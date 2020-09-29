@@ -12,15 +12,6 @@
     <artifactId>jjg-online</artifactId>
 
     <repositories>
-
-            <repository>
-                <id>getui-nexus</id>
-                <url>http://mvn.gt.igexin.com/nexus/content/repositories/releases/</url>
-                <snapshots>
-                    <enabled>false</enabled>
-                </snapshots>
-            </repository>
-
         <repository>
             <snapshots>
                 <enabled>false</enabled>
@@ -84,19 +75,19 @@
             <artifactId>jjg-common-db</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.xdl.jjg</groupId>
-            <artifactId>jjg-security-app</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-feign</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-oauth2</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.xdl.jjg</groupId>-->
+            <!--<artifactId>jjg-security-app</artifactId>-->
+            <!--<version>${project.version}</version>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-starter-feign</artifactId>-->
+        <!--</dependency>-->
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.cloud</groupId>-->
+            <!--<artifactId>spring-cloud-starter-oauth2</artifactId>-->
+        <!--</dependency>-->
 
         <!--远程发现配置-->
 <!--        <dependency>

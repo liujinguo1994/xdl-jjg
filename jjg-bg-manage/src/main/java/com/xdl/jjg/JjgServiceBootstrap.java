@@ -1,28 +1,30 @@
 package com.xdl.jjg;
 
-
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.feign.EnableFeignClients;
-import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
- * @author sanqi
- * @version 1.0.0
- * @data 2019年07月22日
- * @Description 手机客户端项目启动类
+ * @author qiushi
+ * @version 1.0
+ * @date 2019/7/9 15:11
  */
+
 @SpringBootApplication
 @EnableDiscoveryClient
 @MapperScan(basePackages = {"com.xdl.jjg.mapper"})
+@EnableEurekaClient
 @EnableFeignClients("com.xdl.jjg.web.service")
-@EnableAsync
-public class OnlineApplication {
+public class JjgServiceBootstrap extends WebMvcConfigurerAdapter {
+
 
     public static void main(String[] args) {
-        SpringApplication.run(OnlineApplication.class, args);
+        SpringApplication.run(JjgServiceBootstrap.class, args);
     }
+
 
 }
