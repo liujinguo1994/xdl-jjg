@@ -101,11 +101,6 @@
 
 
     <repositories>
-        <!--个推-->
-        <repository>
-            <id>getui-nexus</id>
-            <url>http://mvn.gt.igexin.com/nexus/content/repositories/releases/</url>
-        </repository>
 
         <repository>
             <snapshots>
