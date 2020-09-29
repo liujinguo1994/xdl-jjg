@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="jjg-bg-manage" />
+        <module name="jjg-common-base" />
+        <module name="jjg-common-db" />
+        <module name="jjg-eureka-server" />
+        <module name="jjg-job-admin" />
+        <module name="jjg-online" />
+        <module name="jjg-security-app" />
+        <module name="jjg-security-core" />
+        <module name="jjg-single" />
+        <module name="jjg-zuul-gatway" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="jjg-bg-manage" target="1.8" />
+      <module name="jjg-common-base" target="1.8" />
+      <module name="jjg-common-db" target="1.8" />
+      <module name="jjg-eureka-server" target="1.8" />
+      <module name="jjg-job-admin" target="1.8" />
+      <module name="jjg-online" target="1.8" />
+      <module name="jjg-parent" target="1.8" />
+      <module name="jjg-security-app" target="1.8" />
+      <module name="jjg-security-core" target="1.8" />
+      <module name="jjg-single" target="1.8" />
+      <module name="jjg-zuul-gatway" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,50 @@
+package com.xdl.jjg.support;
+
+import java.io.Serializable;
+
+/**
+ * @Author: ciyuan
+ * @Date: 2019/5/26 3:27
+ */
+public class SocialUserInfo implements Serializable {
+    private static final long serialVersionUID = -7030595826553178364L;
+    private String providerId;
+
+    private String providerUserId;
+
+    private String nickname;
+
+    private String headImg;
+
+    public String getProviderId() {
+        return providerId;
+    }
+
+    public void setProviderId(String providerId) {
+        this.providerId = providerId;
+    }
+
+    public String getProviderUserId() {
+        return providerUserId;
+    }
+
+    public void setProviderUserId(String providerUserId) {
+        this.providerUserId = providerUserId;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+
+    public String getHeadImg() {
+        return headImg;
+    }
+
+    public void setHeadImg(String headImg) {
+        this.headImg = headImg;
+    }
+}

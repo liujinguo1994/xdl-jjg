@@ -1,0 +1,871 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="bdee0281-2e55-48f6-9cdf-0a14eed89c35" name="Default" comment="" />
+    <ignored path="$PROJECT_DIR$/jjg-bg-manage/target/" />
+    <ignored path="$PROJECT_DIR$/target/" />
+    <ignored path="$PROJECT_DIR$/jjg-eureka-server/target/" />
+    <ignored path="$PROJECT_DIR$/jjg-security-app/target/" />
+    <ignored path="$PROJECT_DIR$/jjg-common-db/target/" />
+    <ignored path="$PROJECT_DIR$/jjg-common-base/target/" />
+    <ignored path="$PROJECT_DIR$/jjg-security-core/target/" />
+    <ignored path="$PROJECT_DIR$/jjg-job-admin/target/" />
+    <ignored path="$PROJECT_DIR$/jjg-single/target/" />
+    <ignored path="$PROJECT_DIR$/jjg-zuul-gatway/target/" />
+    <ignored path="$PROJECT_DIR$/jjg-online/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>db</find>
+      <find>test</find>
+      <find>mybatis-</find>
+      <find>jpa</find>
+      <find>登录</find>
+      <find>sms</find>
+      <find>updateByExampleSelective</find>
+      <find>LocalDateTime</find>
+      <find>SnowFlake</find>
+      <find>SnowIdServiceImpl</find>
+      <find>springfox</find>
+      <find>endpoint</find>
+      <find>accessId</find>
+      <find>图片</find>
+      <find>core</find>
+      <find>IdleBeatParam</find>
+      <find>WebMvcConfigurer</find>
+      <find>webmvc</find>
+      <find>PropertySource</find>
+      <find>文件上传</find>
+      <find>starter-parent</find>
+      <find>SnowFlakeService</find>
+      <find>分布式</find>
+      <find>confirm</find>
+      <find>/trade/order/list/confirm/receipt</find>
+      <find>/snow/flake</find>
+      <find>jjg-online</find>
+      <find>375</find>
+      <find>JobHandler</find>
+      <find>118.31.111.50</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+    </replaceStrings>
+    <dirStrings>
+      <dir>F:\project\xdl-jjg\jjg-online</dir>
+    </dirStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/jjg-online/src/main/java/com/xdl/jjg/web/controller/WeixinController.java" />
+        <option value="$PROJECT_DIR$/jjg-bg-manage/src/test/java/com/xdl/jjg/web/service/impl/WithdrawServiceImplTest.java" />
+        <option value="$PROJECT_DIR$/jjg-online/src/main/java/com/xdl/jjg/web/controller/SysUserController.java" />
+        <option value="$PROJECT_DIR$/jjg-online/src/main/java/com/xdl/jjg/web/service/impl/AuctionVideoServiceImpl.java" />
+        <option value="$PROJECT_DIR$/jjg-online/src/main/java/com/xdl/jjg/web/service/impl/AuctionServiceImpl.java" />
+        <option value="$PROJECT_DIR$/jjg-bg-manage/src/main/java/com/xdl/jjg/web/service/impl/ClientServiceImpl.java" />
+        <option value="$PROJECT_DIR$/jjg-online/src/main/java/com/xdl/jjg/OnlineApplication.java" />
+        <option value="$PROJECT_DIR$/jjg-online/src/main/resources/application-test.properties" />
+        <option value="$PROJECT_DIR$/jjg-job-admin/src/main/resources/application-test.properties" />
+        <option value="$PROJECT_DIR$/jjg-single/src/main/resources/application-test.properties" />
+        <option value="$PROJECT_DIR$/jjg-single/src/main/java/com/xdl/jjg/job/config/XxlJobConfig.java" />
+        <option value="$PROJECT_DIR$/jjg-single/src/main/java/com/xdl/jjg/job/JobExample.java" />
+        <option value="$PROJECT_DIR$/jjg-security-core/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="jjg-online" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="width" value="1920" />
+    <option name="height" value="1050" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="jjg-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xdl-jjg" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jjg-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xdl-jjg" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg-security-core" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jjg-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xdl-jjg" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg-single" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jjg-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xdl-jjg" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg-single" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jjg-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xdl-jjg" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg-single" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jjg-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xdl-jjg" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg-single" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jjg-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xdl-jjg" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg-single" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jjg-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xdl-jjg" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg-single" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xdl" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jjg-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xdl-jjg" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg-single" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xdl" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jjg-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xdl-jjg" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg-single" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xdl" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg" type="462c0819:PsiDirectoryNode" />
+              <item name="job" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jjg-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xdl-jjg" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg-single" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xdl" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg" type="462c0819:PsiDirectoryNode" />
+              <item name="job" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jjg-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xdl-jjg" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg-single" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xdl" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg" type="462c0819:PsiDirectoryNode" />
+              <item name="job" type="462c0819:PsiDirectoryNode" />
+              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="XxlJobConfig" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="jjg-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xdl-jjg" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg-single" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xdl" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg" type="462c0819:PsiDirectoryNode" />
+              <item name="job" type="462c0819:PsiDirectoryNode" />
+              <item name="JobExample" type="1a9f42e2:ClassTreeNode" />
+            </path>
+            <path>
+              <item name="jjg-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xdl-jjg" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg-single" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xdl" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg" type="462c0819:PsiDirectoryNode" />
+              <item name="web" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="jjg-parent" type="b2602c69:ProjectViewProjectNode" />
+              <item name="xdl-jjg" type="462c0819:PsiDirectoryNode" />
+              <item name="jjg-single" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RequestMappingsPanelOrder0" value="0" />
+    <property name="RequestMappingsPanelOrder1" value="1" />
+    <property name="RequestMappingsPanelOrder2" value="2" />
+    <property name="RequestMappingsPanelWidth0" value="75" />
+    <property name="RequestMappingsPanelWidth1" value="75" />
+    <property name="RequestMappingsPanelWidth2" value="75" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../wechat-mall/xdl-jjg" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="preferences.fileTypes" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="F:\project\xdl-jjg\jjg-single\src\main\java\com\xdl\jjg" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.SingleApplication">
+    <configuration name="JwtUtils" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.xdl.jjg.utils.JwtUtils" />
+      <module name="jjg-bg-manage" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xdl.jjg.utils.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration name="ShareCodeUtil" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.xdl.jjg.util.ShareCodeUtil" />
+      <module name="jjg-common-base" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.xdl.jjg.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration name="EurekaServiceApp" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="jjg-eureka-server" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.xdl.jjg.EurekaServiceApp" />
+    </configuration>
+    <configuration name="JjgServiceBootstrap" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="jjg-bg-manage" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.xdl.jjg.JjgServiceBootstrap" />
+    </configuration>
+    <configuration name="OnlineApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="jjg-online" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.xdl.jjg.OnlineApplication" />
+    </configuration>
+    <configuration name="SingleApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="jjg-single" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.xdl.jjg.SingleApplication" />
+    </configuration>
+    <configuration name="XxlJobAdminApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="jjg-job-admin" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.xxl.job.admin.XxlJobAdminApplication" />
+    </configuration>
+    <configuration name="ZuulApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
+      <module name="jjg-zuul-gatway" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.xdl.jjg.ZuulApplication" />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <list>
+      <item itemvalue="Spring Boot.EurekaServiceApp" />
+      <item itemvalue="Spring Boot.ZuulApplication" />
+      <item itemvalue="Spring Boot.OnlineApplication" />
+      <item itemvalue="Spring Boot.XxlJobAdminApplication" />
+      <item itemvalue="Spring Boot.SingleApplication" />
+      <item itemvalue="Spring Boot.JjgServiceBootstrap" />
+      <item itemvalue="Application.ShareCodeUtil" />
+      <item itemvalue="Application.JwtUtils" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.JwtUtils" />
+        <item itemvalue="Application.ShareCodeUtil" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bdee0281-2e55-48f6-9cdf-0a14eed89c35" name="Default" comment="" />
+      <created>1596773384502</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1596773384502</updated>
+      <workItem from="1596773386128" duration="733000" />
+      <workItem from="1596776681375" duration="1223000" />
+      <workItem from="1596849899923" duration="6656000" />
+      <workItem from="1597199393194" duration="599000" />
+      <workItem from="1597279435749" duration="598000" />
+      <workItem from="1597813381267" duration="1434000" />
+      <workItem from="1597884263596" duration="597000" />
+      <workItem from="1597997104263" duration="598000" />
+      <workItem from="1598103597335" duration="596000" />
+      <workItem from="1598145847308" duration="598000" />
+      <workItem from="1598232730528" duration="2993000" />
+      <workItem from="1598325436349" duration="9672000" />
+      <workItem from="1598404137019" duration="4738000" />
+      <workItem from="1598418768378" duration="39000" />
+      <workItem from="1598435944242" duration="1010000" />
+      <workItem from="1598489027350" duration="1547000" />
+      <workItem from="1598834584448" duration="3536000" />
+      <workItem from="1598921139256" duration="7001000" />
+      <workItem from="1598936957739" duration="579000" />
+      <workItem from="1598937592666" duration="228000" />
+      <workItem from="1598938066946" duration="7898000" />
+      <workItem from="1598960981251" duration="1649000" />
+      <workItem from="1599006770396" duration="8772000" />
+      <workItem from="1599026881797" duration="2827000" />
+      <workItem from="1599030676836" duration="235000" />
+      <workItem from="1599031090245" duration="2812000" />
+      <workItem from="1599036393950" duration="11824000" />
+      <workItem from="1599093747227" duration="598000" />
+      <workItem from="1599096594233" duration="597000" />
+      <workItem from="1599109201622" duration="1642000" />
+      <workItem from="1599133976004" duration="597000" />
+      <workItem from="1599180553398" duration="6941000" />
+      <workItem from="1599267100554" duration="1264000" />
+      <workItem from="1599281991047" duration="3371000" />
+      <workItem from="1599352900317" duration="9754000" />
+      <workItem from="1599383174364" duration="1200000" />
+      <workItem from="1599440104311" duration="6038000" />
+      <workItem from="1599526252692" duration="7460000" />
+      <workItem from="1599565277342" duration="1405000" />
+      <workItem from="1599612535986" duration="6587000" />
+      <workItem from="1599634711422" duration="1547000" />
+      <workItem from="1599698411278" duration="1325000" />
+      <workItem from="1599711408490" duration="1753000" />
+      <workItem from="1599727160997" duration="2280000" />
+      <workItem from="1599733390369" duration="2277000" />
+      <workItem from="1599740550825" duration="596000" />
+      <workItem from="1599742978503" duration="253000" />
+      <workItem from="1599785905035" duration="3945000" />
+      <workItem from="1599871685758" duration="8171000" />
+      <workItem from="1599971259075" duration="597000" />
+      <workItem from="1600044582931" duration="4357000" />
+      <workItem from="1600130733855" duration="596000" />
+      <workItem from="1600304583078" duration="7552000" />
+      <workItem from="1600390200710" duration="599000" />
+      <workItem from="1600668679912" duration="1060000" />
+      <workItem from="1600670328599" duration="2184000" />
+      <workItem from="1600735572559" duration="596000" />
+      <workItem from="1600854152399" duration="1798000" />
+      <workItem from="1600908505039" duration="3547000" />
+      <workItem from="1600994750041" duration="1547000" />
+      <workItem from="1601002876073" duration="598000" />
+      <workItem from="1601006993173" duration="3283000" />
+      <workItem from="1601096131987" duration="1234000" />
+      <workItem from="1601167216005" duration="7509000" />
+      <workItem from="1601360196119" duration="546000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="188218000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1936" height="1066" extended-state="6" />
+    <layout>
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="right" id="Maven Projects" order="3" visible="true" weight="0.0074626864" />
+      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
+      <window_info id="Capture Tool" order="2" />
+      <window_info id="Designer" order="2" />
+      <window_info anchor="right" id="Database" order="3" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info id="UI Designer" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.0" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="3" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="bottom" id="Java Enterprise" order="8" />
+      <window_info anchor="right" id="Capture Analysis" order="3" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.6092077" />
+      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Spring" order="8" />
+      <window_info anchor="bottom" id="Terminal" order="7" weight="0.0" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23400854" />
+      <window_info anchor="right" id="Bean Validation" order="4" />
+      <window_info id="Web" order="3" side_tool="true" />
+      <window_info anchor="right" id="Theme Preview" order="3" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.23233405" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/jjg-bg-manage/src/main/java/com/xdl/jjg/utils/JwtUtils.java</url>
+          <line>53</line>
+          <properties />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/jjg-single/src/main/java/com/xdl/jjg/service/jobhandler/ConfirmWithdrawalJob.java</url>
+          <line>30</line>
+          <properties />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="6" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/jjg-online/src/main/java/com/xdl/jjg/web/controller/PayController.java" />
+    <entry file="file://$PROJECT_DIR$/jjg-online/src/main/java/com/xdl/jjg/web/service/PayService.java" />
+    <entry file="file://$PROJECT_DIR$/jjg-online/src/main/java/com/xdl/jjg/web/service/impl/PayServiceImpl.java" />
+    <entry file="file://$PROJECT_DIR$/jjg-common-base/src/main/java/com/xdl/jjg/web/service/RedisService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="9396">
+          <caret line="264" column="9" selection-start-line="264" selection-start-column="9" selection-end-line="264" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-common-base/src/main/java/com/xdl/jjg/web/service/impl/RedisServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="472">
+          <caret line="231" column="21" selection-start-line="231" selection-start-column="21" selection-end-line="231" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-online/src/main/java/com/xdl/jjg/mq/MQConsumerConfig.java" />
+    <entry file="file://$PROJECT_DIR$/jjg-online/src/main/java/com/xdl/jjg/mq/MQProducerConfig.java" />
+    <entry file="file://$PROJECT_DIR$/jjg-online/src/main/java/com/xdl/jjg/mq/TradeOrderListener.java" />
+    <entry file="file://$PROJECT_DIR$/jjg-online/src/main/java/com/xdl/jjg/mq/WeiXinNotifyListener.java" />
+    <entry file="file://$PROJECT_DIR$/jjg-online/src/main/java/com/xdl/jjg/mq/AccountRegisteredListener.java" />
+    <entry file="file://$PROJECT_DIR$/jjg-bg-manage/src/main/java/com/xdl/jjg/mq/MQProducerConfig.java" />
+    <entry file="file://$PROJECT_DIR$/jjg-bg-manage/src/main/java/com/xdl/jjg/mq/MQConsumerConfig.java" />
+    <entry file="file://$PROJECT_DIR$/jjg-bg-manage/src/main/java/com/xdl/jjg/mq/AuctionBeginListener.java" />
+    <entry file="file://$PROJECT_DIR$/jjg-bg-manage/src/main/java/com/xdl/jjg/aspect/OncePerRequest.java" />
+    <entry file="file://$PROJECT_DIR$/jjg-single/src/main/java/com/xdl/jjg/SingleApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="612">
+          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-single/src/main/java/com/xdl/jjg/service/jobhandler/ConfirmOrderJob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-60">
+          <caret line="17" column="36" lean-forward="true" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-single/src/main/java/com/xdl/jjg/web/service/impl/OrderServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="26" column="35" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-single/src/main/java/com/xdl/jjg/web/service/SysUserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="288">
+          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-online/src/main/java/com/xdl/jjg/web/service/TradeOrderService.java" />
+    <entry file="file://$PROJECT_DIR$/jjg-online/src/main/java/com/xdl/jjg/web/service/impl/TradeOrderServiceImpl.java" />
+    <entry file="file://$PROJECT_DIR$/jjg-online/src/main/java/com/xdl/jjg/web/controller/TradeOrderController.java" />
+    <entry file="file://$PROJECT_DIR$/jjg-security-app/src/main/java/com/xdl/jjg/MyAuthorizationResourceServerConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2844">
+          <caret line="92" column="58" selection-start-line="92" selection-start-column="25" selection-end-line="92" selection-end-column="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-single/src/main/java/com/xdl/jjg/web/controller/SnowFlakeController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="16" column="28" selection-start-line="16" selection-start-column="17" selection-end-line="16" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-online/src/main/java/com/xdl/jjg/web/service/SnowFlakeService.java" />
+    <entry file="file://$PROJECT_DIR$/jjg-single/src/main/java/com/xdl/jjg/web/service/FileService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-single/src/main/java/com/xdl/jjg/web/service/TradeOrderService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="19" column="36" selection-start-line="19" selection-start-column="36" selection-end-line="19" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-online/src/main/resources/application-test.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1044">
+          <caret line="29" column="62" selection-start-line="29" selection-start-column="2" selection-end-line="29" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-common-base/src/main/java/com/xdl/jjg/web/service/impl/OssServiceImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1116">
+          <caret line="41" column="18" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-common-base/src/main/java/com/xdl/jjg/web/service/OssService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="19" column="11" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-online/src/main/java/com/xdl/jjg/web/service/impl/AuctionVideoServiceImpl.java" />
+    <entry file="file://$PROJECT_DIR$/jjg-bg-manage/src/main/resources/application-prod.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1143">
+          <caret line="107" column="34" selection-start-line="107" selection-start-column="34" selection-end-line="107" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-single/src/main/java/com/xdl/jjg/service/jobhandler/ConfirmWithdrawalJob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="341">
+          <caret line="28" lean-forward="true" selection-start-line="28" selection-end-line="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-single/src/main/resources/application-test.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3708">
+          <caret line="103" column="17" lean-forward="true" selection-start-line="103" selection-start-column="17" selection-end-line="103" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-common-base/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="432">
+          <caret line="66" lean-forward="true" selection-start-line="66" selection-end-line="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-job-admin/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="41" column="42" lean-forward="true" selection-start-line="41" selection-start-column="42" selection-end-line="41" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-job-admin/src/main/java/com/xxl/job/admin/XxlJobAdminApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-job-admin/src/main/resources/application-test.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-607">
+          <caret line="34" column="42" lean-forward="true" selection-start-line="34" selection-start-column="42" selection-end-line="34" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-single/src/main/java/com/xdl/jjg/task/TradeOrderTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="696">
+          <caret line="65" column="23" selection-start-line="65" selection-start-column="23" selection-end-line="65" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-single/src/main/java/com/xdl/jjg/service/jobhandler/DelAuctionTimeJob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="113">
+          <caret line="20" column="52" lean-forward="true" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-single/src/main/java/com/xdl/jjg/task/AuctionTimeTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="737">
+          <caret line="26" column="25" lean-forward="true" selection-start-line="26" selection-start-column="25" selection-end-line="26" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-single/src/main/java/com/xdl/jjg/task/LeaderBoardTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-458">
+          <caret line="30" column="13" selection-start-line="30" selection-start-column="13" selection-end-line="30" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-single/src/main/java/com/xdl/jjg/core/config/XxlJobConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="15" column="14" lean-forward="true" selection-start-line="15" selection-start-column="14" selection-end-line="15" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-single/src/main/java/com/xdl/jjg/job/config/XxlJobConfig.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="722">
+          <caret line="26" column="16" selection-start-line="26" selection-start-column="16" selection-end-line="26" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-single/src/main/java/com/xdl/jjg/job/JobExample.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="36">
+          <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-bg-manage/src/main/java/com/xdl/jjg/aspect/BodyReaderWrapper.java" />
+    <entry file="file://$PROJECT_DIR$/jjg-bg-manage/src/main/java/com/xdl/jjg/aspect/LockMethodInterceptor.java" />
+    <entry file="file://$PROJECT_DIR$/jjg-config-server/src/main/java/com/xdl/jjg/ConfigServerApplication.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="7" column="22" selection-start-line="7" selection-start-column="22" selection-end-line="7" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-security-core/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="324">
+          <caret line="9" column="38" selection-start-line="9" selection-start-column="38" selection-end-line="9" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-single/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="108">
+          <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-zuul-gatway/pom.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/jjg-zuul-gatway/src/main/resources/application-test.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1008">
+          <caret line="28" column="44" lean-forward="true" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>Spring</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>jjg-online</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>Maven: antlr:antlr:2.7.7</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jjg-bg-manage" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jjg-common-base" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jjg-common-db" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jjg-eureka-server" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jjg-job-admin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jjg-online" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jjg-security-app" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jjg-security-core" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jjg-single" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/jjg-zuul-gatway" charset="UTF-8" />
+  </component>
+</project>

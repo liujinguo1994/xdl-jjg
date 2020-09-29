@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/jjg-bg-manage/jjg-bg-manage.iml" filepath="$PROJECT_DIR$/jjg-bg-manage/jjg-bg-manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jjg-common-base/jjg-common-base.iml" filepath="$PROJECT_DIR$/jjg-common-base/jjg-common-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jjg-common-db/jjg-common-db.iml" filepath="$PROJECT_DIR$/jjg-common-db/jjg-common-db.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jjg-eureka-server/jjg-eureka-server.iml" filepath="$PROJECT_DIR$/jjg-eureka-server/jjg-eureka-server.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jjg-job-admin/jjg-job-admin.iml" filepath="$PROJECT_DIR$/jjg-job-admin/jjg-job-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jjg-online/jjg-online.iml" filepath="$PROJECT_DIR$/jjg-online/jjg-online.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jjg-parent.iml" filepath="$PROJECT_DIR$/jjg-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jjg-security-app/jjg-security-app.iml" filepath="$PROJECT_DIR$/jjg-security-app/jjg-security-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jjg-security-core/jjg-security-core.iml" filepath="$PROJECT_DIR$/jjg-security-core/jjg-security-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jjg-single/jjg-single.iml" filepath="$PROJECT_DIR$/jjg-single/jjg-single.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jjg-zuul-gatway/jjg-zuul-gatway.iml" filepath="$PROJECT_DIR$/jjg-zuul-gatway/jjg-zuul-gatway.iml" />
+    </modules>
+  </component>
+</project>
