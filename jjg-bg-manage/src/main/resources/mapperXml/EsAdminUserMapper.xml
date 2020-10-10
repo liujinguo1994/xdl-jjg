@@ -1,0 +1,22 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsAdminUserMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsAdminUser">
+        <id column="id" property="id" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="salt" property="salt" />
+        <result column="department" property="department" />
+        <result column="role_id" property="roleId" />
+        <result column="create_time" property="createTime" />
+        <result column="remark" property="remark" />
+        <result column="is_del" property="isDel" />
+        <result column="real_name" property="realName" />
+        <result column="face" property="face" />
+        <result column="is_admin" property="isAdmin" />
+        <result column="mobile" property="mobile" />
+    </resultMap>
+
+</mapper>

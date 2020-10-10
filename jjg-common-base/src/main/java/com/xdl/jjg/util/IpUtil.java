@@ -1,57 +1,47 @@
 package com.xdl.jjg.util;
 
+
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.servlet.http.HttpServletRequest;
-import java.net.InetAddress;
-import java.net.UnknownHostException;
 
 /**
- * IP地址相关工具类
+ * IP地址
  */
-public class IpUtil {
-    public static String client(HttpServletRequest request) {
-        String xff = request.getHeader("x-forwarded-for");
-        if (xff == null) {
-            xff = request.getRemoteAddr();
-        }
-        return xff;
-    }
+public class IPUtil {
+    private static Logger logger = LoggerFactory.getLogger(IPUtil.class);
 
+    /**
+     * 获取IP地址
+     *
+     * 使用Nginx等反向代理软件， 则不能通过request.getRemoteAddr()获取IP地址
+     * 如果使用了多级反向代理的话，X-Forwarded-For的值并不止一个，而是一串IP地址，X-Forwarded-For中第一个非unknown的有效IP字符串，则为真实IP地址
+     */
     public static String getIpAddr(HttpServletRequest request) {
-        String ipAddress = null;
+        String ip = null;
         try {
-            ipAddress = request.getHeader("x-forwarded-for");
-            if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
-                ipAddress = request.getHeader("Proxy-Client-IP");
+            ip = request.getHeader("x-forwarded-for");
+            if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getHeader("Proxy-Client-IP");
             }
-            if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
-                ipAddress = request.getHeader("WL-Proxy-Client-IP");
+            if (StringUtils.isEmpty(ip) || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getHeader("WL-Proxy-Client-IP");
             }
-            if (ipAddress == null || ipAddress.length() == 0 || "unknown".equalsIgnoreCase(ipAddress)) {
-                ipAddress = request.getRemoteAddr();
-                if (ipAddress.equals("127.0.0.1")) {
-                    // 根据网卡取本机配置的IP
-                    InetAddress inet = null;
-                    try {
-                        inet = InetAddress.getLocalHost();
-                    } catch (UnknownHostException e) {
-                        e.printStackTrace();
-                    }
-                    ipAddress = inet.getHostAddress();
-                }
+            if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getHeader("HTTP_CLIENT_IP");
             }
-            // 对于通过多个代理的情况，第一个IP为客户端真实IP,多个IP按照','分割
-            if (ipAddress != null && ipAddress.length() > 15) {
-                // "***.***.***.***".length()
-                // = 15
-                if (ipAddress.indexOf(",") > 0) {
-                    ipAddress = ipAddress.substring(0, ipAddress.indexOf(","));
-                }
+            if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getHeader("HTTP_X_FORWARDED_FOR");
+            }
+            if (StringUtils.isEmpty(ip) || "unknown".equalsIgnoreCase(ip)) {
+                ip = request.getRemoteAddr();
             }
         } catch (Exception e) {
-            ipAddress = "";
+            logger.error("IPUtils ERROR ", e);
         }
-        // ipAddress = this.get().getRemoteAddr();
 
-        return ipAddress;
+        return ip;
     }
 }
