@@ -6,7 +6,6 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;
-import lombok.experimental.Accessors;
 
 import java.io.Serializable;
 
@@ -15,27 +14,35 @@ import java.io.Serializable;
  * 
  * </p>
  *
- * @author LiuJG 344009799@qq.com
- * @since 2020-10-09
+ * @author rm 2817512105@qq.com
+ * @since 2019-05-29
  */
 @Data
-@Accessors(chain = true)
 @TableName("es_role")
 public class EsRole extends Model<EsRole> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 主键ID
-	 */
+    /**
+     * 主键ID
+     */
 	@TableId(value="id", type= IdType.AUTO)
-	private Double id;
-
-	/**
-	 * 权限名称
-	 */
-	@TableField("role_name")
+	private Long id;
+    /**
+     * 权限名称
+     */
+    @TableField("role_name")
 	private String roleName;
+    /**
+     * 权限集合
+     */
+    @TableField("auth_ids")
+	private String authIds;
+    /**
+     * 角色描述
+     */
+    @TableField("role_describe")
+	private String roleDescribe;
 
 	/**
 	 * 角色拼音名称
@@ -43,20 +50,10 @@ public class EsRole extends Model<EsRole> {
 	@TableField("name")
 	private String name;
 
-	/**
-	 * 权限集合
-	 */
-	@TableField("auth_ids")
-	private String authIds;
-
-	/**
-	 * 角色描述
-	 */
-	@TableField("role_describe")
-	private String roleDescribe;
 
 	@Override
 	protected Serializable pkVal() {
 		return this.id;
 	}
+
 }

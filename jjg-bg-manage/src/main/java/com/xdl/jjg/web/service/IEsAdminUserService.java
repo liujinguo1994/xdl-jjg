@@ -73,4 +73,13 @@ public interface IEsAdminUserService {
 
     //修改平台管理员
     DubboResult updateEsAdminUser(EsAdminUserDTO esAdminUserDTO);
+
+    //根据部门id查询管理员列表
+    DubboResult<List<EsAdminUserDO>> getByDepartmentId(Long departmentId);
+
+    //根据角色id查询管理员列表
+    DubboPageResult<EsAdminUserDO> getByRoleId(Long roleId);
+
+
+
 }

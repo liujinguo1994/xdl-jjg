@@ -1,0 +1,18 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsLogiCompanyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsLogiCompany">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="code" property="code" />
+        <result column="kdcode" property="kdcode" />
+        <result column="is_waybill" property="isWaybill" />
+        <result column="customer_name" property="customerName" />
+        <result column="customer_pwd" property="customerPwd" />
+    </resultMap>
+    <select id="getLogiByCode" resultType="com.shopx.system.api.model.domain.EsLogiCompanyDO">
+            select * from es_logi_company t where t.code=#{code}
+    </select>
+</mapper>

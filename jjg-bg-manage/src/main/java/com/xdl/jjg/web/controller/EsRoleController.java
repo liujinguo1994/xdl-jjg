@@ -1,106 +1,157 @@
 package com.xdl.jjg.web.controller;
 
-import com.xdl.jjg.entity.EsRole;
+import com.shopx.common.model.result.ApiPageResponse;
+import com.shopx.common.model.result.DubboPageResult;
+import com.shopx.common.util.JsonUtil;
+import com.shopx.system.api.model.domain.EsAdminUserDO;
+import com.shopx.system.api.model.domain.EsRoleDO;
+import com.shopx.system.api.model.domain.vo.EsRoleVO;
+import com.shopx.system.api.model.domain.vo.Menus;
+import com.shopx.system.web.constant.ApiStatus;
+import com.shopx.system.web.request.EsRoleQueryForm;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.entity.Menus;
+import com.xdl.jjg.model.domain.EsAdminUserDO;
+import com.xdl.jjg.model.domain.EsRoleDO;
 import com.xdl.jjg.model.dto.EsRoleDTO;
 import com.xdl.jjg.model.form.EsRoleForm;
+import com.xdl.jjg.model.form.EsRoleQueryForm;
 import com.xdl.jjg.model.vo.EsRoleVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
-import com.xdl.jjg.response.web.RestResult;
+import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.web.service.IEsAdminUserService;
 import com.xdl.jjg.web.service.IEsRoleService;
-import io.swagger.annotations.ApiOperation;
-import org.hibernate.validator.constraints.NotEmpty;
-import org.springframework.beans.BeanUtils;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
+import javax.validation.Valid;
 import java.util.List;
+
 
 /**
  * <p>
- *  前端控制器
+ *  前端控制器-角色管理
  * </p>
  *
- * @author LiuJG 344009799@qq.com
- * @since 2020-10-09
+ * @author rm 2817512105@qq.com
+ * @since 2019-05-29
  */
 @RestController
 @RequestMapping("/esRole")
+@Api(value="/esRole", tags="角色管理")
 public class EsRoleController {
 
     @Autowired
     private IEsRoleService iesRoleService;
 
-    @ApiOperation(value = "查询Role信息", notes = "通过Id查询Role信息")
-    @GetMapping("/getRoleById")
-    public Object getRoleById(String id)  {
+    @Autowired
+    private IEsAdminUserService iesAdminUserService;
 
-        DubboResult<EsRole> roleResult =  iesRoleService.getRole(id);
-        if(roleResult.isSuccess()){
-            EsRole role = roleResult.getData();
-            EsRoleVO roleVO = new EsRoleVO();
-            BeanUtils.copyProperties(role,roleVO);
-            return RestResult.ok(roleVO);
+    @ApiOperation(value = "添加角色")
+    @PostMapping(value = "/insertEsRole")
+    @ResponseBody
+    public ApiResponse insertEsRole(@Valid @RequestBody @ApiParam(name="角色form对象",value="form") EsRoleForm form){
+        EsRoleDTO esRoleDTO=new EsRoleDTO();
+        BeanUtil.copyProperties(form, esRoleDTO);
+        DubboResult result = iesRoleService.insertEsRole(esRoleDTO);
+        if (result.isSuccess()) {
+            return ApiResponse.success();
+        }else{
+            return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
-        return RestResult.fail(roleResult.getCode(),roleResult.getMsg());
     }
 
-    @ApiOperation(value = "插入Role信息", notes = "插入Role信息")
-    @PostMapping("/insertRole")
-    public Object insertRole(EsRoleForm roleForm)  {
-
-        EsRoleDTO roleDTO = new EsRoleDTO();
-        BeanUtil.copyProperties(roleForm,roleDTO);
-
-        DubboResult roleResult =  iesRoleService.insertRole(roleDTO);
-        if(roleResult.isSuccess()){
-            return RestResult.ok();
+    @ApiOperation(value = "根据id查询角色",response = EsRoleVO.class)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "角色id", required = true, dataType = "long", paramType = "path",example = "1")
+    })
+    @GetMapping(value = "/getEsRole/{id}")
+    @ResponseBody
+    public ApiResponse getEsRole(@PathVariable Long id) {
+        DubboResult<EsRoleDO> result = iesRoleService.getEsRole(id);
+        if (result.isSuccess()) {
+            EsRoleDO esRoleDO = result.getData();
+            EsRoleVO esRoleVO = new EsRoleVO();
+            BeanUtil.copyProperties(esRoleDO,esRoleVO);
+            List<Menus> esMenuList = JsonUtil.jsonToList(esRoleVO.getAuthIds(), Menus.class);
+            esRoleVO.setMenus(esMenuList);
+            return ApiResponse.success(esRoleVO);
+        } else {
+            return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
-        return RestResult.fail(roleResult.getCode(),roleResult.getMsg());
-
     }
 
-    @ApiOperation(value = "查询RoleList信息", notes = "查询RoleList信息")
-    @GetMapping("/getRoleList")
-    public Object getRoleList(Boolean delFlag,@NotEmpty int pageSize, @NotEmpty int pageNum)  {
-
-        DubboPageResult roleResult =  iesRoleService.getRoleList(delFlag,pageSize,pageNum);
-
-        List<EsRoleVO> roleVOS = BeanUtil.copyList(roleResult.getData().getList(),EsRoleVO.class);
-
-        if(!roleResult.isSuccess()){
-            return RestResult.fail(roleResult.getCode(),roleResult.getMsg());
+    @ApiOperation(value = "修改角色")
+    @PutMapping(value = "/updateEsRole/{id}")
+    @ResponseBody
+    public ApiResponse updateEsRole(@Valid @RequestBody @ApiParam(name="角色form对象",value="form") EsRoleForm form, @PathVariable Long id){
+        EsRoleDTO esRoleDTO=new EsRoleDTO();
+        BeanUtil.copyProperties(form, esRoleDTO);
+        esRoleDTO.setId(id);
+        DubboResult result = iesRoleService.updateEsRole(esRoleDTO);
+        if (result.isSuccess()) {
+            return ApiResponse.success();
+        }else{
+            return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
-        return ApiPageResponse.pageSuccess(roleResult.getData().getTotal(),roleVOS);
     }
 
-    @ApiOperation(value = "删除Role信息", notes = "删除RoleList信息")
-    @DeleteMapping("/delRoleByIds")
-    public Object delRoleByIds(String [] ids)  {
-
-        DubboResult roleResult =  iesRoleService.deleteRole(Arrays.asList(ids));
-
-        if(!roleResult.isSuccess()){
-            return RestResult.fail(roleResult.getCode(),roleResult.getMsg());
+    @ApiOperation(value = "删除角色")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "要删除的角色id", required = true, dataType = "long", paramType = "path",example = "1")
+    })
+    @DeleteMapping(value = "/deleteEsRole/{id}")
+    @ResponseBody
+    public ApiResponse deleteEsRole(@PathVariable Long id) {
+        //判断是否关联管理员
+        DubboPageResult<EsAdminUserDO> pageResult = iesAdminUserService.getByRoleId(id);
+        List<EsAdminUserDO> list = pageResult.getData().getList();
+        if (list.size() > 0){
+            return ApiResponse.fail(10086,"该角色已关联管理员，不能删除");
         }
-        return RestResult.ok();
+        DubboResult result = iesRoleService.deleteEsRole(id);
+        if (result.isSuccess()) {
+            return ApiResponse.success();
+        }else{
+            return ApiResponse.fail(ApiStatus.wrapperException(result));
+        }
     }
 
-    @ApiOperation(value = "修改Role信息", notes = "修改RoleList信息")
-    @PutMapping("/updateRole")
-    public Object updateRole(EsRoleForm roleForm)  {
-
-        EsRoleDTO roleDTO = new EsRoleDTO();
-        BeanUtils.copyProperties(roleForm,roleDTO);
-        DubboResult roleResult =  iesRoleService.updateRole(roleDTO);
-
-        if(!roleResult.isSuccess()){
-            return RestResult.fail(roleResult.getCode(),roleResult.getMsg());
+    @GetMapping(value = "/{id}/checked")
+    @ApiOperation(value = "根据角色id查询所拥有的菜单")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "要查询的角色表主键", required = true, dataType = "long", paramType = "path",example = "1")
+    })
+    @ResponseBody
+    public ApiResponse getCheckedMenu(@PathVariable Long id) {
+        DubboResult<List<String>> result = iesRoleService.getRoleMenu(id);
+        if (result.isSuccess()) {
+            List<String> data = result.getData();
+            return ApiResponse.success(data);
+        }else{
+            return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
-        return RestResult.ok();
+    }
+
+    @ApiOperation(value = "分页查询角色列表",response = EsRoleVO.class)
+    @GetMapping(value = "/getEsRoleList")
+    @ResponseBody
+    public ApiResponse getEsRoleList(EsRoleQueryForm form) {
+        EsRoleDTO esRoleDTO = new EsRoleDTO();
+        BeanUtil.copyProperties(form,esRoleDTO);
+        DubboPageResult<EsRoleDO> result = iesRoleService.getEsRoleList(esRoleDTO,form.getPageSize(), form.getPageNum());
+        if (result.isSuccess()) {
+            List<EsRoleDO> data = result.getData().getList();
+            List<EsRoleVO> esRoleVOList = BeanUtil.copyList(data,  EsRoleVO.class);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(),esRoleVOList);
+        } else {
+            return ApiPageResponse.fail(ApiStatus.wrapperException(result));
+        }
     }
 
 }

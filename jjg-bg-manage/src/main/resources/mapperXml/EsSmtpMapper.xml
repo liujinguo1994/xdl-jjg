@@ -1,0 +1,19 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsSmtpMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsSmtp">
+        <id column="id" property="id" />
+        <result column="host" property="host" />
+        <result column="username" property="username" />
+        <result column="password" property="password" />
+        <result column="update_time" property="updateTime" />
+        <result column="send_count" property="sendCount" />
+        <result column="max_count" property="maxCount" />
+        <result column="mail_from" property="mailFrom" />
+        <result column="port" property="port" />
+        <result column="open_ssl" property="openSsl" />
+    </resultMap>
+
+</mapper>

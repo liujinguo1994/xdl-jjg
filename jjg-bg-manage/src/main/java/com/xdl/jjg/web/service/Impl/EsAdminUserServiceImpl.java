@@ -29,6 +29,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * <p>
@@ -48,6 +49,8 @@ public class EsAdminUserServiceImpl implements IEsAdminUserService {
 
     @Autowired
     private SnowFlakeService snowFlakeService;
+
+
 
     /**
      * 插入数据
@@ -325,5 +328,50 @@ public class EsAdminUserServiceImpl implements IEsAdminUserService {
         queryWrapper.lambda().eq(EsAdminUser::getId,id).eq(EsAdminUser::getIsDel,0);
         EsAdminUser esAdminUser = adminUserMapper.selectOne(queryWrapper);
         return esAdminUser;
+    }
+
+
+    //根据部门id查询管理员
+    @Override
+    public DubboResult<List<EsAdminUserDO>> getByDepartmentId(Long departmentId) {
+        try {
+            QueryWrapper<EsAdminUser> queryWrapper = new QueryWrapper<>();
+            queryWrapper.lambda().eq(EsAdminUser::getDepartment,departmentId);
+            List<EsAdminUser> esAdminUserList = adminUserMapper.selectList(queryWrapper);
+            List<EsAdminUserDO> esAdminUserDOList = new ArrayList<>();
+            if (com.baomidou.mybatisplus.core.toolkit.CollectionUtils.isNotEmpty(esAdminUserList)) {
+                //属性复制
+                esAdminUserDOList = esAdminUserList.stream().map(esAdminUser -> {
+                    EsAdminUserDO esAdminUserDO = new EsAdminUserDO();
+                    BeanUtil.copyProperties(esAdminUser, esAdminUserDO);
+                    return esAdminUserDO;
+                }).collect(Collectors.toList());
+            }
+            return DubboResult.success(esAdminUserDOList);
+        } catch (ArgumentException e) {
+            logger.error("根据部门id查询管理员失败", e);
+            return DubboResult.fail(e.getExceptionCode(), e.getMessage());
+        } catch (Throwable th) {
+            logger.error("根据部门id查询管理员失败", th);
+            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+        }
+    }
+
+    //根据角色id查询管理员列表
+    @Override
+    public DubboPageResult<EsAdminUserDO> getByRoleId(Long roleId) {
+        try {
+            QueryWrapper<EsAdminUser> queryWrapper = new QueryWrapper<>();
+            queryWrapper.lambda().eq(EsAdminUser::getRoleId,roleId);
+            List<EsAdminUser> adminUserList = adminUserMapper.selectList(queryWrapper);
+            List<EsAdminUserDO> doList = (List<EsAdminUserDO>) BeanUtil.copyList(adminUserList, new EsAdminUserDO().getClass());
+            return DubboPageResult.success(doList);
+        } catch (ArgumentException e) {
+            logger.error("根据角色id查询管理员列表失败", e);
+            return DubboPageResult.fail(e.getExceptionCode(), e.getMessage());
+        } catch (Throwable th) {
+            logger.error("根据角色id查询管理员列表失败", th);
+            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+        }
     }
 }

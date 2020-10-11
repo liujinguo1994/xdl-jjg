@@ -1,51 +1,47 @@
 package com.xdl.jjg.model.dto;
 
+import com.shopx.system.api.model.domain.vo.Menus;
 import lombok.Data;
-import lombok.experimental.Accessors;
+import lombok.ToString;
+
 import java.io.Serializable;
-import java.util.Date;
+import java.util.List;
 
 /**
  * <p>
  * 
  * </p>
  *
- * @author LiuJG 344009799@qq.com
- * @since 2020-10-09
+ * @author rm 2817512105@qq.com
+ * @since 2019-05-29
  */
 @Data
-@Accessors(chain = true)
+@ToString
 public class EsRoleDTO implements Serializable {
 
-    private static final long serialVersionUID = 1L;
-
+    private static final long serialVersionUID = 5147329712480485173L;
     /**
      * 主键ID
      */
 	private Long id;
-
     /**
      * 权限名称
      */
 	private String roleName;
-
-    /**
-     * 角色拼音名称
-     */
-	private String name;
-
     /**
      * 权限集合
      */
 	private String authIds;
-
     /**
      * 角色描述
      */
 	private String roleDescribe;
-
-	protected Serializable pkVal() {
-		return this.id;
-	}
-
+    /**
+     * 角色拼音名称
+     */
+    private String name;
+    /**
+     * 角色所拥有的菜单权限
+     */
+    private List<Menus> menus;
 }
