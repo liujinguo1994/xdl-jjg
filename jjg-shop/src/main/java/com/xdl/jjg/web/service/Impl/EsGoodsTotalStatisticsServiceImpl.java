@@ -1,13 +1,14 @@
 package com.xdl.jjg.web.service.Impl;
 
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.goods.api.model.domain.EsGoodsTotalStatisticsDO;
-import com.shopx.goods.api.service.IEsGoodsTotalStatisticsService;
-import com.shopx.goods.dao.mapper.EsGoodsTotalStatisticsMapper;
-import org.apache.dubbo.config.annotation.Service;
-import org.springframework.beans.factory.annotation.Autowired;
 
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsGoodsTotalStatisticsService.class, timeout = 50000)
+import com.xdl.jjg.mapper.EsGoodsTotalStatisticsMapper;
+import com.xdl.jjg.model.domain.EsGoodsTotalStatisticsDO;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.web.service.IEsGoodsTotalStatisticsService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+@Service
 public class EsGoodsTotalStatisticsServiceImpl implements IEsGoodsTotalStatisticsService {
     @Autowired
     private EsGoodsTotalStatisticsMapper esGoodsTotalStatisticsMapper;

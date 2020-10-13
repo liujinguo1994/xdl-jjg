@@ -1,50 +1,39 @@
 package com.xdl.jjg.web.service.Impl;
 
 
+import com.aliyun.openservices.shade.com.alibaba.rocketmq.client.producer.MQProducer;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.collect.Maps;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.roketmq.MQProducer;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.goods.api.constant.GoodsConstants;
-import com.shopx.goods.api.constant.GoodsErrorCode;
-import com.shopx.goods.api.constant.GoodsOperate;
-import com.shopx.goods.api.constant.GoodsOperateType;
-import com.shopx.goods.api.model.domain.*;
-import com.shopx.goods.api.model.domain.cache.EsGoodsCO;
-import com.shopx.goods.api.model.domain.cache.EsGoodsSkuCO;
-import com.shopx.goods.api.model.domain.dto.*;
-import com.shopx.goods.api.model.domain.enums.GoodsCachePrefix;
-import com.shopx.goods.api.model.domain.enums.GoodsEnum;
-import com.shopx.goods.api.model.domain.message.EsGoodsIndexTO;
-import com.shopx.goods.api.model.domain.vo.EsPromotionGoodsVO;
-import com.shopx.goods.api.service.*;
-import com.shopx.goods.dao.entity.*;
-import com.shopx.goods.dao.mapper.*;
-import com.shopx.member.api.model.domain.EsCustomDO;
-import com.shopx.member.api.model.domain.EsShopDO;
-import com.shopx.member.api.model.domain.enums.ShopStatusEnums;
-import com.shopx.member.api.service.IEsCustomService;
-import com.shopx.member.api.service.IEsShopService;
-import com.shopx.system.api.service.IEsSettingsService;
-import com.shopx.trade.api.model.domain.EsPromotionGoodsDO;
-import com.shopx.trade.api.service.IEsGoodsFreightService;
-import com.shopx.trade.api.service.IEsPromotionGoodsService;
+import com.xdl.jjg.constant.GoodsConstants;
+import com.xdl.jjg.constant.GoodsErrorCode;
+import com.xdl.jjg.constant.GoodsOperate;
+import com.xdl.jjg.constant.GoodsOperateType;
+import com.xdl.jjg.entity.*;
+import com.xdl.jjg.mapper.*;
+import com.xdl.jjg.model.co.EsGoodsCO;
+import com.xdl.jjg.model.co.EsGoodsSkuCO;
+import com.xdl.jjg.model.domain.*;
+import com.xdl.jjg.model.dto.*;
+import com.xdl.jjg.model.enums.GoodsCachePrefix;
+import com.xdl.jjg.model.enums.GoodsEnum;
+import com.xdl.jjg.model.vo.EsPromotionGoodsVO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.web.service.*;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
-import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -62,7 +51,7 @@ import java.util.stream.Stream;
  * @author WAF 826988665@qq.com
  * @since 2019-05-29
  */
-@Service(version = "${dubbo.application.version}",interfaceClass = IEsGoodsService.class,timeout = 5000)
+@Service
 public class EsGoodsServiceImpl extends ServiceImpl<EsGoodsMapper, EsGoods> implements IEsGoodsService {
 
 
@@ -94,7 +83,7 @@ public class EsGoodsServiceImpl extends ServiceImpl<EsGoodsMapper, EsGoods> impl
     @Reference(version = "${dubbo.application.version}",timeout = 5000,check = false)
     private IEsShopService esShopService;
     //系统设置
-    @Reference(version = "${dubbo.application.version}",timeout = 5000,check = false)
+    @Autowired
     private IEsSettingsService esSettingsService;
     @Reference(version = "${dubbo.application.version}",timeout = 5000,check = false)
     private  IEsGoodsFreightService esGoodsFreightService;
@@ -334,7 +323,7 @@ public class EsGoodsServiceImpl extends ServiceImpl<EsGoodsMapper, EsGoods> impl
      * @return 商品集合
      */
     @Override
-    public DubboPageResult<EsGoodsDO> sellerGetEsGoodsList(EsGoodsQueryDTO esGoodsDTO,Long shopId ,int pageSize, int pageNum) {
+    public DubboPageResult<EsGoodsDO> sellerGetEsGoodsList(EsGoodsQueryDTO esGoodsDTO, Long shopId , int pageSize, int pageNum) {
         try{
             //店铺ID
             esGoodsDTO.setShopId(shopId);

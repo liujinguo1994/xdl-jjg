@@ -1,0 +1,25 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsMemberLevelConfigMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsMemberLevelConfig">
+        <id column="id" property="id"/>
+        <result column="level" property="level"/>
+        <result column="under_line" property="underLine"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="getMemberLevelConfigList" resultType="com.xdl.jjg.model.domain.EsMemberLevelConfigDO">
+        SELECT ec.id,ec.`level`,ec.under_line underLine,ec.create_time createTime FROM es_member_level_config ec
+        where 1=1
+        <if test="es.level != null and es.level !=''">
+         and ec.level = #{es.level}
+        </if>
+        <if test = "es.createTimeStart != null and es.createTimeEnd !=''">
+        and ec.create_time between #{es.createTimeStart} and #{es.createTimeEnd}
+        </if>
+    </select>
+
+</mapper>

@@ -1,0 +1,89 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsShopDetailMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsShopDetail">
+        <id column="id" property="id" />
+        <result column="shop_id" property="shopId" />
+        <result column="shop_province_id" property="shopProvinceId" />
+        <result column="shop_city_id" property="shopCityId" />
+        <result column="shop_county_id" property="shopCountyId" />
+        <result column="shop_town_id" property="shopTownId" />
+        <result column="shop_province" property="shopProvince" />
+        <result column="shop_city" property="shopCity" />
+        <result column="shop_county" property="shopCounty" />
+        <result column="shop_town" property="shopTown" />
+        <result column="shop_add" property="shopAdd" />
+        <result column="company_name" property="companyName" />
+        <result column="company_address" property="companyAddress" />
+        <result column="company_phone" property="companyPhone" />
+        <result column="company_email" property="companyEmail" />
+        <result column="employee_num" property="employeeNum" />
+        <result column="reg_money" property="regMoney" />
+        <result column="link_name" property="linkName" />
+        <result column="link_phone" property="linkPhone" />
+        <result column="legal_name" property="legalName" />
+        <result column="legal_id" property="legalId" />
+        <result column="legal_img" property="legalImg" />
+        <result column="license_num" property="licenseNum" />
+        <result column="license_province_id" property="licenseProvinceId" />
+        <result column="license_city_id" property="licenseCityId" />
+        <result column="license_county_id" property="licenseCountyId" />
+        <result column="license_town_id" property="licenseTownId" />
+        <result column="license_province" property="licenseProvince" />
+        <result column="license_city" property="licenseCity" />
+        <result column="license_county" property="licenseCounty" />
+        <result column="license_town" property="licenseTown" />
+        <result column="license_add" property="licenseAdd" />
+        <result column="establish_date" property="establishDate" />
+        <result column="licence_start" property="licenceStart" />
+        <result column="licence_end" property="licenceEnd" />
+        <result column="scope" property="scope" />
+        <result column="licence_img" property="licenceImg" />
+        <result column="organization_code" property="organizationCode" />
+        <result column="code_img" property="codeImg" />
+        <result column="taxes_img" property="taxesImg" />
+        <result column="bank_account_name" property="bankAccountName" />
+        <result column="bank_number" property="bankNumber" />
+        <result column="bank_name" property="bankName" />
+        <result column="bank_province_id" property="bankProvinceId" />
+        <result column="bank_city_id" property="bankCityId" />
+        <result column="bank_county_id" property="bankCountyId" />
+        <result column="bank_town_id" property="bankTownId" />
+        <result column="bank_province" property="bankProvince" />
+        <result column="bank_city" property="bankCity" />
+        <result column="bank_county" property="bankCounty" />
+        <result column="bank_town" property="bankTown" />
+        <result column="bank_img" property="bankImg" />
+        <result column="taxes_certificate_num" property="taxesCertificateNum" />
+        <result column="taxes_distinguish_num" property="taxesDistinguishNum" />
+        <result column="taxes_certificate_img" property="taxesCertificateImg" />
+        <result column="goods_management_category" property="goodsManagementCategory" />
+        <result column="shop_level" property="shopLevel" />
+        <result column="shop_level_apply" property="shopLevelApply" />
+        <result column="store_space_capacity" property="storeSpaceCapacity" />
+        <result column="shop_logo" property="shopLogo" />
+        <result column="shop_banner" property="shopBanner" />
+        <result column="shop_desc" property="shopDesc" />
+        <result column="shop_recommend" property="shopRecommend" />
+        <result column="shop_themeid" property="shopThemeid" />
+        <result column="shop_theme_path" property="shopThemePath" />
+        <result column="wap_themeid" property="wapThemeid" />
+        <result column="wap_theme_path" property="wapThemePath" />
+        <result column="shop_credit" property="shopCredit" />
+        <result column="shop_praise_rate" property="shopPraiseRate" />
+        <result column="shop_description_credit" property="shopDescriptionCredit" />
+        <result column="shop_service_credit" property="shopServiceCredit" />
+        <result column="shop_delivery_credit" property="shopDeliveryCredit" />
+        <result column="shop_collect" property="shopCollect" />
+        <result column="goods_num" property="goodsNum" />
+        <result column="shop_qq" property="shopQq" />
+        <result column="self_operated" property="selfOperated" />
+        <result column="step" property="step" />
+        <result column="supplier_id" property="supplierId" />
+        <result column="supplier_name" property="supplierName" />
+        <result column="banner_url" property="bannerUrl" />
+    </resultMap>
+
+</mapper>

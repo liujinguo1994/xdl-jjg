@@ -10,6 +10,7 @@ import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.util.StringUtil;
 import com.xdl.jjg.web.service.IEsSettingsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

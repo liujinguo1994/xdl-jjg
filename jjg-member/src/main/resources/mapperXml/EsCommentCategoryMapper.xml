@@ -1,0 +1,31 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsCommentCategoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsCommentCategory">
+        <id column="id" property="id"/>
+        <result column="label_id" property="labelId"/>
+        <result column="category_id" property="categoryId"/>
+    </resultMap>
+
+    <select id="getEsCommentCategoryList" resultType="com.xdl.jjg.model.domain.EsCommentCategoryDO">
+          SELECT
+        es.comment_label commentLabel,
+        e.id,
+        e.label_id labelId,
+        e.category_id categoryId,
+        es.type
+    FROM
+        es_comment_label es
+        LEFT JOIN  es_comment_category e ON e.label_id = es.id
+        WHERE e.category_id = #{categoryId}
+    </select>
+
+    <select id="getEsCommentCategoryBindList" resultType="com.xdl.jjg.model.domain.EsCommentCategoryDO">
+        select cc.id id, cl.id labelId,cl.comment_label commentLabel, cl.type type,case category_id when #{categoryId}
+        then true else false end selected from es_comment_label cl left join
+        es_comment_category cc on cc.label_id=cl.id and category_id = #{categoryId}
+    </select>
+
+</mapper>

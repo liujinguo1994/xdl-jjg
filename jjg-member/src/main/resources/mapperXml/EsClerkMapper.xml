@@ -1,0 +1,37 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsClerkMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsClerk">
+        <id column="id" property="id" />
+        <result column="member_id" property="memberId" />
+        <result column="clerk_name" property="clerkName" />
+        <result column="is_admin" property="isAdmin" />
+        <result column="role_id" property="roleId" />
+        <result column="state" property="state" />
+        <result column="create_time" property="createTime" />
+        <result column="shop_id" property="shopId" />
+    </resultMap>
+
+
+    <select id="getAllClerk"  resultType="com.xdl.jjg.model.domain.EsClerkListDO">
+        select c.*,m.`name`,m.mobile,m.email,if(c.is_admin = 1 and c.role_id=0,'超级店员',er.role_name) roleName from  es_clerk c inner JOIN es_member m on c.member_id=m.id
+        LEFT JOIN es_shop_role er on c.role_id = er.id
+        where  c.shop_id =#{es.shopId}
+        <if test=" es.keyword !=null and es.keyword!=''">
+            and m.name LIKE CONCAT('%',#{es.keyword},'%') or m.mobile like CONCAT('%',#{es.keyword},'%')
+        </if>
+        <if test="es.state !=null">
+            and c.state =#{es.state}
+        </if>
+    </select>
+
+    <update id="updateState"  parameterType="java.lang.Long">
+        update es_clerk
+        <set>
+            state =${state}
+        </set>
+        where id = ${id}
+    </update>
+</mapper>

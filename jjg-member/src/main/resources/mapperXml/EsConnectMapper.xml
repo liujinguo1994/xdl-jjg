@@ -1,0 +1,18 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsConnectMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsConnect">
+        <id column="id" property="id" />
+        <result column="member_id" property="memberId" />
+        <result column="union_id" property="unionId" />
+        <result column="union_type" property="unionType" />
+        <result column="unbound_time" property="unboundTime" />
+    </resultMap>
+
+    <update id="unbindWechaAndQQ" parameterType="com.xdl.jjg.model.domain.dto.EsConnectDTO">
+        UPDATE es_connect SET unbound_time=#{es.unboundTime} , is_del=1 WHERE member_id = #{es.memberId} AND union_type = #{es.unionType}
+    </update>
+
+</mapper>

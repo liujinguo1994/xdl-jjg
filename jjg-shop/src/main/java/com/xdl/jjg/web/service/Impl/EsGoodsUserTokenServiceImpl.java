@@ -4,21 +4,21 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.model.domain.EsGoodsUserTokenDO;
-import com.shopx.goods.api.model.domain.dto.EsGoodsUserTokenDTO;
-import com.shopx.goods.api.service.IEsGoodsUserTokenService;
-import com.shopx.goods.dao.entity.EsGoodsUserToken;
-import com.shopx.goods.dao.mapper.EsGoodsUserTokenMapper;
-import com.shopx.system.api.constant.ErrorCode;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.constant.GoodsErrorCode;
+import com.xdl.jjg.entity.EsGoodsUserToken;
+import com.xdl.jjg.mapper.EsGoodsUserTokenMapper;
+import com.xdl.jjg.model.domain.EsGoodsUserTokenDO;
+import com.xdl.jjg.model.dto.EsGoodsUserTokenDTO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.web.service.IEsGoodsUserTokenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
  * @author WANGAF 826988665@qq.com
  * @since 2019-07-10 16:43:10
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsGoodsUserTokenService.class, timeout = 50000)
+@Service
 public class EsGoodsUserTokenServiceImpl extends ServiceImpl<EsGoodsUserTokenMapper, EsGoodsUserToken> implements IEsGoodsUserTokenService {
 
     private static Logger logger = LoggerFactory.getLogger(EsGoodsUserTokenServiceImpl.class);
@@ -66,7 +66,7 @@ public class EsGoodsUserTokenServiceImpl extends ServiceImpl<EsGoodsUserTokenMap
         }catch (Throwable ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -95,7 +95,7 @@ public class EsGoodsUserTokenServiceImpl extends ServiceImpl<EsGoodsUserTokenMap
         } catch (Throwable th) {
             logger.error("更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -128,7 +128,7 @@ public class EsGoodsUserTokenServiceImpl extends ServiceImpl<EsGoodsUserTokenMap
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
         }  catch (Throwable th) {
             logger.error("查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -164,7 +164,7 @@ public class EsGoodsUserTokenServiceImpl extends ServiceImpl<EsGoodsUserTokenMap
             return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
         } catch (Throwable th) {
             logger.error("分页查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -191,7 +191,7 @@ public class EsGoodsUserTokenServiceImpl extends ServiceImpl<EsGoodsUserTokenMap
         }  catch (Throwable th) {
             logger.error("删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
     @Override
@@ -209,7 +209,7 @@ public class EsGoodsUserTokenServiceImpl extends ServiceImpl<EsGoodsUserTokenMap
         }  catch (Throwable th) {
             logger.error("删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 }

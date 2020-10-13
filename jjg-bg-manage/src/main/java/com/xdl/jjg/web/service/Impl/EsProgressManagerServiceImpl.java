@@ -1,14 +1,14 @@
 package com.xdl.jjg.web.service.Impl;
 
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.common.util.StringUtil;
-import com.shopx.system.api.model.domain.TaskProgress;
-import com.shopx.system.api.service.IEsProgressManagerService;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.model.domain.TaskProgress;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.util.StringUtil;
+import com.xdl.jjg.web.service.IEsProgressManagerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import redis.clients.jedis.JedisCluster;
 
 
@@ -20,7 +20,7 @@ import redis.clients.jedis.JedisCluster;
  * @author rm 2817512105@qq.com
  * @since 2019-06-04
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsProgressManagerService.class, timeout = 50000)
+@Service
 public class EsProgressManagerServiceImpl implements IEsProgressManagerService {
 
     private static Logger logger = LoggerFactory.getLogger(EsProgressManagerServiceImpl.class);

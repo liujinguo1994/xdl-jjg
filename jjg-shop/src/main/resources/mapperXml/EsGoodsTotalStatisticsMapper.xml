@@ -1,6 +1,6 @@
 <?Mapper version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shopx.goods.dao.mapper.EsGoodsTotalStatisticsMapper">
+<mapper namespace="com.xdl.jjg.mapper.EsGoodsTotalStatisticsMapper">
 
     <select id="adminGoodsTotalStatistics" resultType="com.shopx.goods.api.model.domain.EsGoodsTotalStatisticsDO">
         /*管理端商品数量*/

@@ -2,23 +2,22 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.constant.GoodsErrorCode;
-import com.shopx.goods.api.model.domain.EsGoodsWordsDO;
-import com.shopx.goods.api.model.domain.dto.EsGoodsWordsDTO;
-import com.shopx.goods.api.service.IEsGoodsWordsService;
-import com.shopx.goods.dao.entity.EsGoodsWords;
-import com.shopx.goods.dao.mapper.EsGoodsWordsMapper;
-import com.shopx.system.api.constant.ErrorCode;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.constant.GoodsErrorCode;
+import com.xdl.jjg.entity.EsGoodsWords;
+import com.xdl.jjg.mapper.EsGoodsWordsMapper;
+import com.xdl.jjg.model.domain.EsGoodsWordsDO;
+import com.xdl.jjg.model.dto.EsGoodsWordsDTO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.web.service.IEsGoodsWordsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -34,7 +33,7 @@ import java.util.stream.Collectors;
  * @author WANGAF 826988665@qq.com
  * @since 2019-07-01 13:54:19
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsGoodsWordsService.class, timeout = 50000)
+@Service
 public class EsGoodsWordsServiceImpl extends ServiceImpl<EsGoodsWordsMapper, EsGoodsWords> implements IEsGoodsWordsService {
 
     private static Logger logger = LoggerFactory.getLogger(EsGoodsWordsServiceImpl.class);
@@ -74,7 +73,7 @@ public class EsGoodsWordsServiceImpl extends ServiceImpl<EsGoodsWordsMapper, EsG
         }catch (Throwable ae) {
             logger.error("自定义分词新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -107,7 +106,7 @@ public class EsGoodsWordsServiceImpl extends ServiceImpl<EsGoodsWordsMapper, EsG
         }  catch (Throwable th) {
             logger.error("自定义分词删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
@@ -123,7 +122,7 @@ public class EsGoodsWordsServiceImpl extends ServiceImpl<EsGoodsWordsMapper, EsG
         }  catch (Throwable th) {
             logger.error("自定义分词删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
     @Override

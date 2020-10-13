@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.xdl.jjg.constant.GoodsErrorCode;
 import com.xdl.jjg.entity.EsBrandShow;
 import com.xdl.jjg.mapper.EsBrandShowMapper;
 import com.xdl.jjg.model.domain.EsBrandShowDO;
@@ -12,6 +13,7 @@ import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
 import com.xdl.jjg.web.service.IEsBrandShowService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,7 +66,7 @@ public class EsBrandShowServiceImpl extends ServiceImpl<EsBrandShowMapper, EsBra
         }catch (Throwable ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -93,7 +95,7 @@ public class EsBrandShowServiceImpl extends ServiceImpl<EsBrandShowMapper, EsBra
         } catch (Throwable th) {
             logger.error("更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -113,7 +115,7 @@ public class EsBrandShowServiceImpl extends ServiceImpl<EsBrandShowMapper, EsBra
             EsBrandShow brandShow = this.brandShowMapper.selectOne(queryWrapper);
             EsBrandShowDO brandShowDO = new EsBrandShowDO();
             if (brandShow == null) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(GoodsErrorCode.DATA_NOT_EXIST.getErrorCode(), GoodsErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             BeanUtil.copyProperties(brandShow, brandShowDO);
             return DubboResult.success(brandShowDO);
@@ -122,7 +124,7 @@ public class EsBrandShowServiceImpl extends ServiceImpl<EsBrandShowMapper, EsBra
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
         }  catch (Throwable th) {
             logger.error("查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -158,7 +160,7 @@ public class EsBrandShowServiceImpl extends ServiceImpl<EsBrandShowMapper, EsBra
             return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
         } catch (Throwable th) {
             logger.error("分页查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -185,7 +187,7 @@ public class EsBrandShowServiceImpl extends ServiceImpl<EsBrandShowMapper, EsBra
         }  catch (Throwable th) {
             logger.error("删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 }

@@ -1,27 +1,27 @@
 package com.xdl.jjg.web.service.Impl;
 
+import com.aliyun.openservices.shade.org.apache.commons.lang3.StringUtils;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.constant.GoodsErrorCode;
-import com.shopx.goods.api.model.domain.EsBrandDO;
-import com.shopx.goods.api.model.domain.dto.EsBrandDTO;
-import com.shopx.goods.api.service.IEsBrandService;
-import com.shopx.goods.dao.entity.EsBrand;
-import com.shopx.goods.dao.entity.EsCategory;
-import com.shopx.goods.dao.mapper.EsBrandMapper;
-import com.shopx.goods.dao.mapper.EsCategoryMapper;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.common.utils.StringUtils;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.constant.GoodsErrorCode;
+import com.xdl.jjg.entity.EsBrand;
+import com.xdl.jjg.entity.EsCategory;
+import com.xdl.jjg.mapper.EsBrandMapper;
+import com.xdl.jjg.mapper.EsCategoryMapper;
+import com.xdl.jjg.model.domain.EsBrandDO;
+import com.xdl.jjg.model.dto.EsBrandDTO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.web.service.IEsBrandService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
  * @author WAF 826988665@qq.com
  * @since 2019-05-29
  */
-@Service(version = "${dubbo.application.version}",interfaceClass = IEsBrandService.class,timeout = 5000)
+@Service
 public class EsBrandServiceImpl extends ServiceImpl<EsBrandMapper, EsBrand> implements IEsBrandService {
 
     private Logger logger = LoggerFactory.getLogger(IEsBrandService.class);

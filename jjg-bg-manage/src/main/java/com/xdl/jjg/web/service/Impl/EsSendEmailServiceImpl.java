@@ -1,6 +1,5 @@
 package com.xdl.jjg.web.service.Impl;
 
-import com.sun.xml.internal.messaging.saaj.packaging.mime.MessagingException;
 import com.xdl.jjg.constant.ErrorCode;
 import com.xdl.jjg.entity.EsEmail;
 import com.xdl.jjg.entity.EsSmtp;
@@ -20,14 +19,10 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import javax.mail.Address;
-import javax.mail.Message;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
-import java.net.PasswordAuthentication;
 import java.util.Date;
 import java.util.Properties;
 

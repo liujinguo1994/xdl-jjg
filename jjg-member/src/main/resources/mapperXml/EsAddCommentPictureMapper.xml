@@ -1,0 +1,21 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsAddCommentPictureMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsAddCommentPicture">
+        <id column="id" property="id" />
+        <result column="add_comment_id" property="addCommentId" />
+        <result column="original" property="original" />
+        <result column="sort" property="sort" />
+    </resultMap>
+
+    <insert id="addPictureBatch">
+        INSERT INTO es_add_comment_picture(comment_id, original, sort)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{commentId},#{item.original},#{item.sort})
+        </foreach>
+    </insert>
+
+</mapper>

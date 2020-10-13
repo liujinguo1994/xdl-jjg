@@ -1,0 +1,13 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsGrowthValueStrategyMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsGrowthValueStrategy">
+        <id column="id" property="id" />
+        <result column="growth_type" property="growthType" />
+        <result column="growth_value" property="growthValue" />
+        <result column="limit_num" property="limitNum" />
+    </resultMap>
+
+</mapper>

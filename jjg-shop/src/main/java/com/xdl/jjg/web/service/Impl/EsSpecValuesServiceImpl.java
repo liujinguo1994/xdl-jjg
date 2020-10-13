@@ -4,23 +4,23 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.constant.GoodsErrorCode;
-import com.shopx.goods.api.model.domain.EsSpecValuesDO;
-import com.shopx.goods.api.model.domain.dto.EsSpecValuesDTO;
-import com.shopx.goods.api.service.IEsSpecValuesService;
-import com.shopx.goods.dao.entity.EsSpecValues;
-import com.shopx.goods.dao.entity.EsSpecification;
-import com.shopx.goods.dao.mapper.EsSpecValuesMapper;
-import com.shopx.goods.dao.mapper.EsSpecificationMapper;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.constant.GoodsErrorCode;
+import com.xdl.jjg.entity.EsSpecValues;
+import com.xdl.jjg.entity.EsSpecification;
+import com.xdl.jjg.mapper.EsSpecValuesMapper;
+import com.xdl.jjg.mapper.EsSpecificationMapper;
+import com.xdl.jjg.model.domain.EsSpecValuesDO;
+import com.xdl.jjg.model.dto.EsSpecValuesDTO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.web.service.IEsSpecValuesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
  * @author wangaf 826988665@qq.com
  * @since 2019-06-03
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsSpecValuesService.class, timeout = 50000)
+@Service
 public class EsSpecValuesServiceImpl extends ServiceImpl<EsSpecValuesMapper, EsSpecValues> implements IEsSpecValuesService {
 
     private static Logger logger = LoggerFactory.getLogger(EsSpecValuesServiceImpl.class);
@@ -55,7 +55,7 @@ public class EsSpecValuesServiceImpl extends ServiceImpl<EsSpecValuesMapper, EsS
      */
     @Override
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public DubboResult<EsSpecValuesDO> insertSpecValues(Long specId,String[] specValues) {
+    public DubboResult<EsSpecValuesDO> insertSpecValues(Long specId, String[] specValues) {
         try {
            EsSpecification esSpecification = specificationMapper.selectById(specId);
            if(esSpecification == null ){

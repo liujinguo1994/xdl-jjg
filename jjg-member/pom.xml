@@ -10,9 +10,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <groupId>com.xdl.jjg</groupId>
     <artifactId>jjg-member</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
     <name>jjg-member</name>
     <description>jjg-member</description>
     <modelVersion>4.0.0</modelVersion>
@@ -70,6 +68,12 @@
 
         <dependency>
             <groupId>com.xdl.jjg</groupId>
+            <artifactId>jjg-shop</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xdl.jjg</groupId>
             <artifactId>jjg-common-db</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -100,7 +104,7 @@
                 <version>2.1.7.RELEASE</version>
                 <configuration>
                     <!-- 指定该Main Class为全局的唯一入口 -->
-                    <mainClass>com.xdl.jjg.JjgServiceBootstrap</mainClass>
+                    <mainClass>com.xdl.jjg.JjgMemberApplication</mainClass>
                     <layout>ZIP</layout>
                 </configuration>
                 <executions>

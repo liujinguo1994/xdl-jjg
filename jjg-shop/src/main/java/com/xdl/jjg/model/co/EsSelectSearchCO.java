@@ -3,8 +3,8 @@ package com.xdl.jjg.model.co;/**
  * @date 2019/10/29 10:26
  **/
 
-import com.shopx.goods.api.constant.PropSelector;
-import com.shopx.goods.api.model.domain.vo.EsSearchGoodsVO;
+import com.xdl.jjg.constant.PropSelector;
+import com.xdl.jjg.model.vo.EsSearchGoodsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

@@ -4,22 +4,25 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.constant.GoodsErrorCode;
-import com.shopx.goods.api.model.domain.*;
-import com.shopx.goods.api.model.domain.dto.EsGoodsParamsDTO;
-import com.shopx.goods.api.service.IEsGoodsParamsService;
-import com.shopx.goods.api.service.IEsParameterGroupService;
-import com.shopx.goods.dao.entity.EsGoodsParams;
-import com.shopx.goods.dao.mapper.EsGoodsParamsMapper;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.constant.GoodsErrorCode;
+import com.xdl.jjg.entity.EsGoodsParams;
+import com.xdl.jjg.mapper.EsGoodsParamsMapper;
+import com.xdl.jjg.model.domain.EsBuyerGoodsParamsDO;
+import com.xdl.jjg.model.domain.EsBuyerParamsDO;
+import com.xdl.jjg.model.domain.EsGoodsParamsDO;
+import com.xdl.jjg.model.domain.EsParameterGroupDO;
+import com.xdl.jjg.model.dto.EsGoodsParamsDTO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.web.service.IEsGoodsParamsService;
+import com.xdl.jjg.web.service.IEsParameterGroupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -38,7 +41,7 @@ import java.util.stream.Collectors;
  * @author wangaf 826988665@qq.com
  * @since 2019-06-03
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsGoodsParamsService.class, timeout = 50000)
+@Service
 public class EsGoodsParamsServiceImpl extends ServiceImpl<EsGoodsParamsMapper, EsGoodsParams> implements IEsGoodsParamsService {
 
     private static Logger logger = LoggerFactory.getLogger(EsGoodsParamsServiceImpl.class);

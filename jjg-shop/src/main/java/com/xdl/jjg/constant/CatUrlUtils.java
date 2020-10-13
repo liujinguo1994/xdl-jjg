@@ -1,9 +1,10 @@
 package com.xdl.jjg.constant;
 
-import com.shopx.common.util.StringUtil;
-import com.shopx.goods.api.model.domain.EsCategoryDO;
-import com.shopx.goods.api.model.domain.cache.SearchSelector;
-import org.elasticsearch.search.aggregations.bucket.terms.LongTerms;
+
+import com.xdl.jjg.model.co.SearchSelector;
+import com.xdl.jjg.model.domain.EsCategoryDO;
+import com.xdl.jjg.util.StringUtil;
+import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -77,7 +78,7 @@ public class CatUrlUtils {
      *
      * @return
      */
-    public static List<SearchSelector> getCatDimSelected(List<LongTerms.Bucket> categoryBuckets, List<EsCategoryDO> allCatList, String cat) {
+    public static List<SearchSelector> getCatDimSelected(List<Terms.Bucket> categoryBuckets, List<EsCategoryDO> allCatList, String cat) {
         List<SearchSelector> selectorList = new ArrayList();
         if (!StringUtil.isEmpty(cat)) {
             String[] catAr = cat.split(Separator.SEPARATOR_PROP_VLAUE);
@@ -121,7 +122,7 @@ public class CatUrlUtils {
      * @param cat
      * @return
      */
-    private static List<SearchSelector> createBrothersCat(List<LongTerms.Bucket> categoryBuckets,List<EsCategoryDO> allCatList, EsCategoryDO cat) {
+    private static List<SearchSelector> createBrothersCat(List<Terms.Bucket> categoryBuckets,List<EsCategoryDO> allCatList, EsCategoryDO cat) {
         List<SearchSelector> selectorList = new ArrayList();
 
         int parentId = cat.getId().intValue();

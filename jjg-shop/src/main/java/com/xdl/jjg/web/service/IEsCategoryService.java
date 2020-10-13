@@ -1,10 +1,13 @@
 package com.xdl.jjg.web.service;
 
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.goods.api.model.domain.*;
-import com.shopx.goods.api.model.domain.cache.EsCategoryCO;
-import com.shopx.goods.api.model.domain.dto.EsCategoryDTO;
+import com.xdl.jjg.model.co.EsCategoryCO;
+import com.xdl.jjg.model.domain.EsBuyerCategoryDO;
+import com.xdl.jjg.model.domain.EsCategoryDO;
+import com.xdl.jjg.model.domain.EsCategorySpecDO;
+import com.xdl.jjg.model.domain.ParameterGroupDO;
+import com.xdl.jjg.model.dto.EsCategoryDTO;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
 
 import java.util.List;
 

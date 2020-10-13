@@ -1,0 +1,17 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsGrowthWeightConfigMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsGrowthWeightConfig">
+        <id column="id" property="id" />
+        <result column="type" property="type" />
+        <result column="weight" property="weight" />
+        <result column="state" property="state" />
+    </resultMap>
+
+    <delete id="deleteAll">
+        delete  from  es_growth_weight_config
+    </delete>
+
+</mapper>

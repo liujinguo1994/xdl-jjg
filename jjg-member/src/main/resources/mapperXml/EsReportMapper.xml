@@ -1,0 +1,31 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsReportMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsReport">
+        <id column="id" property="id" />
+        <result column="complaint_reason" property="complaintReason" />
+        <result column="intro" property="intro" />
+        <result column="shop_id" property="shopId" />
+        <result column="shop_name" property="shopName" />
+        <result column="state" property="state" />
+        <result column="phone" property="phone" />
+        <result column="member_id" property="memberId" />
+        <result column="member_name" property="memberName" />
+        <result column="create_time" property="createTime" />
+        <result column="is_del" property="isDel" />
+        <result column="deal_content" property="dealContent" />
+    </resultMap>
+
+    <select id="getAllreport"  resultType="com.xdl.jjg.model.domain.EsReportDO">
+        SELECT p.*,s.shop_name from es_report p  LEFT JOIN es_shop s on p.shop_id=s.id where p.is_del=0
+        <if test="reportQueryParam.memberId !=null and reportQueryParam.memberId!=''">
+            and p.member_id = #{reportQueryParam.memberId}
+        </if>
+        <if test="reportQueryParam.state !=null and reportQueryParam.state!=''">
+            and p.state = #{reportQueryParam.state}
+        </if>
+    </select>
+
+</mapper>

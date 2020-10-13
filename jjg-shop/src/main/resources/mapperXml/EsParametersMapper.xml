@@ -1,9 +1,9 @@
 <?Mapper version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shopx.goods.dao.mapper.EsParametersMapper">
+<mapper namespace="com.xdl.jjg.mapper.EsParametersMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.shopx.goods.dao.entity.EsParameters">
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsParameters">
         <id column="id" property="id" />
         <result column="param_name" property="paramName" />
         <result column="param_type" property="paramType" />
@@ -14,13 +14,13 @@
         <result column="category_id" property="categoryId" />
         <result column="sort" property="sort" />
     </resultMap>
-    <select id="getParametersList" resultType="com.shopx.goods.api.model.domain.EsParametersDO">
+    <select id="getParametersList" resultType="com.xdl.jjg.model.domain.EsParametersDO">
             select p.*,gp.param_value,p.group_id
                 from es_parameters p
                left join es_goods_params gp on p.id=gp.param_id where p.category_id = #{categoryId}
                 and gp.goods_id =#{goodsId}
     </select>
-    <select id="getDraftParametersList" resultType="com.shopx.goods.api.model.domain.EsParametersDO">
+    <select id="getDraftParametersList" resultType="com.xdl.jjg.model.domain.EsParametersDO">
             select p.*,gp.param_value,p.group_id
                 from es_parameters p
                left join es_draft_goods_params gp on p.id=gp.param_id where p.category_id = #{categoryId}

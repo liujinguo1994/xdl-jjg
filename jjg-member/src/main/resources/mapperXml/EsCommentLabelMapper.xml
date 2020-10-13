@@ -1,0 +1,27 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsCommentLabelMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsCommentLabel">
+        <id column="id" property="id"/>
+        <result column="comment_label" property="commentLabel"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+    </resultMap>
+
+    <select id="getAllTags" resultType="com.xdl.jjg.model.domain.EsCommentLabelDO">
+        SELECT  ec.label_id id,el.comment_label commentLabel,el.type  FROM es_comment_category ec
+        INNER  JOIN es_comment_label el
+        on ec.label_id = el.id
+        WHERE ec.category_id = #{categoryId}
+    </select>
+
+    <select id="getLabelsById" resultType="java.lang.String">
+        SELECT  comment_label commentLabel from es_comment_label
+        WHERE id in
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+</mapper>

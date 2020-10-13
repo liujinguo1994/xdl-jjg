@@ -4,29 +4,29 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.constant.GoodsErrorCode;
-import com.shopx.goods.api.model.domain.EsParameterGroupDO;
-import com.shopx.goods.api.model.domain.EsParametersDO;
-import com.shopx.goods.api.model.domain.ParameterGroupDO;
-import com.shopx.goods.api.model.domain.dto.EsParameterGroupDTO;
-import com.shopx.goods.api.model.domain.dto.EsParametersDTO;
-import com.shopx.goods.api.service.IEsParameterGroupService;
-import com.shopx.goods.api.service.IEsParametersService;
-import com.shopx.goods.dao.entity.EsCategory;
-import com.shopx.goods.dao.entity.EsParameterGroup;
-import com.shopx.goods.dao.mapper.EsCategoryMapper;
-import com.shopx.goods.dao.mapper.EsParameterGroupMapper;
+import com.xdl.jjg.constant.GoodsErrorCode;
+import com.xdl.jjg.entity.EsCategory;
+import com.xdl.jjg.entity.EsParameterGroup;
+import com.xdl.jjg.mapper.EsCategoryMapper;
+import com.xdl.jjg.mapper.EsParameterGroupMapper;
+import com.xdl.jjg.model.domain.EsParameterGroupDO;
+import com.xdl.jjg.model.domain.EsParametersDO;
+import com.xdl.jjg.model.domain.ParameterGroupDO;
+import com.xdl.jjg.model.dto.EsParameterGroupDTO;
+import com.xdl.jjg.model.dto.EsParametersDTO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.web.service.IEsParameterGroupService;
+import com.xdl.jjg.web.service.IEsParametersService;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -44,7 +44,7 @@ import java.util.stream.Collectors;
  * @author wangaf 826988665@qq.com
  * @since 2019-06-03
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsParameterGroupService.class, timeout = 50000)
+@Service
 public class EsParameterGroupServiceImpl extends ServiceImpl<EsParameterGroupMapper, EsParameterGroup> implements IEsParameterGroupService {
 
     private static Logger logger = LoggerFactory.getLogger(EsParameterGroupServiceImpl.class);

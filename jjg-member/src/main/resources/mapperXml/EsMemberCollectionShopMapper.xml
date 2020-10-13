@@ -1,0 +1,27 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsMemberCollectionShopMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsMemberCollectionShop">
+        <id column="id" property="id"/>
+        <result column="member_id" property="memberId"/>
+        <result column="shop_id" property="shopId"/>
+        <result column="shop_name" property="shopName"/>
+        <result column="create_time" property="createTime"/>
+        <result column="logo" property="logo"/>
+        <result column="shop_province" property="shopProvince"/>
+        <result column="shop_city" property="shopCity"/>
+        <result column="shop_region" property="shopRegion"/>
+        <result column="shop_town" property="shopTown"/>
+    </resultMap>
+
+    <select id="getMaxSort" resultType="java.lang.Integer">
+     SELECT max(sort) FROM es_member_collection_shop
+    </select>
+
+    <select id="getCollectShopNum" resultType="java.lang.Integer">
+        SELECT count(*) FROM (SELECT member_id,create_time,from_unixtime(create_time /1000,'%Y-%m-%d') timeNow FROM es_member_collection_shop) t WHERE t.timeNow = #{timesNow} AND t.member_id = #{memberId}
+    </select>
+
+</mapper>

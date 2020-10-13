@@ -1,9 +1,9 @@
 <?Mapper version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shopx.goods.dao.mapper.EsDraftGoodsMapper">
+<mapper namespace="com.xdl.jjg.mapper.EsDraftGoodsMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.shopx.goods.dao.entity.EsDraftGoods">
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsDraftGoods">
         <id column="id" property="id" />
         <result column="goods_name" property="goodsName" />
         <result column="goods_sn" property="goodsSn" />

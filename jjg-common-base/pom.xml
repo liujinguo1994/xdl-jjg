@@ -38,6 +38,21 @@
             <version>${project.version}</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson</artifactId>
+            <version>${redisson.version}</version>
+        </dependency>
+
+        <!-- rocketmq begin -->
+        <dependency>
+            <groupId>org.apache.rocketmq</groupId>
+            <artifactId>rocketmq-client</artifactId>
+            <version>4.4.0</version>
+        </dependency>
+        <!-- rocketmq end -->
+
+
         <!-- actuator监控信息完善 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -118,8 +133,7 @@
         <dependency>
             <groupId>com.aliyun.oss</groupId>
             <artifactId>aliyun-sdk-oss</artifactId>
-            <version>2.0.6</version>
-            <scope>compile</scope>
+            <version>3.4.2</version>
         </dependency>
         <dependency>
             <groupId>com.aliyun</groupId>

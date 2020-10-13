@@ -1,0 +1,35 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsCartMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsCart">
+        <id column="id" property="id" />
+        <result column="member_id" property="memberId" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="submit_time" property="submitTime" />
+        <result column="submit_ip" property="submitIp" />
+        <result column="remake" property="remake" />
+        <result column="phone_imei" property="phoneImei" />
+        <result column="phone_mac" property="phoneMac" />
+    </resultMap>
+
+    <select id="getCartNumBYMemberId" resultType="com.xdl.jjg.model.domain.EsCartNumDO">
+
+    SELECT
+      t1.id AS cartId,
+     (SELECT
+           count(1)
+         FROM
+          es_commercel_items
+         WHERE
+          t1.id = cart_id
+         ) AS skuNum
+    FROM
+     es_cart t1
+    WHERE
+      t1.member_id = #{memberId}
+   </select>
+
+</mapper>

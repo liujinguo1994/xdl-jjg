@@ -1,6 +1,7 @@
 package com.xdl.jjg.constant;
 
-import com.shopx.goods.api.model.domain.cache.SearchSelector;
+
+import com.xdl.jjg.model.co.SearchSelector;
 
 import java.io.Serializable;
 import java.util.List;

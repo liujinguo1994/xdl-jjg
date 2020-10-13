@@ -1,6 +1,6 @@
 package com.xdl.jjg.constant;
 
-import com.shopx.common.constant.BaseErrorCode;
+import com.xdl.jjg.response.service.BaseErrorCode;
 import lombok.ToString;
 
 

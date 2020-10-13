@@ -1,0 +1,18 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsMemberNoticeLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsMemberNoticeLog">
+        <id column="id" property="id" />
+        <result column="member_id" property="memberId" />
+        <result column="content" property="content" />
+        <result column="send_time" property="sendTime" />
+        <result column="is_del" property="isDel" />
+        <result column="is_read" property="isRead" />
+        <result column="receive_time" property="receiveTime" />
+        <result column="title" property="title" />
+        <result column="msg_type" property="msgType" />
+    </resultMap>
+
+</mapper>

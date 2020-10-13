@@ -4,24 +4,24 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.constant.GoodsErrorCode;
-import com.shopx.goods.api.model.domain.EsParametersDO;
-import com.shopx.goods.api.model.domain.dto.EsParametersDTO;
-import com.shopx.goods.api.service.IEsParametersService;
-import com.shopx.goods.dao.entity.EsParameterGroup;
-import com.shopx.goods.dao.entity.EsParameters;
-import com.shopx.goods.dao.mapper.EsParameterGroupMapper;
-import com.shopx.goods.dao.mapper.EsParametersMapper;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.common.utils.StringUtils;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.constant.GoodsErrorCode;
+import com.xdl.jjg.entity.EsParameterGroup;
+import com.xdl.jjg.entity.EsParameters;
+import com.xdl.jjg.mapper.EsParameterGroupMapper;
+import com.xdl.jjg.mapper.EsParametersMapper;
+import com.xdl.jjg.model.domain.EsParametersDO;
+import com.xdl.jjg.model.dto.EsParametersDTO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.web.service.IEsParametersService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -38,7 +38,7 @@ import java.util.stream.Collectors;
  * @author wangaf 826988665@qq.com
  * @since 2019-06-03
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsParametersService.class, timeout = 50000)
+@Service
 public class EsParametersServiceImpl extends ServiceImpl<EsParametersMapper, EsParameters> implements IEsParametersService {
 
     private static Logger logger = LoggerFactory.getLogger(EsParametersServiceImpl.class);
@@ -251,12 +251,12 @@ public class EsParametersServiceImpl extends ServiceImpl<EsParametersMapper, EsP
                 throw new ArgumentException(GoodsErrorCode.DATA_NOT_EXIST.getErrorCode(),"参数不存在");
             }
             QueryWrapper<EsParameters> queryWrapper = new QueryWrapper<>();
-            if(StringUtils.isEquals(sortType,"up")){
+            if("up".equals(sortType)){
                 //小于
                 queryWrapper.lambda().lt(EsParameters::getSort,curParam.getSort()).
                         eq(EsParameters::getCategoryId,curParam.getCategoryId()).orderByDesc(EsParameters::getSort);
                 queryWrapper.last("limit 0,1");
-            }else if(StringUtils.isEquals(sortType,"down")){
+            }else if("down".equals(sortType)){
                 //大于
                 queryWrapper.lambda().gt(EsParameters::getSort,curParam.getSort()).
                         eq(EsParameters::getCategoryId,curParam.getCategoryId()).orderByAsc(EsParameters::getSort);

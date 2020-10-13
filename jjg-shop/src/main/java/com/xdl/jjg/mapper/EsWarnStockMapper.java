@@ -1,7 +1,7 @@
 package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.shopx.goods.dao.entity.EsWarnStock;
+import com.xdl.jjg.entity.EsWarnStock;
 
 /**
  * <p>

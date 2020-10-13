@@ -1,0 +1,16 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsMemberPointHistoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsMemberPointHistory">
+        <id column="id" property="id" />
+        <result column="member_id" property="memberId" />
+        <result column="grade_point" property="gradePoint" />
+        <result column="create_time" property="createTime" />
+        <result column="reason" property="reason" />
+        <result column="grade_point_type" property="gradePointType" />
+        <result column="operator" property="operator" />
+    </resultMap>
+
+</mapper>

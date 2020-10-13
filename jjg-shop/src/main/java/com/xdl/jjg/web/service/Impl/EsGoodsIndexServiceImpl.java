@@ -1,25 +1,23 @@
 package com.xdl.jjg.web.service.Impl;
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.roketmq.MQProducer;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.util.PinyinUtil;
-import com.shopx.common.util.StringUtil;
-import com.shopx.common.util.security.Hex;
-import com.shopx.goods.api.constant.*;
-import com.shopx.goods.api.model.domain.*;
-import com.shopx.goods.api.model.domain.cache.*;
-import com.shopx.goods.api.model.domain.dto.EsGoodsIndexDTO;
-import com.shopx.goods.api.model.domain.dto.EsGoodsWordsDTO;
-import com.shopx.goods.api.model.domain.vo.EsSearchGoodsVO;
-import com.shopx.goods.api.service.*;
-import com.shopx.system.api.constant.ErrorCode;
+
+import com.aliyun.openservices.shade.com.alibaba.rocketmq.client.producer.MQProducer;
+import com.xdl.jjg.constant.*;
+import com.xdl.jjg.model.co.*;
+import com.xdl.jjg.model.domain.*;
+import com.xdl.jjg.model.dto.EsGoodsIndexDTO;
+import com.xdl.jjg.model.dto.EsGoodsWordsDTO;
+import com.xdl.jjg.model.vo.EsSearchGoodsVO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.util.PinyinUtil;
+import com.xdl.jjg.util.StringUtil;
+import com.xdl.jjg.util.security.Hex;
+import com.xdl.jjg.web.service.*;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Service;
-import org.apache.lucene.search.join.ScoreMode;
 import org.elasticsearch.action.admin.indices.analyze.AnalyzeAction;
 import org.elasticsearch.action.admin.indices.analyze.AnalyzeRequestBuilder;
 import org.elasticsearch.action.admin.indices.analyze.AnalyzeResponse;
@@ -27,7 +25,9 @@ import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.IndicesAdminClient;
 import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.index.query.*;
+import org.elasticsearch.index.query.BoolQueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.index.query.QueryStringQueryBuilder;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.aggregations.Aggregation;
@@ -37,17 +37,19 @@ import org.elasticsearch.search.aggregations.InternalAggregations;
 import org.elasticsearch.search.aggregations.bucket.nested.InternalNested;
 import org.elasticsearch.search.aggregations.bucket.terms.LongTerms;
 import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
+import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.sort.SortOrder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.query.IndexQuery;
+import org.springframework.stereotype.Service;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-@Service(version = "${dubbo.application.version}",interfaceClass = IEsGoodsIndexService.class,timeout = 5000)
+@Service
 public class EsGoodsIndexServiceImpl   implements IEsGoodsIndexService {
 
     private Logger logger = LoggerFactory.getLogger(EsGoodsIndexServiceImpl.class);
@@ -232,7 +234,7 @@ public class EsGoodsIndexServiceImpl   implements IEsGoodsIndexService {
      * @return
      */
     @Override
-    public DubboPageResult<EsGoodsIndexDO> getEsGoodsIndex(EsGoodsIndexDTO esGoodsIndexDTO,int pageSize,int pageNum) {
+    public DubboPageResult<EsGoodsIndexDO> getEsGoodsIndex(EsGoodsIndexDTO esGoodsIndexDTO, int pageSize, int pageNum) {
         try {
             //pageNum = pageNum == 0 ? 1 : pageNum;
            // pageSize = pageSize == 0 ? 10 : pageSize;
@@ -246,7 +248,7 @@ public class EsGoodsIndexServiceImpl   implements IEsGoodsIndexService {
             SearchHits searchHits = response.getHits();
             List<EsGoodsIndexDO> resultlist = new ArrayList<EsGoodsIndexDO>();
             for(SearchHit his:searchHits){
-                Map<String, Object> hisMap = his.getSourceAsMap();
+                Map<String, Object> hisMap = his.getSource();
                 EsGoodsIndexDO goodsIndexDO = new EsGoodsIndexDO();
                 goodsIndexDO.setName(hisMap.get("goodsName").toString());
                 goodsIndexDO.setOriginal(hisMap.get("original")==null ? "" :hisMap.get("original").toString() );
@@ -307,7 +309,7 @@ public class EsGoodsIndexServiceImpl   implements IEsGoodsIndexService {
         // 关键字检索
         if (!StringUtil.isEmpty(goodsIndexDTO.getKeyword())) {
             QueryStringQueryBuilder queryString = new QueryStringQueryBuilder(goodsIndexDTO.getKeyword()).field("goodsName");
-            queryString.defaultOperator(Operator.AND);
+            queryString.defaultOperator(QueryStringQueryBuilder.Operator.AND);
             boolQueryBuilder.must(queryString);
         }
         //品牌
@@ -358,8 +360,8 @@ public class EsGoodsIndexServiceImpl   implements IEsGoodsIndexService {
                 String value = onpropAr[1];
                 String[] values = value.split(Separator.SEPARATOR_PROP_FENHAO);
                 for (String p : values) {
-                    boolQueryBuilder.must(QueryBuilders.nestedQuery("params", QueryBuilders.termQuery("params.paramName", name), ScoreMode.None));
-                    boolQueryBuilder.must(QueryBuilders.nestedQuery("params", QueryBuilders.termQuery("params.paramValue", p), ScoreMode.None));
+                    boolQueryBuilder.must(QueryBuilders.nestedQuery("params", QueryBuilders.termQuery("params.paramName", name)));
+                    boolQueryBuilder.must(QueryBuilders.nestedQuery("params", QueryBuilders.termQuery("params.paramValue", p)));
                 }
             });
         }
@@ -516,7 +518,7 @@ public class EsGoodsIndexServiceImpl   implements IEsGoodsIndexService {
             //参数
             AggregationBuilder valuesBuilder = AggregationBuilders.terms("valueAgg").field("params.paramValue").size(Integer.MAX_VALUE);
             AggregationBuilder paramsNameBuilder = AggregationBuilders.terms("nameAgg").field("params.paramName").subAggregation(valuesBuilder).size(Integer.MAX_VALUE);
-            AggregationBuilder avgBuild = AggregationBuilders.nested("paramsAgg", "params").subAggregation(paramsNameBuilder);
+            AggregationBuilder avgBuild = AggregationBuilders.nested("paramsAgg").subAggregation(paramsNameBuilder);
 
             searchRequestBuilder.addAggregation(categoryTermsBuilder);
             searchRequestBuilder.addAggregation(brandTermsBuilder);
@@ -527,7 +529,7 @@ public class EsGoodsIndexServiceImpl   implements IEsGoodsIndexService {
             EsSelectSearchCO selectSearchCO = new EsSelectSearchCO();
             //分类
             LongTerms categoryTerms = (LongTerms) aggMap.get("categoryAgg");
-            List<LongTerms.Bucket> categoryBuckets = categoryTerms.getBuckets();
+            List<Terms.Bucket> categoryBuckets = categoryTerms.getBuckets();
 
             DubboPageResult<EsCategoryDO> allCatList = this.esCategoryService.getCategoryChildren(0L);
 
@@ -545,7 +547,7 @@ public class EsGoodsIndexServiceImpl   implements IEsGoodsIndexService {
            selectSearchCO.setSelectedCat(selectedCat);
             //品牌
             LongTerms brandTerms = (LongTerms) aggMap.get("brandAgg");
-            List<LongTerms.Bucket> brandBuckets = brandTerms.getBuckets();
+            List<Terms.Bucket> brandBuckets = brandTerms.getBuckets();
             DubboPageResult<EsBrandDO> brandList = esBrandService.getAllBrandList();
             List<SearchSelector> brandDim = SelectorUtil.createBrandSelector(brandBuckets, brandList.getData().getList());
             selectSearchCO.setBrand(brandDim);
@@ -555,7 +557,7 @@ public class EsGoodsIndexServiceImpl   implements IEsGoodsIndexService {
             Map<String, Aggregation> nameMap = paramTerms.asMap();
             StringTerms nameTerms = (StringTerms) nameMap.get("nameAgg");
             if(nameTerms !=null){
-                Iterator<StringTerms.Bucket> paramBucketIt = nameTerms.getBuckets().iterator();
+                Iterator<Terms.Bucket> paramBucketIt = nameTerms.getBuckets().iterator();
                 List<PropSelector> paramDim = SelectorUtil.createParamSelector(paramBucketIt);
                 selectSearchCO.setProp(paramDim);
             }else{
@@ -569,7 +571,7 @@ public class EsGoodsIndexServiceImpl   implements IEsGoodsIndexService {
             return DubboResult.success(selectSearchCO);
         } catch (Exception e) {
             logger.error("选择器查询失败",e);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
 
     }
@@ -589,7 +591,7 @@ public class EsGoodsIndexServiceImpl   implements IEsGoodsIndexService {
             //参数
             AggregationBuilder valuesBuilder = AggregationBuilders.terms("valueAgg").field("params.paramValue").size(Integer.MAX_VALUE);
             AggregationBuilder paramsNameBuilder = AggregationBuilders.terms("nameAgg").field("params.paramName").subAggregation(valuesBuilder).size(Integer.MAX_VALUE);
-            AggregationBuilder avgBuild = AggregationBuilders.nested("paramsAgg", "params").subAggregation(paramsNameBuilder);
+            AggregationBuilder avgBuild = AggregationBuilders.nested("paramsAgg").subAggregation(paramsNameBuilder);
 
             searchRequestBuilder.addAggregation(categoryTermsBuilder);
             searchRequestBuilder.addAggregation(brandTermsBuilder);
@@ -600,7 +602,7 @@ public class EsGoodsIndexServiceImpl   implements IEsGoodsIndexService {
             EsPcSelectSearchCO selectSearchCat = new EsPcSelectSearchCO();
             //分类
             LongTerms categoryTerms = (LongTerms) aggMap.get("categoryAgg");
-            List<LongTerms.Bucket> categoryBuckets = categoryTerms.getBuckets();
+            List<Terms.Bucket> categoryBuckets = categoryTerms.getBuckets();
 
             DubboPageResult<EsCategoryDO> allCatList = this.esCategoryService.getCategoryChildren(0L);
             List<SearchSelector> catDim = SelectorUtil.createCatSelector(categoryBuckets, allCatList.getData().getList(), goodsSearch.getCategoryId());
@@ -651,7 +653,7 @@ public class EsGoodsIndexServiceImpl   implements IEsGoodsIndexService {
             searchSelected.setParamsList(Collections.singletonList(selectedAll));
 
             LongTerms brandTerms = (LongTerms) aggMap.get("brandAgg");
-            List<LongTerms.Bucket> brandBuckets = brandTerms.getBuckets();
+            List<Terms.Bucket> brandBuckets = brandTerms.getBuckets();
             // 已选择的品牌
             List<String> bandList = goodsSearch.getBrandList();
             if(CollectionUtils.isNotEmpty(bandList)){
@@ -709,7 +711,7 @@ public class EsGoodsIndexServiceImpl   implements IEsGoodsIndexService {
                 StringTerms nameTerms = (StringTerms) nameMap.get("nameAgg");
                 EsPcSelectSearchCO selectSearchProp = new EsPcSelectSearchCO();
                 if(nameTerms !=null){
-                    Iterator<StringTerms.Bucket> paramBucketIt = nameTerms.getBuckets().iterator();
+                    Iterator<Terms.Bucket> paramBucketIt = nameTerms.getBuckets().iterator();
                     List<PropSelector> paramDim = SelectorUtil.createParamSelector(paramBucketIt);
                     List<String> propkey = new ArrayList<>();
                     if(CollectionUtils.isNotEmpty(propList)){
@@ -743,7 +745,7 @@ public class EsGoodsIndexServiceImpl   implements IEsGoodsIndexService {
             return DubboPageResult.success(paramsList);
         } catch (Exception e) {
             logger.error("选择器查询失败",e);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboPageResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
 
     }

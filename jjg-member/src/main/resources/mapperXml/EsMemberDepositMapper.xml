@@ -1,0 +1,92 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsMemberDepositMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsMemberDeposit">
+        <id column="id" property="id"/>
+        <result column="member_id" property="memberId"/>
+        <result column="type" property="type"/>
+        <result column="money" property="money"/>
+        <result column="create_time" property="createTime"/>
+    </resultMap>
+
+    <select id="getRecentlyThreeMonth" parameterType="com.xdl.jjg.model.domain.dto.EsMemberDepositDTO" resultType="com.xdl.jjg.model.domain.EsMemberDepositDO">
+        SELECT
+            t.id,
+            t.member_id,
+            t.type,
+            t.money,
+            t.create_time,
+            t.time,
+            t.member_balance
+        FROM
+            (SELECT
+                e.id,
+                e.member_id,
+                e.type,
+                e.money,
+                e.create_time,
+                e.member_balance,
+            from_unixtime(e.create_time /1000 ,'%Y-%m-%d %H:%i:%S') time
+            FROM es_member_deposit e
+            ORDER BY time DESC) t
+        WHERE
+         t.member_id = #{esMemberDepositDTO.memberId} and t.money <![CDATA[ <> ]]> 0
+        <if test="esMemberDepositDTO.threeMonth != null and esMemberDepositDTO.threeMonth== '1'.toString()">
+            and t.time <![CDATA[>= ]]> DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
+        </if>
+        <if test="esMemberDepositDTO.threeMonth != null and esMemberDepositDTO.threeMonth== '2'.toString()">
+            and t.time <![CDATA[<]]> DATE_SUB(CURDATE(), INTERVAL 3 MONTH)
+        </if>
+        <if test="esMemberDepositDTO.type != null and esMemberDepositDTO.type == '1'.toString()">
+            and t.type=1
+        </if>
+        <if test="esMemberDepositDTO.type != null and esMemberDepositDTO.type == '2'.toString()">
+            and t.type=2
+        </if>
+        ORDER BY t.create_time desc
+    </select>
+
+    <select id="getWapBalance" resultType="com.xdl.jjg.model.domain.EsMemberDepositDO">
+        SELECT
+        t.id,
+        t.member_id,
+        t.type,
+        t.money,
+        t.create_time,
+        t.time,
+        t.member_balance
+        FROM
+        (SELECT
+        e.id,
+        e.member_id,
+        e.type,
+        e.money,
+        e.create_time,
+        e.member_balance,
+        from_unixtime(e.create_time /1000 ,'%Y-%m-%d %H:%i:%S') time
+        FROM es_member_deposit e
+        ORDER BY time DESC) t
+        WHERE
+        t.member_id = #{esMemberDepositDTO.memberId} and t.money <![CDATA[ > ]]> 0
+        <if test="esMemberDepositDTO.type != null and esMemberDepositDTO.type == '1'.toString()">
+            and (t.type='RECHARGE' or t.type='REFUND')
+        </if>
+        <if test="esMemberDepositDTO.type != null and esMemberDepositDTO.type == '2'.toString()">
+            and t.type='CONSUME'
+        </if>
+        ORDER BY t.create_time desc
+    </select>
+
+
+
+    <insert id="insertMemberDepositBatch">
+        INSERT INTO es_member_deposit(`member_id`,`type`,`money`,`create_time`,`member_balance`)
+        VALUES
+        <foreach collection="lists" item="item" separator=",">
+            (#{item.id},1,#{item.money},#{item.createTime},#{item.memberBalance})
+        </foreach>
+    </insert>
+
+</mapper>

@@ -2,24 +2,22 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.constant.GoodsErrorCode;
-import com.shopx.goods.api.model.domain.EsShopLogiRelDO;
-import com.shopx.goods.api.service.IEsShopLogiRelService;
-import com.shopx.goods.dao.entity.EsShopLogiRel;
-import com.shopx.goods.dao.mapper.EsShopLogiRelMapper;
-import com.shopx.system.api.constant.ErrorCode;
-import com.shopx.system.api.model.domain.EsLogiCompanyDO;
-import com.shopx.system.api.service.IEsLogiCompanyService;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.constant.GoodsErrorCode;
+import com.xdl.jjg.entity.EsShopLogiRel;
+import com.xdl.jjg.mapper.EsShopLogiRelMapper;
+import com.xdl.jjg.model.domain.EsLogiCompanyDO;
+import com.xdl.jjg.model.domain.EsShopLogiRelDO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.web.service.IEsLogiCompanyService;
+import com.xdl.jjg.web.service.IEsShopLogiRelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -35,7 +33,7 @@ import java.util.stream.Collectors;
  * @author WAF 826988665@qq.com
  * @since 2019-07-17 14:59:14
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsShopLogiRelService.class, timeout = 50000)
+@Service
 public class EsShopLogiRelServiceImpl extends ServiceImpl<EsShopLogiRelMapper, EsShopLogiRel> implements IEsShopLogiRelService {
 
     private static Logger logger = LoggerFactory.getLogger(EsShopLogiRelServiceImpl.class);
@@ -43,7 +41,7 @@ public class EsShopLogiRelServiceImpl extends ServiceImpl<EsShopLogiRelMapper, E
     @Autowired
     private EsShopLogiRelMapper shopLogiRelMapper;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000,check = false)
+    @Autowired
     private IEsLogiCompanyService esLogiCompanyService;
     /**
      * 插入数据
@@ -54,7 +52,7 @@ public class EsShopLogiRelServiceImpl extends ServiceImpl<EsShopLogiRelMapper, E
      */
     @Override
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public DubboResult insertShopLogiRel(Long shopId,Long id) {
+    public DubboResult insertShopLogiRel(Long shopId, Long id) {
         try {
             EsShopLogiRel shopLogiRel = new EsShopLogiRel();
             shopLogiRel.setShopId(shopId);
@@ -68,7 +66,7 @@ public class EsShopLogiRelServiceImpl extends ServiceImpl<EsShopLogiRelMapper, E
         }catch (Throwable ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
     /**
@@ -94,7 +92,7 @@ public class EsShopLogiRelServiceImpl extends ServiceImpl<EsShopLogiRelMapper, E
         }  catch (Throwable th) {
             logger.error("删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -112,7 +110,7 @@ public class EsShopLogiRelServiceImpl extends ServiceImpl<EsShopLogiRelMapper, E
         }  catch (Throwable th) {
             logger.error("删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -142,7 +140,7 @@ public class EsShopLogiRelServiceImpl extends ServiceImpl<EsShopLogiRelMapper, E
            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
        }  catch (Throwable th) {
            logger.error("获取物流公司信息失败", th);
-           return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+           return DubboPageResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
        }
     }
     @Override
@@ -172,7 +170,7 @@ public class EsShopLogiRelServiceImpl extends ServiceImpl<EsShopLogiRelMapper, E
             return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
         }  catch (Throwable th) {
             logger.error("获取物流公司信息失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboPageResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 }

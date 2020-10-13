@@ -1,0 +1,26 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsCommentSortConfigMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsCommentSortConfig">
+        <id column="id" property="id" />
+        <result column="min_score" property="minScore" />
+        <result column="max_score" property="maxScore" />
+        <result column="comment_sort" property="commentSort" />
+        <result column="comment_type" property="commentType" />
+    </resultMap>
+
+    <select id="getCommentSortConfigList" resultType="com.xdl.jjg.model.domain.EsCommentSortConfigDO">
+        select id,min_score minScore,max_score maxScore,comment_type commentType,comment_sort commentSort FROM es_comment_sort_config
+    </select>
+
+    <delete id="deleteCommentSortConfig">
+        delete from  es_comment_sort_config
+    </delete>
+
+    <select id="getCommentSortLevel" resultType="com.xdl.jjg.model.domain.EsCommentSortConfigDO" >
+        SELECT min_score minScore,max_score maxScore,comment_type commentType  FROM es_comment_sort_config where comment_type = #{commentType}
+    </select>
+
+</mapper>

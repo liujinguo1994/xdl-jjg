@@ -1,11 +1,12 @@
 package com.xdl.jjg.constant;
 
-import com.shopx.common.util.StringUtil;
-import com.shopx.goods.api.model.domain.EsBrandDO;
-import com.shopx.goods.api.model.domain.EsCategoryDO;
-import com.shopx.goods.api.model.domain.cache.SearchSelector;
-import org.elasticsearch.search.aggregations.bucket.terms.LongTerms;
+
+import com.xdl.jjg.model.co.SearchSelector;
+import com.xdl.jjg.model.domain.EsBrandDO;
+import com.xdl.jjg.model.domain.EsCategoryDO;
+import com.xdl.jjg.util.StringUtil;
 import org.elasticsearch.search.aggregations.bucket.terms.StringTerms;
+import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.elasticsearch.search.aggregations.bucket.terms.Terms.Bucket;
 
 import java.util.*;
@@ -26,7 +27,7 @@ public class SelectorUtil {
      * @param allCatList
      * @return
      */
-    public static List<SearchSelector> createCatSelector(List<LongTerms.Bucket> categoryBuckets, List<EsCategoryDO> allCatList, Long catId) {
+    public static List<SearchSelector> createCatSelector(List<Terms.Bucket> categoryBuckets, List<EsCategoryDO> allCatList, Long catId) {
         String catPid = null;
         if (catId != null) {
 //            String[] catar = catId.split(Separator.SEPARATOR_PROP_VLAUE);
@@ -86,7 +87,7 @@ public class SelectorUtil {
      * @param brandList
      * @return
      */
-    public static List<SearchSelector> createBrandSelector(List<LongTerms.Bucket> brandBuckets, List<EsBrandDO> brandList) {
+    public static List<SearchSelector> createBrandSelector(List<Terms.Bucket> brandBuckets, List<EsBrandDO> brandList) {
         List<SearchSelector> selectorList = new ArrayList<>();
 
         if (brandBuckets != null && brandBuckets.size() > 0) {
@@ -135,7 +136,7 @@ public class SelectorUtil {
      * @param paramBucketIt
      * @return
      */
-    public static List<PropSelector> createParamSelector(Iterator<StringTerms.Bucket> paramBucketIt) {
+    public static List<PropSelector> createParamSelector(Iterator<Terms.Bucket> paramBucketIt) {
 
         List<PropSelector>  propSelectorList = new ArrayList<>();
         while (paramBucketIt.hasNext()) {
@@ -143,7 +144,7 @@ public class SelectorUtil {
             Bucket paramBucket = paramBucketIt.next();
             String param = paramBucket.getKey().toString();
             StringTerms valueTerms = (StringTerms)paramBucket.getAggregations().asMap().get("valueAgg");
-            Iterator<StringTerms.Bucket> valueBucketIt = valueTerms.getBuckets().iterator();
+            Iterator<Terms.Bucket> valueBucketIt = valueTerms.getBuckets().iterator();
             List<SearchSelector> selectList = new ArrayList<>();
             while (valueBucketIt.hasNext()) {
 

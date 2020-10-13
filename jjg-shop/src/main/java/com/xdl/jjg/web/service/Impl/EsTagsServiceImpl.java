@@ -2,22 +2,22 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.constant.GoodsErrorCode;
-import com.shopx.goods.api.model.domain.EsTagsDO;
-import com.shopx.goods.api.model.domain.dto.EsTagsDTO;
-import com.shopx.goods.api.service.IEsTagsService;
-import com.shopx.goods.dao.entity.EsTagGoods;
-import com.shopx.goods.dao.entity.EsTags;
-import com.shopx.goods.dao.mapper.EsTagsMapper;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.constant.GoodsErrorCode;
+import com.xdl.jjg.entity.EsTagGoods;
+import com.xdl.jjg.entity.EsTags;
+import com.xdl.jjg.mapper.EsTagsMapper;
+import com.xdl.jjg.model.domain.EsTagsDO;
+import com.xdl.jjg.model.dto.EsTagsDTO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.web.service.IEsTagsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
  * @author wangaf 826988665@qq.com
  * @since 2019-06-03
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsTagsService.class, timeout = 50000)
+@Service
 public class EsTagsServiceImpl extends ServiceImpl<EsTagsMapper, EsTags> implements IEsTagsService {
 
     private static Logger logger = LoggerFactory.getLogger(EsTagsServiceImpl.class);

@@ -1,9 +1,9 @@
 <?Mapper version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shopx.goods.dao.mapper.EsGoodsUserTokenMapper">
+<mapper namespace="com.xdl.jjg.mapper.EsGoodsUserTokenMapper">
 
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.shopx.goods.dao.entity.EsGoodsUserToken">
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsGoodsUserToken">
         <id column="user_id" property="userId" />
         <result column="token" property="token" />
         <result column="expire_time" property="expireTime" />

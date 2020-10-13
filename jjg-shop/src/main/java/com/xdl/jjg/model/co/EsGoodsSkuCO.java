@@ -1,7 +1,7 @@
 package com.xdl.jjg.model.co;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.shopx.goods.api.model.domain.EsGoodsGalleryDO;
+import com.xdl.jjg.model.domain.EsGoodsGalleryDO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

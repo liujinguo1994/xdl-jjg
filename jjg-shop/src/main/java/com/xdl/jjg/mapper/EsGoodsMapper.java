@@ -3,11 +3,11 @@ package com.xdl.jjg.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.shopx.goods.api.model.domain.EsGoodsDO;
-import com.shopx.goods.api.model.domain.EsSalesRankingGoodsDO;
-import com.shopx.goods.api.model.domain.dto.EsGoodsDTO;
-import com.shopx.goods.api.model.domain.dto.EsGoodsQueryDTO;
-import com.shopx.goods.dao.entity.EsGoods;
+import com.xdl.jjg.entity.EsGoods;
+import com.xdl.jjg.model.domain.EsGoodsDO;
+import com.xdl.jjg.model.domain.EsSalesRankingGoodsDO;
+import com.xdl.jjg.model.dto.EsGoodsDTO;
+import com.xdl.jjg.model.dto.EsGoodsQueryDTO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

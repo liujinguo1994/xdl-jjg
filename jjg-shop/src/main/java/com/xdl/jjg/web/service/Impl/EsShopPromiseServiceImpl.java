@@ -2,22 +2,21 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.constant.GoodsErrorCode;
-import com.shopx.goods.api.model.domain.EsShopPromiseDO;
-import com.shopx.goods.api.model.domain.dto.EsShopPromiseDTO;
-import com.shopx.goods.api.service.IEsShopPromiseService;
-import com.shopx.goods.dao.entity.EsShopPromise;
-import com.shopx.goods.dao.mapper.EsShopPromiseMapper;
-import com.shopx.system.api.constant.ErrorCode;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.constant.GoodsErrorCode;
+import com.xdl.jjg.entity.EsShopPromise;
+import com.xdl.jjg.mapper.EsShopPromiseMapper;
+import com.xdl.jjg.model.domain.EsShopPromiseDO;
+import com.xdl.jjg.model.dto.EsShopPromiseDTO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.web.service.IEsShopPromiseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -34,7 +33,7 @@ import java.util.stream.Collectors;
  * @author WAF 826988665@qq.com
  * @since 2019-06-18 09:39:17
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsShopPromiseService.class, timeout = 50000)
+@Service
 public class EsShopPromiseServiceImpl extends ServiceImpl<EsShopPromiseMapper, EsShopPromise> implements IEsShopPromiseService {
 
     private static Logger logger = LoggerFactory.getLogger(EsShopPromiseServiceImpl.class);
@@ -65,7 +64,7 @@ public class EsShopPromiseServiceImpl extends ServiceImpl<EsShopPromiseMapper, E
         }catch (Throwable ae) {
             logger.error("新增卖家承诺失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -99,7 +98,7 @@ public class EsShopPromiseServiceImpl extends ServiceImpl<EsShopPromiseMapper, E
         } catch (Throwable th) {
             logger.error("更新卖家承诺失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -117,7 +116,7 @@ public class EsShopPromiseServiceImpl extends ServiceImpl<EsShopPromiseMapper, E
             EsShopPromise shopPromise = this.getById(id);
             EsShopPromiseDO shopPromiseDO = new EsShopPromiseDO();
             if (shopPromise == null || shopPromise.getState() == 2) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(GoodsErrorCode.DATA_NOT_EXIST.getErrorCode(), GoodsErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             BeanUtil.copyProperties(shopPromise, shopPromiseDO);
             return DubboResult.success(shopPromiseDO);
@@ -126,7 +125,7 @@ public class EsShopPromiseServiceImpl extends ServiceImpl<EsShopPromiseMapper, E
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
         }  catch (Throwable th) {
             logger.error("查询卖家承诺失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -158,7 +157,7 @@ public class EsShopPromiseServiceImpl extends ServiceImpl<EsShopPromiseMapper, E
             return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
         } catch (Throwable th) {
             logger.error("查询卖家承诺列表失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -189,7 +188,7 @@ public class EsShopPromiseServiceImpl extends ServiceImpl<EsShopPromiseMapper, E
         }  catch (Throwable th) {
             logger.error("删除卖家承诺失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 }

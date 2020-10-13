@@ -1,0 +1,46 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsShopMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsShop">
+        <id column="id" property="id" />
+        <result column="member_id" property="memberId" />
+        <result column="member_name" property="memberName" />
+        <result column="state" property="state" />
+        <result column="shop_name" property="shopName" />
+        <result column="shop_createtime" property="shopCreatetime" />
+        <result column="shop_endtime" property="shopEndtime" />
+    </resultMap>
+
+
+    <select id="getAllShop"  resultType="com.xdl.jjg.model.domain.EsShopDO">
+           select s.*,m.mobile from  es_member m,es_shop s WHERE m.id=s.member_id
+        <if test="shopQueryParam.shopName !=null and shopQueryParam.shopName!=''">
+            and s.shop_name LIKE CONCAT('%',#{shopQueryParam.shopName},'%')
+        </if>
+         <if test="shopQueryParam.memberName !=null and shopQueryParam.memberName!=''">
+            and m.name LIKE CONCAT('%',#{shopQueryParam.memberName},'%')
+        </if>
+         <if test="shopQueryParam.mobile !=null and shopQueryParam.mobile!=''">
+            and m.mobile = #{shopQueryParam.mobile}
+        </if>
+         <if test="shopQueryParam.state !=null and shopQueryParam.state!=''">
+            and s.state =#{shopQueryParam.state}
+        </if>
+         <if test="shopQueryParam.shopCreatetimeStart !=null and shopQueryParam.shopCreatetimeStart!=''">
+            and s.shop_createtime <![CDATA[<= ]]> #{shopQueryParam.shopCreatetimeStart}
+        </if>
+         <if test="shopQueryParam.shopCreatetimeEnd !=null and shopQueryParam.shopCreatetimeEnd!=''">
+            and s.shop_createtime <![CDATA[>= ]]> #{shopQueryParam.shopCreatetimeEnd}
+        </if>
+
+    </select>
+
+
+    <select id="selectShopDetailById" resultType="com.xdl.jjg.model.domain.EsShopAndDetailDO">
+
+        SELECT * from es_shop s LEFT JOIN es_shop_detail d ON s.id=d.shop_id WHERE s.id=#{shopId}
+    </select>
+
+</mapper>

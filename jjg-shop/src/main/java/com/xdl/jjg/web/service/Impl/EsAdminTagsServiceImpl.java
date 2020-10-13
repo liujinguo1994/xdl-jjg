@@ -2,23 +2,24 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.model.domain.EsAdminTagsDO;
-import com.shopx.goods.api.model.domain.dto.EsAdminTagsDTO;
-import com.shopx.goods.api.service.IEsAdminTagsService;
-import com.shopx.goods.dao.entity.EsAdminTags;
-import com.shopx.goods.dao.mapper.EsAdminTagGoodsMapper;
-import com.shopx.goods.dao.mapper.EsAdminTagsMapper;
-import com.shopx.goods.dao.mapper.EsGoodsMapper;
-import com.shopx.system.api.constant.ErrorCode;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.constant.GoodsErrorCode;
+import com.xdl.jjg.entity.EsAdminTags;
+import com.xdl.jjg.mapper.EsAdminTagGoodsMapper;
+import com.xdl.jjg.mapper.EsAdminTagsMapper;
+import com.xdl.jjg.mapper.EsGoodsMapper;
+import com.xdl.jjg.model.domain.EsAdminTagsDO;
+import com.xdl.jjg.model.dto.EsAdminTagsDTO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.service.ErrorCode;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.web.service.IEsAdminTagsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -35,7 +36,7 @@ import java.util.stream.Collectors;
  * @author WAF 826988665@qq.com
  * @since 2019-07-27 14:57:56
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsAdminTagsService.class, timeout = 50000)
+@Service
 public class EsAdminTagsServiceImpl extends ServiceImpl<EsAdminTagsMapper, EsAdminTags> implements IEsAdminTagsService {
 
     private static Logger logger = LoggerFactory.getLogger(EsAdminTagsServiceImpl.class);
@@ -70,7 +71,7 @@ public class EsAdminTagsServiceImpl extends ServiceImpl<EsAdminTagsMapper, EsAdm
         }catch (Throwable ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -89,7 +90,7 @@ public class EsAdminTagsServiceImpl extends ServiceImpl<EsAdminTagsMapper, EsAdm
         try {
             EsAdminTags adminTags = this.adminTagsMapper.selectById(id);
             if (adminTags == null) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(GoodsErrorCode.DATA_NOT_EXIST.getErrorCode(), GoodsErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             BeanUtil.copyProperties(adminTagsDTO, adminTags);
             QueryWrapper<EsAdminTags> queryWrapper = new QueryWrapper<>();
@@ -103,7 +104,7 @@ public class EsAdminTagsServiceImpl extends ServiceImpl<EsAdminTagsMapper, EsAdm
         } catch (Throwable th) {
             logger.error("更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -120,7 +121,7 @@ public class EsAdminTagsServiceImpl extends ServiceImpl<EsAdminTagsMapper, EsAdm
         try {
             EsAdminTags adminTags = this.adminTagsMapper.selectById(id);
             if (adminTags == null) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(GoodsErrorCode.DATA_NOT_EXIST.getErrorCode(), GoodsErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             EsAdminTagsDO adminTagsDO = new EsAdminTagsDO();
             BeanUtil.copyProperties(adminTags, adminTagsDO);
@@ -130,7 +131,7 @@ public class EsAdminTagsServiceImpl extends ServiceImpl<EsAdminTagsMapper, EsAdm
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
         }  catch (Throwable th) {
             logger.error("查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -160,7 +161,7 @@ public class EsAdminTagsServiceImpl extends ServiceImpl<EsAdminTagsMapper, EsAdm
             return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
         } catch (Throwable th) {
             logger.error("查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
     public DubboPageResult<EsAdminTagsDO> getAdminTagsList() {
@@ -181,7 +182,7 @@ public class EsAdminTagsServiceImpl extends ServiceImpl<EsAdminTagsMapper, EsAdm
             return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
         } catch (Throwable th) {
             logger.error("查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
     /**
@@ -205,7 +206,7 @@ public class EsAdminTagsServiceImpl extends ServiceImpl<EsAdminTagsMapper, EsAdm
         }  catch (Throwable th) {
             logger.error("删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 }

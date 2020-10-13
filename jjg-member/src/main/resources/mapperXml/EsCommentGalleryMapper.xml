@@ -1,0 +1,22 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsCommentGalleryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsCommentGallery">
+        <id column="id" property="id" />
+        <result column="comment_id" property="commentId" />
+        <result column="original" property="original" />
+        <result column="sort" property="sort" />
+    </resultMap>
+
+
+    <select id="getCommentGalleryList" parameterType="java.lang.Long" resultType="com.xdl.jjg.model.domain.EsCommentGalleryDO">
+        SELECT id,comment_id commentId,original FROM es_comment_gallery where comment_id = #{commentId} order by sort
+    </select>
+
+    <select id="getCommentImageList" resultType="java.lang.String">
+        SELECT original FROM es_comment_gallery where comment_id = #{commentId}
+    </select>
+
+</mapper>

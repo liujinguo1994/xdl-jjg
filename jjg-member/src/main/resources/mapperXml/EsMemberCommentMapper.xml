@@ -1,0 +1,96 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsMemberCommentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsMemberComment">
+        <id column="id" property="id" />
+        <result column="goods_id" property="goodsId" />
+        <result column="sku_id" property="skuId" />
+        <result column="member_id" property="memberId" />
+        <result column="shop_id" property="shopId" />
+        <result column="member_name" property="memberName" />
+        <result column="member_face" property="memberFace" />
+        <result column="goods_name" property="goodsName" />
+        <result column="content" property="content" />
+        <result column="create_time" property="createTime" />
+        <result column="have_image" property="haveImage" />
+        <result column="state" property="state" />
+        <result column="grade" property="grade" />
+        <result column="order_sn" property="orderSn" />
+        <result column="reply_status" property="replyStatus" />
+    </resultMap>
+
+
+    <select id="getCommentLabel"  resultType="com.xdl.jjg.model.domain.EsCommentLabelDO">
+        SELECT type,GROUP_CONCAT(comment_label) commentLabel FROM es_comment_label
+        WHERE
+         id in
+        <foreach collection="array" item="item" index="index" open="(" close=")" separator="," >
+            #{item}
+        </foreach>
+        GROUP BY type
+    </select>
+
+    <select id="getCommentByOrdersAndGoodsId" resultType="com.xdl.jjg.model.domain.EsCommentInfoDO">
+        SELECT content,grade,labels,member_id memberId,comment_score commentScore,id, have_image haveImage,shop_id shopId FROM es_member_comment WHERE goods_id = #{goodsId} and order_sn = #{orderSn} and state =0  and sku_id=#{skuId}
+    </select>
+
+    <select id="getMemberDetailCommentList" resultType="com.xdl.jjg.model.domain.EsMemberCommentDetailDO">
+     SELECT er.content replayContentInfo,ea.content addContentInfo,ec.content content,ec.have_image haveImage,em.face,if(ec.is_anonymous =2,'匿名',REPLACE(mobile,SUBSTR(em.mobile,4,4),'****')) mobile,ec.id,ec.goods_id goodsId,ec.sku_id,
+     ec.member_id,ec.labels,ec.grade,ec.comment_score commentScore,ec.create_time createTime,em.nickname,
+        ec.is_anonymous as isAnonymous  FROM es_member_comment ec
+     left JOIN es_member em
+     on ec.member_id = em.id
+        LEFT JOIN es_comment_reply er
+        on ec.id = er.comment_id
+        LEFT JOIN es_add_comment ea
+        on ec.id = ea.comment_id
+
+     WHERE  ec.goods_id = #{es.goodsId}
+     <if test="es.grade != null">
+         /*好中差评查询*/
+         <if test='es.grade eq "0" or es.grade eq "1" or es.grade eq "2"'>
+             and ec.grade = #{es.grade}
+         </if>
+         /*最近三个月*/
+         <if test='es.grade eq "3"'>
+             and (UNIX_TIMESTAMP()*1000 - ec.create_time)/(1000*60*60*24*30) &lt; 3
+         </if>
+         /*追加评论*/
+         <if test='es.grade eq "4"'>
+             and ea.id is not null
+         </if>
+     </if>
+     <if test="es.imageType !=null">
+         and ec.have_image = #{es.imageType}
+     </if>
+    </select>
+
+    <select id="getAdminManagerList" resultType="com.xdl.jjg.model.domain.EsAdminManagerDO">
+     SELECT order_sn orderSn,ec.id,ec.goods_id goodsId,ec.goods_sn goodsSn,ec.goods_name goodsName,
+        ec.content,ec.comment_score commentScore,ec.create_time createTime,ec.member_id,em.nickname,
+        reply_status replyStatus, ec.member_id memberId, ec.shop_id shopId
+      FROM es_member_comment ec
+        LEFT JOIN
+        es_member em
+        on em.id = ec.member_id
+        where 1=1
+        <if test="es.keyword !='' and es.keyword != null">
+            and ec.goods_sn = #{es.keyword} or ec.goods_name = #{es.keyword}
+        </if>
+        <if test="es.replyStatus !='' and es.replyStatus != null">
+            and ec.reply_status = #{es.replyStatus} or ec.reply_status = #{es.replyStatus}
+        </if>
+        ORDER BY ec.create_time DESC
+    </select>
+
+    <select id="getCollectCommentNum" resultType="java.lang.Integer">
+        SELECT count(*) FROM (SELECT member_id,create_time,from_unixtime(create_time /1000,'%Y-%m-%d') timeNow FROM es_member_comment) t WHERE t.timeNow = #{timesNow} AND t.member_id = #{memberId}
+    </select>
+
+    <select id="getLabelsGroup" resultType="java.lang.String">
+        SELECT labels from es_member_comment where goods_id = #{goodsId} and labels  <![CDATA[ <> ]]> ""
+    </select>
+
+</mapper>

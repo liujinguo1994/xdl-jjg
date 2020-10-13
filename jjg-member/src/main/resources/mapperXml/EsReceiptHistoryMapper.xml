@@ -1,0 +1,32 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsReceiptHistoryMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsReceiptHistory">
+        <id column="history_id" property="historyId" />
+        <result column="order_sn" property="orderSn" />
+        <result column="shop_id" property="shopId" />
+        <result column="member_id" property="memberId" />
+        <result column="receipt_type" property="receiptType" />
+        <result column="receipt_title" property="receiptTitle" />
+        <result column="receipt_amount" property="receiptAmount" />
+        <result column="receipt_content" property="receiptContent" />
+        <result column="tax_no" property="taxNo" />
+        <result column="reg_addr" property="regAddr" />
+        <result column="reg_tel" property="regTel" />
+        <result column="bank_name" property="bankName" />
+        <result column="bank_account" property="bankAccount" />
+        <result column="create_time" property="createTime" />
+        <result column="member_name" property="memberName" />
+        <result column="state" property="state" />
+        <result column="fail_reason" property="failReason" />
+        <result column="goods_id" property="goodsId" />
+    </resultMap>
+
+    <select id="getReceiptHistoryByInvoiceSerialNum" resultType="com.xdl.jjg.model.domain.EsReceiptHistoryDO">
+        select  order_sn orderSn,receipt_type receiptType,receipt_content receiptContent,receipt_title receiptTitle,invoice_code invoiceCode,invoice_num invoiceNum,invoice_file_url invoiceFileUrl,invoice_serial_num invoiceSerialNum
+        from es_receipt_history where invoice_serial_num = #{es}
+    </select>
+
+</mapper>

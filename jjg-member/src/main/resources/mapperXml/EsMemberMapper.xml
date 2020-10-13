@@ -1,0 +1,224 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsMemberMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsMember">
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="email" property="email"/>
+        <result column="password" property="password"/>
+        <result column="sex" property="sex"/>
+        <result column="birthday" property="birthday"/>
+        <result column="province_id" property="provinceId"/>
+        <result column="city_id" property="cityId"/>
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
+        <result column="mobile" property="mobile"/>
+        <result column="tel" property="tel"/>
+        <result column="grade" property="grade"/>
+        <result column="consum_point" property="consumPoint"/>
+        <result column="last_login" property="lastLogin"/>
+        <result column="is_cheked" property="isCheked"/>
+        <result column="register_ip" property="registerIp"/>
+        <result column="info_full" property="infoFull"/>
+        <result column="face" property="face"/>
+        <result column="identity" property="identity"/>
+        <result column="state" property="state"/>
+        <result column="qq_id" property="qqId"/>
+        <result column="wechat_id" property="wechatId"/>
+        <result column="weibo_id" property="weiboId"/>
+        <result column="alipay_id" property="alipayId"/>
+        <result column="nickname" property="nickname"/>
+        <result column="member_balance" property="memberBalance"/>
+        <result column="company_code" property="companyCode"/>
+        <result column="card_name" property="cardName"/>
+    </resultMap>
+
+
+    <sql id="Base_Column_list">
+         id,name,email,password,sex,birthday, province_id provinceId,city_id cityId,mobile,tel,grade,consum_point consumPoint,last_login lastLogin,is_cheked isCheked,register_ip registerIp,
+         info_full infoFull,face,identity, state,qq_id qqId, wechat_id wechatId, weibo_id weiboId, alipay_id alipayId, nickname, member_balance memberBalance,company_code companyCode,salt
+    </sql>
+
+    <select id="selectMobileById" parameterType="com.xdl.jjg.entity.EsMember" resultType="java.lang.Long">
+        select mobile from es_member where id = #{id}
+    </select>
+
+    <update id="updateByMobile" parameterType="com.xdl.jjg.entity.EsMember">
+        update es_member set mobile = #{newMobile} where mobile = #{mobile}
+    </update>
+
+    <select id="selectById" parameterType="java.lang.Long" resultType="com.xdl.jjg.model.domain.EsMemberDO">
+        select
+                id,
+                name,
+                email,
+                password,
+                sex,
+                birthday,
+                province_id provinceId,
+                city_id cityId,
+                mobile,
+                tel,
+                grade,
+                consum_point consumPoint,
+                last_login lastLogin,
+                is_cheked isCheked,
+                register_ip registerIp,
+                info_full infoFull,
+                face,
+                identity,
+                state,
+                qq_id qqId,
+                wechat_id wechatId,
+                weibo_id weiboId,
+                alipay_id alipayId,
+                nickname,
+                member_balance memberBalance,
+                company_code companyCode,
+                salt,
+                card_name
+         from  es_member
+         where id = #{id} and state = 0
+    </select>
+
+    <select id="selectByNameOrMobile" parameterType="java.lang.String" resultType="com.xdl.jjg.model.domain.EsMemberDO">
+        select
+        <include refid="Base_Column_list"/>
+        from  es_member where state !=1  and  name = #{nameOrMobile} or mobile = #{nameOrMobile}
+    </select>
+
+    <select id="selectByMobile" parameterType="java.lang.String" resultType="com.xdl.jjg.model.domain.EsMemberDO">
+        select
+        <include refid="Base_Column_list"/>
+        from  es_member where state !=1  and  mobile = #{mobile}
+    </select>
+
+    <select id="selectByName" parameterType="java.lang.String" resultType="com.xdl.jjg.model.domain.EsMemberDO">
+        select
+        <include refid="Base_Column_list"/>
+        from  es_member where state !=1  and  name = #{name}
+    </select>
+    
+    <select id="selectAdminMemberList" resultType="com.xdl.jjg.model.domain.EsAdminMemberDO">
+        SELECT es.id,es.name,es.mobile,es.email,es.member_balance money,es.create_time registerTime,es.last_login lastLogin,
+        es.state,es.company_code company,es.grade
+        FROM es_member es
+        where 1=1
+        <if test ="esName.state != null and esName.state != ''">
+          and es.state = #{esName.state}
+        </if>
+        <if test = "esName.companyCode != null and esName.companyCode !=''">
+          and  es.company_code = #{esName.companyCode}
+        </if>
+        <if test ="esName.min != null and esName.min !=''">
+           and es.grade <![CDATA[>=]]> #{esName.min}
+        </if>
+        <if test ="esName.max != null and esName.max !=''">
+            and es.grade <![CDATA[<]]> #{esName.max}
+        </if>
+        <if test="esName.createTimeStart != null and esName.createTimeStart !=''">
+            and es.create_time  <![CDATA[>=]]>  #{esName.createTimeStart}
+        </if>
+        <if test="esName.createTimeEnd != null and esName.createTimeEnd !=''">
+            and es.create_time<![CDATA[<=]]> #{esName.createTimeEnd}
+        </if>
+        <if test="esName.keyword != null and esName.keyword !=''">
+            and es.name = #{esName.keyword} or es.mobile = #{esName.keyword} or es.email = #{esName.keyword} or es.id = #{esName.keyword}
+        </if>
+
+        ORDER BY es.create_time desc
+    </select>
+
+    <select id="getNameExistListInfo"  resultType="java.lang.String">
+        select
+        name
+        from  es_member where state !=1
+    </select>
+
+    <select id="getMobileExistList"  resultType="java.lang.String">
+        select
+        mobile
+        from  es_member where state !=1
+    </select>
+
+    <insert id="insertMemberBatch">
+        INSERT INTO es_member(`name`,`mobile`,`password`,`company_code`,`create_time`)
+        VALUES
+        <foreach collection="lists" item="item" separator=",">
+            (#{item.name},#{item.mobile},#{item.password},#{item.companyCode},#{item.createTime})
+        </foreach>
+    </insert>
+
+    <update id="updateMemberBatch"  parameterType="java.util.List">
+        <foreach collection="lists" item="item" index="index" open="" close="" separator=";">
+            update es_member
+            <set>
+                member_balance =${item.memberBalance}
+            </set>
+            where id = ${item.id}
+        </foreach>
+    </update>
+
+  <!--  <update id="updateMemberBatch">
+        update es_member
+        SET member_balance=20.3
+        where id in
+        <foreach collection="lists" item="item" index="index" open="(" close=")" separator=",">
+            #{item.id}
+        </foreach>
+
+        &lt;!&ndash;<foreach collection="lists" item="item" index="index">
+            update es_member set member_balance=20.3
+            where 1=1 and  id = #{item.id}
+
+        </foreach>&ndash;&gt;
+
+    </update>-->
+
+    <update id="updateMemberBalance">
+        update es_member set member_balance = #{es.memberBalance} where id = #{es.id}
+    </update>
+
+    <select id="getSellerAdmin" resultType="com.xdl.jjg.model.domain.EsSellerMemberAdminDO">
+       SELECT ec.id,ec.member_id memberId,ec.clerk_name name,em.mobile,em.email,ec.role_id roleId  FROM es_clerk ec
+       INNER JOIN es_member em
+       on ec.member_id = em.id
+       where ec.member_id = #{memberId} and ec.shop_id = #{shopId}
+    </select>
+
+    <update id="updateBalanceByMobile">
+        update es_member set member_balance = #{memberDO.memberBalance} where mobile = #{memberDO.mobile}
+    </update>
+
+    <select id="selectExportMemberList" resultType="com.xdl.jjg.model.domain.vo.EsExportMemberVO">
+        SELECT es.id,es.name,es.mobile,es.email,es.member_balance,es.create_time,
+        es.state,es.company_code,es.grade,es.nickname,es.sex,es.identity,es.consum_point
+        FROM es_member es
+        where 1=1
+        <if test ="dto.state != null and dto.state != ''">
+            and es.state = #{dto.state}
+        </if>
+        <if test = "dto.companyCode != null and dto.companyCode !=''">
+            and  es.company_code = #{dto.companyCode}
+        </if>
+        <if test ="dto.min != null and dto.min !=''">
+            and es.grade <![CDATA[>=]]> #{dto.min}
+        </if>
+        <if test ="dto.max != null and dto.max !=''">
+            and es.grade <![CDATA[<]]> #{dto.max}
+        </if>
+        <if test="dto.createTimeStart != null and dto.createTimeStart !=''">
+            and es.create_time  <![CDATA[>=]]>  #{dto.createTimeStart}
+        </if>
+        <if test="dto.createTimeEnd != null and dto.createTimeEnd !=''">
+            and es.create_time<![CDATA[<=]]> #{dto.createTimeEnd}
+        </if>
+        <if test="dto.keyword != null and dto.keyword !=''">
+            and es.name = #{dto.keyword} or es.mobile = #{dto.keyword} or es.email = #{dto.keyword} or es.id = #{dto.keyword}
+        </if>
+        ORDER BY es.create_time desc
+    </select>
+
+</mapper>

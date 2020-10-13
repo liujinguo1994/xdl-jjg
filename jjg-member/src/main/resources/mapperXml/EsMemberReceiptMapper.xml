@@ -1,0 +1,20 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsMemberReceiptMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsMemberReceipt">
+        <id column="id" property="id" />
+        <result column="member_id" property="memberId" />
+        <result column="receipt_type" property="receiptType" />
+        <result column="receipt_title" property="receiptTitle" />
+        <result column="receipt_content" property="receiptContent" />
+        <result column="tax_no" property="taxNo" />
+        <result column="reg_addr" property="regAddr" />
+        <result column="reg_tel" property="regTel" />
+        <result column="bank_name" property="bankName" />
+        <result column="bank_account" property="bankAccount" />
+        <result column="is_default" property="isDefault" />
+    </resultMap>
+
+</mapper>

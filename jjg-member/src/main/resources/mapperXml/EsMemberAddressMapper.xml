@@ -1,0 +1,37 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsMemberAddressMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsMemberAddress">
+        <id column="id" property="id" />
+        <result column="member_id" property="memberId" />
+        <result column="name" property="name" />
+        <result column="country" property="country" />
+        <result column="province_id" property="provinceId" />
+        <result column="city_id" property="cityId" />
+        <result column="county_id" property="countyId" />
+        <result column="town_id" property="townId" />
+        <result column="county" property="county" />
+        <result column="city" property="city" />
+        <result column="province" property="province" />
+        <result column="town" property="town" />
+        <result column="address" property="address" />
+        <result column="zip" property="zip" />
+        <result column="tel" property="tel" />
+        <result column="mobile" property="mobile" />
+        <result column="def_address" property="defAddress" />
+        <result column="ship_address_name" property="shipAddressName" />
+    </resultMap>
+
+    <sql id="Base_Column_list">
+        id,member_id memberId,name ,country,province_id provinceId,city_id cityId,county_id countyId,town_id townId,county,city,province,town,address,zip,tel,mobile,def_address defAddress,ship_address_name shipAddressName
+    </sql>
+
+    <select id="getMemberAddressListByMemberId" parameterType="java.lang.Long" resultType="com.xdl.jjg.model.domain.EsMemberAddressDO">
+        select
+        <include refid="Base_Column_list"/>
+        from  es_member_address where member_id = #{memberId} ORDER BY def_address =0 DESC
+    </select>
+
+</mapper>

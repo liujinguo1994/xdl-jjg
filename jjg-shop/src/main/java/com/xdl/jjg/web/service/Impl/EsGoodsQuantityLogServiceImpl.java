@@ -2,19 +2,19 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.model.domain.EsGoodsQuantityLogDO;
-import com.shopx.goods.api.model.domain.dto.EsGoodsQuantityLogDTO;
-import com.shopx.goods.api.service.IEsGoodsQuantityLogService;
-import com.shopx.goods.dao.entity.EsGoodsQuantityLog;
-import com.shopx.goods.dao.mapper.EsGoodsQuantityLogMapper;
-import com.shopx.system.api.constant.ErrorCode;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.constant.GoodsErrorCode;
+import com.xdl.jjg.entity.EsGoodsQuantityLog;
+import com.xdl.jjg.mapper.EsGoodsQuantityLogMapper;
+import com.xdl.jjg.model.domain.EsGoodsQuantityLogDO;
+import com.xdl.jjg.model.dto.EsGoodsQuantityLogDTO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.IEsGoodsQuantityLogService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -27,7 +27,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
  * @author WANGAF 826988665@qq.com
  * @since 2019-07-16 09:52:07
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsGoodsQuantityLogService.class, timeout = 50000)
+@Service
 public class EsGoodsQuantityLogServiceImpl extends ServiceImpl<EsGoodsQuantityLogMapper, EsGoodsQuantityLog> implements IEsGoodsQuantityLogService {
 
     private static Logger logger = LoggerFactory.getLogger(EsGoodsQuantityLogServiceImpl.class);
@@ -58,7 +58,7 @@ public class EsGoodsQuantityLogServiceImpl extends ServiceImpl<EsGoodsQuantityLo
         }catch (Throwable ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -72,7 +72,7 @@ public class EsGoodsQuantityLogServiceImpl extends ServiceImpl<EsGoodsQuantityLo
      * @return: com.shopx.common.model.result.DubboResult<EsGoodsQuantityLogDO>
      */
     @Override
-    public DubboResult<EsGoodsQuantityLogDO> getGoodsQuantityLog(String orderSn,Long skuId) {
+    public DubboResult<EsGoodsQuantityLogDO> getGoodsQuantityLog(String orderSn, Long skuId) {
         try {
             QueryWrapper<EsGoodsQuantityLog> queryWrapper = new QueryWrapper<>();
             queryWrapper.lambda().eq(EsGoodsQuantityLog::getOrderSn, orderSn);
@@ -81,7 +81,7 @@ public class EsGoodsQuantityLogServiceImpl extends ServiceImpl<EsGoodsQuantityLo
             EsGoodsQuantityLog goodsQuantityLog = this.goodsQuantityLogMapper.selectOne(queryWrapper);
             EsGoodsQuantityLogDO goodsQuantityLogDO = new EsGoodsQuantityLogDO();
             if (goodsQuantityLog == null) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(GoodsErrorCode.DATA_NOT_EXIST.getErrorCode(), GoodsErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             BeanUtil.copyProperties(goodsQuantityLog, goodsQuantityLogDO);
             return DubboResult.success(goodsQuantityLogDO);
@@ -90,7 +90,7 @@ public class EsGoodsQuantityLogServiceImpl extends ServiceImpl<EsGoodsQuantityLo
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
         }  catch (Throwable th) {
             logger.error("查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
     public DubboResult<EsGoodsQuantityLogDO> getGoodsQuantityLogByGoodsId(String orderSn,Long goodsId) {
@@ -102,7 +102,7 @@ public class EsGoodsQuantityLogServiceImpl extends ServiceImpl<EsGoodsQuantityLo
             EsGoodsQuantityLog goodsQuantityLog = this.goodsQuantityLogMapper.selectOne(queryWrapper);
             EsGoodsQuantityLogDO goodsQuantityLogDO = new EsGoodsQuantityLogDO();
             if (goodsQuantityLog == null) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(GoodsErrorCode.DATA_NOT_EXIST.getErrorCode(), GoodsErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             BeanUtil.copyProperties(goodsQuantityLog, goodsQuantityLogDO);
             return DubboResult.success(goodsQuantityLogDO);
@@ -111,7 +111,7 @@ public class EsGoodsQuantityLogServiceImpl extends ServiceImpl<EsGoodsQuantityLo
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
         }  catch (Throwable th) {
             logger.error("查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 }

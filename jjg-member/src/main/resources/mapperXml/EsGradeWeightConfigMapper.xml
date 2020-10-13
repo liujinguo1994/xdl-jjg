@@ -1,0 +1,22 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsGradeWeightConfigMapper">
+
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsGradeWeightConfig">
+        <id column="id" property="id" />
+        <result column="comment_name" property="commentName" />
+        <result column="comment_type" property="commentType" />
+        <result column="weight_value" property="weightValue" />
+    </resultMap>
+
+    <select id="getEsGradeConfigList" resultType="com.xdl.jjg.model.domain.EsGradeWeightConfigDO">
+        select id,comment_name commentName,comment_type commentType,weight_value weightValue FROM es_grade_weight_config
+    </select>
+
+    <delete id="deleteEsGradeConfig">
+        delete from es_grade_weight_config
+    </delete>
+
+</mapper>

@@ -1,0 +1,21 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsMemberRfmConfigMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsMemberRfmConfig">
+        <id column="id" property="id" />
+        <result column="recency" property="recency" />
+        <result column="recency_growth_value" property="recencyGrowthValue" />
+        <result column="frequency" property="frequency" />
+        <result column="frequency_growth_value" property="frequencyGrowthValue" />
+        <result column="monetary" property="monetary" />
+        <result column="monetary_growth_value" property="monetaryGrowthValue" />
+        <result column="rfm_info" property="rfmInfo" />
+    </resultMap>
+
+    <delete id="deleteRfmList">
+        delete  from  es_member_rfm_config
+    </delete>
+
+</mapper>

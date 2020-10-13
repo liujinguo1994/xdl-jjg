@@ -68,6 +68,12 @@
 
             <dependency>
                 <groupId>com.xdl.jjg</groupId>
+                <artifactId>jjg-bg-manage</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.xdl.jjg</groupId>
                 <artifactId>jjg-common-db</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -85,6 +91,12 @@
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt</artifactId>
                 <version>0.9.1</version>
+            </dependency>
+
+            <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-elasticsearch -->
+            <dependency>
+                <groupId>org.springframework.data</groupId>
+                <artifactId>spring-data-elasticsearch</artifactId>
             </dependency>
 
 

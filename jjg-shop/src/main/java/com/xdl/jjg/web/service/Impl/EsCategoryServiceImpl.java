@@ -2,38 +2,34 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.goods.api.constant.GoodsErrorCode;
-import com.shopx.goods.api.model.domain.*;
-import com.shopx.goods.api.model.domain.cache.ESCategoryChildrenCO;
-import com.shopx.goods.api.model.domain.cache.EsCategoryCO;
-import com.shopx.goods.api.model.domain.dto.EsCategoryDTO;
-import com.shopx.goods.api.model.domain.dto.EsGoodsQueryDTO;
-import com.shopx.goods.api.model.domain.enums.GoodsCachePrefix;
-import com.shopx.goods.api.model.domain.vo.EsCategoryVO;
-import com.shopx.goods.api.service.IEsCategoryBrandService;
-import com.shopx.goods.api.service.IEsCategoryService;
-import com.shopx.goods.api.service.IEsGoodsService;
-import com.shopx.goods.api.service.IEsParameterGroupService;
-import com.shopx.goods.dao.entity.EsCategory;
-import com.shopx.goods.dao.entity.EsCategorySpec;
-import com.shopx.goods.dao.entity.EsParameterGroup;
-import com.shopx.goods.dao.entity.EsSpecification;
-import com.shopx.goods.dao.mapper.*;
-import com.shopx.member.api.model.domain.EsDiscountDO;
-import com.shopx.member.api.service.IEsDiscountService;
-import com.shopx.system.api.model.enums.CachePrefix;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.constant.GoodsErrorCode;
+import com.xdl.jjg.entity.EsCategory;
+import com.xdl.jjg.entity.EsCategorySpec;
+import com.xdl.jjg.entity.EsParameterGroup;
+import com.xdl.jjg.entity.EsSpecification;
+import com.xdl.jjg.mapper.*;
+import com.xdl.jjg.model.co.ESCategoryChildrenCO;
+import com.xdl.jjg.model.co.EsCategoryCO;
+import com.xdl.jjg.model.domain.*;
+import com.xdl.jjg.model.dto.EsCategoryDTO;
+import com.xdl.jjg.model.dto.EsGoodsQueryDTO;
+import com.xdl.jjg.model.enums.GoodsCachePrefix;
+import com.xdl.jjg.model.vo.EsCategoryVO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.web.service.IEsCategoryBrandService;
+import com.xdl.jjg.web.service.IEsCategoryService;
+import com.xdl.jjg.web.service.IEsGoodsService;
+import com.xdl.jjg.web.service.IEsParameterGroupService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -50,7 +46,7 @@ import java.util.stream.Collectors;
  * @author wangaf 826988665@qq.com
  * @since 2019-06-03
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsCategoryService.class, timeout = 50000)
+@Service
 public class EsCategoryServiceImpl extends ServiceImpl<EsCategoryMapper, EsCategory> implements IEsCategoryService {
 
     private static Logger logger = LoggerFactory.getLogger(EsCategoryServiceImpl.class);

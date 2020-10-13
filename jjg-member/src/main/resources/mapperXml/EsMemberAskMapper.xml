@@ -1,0 +1,22 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsMemberAskMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsMemberAsk">
+        <id column="id" property="id" />
+        <result column="goods_id" property="goodsId" />
+        <result column="member_id" property="memberId" />
+        <result column="content" property="content" />
+        <result column="create_time" property="createTime" />
+        <result column="shop_id" property="shopId" />
+        <result column="reply" property="reply" />
+        <result column="reply_time" property="replyTime" />
+        <result column="reply_status" property="replyStatus" />
+        <result column="state" property="state" />
+        <result column="member_name" property="memberName" />
+        <result column="goods_name" property="goodsName" />
+        <result column="member_face" property="memberFace" />
+    </resultMap>
+
+</mapper>

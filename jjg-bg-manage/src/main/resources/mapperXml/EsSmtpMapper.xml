@@ -8,7 +8,7 @@
         <result column="host" property="host"/>
         <result column="username" property="username"/>
         <result column="password" property="password"/>
-        <result column="update_time" property="updateTime"/>
+        <!--<result column="update_time" property="updateTime"/>-->
         <result column="send_count" property="sendCount"/>
         <result column="max_count" property="maxCount"/>
         <result column="mail_from" property="mailFrom"/>

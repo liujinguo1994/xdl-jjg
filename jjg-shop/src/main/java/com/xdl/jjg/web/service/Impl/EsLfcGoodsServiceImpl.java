@@ -1,14 +1,14 @@
 package com.xdl.jjg.web.service.Impl;
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.goods.api.constant.GoodsErrorCode;
-import com.shopx.goods.api.service.IEsLfcGoodsService;
-import com.shopx.goods.dao.mapper.EsLfcGoodsMapper;
-import org.apache.dubbo.common.logger.Logger;
-import org.apache.dubbo.common.logger.LoggerFactory;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.constant.GoodsErrorCode;
+import com.xdl.jjg.mapper.EsLfcGoodsMapper;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.web.service.IEsLfcGoodsService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ import java.util.List;
  * @author yuanj 595831329@qq.com
  * @since 2020-03-25
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsLfcGoodsService.class, timeout = 50000)
+@Service
 public class EsLfcGoodsServiceImpl implements IEsLfcGoodsService {
 
     private static Logger logger = LoggerFactory.getLogger(EsLfcGoodsServiceImpl.class);

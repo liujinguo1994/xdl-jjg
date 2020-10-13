@@ -1,0 +1,37 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsComplaintMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsComplaint">
+        <id column="id" property="id" />
+        <result column="content" property="content" />
+        <result column="order_sn" property="orderSn" />
+        <result column="order_items" property="orderItems" />
+        <result column="shop_id" property="shopId" />
+        <result column="type" property="type" />
+        <result column="state" property="state" />
+        <result column="phone" property="phone" />
+        <result column="member_id" property="memberId" />
+        <result column="member_name" property="memberName" />
+        <result column="create_time" property="createTime" />
+        <result column="is_del" property="isDel" />
+    </resultMap>
+
+
+    <select id="getAllComplaint"  resultType="com.xdl.jjg.model.domain.EsComplaintDO">
+        SELECT p.*,s.shop_name from es_complaint p  LEFT JOIN es_shop s on p.shop_id=s.id where p.is_del=0
+        <if test="complaintQueryParam.shopName !=null and complaintQueryParam.shopName!=''">
+            and s.shop_name LIKE CONCAT('%',#{complaintQueryParam.shopName},'%')
+        </if>
+        <if test="complaintQueryParam.orderSn !=null and complaintQueryParam.orderSn!=''">
+            and p.order_sn = #{complaintQueryParam.orderSn}
+        </if>
+        <if test="complaintQueryParam.typeId !=null">
+            and p.type_id = #{complaintQueryParam.typeId}
+        </if>
+
+    </select>
+
+
+</mapper>

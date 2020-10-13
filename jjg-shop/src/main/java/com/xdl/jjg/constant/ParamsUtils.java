@@ -1,6 +1,7 @@
 package com.xdl.jjg.constant;
 
-import com.shopx.common.util.StringUtil;
+
+import com.xdl.jjg.util.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;

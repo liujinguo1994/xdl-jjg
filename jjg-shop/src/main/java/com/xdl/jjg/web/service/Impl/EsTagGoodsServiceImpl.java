@@ -4,24 +4,23 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.constant.GoodsErrorCode;
-import com.shopx.goods.api.model.domain.EsGoodsDO;
-import com.shopx.goods.api.model.domain.EsTagGoodsDO;
-import com.shopx.goods.api.service.IEsTagGoodsService;
-import com.shopx.goods.dao.entity.EsTagGoods;
-import com.shopx.goods.dao.entity.EsTags;
-import com.shopx.goods.dao.mapper.EsGoodsMapper;
-import com.shopx.goods.dao.mapper.EsTagGoodsMapper;
-import com.shopx.system.api.constant.ErrorCode;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.constant.GoodsErrorCode;
+import com.xdl.jjg.entity.EsTagGoods;
+import com.xdl.jjg.entity.EsTags;
+import com.xdl.jjg.mapper.EsGoodsMapper;
+import com.xdl.jjg.mapper.EsTagGoodsMapper;
+import com.xdl.jjg.model.domain.EsGoodsDO;
+import com.xdl.jjg.model.domain.EsTagGoodsDO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.web.service.IEsTagGoodsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -37,7 +36,7 @@ import java.util.List;
  * @author wangaf 826988665@qq.com
  * @since 2019-06-03
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsTagGoodsService.class, timeout = 50000)
+@Service
 public class EsTagGoodsServiceImpl extends ServiceImpl<EsTagGoodsMapper, EsTagGoods> implements IEsTagGoodsService {
 
     private static Logger logger = LoggerFactory.getLogger(EsTagGoodsServiceImpl.class);
@@ -68,7 +67,7 @@ public class EsTagGoodsServiceImpl extends ServiceImpl<EsTagGoodsMapper, EsTagGo
                 }
             }
             return DubboResult.success();
-        }catch (ArgumentException  ae){
+        }catch (ArgumentException ae){
             logger.error("商品标签关系表数据新增失败",ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
@@ -232,7 +231,7 @@ public class EsTagGoodsServiceImpl extends ServiceImpl<EsTagGoodsMapper, EsTagGo
         }  catch (Throwable th) {
             logger.error("查询失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboPageResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 

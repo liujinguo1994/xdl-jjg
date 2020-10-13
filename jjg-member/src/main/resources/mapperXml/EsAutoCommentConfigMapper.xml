@@ -1,0 +1,16 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsAutoCommentConfigMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsAutoCommentConfig">
+        <id column="id" property="id" />
+        <result column="auto_comment" property="autoComment" />
+        <result column="auto_days" property="autoDays" />
+    </resultMap>
+
+    <delete id="delete">
+        DELETE  FROM es_auto_comment_config
+    </delete>
+
+</mapper>

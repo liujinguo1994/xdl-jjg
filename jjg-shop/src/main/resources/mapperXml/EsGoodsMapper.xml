@@ -1,8 +1,8 @@
 <?Mapper version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.shopx.goods.dao.mapper.EsGoodsMapper">
+<mapper namespace="com.xdl.jjg.mapper.EsGoodsMapper">
     <!-- 通用查询映射结果 -->
-    <resultMap id="BaseResultMap" type="com.shopx.goods.dao.entity.EsGoods">
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsGoods">
         <id column="id" property="id" />
         <result column="goods_name" property="goodsName" />
         <result column="goods_sn" property="goodsSn" />
@@ -82,10 +82,10 @@
         </if>
         order by create_time desc
     </select>
-    <select id="buyGetEsGoods" resultType="com.shopx.goods.api.model.domain.EsGoodsDO">
+    <select id="buyGetEsGoods" resultType="com.xdl.jjg.model.domain.EsGoodsDO">
         select * from es_goods where id=#{goodsId}
     </select>
-    <select id="getEsGoodsPageList" resultType="com.shopx.goods.api.model.domain.EsGoodsDO">
+    <select id="getEsGoodsPageList" resultType="com.xdl.jjg.model.domain.EsGoodsDO">
         SELECT
         DISTINCT(t.id) as goods_id,
         t.quantity AS zsQuantity ,
@@ -144,7 +144,7 @@
         </if>
         order by t.create_time desc
     </select>
-    <select id="adminGetEsGoodsPageList" resultType="com.shopx.goods.api.model.domain.EsGoodsDO">
+    <select id="adminGetEsGoodsPageList" resultType="com.xdl.jjg.model.domain.EsGoodsDO">
         SELECT
         DISTINCT(t.id) as goods_id,
         t.*,
@@ -227,7 +227,7 @@
     <update id="updateBathByCustom"  parameterType="java.lang.Long">
         update es_goods set custom_id=null where custom_id = #{customId}
     </update>
-    <select id="getBuyerAdminGoods" resultType="com.shopx.goods.api.model.domain.EsGoodsDO">
+    <select id="getBuyerAdminGoods" resultType="com.xdl.jjg.model.domain.EsGoodsDO">
             select * from es_goods t left join es_tag_goods e on t.id=e.goods_id
              where e.tag_id=#{tagId} and  t.is_del=0 and t.is_auth=1 and t.market_enable=1 and t.shop_id=#{shopId}
             <if test="type == 1">
@@ -238,7 +238,7 @@
             </if>
         LIMIT 5
     </select>
-    <select id="getRecommendForYouGoods" resultType="com.shopx.goods.api.model.domain.EsGoodsDO">
+    <select id="getRecommendForYouGoods" resultType="com.xdl.jjg.model.domain.EsGoodsDO">
           SELECT t.*  FROM es_goods t
           LEFT JOIN es_goods_sku s  ON t.id=s.goods_id
         where s.is_enable=1 and market_enable = 1 AND is_del = 0 AND is_auth = 1 AND is_gifts = 2
@@ -249,7 +249,7 @@
 
     </select>
 
-    <select id="getByCategoryId" resultType="com.shopx.goods.api.model.domain.EsSalesRankingGoodsDO">
+    <select id="getByCategoryId" resultType="com.xdl.jjg.model.domain.EsSalesRankingGoodsDO">
         select t.id,t.goods_name,t.money,t.original,t.buy_count from es_goods t
         where t.category_id=#{categoryId} and  t.is_del=0 and t.is_auth=1 and t.market_enable=1 and t.is_gifts = 2
         ORDER BY t.buy_count DESC

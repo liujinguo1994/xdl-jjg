@@ -1,38 +1,38 @@
 package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.redisson.annotation.DistributedLock;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.goods.api.constant.GoodsErrorCode;
-import com.shopx.goods.api.model.domain.EsGoodsQuantityLogDO;
-import com.shopx.goods.api.model.domain.EsGoodsSkuQuantityDO;
-import com.shopx.goods.api.model.domain.EsSellerGoodsDO;
-import com.shopx.goods.api.model.domain.EsSellerGoodsSkuDO;
-import com.shopx.goods.api.model.domain.cache.EsGoodsCO;
-import com.shopx.goods.api.model.domain.cache.EsGoodsSkuCO;
-import com.shopx.goods.api.model.domain.dto.EsGoodsQuantityLogDTO;
-import com.shopx.goods.api.model.domain.dto.EsGoodsSkuQuantityDTO;
-import com.shopx.goods.api.model.domain.enums.GoodsCachePrefix;
-import com.shopx.goods.api.service.IEsGoodsQuantityLogService;
-import com.shopx.goods.api.service.IEsGoodsSkuQuantityService;
-import com.shopx.goods.dao.entity.EsGoods;
-import com.shopx.goods.dao.entity.EsGoodsSku;
-import com.shopx.goods.dao.mapper.EsGoodsSkuMapper;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.common.utils.StringUtils;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.constant.GoodsErrorCode;
+import com.xdl.jjg.entity.EsGoods;
+import com.xdl.jjg.entity.EsGoodsSku;
+import com.xdl.jjg.mapper.EsGoodsSkuMapper;
+import com.xdl.jjg.model.co.EsGoodsCO;
+import com.xdl.jjg.model.co.EsGoodsSkuCO;
+import com.xdl.jjg.model.domain.EsGoodsQuantityLogDO;
+import com.xdl.jjg.model.domain.EsGoodsSkuQuantityDO;
+import com.xdl.jjg.model.domain.EsSellerGoodsDO;
+import com.xdl.jjg.model.domain.EsSellerGoodsSkuDO;
+import com.xdl.jjg.model.dto.EsGoodsQuantityLogDTO;
+import com.xdl.jjg.model.dto.EsGoodsSkuQuantityDTO;
+import com.xdl.jjg.model.enums.GoodsCachePrefix;
+import com.xdl.jjg.redisson.annotation.DistributedLock;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.web.service.IEsGoodsQuantityLogService;
+import com.xdl.jjg.web.service.IEsGoodsSkuQuantityService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import redis.clients.jedis.JedisCluster;
 
 import java.util.List;
 
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsGoodsSkuQuantityService.class, timeout = 50000)
+@Service
 public class EsGoodsSkuQuantityServiceImpl  extends ServiceImpl<EsGoodsSkuMapper, EsGoodsSku> implements IEsGoodsSkuQuantityService {
     private static Logger logger = LoggerFactory.getLogger(EsGoodsSkuQuantityServiceImpl.class);
 

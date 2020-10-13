@@ -4,23 +4,23 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.util.SnowflakeIdWorker;
-import com.shopx.goods.api.constant.GoodsErrorCode;
-import com.shopx.goods.api.model.domain.EsSupplierDO;
-import com.shopx.goods.api.model.domain.dto.EsSupplierDTO;
-import com.shopx.goods.api.service.IEsSupplierService;
-import com.shopx.goods.dao.entity.EsSupplier;
-import com.shopx.goods.dao.mapper.EsSupplierMapper;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.common.utils.StringUtils;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.constant.GoodsErrorCode;
+import com.xdl.jjg.entity.EsSupplier;
+import com.xdl.jjg.mapper.EsSupplierMapper;
+import com.xdl.jjg.model.domain.EsSupplierDO;
+import com.xdl.jjg.model.dto.EsSupplierDTO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.util.SnowflakeIdWorker;
+import com.xdl.jjg.web.service.IEsSupplierService;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
  * @author wangaf
  * @since 2019-05-29
  */
-@Service(version = "${dubbo.application.version}",interfaceClass = IEsSupplierService.class,timeout = 5000)
+@Service
 public class EsSupplierServiceImpl extends ServiceImpl<EsSupplierMapper, EsSupplier> implements IEsSupplierService {
 
     private Logger logger =  LoggerFactory.getLogger(EsSupplierServiceImpl.class);

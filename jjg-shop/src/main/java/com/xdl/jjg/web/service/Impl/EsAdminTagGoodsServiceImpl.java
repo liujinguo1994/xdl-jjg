@@ -2,23 +2,24 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.constant.GoodsErrorCode;
-import com.shopx.goods.api.model.domain.EsAdminTagGoodsDO;
-import com.shopx.goods.api.model.domain.EsGoodsDO;
-import com.shopx.goods.api.service.IEsAdminTagGoodsService;
-import com.shopx.goods.dao.entity.*;
-import com.shopx.goods.dao.mapper.EsAdminTagGoodsMapper;
-import com.shopx.goods.dao.mapper.EsGoodsMapper;
-import com.shopx.system.api.constant.ErrorCode;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.constant.GoodsErrorCode;
+import com.xdl.jjg.entity.EsAdminTagGoods;
+import com.xdl.jjg.entity.EsGoods;
+import com.xdl.jjg.entity.EsTags;
+import com.xdl.jjg.mapper.EsAdminTagGoodsMapper;
+import com.xdl.jjg.mapper.EsGoodsMapper;
+import com.xdl.jjg.model.domain.EsAdminTagGoodsDO;
+import com.xdl.jjg.model.domain.EsGoodsDO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.web.service.IEsAdminTagGoodsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -35,7 +36,7 @@ import java.util.stream.Collectors;
  * @author WAF 826988665@qq.com
  * @since 2019-07-27 14:57:56
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsAdminTagGoodsService.class, timeout = 50000)
+@Service
 public class EsAdminTagGoodsServiceImpl extends ServiceImpl<EsAdminTagGoodsMapper, EsAdminTagGoods> implements IEsAdminTagGoodsService {
 
     private static Logger logger = LoggerFactory.getLogger(EsAdminTagGoodsServiceImpl.class);
@@ -158,7 +159,7 @@ public class EsAdminTagGoodsServiceImpl extends ServiceImpl<EsAdminTagGoodsMappe
         }  catch (Throwable th) {
             logger.error("查询失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboPageResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -174,7 +175,7 @@ public class EsAdminTagGoodsServiceImpl extends ServiceImpl<EsAdminTagGoodsMappe
         }  catch (Throwable th) {
             logger.error("查询失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboPageResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 }

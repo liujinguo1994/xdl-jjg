@@ -1,0 +1,26 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsCommercelItemsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsCommercelItems">
+        <id column="id" property="id" />
+        <result column="cart_id" property="cartId" />
+        <result column="type" property="type" />
+        <result column="product_id" property="productId" />
+        <result column="sku_id" property="skuId" />
+        <result column="price" property="price" />
+        <result column="quantity" property="quantity" />
+        <result column="goods_sn" property="goodsSn" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="shop_id" property="shopId" />
+    </resultMap>
+
+
+    <select id="getListByMemberId" resultType="com.xdl.jjg.model.domain.EsCommercelItemsDO">
+        SELECT i.* from es_commercel_items i LEFT JOIN es_cart c ON i.cart_id=c.id LEFT JOIN es_member m ON c.member_id=m.id
+        WHERE m.id=#{memberId}
+   </select>
+
+</mapper>

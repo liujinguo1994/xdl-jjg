@@ -1,0 +1,99 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xdl.jjg.mapper.EsMemberActiveConfigMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsMemberActiveConfig">
+        <id column="id" property="id" />
+        <result column="days" property="days" />
+        <result column="orders" property="orders" />
+        <result column="member_type" property="memberType" />
+        <result column="shop_id" property="shopId" />
+        <result column="visit_days" property="visitDays" />
+    </resultMap>
+
+    <delete id="deleteMemberActiveConfig">
+        delete from es_member_active_config where  shop_id = #{shopId}
+    </delete>
+
+    <select id="getMemberInfoByUserId" resultType="com.xdl.jjg.model.domain.EsSellerMemberInFoDO">
+        SELECT tt.* FROM (select t.*,(
+        CASE
+        WHEN hydds  <![CDATA[>=]]> #{es.activeOrders}  THEN "活跃会员"
+        WHEN xinzds =0   THEN "新增会员"
+        WHEN sleepTime = 0  or disTime= 0 THEN "休眠会员"
+        WHEN talentTime <![CDATA[>=]]> 1 THEN "潜在会员"
+        ELSE "普通会员"
+        END
+        ) as type from (SELECT
+        e.id memberId,
+        e.`name`,
+        e.mobile,
+        e.email ,
+        ttt.currenTime scanneTime,
+        et.orderTime,
+        IF((SELECT count(1) FROM es_member_active_info WHERE shop_id = #{es.shopId} and member_id = e.id) <![CDATA[>]]> 0
+        ,<![CDATA[(select count(1)   from es_member_active_info ac where ac.member_id=e.id AND ac.shop_id = #{es.shopId}  AND FROM_UNIXTIME(ac.payment_time/1000,'%Y-%m%-%d') BETWEEN (#{es.activeTime}) AND date_format(NOW( ) ,'%Y-%m-%d'))]]>
+        ,-1) as hydds,
+        IF((SELECT count(1) FROM es_member_active_info WHERE shop_id = #{es.shopId} and member_id = e.id) <![CDATA[>=]]> 1
+        ,(select count(1)   from es_member_active_info ac where ac.member_id=e.id AND ac.shop_id = #{es.shopId}  AND FROM_UNIXTIME(ac.payment_time/1000,'%Y-%m%-%d') <![CDATA[<]]> #{es.addTime})
+        ,-1) as xinzds,
+        IF((SELECT count(1) FROM es_member_active_info WHERE shop_id = #{es.shopId} and member_id = e.id) <![CDATA[>]]>0
+        ,(SELECT count( 1 ) FROM es_member_active_info me WHERE me.member_id = e.id AND me.shop_id = #{es.shopId} AND from_unixtime( me.payment_time / 1000, '%Y-%m-%d ') BETWEEN (#{es.noOrderTime}) AND date_format(NOW( ) ,'%Y-%m-%d'))
+        ,-1) as sleepTime,
+        IF((SELECT count(1) FROM es_member_active_info WHERE shop_id = #{es.shopId} and member_id = e.id) <![CDATA[>]]>0
+        ,(select count(1) from es_my_footprint foo where foo.member_id=e.id AND foo.shop_id = #{es.shopId} and from_unixtime( foo.create_time / 1000, '%Y-%m-%d ') BETWEEN (#{es.outLandTime}) and  date_format(NOW( ) ,'%Y-%m-%d'))
+        ,-1) as disTime,
+        IF((SELECT count(1) FROM es_member_active_info WHERE shop_id = #{es.shopId} and member_id = e.id) <![CDATA[=]]>0
+        ,(select count(1) from es_my_footprint foo where foo.member_id=e.id AND foo.shop_id = #{es.shopId} )
+        ,-1) as talentTime
+
+        FROM
+        es_member e
+        right  JOIN
+        (SELECT tt.* FROM (SELECT e.member_id,e.create_time  currenTime FROM es_my_footprint e WHERE e.shop_id = #{es.shopId} ORDER BY e.member_id ASC, e.create_time DESC) tt  GROUP BY tt.member_id) ttt
+        on e.id =ttt.member_id
+        left JOIN
+        (SELECT est.* FROM (SELECT es.member_id,es.payment_time,es.payment_time  orderTime FROM es_member_active_info es WHERE es.shop_id =#{es.shopId} ORDER BY es.member_id ASC,es.create_time DESC) est GROUP BY est.member_id) et
+        on e.id = et.member_id
+        )t
+        order by t.memberId) tt
+        where tt.memberId is not null
+        <if test="es.memberType !=null and es.memberType!=''">
+            and tt.type = #{es.memberType}
+        </if>
+        <if test="es.coent !=null and es.coent!=''">
+            and tt.name = #{es.coent} or tt.email = #{es.coent} or tt.mobile = #{es.coent} or tt.memberId = #{es.coent}
+        </if>
+        <if test="es.beginTime != null and es.endTime != null">
+            and tt.orderTime between #{es.beginTime} and #{es.endTime}
+        </if>
+
+    </select>
+
+    <select id="getCommenMemberInfoByUserId" resultType="com.xdl.jjg.model.domain.EsSellerMemberInFoDO">
+        SELECT tt.* FROM (select t.*,
+        "普通会员" as  type from (SELECT
+        e.id memberId,
+        e.`name`,
+        e.mobile,
+        e.email ,
+        ttt.currenTime scanneTime,
+        et.orderTime
+        FROM
+        es_member e
+        LEFT  JOIN
+        (SELECT tt.* FROM (SELECT e.member_id,e.create_time  currenTime FROM es_my_footprint e WHERE e.shop_id = #{es.shopId} ORDER BY e.member_id ASC, e.create_time DESC) tt  GROUP BY tt.member_id) ttt
+        on e.id =ttt.member_id
+        RIGHT JOIN
+        (SELECT est.* FROM (SELECT es.member_id,es.payment_time,es.payment_time  orderTime FROM es_member_active_info es WHERE es.shop_id =#{es.shopId} ORDER BY es.member_id ASC,es.create_time DESC) est GROUP BY est.member_id) et
+        on e.id = et.member_id
+        )t
+        order by t.memberId) tt
+    </select>
+
+    <select id="getListInfo" resultType="com.xdl.jjg.model.domain.EsSellerMemberActiveConfigDO">
+        SELECT days,member_type memberType,orders,visit_days visitDays FROM es_member_active_config where shop_id = #{shopId}
+    </select>
+
+</mapper>
