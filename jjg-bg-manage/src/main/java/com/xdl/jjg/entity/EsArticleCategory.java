@@ -21,52 +21,52 @@ import java.io.Serializable;
 @TableName("es_article_category")
 public class EsArticleCategory extends Model<EsArticleCategory> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 主键ID
-	 */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    /**
+     * 主键ID
+     */
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
 
-	/**
-	 * 分类名称
-	 */
-	@TableField("name")
-	private String name;
+    /**
+     * 分类名称
+     */
+    @TableField("name")
+    private String name;
 
-	/**
-	 * 父分类id
-	 */
-	@TableField("parent_id")
-	private Long parentId;
+    /**
+     * 父分类id
+     */
+    @TableField("parent_id")
+    private Long parentId;
 
-	/**
-	 * 路径
-	 */
-	@TableField("path")
-	private String path;
+    /**
+     * 路径
+     */
+    @TableField("path")
+    private String path;
 
-	/**
-	 * 是否允许删除
-	 */
-	@TableField("allow_delete")
-	private Integer allowDelete;
+    /**
+     * 是否允许删除
+     */
+    @TableField("allow_delete")
+    private Integer allowDelete;
 
-	/**
-	 * 分类类型
-	 */
-	@TableField("type")
-	private String type;
+    /**
+     * 分类类型
+     */
+    @TableField("type")
+    private String type;
 
-	/**
-	 * 排序
-	 */
-	@TableField("sort")
-	private Integer sort;
+    /**
+     * 排序
+     */
+    @TableField("sort")
+    private Integer sort;
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 }

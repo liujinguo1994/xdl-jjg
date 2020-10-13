@@ -23,21 +23,21 @@ public class EsManualSettlementForm implements Serializable {
     /**
      * 时间开始
      */
-    @ApiModelProperty(required = true,value = "时间开始")
+    @ApiModelProperty(required = true, value = "时间开始")
     @NotNull(message = "开始时间不能为空")
     private Long startTime;
 
     /**
      * 时间结束
      */
-    @ApiModelProperty(required = true,value = "时间结束")
+    @ApiModelProperty(required = true, value = "时间结束")
     @NotNull(message = "结束时间不能为空")
     private Long endTime;
 
     /**
      * 结算类型(1店铺结算,2供应商结算,3签约公司结算)
      */
-    @ApiModelProperty(required = true,value = "结算类型(1店铺结算,2供应商结算,3签约公司结算)")
+    @ApiModelProperty(required = true, value = "结算类型(1店铺结算,2供应商结算,3签约公司结算)")
     @NotNull(message = "结算类型不能为空")
     private Integer type;
 

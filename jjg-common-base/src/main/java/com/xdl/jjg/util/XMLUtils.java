@@ -98,7 +98,7 @@ public class XMLUtils {
         StringBuffer sb = new StringBuffer();
         sb.append("<xml>");
         parameters.forEach((key, value) -> {
-            if (StringUtils.isNotBlank(key) && StringUtils.isNotBlank(value)){
+            if (StringUtils.isNotBlank(key) && StringUtils.isNotBlank(value)) {
                 if ("attach".equalsIgnoreCase(key) || "body".equalsIgnoreCase(key) || "sign".equalsIgnoreCase(key)) {
                     sb.append("<" + key + ">" + "<![CDATA[" + value + "]]></" + key + ">");
                 } else {

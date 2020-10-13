@@ -7,7 +7,7 @@ import com.xdl.jjg.response.service.DubboResult;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -26,7 +26,7 @@ public interface IEsWaybillService {
     DubboPageResult<EsWaybillVO> getWaybillList();
 
     /*
-    *开启某个电子面单
-    */
+     *开启某个电子面单
+     */
     DubboResult openWaybill(String bean);
 }

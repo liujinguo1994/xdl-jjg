@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -22,14 +22,14 @@ public class EsSettingsDO implements Serializable {
     /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
     /**
      * 系统配置信息
      */
-	private String cfgValue;
+    private String cfgValue;
     /**
      * 业务设置标识
      */
-	private String cfgGroup;
+    private String cfgGroup;
 
 }

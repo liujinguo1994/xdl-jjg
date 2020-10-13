@@ -45,6 +45,7 @@ public class Swagger2Init {
         list.add(new ApiKey("Authorization", "Authorization", "header"));
         return list;
     }
+
     private List<SecurityContext> securityContexts() {
         List<SecurityContext> list = new ArrayList();
         list.add(SecurityContext.builder()

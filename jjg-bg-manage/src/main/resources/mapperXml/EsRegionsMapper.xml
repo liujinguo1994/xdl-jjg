@@ -4,12 +4,12 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsRegions">
-        <id column="id" property="id" />
-        <result column="parent_id" property="parentId" />
-        <result column="region_path" property="regionPath" />
-        <result column="region_grade" property="regionGrade" />
-        <result column="local_name" property="localName" />
-        <result column="zipcode" property="zipcode" />
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="region_path" property="regionPath"/>
+        <result column="region_grade" property="regionGrade"/>
+        <result column="local_name" property="localName"/>
+        <result column="zipcode" property="zipcode"/>
     </resultMap>
 
 </mapper>

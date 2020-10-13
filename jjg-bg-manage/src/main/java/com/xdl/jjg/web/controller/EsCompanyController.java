@@ -28,7 +28,7 @@ import java.util.List;
  * @author rm 2817512105@qq.com
  * @since 2019-05-29
  */
-@Api(value = "/esCompany",tags = "签约公司")
+@Api(value = "/esCompany", tags = "签约公司")
 @RestController
 @RequestMapping("/esCompany")
 public class EsCompanyController {
@@ -37,7 +37,7 @@ public class EsCompanyController {
     @Autowired
     private IEsCompanyService iesCompanyService;
 
-    @ApiOperation(value = "分页查询签约公司",response = EsCompanyVO.class)
+    @ApiOperation(value = "分页查询签约公司", response = EsCompanyVO.class)
     @GetMapping(value = "/getCompanyList")
     @ResponseBody
     public ApiResponse getCompanyList(EsCompanyQueryForm form) {
@@ -48,7 +48,7 @@ public class EsCompanyController {
         if (result.isSuccess()) {
             List<EsCompanyDO> data = result.getData().getList();
             List<EsCompanyVO> esCompanyVOList = BeanUtil.copyList(data, EsCompanyVO.class);
-            return ApiPageResponse.pageSuccess(result.getData().getTotal(),esCompanyVOList);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(), esCompanyVOList);
         } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
@@ -57,13 +57,13 @@ public class EsCompanyController {
     @ApiOperation(value = "添加签约公司")
     @PostMapping(value = "/insertCompany")
     @ResponseBody
-    public ApiResponse insertCompany(@Valid @RequestBody @ApiParam(name="签约公司form对象",value="form") EsCompanyForm form){
+    public ApiResponse insertCompany(@Valid @RequestBody @ApiParam(name = "签约公司form对象", value = "form") EsCompanyForm form) {
         EsCompanyDTO esCompanyDTO = new EsCompanyDTO();
         BeanUtil.copyProperties(form, esCompanyDTO);
         DubboResult result = iesCompanyService.insertCompany(esCompanyDTO);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -71,13 +71,13 @@ public class EsCompanyController {
     @ApiOperation(value = "修改签约公司")
     @PutMapping(value = "/updateCompany")
     @ResponseBody
-    public ApiResponse updateCompany(@Valid @RequestBody @ApiParam(name="签约公司form对象",value="form") EsCompanyForm form){
+    public ApiResponse updateCompany(@Valid @RequestBody @ApiParam(name = "签约公司form对象", value = "form") EsCompanyForm form) {
         EsCompanyDTO esCompanyDTO = new EsCompanyDTO();
         BeanUtil.copyProperties(form, esCompanyDTO);
         DubboResult result = iesCompanyService.updateCompany(esCompanyDTO);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -85,12 +85,12 @@ public class EsCompanyController {
     @DeleteMapping(value = "/batchDel/{ids}")
     @ResponseBody
     @ApiOperation(value = "删除或批量删除签约公司")
-    @ApiImplicitParam(name = "ids", value = "签约公司id数组", required = true, dataType = "int",example = "1", paramType = "path",allowMultiple = true)
-    public ApiResponse batchDel(@PathVariable Integer[] ids){
+    @ApiImplicitParam(name = "ids", value = "签约公司id数组", required = true, dataType = "int", example = "1", paramType = "path", allowMultiple = true)
+    public ApiResponse batchDel(@PathVariable Integer[] ids) {
         DubboResult result = iesCompanyService.deleteCompany(ids);
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }

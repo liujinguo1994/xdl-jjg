@@ -4,14 +4,14 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsEmail">
-        <id column="id" property="id" />
-        <result column="title" property="title" />
-        <result column="type" property="type" />
-        <result column="is_success" property="isSuccess" />
-        <result column="email" property="email" />
-        <result column="content" property="content" />
-        <result column="error_num" property="errorNum" />
-        <result column="update_time" property="updateTime" />
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="type" property="type"/>
+        <result column="is_success" property="isSuccess"/>
+        <result column="email" property="email"/>
+        <result column="content" property="content"/>
+        <result column="error_num" property="errorNum"/>
+        <result column="update_time" property="updateTime"/>
     </resultMap>
 
 </mapper>

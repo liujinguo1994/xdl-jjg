@@ -45,7 +45,7 @@ public class OssProperties {
     private String callbackUrl;
 
     /**
-     *用户上传文件时制定的前缀
+     * 用户上传文件时制定的前缀
      */
     private String dir;
 

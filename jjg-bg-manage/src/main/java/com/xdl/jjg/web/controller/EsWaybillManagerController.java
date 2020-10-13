@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器-电子面单
+ * 前端控制器-电子面单
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -26,19 +26,19 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/esWaybillManager")
-@Api(value="/esWaybillManager", tags="电子面单")
+@Api(value = "/esWaybillManager", tags = "电子面单")
 public class EsWaybillManagerController {
 
     @Autowired
     private IEsWaybillService waybillService;
 
 
-    @ApiOperation(value = "查询电子面单列表",response = EsWaybillVO.class)
+    @ApiOperation(value = "查询电子面单列表", response = EsWaybillVO.class)
     @GetMapping(value = "/getWaybillList")
     @ResponseBody
     public ApiResponse getWaybillList() {
         DubboPageResult<EsWaybillVO> result = waybillService.getWaybillList();
-        if (result.isSuccess()){
+        if (result.isSuccess()) {
             List<EsWaybillVO> data = result.getData().getList();
             return ApiResponse.success(data);
         } else {
@@ -49,11 +49,11 @@ public class EsWaybillManagerController {
     @ApiOperation(value = "修改电子面单")
     @PutMapping(value = "/updateWaybill")
     @ResponseBody
-    public ApiResponse updateWaybill(@RequestBody @ApiParam(name="电子面单form对象",value="form") EsWaybillVO form){
+    public ApiResponse updateWaybill(@RequestBody @ApiParam(name = "电子面单form对象", value = "form") EsWaybillVO form) {
         DubboResult result = waybillService.updateWaybill(form);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -66,7 +66,7 @@ public class EsWaybillManagerController {
         DubboResult result = waybillService.openWaybill(bean);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }

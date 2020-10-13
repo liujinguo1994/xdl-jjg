@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author LiuJG 344009799@qq.com
@@ -36,69 +36,69 @@ public class EsAdminUserTokenController {
 
     @ApiOperation(value = "查询AdminUserToken信息", notes = "通过Id查询AdminUserToken信息")
     @GetMapping("/getAdminUserTokenById")
-    public Object getAdminUserTokenById(String id)  {
+    public Object getAdminUserTokenById(String id) {
 
-        DubboResult<EsAdminUserToken> adminUserTokenResult =  iesAdminUserTokenService.getAdminUserToken(id);
-        if(adminUserTokenResult.isSuccess()){
+        DubboResult<EsAdminUserToken> adminUserTokenResult = iesAdminUserTokenService.getAdminUserToken(id);
+        if (adminUserTokenResult.isSuccess()) {
             EsAdminUserToken adminUserToken = adminUserTokenResult.getData();
             EsAdminUserTokenVO adminUserTokenVO = new EsAdminUserTokenVO();
-            BeanUtils.copyProperties(adminUserToken,adminUserTokenVO);
+            BeanUtils.copyProperties(adminUserToken, adminUserTokenVO);
             return RestResult.ok(adminUserTokenVO);
         }
-        return RestResult.fail(adminUserTokenResult.getCode(),adminUserTokenResult.getMsg());
+        return RestResult.fail(adminUserTokenResult.getCode(), adminUserTokenResult.getMsg());
     }
 
     @ApiOperation(value = "插入AdminUserToken信息", notes = "插入AdminUserToken信息")
     @PostMapping("/insertAdminUserToken")
-    public Object insertAdminUserToken(EsAdminUserTokenForm adminUserTokenForm)  {
+    public Object insertAdminUserToken(EsAdminUserTokenForm adminUserTokenForm) {
 
         EsAdminUserTokenDTO adminUserTokenDTO = new EsAdminUserTokenDTO();
-        BeanUtil.copyProperties(adminUserTokenForm,adminUserTokenDTO);
+        BeanUtil.copyProperties(adminUserTokenForm, adminUserTokenDTO);
 
-        DubboResult adminUserTokenResult =  iesAdminUserTokenService.insertAdminUserToken(adminUserTokenDTO);
-        if(adminUserTokenResult.isSuccess()){
+        DubboResult adminUserTokenResult = iesAdminUserTokenService.insertAdminUserToken(adminUserTokenDTO);
+        if (adminUserTokenResult.isSuccess()) {
             return RestResult.ok();
         }
-        return RestResult.fail(adminUserTokenResult.getCode(),adminUserTokenResult.getMsg());
+        return RestResult.fail(adminUserTokenResult.getCode(), adminUserTokenResult.getMsg());
 
     }
 
     @ApiOperation(value = "查询AdminUserTokenList信息", notes = "查询AdminUserTokenList信息")
     @GetMapping("/getAdminUserTokenList")
-    public Object getAdminUserTokenList(Boolean delFlag,@NotEmpty int pageSize, @NotEmpty int pageNum)  {
+    public Object getAdminUserTokenList(Boolean delFlag, @NotEmpty int pageSize, @NotEmpty int pageNum) {
 
-        DubboPageResult adminUserTokenResult =  iesAdminUserTokenService.getAdminUserTokenList(delFlag,pageSize,pageNum);
+        DubboPageResult adminUserTokenResult = iesAdminUserTokenService.getAdminUserTokenList(delFlag, pageSize, pageNum);
 
-        List<EsAdminUserTokenVO> adminUserTokenVOS = BeanUtil.copyList(adminUserTokenResult.getData().getList(),EsAdminUserTokenVO.class);
+        List<EsAdminUserTokenVO> adminUserTokenVOS = BeanUtil.copyList(adminUserTokenResult.getData().getList(), EsAdminUserTokenVO.class);
 
-        if(!adminUserTokenResult.isSuccess()){
-            return RestResult.fail(adminUserTokenResult.getCode(),adminUserTokenResult.getMsg());
+        if (!adminUserTokenResult.isSuccess()) {
+            return RestResult.fail(adminUserTokenResult.getCode(), adminUserTokenResult.getMsg());
         }
-        return ApiPageResponse.pageSuccess(adminUserTokenResult.getData().getTotal(),adminUserTokenVOS);
+        return ApiPageResponse.pageSuccess(adminUserTokenResult.getData().getTotal(), adminUserTokenVOS);
     }
 
     @ApiOperation(value = "删除AdminUserToken信息", notes = "删除AdminUserTokenList信息")
     @DeleteMapping("/delAdminUserTokenByIds")
-    public Object delAdminUserTokenByIds(String [] ids)  {
+    public Object delAdminUserTokenByIds(String[] ids) {
 
-        DubboResult adminUserTokenResult =  iesAdminUserTokenService.deleteAdminUserToken(Arrays.asList(ids));
+        DubboResult adminUserTokenResult = iesAdminUserTokenService.deleteAdminUserToken(Arrays.asList(ids));
 
-        if(!adminUserTokenResult.isSuccess()){
-            return RestResult.fail(adminUserTokenResult.getCode(),adminUserTokenResult.getMsg());
+        if (!adminUserTokenResult.isSuccess()) {
+            return RestResult.fail(adminUserTokenResult.getCode(), adminUserTokenResult.getMsg());
         }
         return RestResult.ok();
     }
 
     @ApiOperation(value = "修改AdminUserToken信息", notes = "修改AdminUserTokenList信息")
     @PutMapping("/updateAdminUserToken")
-    public Object updateAdminUserToken(EsAdminUserTokenForm adminUserTokenForm)  {
+    public Object updateAdminUserToken(EsAdminUserTokenForm adminUserTokenForm) {
 
         EsAdminUserTokenDTO adminUserTokenDTO = new EsAdminUserTokenDTO();
-        BeanUtils.copyProperties(adminUserTokenForm,adminUserTokenDTO);
-        DubboResult adminUserTokenResult =  iesAdminUserTokenService.updateAdminUserToken(adminUserTokenDTO);
+        BeanUtils.copyProperties(adminUserTokenForm, adminUserTokenDTO);
+        DubboResult adminUserTokenResult = iesAdminUserTokenService.updateAdminUserToken(adminUserTokenDTO);
 
-        if(!adminUserTokenResult.isSuccess()){
-            return RestResult.fail(adminUserTokenResult.getCode(),adminUserTokenResult.getMsg());
+        if (!adminUserTokenResult.isSuccess()) {
+            return RestResult.fail(adminUserTokenResult.getCode(), adminUserTokenResult.getMsg());
         }
         return RestResult.ok();
     }

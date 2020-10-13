@@ -18,7 +18,7 @@ public class ArgumentException extends RuntimeException {
         this.exceptionCode = exceptionCode;
     }
 
-    public ArgumentException(ErrorCodeEnum errorCodeEnum){
+    public ArgumentException(ErrorCodeEnum errorCodeEnum) {
         super(errorCodeEnum.getErrorMassage());
         this.exceptionCode = errorCodeEnum.getErrorCode();
     }

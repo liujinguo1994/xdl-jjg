@@ -76,8 +76,8 @@ public class EsFindGoodsServiceImpl extends ServiceImpl<EsFindGoodsMapper, EsFin
             findGoodsMapper.insert(findGoods);
             //插入相册
             List<EsFindGoodsGalleryDTO> galleryList = findGoodsDTO.getGalleryList();
-            if (CollectionUtils.isNotEmpty(galleryList)){
-                for (EsFindGoodsGalleryDTO galleryDTO:galleryList) {
+            if (CollectionUtils.isNotEmpty(galleryList)) {
+                for (EsFindGoodsGalleryDTO galleryDTO : galleryList) {
                     EsFindGoodsGallery findGoodsGallery = new EsFindGoodsGallery();
                     findGoodsGallery.setFindGoodsId(findGoods.getId());
                     findGoodsGallery.setUrl(galleryDTO.getUrl());
@@ -85,11 +85,11 @@ public class EsFindGoodsServiceImpl extends ServiceImpl<EsFindGoodsMapper, EsFin
                 }
             }
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("发现好货新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("发现好货新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -118,11 +118,11 @@ public class EsFindGoodsServiceImpl extends ServiceImpl<EsFindGoodsMapper, EsFin
             this.findGoodsMapper.update(findGoods, queryWrapper);
             //相册先删后插
             QueryWrapper<EsFindGoodsGallery> wrapper = new QueryWrapper<>();
-            wrapper.lambda().eq(EsFindGoodsGallery::getFindGoodsId,findGoodsDTO.getId());
+            wrapper.lambda().eq(EsFindGoodsGallery::getFindGoodsId, findGoodsDTO.getId());
             findGoodsGalleryMapper.delete(wrapper);
             List<EsFindGoodsGalleryDTO> galleryList = findGoodsDTO.getGalleryList();
-            if (CollectionUtils.isNotEmpty(galleryList)){
-                for (EsFindGoodsGalleryDTO galleryDTO:galleryList) {
+            if (CollectionUtils.isNotEmpty(galleryList)) {
+                for (EsFindGoodsGalleryDTO galleryDTO : galleryList) {
                     EsFindGoodsGallery findGoodsGallery = new EsFindGoodsGallery();
                     findGoodsGallery.setFindGoodsId(findGoods.getId());
                     findGoodsGallery.setUrl(galleryDTO.getUrl());
@@ -130,10 +130,10 @@ public class EsFindGoodsServiceImpl extends ServiceImpl<EsFindGoodsMapper, EsFin
                 }
             }
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("发现好货更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("发现好货更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -161,10 +161,10 @@ public class EsFindGoodsServiceImpl extends ServiceImpl<EsFindGoodsMapper, EsFin
             }
             BeanUtil.copyProperties(findGoods, findGoodsDO);
             return DubboResult.success(findGoodsDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("发现好货查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("发现好货查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -185,7 +185,7 @@ public class EsFindGoodsServiceImpl extends ServiceImpl<EsFindGoodsMapper, EsFin
         QueryWrapper<EsFindGoods> queryWrapper = new QueryWrapper<>();
         try {
             // 查询条件
-            queryWrapper.lambda().eq(findGoodsDTO.getCustomCategoryId() != null,EsFindGoods::getCustomCategoryId,findGoodsDTO.getCustomCategoryId());
+            queryWrapper.lambda().eq(findGoodsDTO.getCustomCategoryId() != null, EsFindGoods::getCustomCategoryId, findGoodsDTO.getCustomCategoryId());
             Page<EsFindGoods> page = new Page<>(pageNum, pageSize);
             IPage<EsFindGoods> iPage = this.page(page, queryWrapper);
             List<EsFindGoodsDO> findGoodsDOList = new ArrayList<>();
@@ -195,23 +195,23 @@ public class EsFindGoodsServiceImpl extends ServiceImpl<EsFindGoodsMapper, EsFin
                     BeanUtil.copyProperties(findGoods, findGoodsDO);
                     DubboResult<EsCustomCategoryDO> result = customCategoryService.getCustomCategory(findGoodsDO.getCustomCategoryId());
                     EsCustomCategoryDO customCategoryDO = result.getData();
-                    if (customCategoryDO != null){
+                    if (customCategoryDO != null) {
                         findGoodsDO.setCategoryName(customCategoryDO.getCategoryName());
                     }
                     QueryWrapper<EsFindGoodsGallery> wrapper = new QueryWrapper<>();
-                    wrapper.lambda().eq(EsFindGoodsGallery::getFindGoodsId,findGoodsDO.getId());
+                    wrapper.lambda().eq(EsFindGoodsGallery::getFindGoodsId, findGoodsDO.getId());
                     List<EsFindGoodsGallery> esFindGoodsGalleries = findGoodsGalleryMapper.selectList(wrapper);
-                    if (CollectionUtils.isNotEmpty(esFindGoodsGalleries)){
+                    if (CollectionUtils.isNotEmpty(esFindGoodsGalleries)) {
                         List<EsFindGoodsGalleryDO> doList = BeanUtil.copyList(esFindGoodsGalleries, EsFindGoodsGalleryDO.class);
                         findGoodsDO.setGalleryList(doList);
                     }
                     return findGoodsDO;
                 }).collect(Collectors.toList());
             }
-            return DubboPageResult.success(iPage.getTotal(),findGoodsDOList);
-        } catch (ArgumentException ae){
+            return DubboPageResult.success(iPage.getTotal(), findGoodsDOList);
+        } catch (ArgumentException ae) {
             logger.error("发现好货分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("发现好货分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -238,14 +238,14 @@ public class EsFindGoodsServiceImpl extends ServiceImpl<EsFindGoodsMapper, EsFin
             this.findGoodsMapper.delete(deleteWrapper);
             //删除相册
             QueryWrapper<EsFindGoodsGallery> wrapper = new QueryWrapper<>();
-            wrapper.lambda().eq(EsFindGoodsGallery::getFindGoodsId,id);
+            wrapper.lambda().eq(EsFindGoodsGallery::getFindGoodsId, id);
             findGoodsGalleryMapper.delete(wrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
-             logger.error("发现好货删除失败", ae);
-             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+        } catch (ArgumentException ae) {
+            logger.error("发现好货删除失败", ae);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("发现好货删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -257,7 +257,7 @@ public class EsFindGoodsServiceImpl extends ServiceImpl<EsFindGoodsMapper, EsFin
         QueryWrapper<EsFindGoods> queryWrapper = new QueryWrapper<>();
         try {
             // 查询条件
-            queryWrapper.lambda().eq(EsFindGoods::getCustomCategoryId,customCategoryId);
+            queryWrapper.lambda().eq(EsFindGoods::getCustomCategoryId, customCategoryId);
             Page<EsFindGoods> page = new Page<>(pageNum, pageSize);
             IPage<EsFindGoods> iPage = this.page(page, queryWrapper);
             List<EsFindGoodsDO> findGoodsDOList = new ArrayList<>();
@@ -267,9 +267,9 @@ public class EsFindGoodsServiceImpl extends ServiceImpl<EsFindGoodsMapper, EsFin
                     BeanUtil.copyProperties(findGoods, findGoodsDO);
                     //设置相册
                     QueryWrapper<EsFindGoodsGallery> wrapper = new QueryWrapper<>();
-                    wrapper.lambda().eq(EsFindGoodsGallery::getFindGoodsId,findGoodsDO.getId());
+                    wrapper.lambda().eq(EsFindGoodsGallery::getFindGoodsId, findGoodsDO.getId());
                     List<EsFindGoodsGallery> esFindGoodsGalleries = findGoodsGalleryMapper.selectList(wrapper);
-                    if (CollectionUtils.isNotEmpty(esFindGoodsGalleries)){
+                    if (CollectionUtils.isNotEmpty(esFindGoodsGalleries)) {
                         List<EsFindGoodsGalleryDO> doList = BeanUtil.copyList(esFindGoodsGalleries, EsFindGoodsGalleryDO.class);
                         findGoodsDO.setGalleryList(doList);
                     }
@@ -277,10 +277,10 @@ public class EsFindGoodsServiceImpl extends ServiceImpl<EsFindGoodsMapper, EsFin
                     DubboResult<EsGoodsCO> goodsCODubboResult = goodsService.getEsBuyerGoods(findGoodsDO.getGoodsId());
                     EsGoodsCO esGoodsCO = goodsCODubboResult.getData();
                     //商品不存在或者下线将数据删除
-                    if (!goodsCODubboResult.isSuccess() || esGoodsCO == null || esGoodsCO.getIsDel() == 1|| esGoodsCO.getIsAuth() != 1 || esGoodsCO.getMarketEnable() == 2 || esGoodsCO.getIsGifts() == 1){
+                    if (!goodsCODubboResult.isSuccess() || esGoodsCO == null || esGoodsCO.getIsDel() == 1 || esGoodsCO.getIsAuth() != 1 || esGoodsCO.getMarketEnable() == 2 || esGoodsCO.getIsGifts() == 1) {
                         //删除数据库该条数据
                         deleteFindGoods(findGoodsDO.getId());
-                    }else {
+                    } else {
                         //设置商品价格
                         findGoodsDO.setMoney(esGoodsCO.getMoney());
                         //设置浏览数量
@@ -289,10 +289,10 @@ public class EsFindGoodsServiceImpl extends ServiceImpl<EsFindGoodsMapper, EsFin
                     }
                 });
             }
-            return DubboPageResult.success(iPage.getTotal(),findGoodsDOList);
-        } catch (ArgumentException ae){
+            return DubboPageResult.success(iPage.getTotal(), findGoodsDOList);
+        } catch (ArgumentException ae) {
             logger.error("发现好货分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("发现好货分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -305,17 +305,17 @@ public class EsFindGoodsServiceImpl extends ServiceImpl<EsFindGoodsMapper, EsFin
         QueryWrapper<EsFindGoods> queryWrapper = new QueryWrapper<>();
         try {
             // 查询条件
-            queryWrapper.lambda().eq(EsFindGoods::getCustomCategoryId,customCategoryId);
+            queryWrapper.lambda().eq(EsFindGoods::getCustomCategoryId, customCategoryId);
             List<EsFindGoods> esFindGoods = this.findGoodsMapper.selectList(queryWrapper);
             List<EsFindGoodsDO> findGoodsDOList = new ArrayList<>();
-            esFindGoods.forEach(findGoods->{
+            esFindGoods.forEach(findGoods -> {
                 EsFindGoodsDO findGoodsDO = new EsFindGoodsDO();
                 BeanUtil.copyProperties(findGoods, findGoodsDO);
                 //设置相册
                 QueryWrapper<EsFindGoodsGallery> wrapper = new QueryWrapper<>();
-                wrapper.lambda().eq(EsFindGoodsGallery::getFindGoodsId,findGoodsDO.getId());
+                wrapper.lambda().eq(EsFindGoodsGallery::getFindGoodsId, findGoodsDO.getId());
                 List<EsFindGoodsGallery> esFindGoodsGalleries = findGoodsGalleryMapper.selectList(wrapper);
-                if (CollectionUtils.isNotEmpty(esFindGoodsGalleries)){
+                if (CollectionUtils.isNotEmpty(esFindGoodsGalleries)) {
                     List<EsFindGoodsGalleryDO> doList = BeanUtil.copyList(esFindGoodsGalleries, EsFindGoodsGalleryDO.class);
                     findGoodsDO.setGalleryList(doList);
                 }
@@ -323,10 +323,10 @@ public class EsFindGoodsServiceImpl extends ServiceImpl<EsFindGoodsMapper, EsFin
                 DubboResult<EsGoodsCO> goodsCODubboResult = goodsService.getEsBuyerGoods(findGoodsDO.getGoodsId());
                 EsGoodsCO esGoodsCO = goodsCODubboResult.getData();
                 //商品不存在或者下线将数据删除
-                if (!goodsCODubboResult.isSuccess() || esGoodsCO == null || esGoodsCO.getIsDel() == 1|| esGoodsCO.getIsAuth() != 1 || esGoodsCO.getMarketEnable() == 2 || esGoodsCO.getIsGifts() == 1){
+                if (!goodsCODubboResult.isSuccess() || esGoodsCO == null || esGoodsCO.getIsDel() == 1 || esGoodsCO.getIsAuth() != 1 || esGoodsCO.getMarketEnable() == 2 || esGoodsCO.getIsGifts() == 1) {
                     //删除数据库该条数据
                     deleteFindGoods(findGoodsDO.getId());
-                }else {
+                } else {
                     //设置商品价格
                     findGoodsDO.setMoney(esGoodsCO.getMoney());
                     //设置浏览数量
@@ -335,9 +335,9 @@ public class EsFindGoodsServiceImpl extends ServiceImpl<EsFindGoodsMapper, EsFin
                 }
             });
             return DubboPageResult.success(findGoodsDOList);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("发现好货查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("发现好货查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");

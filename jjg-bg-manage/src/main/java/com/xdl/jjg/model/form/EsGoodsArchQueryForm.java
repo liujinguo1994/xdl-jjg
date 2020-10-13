@@ -7,7 +7,7 @@ import lombok.Data;
 
 /**
  * <p>
- *  商品档案查询form
+ * 商品档案查询form
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -29,13 +29,13 @@ public class EsGoodsArchQueryForm extends QueryPageForm {
     /**
      * 创建时间开始
      */
-    @ApiModelProperty(value = "创建时间开始",example = "1")
+    @ApiModelProperty(value = "创建时间开始", example = "1")
     private Long createTimeStart;
 
     /**
      * 创建时间结束
      */
-    @ApiModelProperty(value = "创建时间结束",example = "1")
+    @ApiModelProperty(value = "创建时间结束", example = "1")
     private Long createTimeEnd;
 
     /**

@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -23,28 +23,28 @@ public class EsSensitiveWords extends Model<EsSensitiveWords> {
     /**
      * 主键ID
      */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
     /**
      * 敏感词名称
      */
     @TableField("word_name")
-	private String wordName;
+    private String wordName;
     /**
      * 创建时间
      */
-	@TableField(value = "create_time", fill = FieldFill.INSERT)
-	private Long createTime;
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    private Long createTime;
     /**
      * 删除状态  0正常 1 删除
      */
     @TableField("is_del")
-	private Integer isDel;
+    private Integer isDel;
 
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 
 }

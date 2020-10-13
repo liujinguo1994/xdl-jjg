@@ -22,7 +22,7 @@ public class EsUpdateMemberForm implements Serializable {
     /**
      * 主键id
      */
-    @ApiModelProperty(required = true,value = "主键id", example = "1")
+    @ApiModelProperty(required = true, value = "主键id", example = "1")
     @NotNull(message = "id不能为空")
     private Long id;
     /**
@@ -50,7 +50,7 @@ public class EsUpdateMemberForm implements Serializable {
     /**
      * 会员生日
      */
-    @ApiModelProperty(required = true,value = "会员生日", example = "1")
+    @ApiModelProperty(required = true, value = "会员生日", example = "1")
     @NotNull(message = "生日不能为空")
     private Long birthday;
     /**
@@ -77,7 +77,7 @@ public class EsUpdateMemberForm implements Serializable {
     /**
      * 所属城市名称
      */
-    @ApiModelProperty( value = "所属城市名称")
+    @ApiModelProperty(value = "所属城市名称")
     private String city;
     /**
      * 手机号码

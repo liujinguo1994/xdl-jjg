@@ -7,7 +7,7 @@ import java.util.List;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -20,39 +20,39 @@ public class EsMenuDO implements Serializable {
     /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
     /**
      * 父id
      */
-	private Long parentId;
+    private Long parentId;
     /**
      * 菜单标题
      */
-	private String title;
+    private String title;
     /**
      * 菜单url
      */
-	private String url;
+    private String url;
     /**
      * 菜单唯一标识
      */
-	private String identifier;
+    private String identifier;
     /**
      * 权限表达式
      */
-	private String authExpression;
+    private String authExpression;
     /**
      * 删除标记 0 未删除 1删除
      */
-	private Integer isDel;
+    private Integer isDel;
     /**
      * 菜单级别标识
      */
-	private String path;
+    private String path;
     /**
      * 菜单级别
      */
-	private Integer grade;
+    private Integer grade;
     /**
      * 子菜单
      */

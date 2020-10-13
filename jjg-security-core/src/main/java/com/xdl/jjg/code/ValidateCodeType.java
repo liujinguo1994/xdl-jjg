@@ -39,6 +39,7 @@ public enum ValidateCodeType {
 
     /**
      * 校验时从请求中获取的参数的名字
+     *
      * @return
      */
     public abstract String getParamNameOnValidate();

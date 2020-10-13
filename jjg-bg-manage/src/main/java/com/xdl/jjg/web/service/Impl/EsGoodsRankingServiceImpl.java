@@ -63,11 +63,11 @@ public class EsGoodsRankingServiceImpl extends ServiceImpl<EsGoodsRankingMapper,
             }
 
             //判断首页榜单的个数
-            if (goodsRankingDTO.getHomePage() == 1){
+            if (goodsRankingDTO.getHomePage() == 1) {
                 QueryWrapper<EsGoodsRanking> queryWrapper = new QueryWrapper<>();
                 queryWrapper.lambda().eq(EsGoodsRanking::getHomePage, 1);
                 Integer count = goodsRankingMapper.selectCount(queryWrapper);
-                if (count >= 3){
+                if (count >= 3) {
                     throw new ArgumentException(ErrorCode.GOODS_RANKING_COUNT_ERROR.getErrorCode(), "首页榜单个数不能超过三个");
                 }
             }
@@ -75,11 +75,11 @@ public class EsGoodsRankingServiceImpl extends ServiceImpl<EsGoodsRankingMapper,
             BeanUtil.copyProperties(goodsRankingDTO, goodsRanking);
             this.goodsRankingMapper.insert(goodsRanking);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("热门榜单新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("热门榜单新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -102,17 +102,17 @@ public class EsGoodsRankingServiceImpl extends ServiceImpl<EsGoodsRankingMapper,
                 throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), ErrorCode.PARAM_ERROR.getErrorMsg());
             }
             //判断首页榜单的个数
-            if (goodsRankingDTO.getHomePage() == 1){
+            if (goodsRankingDTO.getHomePage() == 1) {
                 QueryWrapper<EsGoodsRanking> query = new QueryWrapper<>();
                 query.lambda().eq(EsGoodsRanking::getHomePage, 1);
                 List<EsGoodsRanking> list = goodsRankingMapper.selectList(query);
                 List<Long> ids = new ArrayList<>();
-                if (CollectionUtils.isNotEmpty(list)){
+                if (CollectionUtils.isNotEmpty(list)) {
                     list.stream().forEach(goodsRanking -> {
-                    ids.add(goodsRanking.getId());
+                        ids.add(goodsRanking.getId());
                     });
                 }
-                if (!ids.contains(goodsRankingDTO.getId()) && list.size() >= 3){
+                if (!ids.contains(goodsRankingDTO.getId()) && list.size() >= 3) {
                     throw new ArgumentException(ErrorCode.GOODS_RANKING_COUNT_ERROR.getErrorCode(), "首页榜单个数不能超过三个");
                 }
             }
@@ -122,10 +122,10 @@ public class EsGoodsRankingServiceImpl extends ServiceImpl<EsGoodsRankingMapper,
             queryWrapper.lambda().eq(EsGoodsRanking::getId, goodsRankingDTO.getId());
             this.goodsRankingMapper.update(goodsRanking, queryWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("热门榜单更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("热门榜单更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -153,10 +153,10 @@ public class EsGoodsRankingServiceImpl extends ServiceImpl<EsGoodsRankingMapper,
             }
             BeanUtil.copyProperties(goodsRanking, goodsRankingDO);
             return DubboResult.success(goodsRankingDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("热门榜单查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("热门榜单查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -166,8 +166,8 @@ public class EsGoodsRankingServiceImpl extends ServiceImpl<EsGoodsRankingMapper,
      * 根据查询热门榜单列表
      *
      * @param goodsRankingDTO 热门榜单DTO
-     * @param pageSize     页码
-     * @param pageNum      页数
+     * @param pageSize        页码
+     * @param pageNum         页数
      * @auther: rm 2817512105@qq.com
      * @date: 2020-05-07
      * @return: com.shopx.common.model.result.DubboPageResult<EsGoodsRankingDO>
@@ -177,7 +177,7 @@ public class EsGoodsRankingServiceImpl extends ServiceImpl<EsGoodsRankingMapper,
         QueryWrapper<EsGoodsRanking> queryWrapper = new QueryWrapper<>();
         try {
             // 查询条件
-            queryWrapper.lambda().like(StringUtil.notEmpty(goodsRankingDTO.getRankingName()),EsGoodsRanking::getRankingName,goodsRankingDTO.getRankingName()).eq(goodsRankingDTO.getHomePage() != null,EsGoodsRanking::getHomePage,goodsRankingDTO.getHomePage());
+            queryWrapper.lambda().like(StringUtil.notEmpty(goodsRankingDTO.getRankingName()), EsGoodsRanking::getRankingName, goodsRankingDTO.getRankingName()).eq(goodsRankingDTO.getHomePage() != null, EsGoodsRanking::getHomePage, goodsRankingDTO.getHomePage());
             Page<EsGoodsRanking> page = new Page<>(pageNum, pageSize);
             IPage<EsGoodsRanking> iPage = this.page(page, queryWrapper);
             List<EsGoodsRankingDO> goodsRankingDOList = new ArrayList<>();
@@ -186,7 +186,7 @@ public class EsGoodsRankingServiceImpl extends ServiceImpl<EsGoodsRankingMapper,
                     EsGoodsRankingDO goodsRankingDO = new EsGoodsRankingDO();
                     BeanUtil.copyProperties(goodsRanking, goodsRankingDO);
                     DubboPageResult<EsSalesRankingGoodsDO> result = goodsService.getByCategoryId(goodsRanking.getGoodsCategoryId(), goodsRanking.getGoodsId());
-                    if(result.isSuccess()){
+                    if (result.isSuccess()) {
                         int sum = result.getData().getList().stream().mapToInt(EsSalesRankingGoodsDO::getBuyCount).sum();
                         goodsRankingDO.setBuyCount(sum);
 
@@ -200,10 +200,10 @@ public class EsGoodsRankingServiceImpl extends ServiceImpl<EsGoodsRankingMapper,
                     return goodsRankingDO;
                 }).collect(Collectors.toList());
             }
-            return DubboPageResult.success(iPage.getTotal(),goodsRankingDOList);
-        } catch (ArgumentException ae){
+            return DubboPageResult.success(iPage.getTotal(), goodsRankingDOList);
+        } catch (ArgumentException ae) {
             logger.error("热门榜单分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("热门榜单分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -229,11 +229,11 @@ public class EsGoodsRankingServiceImpl extends ServiceImpl<EsGoodsRankingMapper,
             deleteWrapper.lambda().eq(EsGoodsRanking::getId, id);
             this.goodsRankingMapper.delete(deleteWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
-             logger.error("热门榜单删除失败", ae);
-             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+        } catch (ArgumentException ae) {
+            logger.error("热门榜单删除失败", ae);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("热门榜单删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -245,49 +245,49 @@ public class EsGoodsRankingServiceImpl extends ServiceImpl<EsGoodsRankingMapper,
         QueryWrapper<EsGoodsRanking> queryWrapper = new QueryWrapper<>();
         try {
             // 查询条件
-            queryWrapper.lambda().eq(EsGoodsRanking::getHomePage,2);
+            queryWrapper.lambda().eq(EsGoodsRanking::getHomePage, 2);
             Page<EsGoodsRanking> page = new Page<>(pageNum, pageSize);
             IPage<EsGoodsRanking> iPage = this.page(page, queryWrapper);
             List<EsGoodsRankingDO> goodsRankingDOList = new ArrayList<>();
             if (CollectionUtils.isNotEmpty(iPage.getRecords())) {
-               iPage.getRecords().stream().forEach(goodsRanking -> {
-                   EsGoodsRankingDO goodsRankingDO = new EsGoodsRankingDO();
-                   BeanUtil.copyProperties(goodsRanking, goodsRankingDO);
-                   //查询商品信息
-                   DubboResult<EsGoodsCO> goodsCODubboResult = goodsService.getEsBuyerGoods(goodsRankingDO.getGoodsId());
-                   EsGoodsCO esGoodsCO = goodsCODubboResult.getData();
-                   if (!goodsCODubboResult.isSuccess() || esGoodsCO == null || esGoodsCO.getIsDel() == 1|| esGoodsCO.getIsAuth() != 1 || esGoodsCO.getMarketEnable() == 2 || esGoodsCO.getIsGifts() == 1){
-                       //删除数据库该条数据
-                       deleteGoodsRanking(goodsRankingDO.getId());
-                   }else {
-                       //设置商品价格
-                       goodsRankingDO.setMoney(esGoodsCO.getMoney());
-                       //设置销量
-                       goodsRankingDO.setBuyCount(esGoodsCO.getBuyCount());
-                       //设置商品名称
-                       goodsRankingDO.setGoodsName(esGoodsCO.getGoodsName());
-                       //设置图片
-                       goodsRankingDO.setOriginal(esGoodsCO.getOriginal());
-                       //设置榜单销量
-                       int count = 0;
-                       DubboPageResult<EsGoodsDO> result = goodsService.buyerGetGoodsByCategoryId(goodsRankingDO.getGoodsCategoryId());
-                       if (result.isSuccess()){
-                           List<EsGoodsDO> list = result.getData().getList();
-                           if (CollectionUtils.isNotEmpty(list)){
-                               for (EsGoodsDO goodsDO : list) {
-                                   count += goodsDO.getBuyCount();
-                               }
-                           }
-                       }
-                       goodsRankingDO.setCount(count);
-                       goodsRankingDOList.add(goodsRankingDO);
-                   }
-               });
+                iPage.getRecords().stream().forEach(goodsRanking -> {
+                    EsGoodsRankingDO goodsRankingDO = new EsGoodsRankingDO();
+                    BeanUtil.copyProperties(goodsRanking, goodsRankingDO);
+                    //查询商品信息
+                    DubboResult<EsGoodsCO> goodsCODubboResult = goodsService.getEsBuyerGoods(goodsRankingDO.getGoodsId());
+                    EsGoodsCO esGoodsCO = goodsCODubboResult.getData();
+                    if (!goodsCODubboResult.isSuccess() || esGoodsCO == null || esGoodsCO.getIsDel() == 1 || esGoodsCO.getIsAuth() != 1 || esGoodsCO.getMarketEnable() == 2 || esGoodsCO.getIsGifts() == 1) {
+                        //删除数据库该条数据
+                        deleteGoodsRanking(goodsRankingDO.getId());
+                    } else {
+                        //设置商品价格
+                        goodsRankingDO.setMoney(esGoodsCO.getMoney());
+                        //设置销量
+                        goodsRankingDO.setBuyCount(esGoodsCO.getBuyCount());
+                        //设置商品名称
+                        goodsRankingDO.setGoodsName(esGoodsCO.getGoodsName());
+                        //设置图片
+                        goodsRankingDO.setOriginal(esGoodsCO.getOriginal());
+                        //设置榜单销量
+                        int count = 0;
+                        DubboPageResult<EsGoodsDO> result = goodsService.buyerGetGoodsByCategoryId(goodsRankingDO.getGoodsCategoryId());
+                        if (result.isSuccess()) {
+                            List<EsGoodsDO> list = result.getData().getList();
+                            if (CollectionUtils.isNotEmpty(list)) {
+                                for (EsGoodsDO goodsDO : list) {
+                                    count += goodsDO.getBuyCount();
+                                }
+                            }
+                        }
+                        goodsRankingDO.setCount(count);
+                        goodsRankingDOList.add(goodsRankingDO);
+                    }
+                });
             }
-            return DubboPageResult.success(iPage.getTotal(),goodsRankingDOList);
-        } catch (ArgumentException ae){
+            return DubboPageResult.success(iPage.getTotal(), goodsRankingDOList);
+        } catch (ArgumentException ae) {
             logger.error("热门榜单分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("热门榜单分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");

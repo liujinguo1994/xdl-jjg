@@ -22,67 +22,67 @@ public class EsFindGoodsDO implements Serializable {
     /**
      * 主键id
      */
-	private Long id;
+    private Long id;
 
     /**
      * 商品名称
      */
-	private String goodsName;
+    private String goodsName;
 
     /**
      * 自定义分类id
      */
-	private Long customCategoryId;
+    private Long customCategoryId;
 
     /**
      * 商品链接
      */
-	private String goodsUrl;
+    private String goodsUrl;
 
-	/**
-	 * 图片地址
-	 */
-	private String picUrl;
+    /**
+     * 图片地址
+     */
+    private String picUrl;
 
-	/**
-	 * 相册
-	 */
-	private List<EsFindGoodsGalleryDO> galleryList;
+    /**
+     * 相册
+     */
+    private List<EsFindGoodsGalleryDO> galleryList;
 
     /**
      * 商品id
      */
-	private Long goodsId;
+    private Long goodsId;
 
     /**
      * 商品描述
      */
-	private String goodsDescription;
+    private String goodsDescription;
 
     /**
      * 创建时间
      */
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-	private Long createTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Long createTime;
 
     /**
      * 最后修改时间
      */
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-	private Long updateTime;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Long updateTime;
 
-	/**
-	 * 自定义分类名称
-	 */
-	private String categoryName;
+    /**
+     * 自定义分类名称
+     */
+    private String categoryName;
 
-	/**
-	 * 商品价格
-	 */
-	private Double money;
+    /**
+     * 商品价格
+     */
+    private Double money;
 
-	/**
-	 * 浏览数量
-	 */
-	private Integer viewCount;
+    /**
+     * 浏览数量
+     */
+    private Integer viewCount;
 }

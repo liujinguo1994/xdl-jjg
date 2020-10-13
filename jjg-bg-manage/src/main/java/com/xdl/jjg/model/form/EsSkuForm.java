@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * <p>
- *档案管理-商品sku信息
+ * 档案管理-商品sku信息
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -21,14 +21,14 @@ import java.util.List;
  */
 @Data
 @ApiModel
-public class EsSkuForm implements  Serializable{
+public class EsSkuForm implements Serializable {
 
     private static final long serialVersionUID = 7684774151707155683L;
 
     /**
      * skuId
      */
-    @ApiModelProperty(value = "skuId" ,example = "1")
+    @ApiModelProperty(value = "skuId", example = "1")
     private Long id;
 
     /**
@@ -46,13 +46,13 @@ public class EsSkuForm implements  Serializable{
     /**
      * 重量
      */
-    @ApiModelProperty(required = true, value = "重量",example = "1")
+    @ApiModelProperty(required = true, value = "重量", example = "1")
     @NotNull(message = "重量不能为空")
     private Double weight;
     /**
      * 质检状态
      */
-    @ApiModelProperty(value = "质检状态",example = "1")
+    @ApiModelProperty(value = "质检状态", example = "1")
     private Integer qualityState;
 
     /**
@@ -64,21 +64,21 @@ public class EsSkuForm implements  Serializable{
     /**
      * 长
      */
-    @ApiModelProperty(required = true, value = "长",example = "1")
+    @ApiModelProperty(required = true, value = "长", example = "1")
     @NotNull(message = "长不能为空")
     private String skuLong;
 
     /**
      * 宽
      */
-    @ApiModelProperty(required = true, value = "宽",example = "1")
+    @ApiModelProperty(required = true, value = "宽", example = "1")
     @NotNull(message = "宽不能为空")
     private String wide;
 
     /**
      * 高
      */
-    @ApiModelProperty(required = true, value = "高",example = "1")
+    @ApiModelProperty(required = true, value = "高", example = "1")
     @NotNull(message = "高不能为空")
     private String high;
     /**
@@ -93,7 +93,7 @@ public class EsSkuForm implements  Serializable{
     @ApiModelProperty(required = true, value = "商品规格集合")
     @Valid
     @NotNull(message = "商品规格集合不能为空")
-    @Size(min = 1 , message = "至少有一个规格信息")
+    @Size(min = 1, message = "至少有一个规格信息")
     private List<EsSpecForm> specList;
 
 }

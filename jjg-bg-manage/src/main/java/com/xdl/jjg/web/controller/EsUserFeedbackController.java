@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- *  前端控制器
+ * 前端控制器
  * </p>
  *
  * @author LiuJG 344009799@qq.com
@@ -23,7 +23,6 @@ public class EsUserFeedbackController extends BaseController {
 //    public ApiResponse getUserFeedbackList(@){
 //
 //    }
-
 
 
 }

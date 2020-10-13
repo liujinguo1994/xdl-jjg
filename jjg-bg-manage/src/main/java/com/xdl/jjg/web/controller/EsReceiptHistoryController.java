@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * <p>
- *  前端控制器-发票历史
+ * 前端控制器-发票历史
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/esReceiptHistory")
-@Api(value="/esReceiptHistory", tags="发票历史")
+@Api(value = "/esReceiptHistory", tags = "发票历史")
 public class EsReceiptHistoryController {
 
     @Autowired
@@ -45,10 +45,6 @@ public class EsReceiptHistoryController {
         receiptHistoryService.getByHistoryId(historyId);
 
     }*/
-
-
-
-
 
 
 }

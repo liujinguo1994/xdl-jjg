@@ -42,7 +42,7 @@ public class EsDeliveryServiceForm extends QueryPageForm {
     /**
      * 有效状态（0：有效，1：无效）
      */
-    @ApiModelProperty(required = true, value = "有效状态（0：有效，1：无效）",example = "1")
+    @ApiModelProperty(required = true, value = "有效状态（0：有效，1：无效）", example = "1")
     @NotNull(message = "有效状态不能为空")
     private Integer state;
 
@@ -52,13 +52,13 @@ public class EsDeliveryServiceForm extends QueryPageForm {
     @ApiModelProperty(required = true, value = "自提日期id集合")
     @Valid
     @NotNull(message = "自提日期id集合不能为空")
-    @Size(min = 1 , message = "至少有一个自提日期id")
+    @Size(min = 1, message = "至少有一个自提日期id")
     private List<Long> selfDateId;
 
     /**
      * 签约公司id
      */
-    @ApiModelProperty(required = true, value = "签约公司id",example = "1")
+    @ApiModelProperty(required = true, value = "签约公司id", example = "1")
     @NotNull(message = "签约公司id不能为空")
     private Long companyId;
 }

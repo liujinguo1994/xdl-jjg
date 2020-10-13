@@ -2,27 +2,18 @@ package com.xdl.jjg.web.controller;
 
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.OSSObject;
-import com.shopx.common.model.result.ApiPageResponse;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.member.api.model.domain.EsMemberDepositDO;
-import com.shopx.member.api.model.domain.dto.EsMemberDTO;
-import com.shopx.member.api.model.domain.dto.EsQueryAdminMemberDepositDTO;
-import com.shopx.member.api.model.domain.vo.EsImportBalanceVO;
-import com.shopx.member.api.model.domain.vo.EsMemberDepositVO;
-import com.shopx.member.api.service.IEsMemberDepositService;
-import com.shopx.member.api.service.IEsMemberService;
-import com.shopx.system.web.constant.ApiStatus;
-import com.shopx.system.web.request.EsImportForm;
-import com.shopx.system.web.request.EsMemberDepositQueryForm;
-import com.shopx.system.web.request.EsUpdateBalanceForm;
-import com.shopx.system.web.shiro.oath.ShiroKit;
-import com.shopx.system.web.shiro.oath.ShiroUser;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.model.form.EsImportForm;
+import com.xdl.jjg.model.form.EsMemberDepositQueryForm;
+import com.xdl.jjg.model.form.EsUpdateBalanceForm;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.util.BeanUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mock.web.MockMultipartFile;
@@ -69,17 +60,17 @@ public class EsMemberDepositController {
     private JedisCluster jedisCluster;
 
 
-    @ApiOperation(value = "分页查询会员账户余额明细列表",response = EsMemberDepositVO.class)
+    @ApiOperation(value = "分页查询会员账户余额明细列表", response = EsMemberDepositVO.class)
     @GetMapping(value = "/getMemberDepositList")
     @ResponseBody
     public ApiResponse getMemberDepositList(@Valid EsMemberDepositQueryForm form) {
         EsQueryAdminMemberDepositDTO dto = new EsQueryAdminMemberDepositDTO();
-        BeanUtil.copyProperties(form,dto);
+        BeanUtil.copyProperties(form, dto);
         DubboPageResult<EsMemberDepositDO> result = iesMemberDepositService.getAdminMemberDepositList(dto, form.getPageSize(), form.getPageNum());
         if (result.isSuccess()) {
             List<EsMemberDepositDO> data = result.getData().getList();
             List<EsMemberDepositVO> esMemberDepositVOList = BeanUtil.copyList(data, EsMemberDepositVO.class);
-            return ApiPageResponse.pageSuccess(result.getData().getTotal(),esMemberDepositVOList);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(), esMemberDepositVOList);
         } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
@@ -91,15 +82,15 @@ public class EsMemberDepositController {
     public ApiResponse updateBalance(@Valid @RequestBody EsUpdateBalanceForm form) {
         //只有超级管理员才能操作
         boolean b = checkRole();
-        if (!b){
+        if (!b) {
             return ApiResponse.fail(2000, "只有超级管理员才能操作!");
         }
         EsMemberDTO esMemberDTO = new EsMemberDTO();
-        BeanUtil.copyProperties(form,esMemberDTO);
+        BeanUtil.copyProperties(form, esMemberDTO);
         DubboResult result = iesMemberService.updateMemberInfo(esMemberDTO);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
 
@@ -109,7 +100,7 @@ public class EsMemberDepositController {
     private boolean checkRole() {
         ShiroUser shiroUser = ShiroKit.getUser();
         Integer isAdmin = shiroUser.getIsAdmin();
-        boolean flag =false;
+        boolean flag = false;
         if (isAdmin == 1) {//只有超级管理员才能操作
             flag = true;
         } else {
@@ -264,38 +255,38 @@ public class EsMemberDepositController {
         return ApiResponse.success();
     }*/
 
-    @ApiOperation(value = "批量导入会员余额",response = EsImportBalanceVO.class)
+    @ApiOperation(value = "批量导入会员余额", response = EsImportBalanceVO.class)
     @PostMapping(value = "/importMemberDeposit")
     @ResponseBody
     public ApiResponse importMemberDeposit(@RequestBody @Valid EsImportForm form) {
         //只有超级管理员才能操作
         boolean b = checkRole();
-        if (!b){
+        if (!b) {
             return ApiResponse.fail(2000, "只有超级管理员才能操作!");
         }
         String[] split = form.getUrl().split("/");
-        String tempFileName=split[split.length-1];
+        String tempFileName = split[split.length - 1];
 
         // 创建OSSClient实例。
         OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
 
-        String ossKey=tempFileName;
-        OSSObject ossObject = ossClient.getObject(bucketName,picLocation+"excel/"+ossKey);
+        String ossKey = tempFileName;
+        OSSObject ossObject = ossClient.getObject(bucketName, picLocation + "excel/" + ossKey);
         // 下载object到文件
         InputStream inputStream = ossObject.getObjectContent();
         try {
-            MultipartFile file = new MockMultipartFile("aa","cc","", inputStream);
+            MultipartFile file = new MockMultipartFile("aa", "cc", "", inputStream);
             //关闭client
             ossClient.shutdown();
             DubboResult<EsImportBalanceVO> result = iesMemberService.importBalance(file.getBytes());
-            if(result.isSuccess()){
+            if (result.isSuccess()) {
                 return ApiResponse.success(result.getData());
-            }else{
+            } else {
                 return ApiResponse.fail(ApiStatus.wrapperException(result));
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return ApiResponse.fail(1001,"文件转换失败!");
+            return ApiResponse.fail(1001, "文件转换失败!");
         }
     }
 

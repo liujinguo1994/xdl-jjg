@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- *   导入异常会员余额实体
+ * 导入异常会员余额实体
  * </p>
  *
  * @author rm 2817512105@qq.com

@@ -18,18 +18,18 @@ import lombok.Data;
 public class EsArticleQueryForm extends QueryPageForm {
 
 
-	private static final long serialVersionUID = 183028796064474389L;
+    private static final long serialVersionUID = 183028796064474389L;
 
-	/**
-	 * 文章名称
-	 */
-	@ApiModelProperty(value = "文章名称")
-	private String articleName;
+    /**
+     * 文章名称
+     */
+    @ApiModelProperty(value = "文章名称")
+    private String articleName;
 
-	/**
-	 * 分类id
-	 */
-	@ApiModelProperty(value = "分类id",example = "1")
-	private Long categoryId;
+    /**
+     * 分类id
+     */
+    @ApiModelProperty(value = "分类id", example = "1")
+    private Long categoryId;
 
-	}
+}

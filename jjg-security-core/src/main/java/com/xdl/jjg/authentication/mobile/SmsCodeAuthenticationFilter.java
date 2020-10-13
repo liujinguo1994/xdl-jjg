@@ -68,6 +68,7 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
 
     /**
      * 获取请求中的手机号参数
+     *
      * @param request
      * @return
      */
@@ -78,6 +79,7 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
 
     /**
      * 将请求的一些信息保存到验证请求里面去
+     *
      * @param request
      * @param authRequest
      */
@@ -96,7 +98,6 @@ public class SmsCodeAuthenticationFilter extends AbstractAuthenticationProcessin
         Assert.hasText(mobileParameter, "Mobile parameter must not be empty or null");
         this.mobileParameter = mobileParameter;
     }
-
 
 
     /**

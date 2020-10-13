@@ -31,7 +31,7 @@ import java.util.List;
  * @author rm 2817512105@qq.com
  * @since 2019-12-16
  */
-@Api(value = "/esReturnReason",tags = "售后申请原因")
+@Api(value = "/esReturnReason", tags = "售后申请原因")
 @RestController
 @RequestMapping("/esReturnReason")
 public class EsReturnReasonController {
@@ -39,7 +39,7 @@ public class EsReturnReasonController {
     @Autowired
     private IEsReturnReasonService returnReasonService;
 
-    @ApiOperation(value = "分页查询售后申请原因",response = EsReturnReasonVO.class)
+    @ApiOperation(value = "分页查询售后申请原因", response = EsReturnReasonVO.class)
     @GetMapping(value = "/getReturnReasonList")
     @ResponseBody
     public ApiResponse getReturnReasonList(EsQueryPageForm form) {
@@ -48,7 +48,7 @@ public class EsReturnReasonController {
         if (result.isSuccess()) {
             List<EsReturnReasonDO> data = result.getData().getList();
             List<EsReturnReasonVO> list = BeanUtil.copyList(data, EsReturnReasonVO.class);
-            return ApiPageResponse.pageSuccess(result.getData().getTotal(),list);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(), list);
         } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
@@ -57,13 +57,13 @@ public class EsReturnReasonController {
     @ApiOperation(value = "添加")
     @PostMapping(value = "/insertReturnReason")
     @ResponseBody
-    public ApiResponse insertReturnReason(@Valid @RequestBody @ApiParam(name="原因form对象",value="form") EsReturnReasonForm form){
+    public ApiResponse insertReturnReason(@Valid @RequestBody @ApiParam(name = "原因form对象", value = "form") EsReturnReasonForm form) {
         EsReturnReasonDTO dto = new EsReturnReasonDTO();
         BeanUtil.copyProperties(form, dto);
         DubboResult result = returnReasonService.insertReturnReason(dto);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -71,13 +71,13 @@ public class EsReturnReasonController {
     @ApiOperation(value = "修改")
     @PutMapping(value = "/updateReturnReason")
     @ResponseBody
-    public ApiResponse updateReturnReason(@Valid @RequestBody @ApiParam(name="原因form对象",value="form") EsReturnReasonForm form){
+    public ApiResponse updateReturnReason(@Valid @RequestBody @ApiParam(name = "原因form对象", value = "form") EsReturnReasonForm form) {
         EsReturnReasonDTO dto = new EsReturnReasonDTO();
         BeanUtil.copyProperties(form, dto);
         DubboResult result = returnReasonService.updateReturnReason(dto);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -85,12 +85,12 @@ public class EsReturnReasonController {
     @DeleteMapping(value = "/deleteReturnReason/{id}")
     @ResponseBody
     @ApiOperation(value = "删除")
-    @ApiImplicitParam(name = "id", value = "主键id", required = true, dataType = "long",example = "1", paramType = "path")
-    public ApiResponse deleteReturnReason(@PathVariable Long id){
+    @ApiImplicitParam(name = "id", value = "主键id", required = true, dataType = "long", example = "1", paramType = "path")
+    public ApiResponse deleteReturnReason(@PathVariable Long id) {
         DubboResult result = returnReasonService.deleteReturnReason(id);
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }

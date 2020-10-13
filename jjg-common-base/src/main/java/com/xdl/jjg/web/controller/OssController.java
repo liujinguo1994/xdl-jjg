@@ -46,6 +46,7 @@ public class OssController {
 
     /**
      * 获取签名
+     *
      * @param request
      * @param response
      */
@@ -145,7 +146,7 @@ public class OssController {
      * @param url
      * @return
      */
-    @SuppressWarnings({ "finally" })
+    @SuppressWarnings({"finally"})
     public String executeGet(String url) {
         BufferedReader in = null;
 
@@ -223,9 +224,9 @@ public class OssController {
             throws IOException {
         String callbackFunName = request.getParameter("callback");
         response.addHeader("Content-Length", String.valueOf(results.length()));
-        if (callbackFunName == null || callbackFunName.equalsIgnoreCase("")){
+        if (callbackFunName == null || callbackFunName.equalsIgnoreCase("")) {
             response.getWriter().println(results);
-        } else{
+        } else {
             response.getWriter().println(callbackFunName + "( " + results + " )");
         }
         response.setStatus(status);
@@ -237,9 +238,9 @@ public class OssController {
      */
     private void response(HttpServletRequest request, HttpServletResponse response, String results) throws IOException {
         String callbackFunName = request.getParameter("callback");
-        if (callbackFunName == null || callbackFunName.equalsIgnoreCase("")){
+        if (callbackFunName == null || callbackFunName.equalsIgnoreCase("")) {
             response.getWriter().println(results);
-        } else{
+        } else {
             response.getWriter().println(callbackFunName + "( " + results + " )");
         }
         response.setStatus(HttpServletResponse.SC_OK);
@@ -248,6 +249,7 @@ public class OssController {
 
     /**
      * 验证RSA
+     *
      * @param content
      * @param sign
      * @param publicKey

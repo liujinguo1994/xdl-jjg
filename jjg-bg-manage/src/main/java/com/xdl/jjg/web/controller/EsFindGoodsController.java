@@ -35,7 +35,7 @@ import java.util.List;
  * @author rm 2817512105@qq.com
  * @since 2020-05-07
  */
-@Api(value = "/esFindGoods",tags = "发现好货")
+@Api(value = "/esFindGoods", tags = "发现好货")
 @RestController
 @RequestMapping("/esFindGoods")
 public class EsFindGoodsController {
@@ -46,23 +46,23 @@ public class EsFindGoodsController {
     @ApiOperation(value = "添加")
     @PostMapping(value = "/insertEsFindGoods")
     @ResponseBody
-    public ApiResponse insertEsFindGoods(@RequestBody @ApiParam(name="发现好货form对象",value="form") @Valid EsFindGoodsForm form){
+    public ApiResponse insertEsFindGoods(@RequestBody @ApiParam(name = "发现好货form对象", value = "form") @Valid EsFindGoodsForm form) {
         EsFindGoodsDTO dto = new EsFindGoodsDTO();
         BeanUtil.copyProperties(form, dto);
         String url = form.getGoodsUrl();
         String s = StringUtils.substringAfterLast(url, "/");
-        if (StringUtils.isBlank(s) || !StringUtil.isNumber(s)){
+        if (StringUtils.isBlank(s) || !StringUtil.isNumber(s)) {
             throw new ArgumentException(ErrorCode.URL_ERROR.getErrorCode(), "商品链接异常");
         }
         dto.setGoodsId(Long.valueOf(s));
-        if (CollectionUtils.isNotEmpty(form.getGalleryList())){
+        if (CollectionUtils.isNotEmpty(form.getGalleryList())) {
             List<EsFindGoodsGalleryDTO> dtoList = BeanUtil.copyList(form.getGalleryList(), EsFindGoodsGalleryDTO.class);
             dto.setGalleryList(dtoList);
         }
         DubboResult result = iesFindGoodsService.insertFindGoods(dto);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -70,30 +70,30 @@ public class EsFindGoodsController {
     @ApiOperation(value = "修改")
     @PutMapping(value = "/editEsFindGoods")
     @ResponseBody
-    public ApiResponse editEsFindGoods(@RequestBody @ApiParam(name="发现好货form对象",value="form") @Valid EsFindGoodsForm form){
+    public ApiResponse editEsFindGoods(@RequestBody @ApiParam(name = "发现好货form对象", value = "form") @Valid EsFindGoodsForm form) {
         EsFindGoodsDTO dto = new EsFindGoodsDTO();
         BeanUtil.copyProperties(form, dto);
         String url = form.getGoodsUrl();
         String s = StringUtils.substringAfterLast(url, "/");
-        if (StringUtils.isBlank(s) || !StringUtil.isNumber(s)){
+        if (StringUtils.isBlank(s) || !StringUtil.isNumber(s)) {
             throw new ArgumentException(ErrorCode.URL_ERROR.getErrorCode(), "商品链接异常");
         }
         dto.setGoodsId(Long.valueOf(s));
-        if (CollectionUtils.isNotEmpty(form.getGalleryList())){
+        if (CollectionUtils.isNotEmpty(form.getGalleryList())) {
             List<EsFindGoodsGalleryDTO> dtoList = BeanUtil.copyList(form.getGalleryList(), EsFindGoodsGalleryDTO.class);
             dto.setGalleryList(dtoList);
         }
         DubboResult result = iesFindGoodsService.updateFindGoods(dto);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
 
     @ApiOperation(value = "删除")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "主键id", required = true, dataType = "long", paramType = "path",example = "1")
+            @ApiImplicitParam(name = "id", value = "主键id", required = true, dataType = "long", paramType = "path", example = "1")
     })
     @DeleteMapping(value = "/deleteEsFindGoods/{id}")
     @ResponseBody
@@ -101,33 +101,33 @@ public class EsFindGoodsController {
         DubboResult result = iesFindGoodsService.deleteFindGoods(id);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
 
-    @ApiOperation(value = "分页查询列表",response = EsFindGoodsVO.class)
+    @ApiOperation(value = "分页查询列表", response = EsFindGoodsVO.class)
     @GetMapping(value = "/getEsFindGoods")
     @ResponseBody
     public ApiResponse getEsFindGoods(EsFindGoodsQueryForm form) {
-        EsFindGoodsDTO dto=new EsFindGoodsDTO();
-        BeanUtil.copyProperties(form,dto);
+        EsFindGoodsDTO dto = new EsFindGoodsDTO();
+        BeanUtil.copyProperties(form, dto);
         DubboPageResult<EsFindGoodsDO> result = iesFindGoodsService.getFindGoodsList(dto, form.getPageSize(), form.getPageNum());
         if (result.isSuccess()) {
             List<EsFindGoodsDO> doList = result.getData().getList();
             List<EsFindGoodsVO> voList = new ArrayList<>();
-            if (CollectionUtils.isNotEmpty(doList)){
+            if (CollectionUtils.isNotEmpty(doList)) {
                 doList.stream().forEach(esFindGoodsDO -> {
                     EsFindGoodsVO vo = new EsFindGoodsVO();
-                    BeanUtil.copyProperties(esFindGoodsDO,vo);
-                    if (CollectionUtils.isNotEmpty(esFindGoodsDO.getGalleryList())){
+                    BeanUtil.copyProperties(esFindGoodsDO, vo);
+                    if (CollectionUtils.isNotEmpty(esFindGoodsDO.getGalleryList())) {
                         List<EsFindGoodsGalleryVO> galleryVOS = BeanUtil.copyList(esFindGoodsDO.getGalleryList(), EsFindGoodsGalleryVO.class);
                         vo.setGalleryList(galleryVOS);
                     }
                     voList.add(vo);
                 });
             }
-            return ApiPageResponse.pageSuccess(result.getData().getTotal(),voList);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(), voList);
         } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }

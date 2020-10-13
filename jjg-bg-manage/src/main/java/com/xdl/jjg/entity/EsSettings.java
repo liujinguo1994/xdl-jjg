@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -26,23 +26,23 @@ public class EsSettings extends Model<EsSettings> {
     /**
      * 主键ID
      */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
     /**
      * 系统配置信息
      */
     @TableField("cfg_value")
-	private String cfgValue;
+    private String cfgValue;
     /**
      * 业务设置标识
      */
     @TableField("cfg_group")
-	private String cfgGroup;
+    private String cfgGroup;
 
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 
 }

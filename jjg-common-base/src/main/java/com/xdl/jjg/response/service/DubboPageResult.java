@@ -8,11 +8,12 @@ import java.util.List;
 
 /**
  * 分页返回结果集
+ *
  * @param <D>
  */
 public class DubboPageResult<D> extends DubboResult {
 
-    private DubboPageResult(Object data, boolean success , int code, String msg) {
+    private DubboPageResult(Object data, boolean success, int code, String msg) {
         super(data, success, code, msg);
     }
 
@@ -26,11 +27,12 @@ public class DubboPageResult<D> extends DubboResult {
     }
 
     public static <D> DubboPageResult success(Long total, List<D> list) {
-        return newBuilder().success(true).data(new ListData(total,list)).code(BaseErrorCode.SUCCESS_CODE).msg("").build();
+        return newBuilder().success(true).data(new ListData(total, list)).code(BaseErrorCode.SUCCESS_CODE).msg("").build();
     }
+
     public static <D> DubboPageResult success(List<D> list) {
-        list = null==list? new ArrayList<D>():list;
-        return newBuilder().success(true).data(new ListData((long)list.size(),list)).code(BaseErrorCode.SUCCESS_CODE).msg("").build();
+        list = null == list ? new ArrayList<D>() : list;
+        return newBuilder().success(true).data(new ListData((long) list.size(), list)).code(BaseErrorCode.SUCCESS_CODE).msg("").build();
     }
 
     public static DubboPageResult fail(int code, String msg) {
@@ -38,7 +40,7 @@ public class DubboPageResult<D> extends DubboResult {
     }
 
     public static <D> DubboPageResult fail(Long total, List<D> list, int code, String msg) {
-        return newBuilder().success(false).data(new ListData(total,list)).code(code).msg(msg).build();
+        return newBuilder().success(false).data(new ListData(total, list)).code(code).msg(msg).build();
     }
 
     public static DubboPageResult fail(BaseErrorCode errorCode) {
@@ -64,6 +66,7 @@ public class DubboPageResult<D> extends DubboResult {
             this.code = code;
             return this;
         }
+
         @Override
         public Builder msg(String msg) {
             this.msg = msg;
@@ -78,7 +81,7 @@ public class DubboPageResult<D> extends DubboResult {
 
         @Override
         public DubboPageResult build() {
-            return new DubboPageResult(data, success ,code, msg);
+            return new DubboPageResult(data, success, code, msg);
         }
 
     }

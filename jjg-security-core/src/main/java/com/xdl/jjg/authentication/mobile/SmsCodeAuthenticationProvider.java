@@ -26,6 +26,7 @@ public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
 
     /**
      * 进行身份验证的逻辑
+     *
      * @param authentication
      * @return
      * @throws AuthenticationException
@@ -45,9 +46,9 @@ public class SmsCodeAuthenticationProvider implements AuthenticationProvider {
     }
 
 
-
     /**
      * 判断传入的参数的类型是否是SmsCodeAuthenticationToken类型的
+     *
      * @param authentication
      * @return
      */

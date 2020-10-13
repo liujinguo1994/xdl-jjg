@@ -1,0 +1,74 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.goods.dao.mapper.EsDraftGoodsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shopx.goods.dao.entity.EsDraftGoods">
+        <id column="id" property="id" />
+        <result column="goods_name" property="goodsName" />
+        <result column="goods_sn" property="goodsSn" />
+        <result column="brand_id" property="brandId" />
+        <result column="category_id" property="categoryId" />
+        <result column="goods_type" property="goodsType" />
+        <result column="weight" property="weight" />
+        <result column="market_enable" property="marketEnable" />
+        <result column="intro" property="intro" />
+        <result column="cost" property="cost" />
+        <result column="money" property="money" />
+        <result column="mktmoney" property="mktmoney" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_del" property="isDel" />
+        <result column="quantity" property="quantity" />
+        <result column="page_title" property="pageTitle" />
+        <result column="meta_keywords" property="metaKeywords" />
+        <result column="meta_description" property="metaDescription" />
+        <result column="shop_id" property="shopId" />
+        <result column="shop_cat_id" property="shopCatId" />
+        <result column="comment_num" property="commentNum" />
+        <result column="template_id" property="templateId" />
+        <result column="goods_transfee_charge" property="goodsTransfeeCharge" />
+        <result column="shop_name" property="shopName" />
+        <result column="is_auth" property="isAuth" />
+        <result column="auth_message" property="authMessage" />
+        <result column="self_operated" property="selfOperated" />
+        <result column="under_message" property="underMessage" />
+        <result column="is_invoice" property="isInvoice" />
+        <result column="invoice_type" property="invoiceType" />
+        <result column="grade" property="grade" />
+        <result column="view_count" property="viewCount" />
+        <result column="buy_count" property="buyCount" />
+        <result column="original" property="original" />
+        <result column="promise_id" property="promiseId" />
+        <result column="custom_id" property="customId" />
+        <result column="is_fresh" property="isFresh" />
+        <result column="auth_time" property="authTime" />
+        <result column="is_gifts" property="isGifts" />
+        <result column="after_service" property="afterService" />
+        <result column="seller_promise" property="sellerPromise" />
+        <result column="is_lfc" property="isLfc" />
+        <result column="is_virtual" property="isVirtual"/>
+    </resultMap>
+    <select id="getDraftEsGoodsPageList" resultType="com.shopx.goods.api.model.domain.EsDraftGoodsDO">
+        SELECT
+        t.*,c.name as categoryName,t.money as saleMoney,t.quantity as zsQuantity
+        FROM
+        es_draft_goods t
+        LEFT JOIN es_category c ON t.category_id = c.id
+        WHERE
+        t.is_gifts = 2
+
+        <if test="shopId !=null and shopId !=''">
+            and t.shop_Id =#{shopId}
+        </if>
+        <if test="goodsName !=null and goodsName !=''">
+            and t.goods_name  like CONCAT('%',#{goodsName},'%')
+        </if>
+        <if test="cateIds !=null and cateIds !=''">
+            and t.category_id in <foreach collection="cateIds" item="id" index="index" open="(" close=")" separator=",">#{id}</foreach>
+        </if>
+        <if test="isVirtual !=null and isVirtual !=''">
+            and t.is_virtual  like CONCAT('%',#{isVirtual},'%')
+        </if>
+    </select>
+</mapper>

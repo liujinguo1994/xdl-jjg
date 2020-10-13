@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -22,32 +22,32 @@ public class EsSiteNavigationDTO implements Serializable {
     /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
 
     /**
      * 导航名称
      */
-	private String navigationName;
+    private String navigationName;
 
     /**
      * 导航地址
      */
-	private String url;
+    private String url;
 
     /**
      * 客户端类型
      */
-	private String clientType;
+    private String clientType;
 
     /**
      * 图片
      */
-	private String image;
+    private String image;
 
     /**
      * 排序
      */
-	private Integer sort;
+    private Integer sort;
 
 
 }

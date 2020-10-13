@@ -2,7 +2,6 @@ package com.xdl.jjg.model.enums;
 
 /**
  * PageCreatePrefixEnum
- *
  */
 public enum PageCreatePrefixEnum {
 

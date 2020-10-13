@@ -52,17 +52,17 @@ public class EsMemberPointHistoryController {
         }
     }
 
-    @ApiOperation(value = "分页查询会员积分明细列表",response = EsMemberPointHistoryVO.class)
+    @ApiOperation(value = "分页查询会员积分明细列表", response = EsMemberPointHistoryVO.class)
     @GetMapping(value = "/getMemberPointHistoryList")
     @ResponseBody
     public ApiResponse getMemberPointHistoryList(@Valid EsMemberPointHistoryQueryForm form) {
         EsMemberPointHistoryDTO dto = new EsMemberPointHistoryDTO();
-        BeanUtil.copyProperties(form,dto);
+        BeanUtil.copyProperties(form, dto);
         DubboPageResult<EsMemberPointHistoryDO> result = iesMemberPointHistoryService.getMemberPointHistoryList(dto, form.getPageSize(), form.getPageNum());
         if (result.isSuccess()) {
             List<EsMemberPointHistoryDO> data = result.getData().getList();
-            List<EsMemberPointHistoryVO> voList =  BeanUtil.copyList(data, EsMemberPointHistoryVO.class);
-            return ApiPageResponse.pageSuccess(result.getData().getTotal(),voList);
+            List<EsMemberPointHistoryVO> voList = BeanUtil.copyList(data, EsMemberPointHistoryVO.class);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(), voList);
         } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }

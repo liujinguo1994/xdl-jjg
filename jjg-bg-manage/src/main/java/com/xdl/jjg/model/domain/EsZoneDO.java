@@ -19,30 +19,30 @@ public class EsZoneDO extends Model<EsZoneDO> {
     /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
 
     /**
      * 专区名称
      */
-	private String zoneName;
+    private String zoneName;
 
     /**
      * 标题
      */
-	private String title;
+    private String title;
 
     /**
      * 副标题
      */
-	private String subtitle;
+    private String subtitle;
 
     /**
      * 图片1
      */
-	private String picture1;
+    private String picture1;
 
     /**
      * 图片2
      */
-	private String picture2;
+    private String picture2;
 }

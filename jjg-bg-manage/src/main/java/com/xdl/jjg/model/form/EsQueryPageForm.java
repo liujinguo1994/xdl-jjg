@@ -5,7 +5,7 @@ import lombok.Data;
 
 /**
  * <p>
- *  分页查询form
+ * 分页查询form
  * </p>
  *
  * @author rm 2817512105@qq.com

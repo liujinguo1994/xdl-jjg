@@ -27,14 +27,14 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/esDiscount")
-@Api(value = "/esDiscount",tags = "公司折扣")
+@Api(value = "/esDiscount", tags = "公司折扣")
 public class EsDiscountController {
 
     @Autowired
     private IEsDiscountService iesDiscountService;
 
 
-    @ApiOperation(value = "分页查询公司折扣",response = EsDiscountVO.class)
+    @ApiOperation(value = "分页查询公司折扣", response = EsDiscountVO.class)
     @GetMapping(value = "/getDiscountList")
     @ResponseBody
     public ApiResponse getDiscountList(@Valid EsDiscountQueryForm form) {
@@ -53,13 +53,13 @@ public class EsDiscountController {
     @ApiOperation(value = "添加公司折扣")
     @PostMapping(value = "/insertCompany")
     @ResponseBody
-    public ApiResponse insertCompany(@Valid @RequestBody @ApiParam(name="公司折扣form对象",value="form") EsDiscountForm form){
+    public ApiResponse insertCompany(@Valid @RequestBody @ApiParam(name = "公司折扣form对象", value = "form") EsDiscountForm form) {
         EsDiscountDTO esDiscountDTO = new EsDiscountDTO();
-        BeanUtil.copyProperties(form,esDiscountDTO);
+        BeanUtil.copyProperties(form, esDiscountDTO);
         DubboResult result = iesDiscountService.insertDiscount(esDiscountDTO);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -67,13 +67,13 @@ public class EsDiscountController {
     @ApiOperation(value = "修改公司折扣")
     @PutMapping(value = "/updateDiscount")
     @ResponseBody
-    public ApiResponse updateDiscount(@Valid @RequestBody @ApiParam(name="公司折扣form对象",value="form") EsDiscountForm form){
+    public ApiResponse updateDiscount(@Valid @RequestBody @ApiParam(name = "公司折扣form对象", value = "form") EsDiscountForm form) {
         EsDiscountDTO esDiscountDTO = new EsDiscountDTO();
-        BeanUtil.copyProperties(form,esDiscountDTO);
+        BeanUtil.copyProperties(form, esDiscountDTO);
         DubboResult result = iesDiscountService.updateDiscount(esDiscountDTO);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -81,12 +81,12 @@ public class EsDiscountController {
     @DeleteMapping(value = "/batchDel/{ids}")
     @ResponseBody
     @ApiOperation(value = "删除或批量删除公司折扣")
-    @ApiImplicitParam(name = "ids", value = "公司折扣id数组", required = true, dataType = "int",example = "1", paramType = "path",allowMultiple = true)
-    public ApiResponse batchDel(@PathVariable Integer[] ids){
+    @ApiImplicitParam(name = "ids", value = "公司折扣id数组", required = true, dataType = "int", example = "1", paramType = "path", allowMultiple = true)
+    public ApiResponse batchDel(@PathVariable Integer[] ids) {
         DubboResult result = iesDiscountService.deleteDiscount(ids);
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }

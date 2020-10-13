@@ -21,7 +21,7 @@ public class EsSmsSendDTO implements Serializable {
      */
     private String mobile;
 
-    /** 
+    /**
      * 模板id(必填)
      */
     private String templateId;

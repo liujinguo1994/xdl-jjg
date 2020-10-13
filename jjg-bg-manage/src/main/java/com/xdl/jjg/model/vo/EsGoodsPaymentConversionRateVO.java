@@ -18,7 +18,7 @@ public class EsGoodsPaymentConversionRateVO implements Serializable {
     private static final long serialVersionUID = 1L;
     @ApiModelProperty(value = "商品名称")
     private String goodsName;
-    @ApiModelProperty(value = "分类ID",example = "0")
+    @ApiModelProperty(value = "分类ID", example = "0")
     private Long categoryId;
     @ApiModelProperty(value = "分类名称")
     private String categoryName;
@@ -26,12 +26,13 @@ public class EsGoodsPaymentConversionRateVO implements Serializable {
     private String specJson;
     @ApiModelProperty(value = "转化率")
     private Double conversionRate;
-    @ApiModelProperty(value = "总销售量",example = "0")
+    @ApiModelProperty(value = "总销售量", example = "0")
     private Integer salesNum;
-    @ApiModelProperty(value = "总销售金额",example = "0")
+    @ApiModelProperty(value = "总销售金额", example = "0")
     private Double totalMoney;
-    @ApiModelProperty(value = "商品规格文本",example = "0")
-    public String getSpecText(){
-        return StringUtils.isNotBlank(this.getSpecJson())? JSONArray.parseArray(this.getSpecJson()).stream().map(o -> JSONObject.parseObject(o.toString()).getString("specValue")).collect(Collectors.joining(" * ")):"";
+
+    @ApiModelProperty(value = "商品规格文本", example = "0")
+    public String getSpecText() {
+        return StringUtils.isNotBlank(this.getSpecJson()) ? JSONArray.parseArray(this.getSpecJson()).stream().map(o -> JSONObject.parseObject(o.toString()).getString("specValue")).collect(Collectors.joining(" * ")) : "";
     }
 }

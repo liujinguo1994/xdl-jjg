@@ -2,11 +2,10 @@ package com.xdl.jjg.model.enums;
 
 /**
  * 场景枚举
- *
  */
 public enum PageCreateEnum {
 
-    INDEX("首页"), GOODS("商品页"),HELP("帮助页面");
+    INDEX("首页"), GOODS("商品页"), HELP("帮助页面");
 
     String scene;
 

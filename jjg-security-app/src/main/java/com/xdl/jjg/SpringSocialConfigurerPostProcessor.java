@@ -22,6 +22,7 @@ public class SpringSocialConfigurerPostProcessor implements BeanPostProcessor {
 
     /**
      * bean初始化之前
+     *
      * @param bean
      * @param beanName
      * @return
@@ -34,11 +35,11 @@ public class SpringSocialConfigurerPostProcessor implements BeanPostProcessor {
 
     /**
      * bean初始化之后
+     *
      * @param bean
      * @param beanName
      * @return
-     * @throws BeansException
-     * 在app环境下cy.security.core.social.SocialConfig#easySocialConfigurer()初始化好以后 将signUp修改成自定义的注册路由
+     * @throws BeansException 在app环境下cy.security.core.social.SocialConfig#easySocialConfigurer()初始化好以后 将signUp修改成自定义的注册路由
      */
     @Override
     public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {

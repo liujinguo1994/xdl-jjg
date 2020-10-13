@@ -7,7 +7,7 @@ import lombok.Data;
 
 /**
  * <p>
- *  导航菜单
+ * 导航菜单
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -23,6 +23,6 @@ public class EsNavigationQueryForm extends QueryPageForm {
      * 客户端类型
      */
     @ApiModelProperty(value = "客户端类型(PC,MOBILE)")
-	private String clientType;
+    private String clientType;
 
 }

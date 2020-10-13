@@ -19,6 +19,8 @@
         <module>jjg-zuul-gatway</module>
         <module>jjg-security-app</module>
         <module>jjg-job-admin</module>
+        <module>jjg-shop</module>
+        <module>jjg-member</module>
 
     </modules>
 

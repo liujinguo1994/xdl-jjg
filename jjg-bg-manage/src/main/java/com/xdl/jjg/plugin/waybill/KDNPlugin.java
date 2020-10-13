@@ -9,7 +9,6 @@ import java.util.List;
 
 /**
  * 快递鸟电子面板插件
- *
  */
 @Component
 public class KDNPlugin implements WayBillEvent {

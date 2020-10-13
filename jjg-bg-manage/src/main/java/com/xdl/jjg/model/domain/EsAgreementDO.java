@@ -19,30 +19,30 @@ public class EsAgreementDO implements Serializable {
     /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
     /**
      * 协议编号
      */
-	private String agrNo;
+    private String agrNo;
     /**
      * 协议内容
      */
-	private String content;
+    private String content;
     /**
      * 创建时间
      */
-	private Long createTime;
+    private Long createTime;
     /**
      * 更新时间
      */
-	private Long updateTime;
+    private Long updateTime;
     /**
      * 协议名称
      */
-	private String agrName;
+    private String agrName;
     /**
      * 协议版本
      */
-	private String version;
+    private String version;
 
 }

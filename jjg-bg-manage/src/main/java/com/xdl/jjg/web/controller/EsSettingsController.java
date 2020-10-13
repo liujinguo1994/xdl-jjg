@@ -23,13 +23,13 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器-系统配置
+ * 前端控制器-系统配置
  * </p>
  *
  * @author rm 2817512105@qq.com
  * @since 2019-06-20 15:30:00
  */
-@Api(value = "/esSettings",tags = "系统配置")
+@Api(value = "/esSettings", tags = "系统配置")
 @RestController
 @RequestMapping("/esSettings")
 public class EsSettingsController {
@@ -38,7 +38,7 @@ public class EsSettingsController {
     private IEsSettingsService iEsSettingsService;
 
     @GetMapping(value = "/getSecuritySetting")
-    @ApiOperation(value = "获取安全设置",response = EsSecuritySettingsVO.class)
+    @ApiOperation(value = "获取安全设置", response = EsSecuritySettingsVO.class)
     @ResponseBody
     public ApiResponse getSecuritySetting() {
         DubboResult<EsSettingsDO> result = iEsSettingsService.getByCfgGroup(SettingGroup.SECURITY.name());
@@ -46,11 +46,11 @@ public class EsSettingsController {
             EsSettingsDO data = result.getData();
             String value = data.getCfgValue();
             EsSecuritySettingsVO vo = new EsSecuritySettingsVO();
-            if (!StringUtil.isEmpty(value)){
+            if (!StringUtil.isEmpty(value)) {
                 vo = JsonUtil.jsonToObject(value, EsSecuritySettingsVO.class);
             }
             return ApiResponse.success(vo);
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -58,13 +58,13 @@ public class EsSettingsController {
     @PutMapping(value = "/updateSecuritySetting")
     @ApiOperation(value = "修改安全设置")
     @ResponseBody
-    public ApiResponse updateSecuritySetting(@Valid @RequestBody @ApiParam(name="安全设置form对象",value="form") EsSecuritySettingsForm form) {
+    public ApiResponse updateSecuritySetting(@Valid @RequestBody @ApiParam(name = "安全设置form对象", value = "form") EsSecuritySettingsForm form) {
         EsSecuritySettingsDTO esSecuritySettingsDTO = new EsSecuritySettingsDTO();
-        BeanUtil.copyProperties(form,esSecuritySettingsDTO);
+        BeanUtil.copyProperties(form, esSecuritySettingsDTO);
         DubboResult result = iEsSettingsService.updateSecuritySetting(SettingGroup.SECURITY, esSecuritySettingsDTO);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -72,19 +72,19 @@ public class EsSettingsController {
     @PutMapping(value = "/saveOrderSetting")
     @ApiOperation(value = "保存订单设置")
     @ResponseBody
-    public ApiResponse saveOrderSetting(@Valid @RequestBody @ApiParam(name="订单设置form对象",value="form") EsOrderSettingForm form) {
+    public ApiResponse saveOrderSetting(@Valid @RequestBody @ApiParam(name = "订单设置form对象", value = "form") EsOrderSettingForm form) {
         EsOrderSettingDTO orderSettingDTO = new EsOrderSettingDTO();
-        BeanUtil.copyProperties(form,orderSettingDTO);
+        BeanUtil.copyProperties(form, orderSettingDTO);
         DubboResult result = iEsSettingsService.saveOrderSetting(SettingGroup.TRADE, orderSettingDTO);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
 
     @GetMapping(value = "/OrderSetting")
-    @ApiOperation(value = "获取订单设置",response = EsOrderSettingVO.class)
+    @ApiOperation(value = "获取订单设置", response = EsOrderSettingVO.class)
     @ResponseBody
     public ApiResponse OrderSetting() {
         DubboResult<EsSettingsDO> result = iEsSettingsService.getByCfgGroup(SettingGroup.TRADE.name());
@@ -92,11 +92,11 @@ public class EsSettingsController {
             EsSettingsDO data = result.getData();
             String value = data.getCfgValue();
             EsOrderSettingVO vo = new EsOrderSettingVO();
-            if (!StringUtil.isEmpty(value)){
+            if (!StringUtil.isEmpty(value)) {
                 vo = JsonUtil.jsonToObject(value, EsOrderSettingVO.class);
             }
             return ApiResponse.success(vo);
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -106,17 +106,17 @@ public class EsSettingsController {
     @ResponseBody
     public ApiResponse saveStaticPageAddress(@Valid EsPageSettingForm form) {
         EsPageSettingDTO dto = new EsPageSettingDTO();
-        BeanUtil.copyProperties(form,dto);
+        BeanUtil.copyProperties(form, dto);
         DubboResult result = iEsSettingsService.saveStaticPageAddress(SettingGroup.PAGE, dto);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
 
     @GetMapping(value = "/getStaticPageAddress")
-    @ApiOperation(value = "查询静态页地址",response = EsPageSettingVO.class)
+    @ApiOperation(value = "查询静态页地址", response = EsPageSettingVO.class)
     @ResponseBody
     public ApiResponse getStaticPageAddress() {
         DubboResult<EsSettingsDO> result = iEsSettingsService.getByCfgGroup(SettingGroup.PAGE.name());
@@ -124,11 +124,11 @@ public class EsSettingsController {
             EsSettingsDO data = result.getData();
             String value = data.getCfgValue();
             EsPageSettingVO vo = new EsPageSettingVO();
-            if (!StringUtil.isEmpty(value)){
+            if (!StringUtil.isEmpty(value)) {
                 vo = JsonUtil.jsonToObject(value, EsPageSettingVO.class);
             }
             return ApiResponse.success(vo);
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -136,19 +136,19 @@ public class EsSettingsController {
     @PutMapping(value = "/saveClearingCycle")
     @ApiOperation(value = "保存结算周期设置")
     @ResponseBody
-    public ApiResponse saveClearingCycle(@RequestBody @ApiParam(name="结算周期设置form对象",value="form") EsClearingCycleSettingsForm form) {
+    public ApiResponse saveClearingCycle(@RequestBody @ApiParam(name = "结算周期设置form对象", value = "form") EsClearingCycleSettingsForm form) {
         EsClearingCycleSettingsDTO dto = new EsClearingCycleSettingsDTO();
-        BeanUtil.copyProperties(form,dto);
+        BeanUtil.copyProperties(form, dto);
         DubboResult result = iEsSettingsService.saveClearingCycle(SettingGroup.CLEARING, dto);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
 
     @GetMapping(value = "/getClearingCycle")
-    @ApiOperation(value = "查询结算周期设置",response = EsClearingCycleVO.class)
+    @ApiOperation(value = "查询结算周期设置", response = EsClearingCycleVO.class)
     @ResponseBody
     public ApiResponse getClearingCycle() {
         DubboResult<EsSettingsDO> result = iEsSettingsService.getByCfgGroup(SettingGroup.CLEARING.name());
@@ -156,11 +156,11 @@ public class EsSettingsController {
             EsSettingsDO data = result.getData();
             String value = data.getCfgValue();
             List<EsClearingCycleVO> list = new ArrayList<>();
-            if (!StringUtil.isEmpty(value)){
+            if (!StringUtil.isEmpty(value)) {
                 list = JsonUtil.jsonToList(value, EsClearingCycleVO.class);
             }
             return ApiResponse.success(list);
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -168,19 +168,19 @@ public class EsSettingsController {
     @PutMapping(value = "/saveSite")
     @ApiOperation(value = "保存站点设置")
     @ResponseBody
-    public ApiResponse saveSite(@RequestBody @ApiParam(name="站点设置form对象",value="form") EsSiteForm form) {
+    public ApiResponse saveSite(@RequestBody @ApiParam(name = "站点设置form对象", value = "form") EsSiteForm form) {
         EsSiteDTO dto = new EsSiteDTO();
-        BeanUtil.copyProperties(form,dto);
+        BeanUtil.copyProperties(form, dto);
         DubboResult result = iEsSettingsService.saveSite(SettingGroup.SITE, dto);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
 
     @GetMapping(value = "/getSite")
-    @ApiOperation(value = "查询站点设置",response = EsSiteVO.class)
+    @ApiOperation(value = "查询站点设置", response = EsSiteVO.class)
     @ResponseBody
     public ApiResponse getSite() {
         DubboResult<EsSettingsDO> result = iEsSettingsService.getByCfgGroup(SettingGroup.SITE.name());
@@ -188,11 +188,11 @@ public class EsSettingsController {
             EsSettingsDO data = result.getData();
             String value = data.getCfgValue();
             EsSiteVO vo = new EsSiteVO();
-            if (!StringUtil.isEmpty(value)){
+            if (!StringUtil.isEmpty(value)) {
                 vo = JsonUtil.jsonToObject(value, EsSiteVO.class);
             }
             return ApiResponse.success(vo);
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }

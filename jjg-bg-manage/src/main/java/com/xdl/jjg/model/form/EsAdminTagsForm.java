@@ -24,8 +24,8 @@ public class EsAdminTagsForm implements Serializable {
     /**
      * 标签名字
      */
-	@ApiModelProperty(value = "标签名字")
-	@NotBlank(message = "标签名字不能为空")
-	private String tagName;
+    @ApiModelProperty(value = "标签名字")
+    @NotBlank(message = "标签名字不能为空")
+    private String tagName;
 
 }

@@ -23,6 +23,7 @@ public class WeixinServiceProvider extends AbstractOAuth2ServiceProvider<Weixin>
 
     /**
      * Create a new{@link WeixinOAuth2Template}
+     *
      * @param appId
      * @param appSecret
      */

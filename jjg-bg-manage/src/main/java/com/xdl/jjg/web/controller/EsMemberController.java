@@ -2,32 +2,16 @@ package com.xdl.jjg.web.controller;
 
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.OSSObject;
-import com.shopx.common.constant.OssFileType;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.domain.FileDTO;
-import com.shopx.common.model.domain.FileVO;
-import com.shopx.common.model.result.ApiPageResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.oss.upload.OSSUploader;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.util.FormatValidateUtils;
-import com.shopx.common.web.BaseController;
-import com.shopx.member.api.model.domain.EsAdminMemberDO;
-import com.shopx.member.api.model.domain.EsMemberAddressDO;
-import com.shopx.member.api.model.domain.EsMemberDO;
-import com.shopx.member.api.model.domain.dto.EsMemberAddressDTO;
-import com.shopx.member.api.model.domain.dto.EsMemberDTO;
-import com.shopx.member.api.model.domain.dto.EsQueryAdminMemberDTO;
-import com.shopx.member.api.model.domain.vo.*;
-import com.shopx.member.api.service.IEsMemberAddressService;
-import com.shopx.member.api.service.IEsMemberService;
-import com.shopx.system.api.constant.ErrorCode;
-import com.shopx.system.api.service.IEsRegionsService;
-import com.shopx.system.web.constant.ApiStatus;
-import com.shopx.system.web.request.*;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.ErrorCode;
+import com.xdl.jjg.model.form.*;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.FormatValidateUtils;
+import com.xdl.jjg.web.service.IEsRegionsService;
 import io.swagger.annotations.*;
-import org.apache.dubbo.config.annotation.Reference;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -139,7 +123,7 @@ public class EsMemberController extends BaseController {
         if (!judgeEmail) {
             throw new ArgumentException(ErrorCode.EMAIL_ERROR.getErrorCode(), "邮箱格式有误");
         }
-        if(form.getProvinceId() == null || form.getProvinceId()==0 || form.getCityId() == null || form.getCityId() == 0){
+        if (form.getProvinceId() == null || form.getProvinceId() == 0 || form.getCityId() == null || form.getCityId() == 0) {
             throw new ArgumentException(ErrorCode.EMAIL_ERROR.getErrorCode(), "地区为必填项，请核对后再提交");
         }
         EsMemberDTO esMemberDTO = new EsMemberDTO();
@@ -159,7 +143,7 @@ public class EsMemberController extends BaseController {
     @ApiImplicitParam(name = "id", value = "会员id", required = true, dataType = "long", paramType = "path", example = "1")
     @ResponseBody
     public ApiResponse disableMember(@PathVariable Long id) {
-        DubboResult result = iesMemberService.updateMemberState(id,1);
+        DubboResult result = iesMemberService.updateMemberState(id, 1);
         if (result.isSuccess()) {
             return ApiResponse.success();
         } else {
@@ -216,33 +200,33 @@ public class EsMemberController extends BaseController {
         }
     }
 
-    @ApiOperation(value = "批量导入会员",response = EsImportMemberVO.class)
+    @ApiOperation(value = "批量导入会员", response = EsImportMemberVO.class)
     @PostMapping(value = "/importMember")
     @ResponseBody
     public ApiResponse importMember(@RequestBody @Valid EsImportForm form) {
         String[] split = form.getUrl().split("/");
-        String tempFileName=split[split.length-1];
+        String tempFileName = split[split.length - 1];
 
         // 创建OSSClient实例。
         OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
 
-        String ossKey=tempFileName;
-        OSSObject ossObject = ossClient.getObject(bucketName,picLocation+"excel/"+ossKey);
+        String ossKey = tempFileName;
+        OSSObject ossObject = ossClient.getObject(bucketName, picLocation + "excel/" + ossKey);
         // 下载object到文件
         InputStream inputStream = ossObject.getObjectContent();
         try {
-            MultipartFile file = new MockMultipartFile("aa","cc","", inputStream);
+            MultipartFile file = new MockMultipartFile("aa", "cc", "", inputStream);
             //关闭client
             ossClient.shutdown();
             DubboResult<EsImportMemberVO> result = iesMemberService.importMember(file.getBytes());
-            if(result.isSuccess()){
+            if (result.isSuccess()) {
                 return ApiResponse.success(result.getData());
-            }else{
+            } else {
                 return ApiResponse.fail(ApiStatus.wrapperException(result));
             }
         } catch (IOException e) {
             e.printStackTrace();
-            return ApiResponse.fail(1001,"文件转换失败!");
+            return ApiResponse.fail(1001, "文件转换失败!");
         }
     }
 
@@ -251,9 +235,9 @@ public class EsMemberController extends BaseController {
     @ResponseBody
     public ApiResponse exportMemberInfo(EsMemberQueryForm form) {
         EsQueryAdminMemberDTO dto = new EsQueryAdminMemberDTO();
-        BeanUtil.copyProperties(form,dto);
+        BeanUtil.copyProperties(form, dto);
         DubboPageResult<EsExportMemberVO> result = iesMemberService.exportMember(dto);
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             List<EsExportMemberVO> list = result.getData().getList();
             //第一步，创建一个workbook对应一个excel文件
             HSSFWorkbook workbook = new HSSFWorkbook();
@@ -291,7 +275,7 @@ public class EsMemberController extends BaseController {
             cell = row.createCell(13);
             cell.setCellValue("会员状态");
 
-            int i=1;
+            int i = 1;
             for (EsExportMemberVO vo : list) {
                 HSSFRow row1 = sheet.createRow(i);
                 row1.createCell(0).setCellValue(vo.getId());
@@ -302,30 +286,30 @@ public class EsMemberController extends BaseController {
                 row1.createCell(5).setCellValue(vo.getIdentity());
                 row1.createCell(6).setCellValue(vo.getEmail());
                 row1.createCell(7).setCellValue(vo.getMemberLevel());
-                if (vo.getGrade() == null){
+                if (vo.getGrade() == null) {
                     row1.createCell(8).setCellValue("");
-                }else {
+                } else {
                     row1.createCell(8).setCellValue(vo.getGrade());
                 }
-                if (vo.getConsumPoint() == null){
+                if (vo.getConsumPoint() == null) {
                     row1.createCell(9).setCellValue("");
-                }else {
+                } else {
                     row1.createCell(9).setCellValue(vo.getConsumPoint());
                 }
                 row1.createCell(10).setCellValue(vo.getMemberBalance());
                 row1.createCell(11).setCellValue(vo.getCompany());
-                if (vo.getCreateTime() == null){
+                if (vo.getCreateTime() == null) {
                     row1.createCell(12).setCellValue("");
-                }else {
+                } else {
                     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                     String sd = sdf.format(vo.getCreateTime());
                     row1.createCell(12).setCellValue(sd);
                 }
-                if (vo.getState() == 0){
+                if (vo.getState() == 0) {
                     row1.createCell(13).setCellValue("正常");
-                }else if (vo.getState() == 1){
+                } else if (vo.getState() == 1) {
                     row1.createCell(13).setCellValue("禁用");
-                }else {
+                } else {
                     row1.createCell(13).setCellValue("");
                 }
                 i++;
@@ -343,9 +327,9 @@ public class EsMemberController extends BaseController {
             fileDTO.setStream(inputStream);
             //上传阿里云
             FileVO fileVO = ossUploader.upload(fileDTO, OssFileType.EXCEL);
-            logger.info("导出会员上传阿里云的地址:"+fileVO.getUrl());
+            logger.info("导出会员上传阿里云的地址:" + fileVO.getUrl());
             return ApiResponse.success(fileVO.getUrl());
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }

@@ -27,7 +27,6 @@ public class SmsCodeProcessor extends AbstractValidateCodeProcessor<ValidateCode
     private SmsCodeSender smsCodeSender;
 
 
-
     @Override
     protected void send(ServletWebRequest request, ValidateCode validateCode) throws Exception {
         String paramName = SecurityConstants.DEFAULT_PARAMETER_NAME_MOBILE;

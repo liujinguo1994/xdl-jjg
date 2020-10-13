@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器-结算
+ * 前端控制器-结算
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -29,7 +29,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/esSettlement")
-@Api(value="/esSettlement", tags="结算")
+@Api(value = "/esSettlement", tags = "结算")
 public class EsSettlementController {
 
     @Autowired
@@ -38,17 +38,17 @@ public class EsSettlementController {
     /**
      * 分页查询账单列表
      */
-    @ApiOperation(value = "分页查询账单列表",response = EsBillVO.class)
+    @ApiOperation(value = "分页查询账单列表", response = EsBillVO.class)
     @GetMapping(value = "/getBillList")
     @ResponseBody
     public ApiResponse getBillList(@Valid EsBillQueryForm form) {
         EsBillDTO dto = new EsBillDTO();
-        BeanUtil.copyProperties(form,dto);
+        BeanUtil.copyProperties(form, dto);
         DubboPageResult<EsBillDO> result = billService.getBillList(dto, form.getPageSize(), form.getPageNum());
         if (result.isSuccess()) {
             List<EsBillDO> data = result.getData().getList();
             List<EsBillVO> voList = BeanUtil.copyList(data, EsBillVO.class);
-            return ApiPageResponse.pageSuccess(result.getData().getTotal(),voList);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(), voList);
         } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
@@ -57,17 +57,17 @@ public class EsSettlementController {
     /**
      * 分页查询账单详情列表
      */
-    @ApiOperation(value = "分页查询账单详情列表",response = EsBillDetailVO.class)
+    @ApiOperation(value = "分页查询账单详情列表", response = EsBillDetailVO.class)
     @GetMapping(value = "/getBillDetail")
     @ResponseBody
     public ApiResponse getBillDetail(@Valid EsBillDetailQueryForm form) {
         EsBillDetailDTO dto = new EsBillDetailDTO();
-        BeanUtil.copyProperties(form,dto);
+        BeanUtil.copyProperties(form, dto);
         DubboPageResult<EsBillDetailDO> result = billService.getBillDetail(dto, form.getPageSize(), form.getPageNum());
         if (result.isSuccess()) {
             List<EsBillDetailDO> data = result.getData().getList();
             List<EsBillDetailVO> voList = BeanUtil.copyList(data, EsBillDetailVO.class);
-            return ApiPageResponse.pageSuccess(result.getData().getTotal(),voList);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(), voList);
         } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
@@ -76,7 +76,7 @@ public class EsSettlementController {
     /**
      * 获取结算单头部信息
      */
-    @ApiOperation(value = "获取结算单头部信息",response = EsHeaderVO.class)
+    @ApiOperation(value = "获取结算单头部信息", response = EsHeaderVO.class)
     @GetMapping(value = "/getSettlementInfo")
     @ResponseBody
     public ApiResponse getSettlementInfo(@Valid EsSettlementHeadQueryForm form) {
@@ -84,9 +84,9 @@ public class EsSettlementController {
         if (result.isSuccess()) {
             EsHeaderDO data = (EsHeaderDO) result.getData();
             EsHeaderVO vo = new EsHeaderVO();
-            BeanUtil.copyProperties(data,vo);
+            BeanUtil.copyProperties(data, vo);
             return ApiResponse.success(vo);
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -94,7 +94,7 @@ public class EsSettlementController {
     /**
      * 获取结算单总订单明细
      */
-    @ApiOperation(value = "获取结算单总订单明细",response = EsSettlementDetailVO.class)
+    @ApiOperation(value = "获取结算单总订单明细", response = EsSettlementDetailVO.class)
     @GetMapping(value = "/getSettlementOrderDetail")
     @ResponseBody
     public ApiResponse getSettlementOrderDetail(@Valid EsSettlementDetailQueryForm form) {
@@ -102,7 +102,7 @@ public class EsSettlementController {
         if (result.isSuccess()) {
             List<EsSettlementDetailDO> data = result.getData().getList();
             List<EsSettlementDetailVO> voList = BeanUtil.copyList(data, EsSettlementDetailVO.class);
-            return ApiPageResponse.pageSuccess(result.getData().getTotal(),voList);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(), voList);
         } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
@@ -111,7 +111,7 @@ public class EsSettlementController {
     /**
      * 获取结算单退款订单明细
      */
-    @ApiOperation(value = "获取结算单退款订单明细",response = EsSettlementDetailVO.class)
+    @ApiOperation(value = "获取结算单退款订单明细", response = EsSettlementDetailVO.class)
     @GetMapping(value = "/getSettlementRefundOrderDetail")
     @ResponseBody
     public ApiResponse getSettlementRefundOrderDetail(@Valid EsSettlementDetailQueryForm form) {
@@ -119,7 +119,7 @@ public class EsSettlementController {
         if (result.isSuccess()) {
             List<EsSettlementDetailDO> data = result.getData().getList();
             List<EsSettlementDetailVO> voList = BeanUtil.copyList(data, EsSettlementDetailVO.class);
-            return ApiPageResponse.pageSuccess(result.getData().getTotal(),voList);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(), voList);
         } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
@@ -131,11 +131,11 @@ public class EsSettlementController {
     @ApiOperation(value = "更改结算状态")
     @PutMapping(value = "/updateStatus")
     @ResponseBody
-    public ApiResponse updateStatus(@Valid @RequestBody @ApiParam(name="更改结算状态form对象",value="form") EsSettlementUpdateStatusForm form){
-        DubboResult result = billService.updateStatus(form.getSettlementId(),form.getType(),form.getStatus());
+    public ApiResponse updateStatus(@Valid @RequestBody @ApiParam(name = "更改结算状态form对象", value = "form") EsSettlementUpdateStatusForm form) {
+        DubboResult result = billService.updateStatus(form.getSettlementId(), form.getType(), form.getStatus());
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -164,7 +164,7 @@ public class EsSettlementController {
      */
     @ApiOperation(value = "店铺及签约公司导出EXCEL")
     @GetMapping(value = "/export")
-    public ApiResponse export(@Valid EsExportSettlementForm form, HttpServletResponse response){
+    public ApiResponse export(@Valid EsExportSettlementForm form, HttpServletResponse response) {
         DubboResult<ExcelDO> result = billService.exportExcel(form.getSettlementId(), form.getType());
         if (result.isSuccess()) {
             ExcelDO excelDO = result.getData();
@@ -173,7 +173,7 @@ public class EsSettlementController {
             try {
                 response.setHeader("Content-disposition", "attachment; filename=" + new String(excelDO.getExcelName().getBytes("UTF-8"), "ISO8859-1") + ".xls");
             } catch (UnsupportedEncodingException e) {
-                return ApiResponse.fail(101,"设置响应头出错!");
+                return ApiResponse.fail(101, "设置响应头出错!");
             }
             try {
                 OutputStream out = new BufferedOutputStream(response.getOutputStream());
@@ -181,10 +181,10 @@ public class EsSettlementController {
                 out.flush();
                 out.close();
             } catch (Exception e) {
-                return ApiResponse.fail(102,"文档操作错误!");
+                return ApiResponse.fail(102, "文档操作错误!");
             }
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }

@@ -29,7 +29,7 @@ public class EsCommentLabelQueryForm extends QueryPageForm {
     /**
      * 标签类型( 0:商品，1物流，2服务)
      */
-    @ApiModelProperty(value = "标签类型( 0:商品，1物流，2服务)",example = "1")
+    @ApiModelProperty(value = "标签类型( 0:商品，1物流，2服务)", example = "1")
     private Integer type;
 
 }

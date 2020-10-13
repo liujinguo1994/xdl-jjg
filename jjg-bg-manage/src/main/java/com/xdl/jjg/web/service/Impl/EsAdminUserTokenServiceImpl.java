@@ -28,7 +28,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author LiuJG 344009799@qq.com
@@ -112,8 +112,8 @@ public class EsAdminUserTokenServiceImpl implements IEsAdminUserTokenService {
      * 根据查询列表
      *
      * @param delFlag
-     * @param pageSize  行数
-     * @param pageNum   页码
+     * @param pageSize 行数
+     * @param pageNum  页码
      * @auther: LiuJG 344009799@qq.com
      * @date: 2019/06/03 13:42:53
      */
@@ -122,7 +122,7 @@ public class EsAdminUserTokenServiceImpl implements IEsAdminUserTokenService {
 
         try {
 
-            return DubboPageResult.success(1l,new ArrayList<>());
+            return DubboPageResult.success(1l, new ArrayList<>());
         } catch (Throwable th) {
             logger.error("查询分页查询失败", th);
             return DubboPageResult.fail(ErrorCodeEnum.SYS_ERROR.getErrorCode(), "系统错误");
@@ -164,23 +164,23 @@ public class EsAdminUserTokenServiceImpl implements IEsAdminUserTokenService {
 
         try {
             QueryWrapper<EsAdminUserToken> queryWrapper = new QueryWrapper<>();
-            if(adminUserTokenDTO.getUserId() != null){
-                queryWrapper.lambda().eq(EsAdminUserToken::getUserId,adminUserTokenDTO.getUserId());
+            if (adminUserTokenDTO.getUserId() != null) {
+                queryWrapper.lambda().eq(EsAdminUserToken::getUserId, adminUserTokenDTO.getUserId());
             }
-            if(!StringUtil.isEmpty(adminUserTokenDTO.getToken())){
-                queryWrapper.lambda().eq(EsAdminUserToken::getToken,adminUserTokenDTO.getToken());
+            if (!StringUtil.isEmpty(adminUserTokenDTO.getToken())) {
+                queryWrapper.lambda().eq(EsAdminUserToken::getToken, adminUserTokenDTO.getToken());
             }
             EsAdminUserToken esAdminUserToken = adminUserTokenMapper.selectOne(queryWrapper);
-            if(esAdminUserToken == null){
+            if (esAdminUserToken == null) {
                 return DubboResult.success();
             }
             EsAdminUserTokenDO esAdminUserTokenDO = new EsAdminUserTokenDO();
-            BeanUtil.copyProperties(esAdminUserToken,esAdminUserTokenDO);
+            BeanUtil.copyProperties(esAdminUserToken, esAdminUserTokenDO);
             return DubboResult.success(esAdminUserTokenDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("获取用户token信息失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("获取用户token信息失败", ae);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
         }

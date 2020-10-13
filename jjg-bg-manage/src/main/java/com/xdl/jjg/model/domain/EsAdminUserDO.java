@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -19,47 +19,47 @@ public class EsAdminUserDO implements Serializable {
     /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
     /**
      * 管理员名称
      */
-	private String username;
+    private String username;
     /**
      * 管理员密码
      */
-	private String password;
+    private String password;
     /**
      * 部门
      */
-	private Long department;
+    private Long department;
     /**
      * 角色ID
      */
-	private Long roleId;
+    private Long roleId;
     /**
      * 创建日期
      */
-	private Long createTime;
+    private Long createTime;
     /**
      * 备注
      */
-	private String remark;
+    private String remark;
     /**
      * 是否删除 0 未删除 1删除
      */
-	private Integer isDel;
+    private Integer isDel;
     /**
      * 管理员真实姓名
      */
-	private String realName;
+    private String realName;
     /**
      * 头像
      */
-	private String face;
+    private String face;
     /**
      * 是否为超级管理员
      */
-	private Integer isAdmin;
+    private Integer isAdmin;
     /**
      * 权限名称
      */

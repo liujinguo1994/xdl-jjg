@@ -21,7 +21,7 @@ import javax.validation.Valid;
 
 /**
  * <p>
- *  前端控制器-楼层装修
+ * 前端控制器-楼层装修
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -29,14 +29,14 @@ import javax.validation.Valid;
  */
 @RestController
 @RequestMapping("/esPage")
-@Api(value="/esPage", tags="楼层装修")
+@Api(value = "/esPage", tags = "楼层装修")
 public class EsPageController {
 
     @Autowired
     private IEsPageService iEsPageService;
 
     @GetMapping(value = "/getByType/{clientType}/{pageType}")
-    @ApiOperation(value = "使用客户端类型和页面类型查询一个楼层",response = EsPageVO.class)
+    @ApiOperation(value = "使用客户端类型和页面类型查询一个楼层", response = EsPageVO.class)
     @ApiImplicitParams({
             @ApiImplicitParam(name = "clientType", value = "要查询的客户端类型 APP/WAP/PC", required = true, dataType = "string", paramType = "path"),
             @ApiImplicitParam(name = "pageType", value = "要查询的页面类型 INDEX 首页/SPECIAL 专题", required = true, dataType = "string", paramType = "path")
@@ -47,9 +47,9 @@ public class EsPageController {
         if (result.isSuccess()) {
             EsPageDO data = result.getData();
             EsPageVO esPageVO = new EsPageVO();
-            BeanUtil.copyProperties(data,esPageVO);
+            BeanUtil.copyProperties(data, esPageVO);
             return ApiResponse.success(esPageVO);
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -57,9 +57,9 @@ public class EsPageController {
     @ApiOperation(value = "使用客户端类型和页面类型修改楼层")
     @PutMapping(value = "/updatePage")
     @ResponseBody
-    public ApiResponse updatePage(@Valid @RequestBody @ApiParam(name="楼层信息form对象",value="form") EsPageForm form) {
+    public ApiResponse updatePage(@Valid @RequestBody @ApiParam(name = "楼层信息form对象", value = "form") EsPageForm form) {
         EsPageDTO esPageDTO = new EsPageDTO();
-        BeanUtil.copyProperties(form,esPageDTO);
+        BeanUtil.copyProperties(form, esPageDTO);
         DubboResult result = iEsPageService.updatePage(esPageDTO);
         if (result.isSuccess()) {
             return ApiResponse.success();

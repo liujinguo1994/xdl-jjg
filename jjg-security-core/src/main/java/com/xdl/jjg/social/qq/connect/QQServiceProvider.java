@@ -25,6 +25,7 @@ public class QQServiceProvider extends AbstractOAuth2ServiceProvider<QQ> impleme
 
     /**
      * Create a new {@link QQOAuth2Template}.
+     *
      * @param appId
      * @param appSecret
      */
@@ -36,6 +37,6 @@ public class QQServiceProvider extends AbstractOAuth2ServiceProvider<QQ> impleme
     @Override
     public QQ getApi(String accessToken) {
 
-        return new QQImpl(accessToken,appId);
+        return new QQImpl(accessToken, appId);
     }
 }

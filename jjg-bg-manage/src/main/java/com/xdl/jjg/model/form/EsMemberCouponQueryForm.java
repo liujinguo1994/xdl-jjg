@@ -25,7 +25,7 @@ public class EsMemberCouponQueryForm extends QueryPageForm {
     /**
      * 会员id
      */
-    @ApiModelProperty(required = true,value = "会员id",example = "1")
+    @ApiModelProperty(required = true, value = "会员id", example = "1")
     @NotNull(message = "会员id不能为空")
     private Long memberId;
 
@@ -38,7 +38,7 @@ public class EsMemberCouponQueryForm extends QueryPageForm {
     /**
      * 商家ID
      */
-    @ApiModelProperty(value = "商家ID",example = "1")
+    @ApiModelProperty(value = "商家ID", example = "1")
     private Long shopId;
 
     /**
@@ -50,7 +50,7 @@ public class EsMemberCouponQueryForm extends QueryPageForm {
     /**
      * 是否过期(1未过期，2已过期)
      */
-    @ApiModelProperty(value = "是否过期(1未过期，2已过期)",example = "1")
+    @ApiModelProperty(value = "是否过期(1未过期，2已过期)", example = "1")
     private Integer overdueState;
 
 }

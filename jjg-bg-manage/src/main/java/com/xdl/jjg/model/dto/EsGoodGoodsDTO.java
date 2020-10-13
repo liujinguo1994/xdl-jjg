@@ -20,41 +20,41 @@ public class EsGoodGoodsDTO implements Serializable {
     /**
      * 主键id
      */
-	private Long id;
+    private Long id;
 
     /**
      * 商品名称
      */
-	private String goodsName;
+    private String goodsName;
 
     /**
      * 商品链接
      */
-	private String goodsUrl;
+    private String goodsUrl;
 
     /**
      * 图片地址
      */
-	private String picUrl;
+    private String picUrl;
 
     /**
      * 状态(1:待发布,2.已发布,3:已下架)
      */
-	private Integer state;
+    private Integer state;
 
     /**
      * 下架原因
      */
-	private String underMessage;
+    private String underMessage;
 
     /**
      * 创建时间
      */
-	private Long createTime;
+    private Long createTime;
 
     /**
      * 最后修改时间
      */
-	private Long updateTime;
+    private Long updateTime;
 
 }

@@ -10,7 +10,6 @@ import java.io.Serializable;
 
 /**
  * 进度条
- *
  */
 @Data
 @ApiModel

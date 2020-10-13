@@ -35,7 +35,7 @@ public class OAuth2AccessTokenUtil {
     private AuthorizationServerTokenServices defaultAuthorizationServerTokenServices;
 
 
-    public OAuth2AccessToken get(HttpServletRequest request, Authentication authentication){
+    public OAuth2AccessToken get(HttpServletRequest request, Authentication authentication) {
         String header = request.getHeader("Authorization");
 
         if (header == null || !header.toLowerCase().startsWith(BASIC)) {
@@ -75,6 +75,7 @@ public class OAuth2AccessTokenUtil {
 
     /**
      * 抽取并解码header字符串
+     *
      * @param header
      * @param request
      * @return
@@ -87,8 +88,7 @@ public class OAuth2AccessTokenUtil {
         byte[] decoded;
         try {
             decoded = Base64.decode(base64Token);
-        }
-        catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             throw new BadCredentialsException(
                     "Failed to decode basic authentication token");
         }
@@ -100,7 +100,7 @@ public class OAuth2AccessTokenUtil {
         if (delim == -1) {
             throw new BadCredentialsException("Invalid basic authentication token");
         }
-        return new String[] { token.substring(0, delim), token.substring(delim + 1) };
+        return new String[]{token.substring(0, delim), token.substring(delim + 1)};
     }
 
 }

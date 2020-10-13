@@ -25,6 +25,7 @@ public class WeixinAdapter implements ApiAdapter<Weixin> {
     /**
      * 测试当前的API是否可用
      * 默认true Weixin永远是可以用的
+     *
      * @param api
      * @return
      */
@@ -50,6 +51,7 @@ public class WeixinAdapter implements ApiAdapter<Weixin> {
     /**
      * 在某些社交网站上有用
      * Weixin不需要配置
+     *
      * @param api
      * @param message
      */

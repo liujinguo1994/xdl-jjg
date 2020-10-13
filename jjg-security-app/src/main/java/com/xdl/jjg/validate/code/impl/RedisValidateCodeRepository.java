@@ -37,11 +37,12 @@ public class RedisValidateCodeRepository implements ValidateCodeRepository {
 
     @Override
     public void save(ServletWebRequest request, ValidateCode code, ValidateCodeType validateCodeType) {
-        redisTemplate.opsForValue().set(buildKey(request,validateCodeType),code,30, TimeUnit.MINUTES);
+        redisTemplate.opsForValue().set(buildKey(request, validateCodeType), code, 30, TimeUnit.MINUTES);
     }
 
     /**
      * 生成存储验证码的key值
+     *
      * @param request
      * @param validateCodeType
      * @return

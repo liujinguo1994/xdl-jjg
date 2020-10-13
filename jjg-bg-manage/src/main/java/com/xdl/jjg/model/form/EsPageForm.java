@@ -24,8 +24,8 @@ public class EsPageForm implements Serializable {
     /**
      * 主键id
      */
-    @ApiModelProperty(value = "主键id",example = "1")
-	private Long id;
+    @ApiModelProperty(value = "主键id", example = "1")
+    private Long id;
     /**
      * 楼层名称
      */

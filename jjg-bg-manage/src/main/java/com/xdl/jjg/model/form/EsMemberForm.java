@@ -47,7 +47,7 @@ public class EsMemberForm implements Serializable {
     /**
      * 会员生日
      */
-    @ApiModelProperty(required = true,value = "会员生日", example = "1")
+    @ApiModelProperty(required = true, value = "会员生日", example = "1")
     @NotNull(message = "生日不能为空")
     private Long birthday;
     /**

@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -26,34 +26,34 @@ public class EsRole extends Model<EsRole> {
     /**
      * 主键ID
      */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
     /**
      * 权限名称
      */
     @TableField("role_name")
-	private String roleName;
+    private String roleName;
     /**
      * 权限集合
      */
     @TableField("auth_ids")
-	private String authIds;
+    private String authIds;
     /**
      * 角色描述
      */
     @TableField("role_describe")
-	private String roleDescribe;
+    private String roleDescribe;
 
-	/**
-	 * 角色拼音名称
-	 */
-	@TableField("name")
-	private String name;
+    /**
+     * 角色拼音名称
+     */
+    @TableField("name")
+    private String name;
 
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 
 }

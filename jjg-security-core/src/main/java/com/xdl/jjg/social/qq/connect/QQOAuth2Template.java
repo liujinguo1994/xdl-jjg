@@ -31,6 +31,7 @@ public class QQOAuth2Template extends OAuth2Template {
      * QQ返回的消息是一个字符串而不是一个标准的json 因此这里需要对其返回的数据进行处理
      * QQ格式：access_token=FE04************************CCE2&expires_in=7776000&refresh_token=88E4************************BE14
      * 处理成将其处理结果封装到AccessGrant
+     *
      * @param accessTokenUrl
      * @param parameters
      * @return 解析封装后的AccessGrant
@@ -50,6 +51,7 @@ public class QQOAuth2Template extends OAuth2Template {
 
     /**
      * 增加http转换器，将QQ返回的text/html格式转换成json
+     *
      * @return
      */
     @Override

@@ -25,7 +25,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器-站内消息
+ * 前端控制器-站内消息
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -33,22 +33,22 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/esMessage")
-@Api(value="/esMessage", tags="站内消息")
+@Api(value = "/esMessage", tags = "站内消息")
 public class EsMessageController {
 
     @Autowired
     private IEsMessageService messageService;
 
-    @ApiOperation(value = "分页查询站内消息",response = EsMessageVO.class)
+    @ApiOperation(value = "分页查询站内消息", response = EsMessageVO.class)
     @GetMapping(value = "/getMessageList")
     @ResponseBody
-    public ApiResponse getMessageList(EsQueryPageForm form){
+    public ApiResponse getMessageList(EsQueryPageForm form) {
         EsMessageDTO dto = new EsMessageDTO();
         DubboPageResult<EsMessageDO> result = messageService.getMessageList(dto, form.getPageSize(), form.getPageNum());
-        if(result.isSuccess()){
-            List<EsMessageVO> list = BeanUtil.copyList(result.getData().getList(),EsMessageVO.class);
-            return ApiPageResponse.pageSuccess(result.getData().getTotal(),list);
-        }else{
+        if (result.isSuccess()) {
+            List<EsMessageVO> list = BeanUtil.copyList(result.getData().getList(), EsMessageVO.class);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(), list);
+        } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -56,16 +56,16 @@ public class EsMessageController {
     @ApiOperation(value = "添加站内消息")
     @PostMapping(value = "/insertMessage")
     @ResponseBody
-    public ApiResponse insertMessage(@Valid @RequestBody @ApiParam(name="站内消息form对象",value="form") EsMessageForm form){
+    public ApiResponse insertMessage(@Valid @RequestBody @ApiParam(name = "站内消息form对象", value = "form") EsMessageForm form) {
         EsMessageDTO dto = new EsMessageDTO();
-        BeanUtil.copyProperties(form,dto);
+        BeanUtil.copyProperties(form, dto);
         dto.setAdminId(ShiroKit.getUser().getId());
         dto.setAdminName(ShiroKit.getUser().getUsername());
         dto.setSendTime(System.currentTimeMillis());
         DubboResult result = messageService.insertMessage(dto);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }

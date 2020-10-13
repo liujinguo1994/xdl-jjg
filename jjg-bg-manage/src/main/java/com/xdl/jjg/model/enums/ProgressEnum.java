@@ -2,7 +2,6 @@ package com.xdl.jjg.model.enums;
 
 /**
  * 进度枚举
- *
  */
 public enum ProgressEnum {
 

@@ -65,11 +65,11 @@ public class EsGoodGoodsServiceImpl extends ServiceImpl<EsGoodGoodsMapper, EsGoo
             goodGoods.setState(1);
             this.goodGoodsMapper.insert(goodGoods);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("品质好货新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("品质好货新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -89,20 +89,20 @@ public class EsGoodGoodsServiceImpl extends ServiceImpl<EsGoodGoodsMapper, EsGoo
     public DubboResult updateGoodGoods(EsGoodGoodsDTO goodGoodsDTO) {
         try {
             EsGoodGoods esGoodGoods = goodGoodsMapper.selectById(goodGoodsDTO.getId());
-            if (esGoodGoods == null){
+            if (esGoodGoods == null) {
                 throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), "数据不存在");
             }
-            if (esGoodGoods.getState() != 1){
+            if (esGoodGoods.getState() != 1) {
                 throw new ArgumentException(ErrorCode.NOT_AWAIT_ISSUE_NOT_UPDATE.getErrorCode(), "只有待发布才可以编辑");
             }
             EsGoodGoods goodGoods = new EsGoodGoods();
             BeanUtil.copyProperties(goodGoodsDTO, goodGoods);
             goodGoodsMapper.updateById(goodGoods);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("品质好货更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("品质好货更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -130,10 +130,10 @@ public class EsGoodGoodsServiceImpl extends ServiceImpl<EsGoodGoodsMapper, EsGoo
             }
             BeanUtil.copyProperties(goodGoods, goodGoodsDO);
             return DubboResult.success(goodGoodsDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("品质好货查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("品质好货查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -154,7 +154,7 @@ public class EsGoodGoodsServiceImpl extends ServiceImpl<EsGoodGoodsMapper, EsGoo
         QueryWrapper<EsGoodGoods> queryWrapper = new QueryWrapper<>();
         try {
             // 查询条件
-            queryWrapper.lambda().like(StringUtil.notEmpty(goodGoodsDTO.getGoodsName()),EsGoodGoods::getGoodsName,goodGoodsDTO.getGoodsName()).eq(goodGoodsDTO.getState() != null,EsGoodGoods::getState,goodGoodsDTO.getState());
+            queryWrapper.lambda().like(StringUtil.notEmpty(goodGoodsDTO.getGoodsName()), EsGoodGoods::getGoodsName, goodGoodsDTO.getGoodsName()).eq(goodGoodsDTO.getState() != null, EsGoodGoods::getState, goodGoodsDTO.getState());
 
             Page<EsGoodGoods> page = new Page<>(pageNum, pageSize);
             IPage<EsGoodGoods> iPage = this.page(page, queryWrapper);
@@ -166,10 +166,10 @@ public class EsGoodGoodsServiceImpl extends ServiceImpl<EsGoodGoodsMapper, EsGoo
                     return goodGoodsDO;
                 }).collect(Collectors.toList());
             }
-            return DubboPageResult.success(iPage.getTotal(),goodGoodsDOList);
-        } catch (ArgumentException ae){
+            return DubboPageResult.success(iPage.getTotal(), goodGoodsDOList);
+        } catch (ArgumentException ae) {
             logger.error("品质好货分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("品质好货分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -178,7 +178,6 @@ public class EsGoodGoodsServiceImpl extends ServiceImpl<EsGoodGoodsMapper, EsGoo
 
     /**
      * 删除或批量删除
-     *
      */
     @Override
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
@@ -187,29 +186,29 @@ public class EsGoodGoodsServiceImpl extends ServiceImpl<EsGoodGoodsMapper, EsGoo
             QueryWrapper<EsGoodGoods> queryWrapper = new QueryWrapper<>();
             queryWrapper.lambda().in(EsGoodGoods::getId, ids);
             List<EsGoodGoods> goodGoodsList = goodGoodsMapper.selectList(queryWrapper);
-            if (CollectionUtils.isEmpty(goodGoodsList)){
+            if (CollectionUtils.isEmpty(goodGoodsList)) {
                 throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), "数据不存在");
             }
             goodGoodsList.stream().forEach(esGoodGoods -> {
-                if (esGoodGoods.getState() == 2){
+                if (esGoodGoods.getState() == 2) {
                     throw new ArgumentException(ErrorCode.ISSUE_STATE_NOT_DELETE.getErrorCode(), "存在已发布状态的商品不可以删除");
                 }
             });
             this.goodGoodsMapper.delete(queryWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
-             logger.error("删除或批量删除失败", ae);
-             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+        } catch (ArgumentException ae) {
+            logger.error("删除或批量删除失败", ae);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("删除或批量删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
+
     /**
      * 发布或批量发布
-     *
      */
     @Override
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
@@ -218,11 +217,11 @@ public class EsGoodGoodsServiceImpl extends ServiceImpl<EsGoodGoodsMapper, EsGoo
             QueryWrapper<EsGoodGoods> queryWrapper = new QueryWrapper<>();
             queryWrapper.lambda().in(EsGoodGoods::getId, ids);
             List<EsGoodGoods> goodGoodsList = goodGoodsMapper.selectList(queryWrapper);
-            if (CollectionUtils.isEmpty(goodGoodsList)){
+            if (CollectionUtils.isEmpty(goodGoodsList)) {
                 throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), "数据不存在");
             }
             goodGoodsList.stream().forEach(esGoodGoods -> {
-                if (esGoodGoods.getState() != 1){
+                if (esGoodGoods.getState() != 1) {
                     throw new ArgumentException(ErrorCode.STATE_error_NOT_RELEASE.getErrorCode(), "存在不是待发布状态的商品不可以发布");
                 }
             });
@@ -233,11 +232,11 @@ public class EsGoodGoodsServiceImpl extends ServiceImpl<EsGoodGoodsMapper, EsGoo
                 goodGoodsMapper.updateById(goods);
             });
             return DubboResult.success();
-        } catch (ArgumentException ae){
-             logger.error("发布或批量发布失败", ae);
-             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+        } catch (ArgumentException ae) {
+            logger.error("发布或批量发布失败", ae);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("发布或批量发布失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -257,11 +256,11 @@ public class EsGoodGoodsServiceImpl extends ServiceImpl<EsGoodGoodsMapper, EsGoo
             goods.setUnderMessage(goodGoodsDTO.getUnderMessage());
             goodGoodsMapper.updateById(goods);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("下架失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("下架失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -276,7 +275,7 @@ public class EsGoodGoodsServiceImpl extends ServiceImpl<EsGoodGoodsMapper, EsGoo
         QueryWrapper<EsGoodGoods> queryWrapper = new QueryWrapper<>();
         try {
             // 查询条件
-            queryWrapper.lambda().eq(EsGoodGoods::getState,2);
+            queryWrapper.lambda().eq(EsGoodGoods::getState, 2);
             Page<EsGoodGoods> page = new Page<>(pageNum, pageSize);
             IPage<EsGoodGoods> iPage = this.page(page, queryWrapper);
             List<EsGoodGoodsDO> goodGoodsDOList = new ArrayList<>();
@@ -287,10 +286,10 @@ public class EsGoodGoodsServiceImpl extends ServiceImpl<EsGoodGoodsMapper, EsGoo
                     return goodGoodsDO;
                 }).collect(Collectors.toList());
             }
-            return DubboPageResult.success(iPage.getTotal(),goodGoodsDOList);
-        } catch (ArgumentException ae){
+            return DubboPageResult.success(iPage.getTotal(), goodGoodsDOList);
+        } catch (ArgumentException ae) {
             logger.error("品质好货分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("品质好货分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");

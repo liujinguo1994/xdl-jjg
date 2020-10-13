@@ -18,24 +18,24 @@ import lombok.Data;
 public class EsMemberLevelQueryForm extends QueryPageForm {
 
 
-	private static final long serialVersionUID = -621962003154697757L;
-	/**
+    private static final long serialVersionUID = -621962003154697757L;
+    /**
      * 等级名称
      */
-	@ApiModelProperty(value = "等级名称")
-	private String level;
+    @ApiModelProperty(value = "等级名称")
+    private String level;
 
     /**
      * 创建时间开始
      */
-	@ApiModelProperty(value = "创建时间开始",example = "1")
-	private Long createTimeStart;
+    @ApiModelProperty(value = "创建时间开始", example = "1")
+    private Long createTimeStart;
 
     /**
      * 创建时间结束
      */
-	@ApiModelProperty(value = "创建时间结束",example = "1")
-	private Long createTimeEnd;
+    @ApiModelProperty(value = "创建时间结束", example = "1")
+    private Long createTimeEnd;
 
 
 }

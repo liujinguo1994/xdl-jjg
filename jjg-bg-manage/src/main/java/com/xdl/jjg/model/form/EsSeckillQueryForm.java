@@ -18,10 +18,10 @@ import lombok.Data;
 public class EsSeckillQueryForm extends QueryPageForm {
 
 
-	private static final long serialVersionUID = 208745614233252259L;
-	/**
+    private static final long serialVersionUID = 208745614233252259L;
+    /**
      * 活动名称
      */
-	@ApiModelProperty(value = "活动名称")
-	private String seckillName;
+    @ApiModelProperty(value = "活动名称")
+    private String seckillName;
 }

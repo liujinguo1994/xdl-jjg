@@ -12,7 +12,6 @@ import java.util.List;
  * <p>
  * 成长值权重设置
  * </p>
- *
  */
 @Data
 @ApiModel

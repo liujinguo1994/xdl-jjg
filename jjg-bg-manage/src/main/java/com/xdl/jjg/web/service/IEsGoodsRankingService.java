@@ -18,48 +18,53 @@ public interface IEsGoodsRankingService {
 
     /**
      * 插入数据
+     *
+     * @param goodsRankingDTO 热门榜单DTO
      * @author rm 2817512105@qq.com
-     * @since 2020-05-07
-     * @param goodsRankingDTO    热门榜单DTO
      * @return: com.shopx.common.model.result.DubboResult<EsGoodsRankingDO>
+     * @since 2020-05-07
      */
     DubboResult insertGoodsRanking(EsGoodsRankingDTO goodsRankingDTO);
 
     /**
      * 根据条件更新更新数据
+     *
+     * @param goodsRankingDTO 热门榜单DTO
      * @author rm 2817512105@qq.com
-     * @since 2020-05-07
-     * @param goodsRankingDTO    热门榜单DTO
      * @return: com.shopx.common.model.result.DubboResult<EsGoodsRankingDO>
+     * @since 2020-05-07
      */
     DubboResult updateGoodsRanking(EsGoodsRankingDTO goodsRankingDTO);
 
     /**
      * 根据id获取数据
+     *
+     * @param id 主键id
      * @author rm 2817512105@qq.com
-     * @since 2020-05-07
-     * @param id    主键id
      * @return: com.shopx.common.model.result.DubboResult<EsGoodsRankingDO>
+     * @since 2020-05-07
      */
     DubboResult<EsGoodsRankingDO> getGoodsRanking(Long id);
 
     /**
      * 根据查询条件查询列表
+     *
+     * @param goodsRankingDTO 热门榜单DTO
+     * @param pageSize        行数
+     * @param pageNum         页码
      * @author rm 2817512105@qq.com
-     * @since 2020-05-07
-     * @param goodsRankingDTO  热门榜单DTO
-     * @param pageSize  行数
-     * @param pageNum   页码
      * @return: com.shopx.common.model.result.DubboPageResult<EsGoodsRankingDO>
+     * @since 2020-05-07
      */
     DubboPageResult<EsGoodsRankingDO> getGoodsRankingList(EsGoodsRankingDTO goodsRankingDTO, int pageSize, int pageNum);
 
     /**
      * 根据主键删除数据
+     *
+     * @param id 主键id
      * @author rm 2817512105@qq.com
-     * @since 2020-05-07
-     * @param id    主键id
      * @return: com.shopx.common.model.result.DubboResult<EsGoodsRankingDO>
+     * @since 2020-05-07
      */
     DubboResult deleteGoodsRanking(Long id);
 

@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -24,32 +24,32 @@ public class EsRegionsDTO implements Serializable {
     /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
 
     /**
      * 父地区id
      */
-	@JsonSerialize(using = ToStringSerializer.class)
-	private Long parentId;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long parentId;
 
     /**
      * 路径
      */
-	private String regionPath;
+    private String regionPath;
 
     /**
      * 级别
      */
-	private Integer regionGrade;
+    private Integer regionGrade;
 
     /**
      * 名称
      */
-	private String localName;
+    private String localName;
 
     /**
      * 邮编
      */
-	private String zipcode;
+    private String zipcode;
 
 }

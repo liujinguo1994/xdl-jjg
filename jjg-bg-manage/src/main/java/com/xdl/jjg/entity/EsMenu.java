@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -25,50 +25,50 @@ public class EsMenu extends Model<EsMenu> {
     /**
      * 主键ID
      */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
     /**
      * 父id
      */
     @JsonSerialize(using = ToStringSerializer.class)
     @TableField("parent_id")
-	private Long parentId;
+    private Long parentId;
     /**
      * 菜单标题
      */
-	private String title;
+    private String title;
     /**
      * 菜单url
      */
-	private String url;
+    private String url;
     /**
      * 菜单唯一标识
      */
-	private String identifier;
+    private String identifier;
     /**
      * 权限表达式
      */
     @TableField("auth_expression")
-	private String authExpression;
+    private String authExpression;
     /**
      * 删除标记 0 未删除 1删除
      */
-    @TableLogic(value="0",delval="1")
+    @TableLogic(value = "0", delval = "1")
     @TableField("is_del")
-	private Integer isDel;
+    private Integer isDel;
     /**
      * 菜单级别标识
      */
-	private String path;
+    private String path;
     /**
      * 菜单级别
      */
-	private Integer grade;
+    private Integer grade;
 
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 
 }

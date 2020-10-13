@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -18,19 +18,19 @@ public class EsRoleDO implements Serializable {
     /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
     /**
      * 权限名称
      */
-	private String roleName;
+    private String roleName;
     /**
      * 权限集合
      */
-	private String authIds;
+    private String authIds;
     /**
      * 角色描述
      */
-	private String roleDescribe;
+    private String roleDescribe;
     /**
      * 角色拼音名称
      */

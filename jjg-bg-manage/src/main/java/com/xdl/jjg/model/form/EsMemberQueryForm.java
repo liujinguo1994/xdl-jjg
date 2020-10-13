@@ -51,7 +51,7 @@ public class EsMemberQueryForm extends QueryPageForm {
     /**
      * 会员状态(0,正常 1，禁用)
      */
-    @ApiModelProperty(value = "会员状态(0,正常 1，禁用)",example = "1")
+    @ApiModelProperty(value = "会员状态(0,正常 1，禁用)", example = "1")
     private Integer state;
 
 }

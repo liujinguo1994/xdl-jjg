@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
  */
 @Data
 @Component
-@PropertySource(value= {"classpath:config/rocketMq.properties","file:${spring.profiles.path}/config/rocketMq.properties"},ignoreResourceNotFound = true)
+@PropertySource(value = {"classpath:config/rocketMq.properties", "file:${spring.profiles.path}/config/rocketMq.properties"}, ignoreResourceNotFound = true)
 public class MqProperties {
 
     @Value("${jjg.topic.account.accountTopic}")

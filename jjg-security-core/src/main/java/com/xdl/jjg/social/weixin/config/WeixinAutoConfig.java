@@ -19,7 +19,7 @@ import org.springframework.web.servlet.View;
  * @Date: 2019/5/26 17:10
  */
 @Configuration
-@ConditionalOnProperty(prefix = "cy.security.social.weixin",name = "app-id")
+@ConditionalOnProperty(prefix = "cy.security.social.weixin", name = "app-id")
 public class WeixinAutoConfig extends SocialAutoConfigurerAdapter {
 
     @Autowired
@@ -32,9 +32,9 @@ public class WeixinAutoConfig extends SocialAutoConfigurerAdapter {
         return new WeixinConnectionFactory(weixinConfig.getProviderId(), weixinConfig.getAppId(), weixinConfig.getAppSecret());
     }
 
-    @Bean({"connect/weixinConnect","connect/weixinConnected"})
+    @Bean({"connect/weixinConnect", "connect/weixinConnected"})
     @ConditionalOnMissingBean(name = "weixinConnectedView")
-    public View weixinConnectedView(){
+    public View weixinConnectedView() {
         return new EasyConnectView();
     }
 }

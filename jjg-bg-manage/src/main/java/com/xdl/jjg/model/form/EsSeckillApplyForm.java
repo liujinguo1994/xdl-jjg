@@ -20,31 +20,32 @@ import java.io.Serializable;
 public class EsSeckillApplyForm implements Serializable {
 
 
-	private static final long serialVersionUID = 4785665812171456168L;
-	/**
-	 * 活动id
-	 */
-	@ApiModelProperty(required = true,value = "活动id",example = "1")
-	@NotNull(message = "活动id不能为空")
-	private Long seckillId;
-	/**
-	 * 商品id
-	 */
-	@ApiModelProperty(required = true,value = "商品id",example = "1")
-	@NotNull(message = "商品id不能为空")
-	private Long goodsId;;
-	/**
-	 * 驳回原因
-	 */
-	@ApiModelProperty(value = "驳回原因")
-	private String failReason;
-	/**
-	 * 审核状态结果(0:通过,1:不通过)
-	 */
-	@ApiModelProperty(required = true,value = "审核状态结果(0:通过,1:不通过)",example = "1")
-	@NotNull(message = "审核状态结果不能为空")
-	private Integer status;
+    private static final long serialVersionUID = 4785665812171456168L;
+    /**
+     * 活动id
+     */
+    @ApiModelProperty(required = true, value = "活动id", example = "1")
+    @NotNull(message = "活动id不能为空")
+    private Long seckillId;
+    /**
+     * 商品id
+     */
+    @ApiModelProperty(required = true, value = "商品id", example = "1")
+    @NotNull(message = "商品id不能为空")
+    private Long goodsId;
+    ;
+    /**
+     * 驳回原因
+     */
+    @ApiModelProperty(value = "驳回原因")
+    private String failReason;
+    /**
+     * 审核状态结果(0:通过,1:不通过)
+     */
+    @ApiModelProperty(required = true, value = "审核状态结果(0:通过,1:不通过)", example = "1")
+    @NotNull(message = "审核状态结果不能为空")
+    private Integer status;
 
-	private Long id;
+    private Long id;
 
 }

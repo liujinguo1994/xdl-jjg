@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -26,53 +26,53 @@ public class EsSmtp extends Model<EsSmtp> {
     /**
      * 主键ID
      */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
     /**
      * 主机
      */
-	private String host;
+    private String host;
     /**
      * 用户名
      */
-	private String username;
+    private String username;
     /**
      * 密码
      */
-	private String password;
+    private String password;
     /**
      * 最后发信时间
      */
-	private Long lastSendTime;
+    private Long lastSendTime;
     /**
      * 已发数
      */
     @TableField("send_count")
-	private Integer sendCount;
+    private Integer sendCount;
     /**
      * 最大发信数
      */
     @TableField("max_count")
-	private Integer maxCount;
+    private Integer maxCount;
     /**
      * 发信邮箱
      */
     @TableField("mail_from")
-	private String mailFrom;
+    private String mailFrom;
     /**
      * 端口
      */
-	private Integer port;
+    private Integer port;
     /**
      * ssl是否开启
      */
     @TableField("open_ssl")
-	private Integer openSsl;
+    private Integer openSsl;
 
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 
 }

@@ -21,10 +21,10 @@ public class EsComplaintTypeConfigForm implements Serializable {
 
     private static final long serialVersionUID = -6137356443389659733L;
 
-    @ApiModelProperty(value = "主键ID",example = "1")
+    @ApiModelProperty(value = "主键ID", example = "1")
     private Long id;
 
-    @ApiModelProperty(required = true,value = "投诉类型")
+    @ApiModelProperty(required = true, value = "投诉类型")
     @NotBlank(message = "投诉类型不能为空")
     private String complainType;
 

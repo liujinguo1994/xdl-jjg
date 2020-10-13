@@ -15,31 +15,31 @@ public class EsGoodsTotalStatisticsVO implements Serializable {
     /**
      * 商品总数
      */
-    @ApiModelProperty(value = "商品总数",example = "0")
+    @ApiModelProperty(value = "商品总数", example = "0")
     private Integer goodsCount;
     /**
      * 自营商品总数
      */
-    @ApiModelProperty(value = "自营商品总数",example = "0")
+    @ApiModelProperty(value = "自营商品总数", example = "0")
     private Integer selfOperatedCount;
     /**
      * 上架商品总数
      */
-    @ApiModelProperty(value = "上架商品总数",example = "0")
+    @ApiModelProperty(value = "上架商品总数", example = "0")
     private Integer shelvesCount;
     /**
      * 下架商品总数
      */
-    @ApiModelProperty(value = "下架商品总数",example = "0")
+    @ApiModelProperty(value = "下架商品总数", example = "0")
     private Integer unShelvesCount;
     /**
      * 商品SKU总数
      */
-    @ApiModelProperty(value = "商品SKU总数",example = "0")
+    @ApiModelProperty(value = "商品SKU总数", example = "0")
     private Integer skuCount;
     /**
      * 品牌总数
      */
-    @ApiModelProperty(value = "品牌总数",example = "0")
+    @ApiModelProperty(value = "品牌总数", example = "0")
     private Integer brandCount;
 }

@@ -39,37 +39,37 @@ public class Kuaidi100Plugin extends ServiceImpl<EsLogiCompanyMapper, EsLogiComp
     @Override
     public List<EsConfigItemVO> definitionConfigItem() {
 
-            List<EsConfigItemVO> list = new ArrayList<>();
-            EsConfigItemVO codeItem = new EsConfigItemVO();
-            codeItem.setName("code");
-            codeItem.setText("公司代码");
-            codeItem.setType("text");
+        List<EsConfigItemVO> list = new ArrayList<>();
+        EsConfigItemVO codeItem = new EsConfigItemVO();
+        codeItem.setName("code");
+        codeItem.setText("公司代码");
+        codeItem.setType("text");
 
-            EsConfigItemVO secretItem = new EsConfigItemVO();
-            secretItem.setName("id");
-            secretItem.setText("id");
-            secretItem.setType("text");
+        EsConfigItemVO secretItem = new EsConfigItemVO();
+        secretItem.setName("id");
+        secretItem.setText("id");
+        secretItem.setType("text");
 
-            EsConfigItemVO typeItem = new EsConfigItemVO();
-            typeItem.setName("user");
-            typeItem.setText("用户类型");
-            typeItem.setType("radio");
-            //组织用户类型可选项
-            List<EsRadioOptionVO> options = new ArrayList<>();
-            EsRadioOptionVO radioOption = new EsRadioOptionVO();
-            radioOption.setLabel("普通用户");
-            radioOption.setValue(0);
-            options.add(radioOption);
-            radioOption = new EsRadioOptionVO();
-            radioOption.setLabel("企业用户");
-            radioOption.setValue(1);
-            options.add(radioOption);
-            typeItem.setOptions(options);
+        EsConfigItemVO typeItem = new EsConfigItemVO();
+        typeItem.setName("user");
+        typeItem.setText("用户类型");
+        typeItem.setType("radio");
+        //组织用户类型可选项
+        List<EsRadioOptionVO> options = new ArrayList<>();
+        EsRadioOptionVO radioOption = new EsRadioOptionVO();
+        radioOption.setLabel("普通用户");
+        radioOption.setValue(0);
+        options.add(radioOption);
+        radioOption = new EsRadioOptionVO();
+        radioOption.setLabel("企业用户");
+        radioOption.setValue(1);
+        options.add(radioOption);
+        typeItem.setOptions(options);
 
-            list.add(codeItem);
-            list.add(secretItem);
-            list.add(typeItem);
-            return list;
+        list.add(codeItem);
+        list.add(secretItem);
+        list.add(typeItem);
+        return list;
 
     }
 
@@ -116,9 +116,9 @@ public class Kuaidi100Plugin extends ServiceImpl<EsLogiCompanyMapper, EsLogiComp
             expressDetailVO.setData((List<Map>) map.get("data"));
             expressDetailVO.setCourierNum(map.get("nu").toString());
             QueryWrapper<EsLogiCompany> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsLogiCompany::getCode,map.get("com").toString());
-            EsLogiCompany esLogiCompany =this.getOne(queryWrapper);
-            if (esLogiCompany !=null){
+            queryWrapper.lambda().eq(EsLogiCompany::getCode, map.get("com").toString());
+            EsLogiCompany esLogiCompany = this.getOne(queryWrapper);
+            if (esLogiCompany != null) {
                 expressDetailVO.setName(esLogiCompany.getName());
             }
             return DubboResult.success(expressDetailVO);

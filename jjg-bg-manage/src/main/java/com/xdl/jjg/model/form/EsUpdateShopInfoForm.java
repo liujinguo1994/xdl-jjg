@@ -21,14 +21,14 @@ public class EsUpdateShopInfoForm implements Serializable {
     /**
      * 是否审核通过(0通过并保存，1拒绝通过),只有审核时传此字段
      */
-    @ApiModelProperty(value = "是否审核通过(0通过并保存，1拒绝通过),只有审核时传此字段",example = "1")
+    @ApiModelProperty(value = "是否审核通过(0通过并保存，1拒绝通过),只有审核时传此字段", example = "1")
     private Integer pass;
 
 //------------------------------------店铺信息--------------------------------------------
     /**
      * 店铺ID
      */
-    @ApiModelProperty(value = "店铺ID",example = "1")
+    @ApiModelProperty(value = "店铺ID", example = "1")
     private Long id;
     /**
      * 店铺名称
@@ -38,22 +38,22 @@ public class EsUpdateShopInfoForm implements Serializable {
     /**
      * 店铺所在省id
      */
-    @ApiModelProperty(value = "店铺所在省id",example = "1")
+    @ApiModelProperty(value = "店铺所在省id", example = "1")
     private Long shopProvinceId;
     /**
      * 店铺所在市id
      */
-    @ApiModelProperty(value = "店铺所在市id",example = "1")
+    @ApiModelProperty(value = "店铺所在市id", example = "1")
     private Long shopCityId;
     /**
      * 店铺所在县id
      */
-    @ApiModelProperty(value = "店铺所在县id",example = "1")
+    @ApiModelProperty(value = "店铺所在县id", example = "1")
     private Long shopCountyId;
     /**
      * 店铺所在镇id
      */
-    @ApiModelProperty(value = "店铺所在镇id",example = "1")
+    @ApiModelProperty(value = "店铺所在镇id", example = "1")
     private Long shopTownId;
     /**
      * 店铺所在省名称
@@ -83,7 +83,7 @@ public class EsUpdateShopInfoForm implements Serializable {
     /**
      * 佣金比例
      */
-    @ApiModelProperty(value = "佣金比例",example = "1")
+    @ApiModelProperty(value = "佣金比例", example = "1")
     private Double commission;
 //----------------------------------------基本信息------------------------------------
     /**
@@ -109,12 +109,12 @@ public class EsUpdateShopInfoForm implements Serializable {
     /**
      * 员工总数
      */
-    @ApiModelProperty(value = "员工总数",example = "1")
+    @ApiModelProperty(value = "员工总数", example = "1")
     private Integer employeeNum;
     /**
      * 注册资金
      */
-    @ApiModelProperty(value = "注册资金",example = "1")
+    @ApiModelProperty(value = "注册资金", example = "1")
     private Double regMoney;
     /**
      * 联系人姓名
@@ -129,7 +129,7 @@ public class EsUpdateShopInfoForm implements Serializable {
     /**
      * 是否自营
      */
-    @ApiModelProperty(value = "是否自营",example = "1")
+    @ApiModelProperty(value = "是否自营", example = "1")
     private Integer selfOperated;
 //-----------------------------------营业执照信息-----------------------------------------
     /**
@@ -155,22 +155,22 @@ public class EsUpdateShopInfoForm implements Serializable {
     /**
      * 营业执照所在省id
      */
-    @ApiModelProperty(value = "营业执照所在省id",example = "1")
+    @ApiModelProperty(value = "营业执照所在省id", example = "1")
     private Long licenseProvinceId;
     /**
      * 营业执照所在市id
      */
-    @ApiModelProperty(value = "营业执照所在市id",example = "1")
+    @ApiModelProperty(value = "营业执照所在市id", example = "1")
     private Long licenseCityId;
     /**
      * 营业执照所在县id
      */
-    @ApiModelProperty(value = "营业执照所在县id",example = "1")
+    @ApiModelProperty(value = "营业执照所在县id", example = "1")
     private Long licenseCountyId;
     /**
      * 营业执照所在镇id
      */
-    @ApiModelProperty(value = "营业执照所在镇id",example = "1")
+    @ApiModelProperty(value = "营业执照所在镇id", example = "1")
     private Long licenseTownId;
     /**
      * 营业执照所在省名称
@@ -200,17 +200,17 @@ public class EsUpdateShopInfoForm implements Serializable {
     /**
      * 成立日期
      */
-    @ApiModelProperty(value = "成立日期",example = "1")
+    @ApiModelProperty(value = "成立日期", example = "1")
     private Long establishDate;
     /**
      * 营业执照有效期开始
      */
-    @ApiModelProperty(value = "营业执照有效期开始",example = "1")
+    @ApiModelProperty(value = "营业执照有效期开始", example = "1")
     private Long licenceStart;
     /**
      * 营业执照有效期结束
      */
-    @ApiModelProperty(value = "营业执照有效期结束",example = "1")
+    @ApiModelProperty(value = "营业执照有效期结束", example = "1")
     private Long licenceEnd;
     /**
      * 法人身份证照片
@@ -252,22 +252,22 @@ public class EsUpdateShopInfoForm implements Serializable {
     /**
      * 开户银行所在省id
      */
-    @ApiModelProperty(value = "开户银行所在省id",example = "1")
+    @ApiModelProperty(value = "开户银行所在省id", example = "1")
     private Long bankProvinceId;
     /**
      * 开户银行所在市id
      */
-    @ApiModelProperty(value = "开户银行所在市id",example = "1")
+    @ApiModelProperty(value = "开户银行所在市id", example = "1")
     private Long bankCityId;
     /**
      * 开户银行所在县id
      */
-    @ApiModelProperty(value = "开户银行所在县id",example = "1")
+    @ApiModelProperty(value = "开户银行所在县id", example = "1")
     private Long bankCountyId;
     /**
      * 开户银行所在镇id
      */
-    @ApiModelProperty(value = "开户银行所在镇id",example = "1")
+    @ApiModelProperty(value = "开户银行所在镇id", example = "1")
     private Long bankTownId;
     /**
      * 开户银行所在省名称

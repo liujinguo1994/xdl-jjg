@@ -23,7 +23,7 @@ public class LockKeyGenerator implements CacheKeyGenerator {
 
 
     @Override
-    public String getLockKey(ProceedingJoinPoint  pjp) {
+    public String getLockKey(ProceedingJoinPoint pjp) {
         MethodSignature signature = (MethodSignature) pjp.getSignature();
         Method method = signature.getMethod();
         CacheLock lockAnnotation = method.getAnnotation(CacheLock.class);

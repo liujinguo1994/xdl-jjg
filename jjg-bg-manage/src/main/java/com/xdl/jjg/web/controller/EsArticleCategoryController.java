@@ -25,7 +25,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器-文章分类
+ * 前端控制器-文章分类
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -33,7 +33,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/esArticleCategory")
-@Api(value="/esArticleCategory", tags="文章分类")
+@Api(value = "/esArticleCategory", tags = "文章分类")
 public class EsArticleCategoryController {
 
     @Autowired
@@ -42,13 +42,13 @@ public class EsArticleCategoryController {
     @ApiOperation(value = "新增文章分类")
     @ResponseBody
     @PostMapping(value = "/insertArticleCategory")
-    public ApiResponse insertArticleCategory(@Valid @RequestBody @ApiParam(name="文章分类form对象",value="form") EsArticleCategoryForm form){
+    public ApiResponse insertArticleCategory(@Valid @RequestBody @ApiParam(name = "文章分类form对象", value = "form") EsArticleCategoryForm form) {
         EsArticleCategoryDTO dto = new EsArticleCategoryDTO();
-        BeanUtil.copyProperties(form,dto);
+        BeanUtil.copyProperties(form, dto);
         DubboResult result = articleCategoryService.insertArticleCategory(dto);
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -56,13 +56,13 @@ public class EsArticleCategoryController {
     @PutMapping(value = "/updateArticleCategory")
     @ResponseBody
     @ApiOperation(value = "修改文章分类")
-    public ApiResponse updateArticleCategory(@Valid @RequestBody @ApiParam(name="文章分类form对象",value="form") EsArticleCategoryForm form){
+    public ApiResponse updateArticleCategory(@Valid @RequestBody @ApiParam(name = "文章分类form对象", value = "form") EsArticleCategoryForm form) {
         EsArticleCategoryDTO dto = new EsArticleCategoryDTO();
-        BeanUtil.copyProperties(form,dto);
+        BeanUtil.copyProperties(form, dto);
         DubboResult result = articleCategoryService.updateArticleCategory(dto);
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -70,33 +70,33 @@ public class EsArticleCategoryController {
     @DeleteMapping(value = "/deleteArticleCategory/{id}")
     @ResponseBody
     @ApiOperation(value = "删除")
-    @ApiImplicitParam(name = "id", value = "文章分类id", required = true, dataType = "long",example = "1", paramType = "path")
-    public ApiResponse deleteArticleCategory(@PathVariable Long id){
+    @ApiImplicitParam(name = "id", value = "文章分类id", required = true, dataType = "long", example = "1", paramType = "path")
+    public ApiResponse deleteArticleCategory(@PathVariable Long id) {
         DubboResult result = articleCategoryService.deleteArticleCategory(id);
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
 
-    @ApiOperation(value = "分页查询一级文章分类列表",response = EsArticleCategoryVO.class)
+    @ApiOperation(value = "分页查询一级文章分类列表", response = EsArticleCategoryVO.class)
     @GetMapping(value = "/getArticleCategoryList")
     @ResponseBody
     public ApiResponse getArticleCategoryList(EsArticleCategoryQueryForm form) {
         EsArticleCategoryDTO dto = new EsArticleCategoryDTO();
-        BeanUtil.copyProperties(form,dto);
+        BeanUtil.copyProperties(form, dto);
         DubboPageResult<EsArticleCategoryDO> result = articleCategoryService.getArticleCategoryList(dto, form.getPageSize(), form.getPageNum());
         if (result.isSuccess()) {
             List<EsArticleCategoryDO> data = result.getData().getList();
-            List<EsArticleCategoryVO>  list =BeanUtil.copyList(data,EsArticleCategoryVO.class);
-            return ApiPageResponse.pageSuccess(result.getData().getTotal(),list);
+            List<EsArticleCategoryVO> list = BeanUtil.copyList(data, EsArticleCategoryVO.class);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(), list);
         } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
     }
 
-    @ApiOperation(value = "查询二级文章分类列表",response = EsArticleCategoryVO.class)
+    @ApiOperation(value = "查询二级文章分类列表", response = EsArticleCategoryVO.class)
     @ApiImplicitParam(name = "id", value = "一级文章分类id", required = true, dataType = "long", paramType = "path")
     @GetMapping(value = "/getChildren/{id}")
     @ResponseBody
@@ -104,21 +104,21 @@ public class EsArticleCategoryController {
         DubboPageResult<EsArticleCategoryDO> result = articleCategoryService.getChildren(id);
         if (result.isSuccess()) {
             List<EsArticleCategoryDO> data = result.getData().getList();
-            List<EsArticleCategoryVO>  list = BeanUtil.copyList(data,EsArticleCategoryVO.class);
+            List<EsArticleCategoryVO> list = BeanUtil.copyList(data, EsArticleCategoryVO.class);
             return ApiPageResponse.pageSuccess(list);
         } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
     }
 
-    @ApiOperation(value = "查询文章分类树",response = EsArticleCategoryVO.class)
+    @ApiOperation(value = "查询文章分类树", response = EsArticleCategoryVO.class)
     @GetMapping("/getTree")
     @ResponseBody
     public ApiResponse getTree() {
         DubboPageResult<EsArticleCategoryDO> result = articleCategoryService.getTree();
         if (result.isSuccess()) {
             List<EsArticleCategoryDO> data = result.getData().getList();
-            List<EsArticleCategoryVO>  list = (  List<EsArticleCategoryVO> ) BeanUtil.copyList(data,new EsArticleCategoryVO().getClass());
+            List<EsArticleCategoryVO> list = (List<EsArticleCategoryVO>) BeanUtil.copyList(data, new EsArticleCategoryVO().getClass());
             return ApiPageResponse.pageSuccess(list);
         } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));

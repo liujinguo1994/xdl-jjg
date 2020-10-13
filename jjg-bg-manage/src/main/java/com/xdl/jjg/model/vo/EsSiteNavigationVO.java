@@ -22,33 +22,33 @@ public class EsSiteNavigationVO implements Serializable {
     /**
      * 主键ID
      */
-    @ApiModelProperty(value = "主键ID",example = "1")
-	private Long id;
+    @ApiModelProperty(value = "主键ID", example = "1")
+    private Long id;
     /**
      * 导航名称
      */
     @ApiModelProperty(value = "导航名称")
-	private String navigationName;
+    private String navigationName;
     /**
      * 导航地址
      */
     @ApiModelProperty(value = "导航地址")
-	private String url;
+    private String url;
     /**
      * 客户端类型
      */
     @ApiModelProperty(value = "客户端类型")
-	private String clientType;
+    private String clientType;
     /**
      * 图片
      */
     @ApiModelProperty(value = "图片")
-	private String image;
+    private String image;
     /**
      * 排序
      */
-    @ApiModelProperty(value = "排序",example = "1")
-	private Integer sort;
+    @ApiModelProperty(value = "排序", example = "1")
+    private Integer sort;
 
 
 }

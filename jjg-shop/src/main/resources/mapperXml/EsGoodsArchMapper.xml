@@ -1,0 +1,59 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.goods.dao.mapper.EsGoodsArchMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shopx.goods.dao.entity.EsGoodsArch">
+        <id column="id" property="id" />
+        <result column="goods_sn" property="goodsSn" />
+        <result column="quantity" property="quantity" />
+        <result column="skuid" property="skuid" />
+        <result column="goods_money" property="goodsMoney" />
+        <result column="cost" property="cost" />
+        <result column="mktmoney" property="mktmoney" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="brand_id" property="brandId" />
+        <result column="weight" property="weight" />
+        <result column="intro" property="intro" />
+        <result column="supplier_id" property="supplierId" />
+        <result column="goods_name" property="goodsName" />
+        <result column="supplier_name" property="supplierName" />
+        <result column="charge_person" property="chargePerson" />
+        <result column="charge_mobile" property="chargeMobile" />
+        <result column="email" property="email" />
+        <result column="purchase_manager" property="purchaseManager" />
+        <result column="purchase_mobile" property="purchaseMobile" />
+        <result column="purchase_email" property="purchaseEmail" />
+        <result column="state" property="state" />
+        <result column="is_fresh" property="isFresh" />
+        <result column="is_gifts" property="isGifts" />
+        <result column="tax_rate" property="taxRate" />
+        <result column="cate_code" property="cateCode" />
+        <result column="unit" property="unit" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        a.*,e.market_enable
+    </sql>
+    <select id="getEsGoodsArchList"  resultType="com.shopx.goods.api.model.domain.EsGoodsArchDO">
+        select    <include refid="Base_Column_List" /> from es_goods_arch a LEFT JOIN  es_goods e on a.id= e.id
+        left join es_supplier s on a.supplier_id=s.id
+        where a.supplier_id=#{supplierId}
+        <if test="keyContent != null">
+            and a.goods_sn like CONCAT('%',#{keyContent},'%')
+            or a.goods_name like CONCAT('%',#{keyContent},'%')
+        </if>
+        and a.state = 0 and a.is_gifts = 2 and s.state=0 AND e.market_enable is null 	and a.id not in(select dr.id from es_draft_goods dr )
+
+
+        order by a.id asc
+    </select>
+    <select id="getEsGoodsArchGiftsList"  resultType="com.shopx.goods.api.model.domain.EsGoodsArchDO">
+        select    <include refid="Base_Column_List" /> from es_goods_arch a LEFT JOIN  es_goods e on a.id= e.id
+        where a.state = 0 and a.is_gifts = 1 AND e.market_enable is null
+        <if test="keyContent != null">
+            and a.goods_sn like CONCAT('%',#{keyContent},'%')
+            or a.goods_name like CONCAT('%',#{keyContent},'%')
+        </if>
+        order by a.id asc
+    </select>
+</mapper>

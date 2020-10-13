@@ -12,7 +12,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -27,40 +27,41 @@ public class EsWaybill extends Model<EsWaybill> {
     /**
      * 主键ID
      */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
     /**
      * 名称
      */
-	private String name;
+    private String name;
     /**
      * 是否开启
      */
-	private Integer open;
+    private Integer open;
     /**
      * 电子面单配置
      */
-	private String config;
+    private String config;
     /**
      * 电子面单bean
      */
-	private String bean;
+    private String bean;
 
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 
-	public EsWaybill() {}
+    public EsWaybill() {
+    }
 
-	public EsWaybill(EsWaybillVO waybillVO) {
-		this.id = waybillVO.getId();
-		this.name = waybillVO.getName();
-		this.open = waybillVO.getOpen();
-		this.bean = waybillVO.getBean();
-		Gson gson = new Gson();
-		this.config = gson.toJson(waybillVO.getConfigItems());
-	}
+    public EsWaybill(EsWaybillVO waybillVO) {
+        this.id = waybillVO.getId();
+        this.name = waybillVO.getName();
+        this.open = waybillVO.getOpen();
+        this.bean = waybillVO.getBean();
+        Gson gson = new Gson();
+        this.config = gson.toJson(waybillVO.getConfigItems());
+    }
 
 }

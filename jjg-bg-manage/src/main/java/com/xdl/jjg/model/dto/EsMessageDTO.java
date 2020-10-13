@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -24,42 +24,42 @@ public class EsMessageDTO implements Serializable {
     /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
 
     /**
      * 标题
      */
-	private String title;
+    private String title;
 
     /**
      * 消息内容
      */
-	private String content;
+    private String content;
 
     /**
      * 会员id
      */
-	private String memberIds;
+    private String memberIds;
 
     /**
      * 管理员id
      */
-	@JsonSerialize(using = ToStringSerializer.class)
-	private Long adminId;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long adminId;
 
     /**
      * 管理员名称
      */
-	private String adminName;
+    private String adminName;
 
     /**
      * 发送时间
      */
-	@JsonSerialize(using = ToStringSerializer.class)
-	private Long sendTime;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long sendTime;
 
     /**
      * 发送类型
      */
-	private Integer sendType;
+    private Integer sendType;
 }

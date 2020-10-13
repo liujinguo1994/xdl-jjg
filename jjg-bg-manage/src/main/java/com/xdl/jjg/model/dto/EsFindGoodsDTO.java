@@ -24,22 +24,22 @@ public class EsFindGoodsDTO implements Serializable {
     /**
      * 主键id
      */
-	private Long id;
+    private Long id;
 
     /**
      * 商品名称
      */
-	private String goodsName;
+    private String goodsName;
 
     /**
      * 自定义分类id
      */
-	private Long customCategoryId;
+    private Long customCategoryId;
 
     /**
      * 商品链接
      */
-	private String goodsUrl;
+    private String goodsUrl;
 
     /**
      * 图片地址
@@ -54,20 +54,20 @@ public class EsFindGoodsDTO implements Serializable {
     /**
      * 商品id
      */
-	private Long goodsId;
+    private Long goodsId;
 
     /**
      * 商品描述
      */
-	private String goodsDescription;
+    private String goodsDescription;
 
     /**
      * 创建时间
      */
-	private Long createTime;
+    private Long createTime;
 
     /**
      * 最后修改时间
      */
-	private Long updateTime;
+    private Long updateTime;
 }

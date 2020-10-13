@@ -25,7 +25,7 @@ public class EsAuthEsGoodsForm implements Serializable {
     /**
      * 状态
      */
-    @ApiModelProperty(required = true, value = "状态(1:通过,2:驳回)",example = "1")
+    @ApiModelProperty(required = true, value = "状态(1:通过,2:驳回)", example = "1")
     @NotNull(message = "状态不能为空")
     private Integer status;
     /**

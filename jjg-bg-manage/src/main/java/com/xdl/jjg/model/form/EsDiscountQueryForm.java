@@ -25,7 +25,7 @@ public class EsDiscountQueryForm extends QueryPageForm {
     /**
      * 公司ID
      */
-    @ApiModelProperty(required = true, value = "公司ID",example = "1")
+    @ApiModelProperty(required = true, value = "公司ID", example = "1")
     @NotNull(message = "公司ID不能为空")
     private Long companyId;
 }

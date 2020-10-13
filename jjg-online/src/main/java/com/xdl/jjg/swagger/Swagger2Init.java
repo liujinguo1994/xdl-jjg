@@ -13,6 +13,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 import java.util.List;
+
 /**
  * @author sanqi
  * @version 1.0.0
@@ -41,6 +42,7 @@ public class Swagger2Init {
         list.add(new ApiKey("Authorization", "Authorization", "header"));
         return list;
     }
+
     private List<SecurityContext> securityContexts() {
         List<SecurityContext> list = new ArrayList();
         list.add(SecurityContext.builder()

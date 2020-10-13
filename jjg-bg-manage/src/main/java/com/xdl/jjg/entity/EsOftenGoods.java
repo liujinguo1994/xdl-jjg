@@ -19,60 +19,60 @@ import java.io.Serializable;
 @TableName("es_often_goods")
 public class EsOftenGoods extends Model<EsOftenGoods> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 主键id
-	 */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    /**
+     * 主键id
+     */
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
 
-	/**
-	 * 商品名称
-	 */
-	@TableField("goods_name")
-	private String goodsName;
+    /**
+     * 商品名称
+     */
+    @TableField("goods_name")
+    private String goodsName;
 
-	/**
-	 * 自定义分类id
-	 */
-	@TableField("custom_category_id")
-	private Long customCategoryId;
+    /**
+     * 自定义分类id
+     */
+    @TableField("custom_category_id")
+    private Long customCategoryId;
 
-	/**
-	 * 商品链接
-	 */
-	@TableField("goods_url")
-	private String goodsUrl;
+    /**
+     * 商品链接
+     */
+    @TableField("goods_url")
+    private String goodsUrl;
 
-	/**
-	 * 图片地址
-	 */
-	@TableField("pic_url")
-	private String picUrl;
+    /**
+     * 图片地址
+     */
+    @TableField("pic_url")
+    private String picUrl;
 
-	/**
-	 * 商品id
-	 */
-	@TableField("goods_id")
-	private Long goodsId;
+    /**
+     * 商品id
+     */
+    @TableField("goods_id")
+    private Long goodsId;
 
-	/**
-	 * 创建时间
-	 */
-	@TableField(value = "create_time", fill = FieldFill.INSERT)
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-	private Long createTime;
+    /**
+     * 创建时间
+     */
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Long createTime;
 
-	/**
-	 * 最后修改时间
-	 */
-	@TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-	private Long updateTime;
+    /**
+     * 最后修改时间
+     */
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Long updateTime;
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 }

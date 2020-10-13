@@ -13,7 +13,7 @@ import java.util.Map;
  *      data：  响应数据
  *  }
  * </pre>
- *
+ * <p>
  * <p>
  * 错误码：
  * <ul>
@@ -37,30 +37,30 @@ public class ResponseUtil implements Serializable {
 
 
     public static Object ok() {
-        return ok(null) ;
+        return ok(null);
     }
 
     public static Object ok(Object data) {
-        return ok("成功", data) ;
+        return ok("成功", data);
     }
 
     public static Object ok(String msg, Object data) {
-        return set(0,msg,data);
+        return set(0, msg, data);
     }
 
     public static Object fail() {
         return fail("错误");
     }
 
-    public static Object fail(String msg){
-        return fail(-1,msg);
+    public static Object fail(String msg) {
+        return fail(-1, msg);
     }
 
     public static Object fail(Integer code, String msg) {
-        return set(code,msg,null);
+        return set(code, msg, null);
     }
 
-    public static Object set(Integer code, String msg,Object data) {
+    public static Object set(Integer code, String msg, Object data) {
         Map<String, Object> obj = new HashMap();
         obj.put("code", code);
         obj.put("msg", msg);

@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -61,24 +61,24 @@ public class EsSiteNavigationServiceImpl extends ServiceImpl<EsSiteNavigationMap
     public DubboResult insertSiteNavigation(EsSiteNavigationDTO siteNavigationDTO) {
         try {
             //移动端图片地址必填
-            if("MOBILE".equals(siteNavigationDTO.getClientType())){
-                if(StringUtil.isEmpty(siteNavigationDTO.getImage())){
+            if ("MOBILE".equals(siteNavigationDTO.getClientType())) {
+                if (StringUtil.isEmpty(siteNavigationDTO.getImage())) {
                     throw new ArgumentException(ErrorCode.IMAGE_IS_NULL.getErrorCode(), "移动端导航，图片必传");
                 }
             }
             //导航名称长度不能超过6
-            if(siteNavigationDTO.getNavigationName().length()>6){
+            if (siteNavigationDTO.getNavigationName().length() > 6) {
                 throw new ArgumentException(ErrorCode.NAME_IS_LONG.getErrorCode(), "导航栏菜单名称已经超出最大限制");
             }
             EsSiteNavigation siteNavigation = new EsSiteNavigation();
             BeanUtil.copyProperties(siteNavigationDTO, siteNavigation);
             this.siteNavigationMapper.insert(siteNavigation);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -98,17 +98,17 @@ public class EsSiteNavigationServiceImpl extends ServiceImpl<EsSiteNavigationMap
     public DubboResult updateSiteNavigation(EsSiteNavigationDTO siteNavigationDTO) {
         try {
             EsSiteNavigation esSiteNavigation = siteNavigationMapper.selectById(siteNavigationDTO.getId());
-            if (esSiteNavigation == null){
+            if (esSiteNavigation == null) {
                 throw new ArgumentException(ErrorCode.SITE_NAVIGATION_NOT_EXIT.getErrorCode(), "导航栏不存在，请正确操作");
             }
             //移动端图片地址必填
-            if("MOBILE".equals(siteNavigationDTO.getClientType())){
-                if(StringUtil.isEmpty(siteNavigationDTO.getImage())){
+            if ("MOBILE".equals(siteNavigationDTO.getClientType())) {
+                if (StringUtil.isEmpty(siteNavigationDTO.getImage())) {
                     throw new ArgumentException(ErrorCode.IMAGE_IS_NULL.getErrorCode(), "移动端导航，图片必传");
                 }
             }
             //导航名称长度不能超过6
-            if(siteNavigationDTO.getNavigationName().length()>6){
+            if (siteNavigationDTO.getNavigationName().length() > 6) {
                 throw new ArgumentException(ErrorCode.NAME_IS_LONG.getErrorCode(), "导航栏菜单名称已经超出最大限制");
             }
 
@@ -118,10 +118,10 @@ public class EsSiteNavigationServiceImpl extends ServiceImpl<EsSiteNavigationMap
             queryWrapper.lambda().eq(EsSiteNavigation::getId, siteNavigationDTO.getId());
             this.siteNavigationMapper.update(siteNavigation, queryWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -149,10 +149,10 @@ public class EsSiteNavigationServiceImpl extends ServiceImpl<EsSiteNavigationMap
             }
             BeanUtil.copyProperties(siteNavigation, siteNavigationDO);
             return DubboResult.success(siteNavigationDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -162,8 +162,8 @@ public class EsSiteNavigationServiceImpl extends ServiceImpl<EsSiteNavigationMap
      * 根据查询列表
      *
      * @param siteNavigationDTO DTO
-     * @param pageSize     页码
-     * @param pageNum      页数
+     * @param pageSize          页码
+     * @param pageNum           页数
      * @auther: rm 2817512105@qq.com
      * @date: 2019-06-04
      * @return: com.shopx.common.model.result.DubboPageResult<EsSiteNavigationDO>
@@ -173,7 +173,7 @@ public class EsSiteNavigationServiceImpl extends ServiceImpl<EsSiteNavigationMap
         QueryWrapper<EsSiteNavigation> queryWrapper = new QueryWrapper<>();
         try {
             // 查询条件
-            queryWrapper.lambda().eq(EsSiteNavigation::getClientType,siteNavigationDTO.getClientType()).orderByDesc(EsSiteNavigation::getSort);
+            queryWrapper.lambda().eq(EsSiteNavigation::getClientType, siteNavigationDTO.getClientType()).orderByDesc(EsSiteNavigation::getSort);
             Page<EsSiteNavigation> page = new Page<>(pageNum, pageSize);
             IPage<EsSiteNavigation> iPage = this.page(page, queryWrapper);
             List<EsSiteNavigationDO> siteNavigationDOList = new ArrayList<>();
@@ -184,10 +184,10 @@ public class EsSiteNavigationServiceImpl extends ServiceImpl<EsSiteNavigationMap
                     return siteNavigationDO;
                 }).collect(Collectors.toList());
             }
-            return DubboPageResult.success(iPage.getTotal(),siteNavigationDOList);
-        } catch (ArgumentException ae){
+            return DubboPageResult.success(iPage.getTotal(), siteNavigationDOList);
+        } catch (ArgumentException ae) {
             logger.error("分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -210,18 +210,18 @@ public class EsSiteNavigationServiceImpl extends ServiceImpl<EsSiteNavigationMap
                 throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), String.format("参数传入错误ID不能为空[%s]", id));
             }
             EsSiteNavigation esSiteNavigation = siteNavigationMapper.selectById(id);
-            if (esSiteNavigation == null){
+            if (esSiteNavigation == null) {
                 throw new ArgumentException(ErrorCode.SITE_NAVIGATION_NOT_EXIT.getErrorCode(), "导航栏不存在，请正确操作");
             }
             QueryWrapper<EsSiteNavigation> deleteWrapper = new QueryWrapper<>();
             deleteWrapper.lambda().eq(EsSiteNavigation::getId, id);
             this.siteNavigationMapper.delete(deleteWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
-             logger.error("删除失败", ae);
-             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+        } catch (ArgumentException ae) {
+            logger.error("删除失败", ae);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -233,13 +233,13 @@ public class EsSiteNavigationServiceImpl extends ServiceImpl<EsSiteNavigationMap
     public DubboPageResult<EsSiteNavigationDO> getByClientType(String clientType) {
         try {
             QueryWrapper<EsSiteNavigation> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsSiteNavigation::getClientType,clientType).orderByAsc(EsSiteNavigation::getSort);
+            queryWrapper.lambda().eq(EsSiteNavigation::getClientType, clientType).orderByAsc(EsSiteNavigation::getSort);
             List<EsSiteNavigation> data = siteNavigationMapper.selectList(queryWrapper);
             List<EsSiteNavigationDO> doList = BeanUtil.copyList(data, EsSiteNavigationDO.class);
             return DubboPageResult.success(doList);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("根据客户端类型查询导航菜单失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("根据客户端类型查询导航菜单失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");

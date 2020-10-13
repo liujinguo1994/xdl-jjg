@@ -4,10 +4,10 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsAdminUserToken">
-        <id column="user_id" property="userId" />
-        <result column="token" property="token" />
-        <result column="expire_time" property="expireTime" />
-        <result column="update_time" property="updateTime" />
+        <id column="user_id" property="userId"/>
+        <result column="token" property="token"/>
+        <result column="expire_time" property="expireTime"/>
+        <result column="update_time" property="updateTime"/>
     </resultMap>
 
 </mapper>

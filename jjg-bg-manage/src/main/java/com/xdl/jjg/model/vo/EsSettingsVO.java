@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -23,17 +23,17 @@ public class EsSettingsVO implements Serializable {
     /**
      * 主键ID
      */
-    @ApiModelProperty(value = "主键ID",example = "1")
-	private Long id;
+    @ApiModelProperty(value = "主键ID", example = "1")
+    private Long id;
     /**
      * 系统配置信息
      */
     @ApiModelProperty(value = "系统配置信息")
-	private String cfgValue;
+    private String cfgValue;
     /**
      * 业务设置标识
      */
     @ApiModelProperty(value = "业务设置标识")
-	private String cfgGroup;
+    private String cfgGroup;
 
 }

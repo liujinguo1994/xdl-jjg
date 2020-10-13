@@ -20,21 +20,21 @@ public class EsReturnReasonDTO implements Serializable {
     /**
      * 主键id
      */
-	private Long id;
+    private Long id;
 
     /**
      * 原因
      */
-	private String reason;
+    private String reason;
 
     /**
      * 售后类型
      */
-	private String refundType;
+    private String refundType;
 
     /**
      * 创建时间
      */
-	private Long createTime;
+    private Long createTime;
 
 }

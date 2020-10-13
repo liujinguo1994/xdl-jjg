@@ -4,18 +4,17 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsSiteNavigation">
-        <id column="id" property="id" />
-        <result column="navigation_name" property="navigationName" />
-        <result column="url" property="url" />
-        <result column="client_type" property="clientType" />
-        <result column="image" property="image" />
-        <result column="sort" property="sort" />
+        <id column="id" property="id"/>
+        <result column="navigation_name" property="navigationName"/>
+        <result column="url" property="url"/>
+        <result column="client_type" property="clientType"/>
+        <result column="image" property="image"/>
+        <result column="sort" property="sort"/>
     </resultMap>
 
     <select id="getMaxSort" resultType="Integer">
       select MAX(sort) from es_site_navigation
     </select>
-
 
 
 </mapper>

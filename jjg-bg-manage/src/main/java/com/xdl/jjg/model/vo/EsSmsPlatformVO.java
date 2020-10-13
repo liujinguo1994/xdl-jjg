@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * <p>
- *  短信平台
+ * 短信平台
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -23,28 +23,28 @@ public class EsSmsPlatformVO implements Serializable {
     /**
      * 主键ID
      */
-    @ApiModelProperty(value = "主键ID",example = "1")
-	private Long id;
+    @ApiModelProperty(value = "主键ID", example = "1")
+    private Long id;
     /**
      * 平台名称
      */
     @ApiModelProperty(value = "平台名称")
-	private String name;
+    private String name;
     /**
      * 是否开启
      */
-    @ApiModelProperty(value = "是否开启(0：关闭，1：开启)",example = "1")
-	private Integer open;
+    @ApiModelProperty(value = "是否开启(0：关闭，1：开启)", example = "1")
+    private Integer open;
     /**
      * 配置
      */
     @ApiModelProperty(value = "配置")
-	private String config;
+    private String config;
     /**
      * bean
      */
     @ApiModelProperty(value = "bean")
-	private String bean;
+    private String bean;
 
     /*短信配置项*/
     @ApiModelProperty(value = "短信配置项")

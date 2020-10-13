@@ -64,7 +64,7 @@ public class OAuth2Realm extends AuthorizingRealm {
         EsAdminUserTokenDTO adminUserTokenDTO = new EsAdminUserTokenDTO();
         adminUserTokenDTO.setToken(accessToken);
         DubboResult<EsAdminUserTokenDO> tokenResult = userTokenService.getUserToken(adminUserTokenDTO);
-        if(!tokenResult.isSuccess()){
+        if (!tokenResult.isSuccess()) {
             throw new IncorrectCredentialsException("登录失败，请重新登录");
         }
         EsAdminUserTokenDO userTokenDO = tokenResult.getData();
@@ -75,7 +75,7 @@ public class OAuth2Realm extends AuthorizingRealm {
         EsAdminUserDTO userDTO = new EsAdminUserDTO();
         userDTO.setId(userTokenDO.getUserId());
         DubboResult<EsAdminUserDO> result = userService.getUserInfo(userDTO);
-        if(!result.isSuccess()){
+        if (!result.isSuccess()) {
             throw new IncorrectCredentialsException("登录失败，请重新登录");
         }
         EsAdminUserDO adminUserDO = result.getData();
@@ -86,25 +86,25 @@ public class OAuth2Realm extends AuthorizingRealm {
 
         ShiroUser su = new ShiroUser();
         List<String> roles = new ArrayList<>();
-        BeanUtil.copyProperties(adminUserDO,su);
+        BeanUtil.copyProperties(adminUserDO, su);
         //判断是否为超级管理员
-        if (adminUserDO.getIsAdmin() == 1){
+        if (adminUserDO.getIsAdmin() == 1) {
             //设置角色
             roles.add("superAdmin");
             su.setRoles(roles);
             //设置用户的权限
             DubboResult<List<String>> listDubboResult = menuService.getAuthExpressionList();
-            if (!listDubboResult.isSuccess()){
+            if (!listDubboResult.isSuccess()) {
                 throw new IncorrectCredentialsException("获取所有菜单权限表达式失败");
             }
             List<String> resultData = listDubboResult.getData();
             su.setUrlSet(resultData);
-            logger.info("当前角色"+JSONArray.fromObject(roles).toString());
-            logger.info("获取所有菜单菜单权限表达式列表:"+JSONArray.fromObject(resultData).toString());
-        }else {
+            logger.info("当前角色" + JSONArray.fromObject(roles).toString());
+            logger.info("获取所有菜单菜单权限表达式列表:" + JSONArray.fromObject(resultData).toString());
+        } else {
             //设置用户的角色
             DubboResult<EsRoleDO> roleDODubboResult = roleService.getEsRole(adminUserDO.getRoleId());
-            if (!roleDODubboResult.isSuccess()){
+            if (!roleDODubboResult.isSuccess()) {
                 throw new IncorrectCredentialsException("根据角色id获取角色失败");
             }
             EsRoleDO roleDO = roleDODubboResult.getData();
@@ -112,12 +112,12 @@ public class OAuth2Realm extends AuthorizingRealm {
             su.setRoles(roles);
             //设置用户的权限
             DubboResult<List<String>> dubboResult = roleService.getAuthExpressionList(adminUserDO.getRoleId());
-            if (!dubboResult.isSuccess()){
+            if (!dubboResult.isSuccess()) {
                 throw new IncorrectCredentialsException("根据角色id获取所属菜单权限表达式列表失败");
             }
             List<String> data = dubboResult.getData();
-            logger.info("当前角色"+JSONArray.fromObject(roles).toString());
-            logger.info("根据角色id获取所属菜单权限表达式列表:"+JSONArray.fromObject(data).toString());
+            logger.info("当前角色" + JSONArray.fromObject(roles).toString());
+            logger.info("根据角色id获取所属菜单权限表达式列表:" + JSONArray.fromObject(data).toString());
             su.setUrlSet(data);
         }
         SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(su, accessToken, getName());

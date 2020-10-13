@@ -4,10 +4,10 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsReturnReason">
-        <id column="id" property="id" />
-        <result column="reason" property="reason" />
-        <result column="refund_type" property="refundType" />
-        <result column="create_time" property="createTime" />
+        <id column="id" property="id"/>
+        <result column="reason" property="reason"/>
+        <result column="refund_type" property="refundType"/>
+        <result column="create_time" property="createTime"/>
     </resultMap>
 
 </mapper>

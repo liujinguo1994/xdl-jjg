@@ -23,7 +23,6 @@ public class WeixinAppServiceProvider extends AbstractOAuth2ServiceProvider<Weix
     private static final String URL_ACCESS_TOKEN = "https://api.weixin.qq.com/sns/oauth2/access_token";
 
     /**
-     *
      * @param appId
      * @param appSecret
      */

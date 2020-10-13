@@ -11,6 +11,7 @@ public interface ValidateCodeGenerator {
 
     /**
      * 创建验证码接口
+     *
      * @param request
      * @return
      */

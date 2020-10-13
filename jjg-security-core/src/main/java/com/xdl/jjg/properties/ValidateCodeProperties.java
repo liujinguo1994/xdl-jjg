@@ -4,7 +4,6 @@ package com.xdl.jjg.properties;
  * @Author: ciyuan
  * @Date: 2019/5/20 0:32
  * TODO: 验证码相关的参数的注入，包括图形验证码和短信验证码
- *
  */
 
 public class ValidateCodeProperties {

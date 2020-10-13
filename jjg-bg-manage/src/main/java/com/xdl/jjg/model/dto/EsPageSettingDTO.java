@@ -6,7 +6,6 @@ import java.io.Serializable;
 
 /**
  * 静态页设置
- *
  */
 @Data
 public class EsPageSettingDTO implements Serializable {

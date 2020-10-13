@@ -4,17 +4,17 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsMessageTemplate">
-        <id column="id" property="id" />
-        <result column="tpl_code" property="tplCode" />
-        <result column="tpl_name" property="tplName" />
-        <result column="type" property="type" />
-        <result column="notice_state" property="noticeState" />
-        <result column="sms_state" property="smsState" />
-        <result column="email_state" property="emailState" />
-        <result column="content" property="content" />
-        <result column="sms_content" property="smsContent" />
-        <result column="email_content" property="emailContent" />
-        <result column="email_title" property="emailTitle" />
+        <id column="id" property="id"/>
+        <result column="tpl_code" property="tplCode"/>
+        <result column="tpl_name" property="tplName"/>
+        <result column="type" property="type"/>
+        <result column="notice_state" property="noticeState"/>
+        <result column="sms_state" property="smsState"/>
+        <result column="email_state" property="emailState"/>
+        <result column="content" property="content"/>
+        <result column="sms_content" property="smsContent"/>
+        <result column="email_content" property="emailContent"/>
+        <result column="email_title" property="emailTitle"/>
     </resultMap>
 
 </mapper>

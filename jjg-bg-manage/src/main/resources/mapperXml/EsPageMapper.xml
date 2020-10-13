@@ -4,11 +4,11 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsPage">
-        <id column="id" property="id" />
-        <result column="page_name" property="pageName" />
-        <result column="page_data" property="pageData" />
-        <result column="page_type" property="pageType" />
-        <result column="client_type" property="clientType" />
+        <id column="id" property="id"/>
+        <result column="page_name" property="pageName"/>
+        <result column="page_data" property="pageData"/>
+        <result column="page_type" property="pageType"/>
+        <result column="client_type" property="clientType"/>
     </resultMap>
 
 </mapper>

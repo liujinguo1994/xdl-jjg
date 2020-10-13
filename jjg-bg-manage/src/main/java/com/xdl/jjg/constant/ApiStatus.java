@@ -19,12 +19,12 @@ public class ApiStatus extends BaseApiStatus {
     public static UnCheckedWebException wrapperException(BaseResultSupport resultSupport) {
         int code = resultSupport.getCode();
         String msg = resultSupport.getMsg();
-        return new UnCheckedWebException(code,msg);
+        return new UnCheckedWebException(code, msg);
     }
 
 
     public static UnCheckedWebException wrapperException(RuntimeException ex) {
-        return new UnCheckedWebException(SYST_SYSTEM_ERROR,FAIL_MESSAGE,ex);
+        return new UnCheckedWebException(SYST_SYSTEM_ERROR, FAIL_MESSAGE, ex);
     }
 
 

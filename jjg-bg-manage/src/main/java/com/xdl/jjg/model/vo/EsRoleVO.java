@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -23,7 +23,7 @@ public class EsRoleVO implements Serializable {
     /**
      * 主键ID
      */
-    @ApiModelProperty(value = "主键ID",example = "1")
+    @ApiModelProperty(value = "主键ID", example = "1")
     private Long id;
     /**
      * 权限名称

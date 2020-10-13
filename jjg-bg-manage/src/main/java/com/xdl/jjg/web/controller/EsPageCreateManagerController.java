@@ -15,7 +15,7 @@ import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * <p>
- *  前端控制器-静态页
+ * 前端控制器-静态页
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -23,7 +23,7 @@ import springfox.documentation.annotations.ApiIgnore;
  */
 @RestController
 @RequestMapping("/esPageCreateManager")
-@Api(value="/esPageCreateManager", tags="静态页")
+@Api(value = "/esPageCreateManager", tags = "静态页")
 public class EsPageCreateManagerController {
 
     @Autowired
@@ -36,22 +36,22 @@ public class EsPageCreateManagerController {
     public ApiResponse create(@ApiIgnore @RequestParam("choosePages") String[] choosePages) {
         //参数校验
         if (choosePages == null || choosePages.length == 0) {
-            return ApiResponse.fail(1001,"生成静态页参数为空");
+            return ApiResponse.fail(1001, "生成静态页参数为空");
         }
         for (String p : choosePages) {
             if (!p.equals(PageCreateEnum.GOODS.name()) && !p.equals(PageCreateEnum.HELP.name()) && !p.equals(PageCreateEnum.INDEX.name())) {
-                return ApiResponse.fail(1002,"生成静态页参数有误");
+                return ApiResponse.fail(1002, "生成静态页参数有误");
             }
         }
         DubboResult<Boolean> result = pageCreateManagerService.create(choosePages);
-        if (result.isSuccess()){
+        if (result.isSuccess()) {
             Boolean b = result.getData();
-            if (b){
+            if (b) {
                 return ApiResponse.success("任务开始");
-            }else {
-                return ApiResponse.fail(1003,"有静态页生成任务正在进行中，需等待本次任务完成后才能再次生成。");
+            } else {
+                return ApiResponse.fail(1003, "有静态页生成任务正在进行中，需等待本次任务完成后才能再次生成。");
             }
-        }else {
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
 

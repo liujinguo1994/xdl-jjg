@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  */
 public class DecimalUtil {
 
-    public static Integer feeToYuan(BigDecimal amount){
+    public static Integer feeToYuan(BigDecimal amount) {
         Integer fee = 0;
         fee = amount.multiply(new BigDecimal(100)).intValue();
         return fee;

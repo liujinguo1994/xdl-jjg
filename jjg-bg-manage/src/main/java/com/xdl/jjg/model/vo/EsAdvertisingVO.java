@@ -20,36 +20,36 @@ import java.io.Serializable;
 @ApiModel
 public class EsAdvertisingVO implements Serializable {
 
-private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 主键id
-	 */
-	@ApiModelProperty(value = "主键id")
-	private Long id;
+    /**
+     * 主键id
+     */
+    @ApiModelProperty(value = "主键id")
+    private Long id;
 
-	/**
-	 * 图片名称
-	 */
-	@ApiModelProperty(value = "图片名称")
-	private String picName;
+    /**
+     * 图片名称
+     */
+    @ApiModelProperty(value = "图片名称")
+    private String picName;
 
-	/**
-	 * 位置(首页，常买清单)
-	 */
-	@ApiModelProperty(value = "位置(首页，常买清单)")
-	private String location;
+    /**
+     * 位置(首页，常买清单)
+     */
+    @ApiModelProperty(value = "位置(首页，常买清单)")
+    private String location;
 
-	/**
-	 * 连接
-	 */
-	@ApiModelProperty(value = "连接")
-	private String link;
+    /**
+     * 连接
+     */
+    @ApiModelProperty(value = "连接")
+    private String link;
 
-	/**
-	 * 图片地址
-	 */
-	@ApiModelProperty(value = "图片地址")
-	private String picUrl;
+    /**
+     * 图片地址
+     */
+    @ApiModelProperty(value = "图片地址")
+    private String picUrl;
 
-	}
+}

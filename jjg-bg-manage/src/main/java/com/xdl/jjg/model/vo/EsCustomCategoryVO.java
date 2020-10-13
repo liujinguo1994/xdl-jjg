@@ -21,40 +21,40 @@ import java.util.List;
 @ApiModel
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class EsCustomCategoryVO implements Serializable {
-	private static final long serialVersionUID = -5810578454543835296L;
-	/**
-	 * 主键ID
-	 */
-	@ApiModelProperty(value = "主键ID")
-	private Long id;
+    private static final long serialVersionUID = -5810578454543835296L;
+    /**
+     * 主键ID
+     */
+    @ApiModelProperty(value = "主键ID")
+    private Long id;
 
-	/**
-	 * 自定义分类名称
-	 */
+    /**
+     * 自定义分类名称
+     */
 
-	@ApiModelProperty(value = "自定义分类名称")
-	private String categoryName;
+    @ApiModelProperty(value = "自定义分类名称")
+    private String categoryName;
 
-	/**
-	 * 所属专区
-	 */
-	@ApiModelProperty(value = "所属专区")
-	private Long zoneId;
+    /**
+     * 所属专区
+     */
+    @ApiModelProperty(value = "所属专区")
+    private Long zoneId;
 
-	/**
-	 * 专区名称
-	 */
-	@ApiModelProperty(value = "专区名称")
-	private String zoneName;
+    /**
+     * 专区名称
+     */
+    @ApiModelProperty(value = "专区名称")
+    private String zoneName;
 
-	/**
-	 * 发现好货
-	 */
-	@ApiModelProperty(value = "发现好货")
-	private List<EsFindGoodsVO> findGoodsVOS;
+    /**
+     * 发现好货
+     */
+    @ApiModelProperty(value = "发现好货")
+    private List<EsFindGoodsVO> findGoodsVOS;
 
-	/**
-	 * 常卖清单
-	 */
-	private List<EsOftenGoodsVO> oftenGoodsVOS;
+    /**
+     * 常卖清单
+     */
+    private List<EsOftenGoodsVO> oftenGoodsVOS;
 }

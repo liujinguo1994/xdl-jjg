@@ -43,15 +43,16 @@ import java.util.Map;
 
 /**
  * <p>
- *  前端控制器-管理员登录相关API
+ * 前端控制器-管理员登录相关API
  * </p>
  *
  * @author rm 2817512105@qq.com
  * @since 2019-05-29
  */
 @RestController
+@CrossOrigin
 @RequestMapping("/adminUser")
-@Api(value="/adminUser", tags="管理员登录相关API")
+@Api(value = "/adminUser", tags = "管理员登录相关API")
 public class EsAdminUserLoginController {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -75,14 +76,14 @@ public class EsAdminUserLoginController {
     @ApiOperation(value = "图片验证码")
     @GetMapping("/captcha.jpg")
     @ApiImplicitParam(name = "uuid", value = "前台请求的UUID", required = true, dataType = "String", paramType = "query")
-    public void kaptcha(HttpServletResponse response , @RequestParam String uuid) throws IOException {
+    public void kaptcha(HttpServletResponse response, @RequestParam String uuid) throws IOException {
         logger.info("前台请求的UUID:" + uuid);
         if (StringUtils.isBlank(uuid)) {
             throw new RuntimeException("uuid不能为空");
         }
         //生成文字验证码
         String code = producer.createText();
-        redisTemplate.opsForValue().set(CachePrefix.SYSTEM_KAPTCHA.getPrefix() + uuid,code);
+        redisTemplate.opsForValue().set(CachePrefix.SYSTEM_KAPTCHA.getPrefix() + uuid, code);
 
         response.setHeader("Cache-Control", "no-store,no-cache");
         response.setContentType("image/jpeg");
@@ -97,24 +98,24 @@ public class EsAdminUserLoginController {
     @ApiOperation(value = "登录")
     @PostMapping("/login")
     @ResponseBody
-    public Object login(@Valid @RequestBody @ApiParam(name="登录信息form对象",value="form") EsLoginForm form) {
+    public Object login(@Valid @RequestBody @ApiParam(name = "登录信息form对象", value = "form") EsLoginForm form) {
         logger.info("POST请求登录");
-        String validateCode = (String)redisTemplate.opsForValue().get(CachePrefix.SYSTEM_KAPTCHA.getPrefix() + form.getUuid());
+        String validateCode = (String) redisTemplate.opsForValue().get(CachePrefix.SYSTEM_KAPTCHA.getPrefix() + form.getUuid());
         logger.info("session中的图形码字符串:" + validateCode);
         //比对
         if (StringUtils.isBlank(form.getCaptcha()) || StringUtils.isBlank(validateCode) || !validateCode.equalsIgnoreCase(form.getCaptcha())) {
-            return RestResult.fail(105,"验证码错误!");
+            return RestResult.fail(105, "验证码错误!");
         }
         EsAdminUserDTO adminUserDTO = new EsAdminUserDTO();
         adminUserDTO.setUsername(form.getUsername());
         DubboResult<EsAdminUserDO> result = iesAdminUserService.getUserInfo(adminUserDTO);
-        if(result.isSuccess()){
-            if(result.getData() == null){
-                return RestResult.fail(106,"账号不存在!");
+        if (result.isSuccess()) {
+            if (result.getData() == null) {
+                return RestResult.fail(106, "账号不存在!");
             }
             EsAdminUserDO adminUserDO = result.getData();
             if (!adminUserDO.getPassword().equals(StringUtil.md5(form.getPassword() + adminUserDO.getSalt()))) {
-                return RestResult.fail(106,"密码不正确!");
+                return RestResult.fail(106, "密码不正确!");
             }
 
             // 清除验证码
@@ -123,7 +124,7 @@ public class EsAdminUserLoginController {
             //生成token，并保存到数据库
             return createToken(adminUserDO);
         }
-        return RestResult.fail(104,"登录失败!");
+        return RestResult.fail(104, "登录失败!");
     }
 
     //生成token，并保存到数据库
@@ -132,7 +133,7 @@ public class EsAdminUserLoginController {
         EsAdminUserTokenDTO esAdminUserTokenDTO = new EsAdminUserTokenDTO();
         esAdminUserTokenDTO.setUserId(adminUserDO.getId());
         DubboResult<EsAdminUserTokenDO> result = adminUserTokenService.getUserToken(esAdminUserTokenDTO);
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             EsAdminUserTokenDO userTokenDO = result.getData();
             //当前时间
             Date now = new Date();
@@ -159,9 +160,9 @@ public class EsAdminUserLoginController {
                 adminUserTokenVO.setRoleId(adminUserDO.getRoleId());
                 return RestResult.ok(adminUserTokenVO);
             } else {
-                if(userTokenDO.getExpireTime() < System.currentTimeMillis()){
+                if (userTokenDO.getExpireTime() < System.currentTimeMillis()) {
                     esAdminUserTokenDTO.setToken(token);
-                }else{
+                } else {
                     esAdminUserTokenDTO.setToken(userTokenDO.getToken());
                 }
                 esAdminUserTokenDTO.setUpdateTime(now.getTime());
@@ -177,7 +178,7 @@ public class EsAdminUserLoginController {
                 return RestResult.ok(adminUserTokenVO);
             }
         }
-        return RestResult.fail(104,"登录失败!");
+        return RestResult.fail(104, "登录失败!");
     }
 
 
@@ -203,28 +204,28 @@ public class EsAdminUserLoginController {
     @PutMapping(value = "/updatePassword")
     @ApiOperation(value = "修改管理员密码及头像")
     @ResponseBody
-    public Object updatePassword(@RequestBody @ApiParam(name="密码修改form对象",value="form") @Valid EsUpdatePasswordForm form, HttpServletRequest request) {
+    public Object updatePassword(@RequestBody @ApiParam(name = "密码修改form对象", value = "form") @Valid EsUpdatePasswordForm form, HttpServletRequest request) {
         Long uid = ShiroKit.getUser().getId();
         DubboResult<EsAdminUserDO> result = iesAdminUserService.getById(uid);
         EsAdminUserDO esAdminUserDO = result.getData();
         if (esAdminUserDO == null) {
-            return RestResult.fail(201,"当前管理员不存在");
+            return RestResult.fail(201, "当前管理员不存在");
         }
-        
+
         EsAdminUserDTO esAdminUserDTO = new EsAdminUserDTO();
         BeanUtil.copyProperties(esAdminUserDO, esAdminUserDTO);
 
         //校验密码
         if (!StringUtil.isEmpty(form.getOldPassword()) && StringUtil.isEmpty(form.getPassword())) {
-            return RestResult.fail(202,"新密码不能为空");
+            return RestResult.fail(202, "新密码不能为空");
         }
         if (StringUtil.isEmpty(form.getOldPassword()) && !StringUtil.isEmpty(form.getPassword())) {
-            return RestResult.fail(203,"原始密码不能为空");
+            return RestResult.fail(203, "原始密码不能为空");
         }
         if (!StringUtil.isEmpty(form.getOldPassword()) && !StringUtil.isEmpty(form.getPassword())) {
             String dbOldPassword = StringUtil.md5(form.getOldPassword() + esAdminUserDO.getSalt());
             if (!dbOldPassword.equals(esAdminUserDO.getPassword())) {
-                return RestResult.fail(204,"原密码错误");
+                return RestResult.fail(204, "原密码错误");
             }
             esAdminUserDTO.setPassword(form.getPassword());
         } else {

@@ -4,15 +4,15 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsArticle">
-        <id column="id" property="id" />
-        <result column="article_name" property="articleName" />
-        <result column="category_id" property="categoryId" />
-        <result column="sort" property="sort" />
-        <result column="outside_url" property="outsideUrl" />
-        <result column="content" property="content" />
-        <result column="show_position" property="showPosition" />
-        <result column="create_time" property="createTime" />
-        <result column="update_time" property="updateTime" />
+        <id column="id" property="id"/>
+        <result column="article_name" property="articleName"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="sort" property="sort"/>
+        <result column="outside_url" property="outsideUrl"/>
+        <result column="content" property="content"/>
+        <result column="show_position" property="showPosition"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
     </resultMap>
 
     <select id="getAllList" resultType="com.shopx.system.api.model.domain.EsArticleDO">
@@ -35,11 +35,13 @@
             and ea.article_name = #{articleName,jdbcType=VARCHAR}
         </if>
         <if test="categoryIds !=null and categoryIds !=''">
-            and ea.category_id in <foreach collection="categoryIds" item="categoryId" index="index" open="(" close=")" separator=",">#{categoryId}</foreach>
+            and ea.category_id in
+            <foreach collection="categoryIds" item="categoryId" index="index" open="(" close=")" separator=",">
+                #{categoryId}
+            </foreach>
         </if>
         order by ea.create_time desc
     </select>
-
 
 
 </mapper>

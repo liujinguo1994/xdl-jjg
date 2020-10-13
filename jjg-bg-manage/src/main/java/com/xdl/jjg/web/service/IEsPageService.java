@@ -7,7 +7,7 @@ import com.xdl.jjg.response.service.DubboResult;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -18,10 +18,11 @@ public interface IEsPageService {
 
     /**
      * 根据条件更新更新数据
+     *
+     * @param pageDTO DTO
      * @author rm 2817512105@qq.com
-     * @since 2019-06-04
-     * @param pageDTO    DTO
      * @return: com.shopx.common.model.result.DubboResult<EsPageDO>
+     * @since 2019-06-04
      */
     DubboResult updatePage(EsPageDTO pageDTO);
 

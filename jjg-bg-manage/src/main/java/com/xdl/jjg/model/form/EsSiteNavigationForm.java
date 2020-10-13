@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- *  导航菜单
+ * 导航菜单
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -24,7 +24,7 @@ public class EsSiteNavigationForm implements Serializable {
     /**
      * 主键ID
      */
-    @ApiModelProperty(value = "主键ID",example = "1")
+    @ApiModelProperty(value = "主键ID", example = "1")
     private Long id;
     /**
      * 导航名称

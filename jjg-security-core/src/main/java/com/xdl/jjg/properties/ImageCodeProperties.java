@@ -5,7 +5,7 @@ package com.xdl.jjg.properties;
  * @Date: 2019/5/20 0:29
  * TODO: 生成图形验证码相关的默认参数
  */
-public class ImageCodeProperties extends SmsCodeProperties{
+public class ImageCodeProperties extends SmsCodeProperties {
 
     public ImageCodeProperties() {
         setLength(4);

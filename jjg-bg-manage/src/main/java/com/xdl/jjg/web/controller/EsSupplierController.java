@@ -19,7 +19,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器-供应商
+ * 前端控制器-供应商
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -27,7 +27,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/esSupplier")
-@Api(value="/esSupplier", tags="供应商")
+@Api(value = "/esSupplier", tags = "供应商")
 public class EsSupplierController {
 
     @Autowired
@@ -36,7 +36,7 @@ public class EsSupplierController {
     @Autowired
     private IEsRegionsService iEsRegionsService;
 
-    @ApiOperation(value = "分页查询供应商列表",response = EsSupplierVO.class)
+    @ApiOperation(value = "分页查询供应商列表", response = EsSupplierVO.class)
     @GetMapping(value = "/getSupplierList")
     @ResponseBody
     public ApiResponse getSupplierList(EsSupplierQueryForm form) {
@@ -46,7 +46,7 @@ public class EsSupplierController {
         if (result.isSuccess()) {
             List<EsSupplierDO> data = result.getData().getList();
             List<EsSupplierVO> esSupplierVOList = BeanUtil.copyList(data, EsSupplierVO.class);
-            return ApiPageResponse.pageSuccess(result.getData().getTotal(),esSupplierVOList);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(), esSupplierVOList);
         } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
@@ -55,7 +55,7 @@ public class EsSupplierController {
     @ApiOperation(value = "添加供应商")
     @PostMapping(value = "/insertSupplier")
     @ResponseBody
-    public ApiResponse insertSupplier(@RequestBody @ApiParam(name="供应商form对象",value="form") EsSupplierForm form){
+    public ApiResponse insertSupplier(@RequestBody @ApiParam(name = "供应商form对象", value = "form") EsSupplierForm form) {
         EsSupplierDTO esSupplierDTO = new EsSupplierDTO();
         BeanUtil.copyProperties(form, esSupplierDTO);
         esSupplierDTO.setProvince(iEsRegionsService.getRegions(form.getProvinceId()).getData().getLocalName());
@@ -64,7 +64,7 @@ public class EsSupplierController {
         DubboResult result = iEsSupplierService.insertSupplier(esSupplierDTO);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -72,16 +72,16 @@ public class EsSupplierController {
     @ApiOperation(value = "修改供应商")
     @PutMapping(value = "/updateSupplier/{id}")
     @ResponseBody
-    public ApiResponse updateSupplier(@RequestBody @ApiParam(name="供应商form对象",value="form") EsSupplierForm form, @PathVariable Long id){
+    public ApiResponse updateSupplier(@RequestBody @ApiParam(name = "供应商form对象", value = "form") EsSupplierForm form, @PathVariable Long id) {
         EsSupplierDTO esSupplierDTO = new EsSupplierDTO();
         BeanUtil.copyProperties(form, esSupplierDTO);
         esSupplierDTO.setProvince(iEsRegionsService.getRegions(form.getProvinceId()).getData().getLocalName());
         esSupplierDTO.setCity(iEsRegionsService.getRegions(form.getCityId()).getData().getLocalName());
         esSupplierDTO.setCounty(iEsRegionsService.getRegions(form.getCountyId()).getData().getLocalName());
-        DubboResult result = iEsSupplierService.updateSupplier(esSupplierDTO,id);
+        DubboResult result = iEsSupplierService.updateSupplier(esSupplierDTO, id);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -89,26 +89,26 @@ public class EsSupplierController {
     @DeleteMapping(value = "/batchDel/{ids}")
     @ResponseBody
     @ApiOperation(value = "删除或批量删除")
-    @ApiImplicitParam(name = "ids", value = "供应商id数组", required = true, dataType = "int",example = "1", paramType = "path",allowMultiple = true)
-    public ApiResponse batchDel(@PathVariable Integer[] ids){
+    @ApiImplicitParam(name = "ids", value = "供应商id数组", required = true, dataType = "int", example = "1", paramType = "path", allowMultiple = true)
+    public ApiResponse batchDel(@PathVariable Integer[] ids) {
         DubboResult result = iEsSupplierService.deleteSupplier(ids);
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
 
-    @ApiOperation(value = "根据id查询供应商信息",response = EsSupplierVO.class)
+    @ApiOperation(value = "根据id查询供应商信息", response = EsSupplierVO.class)
     @GetMapping(value = "/getSupplier/{id}")
-    @ApiImplicitParam(name = "id", value = "供应商id", required = true, dataType = "long",example = "1", paramType = "path")
+    @ApiImplicitParam(name = "id", value = "供应商id", required = true, dataType = "long", example = "1", paramType = "path")
     @ResponseBody
     public ApiResponse getSupplier(@PathVariable Long id) {
         DubboResult<EsSupplierDO> result = iEsSupplierService.getSupplier(id);
         if (result.isSuccess()) {
             EsSupplierDO data = result.getData();
             EsSupplierVO esSupplierVO = new EsSupplierVO();
-            BeanUtil.copyProperties(data,esSupplierVO);
+            BeanUtil.copyProperties(data, esSupplierVO);
             return ApiResponse.success(esSupplierVO);
         } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
@@ -118,12 +118,12 @@ public class EsSupplierController {
     @PutMapping(value = "/revert/{ids}")
     @ResponseBody
     @ApiOperation(value = "启用供应商")
-    @ApiImplicitParam(name = "ids", value = "供应商id数组", required = true, dataType = "int",example = "1", paramType = "path",allowMultiple = true)
-    public ApiResponse revert(@PathVariable Integer[] ids){
+    @ApiImplicitParam(name = "ids", value = "供应商id数组", required = true, dataType = "int", example = "1", paramType = "path", allowMultiple = true)
+    public ApiResponse revert(@PathVariable Integer[] ids) {
         DubboResult result = iEsSupplierService.revertSupplier(ids);
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -131,12 +131,12 @@ public class EsSupplierController {
     @PutMapping(value = "/prohibitSupplier/{ids}")
     @ResponseBody
     @ApiOperation(value = "禁用供应商")
-    @ApiImplicitParam(name = "ids", value = "供应商id数组", required = true, dataType = "int",example = "1", paramType = "path",allowMultiple = true)
-    public ApiResponse prohibitSupplier(@PathVariable Integer[] ids){
+    @ApiImplicitParam(name = "ids", value = "供应商id数组", required = true, dataType = "int", example = "1", paramType = "path", allowMultiple = true)
+    public ApiResponse prohibitSupplier(@PathVariable Integer[] ids) {
         DubboResult result = iEsSupplierService.prohibitSupplier(ids);
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }

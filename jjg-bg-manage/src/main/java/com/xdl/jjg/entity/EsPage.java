@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -26,33 +26,33 @@ public class EsPage extends Model<EsPage> {
     /**
      * 主键id
      */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
     /**
      * 楼层名称
      */
     @TableField("page_name")
-	private String pageName;
+    private String pageName;
     /**
      * 楼层数据
      */
     @TableField("page_data")
-	private String pageData;
+    private String pageData;
     /**
      * 页面类型
      */
     @TableField("page_type")
-	private String pageType;
+    private String pageType;
     /**
      * 客户端类型
      */
     @TableField("client_type")
-	private String clientType;
+    private String clientType;
 
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 
 }

@@ -14,9 +14,9 @@ public abstract class BaseErrorCode {
 
     private String errorMsg;
 
-    public BaseErrorCode(int errorCode, String errorMsg){
+    public BaseErrorCode(int errorCode, String errorMsg) {
         this.errorCode = errorCode;
-        this.errorMsg  = errorMsg;
+        this.errorMsg = errorMsg;
     }
 
 }

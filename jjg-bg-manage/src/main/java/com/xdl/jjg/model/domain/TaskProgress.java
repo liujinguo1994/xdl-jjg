@@ -8,7 +8,6 @@ import java.math.BigDecimal;
 
 /**
  * 任务进度
- *
  */
 @Data
 public class TaskProgress implements Serializable {
@@ -48,7 +47,8 @@ public class TaskProgress implements Serializable {
      */
     private String message;
 
-    public TaskProgress(){}
+    public TaskProgress() {
+    }
 
     /**
      * 构造时要告诉任务总数，以便计算每步占比
@@ -86,11 +86,10 @@ public class TaskProgress implements Serializable {
 
     /**
      * 失败
-     *
      */
-    public void fail(String text,String message) {
+    public void fail(String text, String message) {
         this.taskStatus = ProgressEnum.EXCEPTION.name();
-        this.message=message;
+        this.message = message;
         this.text = text;
     }
 }

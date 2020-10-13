@@ -5,7 +5,7 @@ package com.xdl.jjg.util;
  * @version 1.0
  * @date 2019/8/1 13:36
  */
-public class TwoTuple<A,B> {
+public class TwoTuple<A, B> {
 
     public final A first;
     public final B second;

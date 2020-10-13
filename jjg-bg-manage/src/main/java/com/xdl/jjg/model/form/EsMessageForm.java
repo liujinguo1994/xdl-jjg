@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- *  站内消息
+ * 站内消息
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -35,7 +35,7 @@ public class EsMessageForm implements Serializable {
     /**
      * 发送类型
      */
-    @ApiModelProperty(value = "发送类型(0全站，1指定会员)", required = true,example = "1")
+    @ApiModelProperty(value = "发送类型(0全站，1指定会员)", required = true, example = "1")
     @NotNull(message = "发送类型不能为空")
     private Integer sendType;
     /**

@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -20,19 +20,19 @@ public class EsSmtpDO implements Serializable {
     /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
     /**
      * 主机
      */
-	private String host;
+    private String host;
     /**
      * 用户名
      */
-	private String username;
+    private String username;
     /**
      * 密码
      */
-	private String password;
+    private String password;
     /**
      * 最后发信时间
      */
@@ -40,21 +40,21 @@ public class EsSmtpDO implements Serializable {
     /**
      * 已发数
      */
-	private Integer sendCount;
+    private Integer sendCount;
     /**
      * 最大发信数
      */
-	private Integer maxCount;
+    private Integer maxCount;
     /**
      * 发信邮箱
      */
-	private String mailFrom;
+    private String mailFrom;
     /**
      * 端口
      */
-	private Integer port;
+    private Integer port;
     /**
      * ssl是否开启
      */
-	private Integer openSsl;
+    private Integer openSsl;
 }

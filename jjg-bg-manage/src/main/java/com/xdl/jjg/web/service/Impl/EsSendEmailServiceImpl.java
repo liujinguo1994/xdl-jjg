@@ -33,7 +33,7 @@ import java.util.Properties;
 
 /**
  * <p>
- *  服务实现类-发送邮件impl
+ * 服务实现类-发送邮件impl
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -56,7 +56,7 @@ public class EsSendEmailServiceImpl implements IEsSendEmailService {
     @Override
     public DubboResult sendEmail(EsSendEmailDTO sendEmailDTO) {
         DubboResult<EsSmtpDO> result = smtpService.getCurrentSmtp();
-        if (!result.isSuccess()){
+        if (!result.isSuccess()) {
             throw new ArgumentException(ErrorCode.GET_SMTP_ERROR.getErrorCode(), "获取smtp方案异常");
         }
         EsSmtpDO esSmtpDO = result.getData();
@@ -124,7 +124,7 @@ public class EsSendEmailServiceImpl implements IEsSendEmailService {
             e.printStackTrace();
             sendEmailDTO.setSuccess(0);
             throw new ArgumentException(ErrorCode.SEND_EMAIL_ERROR.getErrorCode(), "邮件发送失败！");
-        }finally {
+        } finally {
             //添加发邮件记录
             add(sendEmailDTO);
             //更新邮件方案的最后发信时间及发件数量
@@ -160,15 +160,13 @@ public class EsSendEmailServiceImpl implements IEsSendEmailService {
             e.printStackTrace();
             sendEmailDTO.setSuccess(0);
             throw new ArgumentException(ErrorCode.SEND_EMAIL_ERROR.getErrorCode(), "邮件发送失败！");
-        }finally {
+        } finally {
             //添加发邮件记录
             add(sendEmailDTO);
             //更新邮件方案的最后发信时间及发件数量
             update(smtp);
         }
     }
-
-
 
 
     /**
@@ -188,7 +186,7 @@ public class EsSendEmailServiceImpl implements IEsSendEmailService {
     /**
      * 更新邮件方案的最后发信时间及发件数量
      */
-    public void update(EsSmtpDO smtp){
+    public void update(EsSmtpDO smtp) {
         EsSmtp esSmtp = new EsSmtp();
         esSmtp.setId(smtp.getId());
         esSmtp.setLastSendTime(System.currentTimeMillis());

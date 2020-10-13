@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -26,43 +26,43 @@ public class EsFocusPicture extends Model<EsFocusPicture> {
     /**
      * 主键id
      */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
     /**
      * 图片地址
      */
     @TableField("pic_url")
-	private String picUrl;
+    private String picUrl;
     /**
      * 操作类型
      */
     @TableField("operation_type")
-	private String operationType;
+    private String operationType;
     /**
      * 操作参数
      */
     @TableField("operation_param")
-	private String operationParam;
+    private String operationParam;
     /**
      * 操作地址
      */
     @TableField("operation_url")
-	private String operationUrl;
+    private String operationUrl;
     /**
      * 客户端类型 APP/WAP/PC
      */
     @TableField("client_type")
-	private String clientType;
+    private String clientType;
     /**
      * 背景色
      */
     @TableField("operation_color")
-	private String operationColor;
+    private String operationColor;
 
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 
 }

@@ -19,16 +19,16 @@ import java.io.Serializable;
 public class EsMemberLevelConfigForm implements Serializable {
 
 
-	private static final long serialVersionUID = 6872818481551774931L;
-	/**
+    private static final long serialVersionUID = 6872818481551774931L;
+    /**
      * 等级名称
      */
-	@ApiModelProperty(value = "等级名称")
-	private String level;
+    @ApiModelProperty(value = "等级名称")
+    private String level;
 
     /**
      * 成长值下线
      */
-	@ApiModelProperty(value = "成长值下线",example = "1")
-	private Integer underLine;
+    @ApiModelProperty(value = "成长值下线", example = "1")
+    private Integer underLine;
 }

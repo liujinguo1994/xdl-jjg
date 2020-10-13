@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -19,22 +19,22 @@ public class EsSmsPlatformDO implements Serializable {
     /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
     /**
      * 平台名称
      */
-	private String name;
+    private String name;
     /**
      * 是否开启
      */
-	private Integer open;
+    private Integer open;
     /**
      * 配置
      */
-	private String config;
+    private String config;
     /**
      * bean
      */
-	private String bean;
+    private String bean;
 
 }

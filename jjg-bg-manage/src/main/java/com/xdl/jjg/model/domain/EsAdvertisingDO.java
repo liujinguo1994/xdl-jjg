@@ -20,25 +20,25 @@ public class EsAdvertisingDO implements Serializable {
     /**
      * 主键id
      */
-	private Long id;
+    private Long id;
 
     /**
      * 图片名称
      */
-	private String picName;
+    private String picName;
 
     /**
      * 位置
      */
-	private String location;
+    private String location;
 
     /**
      * 连接
      */
-	private String link;
+    private String link;
 
     /**
      * 图片地址
      */
-	private String picUrl;
+    private String picUrl;
 }

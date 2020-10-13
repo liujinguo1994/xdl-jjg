@@ -66,5 +66,4 @@ public class EsUserFeedbackVO implements Serializable {
     private String feedbackModule;
 
 
-
 }

@@ -20,12 +20,12 @@ import lombok.Data;
 public class EsArticleCategoryQueryForm extends QueryPageForm {
 
 
-	private static final long serialVersionUID = 1313700039157349982L;
+    private static final long serialVersionUID = 1313700039157349982L;
 
-	/**
-	 * 分类名称
-	 */
-	@ApiModelProperty(value = "分类名称")
-	private String name;
+    /**
+     * 分类名称
+     */
+    @ApiModelProperty(value = "分类名称")
+    private String name;
 
-	}
+}

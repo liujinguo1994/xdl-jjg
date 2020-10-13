@@ -2,13 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    
+
     <artifactId>jjg-bg-manage</artifactId>
     <packaging>jar</packaging>
     <modelVersion>4.0.0</modelVersion>
     <name>jjg-bg-manage</name>
     <description>jjg-bg-manage</description>
-     
+
     <parent>
         <artifactId>jjg-parent</artifactId>
         <groupId>com.xdl.jjg</groupId>
@@ -67,13 +67,19 @@
 
         <dependency>
             <groupId>com.xdl.jjg</groupId>
+            <artifactId>jjg-shop</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.xdl.jjg</groupId>
             <artifactId>jjg-common-db</artifactId>
             <version>${project.version}</version>
         </dependency>
 
-        <dependency> 
-	      <groupId>org.springframework.cloud</groupId> 
-	      <artifactId>spring-cloud-starter-feign</artifactId> 
+        <dependency>
+	      <groupId>org.springframework.cloud</groupId>
+	      <artifactId>spring-cloud-starter-feign</artifactId>
 	    </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>

@@ -23,27 +23,27 @@ public class EsFocusPictureForm implements Serializable {
     /**
      * 主键id
      */
-    @ApiModelProperty(value = "主键id",example = "1")
-	private Long id;
+    @ApiModelProperty(value = "主键id", example = "1")
+    private Long id;
 
     /**
      * 图片地址
      */
     @ApiModelProperty(required = true, value = "图片地址")
     @NotBlank(message = "图片地址不能为空")
-	private String picUrl;
+    private String picUrl;
 
     /**
      * 操作类型
      */
     @ApiModelProperty(value = "操作类型")
-	private String operationType;
+    private String operationType;
 
     /**
      * 操作参数
      */
     @ApiModelProperty(value = "操作参数")
-	private String operationParam;
+    private String operationParam;
 
     /**
      * 操作地址
@@ -55,12 +55,12 @@ public class EsFocusPictureForm implements Serializable {
      */
     @ApiModelProperty(required = true, value = "客户端类型 APP/WAP/PC")
     @NotBlank(message = "客户端类型不能为空")
-	private String clientType;
+    private String clientType;
 
     /**
      * 背景色
      */
     @ApiModelProperty(value = "背景色")
-	private String operationColor;
+    private String operationColor;
 
 }

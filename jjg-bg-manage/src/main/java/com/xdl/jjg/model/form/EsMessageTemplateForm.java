@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- *  消息模板
+ * 消息模板
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -24,7 +24,7 @@ public class EsMessageTemplateForm implements Serializable {
     /**
      * 主键ID
      */
-    @ApiModelProperty(value = "主键ID",example = "1")
+    @ApiModelProperty(value = "主键ID", example = "1")
     private Long id;
     /**
      * 模版编号
@@ -47,17 +47,17 @@ public class EsMessageTemplateForm implements Serializable {
     /**
      * 站内信提醒是否开启(1:开启,2:关闭)
      */
-    @ApiModelProperty(value = "站内信提醒是否开启(1:开启,2:关闭)",example = "1")
+    @ApiModelProperty(value = "站内信提醒是否开启(1:开启,2:关闭)", example = "1")
     private Integer noticeState;
     /**
      * 短信提醒是否开启(1:开启,2:关闭)
      */
-    @ApiModelProperty(value = "短信提醒是否开启(1:开启,2:关闭)",example = "1")
+    @ApiModelProperty(value = "短信提醒是否开启(1:开启,2:关闭)", example = "1")
     private Integer smsState;
     /**
      * 邮件提醒是否开启(1:开启,2:关闭)
      */
-    @ApiModelProperty(value = "邮件提醒是否开启(1:开启,2:关闭)",example = "1")
+    @ApiModelProperty(value = "邮件提醒是否开启(1:开启,2:关闭)", example = "1")
     private Integer emailState;
     /**
      * 站内信内容

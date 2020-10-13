@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author LiuJG 344009799@qq.com
@@ -22,40 +22,40 @@ public class EsUserFeedbackDTO implements Serializable {
     /**
      * 主键
      */
-	private Long id;
+    private Long id;
 
-	/**
-	 * 会员ID
-	 */
-	private Long memberId;
+    /**
+     * 会员ID
+     */
+    private Long memberId;
 
     /**
      * 用户反馈文本
      */
-	private String feedbackText;
+    private String feedbackText;
 
     /**
      * 用户反馈满意度
      */
-	private Integer feedbackSatisfaction;
+    private Integer feedbackSatisfaction;
 
     /**
      * 用户反馈手机号
      */
-	private String feedbackPhone;
+    private String feedbackPhone;
 
     /**
      * 用户反馈姓名
      */
-	private String feedbackName;
+    private String feedbackName;
 
     /**
      * 反馈功能模块
      */
-	private String feedbackModule;
+    private String feedbackModule;
 
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    protected Serializable pkVal() {
+        return this.id;
+    }
 
 }

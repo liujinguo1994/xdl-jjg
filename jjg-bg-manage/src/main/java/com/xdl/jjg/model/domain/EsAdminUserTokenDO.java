@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- *   管理员用户token信息
+ * 管理员用户token信息
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -20,20 +20,20 @@ public class EsAdminUserTokenDO implements Serializable {
     /**
      * 主键ID
      */
-	private Long userId;
+    private Long userId;
 
     /**
      * token
      */
-	private String token;
+    private String token;
 
     /**
      * 过期时间
      */
-	private Long expireTime;
+    private Long expireTime;
 
     /**
      * 更新时间
      */
-	private Long updateTime;
+    private Long updateTime;
 }

@@ -4,10 +4,10 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsSensitiveWords">
-        <id column="id" property="id" />
-        <result column="word_name" property="wordName" />
-        <result column="create_time" property="createTime" />
-        <result column="is_del" property="isDel" />
+        <id column="id" property="id"/>
+        <result column="word_name" property="wordName"/>
+        <result column="create_time" property="createTime"/>
+        <result column="is_del" property="isDel"/>
     </resultMap>
 
 </mapper>

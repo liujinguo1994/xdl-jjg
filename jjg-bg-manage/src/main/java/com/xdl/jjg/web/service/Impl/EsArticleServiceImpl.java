@@ -69,11 +69,11 @@ public class EsArticleServiceImpl extends ServiceImpl<EsArticleMapper, EsArticle
             //article.setShowPosition(ArticleShowPosition.OTHER.name());
             this.articleMapper.insert(article);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("文章新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("文章新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -96,7 +96,7 @@ public class EsArticleServiceImpl extends ServiceImpl<EsArticleMapper, EsArticle
                 throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), ErrorCode.PARAM_ERROR.getErrorMsg());
             }
             EsArticle esArticle = articleMapper.selectById(articleDTO.getId());
-            if (esArticle == null){
+            if (esArticle == null) {
                 throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), "数据不存在");
             }
             EsArticle article = new EsArticle();
@@ -106,10 +106,10 @@ public class EsArticleServiceImpl extends ServiceImpl<EsArticleMapper, EsArticle
             //article.setShowPosition(esArticle.getShowPosition());
             this.articleMapper.update(article, queryWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("文章更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("文章更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -137,10 +137,10 @@ public class EsArticleServiceImpl extends ServiceImpl<EsArticleMapper, EsArticle
             }
             BeanUtil.copyProperties(article, articleDO);
             return DubboResult.success(articleDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("文章查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("文章查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -150,8 +150,8 @@ public class EsArticleServiceImpl extends ServiceImpl<EsArticleMapper, EsArticle
      * 根据查询文章列表
      *
      * @param articleDTO 文章DTO
-     * @param pageSize     页码
-     * @param pageNum      页数
+     * @param pageSize   页码
+     * @param pageNum    页数
      * @auther: rm 2817512105@qq.com
      * @date: 2019-07-24
      * @return: com.shopx.common.model.result.DubboPageResult<EsArticleDO>
@@ -162,13 +162,13 @@ public class EsArticleServiceImpl extends ServiceImpl<EsArticleMapper, EsArticle
             Page<EsArticleDO> page = new Page<>(pageNum, pageSize);
             IPage<EsArticleDO> iPage = null;
             //分类id为空则查询全部
-            if (StringUtils.isEmpty(articleDTO.getCategoryId())){
-                 iPage = articleMapper.getAllList(page,articleDTO.getArticleName());
-            }else {
+            if (StringUtils.isEmpty(articleDTO.getCategoryId())) {
+                iPage = articleMapper.getAllList(page, articleDTO.getArticleName());
+            } else {
                 //分类id不为空则根据分类去查
                 List<Long> categoryIdList = new ArrayList<>();
                 QueryWrapper<EsArticleCategory> queryWrapper = new QueryWrapper<>();
-                queryWrapper.lambda().eq(EsArticleCategory::getParentId,articleDTO.getCategoryId());
+                queryWrapper.lambda().eq(EsArticleCategory::getParentId, articleDTO.getCategoryId());
                 List<EsArticleCategory> categoryList = articleCategoryMapper.selectList(queryWrapper);
                 //如果是对底级分类查询 则只需要查询其分类就可以，否则需要将其下级分类数据全部查询出来
                 if (categoryList.size() > 0) {
@@ -182,13 +182,13 @@ public class EsArticleServiceImpl extends ServiceImpl<EsArticleMapper, EsArticle
                 iPage = articleMapper.getListByCategoryId(page, articleDTO.getArticleName(), categoryIds);
             }
 
-            if (iPage.getTotal() == 0){
-                return DubboPageResult.success(iPage.getTotal(),new ArrayList<EsArticleDO>());
+            if (iPage.getTotal() == 0) {
+                return DubboPageResult.success(iPage.getTotal(), new ArrayList<EsArticleDO>());
             }
-            return DubboPageResult.success(iPage.getTotal(),iPage.getRecords());
-        } catch (ArgumentException ae){
+            return DubboPageResult.success(iPage.getTotal(), iPage.getRecords());
+        } catch (ArgumentException ae) {
             logger.error("文章分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("文章分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -218,11 +218,11 @@ public class EsArticleServiceImpl extends ServiceImpl<EsArticleMapper, EsArticle
             deleteWrapper.lambda().eq(EsArticle::getId, id);
             this.articleMapper.delete(deleteWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
-             logger.error("文章删除失败", ae);
-             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+        } catch (ArgumentException ae) {
+            logger.error("文章删除失败", ae);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("文章删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -236,9 +236,9 @@ public class EsArticleServiceImpl extends ServiceImpl<EsArticleMapper, EsArticle
             QueryWrapper<EsArticle> queryWrapper = new QueryWrapper<>();
             Integer count = articleMapper.selectCount(queryWrapper);
             return DubboResult.success(count);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("获取帮助页面总数失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("获取帮助页面总数失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -253,37 +253,37 @@ public class EsArticleServiceImpl extends ServiceImpl<EsArticleMapper, EsArticle
             QueryWrapper<EsArticle> queryWrapper = new QueryWrapper<>();
             IPage<EsArticle> iPage = articleMapper.selectPage(page, queryWrapper);
             List<EsArticleDO> doList = new ArrayList<>();
-            if (CollectionUtils.isNotEmpty(iPage.getRecords())){
+            if (CollectionUtils.isNotEmpty(iPage.getRecords())) {
                 doList = BeanUtil.copyList(iPage.getRecords(), EsArticleDO.class);
             }
-            return DubboPageResult.success(iPage.getTotal(),doList);
-        } catch (ArgumentException ae){
+            return DubboPageResult.success(iPage.getTotal(), doList);
+        } catch (ArgumentException ae) {
             logger.error("分页查询文章列表失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("分页查询文章列表失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
-     // 根据分类id查询文章列表
+    // 根据分类id查询文章列表
     @Override
     public DubboPageResult<EsArticleDO> getByCategoryId(Long categoryId) {
         try {
-            if (categoryId == null){
+            if (categoryId == null) {
                 throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), "参数错误");
             }
             QueryWrapper<EsArticle> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsArticle::getCategoryId,categoryId);
+            queryWrapper.lambda().eq(EsArticle::getCategoryId, categoryId);
             List<EsArticle> esArticles = articleMapper.selectList(queryWrapper);
             List<EsArticleDO> doList = new ArrayList<>();
-            if (CollectionUtils.isNotEmpty(esArticles)){
+            if (CollectionUtils.isNotEmpty(esArticles)) {
                 doList = BeanUtil.copyList(esArticles, EsArticleDO.class);
             }
             return DubboPageResult.success(doList);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("根据分类id查询文章列表失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("根据分类id查询文章列表失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");

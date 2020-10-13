@@ -16,20 +16,20 @@ import java.io.Serializable;
 @Data
 @ToString
 public class EsCustomCategoryDTO implements Serializable {
-	private static final long serialVersionUID = 2252257754638258859L;
-	/**
+    private static final long serialVersionUID = 2252257754638258859L;
+    /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
 
     /**
      * 自定义分类名称
      */
-	private String categoryName;
+    private String categoryName;
 
     /**
      * 所属专区
      */
-	private Long zoneId;
+    private Long zoneId;
 
 }

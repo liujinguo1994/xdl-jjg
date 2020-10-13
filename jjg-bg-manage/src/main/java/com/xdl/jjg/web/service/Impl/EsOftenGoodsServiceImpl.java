@@ -69,11 +69,11 @@ public class EsOftenGoodsServiceImpl extends ServiceImpl<EsOftenGoodsMapper, EsO
             BeanUtil.copyProperties(oftenGoodsDTO, oftenGoods);
             this.oftenGoodsMapper.insert(oftenGoods);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("常买商品新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("常买商品新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -101,10 +101,10 @@ public class EsOftenGoodsServiceImpl extends ServiceImpl<EsOftenGoodsMapper, EsO
             queryWrapper.lambda().eq(EsOftenGoods::getId, oftenGoodsDTO.getId());
             this.oftenGoodsMapper.update(oftenGoods, queryWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("常买商品更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("常买商品更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -132,10 +132,10 @@ public class EsOftenGoodsServiceImpl extends ServiceImpl<EsOftenGoodsMapper, EsO
             }
             BeanUtil.copyProperties(oftenGoods, oftenGoodsDO);
             return DubboResult.success(oftenGoodsDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("常买商品查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("常买商品查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -145,8 +145,8 @@ public class EsOftenGoodsServiceImpl extends ServiceImpl<EsOftenGoodsMapper, EsO
      * 根据查询常买商品列表
      *
      * @param oftenGoodsDTO 常买商品DTO
-     * @param pageSize     页码
-     * @param pageNum      页数
+     * @param pageSize      页码
+     * @param pageNum       页数
      * @auther: rm 2817512105@qq.com
      * @date: 2020-05-06
      * @return: com.shopx.common.model.result.DubboPageResult<EsOftenGoodsDO>
@@ -156,7 +156,7 @@ public class EsOftenGoodsServiceImpl extends ServiceImpl<EsOftenGoodsMapper, EsO
         QueryWrapper<EsOftenGoods> queryWrapper = new QueryWrapper<>();
         try {
             // 查询条件
-            queryWrapper.lambda().eq(oftenGoodsDTO.getCustomCategoryId() != null,EsOftenGoods::getCustomCategoryId,oftenGoodsDTO.getCustomCategoryId());
+            queryWrapper.lambda().eq(oftenGoodsDTO.getCustomCategoryId() != null, EsOftenGoods::getCustomCategoryId, oftenGoodsDTO.getCustomCategoryId());
             Page<EsOftenGoods> page = new Page<>(pageNum, pageSize);
             IPage<EsOftenGoods> iPage = this.page(page, queryWrapper);
             List<EsOftenGoodsDO> oftenGoodsDOList = new ArrayList<>();
@@ -166,16 +166,16 @@ public class EsOftenGoodsServiceImpl extends ServiceImpl<EsOftenGoodsMapper, EsO
                     BeanUtil.copyProperties(oftenGoods, oftenGoodsDO);
                     DubboResult<EsCustomCategoryDO> result = customCategoryService.getCustomCategory(oftenGoodsDO.getCustomCategoryId());
                     EsCustomCategoryDO customCategoryDO = result.getData();
-                    if (customCategoryDO != null){
+                    if (customCategoryDO != null) {
                         oftenGoodsDO.setCategoryName(customCategoryDO.getCategoryName());
                     }
                     return oftenGoodsDO;
                 }).collect(Collectors.toList());
             }
-            return DubboPageResult.success(iPage.getTotal(),oftenGoodsDOList);
-        } catch (ArgumentException ae){
+            return DubboPageResult.success(iPage.getTotal(), oftenGoodsDOList);
+        } catch (ArgumentException ae) {
             logger.error("常买商品分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("常买商品分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -201,11 +201,11 @@ public class EsOftenGoodsServiceImpl extends ServiceImpl<EsOftenGoodsMapper, EsO
             deleteWrapper.lambda().eq(EsOftenGoods::getId, id);
             this.oftenGoodsMapper.delete(deleteWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
-             logger.error("常买商品删除失败", ae);
-             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+        } catch (ArgumentException ae) {
+            logger.error("常买商品删除失败", ae);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("常买商品删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -217,7 +217,7 @@ public class EsOftenGoodsServiceImpl extends ServiceImpl<EsOftenGoodsMapper, EsO
         QueryWrapper<EsOftenGoods> queryWrapper = new QueryWrapper<>();
         try {
             // 查询条件
-            queryWrapper.lambda().eq(EsOftenGoods::getCustomCategoryId,customCategoryId);
+            queryWrapper.lambda().eq(EsOftenGoods::getCustomCategoryId, customCategoryId);
             Page<EsOftenGoods> page = new Page<>(pageNum, pageSize);
             IPage<EsOftenGoods> iPage = this.page(page, queryWrapper);
             List<EsOftenGoodsDO> oftenGoodsDOList = new ArrayList<>();
@@ -229,20 +229,20 @@ public class EsOftenGoodsServiceImpl extends ServiceImpl<EsOftenGoodsMapper, EsO
                     //查询商品信息
                     DubboResult<EsGoodsCO> goodsCODubboResult = goodsService.getEsBuyerGoods(oftenGoodsDO.getGoodsId());
                     EsGoodsCO esGoodsCO = goodsCODubboResult.getData();
-                    if (!goodsCODubboResult.isSuccess() || esGoodsCO == null || esGoodsCO.getIsDel() == 1|| esGoodsCO.getIsAuth() != 1 || esGoodsCO.getMarketEnable() == 2 || esGoodsCO.getIsGifts() == 1){
+                    if (!goodsCODubboResult.isSuccess() || esGoodsCO == null || esGoodsCO.getIsDel() == 1 || esGoodsCO.getIsAuth() != 1 || esGoodsCO.getMarketEnable() == 2 || esGoodsCO.getIsGifts() == 1) {
                         //删除数据库该条数据
                         deleteOftenGoods(oftenGoodsDO.getId());
-                    }else {
+                    } else {
                         //设置商品价格
                         oftenGoodsDO.setMoney(esGoodsCO.getMoney());
                         oftenGoodsDOList.add(oftenGoodsDO);
                     }
                 });
             }
-            return DubboPageResult.success(iPage.getTotal(),oftenGoodsDOList);
-        } catch (ArgumentException ae){
+            return DubboPageResult.success(iPage.getTotal(), oftenGoodsDOList);
+        } catch (ArgumentException ae) {
             logger.error("常买商品分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("常买商品分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -255,21 +255,21 @@ public class EsOftenGoodsServiceImpl extends ServiceImpl<EsOftenGoodsMapper, EsO
         QueryWrapper<EsOftenGoods> queryWrapper = new QueryWrapper<>();
         try {
 
-            queryWrapper.lambda().eq(EsOftenGoods::getCustomCategoryId,customCategoryId);
+            queryWrapper.lambda().eq(EsOftenGoods::getCustomCategoryId, customCategoryId);
             List<EsOftenGoods> esOfenGoods = this.oftenGoodsMapper.selectList(queryWrapper);
 
             List<EsOftenGoodsDO> oftenGoodsDOList = new ArrayList<>();
 
-            esOfenGoods.forEach(oftenGood->{
+            esOfenGoods.forEach(oftenGood -> {
                 EsOftenGoodsDO oftenGoodsDO = new EsOftenGoodsDO();
                 BeanUtil.copyProperties(oftenGood, oftenGoodsDO);
                 //查询商品信息
                 DubboResult<EsGoodsCO> goodsCODubboResult = goodsService.getEsBuyerGoods(oftenGoodsDO.getGoodsId());
                 EsGoodsCO esGoodsCO = goodsCODubboResult.getData();
-                if (!goodsCODubboResult.isSuccess() || esGoodsCO == null || esGoodsCO.getIsDel() == 1|| esGoodsCO.getIsAuth() != 1 || esGoodsCO.getMarketEnable() == 2 || esGoodsCO.getIsGifts() == 1){
+                if (!goodsCODubboResult.isSuccess() || esGoodsCO == null || esGoodsCO.getIsDel() == 1 || esGoodsCO.getIsAuth() != 1 || esGoodsCO.getMarketEnable() == 2 || esGoodsCO.getIsGifts() == 1) {
                     //删除数据库该条数据
                     deleteOftenGoods(oftenGoodsDO.getId());
-                }else {
+                } else {
                     //设置商品价格
                     oftenGoodsDO.setMoney(esGoodsCO.getMoney());
                     oftenGoodsDOList.add(oftenGoodsDO);
@@ -277,9 +277,9 @@ public class EsOftenGoodsServiceImpl extends ServiceImpl<EsOftenGoodsMapper, EsO
             });
 
             return DubboPageResult.success(oftenGoodsDOList);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("常买商品查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("常买商品查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");

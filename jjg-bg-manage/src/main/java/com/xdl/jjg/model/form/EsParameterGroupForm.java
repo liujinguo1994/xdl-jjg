@@ -25,16 +25,16 @@ public class EsParameterGroupForm implements Serializable {
     /**
      * 参数组名称
      */
-	@ApiModelProperty(required = true, value = "参数组名称")
-	@NotBlank(message = "参数组名称不能为空")
-	private String groupName;
+    @ApiModelProperty(required = true, value = "参数组名称")
+    @NotBlank(message = "参数组名称不能为空")
+    private String groupName;
 
     /**
      * 关联分类id
      */
-	@ApiModelProperty(required = true, value = "关联分类id",example = "1")
-	@NotNull(message = "关联分类id不能为空")
-	private Long categoryId;
+    @ApiModelProperty(required = true, value = "关联分类id", example = "1")
+    @NotNull(message = "关联分类id不能为空")
+    private Long categoryId;
 
 
 }

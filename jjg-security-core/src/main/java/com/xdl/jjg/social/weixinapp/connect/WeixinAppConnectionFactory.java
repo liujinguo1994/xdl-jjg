@@ -21,16 +21,15 @@ import org.springframework.social.oauth2.OAuth2ServiceProvider;
 public class WeixinAppConnectionFactory extends OAuth2ConnectionFactory<WeixinApp> {
 
 
-
-    public WeixinAppConnectionFactory(String providerId, String appId,String appSecret) {
+    public WeixinAppConnectionFactory(String providerId, String appId, String appSecret) {
         super(providerId, new WeixinAppServiceProvider(appId, appSecret), new WeixinAppAdapter());
 
     }
 
     @Override
     protected String extractProviderUserId(AccessGrant accessGrant) {
-        if(accessGrant instanceof WeixinAccessGrant) {
-            return ((WeixinAccessGrant)accessGrant).getOpenId();
+        if (accessGrant instanceof WeixinAccessGrant) {
+            return ((WeixinAccessGrant) accessGrant).getOpenId();
         }
         return null;
     }

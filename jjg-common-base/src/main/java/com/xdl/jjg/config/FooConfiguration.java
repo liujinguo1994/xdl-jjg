@@ -7,10 +7,10 @@ import org.springframework.context.annotation.Scope;
 import feign.Feign;
 
 @Configuration
-public  class FooConfiguration {
-    @Bean 
-	@Scope ("prototype")
-	 public Feign.Builder feignBuilder(){
-		 return Feign.builder();
-	}
+public class FooConfiguration {
+    @Bean
+    @Scope("prototype")
+    public Feign.Builder feignBuilder() {
+        return Feign.builder();
+    }
 }

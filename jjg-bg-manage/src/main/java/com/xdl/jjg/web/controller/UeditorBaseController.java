@@ -18,6 +18,7 @@ import java.util.Map;
 
 /**
  * 百度Ueditor配置及文件上传支持
+ *
  * @author kingapex
  * @version 1.0
  * @since 7.0.0
@@ -39,11 +40,11 @@ public class UeditorBaseController {
      */
     private static String config;
 
-    @GetMapping(value = "",produces = "application/javascript")
+    @GetMapping(value = "", produces = "application/javascript")
     @ApiOperation(value = "获取ueditor配置")
     @ApiImplicitParam(name = "callback", value = "jsonp的callback", required = true, dataType = "String")
     public String config(String callback) throws JSONException {
-        return "/**/"+callback+"("+ getConfig() +");";
+        return "/**/" + callback + "(" + getConfig() + ");";
 
     }
 
@@ -51,6 +52,7 @@ public class UeditorBaseController {
      * 获取配置<br>
      * 如果config中已经存在，则直接返回，否则由硬盘读取<br>
      * 读取文件为/resource/ueditor_config.json<br><br>
+     *
      * @return
      */
     private String getConfig() {
@@ -61,14 +63,15 @@ public class UeditorBaseController {
 
         return config;
     }
+
     @PostMapping(value = "")
     @ApiOperation(value = "ueditor文件/图片上传")
     public Map upload(MultipartFile upfile) throws JSONException, IOException {
         Map result = new HashMap(16);
         if (upfile != null && upfile.getOriginalFilename() != null) {
             if (!FileUtil.isAllowUp(upfile.getOriginalFilename())) {
-                result.put("state","不允许上传的文件格式，请上传gif,jpg,bmp格式文件。");
-                return  result;
+                result.put("state", "不允许上传的文件格式，请上传gif,jpg,bmp格式文件。");
+                return result;
             }
             FileDTO fileDTO = new FileDTO();
             fileDTO.setName(upfile.getOriginalFilename());//文件名（包含后缀）
@@ -76,29 +79,29 @@ public class UeditorBaseController {
                 fileDTO.setStream(upfile.getInputStream());//文件流
             } catch (IOException e) {
                 e.printStackTrace();
-                return  result;
+                return result;
             }
             FileVO fileVO = null;
-            for (OssFileType ossFileType: OssFileType.values()){
+            for (OssFileType ossFileType : OssFileType.values()) {
                 String substring = ossFileType.getValue().substring(0, ossFileType.getValue().indexOf("/"));
-                if(StringUtils.equals(substring,"ueditor")){
+                if (StringUtils.equals(substring, "ueditor")) {
                     fileVO = ossUploader.upload(fileDTO, ossFileType);//上传
-                    String url  = fileVO.getUrl();
+                    String url = fileVO.getUrl();
                     String title = fileVO.getName();
                     String original = fileVO.getName();
-                    result.put("state","SUCCESS");
+                    result.put("state", "SUCCESS");
                     result.put("url", url);
                     result.put("title", title);
                     result.put("name", title);
                     result.put("original", original);
-                    result.put("type","."+fileVO.getExt());
+                    result.put("type", "." + fileVO.getExt());
                 }
 
             }
-            return  result;
+            return result;
         } else {
-            result.put("state","没有读取要上传的文件");
-            return  result;
+            result.put("state", "没有读取要上传的文件");
+            return result;
         }
     }
 }

@@ -1,41 +1,23 @@
 package com.xdl.jjg.web.controller;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.io.IoUtil;
-import cn.hutool.poi.excel.ExcelUtil;
-import cn.hutool.poi.excel.ExcelWriter;
-import com.baomidou.mybatisplus.core.metadata.IPage;
+
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.shopx.common.constant.OssFileType;
-import com.shopx.common.model.domain.FileDTO;
-import com.shopx.common.model.domain.FileVO;
-import com.shopx.common.model.result.ApiPageResponse;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.oss.upload.OSSUploader;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.model.domain.EsGoodsTotalStatisticsDO;
-import com.shopx.goods.api.service.IEsGoodsTotalStatisticsService;
-import com.shopx.system.api.model.domain.vo.*;
-import com.shopx.system.web.constant.ApiStatus;
-import com.shopx.system.web.request.EsGoodsAveragePriceForm;
-import com.shopx.system.web.request.EsGoodsHotSellForm;
-import com.shopx.system.web.request.EsGoodsPaymentConversionRateForm;
-import com.shopx.system.web.request.EsGoodsSalesDetailForm;
-import com.shopx.trade.api.model.domain.EsGoodsAveragePriceDO;
-import com.shopx.trade.api.model.domain.EsGoodsHotSellDO;
-import com.shopx.trade.api.model.domain.EsGoodsPaymentConversionRateDO;
-import com.shopx.trade.api.model.domain.EsGoodsSalesDetailDO;
-import com.shopx.trade.api.model.domain.dto.EsGoodsAveragePriceDTO;
-import com.shopx.trade.api.model.domain.dto.EsGoodsHotSellDTO;
-import com.shopx.trade.api.model.domain.dto.EsGoodsPaymentConversionRateDTO;
-import com.shopx.trade.api.model.domain.dto.EsGoodsSalesDetailDTO;
-import com.shopx.trade.api.service.IEsGoodsStatisticsService;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.model.domain.EsGoodsTotalStatisticsDO;
+import com.xdl.jjg.model.form.EsGoodsAveragePriceForm;
+import com.xdl.jjg.model.form.EsGoodsHotSellForm;
+import com.xdl.jjg.model.form.EsGoodsPaymentConversionRateForm;
+import com.xdl.jjg.model.form.EsGoodsSalesDetailForm;
+import com.xdl.jjg.model.vo.*;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.ExcelUtil;
+import com.xdl.jjg.web.service.IEsGoodsTotalStatisticsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -58,24 +40,25 @@ public class EsGoodsStatisticsController {
     @Autowired
     private OSSUploader ossUploader;
 
-    @ApiOperation(value = "商品销售明细",hidden = true)
+    @ApiOperation(value = "商品销售明细", hidden = true)
     @GetMapping(value = "/goodsSalesDetail")
     public ApiResponse<EsGoodsSalesDetailVO> goodsSalesDetail(@ApiParam(name = "商品销售明细", value = "form") @Valid EsGoodsSalesDetailForm form) {
         EsGoodsSalesDetailDTO esGoodsSalesDetailDTO = new EsGoodsSalesDetailDTO();
         BeanUtil.copyProperties(form, esGoodsSalesDetailDTO);
-        DubboPageResult<EsGoodsSalesDetailDO> result = esGoodsStatisticsService.getGoodsSalesDetailList(esGoodsSalesDetailDTO, new Page(form.getPageNum(),form.getPageSize()));
+        DubboPageResult<EsGoodsSalesDetailDO> result = esGoodsStatisticsService.getGoodsSalesDetailList(esGoodsSalesDetailDTO, new Page(form.getPageNum(), form.getPageSize()));
         if (!result.isSuccess()) {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
         List<EsGoodsSalesDetailVO> esGoodsSalesDetailVOS = BeanUtil.copyList(result.getData().getList(), EsGoodsSalesDetailVO.class);
         return ApiPageResponse.pageSuccess(esGoodsSalesDetailVOS);
     }
-    @ApiOperation(value = "导出商品销售明细",hidden = true)
+
+    @ApiOperation(value = "导出商品销售明细", hidden = true)
     @GetMapping(value = "/goodsSalesDetailExport")
     public ApiResponse goodsSalesDetailExport(@ApiParam(name = "商品销售明细", value = "form") @Valid EsGoodsSalesDetailForm form) {
         EsGoodsSalesDetailDTO esGoodsSalesDetailDTO = new EsGoodsSalesDetailDTO();
         BeanUtil.copyProperties(form, esGoodsSalesDetailDTO);
-        DubboPageResult<EsGoodsSalesDetailDO> result = esGoodsStatisticsService.getGoodsSalesDetailList(esGoodsSalesDetailDTO, new Page(form.getPageNum(),form.getPageSize()));
+        DubboPageResult<EsGoodsSalesDetailDO> result = esGoodsStatisticsService.getGoodsSalesDetailList(esGoodsSalesDetailDTO, new Page(form.getPageNum(), form.getPageSize()));
         if (!result.isSuccess()) {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
@@ -87,7 +70,7 @@ public class EsGoodsStatisticsController {
         writer.addHeaderAlias("orderGoodsNum", "下单商品总数");
         writer.addHeaderAlias("orderPriceTotal", "下单价格总和");
         writer.merge(4, "商品销售明细");
-        writer.write(esGoodsSalesDetailVOS,true);
+        writer.write(esGoodsSalesDetailVOS, true);
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         writer.flush(stream);
         writer.close();
@@ -108,8 +91,9 @@ public class EsGoodsStatisticsController {
         BeanUtil.copyProperties(form, esGoodsHotSellDTO);
         DubboResult<IPage<EsGoodsHotSellDO>> result = esGoodsStatisticsService.getGoodsHotSell(esGoodsHotSellDTO, new Page(form.getPageNum(), form.getPageSize()));
         List<EsGoodsHotSellVO> esGoodsHotSellVOS = BeanUtil.copyList(result.getData().getRecords(), EsGoodsHotSellVO.class);
-        return ApiPageResponse.pageSuccess(result.getData().getTotal(),esGoodsHotSellVOS);
+        return ApiPageResponse.pageSuccess(result.getData().getTotal(), esGoodsHotSellVOS);
     }
+
     @ApiOperation(value = "商品热卖榜导出")
     @GetMapping(value = "/goodsHotSellExport")
     public ApiResponse<EsGoodsHotSellVO> goodsHotSellExport(@ApiParam(name = "商品热卖榜") @Valid EsGoodsHotSellForm form) {
@@ -119,9 +103,9 @@ public class EsGoodsStatisticsController {
         List<EsGoodsHotSellVO> esGoodsHotSellVOS = BeanUtil.copyList(result.getData().getRecords(), EsGoodsHotSellVO.class);
         ExcelWriter writer = ExcelUtil.getWriter();
         writer.merge(5, "商品热卖榜");
-        writer.writeRow(CollUtil.newArrayList("商品名称","分类名称","商品规格","所属店铺","总销售量","总销售金额"));
+        writer.writeRow(CollUtil.newArrayList("商品名称", "分类名称", "商品规格", "所属店铺", "总销售量", "总销售金额"));
         esGoodsHotSellVOS.forEach(hotSell -> {
-            writer.writeRow(CollUtil.newArrayList(hotSell.getGoodsName(),hotSell.getCategoryName(),hotSell.getSpecText(),hotSell.getShopName(),hotSell.getSalesNum(),hotSell.getTotalMoney()));
+            writer.writeRow(CollUtil.newArrayList(hotSell.getGoodsName(), hotSell.getCategoryName(), hotSell.getSpecText(), hotSell.getShopName(), hotSell.getSalesNum(), hotSell.getTotalMoney()));
         });
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         writer.flush(stream);
@@ -135,6 +119,7 @@ public class EsGoodsStatisticsController {
         IoUtil.close(inputStream);
         return ApiResponse.success(fileVO.getUrl());
     }
+
     @ApiOperation(value = "商品转化率榜")
     @GetMapping(value = "/goodsPaymentConversionRate")
     public ApiResponse<EsGoodsPaymentConversionRateVO> goodsPaymentConversionRate(@ApiParam(name = "商品转化率榜") @Valid EsGoodsPaymentConversionRateForm form) {
@@ -142,8 +127,9 @@ public class EsGoodsStatisticsController {
         BeanUtil.copyProperties(form, esGoodsPaymentConversionRateDTO);
         DubboResult<IPage<EsGoodsPaymentConversionRateDO>> result = esGoodsStatisticsService.getGoodsPaymentConversionRate(esGoodsPaymentConversionRateDTO, new Page(form.getPageNum(), form.getPageSize()));
         List<EsGoodsPaymentConversionRateVO> esGoodsPaymentConversionRateVOS = BeanUtil.copyList(result.getData().getRecords(), EsGoodsPaymentConversionRateVO.class);
-        return ApiPageResponse.pageSuccess(result.getData().getTotal(),esGoodsPaymentConversionRateVOS);
+        return ApiPageResponse.pageSuccess(result.getData().getTotal(), esGoodsPaymentConversionRateVOS);
     }
+
     @ApiOperation(value = "商品转化率榜导出")
     @GetMapping(value = "/goodsPaymentConversionRateExport")
     public ApiResponse<EsGoodsPaymentConversionRateVO> goodsPaymentConversionRateExport(@ApiParam(name = "商品转化率榜") @Valid EsGoodsPaymentConversionRateForm form) {
@@ -153,9 +139,9 @@ public class EsGoodsStatisticsController {
         List<EsGoodsPaymentConversionRateVO> esGoodsPaymentConversionRateVOS = BeanUtil.copyList(result.getData().getRecords(), EsGoodsPaymentConversionRateVO.class);
         ExcelWriter writer = ExcelUtil.getWriter();
         writer.merge(5, "商品转化率榜");
-        writer.writeRow(CollUtil.newArrayList("商品名称","分类名称","商品规格","转化率","总销售量","总销售金额"));
+        writer.writeRow(CollUtil.newArrayList("商品名称", "分类名称", "商品规格", "转化率", "总销售量", "总销售金额"));
         esGoodsPaymentConversionRateVOS.forEach(goods -> {
-            writer.writeRow(CollUtil.newArrayList(goods.getGoodsName(),goods.getCategoryName(),goods.getSpecText(),goods.getConversionRate(),goods.getSalesNum(),goods.getTotalMoney()));
+            writer.writeRow(CollUtil.newArrayList(goods.getGoodsName(), goods.getCategoryName(), goods.getSpecText(), goods.getConversionRate(), goods.getSalesNum(), goods.getTotalMoney()));
         });
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         writer.flush(stream);
@@ -177,8 +163,9 @@ public class EsGoodsStatisticsController {
         BeanUtil.copyProperties(form, esGoodsAveragePriceDTO);
         DubboResult<IPage<EsGoodsAveragePriceDO>> result = esGoodsStatisticsService.getGoodsAveragePrice(esGoodsAveragePriceDTO, new Page(form.getPageNum(), form.getPageSize()));
         List<EsGoodsAveragePriceVO> esGoodsAveragePriceVOS = BeanUtil.copyList(result.getData().getRecords(), EsGoodsAveragePriceVO.class);
-        return ApiPageResponse.pageSuccess(result.getData().getTotal(),esGoodsAveragePriceVOS);
+        return ApiPageResponse.pageSuccess(result.getData().getTotal(), esGoodsAveragePriceVOS);
     }
+
     @ApiOperation(value = "商品客单价导出")
     @GetMapping(value = "/goodsAveragePriceExport")
     public ApiResponse<EsGoodsAveragePriceVO> goodsAveragePriceExport(@ApiParam(name = "商品客单价") @Valid EsGoodsAveragePriceForm form) {
@@ -188,9 +175,9 @@ public class EsGoodsStatisticsController {
         List<EsGoodsAveragePriceVO> esGoodsAveragePriceVOS = BeanUtil.copyList(result.getData().getRecords(), EsGoodsAveragePriceVO.class);
         ExcelWriter writer = ExcelUtil.getWriter();
         writer.merge(4, "商品客单价");
-        writer.writeRow(CollUtil.newArrayList("商品名称","分类名称","商品规格","总销售量","客单价"));
+        writer.writeRow(CollUtil.newArrayList("商品名称", "分类名称", "商品规格", "总销售量", "客单价"));
         esGoodsAveragePriceVOS.forEach(goods -> {
-            writer.writeRow(CollUtil.newArrayList(goods.getGoodsName(),goods.getCategoryName(),goods.getSpecText(),goods.getSalesNum(),goods.getAveragePrice()));
+            writer.writeRow(CollUtil.newArrayList(goods.getGoodsName(), goods.getCategoryName(), goods.getSpecText(), goods.getSalesNum(), goods.getAveragePrice()));
         });
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         writer.flush(stream);
@@ -210,7 +197,7 @@ public class EsGoodsStatisticsController {
     public ApiResponse<EsGoodsTotalStatisticsVO> goodsTotalStatistics() {
         DubboResult<EsGoodsTotalStatisticsDO> result = esGoodsTotalStatisticsService.adminGoodsTotalStatistics();
         EsGoodsTotalStatisticsVO esGoodsTotalStatisticsVO = new EsGoodsTotalStatisticsVO();
-        BeanUtil.copyProperties(result.getData(),esGoodsTotalStatisticsVO);
+        BeanUtil.copyProperties(result.getData(), esGoodsTotalStatisticsVO);
         return ApiResponse.success(esGoodsTotalStatisticsVO);
     }
 }

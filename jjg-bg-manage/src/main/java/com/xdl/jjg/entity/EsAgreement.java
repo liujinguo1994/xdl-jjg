@@ -23,41 +23,41 @@ public class EsAgreement extends Model<EsAgreement> {
     /**
      * 主键ID
      */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
     /**
      * 协议编号
      */
     @TableField("agr_no")
-	private String agrNo;
+    private String agrNo;
     /**
      * 协议内容
      */
-	private String content;
+    private String content;
     /**
      * 创建时间
      */
-	@TableField(value = "create_time", fill = FieldFill.INSERT)
-	private Long createTime;
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    private Long createTime;
     /**
      * 更新时间
      */
-	@TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-	private Long updateTime;
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    private Long updateTime;
     /**
      * 协议名称
      */
     @TableField("agr_name")
-	private String agrName;
+    private String agrName;
     /**
      * 协议版本
      */
-	private String version;
+    private String version;
 
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 
 }

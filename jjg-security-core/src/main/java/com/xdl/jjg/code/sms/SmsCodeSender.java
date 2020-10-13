@@ -8,6 +8,7 @@ public interface SmsCodeSender {
 
     /**
      * 发送短信验证码
+     *
      * @param mobile
      * @param code
      */

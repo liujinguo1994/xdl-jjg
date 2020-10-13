@@ -27,14 +27,12 @@ public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
     private ObjectMapper objectMapper = new ObjectMapper();
 
 
-
     /**
      * 获取用户信息的url
      */
     private static final String URL_GET_USER_INFO = "https://api.weixin.qq.com/sns/userinfo?openid=";
 
     /**
-     *
      * @param accessToken
      */
     public WeixinImpl(String accessToken) {
@@ -43,6 +41,7 @@ public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
 
     /**
      * 默认注册的StringHttpMessageConverter字符集为ISO-8859-1,而微信返回的是UTF-8,所以覆盖了原来的方法
+     *
      * @return
      */
     @Override
@@ -55,6 +54,7 @@ public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
 
     /**
      * 获取微信的用户id
+     *
      * @param openId
      * @return
      */
@@ -68,7 +68,7 @@ public class WeixinImpl extends AbstractOAuth2ApiBinding implements Weixin {
         WeixinUserInfo userInfo = null;
         try {
             userInfo = objectMapper.readValue(response, WeixinUserInfo.class);
-            logger.info("获取到第三方用户信息{}",userInfo.toString());
+            logger.info("获取到第三方用户信息{}", userInfo.toString());
 
         } catch (Exception e) {
             e.printStackTrace();

@@ -18,7 +18,7 @@ import java.util.Objects;
 
 /**
  * <p>
- *  前端控制器-进度管理
+ * 前端控制器-进度管理
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -26,7 +26,7 @@ import java.util.Objects;
  */
 @RestController
 @RequestMapping("/esProgressManager")
-@Api(value="/esProgressManager", tags="进度管理")
+@Api(value = "/esProgressManager", tags = "进度管理")
 public class EsProgressManagerController {
 
     @Autowired
@@ -50,20 +50,20 @@ public class EsProgressManagerController {
         }
     }
 
-    @ApiOperation(value = "查看任务进度",response = EsProgressVO.class)
+    @ApiOperation(value = "查看任务进度", response = EsProgressVO.class)
     @ApiImplicitParam(name = "taskId", value = "任务id", dataType = "String", paramType = "path", required = true)
     @GetMapping(value = "/viewProgress/{taskId}")
     @ResponseBody
     public ApiResponse viewProgress(@PathVariable("taskId") String taskId) {
 
         DubboResult<TaskProgress> result = progressManager.getProgress(taskId);
-        if (result.isSuccess()){
+        if (result.isSuccess()) {
             TaskProgress taskProgress = result.getData();
             EsProgressVO esProgressVO = null;
-            if (taskProgress == null){
+            if (taskProgress == null) {
                 esProgressVO = new EsProgressVO(100, ProgressEnum.SUCCESS.name());
                 return ApiResponse.success(esProgressVO);
-            }else {
+            } else {
                 esProgressVO = new EsProgressVO(taskProgress);
             }
             //如果是完成或者出错 需要移除任务
@@ -71,7 +71,7 @@ public class EsProgressManagerController {
                 progressManager.remove(taskId);
             }
             return ApiResponse.success(esProgressVO);
-        }else {
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -82,9 +82,9 @@ public class EsProgressManagerController {
     @ResponseBody
     public ApiResponse clear(@PathVariable("taskId") String taskId) {
         DubboResult result = progressManager.remove(taskId);
-        if (result.isSuccess()){
+        if (result.isSuccess()) {
             return ApiResponse.success();
-        }else {
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }

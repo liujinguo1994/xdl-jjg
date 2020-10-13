@@ -23,13 +23,13 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器-快递平台设置
+ * 前端控制器-快递平台设置
  * </p>
  *
  * @author yuanj 595831329@qq.com
  * @since 2020-03-26 10:30:00
  */
-@Api(value = "/express",tags = "快递平台设置")
+@Api(value = "/express", tags = "快递平台设置")
 @RestController
 @RequestMapping("/express")
 public class EsExpressPlatformController {
@@ -38,13 +38,13 @@ public class EsExpressPlatformController {
     private IEsExpressPlatformService expressPlatformService;
 
     @GetMapping(value = "/getList")
-    @ApiOperation(value = "获取快递平台设置",response = EsExpressPlatformVO.class)
+    @ApiOperation(value = "获取快递平台设置", response = EsExpressPlatformVO.class)
     @ResponseBody
     public ApiResponse getSecuritySetting(int pageSize, int pageNum) {
         DubboPageResult<EsExpressPlatformVO> result = expressPlatformService.getExpressPlatformList(pageSize, pageNum);
         if (result.isSuccess()) {
             List<EsExpressPlatformVO> data = result.getData().getList();
-            return ApiPageResponse.pageSuccess(result.getData().getTotal(),data);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(), data);
         } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
@@ -53,15 +53,15 @@ public class EsExpressPlatformController {
     @PutMapping(value = "/{bean}")
     @ApiOperation(value = "修改快递平台设置")
     @ResponseBody
-    public ApiResponse updateExpress(@PathVariable String bean, @RequestBody @ApiIgnore EsExpressPlatForm form ) {
+    public ApiResponse updateExpress(@PathVariable String bean, @RequestBody @ApiIgnore EsExpressPlatForm form) {
         form.setBean(bean);
         EsExpressPlatformDTO esExpressPlatformDTO = new EsExpressPlatformDTO();
-        BeanUtil.copyProperties(form,esExpressPlatformDTO);
+        BeanUtil.copyProperties(form, esExpressPlatformDTO);
         esExpressPlatformDTO.setConfig(JsonUtil.objectToJson(form.getConfigItems()));
         DubboResult result = expressPlatformService.updateExpressPlatform(esExpressPlatformDTO);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -71,9 +71,9 @@ public class EsExpressPlatformController {
     @ApiImplicitParam(name = "bean", value = "快递平台bean id", required = true, dataType = "String", paramType = "path")
     public ApiResponse getUploadSetting(@PathVariable Long id) {
         DubboResult<EsExpressPlatformDO> result = this.expressPlatformService.getExpressPlatform(id);
-        if (result.isSuccess()){
+        if (result.isSuccess()) {
             return ApiResponse.success(result.getData());
-        }else {
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }

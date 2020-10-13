@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -94,11 +94,11 @@ public class EsRegionsServiceImpl extends ServiceImpl<EsRegionsMapper, EsRegions
                 });
             }*/
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -121,11 +121,11 @@ public class EsRegionsServiceImpl extends ServiceImpl<EsRegionsMapper, EsRegions
                 throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), ErrorCode.PARAM_ERROR.getErrorMsg());
             }
             EsRegions esRegions = regionsMapper.selectById(regionsDTO.getId());
-            if (esRegions == null){
+            if (esRegions == null) {
                 throw new ArgumentException(ErrorCode.REGIONS_IS_NULL.getErrorCode(), "当前地区不存在");
             }
             EsRegions parentRegion = regionsMapper.selectById(esRegions.getParentId());
-            if (regionsDTO.getParentId() !=0 && parentRegion == null) {
+            if (regionsDTO.getParentId() != 0 && parentRegion == null) {
                 throw new ArgumentException(ErrorCode.PARENT_REGIONS_IS_NULL.getErrorCode(), "当前地区父地区id无效");
             }
             EsRegions regions = new EsRegions();
@@ -141,10 +141,10 @@ public class EsRegionsServiceImpl extends ServiceImpl<EsRegionsMapper, EsRegions
                 });
             }*/
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -172,10 +172,10 @@ public class EsRegionsServiceImpl extends ServiceImpl<EsRegionsMapper, EsRegions
             }
             BeanUtil.copyProperties(regions, regionsDO);
             return DubboResult.success(regionsDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -185,8 +185,8 @@ public class EsRegionsServiceImpl extends ServiceImpl<EsRegionsMapper, EsRegions
      * 根据查询列表
      *
      * @param regionsDTO DTO
-     * @param pageSize     页码
-     * @param pageNum      页数
+     * @param pageSize   页码
+     * @param pageNum    页数
      * @auther: rm 2817512105@qq.com
      * @date: 2019-06-04
      * @return: com.shopx.common.model.result.DubboPageResult<EsRegionsDO>
@@ -208,9 +208,9 @@ public class EsRegionsServiceImpl extends ServiceImpl<EsRegionsMapper, EsRegions
                 }).collect(Collectors.toList());
             }
             return DubboPageResult.success(regionsDOList);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -243,11 +243,11 @@ public class EsRegionsServiceImpl extends ServiceImpl<EsRegionsMapper, EsRegions
                 });
             }*/
             return DubboResult.success();
-        } catch (ArgumentException ae){
-             logger.error("删除失败", ae);
-             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+        } catch (ArgumentException ae) {
+            logger.error("删除失败", ae);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -259,25 +259,25 @@ public class EsRegionsServiceImpl extends ServiceImpl<EsRegionsMapper, EsRegions
     public DubboResult<List<EsRegionsDO>> getChildrenById(Long id) {
         try {
             EsRegions esRegions = regionsMapper.selectById(id);
-            if (esRegions==null && id != 0){
+            if (esRegions == null && id != 0) {
                 throw new ArgumentException(ErrorCode.REGIONS_NOT_EXIT.getErrorCode(), "此地区不存在");
             }
-           // String str = jedisCluster.get(CachePrefix.REGIONLIDEPTH.getPrefix() + id);
+            // String str = jedisCluster.get(CachePrefix.REGIONLIDEPTH.getPrefix() + id);
             List<EsRegions> regionsList = null;
             // 如果为空的话需要重数据库中查出数据 然后放入缓存
-           // if (str == null) {
-                QueryWrapper<EsRegions> queryWrapper = new QueryWrapper<>();
-                queryWrapper.lambda().eq(EsRegions::getParentId,id);
-                regionsList = regionsMapper.selectList(queryWrapper);
-                 //if (regionsList.size() !=0 ){
-                    // String s = JsonUtil.objectToJson(regionsList);
-                    // jedisCluster.set(CachePrefix.REGIONLIDEPTH.getPrefix() + id,s);
-                // }
-           // }else {
-               // regionsList = JsonUtil.jsonToList(str, EsRegions.class);
-           // }
+            // if (str == null) {
+            QueryWrapper<EsRegions> queryWrapper = new QueryWrapper<>();
+            queryWrapper.lambda().eq(EsRegions::getParentId, id);
+            regionsList = regionsMapper.selectList(queryWrapper);
+            //if (regionsList.size() !=0 ){
+            // String s = JsonUtil.objectToJson(regionsList);
+            // jedisCluster.set(CachePrefix.REGIONLIDEPTH.getPrefix() + id,s);
+            // }
+            // }else {
+            // regionsList = JsonUtil.jsonToList(str, EsRegions.class);
+            // }
             List<EsRegionsDO> esRegionsDOList = new ArrayList<>();
-            if (CollectionUtils.isNotEmpty(regionsList)){
+            if (CollectionUtils.isNotEmpty(regionsList)) {
                 //属性复制
                 esRegionsDOList = regionsList.stream().map(regions -> {
                     EsRegionsDO esRegionsDO = new EsRegionsDO();
@@ -286,10 +286,10 @@ public class EsRegionsServiceImpl extends ServiceImpl<EsRegionsMapper, EsRegions
                 }).collect(Collectors.toList());
             }
             return DubboResult.success(esRegionsDOList);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("获取某地区的子地区失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("获取某地区的子地区失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
         }
@@ -298,18 +298,18 @@ public class EsRegionsServiceImpl extends ServiceImpl<EsRegionsMapper, EsRegions
     @Override
     public DubboPageResult<EsRegionsDO> getRegionByDepth(Integer depth) {
         try {
-        //如果深度大于4级，则修改深度为最深4级
-        if (depth > 4) {
-            depth = 4;
-        }
-        QueryWrapper<EsRegions> queryWrapper = new QueryWrapper<>();
-        List<EsRegions> data = regionsMapper.selectList(queryWrapper);
-        List<EsRegionsDO> tree = new ArrayList<>();
-        this.sort(1, depth, tree, data);
-        return DubboPageResult.success(tree);
-        } catch (ArgumentException ae){
+            //如果深度大于4级，则修改深度为最深4级
+            if (depth > 4) {
+                depth = 4;
+            }
+            QueryWrapper<EsRegions> queryWrapper = new QueryWrapper<>();
+            List<EsRegions> data = regionsMapper.selectList(queryWrapper);
+            List<EsRegionsDO> tree = new ArrayList<>();
+            this.sort(1, depth, tree, data);
+            return DubboPageResult.success(tree);
+        } catch (ArgumentException ae) {
             logger.error("根据深度获取组织地区数据结构的数据失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("根据深度获取组织地区数据结构的数据失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");

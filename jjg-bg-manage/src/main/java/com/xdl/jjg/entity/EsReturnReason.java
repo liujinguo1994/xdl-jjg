@@ -19,35 +19,35 @@ import java.io.Serializable;
 @TableName("es_return_reason")
 public class EsReturnReason extends Model<EsReturnReason> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 主键id
-	 */
-	@TableId(value="id", type= IdType.AUTO)
-	private Double id;
+    /**
+     * 主键id
+     */
+    @TableId(value = "id", type = IdType.AUTO)
+    private Double id;
 
-	/**
-	 * 原因
-	 */
-	@TableField("reason")
-	private String reason;
+    /**
+     * 原因
+     */
+    @TableField("reason")
+    private String reason;
 
-	/**
-	 * 售后类型
-	 */
-	@TableField("refund_type")
-	private String refundType;
+    /**
+     * 售后类型
+     */
+    @TableField("refund_type")
+    private String refundType;
 
-	/**
-	 * 创建时间
-	 */
-	@TableField(value = "create_time", fill = FieldFill.INSERT)
-	@JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
-	private Long createTime;
+    /**
+     * 创建时间
+     */
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Long createTime;
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 }

@@ -5,13 +5,12 @@ import lombok.Data;
 import java.io.Serializable;
 
 /**
- * @Description: 商品相关的系统设置
- *
  * @author rm 2817512105@qq.com
+ * @Description: 商品相关的系统设置
  * @since 2019-05-29
  */
 @Data
-public class EsGoodsSettingDO implements Serializable{
+public class EsGoodsSettingDO implements Serializable {
 
 
     private static final long serialVersionUID = -4237676288718760409L;
@@ -31,13 +30,13 @@ public class EsGoodsSettingDO implements Serializable{
     //小图宽度
     private Integer smallWidth;
 
-   //小图高度
+    //小图高度
     private Integer smallHeight;
 
     //大图宽度
     private Integer bigWidth;
 
-   //大图高度
+    //大图高度
     private Integer bigHeight;
 
 }

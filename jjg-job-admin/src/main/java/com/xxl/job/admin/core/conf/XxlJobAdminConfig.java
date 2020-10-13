@@ -19,8 +19,9 @@ import javax.sql.DataSource;
  * @author xuxueli 2017-04-28
  */
 @Component
-public class XxlJobAdminConfig implements InitializingBean{
+public class XxlJobAdminConfig implements InitializingBean {
     private static XxlJobAdminConfig adminConfig = null;
+
     public static XxlJobAdminConfig getAdminConfig() {
         return adminConfig;
     }

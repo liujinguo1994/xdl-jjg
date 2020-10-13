@@ -6,7 +6,7 @@ import com.xdl.jjg.entity.EsUserFeedback;
 
 /**
  * <p>
- *  Mapper 接口
+ * Mapper 接口
  * </p>
  *
  * @author LiuJG 344009799@qq.com

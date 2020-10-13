@@ -21,40 +21,40 @@ import java.io.Serializable;
 @TableName("es_advertising")
 public class EsAdvertising extends Model<EsAdvertising> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 主键id
-	 */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    /**
+     * 主键id
+     */
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
 
-	/**
-	 * 图片名称
-	 */
-	@TableField("pic_name")
-	private String picName;
+    /**
+     * 图片名称
+     */
+    @TableField("pic_name")
+    private String picName;
 
-	/**
-	 * 位置
-	 */
-	@TableField("location")
-	private String location;
+    /**
+     * 位置
+     */
+    @TableField("location")
+    private String location;
 
-	/**
-	 * 连接
-	 */
-	@TableField("link")
-	private String link;
+    /**
+     * 连接
+     */
+    @TableField("link")
+    private String link;
 
-	/**
-	 * 图片地址
-	 */
-	@TableField("pic_url")
-	private String picUrl;
+    /**
+     * 图片地址
+     */
+    @TableField("pic_url")
+    private String picUrl;
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 }

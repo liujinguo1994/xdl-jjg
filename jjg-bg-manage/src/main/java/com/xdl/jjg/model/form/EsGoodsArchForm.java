@@ -28,13 +28,13 @@ public class EsGoodsArchForm implements Serializable {
     /**
      * 主键id
      */
-    @ApiModelProperty(value = "主键id",example = "1")
+    @ApiModelProperty(value = "主键id", example = "1")
     private Long id;
 
     /**
      * 供应商ID
      */
-    @ApiModelProperty(required = true, value = "供应商ID",example = "1")
+    @ApiModelProperty(required = true, value = "供应商ID", example = "1")
     @NotNull(message = "供应商ID不能为空")
     private Long supplierId;
     /**
@@ -111,7 +111,7 @@ public class EsGoodsArchForm implements Serializable {
     @ApiModelProperty(required = true, value = "SKU集合")
     @Valid
     @NotNull(message = "SKU集合不能为空")
-    @Size(min = 1 , message = "至少有一个sku信息")
+    @Size(min = 1, message = "至少有一个sku信息")
     private List<EsSkuForm> skuList;
 
     /**
@@ -124,7 +124,7 @@ public class EsGoodsArchForm implements Serializable {
     /**
      * 税率
      */
-    @ApiModelProperty(required = true, value = "税率",example = "1")
+    @ApiModelProperty(required = true, value = "税率", example = "1")
     @NotNull(message = "税率不能为空")
     private Double taxRate;
     /**

@@ -19,19 +19,19 @@ import lombok.Data;
 @ApiModel
 public class EsGoodGoodsQueryForm extends QueryPageForm {
 
-private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
 
-	/**
-	 * 商品名称
-	 */
-	@ApiModelProperty(value = "goodsName")
-	private String goodsName;
+    /**
+     * 商品名称
+     */
+    @ApiModelProperty(value = "goodsName")
+    private String goodsName;
 
-	/**
-	 * 状态(1:待发布,2.已发布,3:已下架)
-	 */
-	@ApiModelProperty(value = "状态(1:待发布,2.已发布,3:已下架)",example = "1")
-	private Integer state;
+    /**
+     * 状态(1:待发布,2.已发布,3:已下架)
+     */
+    @ApiModelProperty(value = "状态(1:待发布,2.已发布,3:已下架)", example = "1")
+    private Integer state;
 
-	}
+}

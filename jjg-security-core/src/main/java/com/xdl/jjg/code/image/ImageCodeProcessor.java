@@ -22,10 +22,12 @@ import java.io.InputStream;
 public class ImageCodeProcessor extends AbstractValidateCodeProcessor<ImageCode> {
 
     private static Logger logger = LoggerFactory.getLogger(ImageCodeProcessor.class);
+
     /**
      * 发送图形验证码，将其写到响应中
      * 直接用文件流来处理
      * BASE64格式
+     *
      * @param request
      * @param imageCode
      * @throws Exception
@@ -37,7 +39,7 @@ public class ImageCodeProcessor extends AbstractValidateCodeProcessor<ImageCode>
         ImageIO.write(imageCode.getImage(), "JPEG", baos);
         byte[] bytes = baos.toByteArray();
         BASE64Encoder encoder = new BASE64Encoder();
-        String jpeg_base64 =  encoder.encodeBuffer(bytes).trim();
+        String jpeg_base64 = encoder.encodeBuffer(bytes).trim();
         jpeg_base64 = jpeg_base64.replaceAll("\n", "").replaceAll("\r", "");
         String newStr = new String("\"data:image/jpg;base64," + jpeg_base64 + "\"");
         request.getResponse().getWriter().write(newStr);

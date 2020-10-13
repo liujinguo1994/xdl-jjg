@@ -22,7 +22,7 @@ public class EsSmtpVO implements Serializable {
     /**
      * 主键ID
      */
-    @ApiModelProperty(value = "主键ID",example = "1")
+    @ApiModelProperty(value = "主键ID", example = "1")
     private Long id;
     /**
      * 主机
@@ -42,17 +42,17 @@ public class EsSmtpVO implements Serializable {
     /**
      * 最后发信时间
      */
-    @ApiModelProperty(value = "最后发信时间",example = "1")
+    @ApiModelProperty(value = "最后发信时间", example = "1")
     private Long lastSendTime;
     /**
      * 已发数
      */
-    @ApiModelProperty(value = "已发数",example = "1")
+    @ApiModelProperty(value = "已发数", example = "1")
     private Integer sendCount;
     /**
      * 最大发信数
      */
-    @ApiModelProperty(value = "最大发信数",example = "1")
+    @ApiModelProperty(value = "最大发信数", example = "1")
     private Integer maxCount;
     /**
      * 发信邮箱
@@ -62,11 +62,11 @@ public class EsSmtpVO implements Serializable {
     /**
      * 端口
      */
-    @ApiModelProperty(value = "端口",example = "1")
+    @ApiModelProperty(value = "端口", example = "1")
     private Integer port;
     /**
      * ssl是否开启(0:未开启，1:开启)
      */
-    @ApiModelProperty(value = "ssl是否开启(0:未开启，1:开启)",example = "1")
+    @ApiModelProperty(value = "ssl是否开启(0:未开启，1:开启)", example = "1")
     private Integer openSsl;
 }

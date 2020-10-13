@@ -77,6 +77,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 
     /**
      * 初始化要拦截的url配置信息
+     *
      * @throws ServletException
      */
     @Override
@@ -95,6 +96,7 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
 
     /**
      * 将系统中配置的需要校验验证码的url根据校验的类型放入map
+     *
      * @param urlString
      * @param type
      */
@@ -123,11 +125,12 @@ public class ValidateCodeFilter extends OncePerRequestFilter implements Initiali
             }
         }
 
-         filterChain.doFilter(httpServletRequest, httpServletResponse);
+        filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
 
     /**
      * 获取校验码的类型，如果当前请求不需要校验，就返回null
+     *
      * @param request
      * @return
      */

@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类-角色管理
+ * 服务实现类-角色管理
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -50,7 +50,7 @@ public class EsRoleServiceImpl extends ServiceImpl<EsRoleMapper, EsRole> impleme
     @Transactional(propagation = Propagation.REQUIRED)
     public DubboResult insertEsRole(EsRoleDTO esRoleDTO) {
         try {
-            EsRole esRole=new EsRole();
+            EsRole esRole = new EsRole();
             esRole.setRoleName(esRoleDTO.getRoleName());
             esRole.setRoleDescribe(esRoleDTO.getRoleDescribe());
             esRole.setAuthIds(JsonUtil.objectToJson(esRoleDTO.getMenus()));
@@ -59,36 +59,36 @@ public class EsRoleServiceImpl extends ServiceImpl<EsRoleMapper, EsRole> impleme
             esRoleMapper.insert(esRole);
             return DubboResult.success();
         } catch (ArgumentException e) {
-            String errorMessage = String.format("添加角色失败，esRoleDTO:%s",esRoleDTO);
-            logger.error(errorMessage,e);
+            String errorMessage = String.format("添加角色失败，esRoleDTO:%s", esRoleDTO);
+            logger.error(errorMessage, e);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//手动开启事务回滚
-            return DubboResult.fail(e.getExceptionCode(),e.getMessage());
+            return DubboResult.fail(e.getExceptionCode(), e.getMessage());
         } catch (Throwable th) {
-            String errorMessage = String.format("添加角色失败，esRoleDTO:%s",esRoleDTO);
-            logger.error(errorMessage,th);
+            String errorMessage = String.format("添加角色失败，esRoleDTO:%s", esRoleDTO);
+            logger.error(errorMessage, th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//手动开启事务回滚
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(),ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
     @Override
     public DubboResult<EsRoleDO> getEsRole(Long id) {
         try {
-            if(StringUtils.isEmpty(id)){
-                throw new ArgumentException(ErrorCode.ID_IS_NULL.getErrorCode(),"id为空");
+            if (StringUtils.isEmpty(id)) {
+                throw new ArgumentException(ErrorCode.ID_IS_NULL.getErrorCode(), "id为空");
             }
             EsRole esRole = esRoleMapper.selectById(id);
-            EsRoleDO esRoleDO=new EsRoleDO();
-            BeanUtil.copyProperties(esRole,esRoleDO);
+            EsRoleDO esRoleDO = new EsRoleDO();
+            BeanUtil.copyProperties(esRole, esRoleDO);
             return DubboResult.success(esRoleDO);
         } catch (ArgumentException e) {
-            String errorMessage = String.format("根据id查询角色失败，参数id:%s",id);
-            logger.error(errorMessage,e);
-            return DubboResult.fail(e.getExceptionCode(),e.getMessage());
+            String errorMessage = String.format("根据id查询角色失败，参数id:%s", id);
+            logger.error(errorMessage, e);
+            return DubboResult.fail(e.getExceptionCode(), e.getMessage());
         } catch (Throwable th) {
-            String errorMessage = String.format("根据id查询角色失败，参数id:%s",id);
-            logger.error(errorMessage,th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(),ErrorCode.SYS_ERROR.getErrorMsg());
+            String errorMessage = String.format("根据id查询角色失败，参数id:%s", id);
+            logger.error(errorMessage, th);
+            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -96,12 +96,12 @@ public class EsRoleServiceImpl extends ServiceImpl<EsRoleMapper, EsRole> impleme
     @Transactional(propagation = Propagation.REQUIRED)
     public DubboResult updateEsRole(EsRoleDTO esRoleDTO) {
         try {
-            if(StringUtils.isEmpty(esRoleDTO.getId())){
-                throw new ArgumentException(ErrorCode.ID_IS_NULL.getErrorCode(),"id为空");
+            if (StringUtils.isEmpty(esRoleDTO.getId())) {
+                throw new ArgumentException(ErrorCode.ID_IS_NULL.getErrorCode(), "id为空");
             }
             EsRole esRole = esRoleMapper.selectById(esRoleDTO.getId());
-            if (esRole == null){
-                throw new ArgumentException(ErrorCode.ROLE_NOT_EXIT.getErrorCode(),"角色不存在");
+            if (esRole == null) {
+                throw new ArgumentException(ErrorCode.ROLE_NOT_EXIT.getErrorCode(), "角色不存在");
             }
             esRole.setRoleName(esRoleDTO.getRoleName());
             esRole.setAuthIds(JsonUtil.objectToJson(esRoleDTO.getMenus()));
@@ -111,40 +111,40 @@ public class EsRoleServiceImpl extends ServiceImpl<EsRoleMapper, EsRole> impleme
             esRoleMapper.updateById(esRole);
             return DubboResult.success();
         } catch (ArgumentException e) {
-            String errorMessage = String.format("修改角色失败，esRoleDTO:%s",esRoleDTO);
-            logger.error(errorMessage,e);
+            String errorMessage = String.format("修改角色失败，esRoleDTO:%s", esRoleDTO);
+            logger.error(errorMessage, e);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//手动开启事务回滚
-            return DubboResult.fail(e.getExceptionCode(),e.getMessage());
+            return DubboResult.fail(e.getExceptionCode(), e.getMessage());
         } catch (Throwable th) {
-            String errorMessage = String.format("修改角色失败，esRoleDTO:%s",esRoleDTO);
-            logger.error(errorMessage,th);
+            String errorMessage = String.format("修改角色失败，esRoleDTO:%s", esRoleDTO);
+            logger.error(errorMessage, th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//手动开启事务回滚
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(),ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
     @Override
     public DubboResult deleteEsRole(Long id) {
         try {
-            if(StringUtils.isEmpty(id)){
-                throw new ArgumentException(ErrorCode.ID_IS_NULL.getErrorCode(),"id为空");
+            if (StringUtils.isEmpty(id)) {
+                throw new ArgumentException(ErrorCode.ID_IS_NULL.getErrorCode(), "id为空");
             }
             EsRole esRole = esRoleMapper.selectById(id);
-            if (esRole == null){
-                throw new ArgumentException(ErrorCode.ROLE_NOT_EXIT.getErrorCode(),"角色不存在");
+            if (esRole == null) {
+                throw new ArgumentException(ErrorCode.ROLE_NOT_EXIT.getErrorCode(), "角色不存在");
             }
             esRoleMapper.deleteById(id);
             return DubboResult.success();
         } catch (ArgumentException e) {
-            String errorMessage = String.format("删除角色失败，参数id:%s",id);
-            logger.error(errorMessage,e);
+            String errorMessage = String.format("删除角色失败，参数id:%s", id);
+            logger.error(errorMessage, e);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//手动开启事务回滚
-            return DubboResult.fail(e.getExceptionCode(),e.getMessage());
+            return DubboResult.fail(e.getExceptionCode(), e.getMessage());
         } catch (Throwable th) {
-            String errorMessage = String.format("删除角色失败，参数id:%s",id);
-            logger.error(errorMessage,th);
+            String errorMessage = String.format("删除角色失败，参数id:%s", id);
+            logger.error(errorMessage, th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//手动开启事务回滚
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(),ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -165,11 +165,11 @@ public class EsRoleServiceImpl extends ServiceImpl<EsRoleMapper, EsRole> impleme
             }
             return DubboResult.success(roleMap);
         } catch (ArgumentException e) {
-            logger.error("获取所有角色的权限对照表失败",e);
-            return DubboResult.fail(e.getExceptionCode(),e.getMessage());
+            logger.error("获取所有角色的权限对照表失败", e);
+            return DubboResult.fail(e.getExceptionCode(), e.getMessage());
         } catch (Throwable th) {
-            logger.error("获取所有角色的权限对照表失败",th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(),ErrorCode.SYS_ERROR.getErrorMsg());
+            logger.error("获取所有角色的权限对照表失败", th);
+            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -179,19 +179,19 @@ public class EsRoleServiceImpl extends ServiceImpl<EsRoleMapper, EsRole> impleme
         try {
             EsRole esRole = esRoleMapper.selectById(id);
             if (esRole == null) {
-                throw new ArgumentException(ErrorCode.ROLE_NOT_EXIT.getErrorCode(),"角色不存在");
+                throw new ArgumentException(ErrorCode.ROLE_NOT_EXIT.getErrorCode(), "角色不存在");
             }
             List<Menus> menusList = JsonUtil.jsonToList(esRole.getAuthIds(), Menus.class);
             List<String> authList = new ArrayList<>();
             //筛选菜单
             reset(menusList, authList);
             return DubboResult.success(authList);
-        }catch (ArgumentException e) {
-            logger.error("根据角色id获取所属菜单失败",e);
-            return DubboResult.fail(e.getExceptionCode(),e.getMessage());
+        } catch (ArgumentException e) {
+            logger.error("根据角色id获取所属菜单失败", e);
+            return DubboResult.fail(e.getExceptionCode(), e.getMessage());
         } catch (Throwable th) {
-            logger.error("根据角色id获取所属菜单失败",th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(),ErrorCode.SYS_ERROR.getErrorMsg());
+            logger.error("根据角色id获取所属菜单失败", th);
+            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -201,44 +201,44 @@ public class EsRoleServiceImpl extends ServiceImpl<EsRoleMapper, EsRole> impleme
         try {
             EsRole esRole = esRoleMapper.selectById(id);
             if (esRole == null) {
-                throw new ArgumentException(ErrorCode.ROLE_NOT_EXIT.getErrorCode(),"角色不存在");
+                throw new ArgumentException(ErrorCode.ROLE_NOT_EXIT.getErrorCode(), "角色不存在");
             }
             List<Menus> menusList = JsonUtil.jsonToList(esRole.getAuthIds(), Menus.class);
             List<String> authList = new ArrayList<>();
             //筛选菜单的权限表达式
             filter(menusList, authList);
             return DubboResult.success(authList);
-        }catch (ArgumentException e) {
-            logger.error("根据角色id获取所属菜单权限表达式列表失败",e);
-            return DubboResult.fail(e.getExceptionCode(),e.getMessage());
+        } catch (ArgumentException e) {
+            logger.error("根据角色id获取所属菜单权限表达式列表失败", e);
+            return DubboResult.fail(e.getExceptionCode(), e.getMessage());
         } catch (Throwable th) {
-            logger.error("根据角色id获取所属菜单权限表达式列表失败",th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(),ErrorCode.SYS_ERROR.getErrorMsg());
+            logger.error("根据角色id获取所属菜单权限表达式列表失败", th);
+            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
     @Override
     public DubboPageResult<EsRoleDO> getEsRoleList(EsRoleDTO esRoleDTO, int pageSize, int pageNum) {
         try {
-            Page<EsRole> page=new Page<>(pageNum,pageSize);
+            Page<EsRole> page = new Page<>(pageNum, pageSize);
             QueryWrapper<EsRole> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(StringUtil.notEmpty(esRoleDTO.getRoleName()), EsRole::getRoleName,esRoleDTO.getRoleName());
+            queryWrapper.lambda().eq(StringUtil.notEmpty(esRoleDTO.getRoleName()), EsRole::getRoleName, esRoleDTO.getRoleName());
             IPage<EsRole> iPage = esRoleMapper.selectPage(page, queryWrapper);
             List<EsRoleDO> esRoleDOList = new ArrayList<>();
-            if(CollectionUtils.isNotEmpty(iPage.getRecords())){
+            if (CollectionUtils.isNotEmpty(iPage.getRecords())) {
                 esRoleDOList = iPage.getRecords().stream().map(esRole -> {
                     EsRoleDO esRoleDO = new EsRoleDO();
-                    BeanUtil.copyProperties(esRole,esRoleDO);
+                    BeanUtil.copyProperties(esRole, esRoleDO);
                     return esRoleDO;
                 }).collect(Collectors.toList());
             }
-            return DubboPageResult.success(iPage.getTotal(),esRoleDOList);
-        }catch (ArgumentException e) {
-            logger.error("分页查询角色列表失败",e);
-            return DubboPageResult.fail(e.getExceptionCode(),e.getMessage());
+            return DubboPageResult.success(iPage.getTotal(), esRoleDOList);
+        } catch (ArgumentException e) {
+            logger.error("分页查询角色列表失败", e);
+            return DubboPageResult.fail(e.getExceptionCode(), e.getMessage());
         } catch (Throwable th) {
-            logger.error("分页查询角色列表失败",th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(),ErrorCode.SYS_ERROR.getErrorMsg());
+            logger.error("分页查询角色列表失败", th);
+            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 

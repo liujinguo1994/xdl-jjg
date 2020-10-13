@@ -20,30 +20,30 @@ import java.io.Serializable;
 public class EsCategoryForm implements Serializable {
 
 
-	private static final long serialVersionUID = -3317812021081644011L;
-	/**
+    private static final long serialVersionUID = -3317812021081644011L;
+    /**
      * 分类名称
      */
-	@ApiModelProperty(required = true, value = "分类名称")
-	@NotBlank(message = "分类名称不能为空")
-	private String name;
+    @ApiModelProperty(required = true, value = "分类名称")
+    @NotBlank(message = "分类名称不能为空")
+    private String name;
 
     /**
      * 分类父id
      */
-	@ApiModelProperty(value = "分类父id",example = "1")
-	private Long parentId;
+    @ApiModelProperty(value = "分类父id", example = "1")
+    private Long parentId;
 
     /**
      * 分类排序
      */
-	@ApiModelProperty(value = "分类排序",example = "1")
-	private Integer categoryOrder;
+    @ApiModelProperty(value = "分类排序", example = "1")
+    private Integer categoryOrder;
 
     /**
      * 分类图标
      */
-	@ApiModelProperty(value = "分类图标")
-	private String image;
+    @ApiModelProperty(value = "分类图标")
+    private String image;
 
 }

@@ -35,6 +35,7 @@ public enum ArticleShowPosition {
         this.description = description;
 
     }
+
     public String description() {
         return this.description;
     }

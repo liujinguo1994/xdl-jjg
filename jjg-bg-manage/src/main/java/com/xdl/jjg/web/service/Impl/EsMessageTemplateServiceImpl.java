@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -63,11 +63,11 @@ public class EsMessageTemplateServiceImpl extends ServiceImpl<EsMessageTemplateM
             BeanUtil.copyProperties(messageTemplateDTO, messageTemplate);
             this.messageTemplateMapper.insert(messageTemplate);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -95,10 +95,10 @@ public class EsMessageTemplateServiceImpl extends ServiceImpl<EsMessageTemplateM
             queryWrapper.lambda().eq(EsMessageTemplate::getId, messageTemplateDTO.getId());
             this.messageTemplateMapper.update(messageTemplate, queryWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -126,10 +126,10 @@ public class EsMessageTemplateServiceImpl extends ServiceImpl<EsMessageTemplateM
             }
             BeanUtil.copyProperties(messageTemplate, messageTemplateDO);
             return DubboResult.success(messageTemplateDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -139,8 +139,8 @@ public class EsMessageTemplateServiceImpl extends ServiceImpl<EsMessageTemplateM
      * 根据查询列表
      *
      * @param messageTemplateDTO DTO
-     * @param pageSize     页码
-     * @param pageNum      页数
+     * @param pageSize           页码
+     * @param pageNum            页数
      * @auther: rm 2817512105@qq.com
      * @date: 2019-06-04
      * @return: com.shopx.common.model.result.DubboPageResult<EsMessageTemplateVO>
@@ -150,7 +150,7 @@ public class EsMessageTemplateServiceImpl extends ServiceImpl<EsMessageTemplateM
         QueryWrapper<EsMessageTemplate> queryWrapper = new QueryWrapper<>();
         try {
             // 查询条件
-            queryWrapper.lambda().eq(EsMessageTemplate::getType,messageTemplateDTO.getType());
+            queryWrapper.lambda().eq(EsMessageTemplate::getType, messageTemplateDTO.getType());
             Page<EsMessageTemplate> page = new Page<>(pageNum, pageSize);
             IPage<EsMessageTemplate> iPage = this.page(page, queryWrapper);
             List<EsMessageTemplateDO> messageTemplateDOList = new ArrayList<>();
@@ -161,10 +161,10 @@ public class EsMessageTemplateServiceImpl extends ServiceImpl<EsMessageTemplateM
                     return messageTemplateDO;
                 }).collect(Collectors.toList());
             }
-            return DubboPageResult.success(iPage.getTotal(),messageTemplateDOList);
-        } catch (ArgumentException ae){
+            return DubboPageResult.success(iPage.getTotal(), messageTemplateDOList);
+        } catch (ArgumentException ae) {
             logger.error("分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -190,11 +190,11 @@ public class EsMessageTemplateServiceImpl extends ServiceImpl<EsMessageTemplateM
             deleteWrapper.lambda().eq(EsMessageTemplate::getId, id);
             this.messageTemplateMapper.delete(deleteWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
-             logger.error("删除失败", ae);
-             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+        } catch (ArgumentException ae) {
+            logger.error("删除失败", ae);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());

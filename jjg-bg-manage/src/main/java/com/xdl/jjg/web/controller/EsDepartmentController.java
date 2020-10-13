@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- *  前端控制器-部门
+ * 前端控制器-部门
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -32,7 +32,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/esDepartment")
-@Api(value="/esDepartment", tags="部门")
+@Api(value = "/esDepartment", tags = "部门")
 public class EsDepartmentController {
 
     @Autowired
@@ -44,13 +44,13 @@ public class EsDepartmentController {
     @ApiOperation(value = "添加部门")
     @PostMapping(value = "/insertEsDepartment")
     @ResponseBody
-    public ApiResponse insertEsDepartment(@Valid @RequestBody @ApiParam(name="部门form对象",value="form") EsDepartmentForm form){
+    public ApiResponse insertEsDepartment(@Valid @RequestBody @ApiParam(name = "部门form对象", value = "form") EsDepartmentForm form) {
         EsDepartmentDTO esDepartmentDTO = new EsDepartmentDTO();
         BeanUtil.copyProperties(form, esDepartmentDTO);
         DubboResult result = iEsDepartmentService.insertDepartment(esDepartmentDTO);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -58,21 +58,21 @@ public class EsDepartmentController {
     @ApiOperation(value = "修改部门")
     @PutMapping(value = "/updateEsDepartment/{id}")
     @ResponseBody
-    public ApiResponse updateEsDepartment(@Valid @RequestBody @ApiParam(name="部门form对象",value="form") EsDepartmentForm form, @PathVariable Long id){
+    public ApiResponse updateEsDepartment(@Valid @RequestBody @ApiParam(name = "部门form对象", value = "form") EsDepartmentForm form, @PathVariable Long id) {
         EsDepartmentDTO esDepartmentDTO = new EsDepartmentDTO();
         BeanUtil.copyProperties(form, esDepartmentDTO);
         esDepartmentDTO.setId(id);
         DubboResult result = iEsDepartmentService.updateDepartment(esDepartmentDTO);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
 
     @ApiOperation(value = "删除部门")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "主键id", required = true, dataType = "long", paramType = "path",example = "1")
+            @ApiImplicitParam(name = "id", value = "主键id", required = true, dataType = "long", paramType = "path", example = "1")
     })
     @DeleteMapping(value = "/deleteEsDepartment/{id}")
     @ResponseBody
@@ -80,18 +80,18 @@ public class EsDepartmentController {
         //判断是否关联管理员
         DubboResult<List<EsAdminUserDO>> dubboResult = iesAdminUserService.getByDepartmentId(id);
         List<EsAdminUserDO> data = dubboResult.getData();
-        if (data.size() > 0){
-            return ApiResponse.fail(10087,"该部门已关联管理员，不能删除");
+        if (data.size() > 0) {
+            return ApiResponse.fail(10087, "该部门已关联管理员，不能删除");
         }
         DubboResult result = iEsDepartmentService.deleteDepartment(id);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
 
-    @ApiOperation(value = "部门下拉框",response = EsDepartmentVO.class)
+    @ApiOperation(value = "部门下拉框", response = EsDepartmentVO.class)
     @GetMapping(value = "/getEsDepartmentComboBox")
     @ResponseBody
     public ApiResponse getEsDepartmentComboBox() {
@@ -113,9 +113,9 @@ public class EsDepartmentController {
         }
     }
 
-    @ApiOperation(value = "查询某部门下的子部门列表",response = EsDepartmentVO.class)
+    @ApiOperation(value = "查询某部门下的子部门列表", response = EsDepartmentVO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "parentId", value = "父id，顶级为0", required = true, dataType = "long", paramType = "path",example = "1")})
+            @ApiImplicitParam(name = "parentId", value = "父id，顶级为0", required = true, dataType = "long", paramType = "path", example = "1")})
     @GetMapping(value = "/{parentId}/children")
     @ResponseBody
     public ApiResponse getChildren(@PathVariable("parentId") Long parentId) {

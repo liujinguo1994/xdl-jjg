@@ -66,25 +66,24 @@ public class ResponseMessage implements Serializable {
     }
 
 
-
-    public static Object badArgument(){
+    public static Object badArgument() {
         return fail(401, "参数不对");
     }
 
 
-    public static Object badArgumentValue(){
+    public static Object badArgumentValue() {
         return fail(402, "参数值不对");
     }
 
-    public static Object unlogin(){
+    public static Object unlogin() {
         return fail(501, "请登录");
     }
 
-    public static Object serious(){
+    public static Object serious() {
         return fail(502, "系统内部错误");
     }
 
-    public static Object unsupport(){
+    public static Object unsupport() {
         return fail(503, "业务不支持");
     }
 }

@@ -22,7 +22,7 @@ import org.springframework.web.cors.CorsUtils;
  */
 @Configuration
 @EnableResourceServer
-public class  MyAuthorizationResourceServerConfig extends ResourceServerConfigurerAdapter {
+public class MyAuthorizationResourceServerConfig extends ResourceServerConfigurerAdapter {
 
     @Autowired
     private SecurityProperties securityProperties;
@@ -77,7 +77,7 @@ public class  MyAuthorizationResourceServerConfig extends ResourceServerConfigur
                         SecurityConstants.DEFAULT_LOGIN_PROCESSING_URL_MOBILE,
                         securityProperties.getBrowser().getLoginPage(),
                         SecurityConstants.DEFAULT_VALIDATE_CODE_URL_PREFIX + "/*",
-                         "/social/signUp",
+                        "/social/signUp",
                         "/social/registered",
                         "/phone/registered",
                         "/code/sms",
@@ -107,7 +107,7 @@ public class  MyAuthorizationResourceServerConfig extends ResourceServerConfigur
                         "/auction/video/list",
                         "/auction/video/listComment",
                         securityProperties.getBrowser().getSession().getSessionInvalidUrl()
-                        )
+                )
                 .permitAll()
                 .anyRequest()
                 .authenticated()
@@ -115,5 +115,5 @@ public class  MyAuthorizationResourceServerConfig extends ResourceServerConfigur
                 .csrf().disable();
 
         //http.authorizeRequests().anyRequest() .permitAll().and().logout().permitAll();
-}
+    }
 }

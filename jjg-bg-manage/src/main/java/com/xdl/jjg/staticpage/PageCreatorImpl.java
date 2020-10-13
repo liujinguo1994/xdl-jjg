@@ -50,7 +50,7 @@ public class PageCreatorImpl implements PageCreator {
     @Autowired
     private IEsSettingsService settingsService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000,check = false)
+    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
     private IEsGoodsService goodsService;
 
     @Autowired
@@ -62,7 +62,7 @@ public class PageCreatorImpl implements PageCreator {
         String url = getUrl(path, type);
         //通过http 来获取html存储redis
         String html = this.getHTML(url, type);
-        jedisCluster.set(name,html);
+        jedisCluster.set(name, html);
 
     }
 
@@ -88,7 +88,7 @@ public class PageCreatorImpl implements PageCreator {
     }
 
     @Override
-    public void createGoods() throws Exception{
+    public void createGoods() throws Exception {
         //为了防止首页有相关商品，所以需要生成首页一次
         this.createIndex();
         //商品总数

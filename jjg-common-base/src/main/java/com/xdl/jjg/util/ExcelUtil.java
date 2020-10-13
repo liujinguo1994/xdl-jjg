@@ -21,13 +21,14 @@ public class ExcelUtil {
 
     /**
      * 获取列样式
+     *
      * @param workbook Excel表
      * @param fontName 字体名称
      * @param fontSize 字体大小
      * @param align    字体位置
      * @return
      */
-    public static HSSFCellStyle getCellStyle(HSSFWorkbook workbook, String fontName, short fontSize, short align){
+    public static HSSFCellStyle getCellStyle(HSSFWorkbook workbook, String fontName, short fontSize, short align) {
         HSSFFont font = workbook.createFont();
         // 设置字体名称
         font.setFontName(fontName);
@@ -50,7 +51,8 @@ public class ExcelUtil {
 
     /**
      * 设置标题
-     * @param workbook   Excel表
+     *
+     * @param workbook  Excel表
      * @param title     标题名称
      * @param row       起始行
      * @param cellStyle 单元格样式
@@ -58,7 +60,7 @@ public class ExcelUtil {
      * @return
      */
     public static HSSFSheet setTitleCell(HSSFWorkbook workbook, String title, Integer row, HSSFCellStyle cellStyle
-                                        , Integer count){
+            , Integer count) {
         // 生成Sheet
         HSSFSheet sheet = workbook.createSheet();
         // 创建行
@@ -81,6 +83,7 @@ public class ExcelUtil {
 
     /**
      * 设置列值和列样式
+     *
      * @param hssfRow   行
      * @param cellNum   列号
      * @param cellValue 列值
@@ -103,15 +106,16 @@ public class ExcelUtil {
 
     /**
      * 设置列名
+     *
      * @param sheet     sheet
      * @param row       行号
      * @param cellName  列名称
      * @param cellStyle 列样式
      */
-    public static void setCellName(HSSFSheet sheet, Integer row, String[] cellName, HSSFCellStyle cellStyle){
+    public static void setCellName(HSSFSheet sheet, Integer row, String[] cellName, HSSFCellStyle cellStyle) {
         Integer size = cellName.length;
         HSSFRow hssfRow = sheet.createRow(row);
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             HSSFCell hssfCell = hssfRow.createCell(i);
             hssfCell.setCellValue(cellName[i]);
             hssfCell.setCellStyle(cellStyle);
@@ -120,18 +124,20 @@ public class ExcelUtil {
 
     /**
      * sheet页中列自适应
+     *
      * @param sheet sheet页
      * @param count 列数
      */
-    public static void cellSelfAdaption(HSSFSheet sheet, Integer count){
-        for(int i = 0; i < count; i++) {
+    public static void cellSelfAdaption(HSSFSheet sheet, Integer count) {
+        for (int i = 0; i < count; i++) {
             // 宽度自适应
-            sheet.autoSizeColumn((short)i, true);
+            sheet.autoSizeColumn((short) i, true);
         }
     }
 
     /**
      * 列合并单元格，并重新设置样式
+     *
      * @param workbook  工作簿
      * @param hssfSheet sheet页
      * @param firstRow  起始行
@@ -139,11 +145,11 @@ public class ExcelUtil {
      * @param cellNum   需要合并的列
      * @param colNum    不改变样式的列号， 没有为-1
      */
-    public static void cellMerged(HSSFWorkbook workbook, HSSFSheet hssfSheet, Integer firstRow, Integer lastRow, int[] cellNum, int colNum){
+    public static void cellMerged(HSSFWorkbook workbook, HSSFSheet hssfSheet, Integer firstRow, Integer lastRow, int[] cellNum, int colNum) {
         // 起始行 < 结束行的时候
         if (firstRow < lastRow) {
             // 当前行
-            for(int col : cellNum){
+            for (int col : cellNum) {
                 hssfSheet.addMergedRegion(new CellRangeAddress(firstRow, lastRow, col, col));
             }
         }
@@ -184,9 +190,9 @@ public class ExcelUtil {
                 for (int y = row.getFirstCellNum(); y < row.getLastCellNum(); y++) {
                     String value = "";
                     cell = row.getCell(y);
-                    if (cell==null){
+                    if (cell == null) {
                         li.add("");
-                    }else {
+                    } else {
                         switch (cell.getCellType()) {
                             // 数字
                             case HSSFCell.CELL_TYPE_NUMERIC:

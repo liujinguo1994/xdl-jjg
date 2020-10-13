@@ -17,11 +17,11 @@ import lombok.Data;
 @ApiModel
 public class EsBrandQueryForm extends QueryPageForm {
 
-	private static final long serialVersionUID = 2402732215682477885L;
-	/**
+    private static final long serialVersionUID = 2402732215682477885L;
+    /**
      * 品牌名称
      */
-	@ApiModelProperty(value = "品牌名称")
-	private String name;
+    @ApiModelProperty(value = "品牌名称")
+    private String name;
 
 }

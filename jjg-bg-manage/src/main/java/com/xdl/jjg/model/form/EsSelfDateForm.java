@@ -23,32 +23,32 @@ import java.util.List;
 public class EsSelfDateForm extends QueryPageForm {
 
 
-	private static final long serialVersionUID = -6563702032275869581L;
+    private static final long serialVersionUID = -6563702032275869581L;
 
-	/**
+    /**
      * 主键ID
      */
-	@ApiModelProperty(value = "主键ID",example = "1")
-	private Long id;
+    @ApiModelProperty(value = "主键ID", example = "1")
+    private Long id;
     /**
      * 自提日期
      */
-    @ApiModelProperty(required = true, value = "自提日期",example = "1")
-	@NotNull(message = "自提日期不能为空")
-	private Long selfDate;
+    @ApiModelProperty(required = true, value = "自提日期", example = "1")
+    @NotNull(message = "自提日期不能为空")
+    private Long selfDate;
     /**
      * 有效状态（0：有效，1：无效）
      */
-	@ApiModelProperty(required = true, value = "有效状态（0：有效，1：无效）",example = "1")
-	@NotNull(message = "有效状态不能为空")
-	private Integer state;
+    @ApiModelProperty(required = true, value = "有效状态（0：有效，1：无效）", example = "1")
+    @NotNull(message = "有效状态不能为空")
+    private Integer state;
     /**
      * 自提时间段集合
      */
-	@ApiModelProperty(required = true, value = "自提时间段集合")
-	@Valid
-	@NotNull(message = "自提时间段集合不能为空")
-	@Size(min=1 , message = "至少有一个自提时间段")
-	private List<EsSelfTimeForm> selfTimeFormList;
+    @ApiModelProperty(required = true, value = "自提时间段集合")
+    @Valid
+    @NotNull(message = "自提时间段集合不能为空")
+    @Size(min = 1, message = "至少有一个自提时间段")
+    private List<EsSelfTimeForm> selfTimeFormList;
 
 }

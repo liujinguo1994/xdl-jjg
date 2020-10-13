@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -19,18 +19,18 @@ public class EsSensitiveWordsDO implements Serializable {
     /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
     /**
      * 敏感词名称
      */
-	private String wordName;
+    private String wordName;
     /**
      * 创建时间
      */
-	private Long createTime;
+    private Long createTime;
     /**
      * 删除状态  0正常 1 删除
      */
-	private Integer isDel;
+    private Integer isDel;
 
 }

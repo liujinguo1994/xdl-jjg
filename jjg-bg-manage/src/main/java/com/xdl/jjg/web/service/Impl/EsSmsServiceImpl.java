@@ -64,31 +64,32 @@ public class EsSmsServiceImpl implements IEsSmsService {
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
+
     public DubboResult sendLfc(EsSmsSendDTO sendDTO) {
         try {
             DubboResult<EsSmsPlatformDO> result = platformService.getOpen();
-            if (!result.isSuccess() || result.getData() == null){
+            if (!result.isSuccess() || result.getData() == null) {
                 throw new ArgumentException(ErrorCode.GET_OPEN_SMS_ERROR.getErrorCode(), "获取开启的短信网关异常");
             }
             EsSmsPlatformDO smsPlatformDO = result.getData();
             SmsPlatformManage smsPlatformManage = (SmsPlatformManage) ApplicationContextHolder.getBean(smsPlatformDO.getBean());
 
-            logger.info("使用阿里云短信模板开始"+ JSONObject.fromObject(sendDTO).toString());
+            logger.info("使用阿里云短信模板开始" + JSONObject.fromObject(sendDTO).toString());
 
             boolean b = smsPlatformManage.onSend(sendDTO, this.getLfcConfig(smsPlatformDO.getConfig()));
-            if(b){
+            if (b) {
                 logger.info("发送短信请求成功");
-            }else {
+            } else {
                 logger.info("发送短信请求失败");
                 throw new ArgumentException(ErrorCode.SMS_SMS_ERROR.getErrorCode(), "发送短信请求失败");
             }
 
-            logger.info("使用阿里云短信模板结束"+ JSONObject.fromObject(sendDTO).toString());
+            logger.info("使用阿里云短信模板结束" + JSONObject.fromObject(sendDTO).toString());
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("发送短信失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("发送短信失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }

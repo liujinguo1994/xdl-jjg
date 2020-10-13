@@ -121,7 +121,7 @@ public class DateUtil {
      * 判断当前时间，是否在该时间范围内
      *
      * @param beginTime 开始时间
-     * @param endTime 结束时间
+     * @param endTime   结束时间
      * @return 是否在
      */
     public static boolean isBetween(Date beginTime, Date endTime) {

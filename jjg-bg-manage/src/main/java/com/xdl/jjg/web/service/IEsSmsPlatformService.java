@@ -8,7 +8,7 @@ import com.xdl.jjg.response.service.DubboResult;
 
 /**
  * <p>
- *  服务类-短信网关设置
+ * 服务类-短信网关设置
  * </p>
  *
  * @author rm 2817512105@qq.com

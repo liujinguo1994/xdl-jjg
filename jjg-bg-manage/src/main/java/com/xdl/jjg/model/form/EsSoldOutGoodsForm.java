@@ -22,20 +22,20 @@ import java.io.Serializable;
 @ApiModel
 public class EsSoldOutGoodsForm implements Serializable {
 
-private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 主键id
-	 */
-	@ApiModelProperty(required = true, value = "主键id")
-	@NotNull(message = "主键id不能为空")
-	private Long id;
+    /**
+     * 主键id
+     */
+    @ApiModelProperty(required = true, value = "主键id")
+    @NotNull(message = "主键id不能为空")
+    private Long id;
 
-	/**
-	 * 下架原因
-	 */
-	@ApiModelProperty(required = true, value = "下架原因")
-	@NotBlank(message = "下架原因不能为空")
-	private String underMessage;
+    /**
+     * 下架原因
+     */
+    @ApiModelProperty(required = true, value = "下架原因")
+    @NotBlank(message = "下架原因不能为空")
+    private String underMessage;
 
-	}
+}

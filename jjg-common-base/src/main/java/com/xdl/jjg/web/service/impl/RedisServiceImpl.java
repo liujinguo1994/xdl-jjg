@@ -97,7 +97,7 @@ public class RedisServiceImpl implements RedisService {
      */
     @Override
     public Boolean saveZSet(final String key, String value, Long score) {
-        return redisTemplate.opsForZSet().add(key,value,score);
+        return redisTemplate.opsForZSet().add(key, value, score);
     }
 
     /**
@@ -113,14 +113,15 @@ public class RedisServiceImpl implements RedisService {
      */
     @Override
     public Set<String> getZSet(final String key, Long start, Long end) {
-        return redisTemplate.opsForZSet().range(key,start,end);
+        return redisTemplate.opsForZSet().range(key, start, end);
     }
+
     /**
      * 获取set元素
      */
     @Override
-    public Double getZSet(final String key,String value) {
-        return redisTemplate.opsForZSet().score(key,value);
+    public Double getZSet(final String key, String value) {
+        return redisTemplate.opsForZSet().score(key, value);
     }
 
     /**
@@ -204,8 +205,9 @@ public class RedisServiceImpl implements RedisService {
 
     @Override
     public void delZSet(String key, String values) {
-        redisTemplate.opsForZSet().remove(key,values);
+        redisTemplate.opsForZSet().remove(key, values);
     }
+
     @Override
     public Long delHash(final String key, final String field) {
         return redisTemplate.opsForHash().delete(key, field);
@@ -257,8 +259,6 @@ public class RedisServiceImpl implements RedisService {
             log.error("【redis分布式锁】解锁异常, {}", e);
         }
     }
-
-
 
 
 }

@@ -23,7 +23,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -57,14 +57,14 @@ public class EsPageServiceImpl extends ServiceImpl<EsPageMapper, EsPage> impleme
                 throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), ErrorCode.PARAM_ERROR.getErrorMsg());
             }
             QueryWrapper<EsPage> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsPage::getClientType,pageDTO.getClientType()).eq(EsPage::getPageType,pageDTO.getPageType());
+            queryWrapper.lambda().eq(EsPage::getClientType, pageDTO.getClientType()).eq(EsPage::getPageType, pageDTO.getPageType());
             EsPage esPage = pageMapper.selectOne(queryWrapper);
             //首次插入
-            if (esPage == null){
+            if (esPage == null) {
                 EsPage page = new EsPage();
                 BeanUtil.copyProperties(pageDTO, page);
                 pageMapper.insert(page);
-            }else {
+            } else {
                 EsPage page = new EsPage();
                 BeanUtil.copyProperties(pageDTO, page);
                 QueryWrapper<EsPage> wrapper = new QueryWrapper<>();
@@ -77,10 +77,10 @@ public class EsPageServiceImpl extends ServiceImpl<EsPageMapper, EsPage> impleme
             pageCreateManagerService.create(choosePages);*/
 
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -93,16 +93,16 @@ public class EsPageServiceImpl extends ServiceImpl<EsPageMapper, EsPage> impleme
     public DubboResult<EsPageDO> getByType(String clientType, String pageType) {
         try {
             QueryWrapper<EsPage> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsPage::getClientType,clientType).eq(EsPage::getPageType,pageType);
+            queryWrapper.lambda().eq(EsPage::getClientType, clientType).eq(EsPage::getPageType, pageType);
             EsPage esPage = pageMapper.selectOne(queryWrapper);
             EsPageDO esPageDO = new EsPageDO();
-            if (esPage != null){
-                BeanUtil.copyProperties(esPage,esPageDO);
+            if (esPage != null) {
+                BeanUtil.copyProperties(esPage, esPageDO);
             }
             return DubboResult.success(esPageDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("使用客户端类型和页面类型查询一个楼层失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("使用客户端类型和页面类型查询一个楼层失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");

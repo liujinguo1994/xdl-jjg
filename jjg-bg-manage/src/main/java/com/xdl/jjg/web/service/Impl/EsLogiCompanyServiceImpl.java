@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -63,34 +63,34 @@ public class EsLogiCompanyServiceImpl extends ServiceImpl<EsLogiCompanyMapper, E
             }
             //校验物流公司代码是否重复
             QueryWrapper<EsLogiCompany> queryWrapper1 = new QueryWrapper<>();
-            queryWrapper1.lambda().eq(EsLogiCompany::getCode,logiCompanyDTO.getCode());
+            queryWrapper1.lambda().eq(EsLogiCompany::getCode, logiCompanyDTO.getCode());
             EsLogiCompany code = logiCompanyMapper.selectOne(queryWrapper1);
-            if(code != null){
+            if (code != null) {
                 throw new ArgumentException(ErrorCode.LOGI_COMPANY_CODE_IS_EXIT.getErrorCode(), "物流公司代码重复");
             }
             //校验物流公司名称是否重复
             QueryWrapper<EsLogiCompany> queryWrapper2 = new QueryWrapper<>();
-            queryWrapper2.lambda().eq(EsLogiCompany::getName,logiCompanyDTO.getName());
+            queryWrapper2.lambda().eq(EsLogiCompany::getName, logiCompanyDTO.getName());
             EsLogiCompany name = logiCompanyMapper.selectOne(queryWrapper2);
-            if(name != null){
+            if (name != null) {
                 throw new ArgumentException(ErrorCode.LOGI_COMPANY_NAME_IS_EXIT.getErrorCode(), "物流公司名称重复");
             }
             //校验快递鸟公司代码是否重复
             QueryWrapper<EsLogiCompany> queryWrapper3 = new QueryWrapper<>();
-            queryWrapper3.lambda().eq(EsLogiCompany::getKdcode,logiCompanyDTO.getKdcode());
+            queryWrapper3.lambda().eq(EsLogiCompany::getKdcode, logiCompanyDTO.getKdcode());
             EsLogiCompany kdcode = logiCompanyMapper.selectOne(queryWrapper3);
-            if(kdcode != null){
+            if (kdcode != null) {
                 throw new ArgumentException(ErrorCode.LOGI_COMPANY_KDCODE_IS_EXIT.getErrorCode(), "快递鸟公司代码重复");
             }
             EsLogiCompany logiCompany = new EsLogiCompany();
             BeanUtil.copyProperties(logiCompanyDTO, logiCompany);
             this.logiCompanyMapper.insert(logiCompany);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -113,34 +113,34 @@ public class EsLogiCompanyServiceImpl extends ServiceImpl<EsLogiCompanyMapper, E
                 throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), ErrorCode.PARAM_ERROR.getErrorMsg());
             }
             EsLogiCompany esLogiCompany = logiCompanyMapper.selectById(logiCompanyDTO.getId());
-            if (esLogiCompany == null){
+            if (esLogiCompany == null) {
                 throw new ArgumentException(ErrorCode.LOGI_COMPANY_NOT_EXIT.getErrorCode(), "物流公司不存在");
             }
 
             //校验物流公司代码是否重复
             QueryWrapper<EsLogiCompany> queryWrapper1 = new QueryWrapper<>();
-            queryWrapper1.lambda().eq(EsLogiCompany::getCode,logiCompanyDTO.getCode());
+            queryWrapper1.lambda().eq(EsLogiCompany::getCode, logiCompanyDTO.getCode());
             EsLogiCompany code = logiCompanyMapper.selectOne(queryWrapper1);
-            if(code != null && !code.getId().equals(logiCompanyDTO.getId())){
+            if (code != null && !code.getId().equals(logiCompanyDTO.getId())) {
                 throw new ArgumentException(ErrorCode.LOGI_COMPANY_CODE_IS_EXIT.getErrorCode(), "物流公司代码重复");
             }
             //校验物流公司名称是否重复
             QueryWrapper<EsLogiCompany> queryWrapper2 = new QueryWrapper<>();
-            queryWrapper2.lambda().eq(EsLogiCompany::getName,logiCompanyDTO.getName());
+            queryWrapper2.lambda().eq(EsLogiCompany::getName, logiCompanyDTO.getName());
             EsLogiCompany name = logiCompanyMapper.selectOne(queryWrapper2);
-            if(name != null && !name.getId().equals(logiCompanyDTO.getId())){
+            if (name != null && !name.getId().equals(logiCompanyDTO.getId())) {
                 throw new ArgumentException(ErrorCode.LOGI_COMPANY_NAME_IS_EXIT.getErrorCode(), "物流公司名称重复");
             }
             //校验快递鸟公司代码是否重复
             QueryWrapper<EsLogiCompany> queryWrapper3 = new QueryWrapper<>();
-            queryWrapper3.lambda().eq(EsLogiCompany::getKdcode,logiCompanyDTO.getKdcode());
+            queryWrapper3.lambda().eq(EsLogiCompany::getKdcode, logiCompanyDTO.getKdcode());
             EsLogiCompany kdcode = logiCompanyMapper.selectOne(queryWrapper3);
-            if(kdcode != null && !kdcode.getId().equals(logiCompanyDTO.getId())){
+            if (kdcode != null && !kdcode.getId().equals(logiCompanyDTO.getId())) {
                 throw new ArgumentException(ErrorCode.LOGI_COMPANY_KDCODE_IS_EXIT.getErrorCode(), "快递鸟公司代码重复");
             }
 
             //如果电子面单由支持变为不支持，需置空相关字段
-            if (esLogiCompany.getIsWaybill() == 1 && logiCompanyDTO.getIsWaybill() == 0){
+            if (esLogiCompany.getIsWaybill() == 1 && logiCompanyDTO.getIsWaybill() == 0) {
                 logiCompanyDTO.setCustomerName("");
                 logiCompanyDTO.setCustomerPwd("");
             }
@@ -150,17 +150,17 @@ public class EsLogiCompanyServiceImpl extends ServiceImpl<EsLogiCompanyMapper, E
             queryWrapper.lambda().eq(EsLogiCompany::getId, logiCompanyDTO.getId());
             this.logiCompanyMapper.update(logiCompany, queryWrapper);
             //删除卖家端物流公司
-            if (logiCompanyDTO.getState() == 1){
+            if (logiCompanyDTO.getState() == 1) {
                 DubboResult result = shopLogiRelService.adminDeleteShopLogiRel(logiCompanyDTO.getId());
-                if (!result.isSuccess()){
+                if (!result.isSuccess()) {
                     throw new ArgumentException(ErrorCode.DELETE_SHOP_LOGI_COMPANY_ERROR.getErrorCode(), "删除卖家端物流公司出错");
                 }
             }
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -188,10 +188,10 @@ public class EsLogiCompanyServiceImpl extends ServiceImpl<EsLogiCompanyMapper, E
             }
             BeanUtil.copyProperties(logiCompany, logiCompanyDO);
             return DubboResult.success(logiCompanyDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -217,10 +217,10 @@ public class EsLogiCompanyServiceImpl extends ServiceImpl<EsLogiCompanyMapper, E
             }
             BeanUtil.copyProperties(logiCompany, logiCompanyDO);
             return DubboResult.success(logiCompanyDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -230,8 +230,8 @@ public class EsLogiCompanyServiceImpl extends ServiceImpl<EsLogiCompanyMapper, E
      * 根据查询列表
      *
      * @param logiCompanyDTO DTO
-     * @param pageSize     页码
-     * @param pageNum      页数
+     * @param pageSize       页码
+     * @param pageNum        页数
      * @auther: rm 2817512105@qq.com
      * @date: 2019-06-04
      * @return: com.shopx.common.model.result.DubboPageResult<EsLogiCompanyDO>
@@ -252,10 +252,10 @@ public class EsLogiCompanyServiceImpl extends ServiceImpl<EsLogiCompanyMapper, E
                     return logiCompanyDO;
                 }).collect(Collectors.toList());
             }
-            return DubboPageResult.success(iPage.getTotal(),logiCompanyDOList);
-        } catch (ArgumentException ae){
+            return DubboPageResult.success(iPage.getTotal(), logiCompanyDOList);
+        } catch (ArgumentException ae) {
             logger.error("分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -282,15 +282,15 @@ public class EsLogiCompanyServiceImpl extends ServiceImpl<EsLogiCompanyMapper, E
             this.logiCompanyMapper.delete(deleteWrapper);
             //删除卖家端物流公司
             DubboResult result = shopLogiRelService.adminDeleteShopLogiRel(id);
-            if (!result.isSuccess()){
+            if (!result.isSuccess()) {
                 throw new ArgumentException(ErrorCode.DELETE_SHOP_LOGI_COMPANY_ERROR.getErrorCode(), "删除卖家端物流公司出错");
             }
             return DubboResult.success();
-        } catch (ArgumentException ae){
-             logger.error("删除失败", ae);
-             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+        } catch (ArgumentException ae) {
+            logger.error("删除失败", ae);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -301,7 +301,7 @@ public class EsLogiCompanyServiceImpl extends ServiceImpl<EsLogiCompanyMapper, E
     public DubboPageResult<EsLogiCompanyDO> getLogiCompanyList() {
         try {
             QueryWrapper<EsLogiCompany> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsLogiCompany::getState,0);
+            queryWrapper.lambda().eq(EsLogiCompany::getState, 0);
             List<EsLogiCompany> companyList = logiCompanyMapper.selectList(queryWrapper);
             List<EsLogiCompanyDO> logiCompanyDOList = new ArrayList<>();
             if (CollectionUtils.isNotEmpty(companyList)) {
@@ -312,9 +312,9 @@ public class EsLogiCompanyServiceImpl extends ServiceImpl<EsLogiCompanyMapper, E
                 }).collect(Collectors.toList());
             }
             return DubboPageResult.success(logiCompanyDOList);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("查询物流公司列表失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("查询物流公司列表失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -323,19 +323,19 @@ public class EsLogiCompanyServiceImpl extends ServiceImpl<EsLogiCompanyMapper, E
 
     @Override
     public DubboResult<EsLogiCompanyDO> getByName(String name) {
-        try{
-        QueryWrapper<EsLogiCompany> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(EsLogiCompany::getState,0).eq(EsLogiCompany::getName,name);
-        EsLogiCompany logiCompany = logiCompanyMapper.selectOne(queryWrapper);
-        EsLogiCompanyDO logiCompanyDO = new EsLogiCompanyDO();
-        if (logiCompany != null){
-            BeanUtil.copyProperties(logiCompany, logiCompanyDO);
-        }
-        return DubboResult.success(logiCompanyDO);
-        } catch (ArgumentException ae){
+        try {
+            QueryWrapper<EsLogiCompany> queryWrapper = new QueryWrapper<>();
+            queryWrapper.lambda().eq(EsLogiCompany::getState, 0).eq(EsLogiCompany::getName, name);
+            EsLogiCompany logiCompany = logiCompanyMapper.selectOne(queryWrapper);
+            EsLogiCompanyDO logiCompanyDO = new EsLogiCompanyDO();
+            if (logiCompany != null) {
+                BeanUtil.copyProperties(logiCompany, logiCompanyDO);
+            }
+            return DubboResult.success(logiCompanyDO);
+        } catch (ArgumentException ae) {
             logger.error("查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }

@@ -11,6 +11,7 @@ public interface WeixinApp {
 
     /**
      * 获取微信的用户信息
+     *
      * @param openId
      * @return
      */

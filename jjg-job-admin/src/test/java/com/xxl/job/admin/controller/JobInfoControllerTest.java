@@ -14,33 +14,33 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 
 public class JobInfoControllerTest extends AbstractSpringMvcTest {
 
-  private Cookie cookie;
+    private Cookie cookie;
 
-  @Before
-  public void login() throws Exception {
-    MvcResult ret = mockMvc.perform(
-        post("/login")
-            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            .param("userName", "admin")
-            .param("password", "123456")
-    ).andReturn();
-    cookie = ret.getResponse().getCookie(LoginService.LOGIN_IDENTITY_KEY);
-  }
+    @Before
+    public void login() throws Exception {
+        MvcResult ret = mockMvc.perform(
+                post("/login")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        .param("userName", "admin")
+                        .param("password", "123456")
+        ).andReturn();
+        cookie = ret.getResponse().getCookie(LoginService.LOGIN_IDENTITY_KEY);
+    }
 
-  @Test
-  public void testAdd() throws Exception {
-    MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
-    parameters.add("jobGroup", "1");
+    @Test
+    public void testAdd() throws Exception {
+        MultiValueMap<String, String> parameters = new LinkedMultiValueMap<String, String>();
+        parameters.add("jobGroup", "1");
 
-    MvcResult ret = mockMvc.perform(
-        post("/jobinfo/pageList")
-            .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-            //.content(paramsJson)
-            .params(parameters)
-            .cookie(cookie)
-    ).andReturn();
+        MvcResult ret = mockMvc.perform(
+                post("/jobinfo/pageList")
+                        .contentType(MediaType.APPLICATION_FORM_URLENCODED)
+                        //.content(paramsJson)
+                        .params(parameters)
+                        .cookie(cookie)
+        ).andReturn();
 
-    System.out.println(ret.getResponse().getContentAsString());
-  }
+        System.out.println(ret.getResponse().getContentAsString());
+    }
 
 }

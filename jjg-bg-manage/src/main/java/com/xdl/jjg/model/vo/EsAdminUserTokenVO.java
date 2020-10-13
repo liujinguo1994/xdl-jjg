@@ -64,7 +64,7 @@ public class EsAdminUserTokenVO implements Serializable {
     /**
      * 角色ID
      */
-    @ApiModelProperty(value = "角色ID",example = "1")
+    @ApiModelProperty(value = "角色ID", example = "1")
     private Long roleId;
 
 

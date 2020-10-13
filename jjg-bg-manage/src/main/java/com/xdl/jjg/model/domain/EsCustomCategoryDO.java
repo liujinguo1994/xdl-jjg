@@ -17,34 +17,34 @@ import java.util.List;
  */
 @Data
 public class EsCustomCategoryDO implements Serializable {
-	private static final long serialVersionUID = -4046391893811616339L;
-	/**
+    private static final long serialVersionUID = -4046391893811616339L;
+    /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
 
     /**
      * 自定义分类名称
      */
-	private String categoryName;
+    private String categoryName;
 
     /**
      * 所属专区
      */
-	private Long zoneId;
+    private Long zoneId;
 
-	/**
-	 * 专区名称
-	 */
-	private String zoneName;
+    /**
+     * 专区名称
+     */
+    private String zoneName;
 
-	/**
-	 * 发现好货
-	 */
-	private List<EsFindGoodsVO> findGoodsVOS;
+    /**
+     * 发现好货
+     */
+    private List<EsFindGoodsVO> findGoodsVOS;
 
-	/**
-	 * 常卖清单
-	 */
-	private List<EsOftenGoodsVO> oftenGoodsVOS;
+    /**
+     * 常卖清单
+     */
+    private List<EsOftenGoodsVO> oftenGoodsVOS;
 }

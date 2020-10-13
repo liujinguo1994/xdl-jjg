@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * <p>
- *  部门
+ * 部门
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -21,58 +21,58 @@ import java.util.List;
 public class EsDepartmentVO implements Serializable {
 
 
-	private static final long serialVersionUID = 6866624277342490515L;
-	/**
-	 * 主键ID
-	 */
+    private static final long serialVersionUID = 6866624277342490515L;
+    /**
+     * 主键ID
+     */
 
-	@ApiModelProperty(value = "主键ID",example = "1")
-	private Long id;
+    @ApiModelProperty(value = "主键ID", example = "1")
+    private Long id;
 
-	/**
-	 * 部门名称
-	 */
+    /**
+     * 部门名称
+     */
 
-	@ApiModelProperty(value = "部门名称")
-	private String departmentName;
+    @ApiModelProperty(value = "部门名称")
+    private String departmentName;
 
-	/**
-	 * 是否删除
-	 */
+    /**
+     * 是否删除
+     */
 
-	@ApiModelProperty(value = "是否删除",example = "1")
-	private Integer isDel;
+    @ApiModelProperty(value = "是否删除", example = "1")
+    private Integer isDel;
 
-	/**
-	 * 创建时间
-	 */
-			
-	@ApiModelProperty(value = "创建时间",example = "1")
-	private Long createTime;
+    /**
+     * 创建时间
+     */
 
-	/**
-	 * 修改时间
-	 */
-			
-	@ApiModelProperty(value = "修改时间",example = "1")
-	private Long updateTime;
+    @ApiModelProperty(value = "创建时间", example = "1")
+    private Long createTime;
 
-	/**
-	 * 父id
-	 */
-	@ApiModelProperty(value = "父id",example = "1")
-	private Long parentId;
+    /**
+     * 修改时间
+     */
 
-	/**
-	 * 父子路径
-	 */
-	@ApiModelProperty(value = "父子路径")
-	private String path;
+    @ApiModelProperty(value = "修改时间", example = "1")
+    private Long updateTime;
 
-	/**
-	 * 子部门
-	 */
-	@ApiModelProperty(value = "子部门")
-	private List<EsDepartmentVO> children;
+    /**
+     * 父id
+     */
+    @ApiModelProperty(value = "父id", example = "1")
+    private Long parentId;
 
-	}
+    /**
+     * 父子路径
+     */
+    @ApiModelProperty(value = "父子路径")
+    private String path;
+
+    /**
+     * 子部门
+     */
+    @ApiModelProperty(value = "子部门")
+    private List<EsDepartmentVO> children;
+
+}

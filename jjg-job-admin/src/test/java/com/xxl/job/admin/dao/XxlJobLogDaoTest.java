@@ -21,7 +21,7 @@ public class XxlJobLogDaoTest {
     private XxlJobLogDao xxlJobLogDao;
 
     @Test
-    public void test(){
+    public void test() {
         List<XxlJobLog> list = xxlJobLogDao.pageList(0, 10, 1, 1, null, null, 1);
         int list_count = xxlJobLogDao.pageListCount(0, 10, 1, 1, null, null, 1);
 
@@ -49,7 +49,7 @@ public class XxlJobLogDaoTest {
         dto = xxlJobLogDao.load(log.getId());
 
 
-        List<Map<String, Object>> list2 = xxlJobLogDao.triggerCountByDay(new Date(new Date().getTime() + 30*24*60*60*1000), new Date());
+        List<Map<String, Object>> list2 = xxlJobLogDao.triggerCountByDay(new Date(new Date().getTime() + 30 * 24 * 60 * 60 * 1000), new Date());
 
         int ret4 = xxlJobLogDao.clearLog(1, 1, new Date(), 100);
 

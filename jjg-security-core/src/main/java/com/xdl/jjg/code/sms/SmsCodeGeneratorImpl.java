@@ -32,14 +32,14 @@ public class SmsCodeGeneratorImpl implements ValidateCodeGenerator {
         String code = RandomStringUtils.randomNumeric(securityProperties.getCode().getSms().getLength());
         String[] profiles = env.getActiveProfiles();
         boolean flag = true;
-        for (String profile:profiles){
-            if (StringUtils.equals("prod",profile)){
+        for (String profile : profiles) {
+            if (StringUtils.equals("prod", profile)) {
                 flag = false;
                 break;
             }
         }
-        if (flag){
-            code="1234";
+        if (flag) {
+            code = "1234";
         }
 
         String paramName = SecurityConstants.DEFAULT_PARAMETER_NAME_MOBILE;

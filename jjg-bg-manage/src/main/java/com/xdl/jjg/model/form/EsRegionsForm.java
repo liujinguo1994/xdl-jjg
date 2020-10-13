@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- *  地区
+ * 地区
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -24,26 +24,26 @@ public class EsRegionsForm implements Serializable {
     /**
      * id
      */
-    @ApiModelProperty(value = "id",example = "1")
+    @ApiModelProperty(value = "id", example = "1")
     private Long id;
 
     /**
      * 父地区id
      */
-	@ApiModelProperty(value = "父地区id",example = "1")
-	private Long parentId;
+    @ApiModelProperty(value = "父地区id", example = "1")
+    private Long parentId;
 
     /**
      * 名称
      */
     @ApiModelProperty(required = true, value = "名称")
     @NotBlank(message = "名称不能为空")
-	private String localName;
+    private String localName;
 
     /**
      * 邮编
      */
-    @ApiModelProperty(value = "邮编",example = "1")
-	private String zipcode;
+    @ApiModelProperty(value = "邮编", example = "1")
+    private String zipcode;
 
 }

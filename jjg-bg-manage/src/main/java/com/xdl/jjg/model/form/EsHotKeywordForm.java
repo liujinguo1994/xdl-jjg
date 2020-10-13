@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- *    热门关键字
+ * 热门关键字
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -24,19 +24,19 @@ public class EsHotKeywordForm implements Serializable {
     /**
      * 主键ID
      */
-    @ApiModelProperty(value = "主键ID",example = "1")
-	private Long id;
+    @ApiModelProperty(value = "主键ID", example = "1")
+    private Long id;
     /**
      * 文字内容
      */
-    @ApiModelProperty(required = true , value = "文字内容")
+    @ApiModelProperty(required = true, value = "文字内容")
     @NotBlank(message = "文字内容不能为空")
-	private String hotName;
+    private String hotName;
     /**
      * 排序
      */
-    @ApiModelProperty(required = true , value = "排序",example = "1")
+    @ApiModelProperty(required = true, value = "排序", example = "1")
     @NotNull(message = "排序不能为空")
-	private Integer sort;
+    private Integer sort;
 
 }

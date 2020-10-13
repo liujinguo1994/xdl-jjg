@@ -27,33 +27,35 @@ public class TokenStoreConfig {
     private RedisConnectionFactory redisConnectionFactory;
 
     @Bean
-    @ConditionalOnProperty(prefix = "cy.security.oauth2",name = "storeType",havingValue = "redis")
-    public TokenStore redisTokenStore(){
+    @ConditionalOnProperty(prefix = "cy.security.oauth2", name = "storeType", havingValue = "redis")
+    public TokenStore redisTokenStore() {
         return new RedisTokenStore(redisConnectionFactory);
     }
 
     @Configuration
-    @ConditionalOnProperty(prefix = "cy.security.oauth2",name = "storeType",havingValue = "jwt",matchIfMissing = true)
-    public static class JwtTokenConfig{
+    @ConditionalOnProperty(prefix = "cy.security.oauth2", name = "storeType", havingValue = "jwt", matchIfMissing = true)
+    public static class JwtTokenConfig {
 
         @Autowired
         private SecurityProperties securityProperties;
 
         /**
          * jwtToken存储器
+         *
          * @return
          */
         @Bean
-        public TokenStore jwtTokenStore(){
+        public TokenStore jwtTokenStore() {
             return new JwtTokenStore(jwtAccessTokenConverter());
         }
 
         /**
          * jwtToken生成相关转换器
+         *
          * @return
          */
         @Bean
-        public JwtAccessTokenConverter jwtAccessTokenConverter(){
+        public JwtAccessTokenConverter jwtAccessTokenConverter() {
             JwtAccessTokenConverter accessTokenConverter = new JwtAccessTokenConverter();
             //设置签名用的密钥
             accessTokenConverter.setSigningKey(securityProperties.getOauth2().getJwtSignKey());
@@ -62,7 +64,7 @@ public class TokenStoreConfig {
 
         @Bean
         @ConditionalOnMissingBean(name = "jwtTokenEnhancer")
-        public TokenEnhancer jwtTokenEnhancer(){
+        public TokenEnhancer jwtTokenEnhancer() {
             return new EasyJwtTokenEnhancer();
         }
 

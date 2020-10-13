@@ -4,11 +4,11 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsSmsPlatform">
-        <id column="id" property="id" />
-        <result column="name" property="name" />
-        <result column="open" property="open" />
-        <result column="config" property="config" />
-        <result column="bean" property="bean" />
+        <id column="id" property="id"/>
+        <result column="name" property="name"/>
+        <result column="open" property="open"/>
+        <result column="config" property="config"/>
+        <result column="bean" property="bean"/>
     </resultMap>
 
 </mapper>

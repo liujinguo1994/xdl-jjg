@@ -23,13 +23,13 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器-轮播图
+ * 前端控制器-轮播图
  * </p>
  *
  * @author rm 2817512105@qq.com
  * @since 2019-05-29
  */
-@Api(value = "/esFocusPicture",tags = "轮播图")
+@Api(value = "/esFocusPicture", tags = "轮播图")
 @RestController
 @RequestMapping("/esFocusPicture")
 public class EsFocusPictureController {
@@ -38,7 +38,7 @@ public class EsFocusPictureController {
     private IEsFocusPictureService iEsFocusPictureService;
 
 
-    @ApiOperation(value = "根据客户端类型查询轮播图列表",response = EsFocusPictureVO.class)
+    @ApiOperation(value = "根据客户端类型查询轮播图列表", response = EsFocusPictureVO.class)
     @GetMapping(value = "/getList/{clientType}")
     @ApiImplicitParam(name = "clientType", value = "客户端类型 APP/WAP/PC", required = true, dataType = "String", paramType = "path")
     @ResponseBody
@@ -47,7 +47,7 @@ public class EsFocusPictureController {
         if (result.isSuccess()) {
             List<EsFocusPictureDO> data = result.getData().getList();
             List<EsFocusPictureVO> esFocusPictureVOList = BeanUtil.copyList(data, EsFocusPictureVO.class);
-            return ApiPageResponse.pageSuccess(result.getData().getTotal(),esFocusPictureVOList);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(), esFocusPictureVOList);
         } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
@@ -56,16 +56,16 @@ public class EsFocusPictureController {
     @ApiOperation(value = "添加轮播图")
     @PostMapping(value = "/insertSupplier")
     @ResponseBody
-    public ApiResponse insertSupplier(@Valid @RequestBody @ApiParam(name="轮播图form对象",value="form") EsFocusPictureForm form){
+    public ApiResponse insertSupplier(@Valid @RequestBody @ApiParam(name = "轮播图form对象", value = "form") EsFocusPictureForm form) {
         EsFocusPictureDTO esFocusPictureDTO = new EsFocusPictureDTO();
         BeanUtil.copyProperties(form, esFocusPictureDTO);
         DubboResult<EsFocusPictureDO> result = iEsFocusPictureService.insertFocusPicture(esFocusPictureDTO);
         if (result.isSuccess()) {
             EsFocusPictureDO data = result.getData();
             EsFocusPictureVO vo = new EsFocusPictureVO();
-            BeanUtil.copyProperties(data,vo);
+            BeanUtil.copyProperties(data, vo);
             return ApiResponse.success(vo);
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -73,16 +73,16 @@ public class EsFocusPictureController {
     @ApiOperation(value = "修改轮播图")
     @PutMapping(value = "/updateFocusPicture")
     @ResponseBody
-    public ApiResponse updateFocusPicture(@Valid @RequestBody @ApiParam(name="轮播图form对象",value="form") EsFocusPictureForm form){
+    public ApiResponse updateFocusPicture(@Valid @RequestBody @ApiParam(name = "轮播图form对象", value = "form") EsFocusPictureForm form) {
         EsFocusPictureDTO esFocusPictureDTO = new EsFocusPictureDTO();
         BeanUtil.copyProperties(form, esFocusPictureDTO);
         DubboResult<EsFocusPictureDO> result = iEsFocusPictureService.updateFocusPicture(esFocusPictureDTO);
         if (result.isSuccess()) {
             EsFocusPictureDO data = result.getData();
             EsFocusPictureVO vo = new EsFocusPictureVO();
-            BeanUtil.copyProperties(data,vo);
+            BeanUtil.copyProperties(data, vo);
             return ApiResponse.success(vo);
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -90,12 +90,12 @@ public class EsFocusPictureController {
     @DeleteMapping(value = "/deleteFocusPicture/{id}")
     @ResponseBody
     @ApiOperation(value = "删除")
-    @ApiImplicitParam(name = "id", value = "轮播图id", required = true, dataType = "long",example = "1", paramType = "path")
-    public ApiResponse deleteFocusPicture(@PathVariable Long id){
+    @ApiImplicitParam(name = "id", value = "轮播图id", required = true, dataType = "long", example = "1", paramType = "path")
+    public ApiResponse deleteFocusPicture(@PathVariable Long id) {
         DubboResult result = iEsFocusPictureService.deleteFocusPicture(id);
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }

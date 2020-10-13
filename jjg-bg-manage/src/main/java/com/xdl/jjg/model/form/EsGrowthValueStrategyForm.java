@@ -12,7 +12,6 @@ import java.util.List;
  * <p>
  * 评价和收藏成长值配置
  * </p>
- *
  */
 @Data
 @ApiModel

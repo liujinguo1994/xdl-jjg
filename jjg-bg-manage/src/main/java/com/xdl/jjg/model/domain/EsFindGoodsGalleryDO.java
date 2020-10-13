@@ -20,15 +20,15 @@ public class EsFindGoodsGalleryDO implements Serializable {
     /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
 
     /**
      * 发现好货ID
      */
-	private Long findGoodsId;
+    private Long findGoodsId;
 
     /**
      * 图片路径
      */
-	private String url;
+    private String url;
 }

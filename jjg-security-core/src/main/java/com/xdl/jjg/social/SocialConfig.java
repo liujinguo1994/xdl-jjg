@@ -37,8 +37,6 @@ public class SocialConfig extends SocialConfigurerAdapter {
     private SocialAuthenticationFilterPostProcessor socialAuthenticationFilterPostProcessor;
 
 
-
-
     @Override
     public UsersConnectionRepository getUsersConnectionRepository(ConnectionFactoryLocator connectionFactoryLocator) {
         JdbcUsersConnectionRepository repository = new JdbcUsersConnectionRepository(dataSource, connectionFactoryLocator, Encryptors.noOpText());
@@ -51,7 +49,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
     }
 
     @Bean
-    public SpringSocialConfigurer easySocialConfigurer(){
+    public SpringSocialConfigurer easySocialConfigurer() {
         String filterProcessUrl = securityProperties.getSocial().getFilterProcessUrl();
         EasySpringSocialConfigurer springSocialConfigurer = new EasySpringSocialConfigurer(filterProcessUrl);
         //当在数据库中找不到用户时，跳转到系统配置的注册页面中去（browser环境）
@@ -65,6 +63,7 @@ public class SocialConfig extends SocialConfigurerAdapter {
      * 作用
      * 1 在注册过程中拿到Spring Social的信息
      * 2 注册完成后把业务系统的用户ID传递给Spring Social
+     *
      * @param connectionFactoryLocator
      * @return
      */

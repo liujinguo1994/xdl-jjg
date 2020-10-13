@@ -1,0 +1,259 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.goods.dao.mapper.EsGoodsMapper">
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shopx.goods.dao.entity.EsGoods">
+        <id column="id" property="id" />
+        <result column="goods_name" property="goodsName" />
+        <result column="goods_sn" property="goodsSn" />
+        <result column="brand_id" property="brandId" />
+        <result column="category_id" property="categoryId" />
+        <result column="goods_type" property="goodsType" />
+        <result column="weight" property="weight" />
+        <result column="market_enable" property="marketEnable" />
+        <result column="intro" property="intro" />
+        <result column="cost" property="cost" />
+        <result column="money" property="money" />
+        <result column="mktmoney" property="mktmoney" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_del" property="isDel" />
+        <result column="quantity" property="quantity" />
+        <result column="page_title" property="pageTitle" />
+        <result column="meta_keywords" property="metaKeywords" />
+        <result column="meta_description" property="metaDescription" />
+        <result column="shop_id" property="shopId" />
+        <result column="shop_cat_id" property="shopCatId" />
+        <result column="comment_num" property="commentNum" />
+        <result column="template_id" property="templateId" />
+        <result column="goods_transfee_charge" property="goodsTransfeeCharge" />
+        <result column="shop_name" property="shopName" />
+        <result column="is_auth" property="isAuth" />
+        <result column="auth_message" property="authMessage" />
+        <result column="self_operated" property="selfOperated" />
+        <result column="under_message" property="underMessage" />
+        <result column="is_invoice" property="isInvoice" />
+        <result column="invoice_type" property="invoiceType" />
+        <result column="grade" property="grade" />
+        <result column="view_count" property="viewCount" />
+        <result column="buy_count" property="buyCount" />
+        <result column="original" property="original" />
+        <result column="is_fresh" property="isFresh" />
+        <result column="promise_id" property="promiseId" />
+        <result column="custom_id" property="customId" />
+        <result column="auth_time" property="authTime" />
+        <result column="is_gifts" property="isGifts" />
+        <result column="seller_promise" property="sellerPromise" />
+        <result column="is_lfc" property="isLfc" />
+        <result column="is_virtual" property="isVirtual"/>
+    </resultMap>
+    <delete id="deleteEsGoods"  parameterType = "long">
+        delete from es_goods where 1=1
+        <if test="shopId != null and shopId !=''">
+            and  shop_id=#{shopId}
+        </if>
+        <if test="goods_ids!=null">
+          and id in
+          <foreach collection="goods_ids"  item="item" open="(" separator="," close=")" >
+                #{item}
+            </foreach>
+        </if>
+
+    </delete>
+    <select id="getEsGoodsList" resultMap="BaseResultMap">
+        select * from es_goods  where is_gifts = 2
+        <if test="shopId != null and shopId !=''">
+           and  shop_id=#{shopId}
+        </if>
+        <if test="esGoodsDTO.goods_ids != null">
+            and id IN
+            <foreach collection="esGoodsDTO.goods_ids" item="item" open="( " close=" )" separator=",">
+                #{item}
+            </foreach>
+        </if>
+        <if test="esGoodsDTO.marketEnable != null and esGoodsDTO.marketEnable !=''">
+            and  market_enable=#{esGoodsDTO.marketEnable}
+        </if>
+        <if test="esGoodsDTO.marketEnable != null and esGoodsDTO.marketEnable !=''">
+            and  market_enable=#{esGoodsDTO.marketEnable}
+        </if>
+        <if test="esGoodsDTO.isDel !=null">
+            and is_del=#{esGoodsDTO.isDel}
+        </if>
+        order by create_time desc
+    </select>
+    <select id="buyGetEsGoods" resultType="com.shopx.goods.api.model.domain.EsGoodsDO">
+        select * from es_goods where id=#{goodsId}
+    </select>
+    <select id="getEsGoodsPageList" resultType="com.shopx.goods.api.model.domain.EsGoodsDO">
+        SELECT
+        DISTINCT(t.id) as goods_id,
+        t.quantity AS zsQuantity ,
+        t.*,
+        t.money as saleMoney,
+        c.`name` as categoryName
+        FROM
+        es_goods t
+        left join es_category c on t.category_id=c.id
+        WHERE
+        t.is_gifts = 2
+        <if test="esGoodsQueryDTO.goodsName != null and esGoodsQueryDTO.goodsName != ''">
+            and t.goods_name  like CONCAT('%',#{esGoodsQueryDTO.goodsName},'%')
+        </if>
+        <if test="esGoodsQueryDTO.goodsSn != null and esGoodsQueryDTO.goodsSn != ''">
+            and  t.goods_sn =#{esGoodsQueryDTO.goodsSn}
+        </if>
+        <if test="esGoodsQueryDTO.categoryPath != null and esGoodsQueryDTO.categoryPath != ''">
+            and t.category_id in <foreach collection="cateIds" item="id" index="index" open="(" close=")" separator=",">#{id}</foreach>
+        </if>
+        <if test="esGoodsQueryDTO.marketEnable != null">
+            and t.market_enable = #{esGoodsQueryDTO.marketEnable}
+        </if>
+        <if test="esGoodsQueryDTO.startTime != null and esGoodsQueryDTO.startTime != ''">
+            and t.create_time <![CDATA[>= ]]>  #{esGoodsQueryDTO.startTime}
+        </if>
+        <if test="esGoodsQueryDTO.endTime != null">
+            and t.create_time <![CDATA[<= ]]>  #{esGoodsQueryDTO.endTime}
+        </if>
+        <if test="esGoodsQueryDTO.isDel !=null">
+            and t.is_del=#{esGoodsQueryDTO.isDel}
+        </if>
+        <if test="esGoodsQueryDTO.isAuth !=null ">
+            and t.is_auth =#{esGoodsQueryDTO.isAuth}
+        </if>
+        <if test="esGoodsQueryDTO.shopName != null and esGoodsQueryDTO.shopName != ''">
+            and t.shop_name =#{esGoodsQueryDTO.shopName}
+        </if>
+        <if test="esGoodsQueryDTO.shopId != null and esGoodsQueryDTO.shopId !=''">
+            and  t.shop_id=#{esGoodsQueryDTO.shopId}
+        </if>
+        <if test="esGoodsQueryDTO.supplierName != null and esGoodsQueryDTO.supplierName != ''">
+            and a.supplier_name  like CONCAT('%',#{esGoodsQueryDTO.supplierName},'%')
+        </if>
+        <if test="esGoodsQueryDTO.startMoney != null">
+            and t.money <![CDATA[>= ]]>  #{esGoodsQueryDTO.startMoney}
+        </if>
+        <if test="esGoodsQueryDTO.endMoney != null  ">
+            and  t.money <![CDATA[<= ]]>  #{esGoodsQueryDTO.endMoney}
+        </if>
+        <if test="esGoodsQueryDTO.isLfc != null and esGoodsQueryDTO.isLfc !='' ">
+            and  t.is_lfc =#{esGoodsQueryDTO.isLfc}
+        </if>
+        <if test="esGoodsQueryDTO.isVirtual != null and esGoodsQueryDTO.isVirtual !='' ">
+            and  t.is_virtual =#{esGoodsQueryDTO.isVirtual}
+        </if>
+        order by t.create_time desc
+    </select>
+    <select id="adminGetEsGoodsPageList" resultType="com.shopx.goods.api.model.domain.EsGoodsDO">
+        SELECT
+        DISTINCT(t.id) as goods_id,
+        t.*,
+        t.money as saleMoney,
+        a.supplier_name as supplierName,
+        t.quantity as zsQuantity
+        FROM
+        es_goods t
+        left JOIN es_goods_arch a ON a.id = t.id
+        WHERE
+        t.is_gifts = 2 and t.market_enable=1
+        <if test="esGoodsQueryDTO.goodsName != null and esGoodsQueryDTO.goodsName != ''">
+            and t.goods_name  like CONCAT('%',#{esGoodsQueryDTO.goodsName},'%')
+        </if>
+        <if test="esGoodsQueryDTO.goodsSn != null and esGoodsQueryDTO.goodsSn != ''">
+            and  t.goods_sn =#{esGoodsQueryDTO.goodsSn}
+        </if>
+        <if test="esGoodsQueryDTO.categoryPath != null and esGoodsQueryDTO.categoryPath != ''">
+            and t.category_id in <foreach collection="cateIds" item="id" index="index" open="(" close=")" separator=",">#{id}</foreach>
+        </if>
+        <if test="esGoodsQueryDTO.startTime != null and esGoodsQueryDTO.startTime != ''">
+            and t.create_time <![CDATA[>= ]]>  #{esGoodsQueryDTO.startTime}
+        </if>
+        <if test="esGoodsQueryDTO.endTime != null">
+            and t.create_time <![CDATA[<= ]]>  #{esGoodsQueryDTO.endTime}
+        </if>
+        <if test="esGoodsQueryDTO.isDel !=null">
+            and t.is_del=#{esGoodsQueryDTO.isDel}
+        </if>
+        <if test="esGoodsQueryDTO.isAuth !=null ">
+            and t.is_auth =#{esGoodsQueryDTO.isAuth}
+        </if>
+        <if test="esGoodsQueryDTO.shopName != null and esGoodsQueryDTO.shopName != ''">
+            and t.shop_name =#{esGoodsQueryDTO.shopName}
+        </if>
+        <if test="esGoodsQueryDTO.shopId != null and esGoodsQueryDTO.shopId !=''">
+            and  t.shop_id=#{esGoodsQueryDTO.shopId}
+        </if>
+        <if test="esGoodsQueryDTO.supplierName != null and esGoodsQueryDTO.supplierName != ''">
+            and a.supplier_name  like CONCAT('%',#{esGoodsQueryDTO.supplierName},'%')
+        </if>
+        <if test="esGoodsQueryDTO.keyword !=null and esGoodsQueryDTO.keyword !=''">
+            and t.goods_name  like CONCAT('%',#{esGoodsQueryDTO.keyword},'%') or  t.goods_sn = #{esGoodsQueryDTO.keyword}
+        </if>
+
+        <if test="esGoodsQueryDTO.authTimeStart != null and esGoodsQueryDTO.authTimeStart != ''">
+            and t.auth_time <![CDATA[>= ]]>  #{esGoodsQueryDTO.authTimeStart}
+        </if>
+        <if test="esGoodsQueryDTO.authTimeEnd != null and esGoodsQueryDTO.authTimeEnd != ''">
+            and t.auth_time <![CDATA[<= ]]>  #{esGoodsQueryDTO.authTimeEnd}
+        </if>
+        order by t.update_time desc
+    </select>
+    <update id="updateBuyCount" >
+        update es_goods t set t.buy_count = t.buy_count+#{goodsNum} where t.id=#{goodsId}
+    </update>
+    <update id="updateViewCount" >
+        update es_goods t set t.view_count = t.buy_count+1 where t.id=#{goodsId}
+    </update>
+    <update id="updateCommenCount" >
+        update es_goods t set t.comment_num = t.comment_num+1 where t.id=#{goodsId}
+    </update>
+    <update id="updateByTemplateId">
+         update es_goods t set t.template_id = #{newTemplateId} where t.template_id=#{oldTemplateId}
+    </update>
+    <select id="getRecommendGoods" resultType="java.lang.Long">
+      SELECT DISTINCT
+            (tmp.category_id)
+        FROM
+            ( SELECT * FROM es_goods t ORDER BY t.buy_count DESC ) AS tmp
+        GROUP BY
+            category_id
+        HAVING
+            max( tmp.buy_count )
+        ORDER BY
+
+	tmp.buy_count DESC LIMIT 5
+    </select>
+
+    <update id="updateBathByCustom"  parameterType="java.lang.Long">
+        update es_goods set custom_id=null where custom_id = #{customId}
+    </update>
+    <select id="getBuyerAdminGoods" resultType="com.shopx.goods.api.model.domain.EsGoodsDO">
+            select * from es_goods t left join es_tag_goods e on t.id=e.goods_id
+             where e.tag_id=#{tagId} and  t.is_del=0 and t.is_auth=1 and t.market_enable=1 and t.shop_id=#{shopId}
+            <if test="type == 1">
+                order by t.buy_count desc
+            </if>
+            <if test="type == 2">
+                order by t.create_time desc
+            </if>
+        LIMIT 5
+    </select>
+    <select id="getRecommendForYouGoods" resultType="com.shopx.goods.api.model.domain.EsGoodsDO">
+          SELECT t.*  FROM es_goods t
+          LEFT JOIN es_goods_sku s  ON t.id=s.goods_id
+        where s.is_enable=1 and market_enable = 1 AND is_del = 0 AND is_auth = 1 AND is_gifts = 2
+        <if test="bindSql != ''">
+            and ${bindSql}
+        </if>
+         ORDER BY buy_count DESC  LIMIT 20
+
+    </select>
+
+    <select id="getByCategoryId" resultType="com.shopx.goods.api.model.domain.EsSalesRankingGoodsDO">
+        select t.id,t.goods_name,t.money,t.original,t.buy_count from es_goods t
+        where t.category_id=#{categoryId} and  t.is_del=0 and t.is_auth=1 and t.market_enable=1 and t.is_gifts = 2
+        ORDER BY t.buy_count DESC
+        LIMIT 9
+    </select>
+
+</mapper>

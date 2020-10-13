@@ -22,7 +22,7 @@ public class EsHotKeywordVO implements Serializable {
     /**
      * 主键ID
      */
-    @ApiModelProperty(value = "主键ID",example = "1")
+    @ApiModelProperty(value = "主键ID", example = "1")
     private Long id;
     /**
      * 文字内容
@@ -32,7 +32,7 @@ public class EsHotKeywordVO implements Serializable {
     /**
      * 排序
      */
-    @ApiModelProperty(value = "排序",example = "1")
+    @ApiModelProperty(value = "排序", example = "1")
     private Integer sort;
 
 }

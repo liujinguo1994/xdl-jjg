@@ -42,9 +42,9 @@ public class FastJsonSerializer implements RedisSerializer<Object> {
             inputStream = new ObjectInputStream(new ByteArrayInputStream(bytes));
             Object obj = inputStream.readObject();
             return obj;
-        }catch (Exception e){
+        } catch (Exception e) {
             String str = new String(bytes, Charset.forName("UTF-8"));
-            return  str;
+            return str;
         }
     }
 

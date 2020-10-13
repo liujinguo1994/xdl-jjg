@@ -23,8 +23,8 @@ public class EsAdminUserQueryForm extends QueryPageForm {
     /**
      * 部门
      */
-    @ApiModelProperty(value = "部门",example = "1")
-	private Long department;
+    @ApiModelProperty(value = "部门", example = "1")
+    private Long department;
 
     /**
      * 关键字(用户名，用户真实姓名)

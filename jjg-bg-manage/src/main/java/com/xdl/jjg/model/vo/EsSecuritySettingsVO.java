@@ -25,17 +25,17 @@ public class EsSecuritySettingsVO implements Serializable {
     /**
      * 注册初始积分
      */
-    @ApiModelProperty(value = "注册初始积分",example = "1")
+    @ApiModelProperty(value = "注册初始积分", example = "1")
     private Integer integral;
     /**
      * 最大登录失败次数
      */
-    @ApiModelProperty(value = "最大登录失败次数",example = "1")
+    @ApiModelProperty(value = "最大登录失败次数", example = "1")
     private Integer failedNumber;
     /**
      * 未支付失败时间(以分钟为单位)
      */
-    @ApiModelProperty(value = "未支付失败时间(以分钟为单位)",example = "1")
+    @ApiModelProperty(value = "未支付失败时间(以分钟为单位)", example = "1")
     private Integer time;
 
 }

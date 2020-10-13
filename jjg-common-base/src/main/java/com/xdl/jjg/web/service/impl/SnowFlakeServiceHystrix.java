@@ -21,7 +21,7 @@ public class SnowFlakeServiceHystrix implements SnowFlakeService {
     @Override
     public RestResult getSingleSnowId() {
         log.error("SnowFlakeS***erviceHystrix.getSingleSnowId():************进入断路由*********");
-        return RestResult.ok(new SnowFlake(2,3).nextId());
+        return RestResult.ok(new SnowFlake(2, 3).nextId());
     }
 
     @Override

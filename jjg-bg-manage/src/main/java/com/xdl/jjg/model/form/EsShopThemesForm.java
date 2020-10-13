@@ -27,7 +27,7 @@ public class EsShopThemesForm implements Serializable {
      */
     @ApiModelProperty(required = true, value = "模版类型(PC ,WAP)")
     @NotBlank(message = "模版类型不能为空")
-	private String type;
+    private String type;
 
     /**
      * 模版名称
@@ -46,7 +46,7 @@ public class EsShopThemesForm implements Serializable {
     /**
      * 是否为默认(1是，0否)
      */
-    @ApiModelProperty(required = true, value = "是否为默认(1是，0否)",example = "1")
+    @ApiModelProperty(required = true, value = "是否为默认(1是，0否)", example = "1")
     @NotNull(message = "是否为默认不能为空")
     private Integer isDefault;
 

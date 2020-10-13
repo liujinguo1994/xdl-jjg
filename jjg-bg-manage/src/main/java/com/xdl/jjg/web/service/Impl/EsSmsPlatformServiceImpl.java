@@ -31,7 +31,7 @@ import java.util.Map;
 
 /**
  * <p>
- *  服务实现类-短信网关设置
+ * 服务实现类-短信网关设置
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -51,7 +51,6 @@ public class EsSmsPlatformServiceImpl extends ServiceImpl<EsSmsPlatformMapper, E
 
     /**
      * 根据条件更新数据
-     *
      */
     @Override
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
@@ -68,10 +67,10 @@ public class EsSmsPlatformServiceImpl extends ServiceImpl<EsSmsPlatformMapper, E
             esSmsPlatformVO.setId(smsPlateform.getId());
             this.smsPlatformMapper.updateById(new EsSmsPlatform(esSmsPlatformVO));
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -87,7 +86,7 @@ public class EsSmsPlatformServiceImpl extends ServiceImpl<EsSmsPlatformMapper, E
             this.add(vo);
         }
         Long size = (long) resultList.size();
-        return DubboPageResult.success(size,resultList);
+        return DubboPageResult.success(size, resultList);
     }
 
     //开启短信网关
@@ -106,16 +105,16 @@ public class EsSmsPlatformServiceImpl extends ServiceImpl<EsSmsPlatformMapper, E
             EsSmsPlatform esSmsPlatform = new EsSmsPlatform();
             esSmsPlatform.setOpen(0);
             QueryWrapper<EsSmsPlatform> queryWrapper = new QueryWrapper<>();
-            smsPlatformMapper.update(esSmsPlatform,queryWrapper);
+            smsPlatformMapper.update(esSmsPlatform, queryWrapper);
             esSmsPlatform.setOpen(1);
             esSmsPlatform.setId(smsPlateform.getId());
             smsPlatformMapper.updateById(esSmsPlatform);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("开启短信网关失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("开启短信网关失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -127,15 +126,15 @@ public class EsSmsPlatformServiceImpl extends ServiceImpl<EsSmsPlatformMapper, E
     public DubboResult<EsSmsPlatformDO> getOpen() {
         try {
             QueryWrapper<EsSmsPlatform> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsSmsPlatform::getOpen,1);
+            queryWrapper.lambda().eq(EsSmsPlatform::getOpen, 1);
             EsSmsPlatform esSmsPlatform = smsPlatformMapper.selectOne(queryWrapper);
             EsSmsPlatformDO esSmsPlatformDO = new EsSmsPlatformDO();
-            BeanUtil.copyProperties(esSmsPlatform,esSmsPlatformDO);
+            BeanUtil.copyProperties(esSmsPlatform, esSmsPlatformDO);
             return DubboResult.success(esSmsPlatformDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("获取开启的短信网关失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("获取开启的短信网关失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -143,7 +142,6 @@ public class EsSmsPlatformServiceImpl extends ServiceImpl<EsSmsPlatformMapper, E
 
     /**
      * 添加短信网关
-     *
      */
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public DubboResult add(EsSmsPlatformVO esSmsPlatformVO) {
@@ -157,11 +155,11 @@ public class EsSmsPlatformServiceImpl extends ServiceImpl<EsSmsPlatformMapper, E
                 smsPlatformMapper.insert(esSmsPlatform);
             }
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("添加短信网关失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("添加短信网关失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -171,7 +169,7 @@ public class EsSmsPlatformServiceImpl extends ServiceImpl<EsSmsPlatformMapper, E
     //根据bean获取短信方案
     public EsSmsPlatform getSmsPlateform(String bean) {
         QueryWrapper<EsSmsPlatform> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(EsSmsPlatform::getBean,bean);
+        queryWrapper.lambda().eq(EsSmsPlatform::getBean, bean);
         EsSmsPlatform esSmsPlatform = smsPlatformMapper.selectOne(queryWrapper);
         return esSmsPlatform;
     }
@@ -212,7 +210,8 @@ public class EsSmsPlatformServiceImpl extends ServiceImpl<EsSmsPlatformMapper, E
         esSmsPlatformVO.setOpen(esSmsPlatform.getOpen());
         esSmsPlatformVO.setBean(esSmsPlatform.getBean());
         Gson gson = new Gson();
-        esSmsPlatformVO.setConfigItems(gson.fromJson(esSmsPlatform.getConfig(),  new TypeToken< List<EsConfigItemVO> >() {  }.getType()));
+        esSmsPlatformVO.setConfigItems(gson.fromJson(esSmsPlatform.getConfig(), new TypeToken<List<EsConfigItemVO>>() {
+        }.getType()));
         return esSmsPlatformVO;
     }
 

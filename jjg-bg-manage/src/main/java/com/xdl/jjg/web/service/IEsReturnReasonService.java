@@ -18,48 +18,53 @@ public interface IEsReturnReasonService {
 
     /**
      * 插入数据
+     *
+     * @param returnReasonDTO 售后申请原因DTO
      * @author rm 2817512105@qq.com
-     * @since 2019-12-16
-     * @param returnReasonDTO    售后申请原因DTO
      * @return: com.shopx.common.model.result.DubboResult<EsReturnReasonDO>
+     * @since 2019-12-16
      */
     DubboResult insertReturnReason(EsReturnReasonDTO returnReasonDTO);
 
     /**
      * 根据条件更新更新数据
+     *
+     * @param returnReasonDTO 售后申请原因DTO
      * @author rm 2817512105@qq.com
-     * @since 2019-12-16
-     * @param returnReasonDTO    售后申请原因DTO
      * @return: com.shopx.common.model.result.DubboResult<EsReturnReasonDO>
+     * @since 2019-12-16
      */
     DubboResult updateReturnReason(EsReturnReasonDTO returnReasonDTO);
 
     /**
      * 根据id获取数据
+     *
+     * @param id 主键id
      * @author rm 2817512105@qq.com
-     * @since 2019-12-16
-     * @param id    主键id
      * @return: com.shopx.common.model.result.DubboResult<EsReturnReasonDO>
+     * @since 2019-12-16
      */
     DubboResult<EsReturnReasonDO> getReturnReason(Long id);
 
     /**
      * 根据查询条件查询列表
+     *
+     * @param returnReasonDTO 售后申请原因DTO
+     * @param pageSize        行数
+     * @param pageNum         页码
      * @author rm 2817512105@qq.com
-     * @since 2019-12-16
-     * @param returnReasonDTO  售后申请原因DTO
-     * @param pageSize  行数
-     * @param pageNum   页码
      * @return: com.shopx.common.model.result.DubboPageResult<EsReturnReasonDO>
+     * @since 2019-12-16
      */
     DubboPageResult<EsReturnReasonDO> getReturnReasonList(EsReturnReasonDTO returnReasonDTO, int pageSize, int pageNum);
 
     /**
      * 根据主键删除数据
+     *
+     * @param id 主键id
      * @author rm 2817512105@qq.com
-     * @since 2019-12-16
-     * @param id    主键id
      * @return: com.shopx.common.model.result.DubboResult<EsReturnReasonDO>
+     * @since 2019-12-16
      */
     DubboResult deleteReturnReason(Long id);
 

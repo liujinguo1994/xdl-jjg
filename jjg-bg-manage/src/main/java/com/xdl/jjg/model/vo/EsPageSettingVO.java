@@ -8,7 +8,6 @@ import java.io.Serializable;
 
 /**
  * 静态页设置
- *
  */
 @Data
 @ApiModel

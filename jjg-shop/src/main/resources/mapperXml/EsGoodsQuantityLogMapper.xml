@@ -1,0 +1,19 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.goods.dao.mapper.EsGoodsQuantityLogMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shopx.goods.dao.entity.EsGoodsQuantityLog">
+        <id column="id" property="id" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="order_sn" property="orderSn" />
+        <result column="xn_quantity" property="xnQuantity" />
+        <result column="quantity" property="quantity" />
+        <result column="goods_sum" property="goodsSum" />
+        <result column="type" property="type" />
+        <result column="goods_id" property="goodsId" />
+        <result column="sku_id" property="skuId" />
+    </resultMap>
+
+</mapper>

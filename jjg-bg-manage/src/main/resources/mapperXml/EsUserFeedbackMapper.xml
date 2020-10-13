@@ -4,12 +4,12 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsUserFeedback">
-        <id column="id" property="id" />
-        <result column="feedback_text" property="feedbackText" />
-        <result column="feedback_satisfaction" property="feedbackSatisfaction" />
-        <result column="feedback_phone" property="feedbackPhone" />
-        <result column="feedback_name" property="feedbackName" />
-        <result column="feedback_module" property="feedbackModule" />
+        <id column="id" property="id"/>
+        <result column="feedback_text" property="feedbackText"/>
+        <result column="feedback_satisfaction" property="feedbackSatisfaction"/>
+        <result column="feedback_phone" property="feedbackPhone"/>
+        <result column="feedback_name" property="feedbackName"/>
+        <result column="feedback_module" property="feedbackModule"/>
         <result column="member_id" property="memberId"/>
     </resultMap>
 

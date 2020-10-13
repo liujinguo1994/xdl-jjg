@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -22,16 +22,16 @@ public class EsHotKeywordDTO implements Serializable {
     /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
 
     /**
      * 文字内容
      */
-	private String hotName;
+    private String hotName;
 
     /**
      * 排序
      */
-	private Integer sort;
+    private Integer sort;
 
 }

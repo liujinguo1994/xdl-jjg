@@ -29,7 +29,7 @@ import java.util.Map;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -65,10 +65,10 @@ public class EsWaybillServiceImpl extends ServiceImpl<EsWaybillMapper, EsWaybill
             waybillVO.setId(waybill.getId());
             waybillMapper.updateById(new EsWaybill(waybillVO));
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -102,16 +102,16 @@ public class EsWaybillServiceImpl extends ServiceImpl<EsWaybillMapper, EsWaybill
             EsWaybill esWaybill = new EsWaybill();
             esWaybill.setOpen(0);
             QueryWrapper<EsWaybill> queryWrapper = new QueryWrapper<>();
-            waybillMapper.update(esWaybill,queryWrapper);
+            waybillMapper.update(esWaybill, queryWrapper);
             esWaybill.setOpen(1);
             esWaybill.setId(waybill.getId());
             waybillMapper.updateById(esWaybill);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("开启失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("开启失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -120,7 +120,6 @@ public class EsWaybillServiceImpl extends ServiceImpl<EsWaybillMapper, EsWaybill
 
     /**
      * 添加电子面单
-     *
      */
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
     public DubboResult add(EsWaybillVO waybillVO) {
@@ -134,11 +133,11 @@ public class EsWaybillServiceImpl extends ServiceImpl<EsWaybillMapper, EsWaybill
                 waybillMapper.insert(waybill);
             }
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("添加电子面单失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("添加电子面单失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -148,7 +147,7 @@ public class EsWaybillServiceImpl extends ServiceImpl<EsWaybillMapper, EsWaybill
     //根据bean获取电子面单
     public EsWaybill getEsWaybill(String bean) {
         QueryWrapper<EsWaybill> queryWrapper = new QueryWrapper<>();
-        queryWrapper.lambda().eq(EsWaybill::getBean,bean);
+        queryWrapper.lambda().eq(EsWaybill::getBean, bean);
         EsWaybill waybill = waybillMapper.selectOne(queryWrapper);
         return waybill;
     }
@@ -191,7 +190,8 @@ public class EsWaybillServiceImpl extends ServiceImpl<EsWaybillMapper, EsWaybill
         waybillVO.setOpen(wayBill.getOpen());
         waybillVO.setBean(wayBill.getBean());
         Gson gson = new Gson();
-        waybillVO.setConfigItems(gson.fromJson(wayBill.getConfig(), new TypeToken<List<EsConfigItemVO>>() { }.getType()));
+        waybillVO.setConfigItems(gson.fromJson(wayBill.getConfig(), new TypeToken<List<EsConfigItemVO>>() {
+        }.getType()));
         return waybillVO;
     }
 

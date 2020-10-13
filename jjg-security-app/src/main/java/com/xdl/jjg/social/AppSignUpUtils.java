@@ -23,7 +23,6 @@ import java.util.concurrent.TimeUnit;
 public class AppSignUpUtils {
 
 
-
     @Autowired
     private RedisTemplate<Object, Object> redisTemplate;
 
@@ -42,6 +41,7 @@ public class AppSignUpUtils {
      * key：通过请求中携带的设备id生成
      * value：即通过第三方获取的用户信息
      * timeout：10分钟，超时就清除缓存
+     *
      * @param request
      * @param connectionData
      */
@@ -51,6 +51,7 @@ public class AppSignUpUtils {
 
     /**
      * 将第三方提供的用户信息与本地服务的用户的userId绑定
+     *
      * @param request
      * @param userId
      */
@@ -69,7 +70,7 @@ public class AppSignUpUtils {
         return connectionData;
     }
 
-    public ConnectionData getConnectionData(WebRequest request,String userId){
+    public ConnectionData getConnectionData(WebRequest request, String userId) {
         String key = (String) getKey(request);
         if (!redisTemplate.hasKey(key)) {
             throw new AppSecretException("无法找到缓存的用户社交账号信息");
@@ -78,7 +79,7 @@ public class AppSignUpUtils {
         return connectionData;
     }
 
-    public ConnectionData getUser(WebRequest request,String userId){
+    public ConnectionData getUser(WebRequest request, String userId) {
         String key = (String) getKey(request);
         if (!redisTemplate.hasKey(key)) {
             return null;

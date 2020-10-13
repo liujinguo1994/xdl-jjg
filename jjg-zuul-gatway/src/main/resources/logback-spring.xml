@@ -1,63 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-	<!-- <include resource="org/springframework/boot/logging/logback/base.xml" 
-		/> -->
+    <!-- <include resource="org/springframework/boot/logging/logback/base.xml"
+        /> -->
 
-	<!-- <include resource="org/springframework/boot/logging/logback/defaults.xml" /> -->
+    <!-- <include resource="org/springframework/boot/logging/logback/defaults.xml" /> -->
 
-	<appender class="ch.qos.logback.core.ConsoleAppender" name="CONSOLE">
-		<encoder>
-			<pattern>%d{yyyy-MM-dd HH:mm:ss}[%thread]%-5level %logger{50} - %msg%n</pattern>
-			<charset>utf8</charset>
-		</encoder>
-	</appender>
+    <appender class="ch.qos.logback.core.ConsoleAppender" name="CONSOLE">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss}[%thread]%-5level %logger{50} - %msg%n</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
 
-	<property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/spring.log}"/>
-	
-	<appender class="ch.qos.logback.core.rolling.RollingFileAppender" name="FILE">
-	<!-- ch.qos.logback.core.rolling.TimeBaseRollingPolicy 
-	    <file>D:\Users\nantian\sdn_product_workSpace\ihp_custom_batches.log</file>
-	    <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
-			<fileNamePattern>${LOG_FILE}.%i</fileNamePattern>
-		</rollingPolicy>-->
-		<!--滚动策略，按照时间滚动 TimeBasedRollingPolicy-->
-		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-			<!--测试环境文件路径,定义了日志的切分方式——把每一天的日志归档到一个文件中,以防止日志填满整个磁盘空间-->
-			<FileNamePattern>/usr/local/jjg-server/gatway-80/logs/jjg-zuul-gatway.%d{yyyy-MM-dd}.log</FileNamePattern>
-			<!--正式环境文件路径,定义了日志的切分方式——把每一天的日志归档到一个文件中,以防止日志填满整个磁盘空间-->
-			<!-- <FileNamePattern>/usr/local/xdl/log/jjg-zuul-gatway.%d{yyyy-MM-dd}.log</FileNamePattern> -->
-			<!--只保留最近90天的日志-->
-			<maxHistory>90</maxHistory>
-		</rollingPolicy>
-	    <encoder >
-			<pattern>%d{yyyy-MM-dd HH:mm:ss}[%thread]%-5level %logger{50} - %msg%n</pattern>
-		</encoder>
-		
-		<triggeringPolicy
-			class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
-			<MaxFileSize>10MB</MaxFileSize>
-		</triggeringPolicy>
-		
-		
-		
-	</appender>
+    <property name="LOG_FILE" value="${LOG_FILE:-${LOG_PATH:-${LOG_TEMP:-${java.io.tmpdir:-/tmp}}}/spring.log}"/>
+
+    <appender class="ch.qos.logback.core.rolling.RollingFileAppender" name="FILE">
+        <!-- ch.qos.logback.core.rolling.TimeBaseRollingPolicy
+            <file>D:\Users\nantian\sdn_product_workSpace\ihp_custom_batches.log</file>
+            <rollingPolicy class="ch.qos.logback.core.rolling.FixedWindowRollingPolicy">
+                <fileNamePattern>${LOG_FILE}.%i</fileNamePattern>
+            </rollingPolicy>-->
+        <!--滚动策略，按照时间滚动 TimeBasedRollingPolicy-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--测试环境文件路径,定义了日志的切分方式——把每一天的日志归档到一个文件中,以防止日志填满整个磁盘空间-->
+            <FileNamePattern>/usr/local/jjg-server/gatway-80/logs/jjg-zuul-gatway.%d{yyyy-MM-dd}.log</FileNamePattern>
+            <!--正式环境文件路径,定义了日志的切分方式——把每一天的日志归档到一个文件中,以防止日志填满整个磁盘空间-->
+            <!-- <FileNamePattern>/usr/local/xdl/log/jjg-zuul-gatway.%d{yyyy-MM-dd}.log</FileNamePattern> -->
+            <!--只保留最近90天的日志-->
+            <maxHistory>90</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss}[%thread]%-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+
+        <triggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeBasedTriggeringPolicy">
+            <MaxFileSize>10MB</MaxFileSize>
+        </triggeringPolicy>
 
 
-	<springProfile name="default">
-		<logger name="org.springboot" level="INFO" />
-		<logger name="org.springframework.web" level="INFO" />
-	</springProfile>
-
-	<springProfile name="dev">
-		<logger name="org.springboot" level="INFO" />
-		<logger name="org.springframework" level="INFO" />
-	</springProfile>
-
-	<root level="INFO">
-		<appender-ref ref="CONSOLE" />
-		 <appender-ref ref="FILE" /> 
-	</root>
+    </appender>
 
 
+    <springProfile name="default">
+        <logger name="org.springboot" level="INFO"/>
+        <logger name="org.springframework.web" level="INFO"/>
+    </springProfile>
 
-</configuration>  
+    <springProfile name="dev">
+        <logger name="org.springboot" level="INFO"/>
+        <logger name="org.springframework" level="INFO"/>
+    </springProfile>
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+
+
+</configuration>

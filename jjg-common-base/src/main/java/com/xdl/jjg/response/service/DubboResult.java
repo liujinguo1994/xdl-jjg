@@ -62,6 +62,7 @@ public class DubboResult<D> extends BaseResultSupport {
             this.code = code;
             return this;
         }
+
         @Override
         public Builder msg(String msg) {
             this.msg = msg;

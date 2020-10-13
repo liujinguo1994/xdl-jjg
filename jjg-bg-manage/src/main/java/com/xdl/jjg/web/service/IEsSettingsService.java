@@ -7,7 +7,7 @@ import com.xdl.jjg.response.service.DubboResult;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author rm 2817512105@qq.com

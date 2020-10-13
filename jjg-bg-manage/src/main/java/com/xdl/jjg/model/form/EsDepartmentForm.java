@@ -32,7 +32,7 @@ public class EsDepartmentForm implements Serializable {
     /**
      * 父id
      */
-    @ApiModelProperty(required = true, value = "父id",example = "1")
+    @ApiModelProperty(required = true, value = "父id", example = "1")
     @NotNull(message = "父id不能为空")
     private Long parentId;
 

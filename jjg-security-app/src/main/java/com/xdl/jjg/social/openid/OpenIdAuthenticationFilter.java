@@ -51,13 +51,14 @@ public class OpenIdAuthenticationFilter extends AbstractAuthenticationProcessing
 
         OpenIdAuthenticationToken token = new OpenIdAuthenticationToken(openId, providerId);
 
-        setDetails(request,token);
+        setDetails(request, token);
 
         return this.getAuthenticationManager().authenticate(token);
     }
 
     /**
      * 将请求的一些信息保存到验证请求里面去
+     *
      * @param request
      * @param token
      */
@@ -67,6 +68,7 @@ public class OpenIdAuthenticationFilter extends AbstractAuthenticationProcessing
 
     /**
      * 获取providerId
+     *
      * @param request
      * @return
      */
@@ -76,6 +78,7 @@ public class OpenIdAuthenticationFilter extends AbstractAuthenticationProcessing
 
     /**
      * 获取openId
+     *
      * @param request
      * @return
      */

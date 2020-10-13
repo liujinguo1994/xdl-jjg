@@ -67,24 +67,24 @@
             <version>${project.version}</version>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>com.xdl.jjg</groupId>-->
-            <!--<artifactId>jjg-security-app</artifactId>-->
-            <!--<version>${project.version}</version>-->
+        <!--<groupId>com.xdl.jjg</groupId>-->
+        <!--<artifactId>jjg-security-app</artifactId>-->
+        <!--<version>${project.version}</version>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>org.springframework.cloud</groupId>-->
-            <!--<artifactId>spring-cloud-starter-feign</artifactId>-->
+        <!--<groupId>org.springframework.cloud</groupId>-->
+        <!--<artifactId>spring-cloud-starter-feign</artifactId>-->
         <!--</dependency>-->
         <!--<dependency>-->
-            <!--<groupId>org.springframework.cloud</groupId>-->
-            <!--<artifactId>spring-cloud-starter-oauth2</artifactId>-->
+        <!--<groupId>org.springframework.cloud</groupId>-->
+        <!--<artifactId>spring-cloud-starter-oauth2</artifactId>-->
         <!--</dependency>-->
 
         <!--远程发现配置-->
-<!--        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-config</artifactId>
-        </dependency>-->
+        <!--        <dependency>
+                    <groupId>org.springframework.cloud</groupId>
+                    <artifactId>spring-cloud-starter-config</artifactId>
+                </dependency>-->
 
         <dependency>
             <groupId>org.bouncycastle</groupId>
@@ -92,15 +92,14 @@
             <version>1.59</version>
         </dependency>
         <!--<dependency>-->
-            <!--<groupId>org.springframework</groupId>-->
-            <!--<artifactId>spring-beans</artifactId>-->
-            <!--<version>5.1.6.RELEASE</version>-->
-            <!--<scope>compile</scope>-->
+        <!--<groupId>org.springframework</groupId>-->
+        <!--<artifactId>spring-beans</artifactId>-->
+        <!--<version>5.1.6.RELEASE</version>-->
+        <!--<scope>compile</scope>-->
         <!--</dependency>-->
 
 
     </dependencies>
-
 
 
     <build>

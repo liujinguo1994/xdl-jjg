@@ -23,7 +23,7 @@ public class EsShopThemesQueryForm extends QueryPageForm {
      * 模版类型
      */
     @ApiModelProperty(value = "模版类型")
-	private String type;
+    private String type;
 
     /**
      * 模版名称

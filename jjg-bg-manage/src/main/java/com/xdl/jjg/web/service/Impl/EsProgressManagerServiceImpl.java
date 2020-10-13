@@ -14,7 +14,7 @@ import redis.clients.jedis.JedisCluster;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -36,7 +36,7 @@ public class EsProgressManagerServiceImpl implements IEsProgressManagerService {
         id = TaskProgress.PROCESS + id;
         String s = jedisCluster.get(id);
         TaskProgress taskProgress = null;
-        if (!StringUtil.isEmpty(s)){
+        if (!StringUtil.isEmpty(s)) {
             taskProgress = JsonUtil.jsonToObject(s, TaskProgress.class);
         }
         return DubboResult.success(taskProgress);

@@ -18,6 +18,7 @@ import java.util.Set;
 
 /**
  * ShiroCache（用户信息，权限信息）
+ *
  * @param <K>
  * @param <V>
  */
@@ -45,7 +46,7 @@ public class ShiroCache<K, V> implements Cache<K, V> {
                 byte[] k = serializeK(getCacheKey(key));
                 //序列化VALUE
                 byte[] v = (byte[]) redisTemplate.opsForValue().get(k);
-                if(null != v){
+                if (null != v) {
                     logger.debug("Getting object from cache [" + this.cacheKey + "] for key [" + key + "]key type:" + key.getClass());
                     return (V) deserializeV(v);
                 }
@@ -63,7 +64,7 @@ public class ShiroCache<K, V> implements Cache<K, V> {
         try {
             byte[] k = serializeK(getCacheKey(key));
             byte[] v = serializeV(value);
-            redisTemplate.opsForValue().set(k,v,expire);
+            redisTemplate.opsForValue().set(k, v, expire);
             logger.debug("Putting object in cache [" + this.cacheKey + "] for key [" + key + "]key type:"
                     + key.getClass() + "for value [" + value + "]value type:" + value.getClass());
             return value;
@@ -76,7 +77,7 @@ public class ShiroCache<K, V> implements Cache<K, V> {
     @Override
     public V remove(K key) throws CacheException {
         V old = get(key);
-        if(null != old){
+        if (null != old) {
             byte[] k = serializeK(getCacheKey(key));
             redisTemplate.delete(k);
             logger.debug("Removing object from cache [" + this.cacheKey + "] for key [" + key + "]key type:" + key.getClass());
@@ -97,7 +98,7 @@ public class ShiroCache<K, V> implements Cache<K, V> {
     @Override
     public Set<K> keys() {
         byte[] k = serializeK(getCacheKey("*"));
-        return (Set<K>)redisTemplate.opsForValue().get(k);
+        return (Set<K>) redisTemplate.opsForValue().get(k);
     }
 
     @Override
@@ -111,11 +112,11 @@ public class ShiroCache<K, V> implements Cache<K, V> {
     }
 
     private String getCacheKey(Object k) {
-        if(k instanceof String){
+        if (k instanceof String) {
             return this.cacheKey + k;
         }
-        if(k instanceof ShiroUser){
-            return this.cacheKey + ((ShiroUser)k).getId();
+        if (k instanceof ShiroUser) {
+            return this.cacheKey + ((ShiroUser) k).getId();
         }
         return this.cacheKey + k;
     }

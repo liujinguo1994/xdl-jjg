@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- *档案管理-规格
+ * 档案管理-规格
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -22,12 +22,12 @@ public class EsSpecForm implements Serializable {
     /**
      * 规格值id
      */
-    @ApiModelProperty(value = "规格值id",example = "1")
+    @ApiModelProperty(value = "规格值id", example = "1")
     private Long id;
     /**
      * 规格项id
      */
-    @ApiModelProperty(value = "规格项id",example = "1")
+    @ApiModelProperty(value = "规格项id", example = "1")
     private Long specId;
     /**
      * 规格名称

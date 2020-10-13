@@ -8,7 +8,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -23,44 +23,44 @@ public class EsEmail extends Model<EsEmail> {
     /**
      * 主键ID
      */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
     /**
      * 邮件标题
      */
-	private String title;
+    private String title;
     /**
      * 邮件类型
      */
-	private String type;
+    private String type;
     /**
      * 是否成功
      */
     @TableField("is_success")
-	private Integer isSuccess;
+    private Integer isSuccess;
     /**
      * 邮件接收者
      */
-	private String email;
+    private String email;
     /**
      * 邮件内容
      */
-	private String content;
+    private String content;
     /**
      * 错误次数
      */
     @TableField("error_num")
-	private Integer errorNum;
+    private Integer errorNum;
     /**
      * 最后发送时间
      */
-	@TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-	private Long updateTime;
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    private Long updateTime;
 
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 
 }

@@ -25,12 +25,13 @@ public class ImageCodeGenerator implements ValidateCodeGenerator {
 
     /**
      * 生成随机验证码图片
+     *
      * @param request
      * @return
      */
     @Override
     public ImageCode createCode(ServletWebRequest request) {
-        int width = ServletRequestUtils.getIntParameter(request.getRequest(),"width",securityProperties.getCode().getImage().getWidth());
+        int width = ServletRequestUtils.getIntParameter(request.getRequest(), "width", securityProperties.getCode().getImage().getWidth());
         int height = ServletRequestUtils.getIntParameter(request.getRequest(), "height", securityProperties.getCode().getImage().getHeight());
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 

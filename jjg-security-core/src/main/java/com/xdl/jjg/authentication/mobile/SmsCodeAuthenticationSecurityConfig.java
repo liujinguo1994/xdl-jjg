@@ -24,7 +24,7 @@ public class SmsCodeAuthenticationSecurityConfig extends SecurityConfigurerAdapt
     private AuthenticationSuccessHandler myAuthenticationSuccessHandler;
 
     @Autowired
-    private AuthenticationFailureHandler  myAuthenticationFailureHandler;
+    private AuthenticationFailureHandler myAuthenticationFailureHandler;
 
     @Autowired
     private UserDetailsService userDetailsService;

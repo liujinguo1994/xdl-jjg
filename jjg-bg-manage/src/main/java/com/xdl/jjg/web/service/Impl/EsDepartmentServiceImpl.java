@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类-部门
+ * 服务实现类-部门
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -59,16 +59,16 @@ public class EsDepartmentServiceImpl extends ServiceImpl<EsDepartmentMapper, EsD
             EsDepartment parent = null;
             // 非顶级部门
             if (departmentDTO.getParentId() != null && departmentDTO.getParentId() != 0) {
-                 parent = departmentMapper.selectById(departmentDTO.getParentId());
+                parent = departmentMapper.selectById(departmentDTO.getParentId());
                 if (parent == null) {
-                    throw new ArgumentException(ErrorCode.PARENT_DEPARTMENT_IS_NULL.getErrorCode(),"父部门不存在");
+                    throw new ArgumentException(ErrorCode.PARENT_DEPARTMENT_IS_NULL.getErrorCode(), "父部门不存在");
                 }
                 // 替换path 根据path规则来匹配级别
                 String path = parent.getPath().replace("|", ",");
                 String[] str = path.split(",");
                 // 如果当前的Path length 大于4 证明当前部门级别超过三级
                 if (str.length >= 4) {
-                    throw new ArgumentException(ErrorCode.DEPARTMENT_GRADE_MORE_THAN_THREE.getErrorCode(),"最多为三级部门,添加失败");
+                    throw new ArgumentException(ErrorCode.DEPARTMENT_GRADE_MORE_THAN_THREE.getErrorCode(), "最多为三级部门,添加失败");
                 }
             }
             EsDepartment department = new EsDepartment();
@@ -76,7 +76,7 @@ public class EsDepartmentServiceImpl extends ServiceImpl<EsDepartmentMapper, EsD
             department.setIsDel(0);
             departmentMapper.insert(department);
 
-            EsDepartment esDepartment=new EsDepartment();
+            EsDepartment esDepartment = new EsDepartment();
             esDepartment.setId(department.getId());
             // 不是顶级部门
             if (parent != null) {
@@ -86,11 +86,11 @@ public class EsDepartmentServiceImpl extends ServiceImpl<EsDepartmentMapper, EsD
             }
             departmentMapper.updateById(esDepartment);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -118,18 +118,18 @@ public class EsDepartmentServiceImpl extends ServiceImpl<EsDepartmentMapper, EsD
                 DubboResult<List<EsDepartmentDO>> children = getChildren(departmentDTO.getId());
                 List<EsDepartmentDO> list = children.getData();
                 if (list != null && list.size() > 0) {
-                    throw new ArgumentException(ErrorCode.HAVE_CHILDREN_DEPARTMENT.getErrorCode(),"当前部门有子部门，不能更换上级部门");
+                    throw new ArgumentException(ErrorCode.HAVE_CHILDREN_DEPARTMENT.getErrorCode(), "当前部门有子部门，不能更换上级部门");
                 } else {
                     parent = departmentMapper.selectById(departmentDTO.getParentId());
                     if (parent == null) {
-                        throw new ArgumentException(ErrorCode.PARENT_DEPARTMENT_IS_NULL.getErrorCode(),"父部门不存在");
+                        throw new ArgumentException(ErrorCode.PARENT_DEPARTMENT_IS_NULL.getErrorCode(), "父部门不存在");
                     }
                     // 替换Path 根据Path规则来匹配级别
                     String path = parent.getPath().replace("|", ",");
                     String[] str = path.split(",");
                     // 如果当前的Path length 大于4 证明当前部门级别超过三级
                     if (str.length >= 4) {
-                        throw new ArgumentException(ErrorCode.DEPARTMENT_GRADE_MORE_THAN_THREE.getErrorCode(),"最多为三级部门,添加失败");
+                        throw new ArgumentException(ErrorCode.DEPARTMENT_GRADE_MORE_THAN_THREE.getErrorCode(), "最多为三级部门,添加失败");
                     }
                     departmentDTO.setPath(parent.getPath() + departmentDTO.getId() + "|");
                 }
@@ -138,10 +138,10 @@ public class EsDepartmentServiceImpl extends ServiceImpl<EsDepartmentMapper, EsD
             BeanUtil.copyProperties(departmentDTO, department);
             departmentMapper.updateById(department);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -169,10 +169,10 @@ public class EsDepartmentServiceImpl extends ServiceImpl<EsDepartmentMapper, EsD
             }
             BeanUtil.copyProperties(department, departmentDO);
             return DubboResult.success(departmentDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -182,8 +182,8 @@ public class EsDepartmentServiceImpl extends ServiceImpl<EsDepartmentMapper, EsD
      * 根据查询列表
      *
      * @param departmentDTO DTO
-     * @param pageSize     页码
-     * @param pageNum      页数
+     * @param pageSize      页码
+     * @param pageNum       页数
      * @auther: rm 2817512105@qq.com
      * @date: 2019-06-18
      * @return: com.shopx.common.model.result.DubboPageResult<EsDepartmentDO>
@@ -193,7 +193,7 @@ public class EsDepartmentServiceImpl extends ServiceImpl<EsDepartmentMapper, EsD
         QueryWrapper<EsDepartment> queryWrapper = new QueryWrapper<>();
         try {
             // 查询条件
-            queryWrapper.lambda().eq(EsDepartment::getDepartmentName,departmentDTO.getDepartmentName());
+            queryWrapper.lambda().eq(EsDepartment::getDepartmentName, departmentDTO.getDepartmentName());
 
             Page<EsDepartment> page = new Page<>(pageNum, pageSize);
             IPage<EsDepartment> iPage = this.page(page, queryWrapper);
@@ -206,9 +206,9 @@ public class EsDepartmentServiceImpl extends ServiceImpl<EsDepartmentMapper, EsD
                 }).collect(Collectors.toList());
             }
             return DubboPageResult.success(departmentDOList);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -232,20 +232,20 @@ public class EsDepartmentServiceImpl extends ServiceImpl<EsDepartmentMapper, EsD
             }
             // 查看是否有子部门
             QueryWrapper<EsDepartment> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsDepartment::getParentId,id);
+            queryWrapper.lambda().eq(EsDepartment::getParentId, id);
             List<EsDepartment> list = departmentMapper.selectList(queryWrapper);
             if (list != null && list.size() > 0) {
-                throw new ArgumentException(ErrorCode.HAVE_CHILDREN_DEPARTMENT_NOT_DELETE.getErrorCode(),"当前部门有子部门，不能删除");
+                throw new ArgumentException(ErrorCode.HAVE_CHILDREN_DEPARTMENT_NOT_DELETE.getErrorCode(), "当前部门有子部门，不能删除");
             }
             QueryWrapper<EsDepartment> deleteWrapper = new QueryWrapper<>();
             deleteWrapper.lambda().eq(EsDepartment::getId, id);
             this.departmentMapper.delete(deleteWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
-             logger.error("删除失败", ae);
-             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+        } catch (ArgumentException ae) {
+            logger.error("删除失败", ae);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -262,7 +262,7 @@ public class EsDepartmentServiceImpl extends ServiceImpl<EsDepartmentMapper, EsD
             List<EsDepartment> esDepartmentList = departmentMapper.selectList(queryWrapper);
             List<EsDepartmentDO> topList = new ArrayList<>();
             List<EsDepartmentDO> esDepartmentDOList = new ArrayList<>();
-            if (CollectionUtils.isNotEmpty(esDepartmentList)){
+            if (CollectionUtils.isNotEmpty(esDepartmentList)) {
                 //属性复制
                 esDepartmentDOList = esDepartmentList.stream().map(esDepartment -> {
                     EsDepartmentDO esDepartmentDO = new EsDepartmentDO();
@@ -270,7 +270,7 @@ public class EsDepartmentServiceImpl extends ServiceImpl<EsDepartmentMapper, EsD
                     return esDepartmentDO;
                 }).collect(Collectors.toList());
 
-                for (EsDepartmentDO esDepartmentDO: esDepartmentDOList) {
+                for (EsDepartmentDO esDepartmentDO : esDepartmentDOList) {
                     if (esDepartmentDO.getParentId() == 0) {
                         List<EsDepartmentDO> children = getChildren(esDepartmentDOList, esDepartmentDO.getId());
                         esDepartmentDO.setChildren(children);
@@ -279,9 +279,9 @@ public class EsDepartmentServiceImpl extends ServiceImpl<EsDepartmentMapper, EsD
                 }
             }
             return DubboPageResult.success(topList);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("部门下拉框查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("部门下拉框查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -310,7 +310,7 @@ public class EsDepartmentServiceImpl extends ServiceImpl<EsDepartmentMapper, EsD
                 throw new ArgumentException(ErrorCode.PARENT_ID_IS_NULL.getErrorCode(), "父id为空");
             }
             QueryWrapper<EsDepartment> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsDepartment::getParentId,parentId).orderByAsc(EsDepartment::getCreateTime);
+            queryWrapper.lambda().eq(EsDepartment::getParentId, parentId).orderByAsc(EsDepartment::getCreateTime);
             List<EsDepartment> esDepartmentList = departmentMapper.selectList(queryWrapper);
             List<EsDepartmentDO> departmentDOList = new ArrayList<>();
             if (CollectionUtils.isNotEmpty(esDepartmentList)) {
@@ -321,9 +321,9 @@ public class EsDepartmentServiceImpl extends ServiceImpl<EsDepartmentMapper, EsD
                 }).collect(Collectors.toList());
             }
             return DubboResult.success(departmentDOList);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("查询某部门下的子部门列表失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("查询某部门下的子部门列表失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");

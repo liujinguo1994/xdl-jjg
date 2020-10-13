@@ -29,7 +29,7 @@ public abstract class BaseResponse extends BaseDO {
         protected Integer res_code;
         protected String error;
 
-        public Builder () {
+        public Builder() {
             theBuilder = getThis();
         }
 

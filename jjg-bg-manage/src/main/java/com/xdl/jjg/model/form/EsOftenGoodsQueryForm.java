@@ -17,12 +17,12 @@ import lombok.Data;
 @ApiModel
 public class EsOftenGoodsQueryForm extends QueryPageForm {
 
-private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 自定义分类id
-	 */
-	@ApiModelProperty(value = "自定义分类id")
-	private Long customCategoryId;
+    /**
+     * 自定义分类id
+     */
+    @ApiModelProperty(value = "自定义分类id")
+    private Long customCategoryId;
 
-	}
+}

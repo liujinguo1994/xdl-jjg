@@ -20,7 +20,7 @@ import java.util.List;
  * @version 1.0
  * @date 2019/8/12 9:37
  */
-public class WeixinAppImpl extends AbstractOAuth2ApiBinding implements WeixinApp{
+public class WeixinAppImpl extends AbstractOAuth2ApiBinding implements WeixinApp {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -33,7 +33,6 @@ public class WeixinAppImpl extends AbstractOAuth2ApiBinding implements WeixinApp
     private static final String URL_GET_USER_INFO = "https://api.weixin.qq.com/sns/userinfo?openid=";
 
     /**
-     *
      * @param accessToken
      */
     public WeixinAppImpl(String accessToken) {
@@ -42,6 +41,7 @@ public class WeixinAppImpl extends AbstractOAuth2ApiBinding implements WeixinApp
 
     /**
      * 默认注册的StringHttpMessageConverter字符集为ISO-8859-1,而微信返回的是UTF-8,所以覆盖了原来的方法
+     *
      * @return
      */
     @Override
@@ -55,6 +55,7 @@ public class WeixinAppImpl extends AbstractOAuth2ApiBinding implements WeixinApp
 
     /**
      * 获取微信的用户id
+     *
      * @param openId
      * @return
      */

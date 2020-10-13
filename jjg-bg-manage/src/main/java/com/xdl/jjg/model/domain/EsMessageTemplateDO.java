@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -19,45 +19,45 @@ public class EsMessageTemplateDO implements Serializable {
     /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
     /**
      * 模版编号
      */
-	private String tplCode;
+    private String tplCode;
     /**
      * 模板名称
      */
-	private String tplName;
+    private String tplName;
     /**
      * 类型(会员 ,店铺 ,其他)
      */
-	private String type;
+    private String type;
     /**
      * 站内信提醒是否开启
      */
-	private Integer noticeState;
+    private Integer noticeState;
     /**
      * 短信提醒是否开启
      */
-	private Integer smsState;
+    private Integer smsState;
     /**
      * 邮件提醒是否开启
      */
-	private Integer emailState;
+    private Integer emailState;
     /**
      * 站内信内容
      */
-	private String content;
+    private String content;
     /**
      * 短信内容
      */
-	private String smsContent;
+    private String smsContent;
     /**
      * 邮件内容
      */
-	private String emailContent;
+    private String emailContent;
     /**
      * 邮件标题
      */
-	private String emailTitle;
+    private String emailTitle;
 }

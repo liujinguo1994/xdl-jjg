@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -19,22 +19,22 @@ public class EsUploaderDO implements Serializable {
     /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
     /**
      * 存储名称
      */
-	private String name;
+    private String name;
     /**
      * 是否开启
      */
-	private Integer open;
+    private Integer open;
     /**
      * 存储配置
      */
-	private String config;
+    private String config;
     /**
      * 存储插件id
      */
-	private String bean;
+    private String bean;
 
 }

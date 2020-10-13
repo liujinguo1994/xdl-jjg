@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author LiuJG 344009799@qq.com
@@ -51,7 +51,6 @@ public class EsAdminUserServiceImpl implements IEsAdminUserService {
     private SnowFlakeService snowFlakeService;
 
 
-
     /**
      * 插入数据
      *
@@ -66,36 +65,36 @@ public class EsAdminUserServiceImpl implements IEsAdminUserService {
             //校验密码格式
             boolean bool = Pattern.matches("[a-fA-F0-9]{32}", esAdminUserDTO.getPassword());
             if (!bool) {
-                throw new ArgumentException(ErrorCode.PASSWORD_FORMAT_ERROR.getErrorCode(),"密码格式不正确");
+                throw new ArgumentException(ErrorCode.PASSWORD_FORMAT_ERROR.getErrorCode(), "密码格式不正确");
             }
             //校验用户名称是否重复
             QueryWrapper<EsAdminUser> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsAdminUser::getUsername,esAdminUserDTO.getUsername()).eq(EsAdminUser::getIsDel,0);
+            queryWrapper.lambda().eq(EsAdminUser::getUsername, esAdminUserDTO.getUsername()).eq(EsAdminUser::getIsDel, 0);
             EsAdminUser esAdminUser = adminUserMapper.selectOne(queryWrapper);
-            if (esAdminUser!=null){
-                throw new ArgumentException(ErrorCode.USERNAME_EXIT.getErrorCode(),"管理员名称重复");
+            if (esAdminUser != null) {
+                throw new ArgumentException(ErrorCode.USERNAME_EXIT.getErrorCode(), "管理员名称重复");
             }
             //不是超级管理员的情况下再校验角色是否为空
             if (esAdminUserDTO.getIsAdmin() != 1) {
                 if (StringUtils.isEmpty(esAdminUserDTO.getRoleId())) {
                     throw new ArgumentException(ErrorCode.ROLE_IS_NULL.getErrorCode(), "角色为空");
                 }
-            }else {
+            } else {
                 esAdminUserDTO.setRoleId(Long.valueOf(0));
             }
             //校验部门是否为空
-            if(StringUtils.isEmpty(esAdminUserDTO.getDepartment())){
+            if (StringUtils.isEmpty(esAdminUserDTO.getDepartment())) {
                 throw new ArgumentException(ErrorCode.DEPARTMENT_IS_NULL.getErrorCode(), "部门为空");
             }
             //校验图像是否为空
-            if(StringUtils.isEmpty(esAdminUserDTO.getFace())){
+            if (StringUtils.isEmpty(esAdminUserDTO.getFace())) {
                 throw new ArgumentException(ErrorCode.FACE_IS_NULL.getErrorCode(), "图像为空");
             }
             //校验手机号码是否为空
-            if(StringUtils.isEmpty(esAdminUserDTO.getMobile())){
-                throw new ArgumentException(ErrorCode.MOBILE_IS_NULL.getErrorCode(),"手机号码不能为空");
+            if (StringUtils.isEmpty(esAdminUserDTO.getMobile())) {
+                throw new ArgumentException(ErrorCode.MOBILE_IS_NULL.getErrorCode(), "手机号码不能为空");
             }
-            EsAdminUser adminUser=new EsAdminUser();
+            EsAdminUser adminUser = new EsAdminUser();
             BeanUtil.copyProperties(esAdminUserDTO, adminUser);
             adminUser.setSalt(RandomStringUtils.randomAlphabetic(6));
             String password = esAdminUserDTO.getPassword();
@@ -104,15 +103,15 @@ public class EsAdminUserServiceImpl implements IEsAdminUserService {
             adminUserMapper.insert(adminUser);
             return DubboResult.success();
         } catch (ArgumentException e) {
-            String errorMessage = String.format("添加平台管理员失败，esAdminUserDTO:%s",esAdminUserDTO);
-            logger.error(errorMessage,e);
+            String errorMessage = String.format("添加平台管理员失败，esAdminUserDTO:%s", esAdminUserDTO);
+            logger.error(errorMessage, e);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//手动开启事务回滚
-            return DubboResult.fail(e.getExceptionCode(),e.getMessage());
+            return DubboResult.fail(e.getExceptionCode(), e.getMessage());
         } catch (Throwable th) {
-            String errorMessage = String.format("添加平台管理员失败，esAdminUserDTO:%s",esAdminUserDTO);
-            logger.error(errorMessage,th);
+            String errorMessage = String.format("添加平台管理员失败，esAdminUserDTO:%s", esAdminUserDTO);
+            logger.error(errorMessage, th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//手动开启事务回滚
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(),ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -161,8 +160,8 @@ public class EsAdminUserServiceImpl implements IEsAdminUserService {
      * 根据查询列表
      *
      * @param delFlag
-     * @param pageSize  行数
-     * @param pageNum   页码
+     * @param pageSize 行数
+     * @param pageNum  页码
      * @auther: LiuJG 344009799@qq.com
      * @date: 2019/06/03 13:42:53
      */
@@ -171,7 +170,7 @@ public class EsAdminUserServiceImpl implements IEsAdminUserService {
 
         try {
 
-            return DubboPageResult.success(1l,new ArrayList());
+            return DubboPageResult.success(1l, new ArrayList());
         } catch (Throwable th) {
             logger.error("查询分页查询失败", th);
             return DubboPageResult.fail(ErrorCodeEnum.SYS_ERROR.getErrorCode(), "系统错误");
@@ -210,18 +209,18 @@ public class EsAdminUserServiceImpl implements IEsAdminUserService {
     public DubboResult<EsAdminUserDO> getUserInfo(EsAdminUserDTO esAdminUserDTO) {
         try {
             QueryWrapper<EsAdminUser> queryWrapper = new QueryWrapper<>();
-            if(!StringUtil.isEmpty(esAdminUserDTO.getUsername())){
-                queryWrapper.lambda().eq(EsAdminUser::getUsername,esAdminUserDTO.getUsername());
+            if (!StringUtil.isEmpty(esAdminUserDTO.getUsername())) {
+                queryWrapper.lambda().eq(EsAdminUser::getUsername, esAdminUserDTO.getUsername());
             }
-            if(esAdminUserDTO.getId() != null){
-                queryWrapper.lambda().eq(EsAdminUser::getId,esAdminUserDTO.getId());
+            if (esAdminUserDTO.getId() != null) {
+                queryWrapper.lambda().eq(EsAdminUser::getId, esAdminUserDTO.getId());
             }
             EsAdminUser adminUser = adminUserMapper.selectOne(queryWrapper);
-            if(adminUser == null){
-                throw new ArgumentException(ErrorCode.ITEM_NOT_FOUND.getErrorCode(),"用户未找到");
+            if (adminUser == null) {
+                throw new ArgumentException(ErrorCode.ITEM_NOT_FOUND.getErrorCode(), "用户未找到");
             }
             EsAdminUserDO adminUserDO = new EsAdminUserDO();
-            BeanUtil.copyProperties(adminUser,adminUserDO);
+            BeanUtil.copyProperties(adminUser, adminUserDO);
             return DubboResult.success(adminUserDO);
         } catch (ArgumentException e) {
             logger.error("根据条件查询用户信息失败", e);
@@ -238,7 +237,7 @@ public class EsAdminUserServiceImpl implements IEsAdminUserService {
         try {
             EsAdminUser esAdminUser = adminUserMapper.selectById(id);
             EsAdminUserDO esAdminUserDO = new EsAdminUserDO();
-            BeanUtil.copyProperties(esAdminUser,esAdminUserDO);
+            BeanUtil.copyProperties(esAdminUser, esAdminUserDO);
             return DubboResult.success(esAdminUserDO);
         } catch (ArgumentException e) {
             logger.error("根据id查询管理员失败", e);
@@ -248,6 +247,7 @@ public class EsAdminUserServiceImpl implements IEsAdminUserService {
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
+
     @Override
     @Transactional(propagation = Propagation.REQUIRED)
     public DubboResult updateEsAdminUser(EsAdminUserDTO esAdminUserDTO) {
@@ -262,13 +262,13 @@ public class EsAdminUserServiceImpl implements IEsAdminUserService {
             }
             //校验用户名称是否重复
             QueryWrapper<EsAdminUser> query = new QueryWrapper<>();
-            query.lambda().eq(EsAdminUser::getUsername,esAdminUserDTO.getUsername());
+            query.lambda().eq(EsAdminUser::getUsername, esAdminUserDTO.getUsername());
             EsAdminUser esAdminUser = adminUserMapper.selectOne(query);
-            if (esAdminUser !=null && !Objects.equals(adminUser.getId(),esAdminUser.getId())){
-                throw new ArgumentException(ErrorCode.USERNAME_EXIT.getErrorCode(),"管理员名称重复");
+            if (esAdminUser != null && !Objects.equals(adminUser.getId(), esAdminUser.getId())) {
+                throw new ArgumentException(ErrorCode.USERNAME_EXIT.getErrorCode(), "管理员名称重复");
             }
             //如果修改的是从超级管理员到普通管理员 需要校验此管理员是否是最后一个超级管理员
-            if (adminUser.getIsAdmin() ==1 && esAdminUserDTO.getIsAdmin() !=1) {
+            if (adminUser.getIsAdmin() == 1 && esAdminUserDTO.getIsAdmin() != 1) {
                 QueryWrapper<EsAdminUser> queryWrapper = new QueryWrapper<>();
                 queryWrapper.lambda().eq(EsAdminUser::getIsAdmin, 1);
                 List<EsAdminUser> esAdminUsers = adminUserMapper.selectList(queryWrapper);
@@ -276,7 +276,7 @@ public class EsAdminUserServiceImpl implements IEsAdminUserService {
                     throw new ArgumentException(ErrorCode.ADMIN_USER_MUST_HAVE_ONE.getErrorCode(), "必须保留一个超级管理员");
                 }
             }
-            if (esAdminUserDTO.getIsAdmin() !=1) {
+            if (esAdminUserDTO.getIsAdmin() != 1) {
                 if (StringUtils.isEmpty(esAdminUserDTO.getRoleId())) {
                     throw new ArgumentException(ErrorCode.ROLE_IS_NULL.getErrorCode(), "角色为空");
                 }
@@ -284,16 +284,16 @@ public class EsAdminUserServiceImpl implements IEsAdminUserService {
                 esAdminUserDTO.setRoleId(Long.valueOf(0));
             }
             //校验部门是否为空
-            if(StringUtils.isEmpty(esAdminUserDTO.getDepartment())){
+            if (StringUtils.isEmpty(esAdminUserDTO.getDepartment())) {
                 throw new ArgumentException(ErrorCode.DEPARTMENT_IS_NULL.getErrorCode(), "部门为空");
             }
             //校验图像是否为空
-            if(StringUtils.isEmpty(esAdminUserDTO.getFace())){
+            if (StringUtils.isEmpty(esAdminUserDTO.getFace())) {
                 throw new ArgumentException(ErrorCode.FACE_IS_NULL.getErrorCode(), "图像为空");
             }
             //校验手机号码是否为空
-            if(StringUtils.isEmpty(esAdminUserDTO.getMobile())){
-                throw new ArgumentException(ErrorCode.MOBILE_IS_NULL.getErrorCode(),"手机号码不能为空");
+            if (StringUtils.isEmpty(esAdminUserDTO.getMobile())) {
+                throw new ArgumentException(ErrorCode.MOBILE_IS_NULL.getErrorCode(), "手机号码不能为空");
             }
             //管理员原密码
             String password = adminUser.getPassword();
@@ -301,7 +301,7 @@ public class EsAdminUserServiceImpl implements IEsAdminUserService {
             if (!StringUtil.isEmpty(esAdminUserDTO.getPassword())) {
                 boolean bool = Pattern.matches("[a-fA-F0-9]{32}", esAdminUserDTO.getPassword());
                 if (!bool) {
-                    throw new ArgumentException(ErrorCode.PASSWORD_FORMAT_ERROR.getErrorCode(),"密码格式不正确");
+                    throw new ArgumentException(ErrorCode.PASSWORD_FORMAT_ERROR.getErrorCode(), "密码格式不正确");
                 }
                 esAdminUserDTO.setPassword(StringUtil.md5(esAdminUserDTO.getPassword() + adminUser.getSalt()));
             } else {
@@ -311,21 +311,22 @@ public class EsAdminUserServiceImpl implements IEsAdminUserService {
             adminUserMapper.updateById(adminUser);
             return DubboResult.success();
         } catch (ArgumentException e) {
-            String errorMessage = String.format("修改平台管理员失败，esAdminUserDTO:%s",esAdminUserDTO);
-            logger.error(errorMessage,e);
+            String errorMessage = String.format("修改平台管理员失败，esAdminUserDTO:%s", esAdminUserDTO);
+            logger.error(errorMessage, e);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//手动开启事务回滚
-            return DubboResult.fail(e.getExceptionCode(),e.getMessage());
+            return DubboResult.fail(e.getExceptionCode(), e.getMessage());
         } catch (Throwable th) {
-            String errorMessage = String.format("修改平台管理员失败，esAdminUserDTO:%s",esAdminUserDTO);
-            logger.error(errorMessage,th);
+            String errorMessage = String.format("修改平台管理员失败，esAdminUserDTO:%s", esAdminUserDTO);
+            logger.error(errorMessage, th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();//手动开启事务回滚
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(),ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
+
     //根据id查询平台管理员
     public EsAdminUser getModel(Long id) {
-        QueryWrapper<EsAdminUser> queryWrapper=new QueryWrapper<>();
-        queryWrapper.lambda().eq(EsAdminUser::getId,id).eq(EsAdminUser::getIsDel,0);
+        QueryWrapper<EsAdminUser> queryWrapper = new QueryWrapper<>();
+        queryWrapper.lambda().eq(EsAdminUser::getId, id).eq(EsAdminUser::getIsDel, 0);
         EsAdminUser esAdminUser = adminUserMapper.selectOne(queryWrapper);
         return esAdminUser;
     }
@@ -336,7 +337,7 @@ public class EsAdminUserServiceImpl implements IEsAdminUserService {
     public DubboResult<List<EsAdminUserDO>> getByDepartmentId(Long departmentId) {
         try {
             QueryWrapper<EsAdminUser> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsAdminUser::getDepartment,departmentId);
+            queryWrapper.lambda().eq(EsAdminUser::getDepartment, departmentId);
             List<EsAdminUser> esAdminUserList = adminUserMapper.selectList(queryWrapper);
             List<EsAdminUserDO> esAdminUserDOList = new ArrayList<>();
             if (com.baomidou.mybatisplus.core.toolkit.CollectionUtils.isNotEmpty(esAdminUserList)) {
@@ -362,7 +363,7 @@ public class EsAdminUserServiceImpl implements IEsAdminUserService {
     public DubboPageResult<EsAdminUserDO> getByRoleId(Long roleId) {
         try {
             QueryWrapper<EsAdminUser> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsAdminUser::getRoleId,roleId);
+            queryWrapper.lambda().eq(EsAdminUser::getRoleId, roleId);
             List<EsAdminUser> adminUserList = adminUserMapper.selectList(queryWrapper);
             List<EsAdminUserDO> doList = (List<EsAdminUserDO>) BeanUtil.copyList(adminUserList, new EsAdminUserDO().getClass());
             return DubboPageResult.success(doList);

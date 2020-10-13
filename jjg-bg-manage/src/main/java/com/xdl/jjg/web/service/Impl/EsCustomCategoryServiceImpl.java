@@ -75,11 +75,11 @@ public class EsCustomCategoryServiceImpl extends ServiceImpl<EsCustomCategoryMap
             BeanUtil.copyProperties(customCategoryDTO, customCategory);
             this.customCategoryMapper.insert(customCategory);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("自定义分类新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("自定义分类新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -107,10 +107,10 @@ public class EsCustomCategoryServiceImpl extends ServiceImpl<EsCustomCategoryMap
             queryWrapper.lambda().eq(EsCustomCategory::getId, customCategoryDTO.getId());
             this.customCategoryMapper.update(customCategory, queryWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("自定义分类更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("自定义分类更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -138,10 +138,10 @@ public class EsCustomCategoryServiceImpl extends ServiceImpl<EsCustomCategoryMap
             }
             BeanUtil.copyProperties(customCategory, customCategoryDO);
             return DubboResult.success(customCategoryDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("自定义分类查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("自定义分类查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -151,8 +151,8 @@ public class EsCustomCategoryServiceImpl extends ServiceImpl<EsCustomCategoryMap
      * 根据查询自定义分类列表
      *
      * @param customCategoryDTO 自定义分类DTO
-     * @param pageSize     页码
-     * @param pageNum      页数
+     * @param pageSize          页码
+     * @param pageNum           页数
      * @auther: rm 2817512105@qq.com
      * @date: 2020-05-06
      * @return: com.shopx.common.model.result.DubboPageResult<EsCustomCategoryDO>
@@ -162,7 +162,7 @@ public class EsCustomCategoryServiceImpl extends ServiceImpl<EsCustomCategoryMap
         QueryWrapper<EsCustomCategory> queryWrapper = new QueryWrapper<>();
         try {
             // 查询条件
-            queryWrapper.lambda().eq(customCategoryDTO.getZoneId() != null, EsCustomCategory::getZoneId,customCategoryDTO.getZoneId());
+            queryWrapper.lambda().eq(customCategoryDTO.getZoneId() != null, EsCustomCategory::getZoneId, customCategoryDTO.getZoneId());
             Page<EsCustomCategory> page = new Page<>(pageNum, pageSize);
             IPage<EsCustomCategory> iPage = this.page(page, queryWrapper);
             List<EsCustomCategoryDO> customCategoryDOList = new ArrayList<>();
@@ -171,13 +171,13 @@ public class EsCustomCategoryServiceImpl extends ServiceImpl<EsCustomCategoryMap
                     EsCustomCategoryDO customCategoryDO = new EsCustomCategoryDO();
                     BeanUtil.copyProperties(customCategory, customCategoryDO);
                     DubboResult<EsZoneDO> result = zoneService.getZone(customCategoryDO.getZoneId());
-                    if (result.isSuccess() && result.getData() != null){
+                    if (result.isSuccess() && result.getData() != null) {
                         customCategoryDO.setZoneName(result.getData().getZoneName());
                     }
                     //常买清单
-                    if (null != customCategoryDTO.getZoneId() && customCategoryDTO.getZoneId()==2){
-                        DubboPageResult<EsOftenGoodsDO> findGoods =this.oftenGoodsService .getByCustomCategoryId(customCategory.getId());
-                        if (findGoods.isSuccess() && findGoods.getData().getList().size() >0 ){
+                    if (null != customCategoryDTO.getZoneId() && customCategoryDTO.getZoneId() == 2) {
+                        DubboPageResult<EsOftenGoodsDO> findGoods = this.oftenGoodsService.getByCustomCategoryId(customCategory.getId());
+                        if (findGoods.isSuccess() && findGoods.getData().getList().size() > 0) {
                             List<EsOftenGoodsVO> esFindGoodsVOS = BeanUtil.copyList(findGoods.getData().getList(), EsOftenGoodsVO.class);
                             customCategoryDO.setOftenGoodsVOS(esFindGoodsVOS);
                         }
@@ -185,10 +185,10 @@ public class EsCustomCategoryServiceImpl extends ServiceImpl<EsCustomCategoryMap
                     return customCategoryDO;
                 }).collect(Collectors.toList());
             }
-            return DubboPageResult.success(iPage.getTotal(),customCategoryDOList);
-        } catch (ArgumentException ae){
+            return DubboPageResult.success(iPage.getTotal(), customCategoryDOList);
+        } catch (ArgumentException ae) {
             logger.error("自定义分类分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("自定义分类分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -214,11 +214,11 @@ public class EsCustomCategoryServiceImpl extends ServiceImpl<EsCustomCategoryMap
             deleteWrapper.lambda().eq(EsCustomCategory::getId, id);
             this.customCategoryMapper.delete(deleteWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
-             logger.error("自定义分类删除失败", ae);
-             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+        } catch (ArgumentException ae) {
+            logger.error("自定义分类删除失败", ae);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("自定义分类删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());

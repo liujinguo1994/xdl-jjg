@@ -20,27 +20,27 @@ import java.io.Serializable;
 @Data
 @TableName("es_custom_category")
 public class EsCustomCategory extends Model<EsCustomCategory> {
-	private static final long serialVersionUID = -1577279185118145553L;
-	/**
-	 * 主键ID
-	 */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    private static final long serialVersionUID = -1577279185118145553L;
+    /**
+     * 主键ID
+     */
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
 
-	/**
-	 * 自定义分类名称
-	 */
-	@TableField("category_name")
-	private String categoryName;
+    /**
+     * 自定义分类名称
+     */
+    @TableField("category_name")
+    private String categoryName;
 
-	/**
-	 * 所属专区
-	 */
-	@TableField("zone_id")
-	private Long zoneId;
+    /**
+     * 所属专区
+     */
+    @TableField("zone_id")
+    private Long zoneId;
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 }

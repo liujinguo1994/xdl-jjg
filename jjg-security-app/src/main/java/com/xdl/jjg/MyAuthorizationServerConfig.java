@@ -72,6 +72,7 @@ public class MyAuthorizationServerConfig extends AuthorizationServerConfigurerAd
 
     /**
      * 跟客户端相关的一些配置
+     *
      * @param clients
      * @throws Exception
      */

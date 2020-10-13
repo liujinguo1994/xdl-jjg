@@ -14,8 +14,6 @@ public class QQProperties extends SocialProperties {
     private String providerId = "qq";
 
 
-
-
     public String getProviderId() {
         return providerId;
     }

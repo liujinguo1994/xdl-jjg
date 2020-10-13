@@ -63,11 +63,11 @@ public class EsZoneServiceImpl extends ServiceImpl<EsZoneMapper, EsZone> impleme
             BeanUtil.copyProperties(zoneDTO, zone);
             this.zoneMapper.insert(zone);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("专区管理新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("专区管理新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -95,10 +95,10 @@ public class EsZoneServiceImpl extends ServiceImpl<EsZoneMapper, EsZone> impleme
             queryWrapper.lambda().eq(EsZone::getId, zoneDTO.getId());
             this.zoneMapper.update(zone, queryWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("专区管理更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("专区管理更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -126,10 +126,10 @@ public class EsZoneServiceImpl extends ServiceImpl<EsZoneMapper, EsZone> impleme
             }
             BeanUtil.copyProperties(zone, zoneDO);
             return DubboResult.success(zoneDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("专区管理查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("专区管理查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -138,9 +138,9 @@ public class EsZoneServiceImpl extends ServiceImpl<EsZoneMapper, EsZone> impleme
     /**
      * 根据查询专区管理列表
      *
-     * @param zoneDTO 专区管理DTO
-     * @param pageSize     页码
-     * @param pageNum      页数
+     * @param zoneDTO  专区管理DTO
+     * @param pageSize 页码
+     * @param pageNum  页数
      * @auther: rm 2817512105@qq.com
      * @date: 2020-05-12
      * @return: com.shopx.common.model.result.DubboPageResult<EsZoneDO>
@@ -161,10 +161,10 @@ public class EsZoneServiceImpl extends ServiceImpl<EsZoneMapper, EsZone> impleme
                     return zoneDO;
                 }).collect(Collectors.toList());
             }
-            return DubboPageResult.success(iPage.getTotal(),zoneDOList);
-        } catch (ArgumentException ae){
+            return DubboPageResult.success(iPage.getTotal(), zoneDOList);
+        } catch (ArgumentException ae) {
             logger.error("专区管理分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("专区管理分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -190,11 +190,11 @@ public class EsZoneServiceImpl extends ServiceImpl<EsZoneMapper, EsZone> impleme
             deleteWrapper.lambda().eq(EsZone::getId, id);
             this.zoneMapper.delete(deleteWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
-             logger.error("专区管理删除失败", ae);
-             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+        } catch (ArgumentException ae) {
+            logger.error("专区管理删除失败", ae);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("专区管理删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -212,10 +212,10 @@ public class EsZoneServiceImpl extends ServiceImpl<EsZoneMapper, EsZone> impleme
                 BeanUtil.copyProperties(zone, zoneDO);
             }
             return DubboResult.success(zoneDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("专区管理查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("专区管理查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }

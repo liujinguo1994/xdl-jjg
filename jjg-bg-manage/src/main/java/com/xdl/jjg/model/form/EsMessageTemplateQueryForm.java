@@ -8,7 +8,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * <p>
- *  消息模板
+ * 消息模板
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -27,8 +27,6 @@ public class EsMessageTemplateQueryForm extends QueryPageForm {
     @ApiModelProperty(required = true, value = "类型(MEMBER:会员 ,SHOP:店铺)")
     @NotBlank(message = "类型不能为空")
     private String type;
-
-
 
 
 }

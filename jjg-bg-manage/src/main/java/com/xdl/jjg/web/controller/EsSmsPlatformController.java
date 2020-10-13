@@ -20,7 +20,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器-短信网关设置
+ * 前端控制器-短信网关设置
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -28,20 +28,20 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/esSmsPlatform")
-@Api(value="/esSmsPlatform", tags="短信网关设置")
+@Api(value = "/esSmsPlatform", tags = "短信网关设置")
 public class EsSmsPlatformController {
 
     @Autowired
     private IEsSmsPlatformService iEsSmsPlatformService;
 
-    @ApiOperation(value = "查询短信平台列表",response = EsSmsPlatformVO.class)
+    @ApiOperation(value = "查询短信平台列表", response = EsSmsPlatformVO.class)
     @GetMapping(value = "/getSmsPlatformList")
     @ResponseBody
     public ApiResponse getSmsPlatformList(EsQueryPageForm form) {
-        DubboPageResult<EsSmsPlatformVO> result = iEsSmsPlatformService.getSmsPlatformList(form.getPageSize(),form.getPageNum());
+        DubboPageResult<EsSmsPlatformVO> result = iEsSmsPlatformService.getSmsPlatformList(form.getPageSize(), form.getPageNum());
         if (result.isSuccess()) {
             List<EsSmsPlatformVO> data = result.getData().getList();
-            return ApiPageResponse.pageSuccess(result.getData().getTotal(),data);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(), data);
         } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
@@ -50,11 +50,11 @@ public class EsSmsPlatformController {
     @ApiOperation(value = "修改短信网关")
     @PutMapping(value = "/updateSmsPlatform")
     @ResponseBody
-    public ApiResponse updateSmsPlatform(@RequestBody @ApiParam(name="短信网关form对象",value="form") EsSmsPlatformVO form){
+    public ApiResponse updateSmsPlatform(@RequestBody @ApiParam(name = "短信网关form对象", value = "form") EsSmsPlatformVO form) {
         DubboResult result = iEsSmsPlatformService.updateSmsPlatform(form);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -67,7 +67,7 @@ public class EsSmsPlatformController {
         DubboResult result = iEsSmsPlatformService.openPlatform(bean);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }

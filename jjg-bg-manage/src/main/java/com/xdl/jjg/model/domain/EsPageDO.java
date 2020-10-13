@@ -6,7 +6,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -20,22 +20,22 @@ public class EsPageDO implements Serializable {
     /**
      * 主键id
      */
-	private Long id;
+    private Long id;
     /**
      * 楼层名称
      */
-	private String pageName;
+    private String pageName;
     /**
      * 楼层数据
      */
-	private String pageData;
+    private String pageData;
     /**
      * 页面类型
      */
-	private String pageType;
+    private String pageType;
     /**
      * 客户端类型
      */
-	private String clientType;
+    private String clientType;
 
 }

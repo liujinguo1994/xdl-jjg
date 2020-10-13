@@ -25,38 +25,38 @@ public class EsArticleForm implements Serializable {
     /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
 
     /**
      * 文章名称
      */
     @ApiModelProperty(value = "文章名称")
     @NotBlank(message = "文章名称不能为空")
-	private String articleName;
+    private String articleName;
 
     /**
      * 分类id
      */
     @ApiModelProperty(value = "分类id")
     @NotNull(message = "分类id不能为空")
-	private Long categoryId;
+    private Long categoryId;
 
     /**
      * 文章排序
      */
     @ApiModelProperty(value = "文章排序")
-	private Integer sort;
+    private Integer sort;
 
     /**
      * 外链url
      */
     @ApiModelProperty(value = "外链url")
-	private String outsideUrl;
+    private String outsideUrl;
 
     /**
      * 文章内容
      */
     @ApiModelProperty(value = "文章内容")
     @NotBlank(message = "文章内容不能为空")
-	private String content;
+    private String content;
 }

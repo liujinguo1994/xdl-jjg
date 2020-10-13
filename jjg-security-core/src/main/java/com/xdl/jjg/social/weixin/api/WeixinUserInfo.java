@@ -6,7 +6,7 @@ import java.util.Arrays;
 /**
  * @Author: ciyuan
  * @Date: 2019/5/26 4:11
- *
+ * <p>
  * 微信用户信息
  */
 public class WeixinUserInfo implements Serializable {

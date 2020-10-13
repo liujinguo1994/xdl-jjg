@@ -22,6 +22,7 @@ public class ImageCode extends ValidateCode {
 
     /**
      * 该构造器用于设置过期时间的秒数
+     *
      * @param image
      * @param code
      * @param expireIn 过期时间的秒数   该验证码在expireIn秒后过期
@@ -33,6 +34,7 @@ public class ImageCode extends ValidateCode {
 
     /**
      * 该构造器用于设置过去时间的具体时间
+     *
      * @param image
      * @param code
      * @param expireTime 验证码过期的具体时间 该验证码在expireTime过期

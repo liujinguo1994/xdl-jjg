@@ -4,12 +4,13 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
+
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author LiuJG 344009799@qq.com
@@ -24,26 +25,26 @@ public class EsAdminUserTokenForm implements Serializable {
     /**
      * 主键ID
      */
-	private Long userId;
+    private Long userId;
 
     /**
      * token
      */
-	private String token;
+    private String token;
 
     /**
      * 过期时间
      */
-	@JsonSerialize(using = ToStringSerializer.class)
-	private Long expireTime;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long expireTime;
 
     /**
      * 更新时间
      */
-	private Long updateTime;
+    private Long updateTime;
 
-	protected Serializable pkVal() {
-		return this.userId;
-	}
+    protected Serializable pkVal() {
+        return this.userId;
+    }
 
 }

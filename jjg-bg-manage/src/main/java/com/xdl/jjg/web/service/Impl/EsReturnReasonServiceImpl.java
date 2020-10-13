@@ -60,11 +60,11 @@ public class EsReturnReasonServiceImpl extends ServiceImpl<EsReturnReasonMapper,
             BeanUtil.copyProperties(returnReasonDTO, returnReason);
             this.returnReasonMapper.insert(returnReason);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("售后申请原因新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("售后申请原因新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -92,10 +92,10 @@ public class EsReturnReasonServiceImpl extends ServiceImpl<EsReturnReasonMapper,
             queryWrapper.lambda().eq(EsReturnReason::getId, returnReasonDTO.getId());
             this.returnReasonMapper.update(returnReason, queryWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("售后申请原因更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("售后申请原因更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -123,10 +123,10 @@ public class EsReturnReasonServiceImpl extends ServiceImpl<EsReturnReasonMapper,
             }
             BeanUtil.copyProperties(returnReason, returnReasonDO);
             return DubboResult.success(returnReasonDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("售后申请原因查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("售后申请原因查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -136,8 +136,8 @@ public class EsReturnReasonServiceImpl extends ServiceImpl<EsReturnReasonMapper,
      * 根据查询售后申请原因列表
      *
      * @param returnReasonDTO 售后申请原因DTO
-     * @param pageSize     页码
-     * @param pageNum      页数
+     * @param pageSize        页码
+     * @param pageNum         页数
      * @auther: rm 2817512105@qq.com
      * @date: 2019-12-16
      * @return: com.shopx.common.model.result.DubboPageResult<EsReturnReasonDO>
@@ -151,10 +151,10 @@ public class EsReturnReasonServiceImpl extends ServiceImpl<EsReturnReasonMapper,
             Page<EsReturnReason> page = new Page<>(pageNum, pageSize);
             IPage<EsReturnReason> iPage = this.page(page, queryWrapper);
             List<EsReturnReasonDO> doList = BeanUtil.copyList(iPage.getRecords(), EsReturnReasonDO.class);
-            return DubboPageResult.success(iPage.getTotal(),doList);
-        } catch (ArgumentException ae){
+            return DubboPageResult.success(iPage.getTotal(), doList);
+        } catch (ArgumentException ae) {
             logger.error("售后申请原因分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("售后申请原因分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -180,11 +180,11 @@ public class EsReturnReasonServiceImpl extends ServiceImpl<EsReturnReasonMapper,
             deleteWrapper.lambda().eq(EsReturnReason::getId, id);
             this.returnReasonMapper.delete(deleteWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
-             logger.error("售后申请原因删除失败", ae);
-             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+        } catch (ArgumentException ae) {
+            logger.error("售后申请原因删除失败", ae);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("售后申请原因删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -195,17 +195,17 @@ public class EsReturnReasonServiceImpl extends ServiceImpl<EsReturnReasonMapper,
     @Override
     public DubboPageResult<EsReturnReasonDO> getByType(String refundType) {
         try {
-            if (StringUtil.isEmpty(refundType)){
-                throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(),"参数错误");
+            if (StringUtil.isEmpty(refundType)) {
+                throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), "参数错误");
             }
             QueryWrapper<EsReturnReason> queryWrapper = new QueryWrapper<>();
             queryWrapper.lambda().eq(EsReturnReason::getRefundType, refundType);
             List<EsReturnReason> reasonList = returnReasonMapper.selectList(queryWrapper);
             List<EsReturnReasonDO> doList = BeanUtil.copyList(reasonList, EsReturnReasonDO.class);
             return DubboPageResult.success(doList);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("根据售后类型获取原因列表失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("根据售后类型获取原因列表失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");

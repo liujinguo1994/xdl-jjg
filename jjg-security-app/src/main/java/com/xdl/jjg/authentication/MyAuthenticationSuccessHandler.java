@@ -49,6 +49,7 @@ public class MyAuthenticationSuccessHandler extends SavedRequestAwareAuthenticat
 
     /**
      * 登录成功时调用的方法
+     *
      * @param request
      * @param response
      * @param authentication 封装认证信息，包括发起的认证请求信息，如：请求的ip session ；以及认证通过以后

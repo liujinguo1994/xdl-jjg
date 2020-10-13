@@ -19,19 +19,19 @@ import java.io.Serializable;
 @ApiModel
 public class EsBrandForm implements Serializable {
 
-	private static final long serialVersionUID = 2402732215682477885L;
-	/**
+    private static final long serialVersionUID = 2402732215682477885L;
+    /**
      * 品牌名称
      */
-	@ApiModelProperty(required = true, value = "品牌名称")
-	@NotBlank(message = "品牌名称不能为空")
-	private String name;
+    @ApiModelProperty(required = true, value = "品牌名称")
+    @NotBlank(message = "品牌名称不能为空")
+    private String name;
 
     /**
      * 品牌图标
      */
-	@ApiModelProperty(required = true, value = "品牌图标")
-	@NotBlank(message = "品牌图标不能为空")
-	private String logo;
+    @ApiModelProperty(required = true, value = "品牌图标")
+    @NotBlank(message = "品牌图标不能为空")
+    private String logo;
 
 }

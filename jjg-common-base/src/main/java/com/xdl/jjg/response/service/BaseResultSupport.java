@@ -27,7 +27,7 @@ public abstract class BaseResultSupport extends BaseDO {
         protected Integer code;
         protected String msg;
 
-        public Builder () {
+        public Builder() {
             theBuilder = getThis();
         }
 

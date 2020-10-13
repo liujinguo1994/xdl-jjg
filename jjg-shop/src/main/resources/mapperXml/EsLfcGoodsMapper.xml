@@ -1,0 +1,13 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.goods.dao.mapper.EsLfcGoodsMapper">
+
+
+
+    <select id="getLfcGoods" resultType="java.lang.Long">
+          SELECT l.goods_id from es_goods g,es_lfc_goods l WHERE g.id=l.goods_id AND g.market_enable=1 and g.is_auth=1 AND l.is_auth=1
+
+    </select>
+
+
+</mapper>

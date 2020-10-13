@@ -1,0 +1,44 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.goods.dao.mapper.EsTagGoodsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shopx.goods.dao.entity.EsTagGoods">
+        <result column="tag_id" property="tagId" />
+        <result column="goods_id" property="goodsId" />
+    </resultMap>
+    <select id="queryTagGoods" resultType="com.shopx.goods.api.model.domain.EsBuyerTagGoodsDO">
+      SELECT
+        g.id,
+        g.goods_name,
+        g.money,
+        g.goods_sn,
+        g.original,
+        g.quantity,
+        g.buy_count
+    FROM
+        es_tag_goods r
+        INNER JOIN es_goods g ON g.id = r.goods_id
+        INNER JOIN es_tags t ON t.id = r.tag_id
+    WHERE
+        g.is_del = 0
+        AND g.market_enable = 1
+        AND t.mark = #{mark}
+        AND t.shop_id = #{shopId}
+        LIMIT 0,#{num}
+    </select>
+    <select id="queryTagGoodsById" resultType="com.shopx.goods.api.model.domain.EsGoodsDO">
+        SELECT
+        *
+        FROM
+            es_tag_goods r
+            LEFT JOIN es_goods g ON g.id = r.goods_id
+        WHERE
+            g.is_del = 0
+            AND g.market_enable = 1
+           	and g.is_gifts=2
+           	and g.is_auth=1
+            AND r.tag_id =#{tagId}
+            AND g.shop_id =#{shopId}
+    </select>
+</mapper>

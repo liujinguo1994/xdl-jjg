@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Data
 public class EsImportForm implements Serializable {
 
-    @ApiModelProperty(value = "url" )
+    @ApiModelProperty(value = "url")
     @NotBlank(message = "url不能为空")
     private String url;
 

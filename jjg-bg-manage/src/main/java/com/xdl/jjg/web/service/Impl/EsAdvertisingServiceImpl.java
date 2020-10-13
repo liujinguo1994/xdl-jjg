@@ -61,20 +61,20 @@ public class EsAdvertisingServiceImpl extends ServiceImpl<EsAdvertisingMapper, E
             }
             //根据位置查询数据库是否存在
             QueryWrapper<EsAdvertising> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsAdvertising::getLocation,advertisingDTO.getLocation());
+            queryWrapper.lambda().eq(EsAdvertising::getLocation, advertisingDTO.getLocation());
             EsAdvertising esAdvertising = advertisingMapper.selectOne(queryWrapper);
-            if (esAdvertising != null){
+            if (esAdvertising != null) {
                 throw new ArgumentException(ErrorCode.ADVERTISING_EXIT.getErrorCode(), "该位置广告已存在");
             }
             EsAdvertising advertising = new EsAdvertising();
             BeanUtil.copyProperties(advertisingDTO, advertising);
             this.advertisingMapper.insert(advertising);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("广告位新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("广告位新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -98,9 +98,9 @@ public class EsAdvertisingServiceImpl extends ServiceImpl<EsAdvertisingMapper, E
             }
             //根据位置查询数据库是否存在
             QueryWrapper<EsAdvertising> query = new QueryWrapper<>();
-            query.lambda().eq(EsAdvertising::getLocation,advertisingDTO.getLocation());
+            query.lambda().eq(EsAdvertising::getLocation, advertisingDTO.getLocation());
             EsAdvertising esAdvertising = advertisingMapper.selectOne(query);
-            if (esAdvertising != null && !Objects.equals(esAdvertising.getId(),advertisingDTO.getId())){
+            if (esAdvertising != null && !Objects.equals(esAdvertising.getId(), advertisingDTO.getId())) {
                 throw new ArgumentException(ErrorCode.ADVERTISING_EXIT.getErrorCode(), "该位置广告已存在");
             }
 
@@ -110,10 +110,10 @@ public class EsAdvertisingServiceImpl extends ServiceImpl<EsAdvertisingMapper, E
             queryWrapper.lambda().eq(EsAdvertising::getId, advertisingDTO.getId());
             this.advertisingMapper.update(advertising, queryWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("广告位更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("广告位更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -141,10 +141,10 @@ public class EsAdvertisingServiceImpl extends ServiceImpl<EsAdvertisingMapper, E
             }
             BeanUtil.copyProperties(advertising, advertisingDO);
             return DubboResult.success(advertisingDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("广告位查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("广告位查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -154,8 +154,8 @@ public class EsAdvertisingServiceImpl extends ServiceImpl<EsAdvertisingMapper, E
      * 根据查询广告位列表
      *
      * @param advertisingDTO 广告位DTO
-     * @param pageSize     页码
-     * @param pageNum      页数
+     * @param pageSize       页码
+     * @param pageNum        页数
      * @auther: rm 2817512105@qq.com
      * @date: 2020-05-12
      * @return: com.shopx.common.model.result.DubboPageResult<EsAdvertisingDO>
@@ -176,10 +176,10 @@ public class EsAdvertisingServiceImpl extends ServiceImpl<EsAdvertisingMapper, E
                     return advertisingDO;
                 }).collect(Collectors.toList());
             }
-            return DubboPageResult.success(iPage.getTotal(),advertisingDOList);
-        } catch (ArgumentException ae){
+            return DubboPageResult.success(iPage.getTotal(), advertisingDOList);
+        } catch (ArgumentException ae) {
             logger.error("广告位分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("广告位分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -205,11 +205,11 @@ public class EsAdvertisingServiceImpl extends ServiceImpl<EsAdvertisingMapper, E
             deleteWrapper.lambda().eq(EsAdvertising::getId, id);
             this.advertisingMapper.delete(deleteWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
-             logger.error("广告位删除失败", ae);
-             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+        } catch (ArgumentException ae) {
+            logger.error("广告位删除失败", ae);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("广告位删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -220,17 +220,17 @@ public class EsAdvertisingServiceImpl extends ServiceImpl<EsAdvertisingMapper, E
     public DubboResult<EsAdvertisingDO> getListByLocation(String location) {
         try {
             QueryWrapper<EsAdvertising> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsAdvertising::getLocation,location);
+            queryWrapper.lambda().eq(EsAdvertising::getLocation, location);
             EsAdvertising advertising = this.advertisingMapper.selectOne(queryWrapper);
             EsAdvertisingDO advertisingDO = new EsAdvertisingDO();
             if (advertising != null) {
                 BeanUtil.copyProperties(advertising, advertisingDO);
             }
             return DubboResult.success(advertisingDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("广告位查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("广告位查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }

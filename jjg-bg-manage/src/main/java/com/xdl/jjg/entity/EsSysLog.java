@@ -25,39 +25,39 @@ public class EsSysLog extends Model<EsSysLog> {
     /**
      * 主键ID
      */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
     /**
      * 创建时间
      */
-	@TableField(value = "create_time", fill = FieldFill.INSERT)
-	private Long createTime;
+    @TableField(value = "create_time", fill = FieldFill.INSERT)
+    private Long createTime;
     /**
      * 更新时间
      */
-	@TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
-	private Long updateTime;
+    @TableField(value = "update_time", fill = FieldFill.INSERT_UPDATE)
+    private Long updateTime;
     /**
      * 操作人ID
      */
     @JsonSerialize(using = ToStringSerializer.class)
     @TableField("oper_id")
-	private Long operId;
+    private Long operId;
     /**
      * 操作内容
      */
     @TableField("oper_content")
-	private String operContent;
+    private String operContent;
     /**
      * 操作类型
      */
     @TableField("oper_type")
-	private Integer operType;
+    private Integer operType;
 
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 
 }

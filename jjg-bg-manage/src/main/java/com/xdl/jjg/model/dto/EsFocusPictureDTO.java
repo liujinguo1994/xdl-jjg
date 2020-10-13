@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -22,36 +22,36 @@ public class EsFocusPictureDTO implements Serializable {
     /**
      * 主键id
      */
-	private Long id;
+    private Long id;
 
     /**
      * 图片地址
      */
-	private String picUrl;
+    private String picUrl;
 
     /**
      * 操作类型
      */
-	private String operationType;
+    private String operationType;
 
     /**
      * 操作参数
      */
-	private String operationParam;
+    private String operationParam;
 
     /**
      * 操作地址
      */
-	private String operationUrl;
+    private String operationUrl;
 
     /**
      * 客户端类型 APP/WAP/PC
      */
-	private String clientType;
+    private String clientType;
 
     /**
      * 背景色
      */
-	private String operationColor;
+    private String operationColor;
 
 }

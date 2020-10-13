@@ -23,19 +23,19 @@ public class EsSecuritySettingsForm implements Serializable {
     /**
      * 注册初始积分
      */
-    @ApiModelProperty(required = true, value = "注册初始积分",example = "1")
+    @ApiModelProperty(required = true, value = "注册初始积分", example = "1")
     @NotNull(message = "注册初始积分不能为空")
     private Integer integral;
     /**
      * 最大登录失败次数
      */
-    @ApiModelProperty(required = true, value = "最大登录失败次数",example = "1")
+    @ApiModelProperty(required = true, value = "最大登录失败次数", example = "1")
     @NotNull(message = "最大登录失败次数不能为空")
     private Integer failedNumber;
     /**
      * 未支付失败时间(以分钟为单位)
      */
-    @ApiModelProperty(required = true, value = "未支付失败时间(以分钟为单位)",example = "1")
+    @ApiModelProperty(required = true, value = "未支付失败时间(以分钟为单位)", example = "1")
     @NotNull(message = "未支付失败时间不能为空")
     private Integer time;
 

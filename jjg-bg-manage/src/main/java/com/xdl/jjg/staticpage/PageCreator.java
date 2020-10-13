@@ -3,16 +3,15 @@ package com.xdl.jjg.staticpage;
 
 /**
  * 静态页生成接口
- *
  */
 public interface PageCreator {
 
     /**
-     *生成单个页面
+     * 生成单个页面
      *
-     * @param path  页面地址
-     * @param type  客户端类型
-     * @param name  生成静态页面在redis中的key
+     * @param path 页面地址
+     * @param type 客户端类型
+     * @param name 生成静态页面在redis中的key
      * @throws Exception
      */
     void createOne(String path, String type, String name) throws Exception;

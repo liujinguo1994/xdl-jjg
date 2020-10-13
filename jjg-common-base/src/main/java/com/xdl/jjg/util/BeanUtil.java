@@ -42,23 +42,25 @@ public class BeanUtil {
 
     /**
      * 复制属性
+     *
      * @param objectFrom
      * @param objectTo
      */
-    public static void copyProperties(Object objectFrom,Object objectTo){
-        BeanUtils.copyProperties(objectFrom, objectTo,getNullPropertyNames(objectFrom));
+    public static void copyProperties(Object objectFrom, Object objectTo) {
+        BeanUtils.copyProperties(objectFrom, objectTo, getNullPropertyNames(objectFrom));
     }
 
     /**
      * 过滤null值
+     *
      * @param source
      * @return
      */
-    private static String[] getNullPropertyNames (Object source) {
+    private static String[] getNullPropertyNames(Object source) {
         final BeanWrapper src = new BeanWrapperImpl(source);
         java.beans.PropertyDescriptor[] pds = src.getPropertyDescriptors();
         Set<String> emptyNames = new HashSet<String>();
-        for(java.beans.PropertyDescriptor pd : pds) {
+        for (java.beans.PropertyDescriptor pd : pds) {
             Object srcValue = src.getPropertyValue(pd.getName());
             if (srcValue == null) emptyNames.add(pd.getName());
         }
@@ -68,6 +70,7 @@ public class BeanUtil {
 
     /**
      * 对象转换
+     *
      * @param source
      * @param targetBean
      * @param <T>
@@ -75,9 +78,9 @@ public class BeanUtil {
      */
     public static <T> List<T> copyList(List<?> source, Class<T> targetBean) {
         try {
-            String  sourceStr =  JsonUtil.objectToJson(source);
-            return JsonUtil.jsonToList(sourceStr,targetBean);
-        }catch (Exception e){
+            String sourceStr = JsonUtil.objectToJson(source);
+            return JsonUtil.jsonToList(sourceStr, targetBean);
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return null;

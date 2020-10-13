@@ -12,9 +12,9 @@ import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
- @Author wangaf 826988665@qq.com
- @Date 2020/3/10
- @Version V1.0
+ * @Author wangaf 826988665@qq.com
+ * @Date 2020/3/10
+ * @Version V1.0
  **/
 @Data
 public class EsSiteSettingDO implements Serializable {

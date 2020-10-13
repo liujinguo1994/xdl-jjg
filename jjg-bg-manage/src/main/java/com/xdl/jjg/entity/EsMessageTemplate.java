@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -26,61 +26,61 @@ public class EsMessageTemplate extends Model<EsMessageTemplate> {
     /**
      * 主键ID
      */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
     /**
      * 模版编号
      */
     @TableField("tpl_code")
-	private String tplCode;
+    private String tplCode;
     /**
      * 模板名称
      */
     @TableField("tpl_name")
-	private String tplName;
+    private String tplName;
     /**
      * 类型(会员 ,店铺 ,其他)
      */
-	private String type;
+    private String type;
     /**
      * 站内信提醒是否开启
      */
     @TableField("notice_state")
-	private Integer noticeState;
+    private Integer noticeState;
     /**
      * 短信提醒是否开启
      */
     @TableField("sms_state")
-	private Integer smsState;
+    private Integer smsState;
     /**
      * 邮件提醒是否开启
      */
     @TableField("email_state")
-	private Integer emailState;
+    private Integer emailState;
     /**
      * 站内信内容
      */
-	private String content;
+    private String content;
     /**
      * 短信内容
      */
     @TableField("sms_content")
-	private String smsContent;
+    private String smsContent;
     /**
      * 邮件内容
      */
     @TableField("email_content")
-	private String emailContent;
+    private String emailContent;
     /**
      * 邮件标题
      */
     @TableField("email_title")
-	private String emailTitle;
+    private String emailTitle;
 
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 
 }

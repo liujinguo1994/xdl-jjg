@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- *  前端控制器-菜单管理
+ * 前端控制器-菜单管理
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/esMenu")
-@Api(value="/esMenu", tags="菜单管理")
+@Api(value = "/esMenu", tags = "菜单管理")
 public class EsMenuController {
 
     @Autowired
@@ -40,13 +40,13 @@ public class EsMenuController {
     @ApiOperation(value = "添加菜单")
     @PostMapping(value = "/insertEsMenu")
     @ResponseBody
-    public ApiResponse insertEsMenu(@Valid @RequestBody @ApiParam(name="菜单form对象",value="form") EsMenuForm form){
-        EsMenuDTO esMenuDTO=new EsMenuDTO();
+    public ApiResponse insertEsMenu(@Valid @RequestBody @ApiParam(name = "菜单form对象", value = "form") EsMenuForm form) {
+        EsMenuDTO esMenuDTO = new EsMenuDTO();
         BeanUtil.copyProperties(form, esMenuDTO);
         DubboResult result = iesMenuService.insertEsMenu(esMenuDTO);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -55,21 +55,21 @@ public class EsMenuController {
     @ApiOperation(value = "修改菜单")
     @PutMapping(value = "/updateEsMenu/{id}")
     @ResponseBody
-    public ApiResponse updateEsMenu(@Valid @RequestBody @ApiParam(name="菜单form对象",value="form") EsMenuForm form, @PathVariable Long id){
-        EsMenuDTO esMenuDTO=new EsMenuDTO();
+    public ApiResponse updateEsMenu(@Valid @RequestBody @ApiParam(name = "菜单form对象", value = "form") EsMenuForm form, @PathVariable Long id) {
+        EsMenuDTO esMenuDTO = new EsMenuDTO();
         BeanUtil.copyProperties(form, esMenuDTO);
         esMenuDTO.setId(id);
         DubboResult result = iesMenuService.updateEsMenu(esMenuDTO);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
 
     @ApiOperation(value = "删除菜单")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要删除的菜单主键", required = true, dataType = "long", paramType = "path",example = "1")
+            @ApiImplicitParam(name = "id", value = "要删除的菜单主键", required = true, dataType = "long", paramType = "path", example = "1")
     })
     @DeleteMapping(value = "/deleteEsMenu/{id}")
     @ResponseBody
@@ -77,14 +77,14 @@ public class EsMenuController {
         DubboResult result = iesMenuService.deleteEsMenu(id);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
 
-    @ApiOperation(value = "根据父id查询所有菜单",response = EsMenuVO.class)
+    @ApiOperation(value = "根据父id查询所有菜单", response = EsMenuVO.class)
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "parentId", value = "父菜单主键", required = true, dataType = "long", paramType = "query",example = "1")
+            @ApiImplicitParam(name = "parentId", value = "父菜单主键", required = true, dataType = "long", paramType = "query", example = "1")
     })
     @GetMapping(value = "/getEsMenuTree")
     @ResponseBody

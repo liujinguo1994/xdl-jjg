@@ -23,8 +23,6 @@ public class OpenIdAuthenticationProvider implements AuthenticationProvider {
     private UsersConnectionRepository usersConnectionRepository;
 
 
-
-
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
 

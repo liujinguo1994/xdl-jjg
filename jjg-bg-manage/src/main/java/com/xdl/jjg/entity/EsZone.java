@@ -21,46 +21,46 @@ import java.io.Serializable;
 @TableName("es_zone")
 public class EsZone extends Model<EsZone> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 主键ID
-	 */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    /**
+     * 主键ID
+     */
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
 
-	/**
-	 * 专区名称
-	 */
-	@TableField("zone_name")
-	private String zoneName;
+    /**
+     * 专区名称
+     */
+    @TableField("zone_name")
+    private String zoneName;
 
-	/**
-	 * 标题
-	 */
-	@TableField("title")
-	private String title;
+    /**
+     * 标题
+     */
+    @TableField("title")
+    private String title;
 
-	/**
-	 * 副标题
-	 */
-	@TableField("subtitle")
-	private String subtitle;
+    /**
+     * 副标题
+     */
+    @TableField("subtitle")
+    private String subtitle;
 
-	/**
-	 * 图片1
-	 */
-	@TableField("picture1")
-	private String picture1;
+    /**
+     * 图片1
+     */
+    @TableField("picture1")
+    private String picture1;
 
-	/**
-	 * 图片2
-	 */
-	@TableField("picture2")
-	private String picture2;
+    /**
+     * 图片2
+     */
+    @TableField("picture2")
+    private String picture2;
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 }

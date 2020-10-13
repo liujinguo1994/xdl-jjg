@@ -4,13 +4,13 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsFocusPicture">
-        <id column="id" property="id" />
-        <result column="pic_url" property="picUrl" />
-        <result column="operation_type" property="operationType" />
-        <result column="operation_param" property="operationParam" />
-        <result column="operation_url" property="operationUrl" />
-        <result column="client_type" property="clientType" />
-        <result column="operation_color" property="operationColor" />
+        <id column="id" property="id"/>
+        <result column="pic_url" property="picUrl"/>
+        <result column="operation_type" property="operationType"/>
+        <result column="operation_param" property="operationParam"/>
+        <result column="operation_url" property="operationUrl"/>
+        <result column="client_type" property="clientType"/>
+        <result column="operation_color" property="operationColor"/>
     </resultMap>
 
 </mapper>

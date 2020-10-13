@@ -19,24 +19,24 @@ import java.io.Serializable;
 @ApiModel
 public class EsFindGoodsGalleryVO implements Serializable {
 
-private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 主键ID
-	 */
-	@ApiModelProperty(value = "主键ID")
-	private Long id;
+    /**
+     * 主键ID
+     */
+    @ApiModelProperty(value = "主键ID")
+    private Long id;
 
-	/**
-	 * 发现好货ID
-	 */
-	@ApiModelProperty(value = "发现好货ID")
-	private Long findGoodsId;
+    /**
+     * 发现好货ID
+     */
+    @ApiModelProperty(value = "发现好货ID")
+    private Long findGoodsId;
 
-	/**
-	 * 图片路径
-	 */
-	@ApiModelProperty(value = "图片路径")
-	private String url;
+    /**
+     * 图片路径
+     */
+    @ApiModelProperty(value = "图片路径")
+    private String url;
 
-	}
+}

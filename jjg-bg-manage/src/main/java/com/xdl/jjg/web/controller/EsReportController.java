@@ -26,7 +26,7 @@ import java.util.List;
  * @author rm 2817512105@qq.com
  * @since 2019-05-29
  */
-@Api(value = "/esReport",tags = "会员举报信息管理")
+@Api(value = "/esReport", tags = "会员举报信息管理")
 @RestController
 @RequestMapping("/esReport")
 public class EsReportController {
@@ -34,17 +34,17 @@ public class EsReportController {
     @Autowired
     private IEsReportService reportService;
 
-    @ApiOperation(value = "分页查询举报信息",response = EsReportVO.class)
+    @ApiOperation(value = "分页查询举报信息", response = EsReportVO.class)
     @GetMapping(value = "/getReportList")
     @ResponseBody
     public ApiResponse getReportList(EsReportQueryForm form) {
         ReportQueryParam dto = new ReportQueryParam();
-        BeanUtil.copyProperties(form,dto);
+        BeanUtil.copyProperties(form, dto);
         DubboPageResult<EsReportDO> result = reportService.getReportList(dto, form.getPageSize(), form.getPageNum());
         if (result.isSuccess()) {
             List<EsReportDO> data = result.getData().getList();
             List<EsReportVO> voList = BeanUtil.copyList(data, EsReportVO.class);
-            return ApiPageResponse.pageSuccess(result.getData().getTotal(),voList);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(), voList);
         } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
@@ -52,13 +52,13 @@ public class EsReportController {
 
     @DeleteMapping(value = "/batchDel/{ids}")
     @ApiOperation(value = "删除或批量删除")
-    @ApiImplicitParam(name = "ids", value = "id数组", required = true, dataType = "int",example = "1", paramType = "path",allowMultiple = true)
+    @ApiImplicitParam(name = "ids", value = "id数组", required = true, dataType = "int", example = "1", paramType = "path", allowMultiple = true)
     @ResponseBody
-    public ApiResponse batchDel(@PathVariable Integer[] ids){
+    public ApiResponse batchDel(@PathVariable Integer[] ids) {
         DubboResult result = reportService.deleteReport(ids);
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -66,17 +66,17 @@ public class EsReportController {
     @ApiOperation(value = "处理举报")
     @PutMapping(value = "/handleReport")
     @ResponseBody
-    public ApiResponse handleReport(@Valid @RequestBody @ApiParam(name="处理举报form对象",value="form") EsHandleReportForm form){
+    public ApiResponse handleReport(@Valid @RequestBody @ApiParam(name = "处理举报form对象", value = "form") EsHandleReportForm form) {
         String state = null;
-        if (form.getOperationStatus() == 1){
+        if (form.getOperationStatus() == 1) {
             state = ReportEnum.APPLYING.value();
-        }else if (form.getOperationStatus() == 2){
+        } else if (form.getOperationStatus() == 2) {
             state = ReportEnum.APPLYED.value();
         }
-        DubboResult result = reportService.dealReport(form.getId(),state,form.getHandleContent());
+        DubboResult result = reportService.dealReport(form.getId(), state, form.getHandleContent());
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }

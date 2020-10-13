@@ -41,7 +41,7 @@
         <commentGenerator>
             <property name="suppressDate" value="true"/>
             <property name="suppressAllComments" value="true"/><!-- 是否取消注释 -->
-            <property name="suppressDate" value="true" /> <!-- 是否生成注释代时间戳-->
+            <property name="suppressDate" value="true"/> <!-- 是否生成注释代时间戳-->
             <!--<property name="suppressAllComments" value="true"/>-->
         </commentGenerator>
 
@@ -64,14 +64,6 @@
         <table tableName="pay_vip_record">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
-
-
-
-
-
-
-
-
 
 
     </context>

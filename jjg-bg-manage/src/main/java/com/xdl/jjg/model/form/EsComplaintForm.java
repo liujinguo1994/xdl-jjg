@@ -16,16 +16,16 @@ import lombok.Data;
 @ApiModel
 public class EsComplaintForm extends EsQueryPageForm {
 
-	private static final long serialVersionUID = 5697156789959653573L;
-	/**
-	 * 关键字(订单编号，商家名称)
-	 */
-	@ApiModelProperty(value = "关键字(订单编号，商家名称)")
-	private String keyword;
-	/**
-	 * 投诉类型
-	 */
-	@ApiModelProperty(value = "投诉类型")
-	private Long typeId;
+    private static final long serialVersionUID = 5697156789959653573L;
+    /**
+     * 关键字(订单编号，商家名称)
+     */
+    @ApiModelProperty(value = "关键字(订单编号，商家名称)")
+    private String keyword;
+    /**
+     * 投诉类型
+     */
+    @ApiModelProperty(value = "投诉类型")
+    private Long typeId;
 
 }

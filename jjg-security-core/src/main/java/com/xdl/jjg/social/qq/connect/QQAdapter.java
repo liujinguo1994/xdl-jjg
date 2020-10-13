@@ -15,6 +15,7 @@ public class QQAdapter implements ApiAdapter<QQ> {
     /**
      * 测试当前的API是否可用
      * 默认true QQ永远是可以用的
+     *
      * @param api
      * @return
      */
@@ -25,18 +26,19 @@ public class QQAdapter implements ApiAdapter<QQ> {
 
     /**
      * 适配
+     *
      * @param api
      * @param values
      */
     @Override
     public void setConnectionValues(QQ api, ConnectionValues values) {
-            QQUserInfo userInfo = api.getUserInfo();
-            values.setDisplayName(userInfo.getNickname());
-            values.setImageUrl(userInfo.getFigureurl_qq_1());
-            //设置个人主页，QQ不需要填写此项
-            values.setProfileUrl(null);
-            //设置服务商的用户ID（openId）
-            values.setProviderUserId(userInfo.getOpenId());
+        QQUserInfo userInfo = api.getUserInfo();
+        values.setDisplayName(userInfo.getNickname());
+        values.setImageUrl(userInfo.getFigureurl_qq_1());
+        //设置个人主页，QQ不需要填写此项
+        values.setProfileUrl(null);
+        //设置服务商的用户ID（openId）
+        values.setProviderUserId(userInfo.getOpenId());
     }
 
     @Override
@@ -47,6 +49,7 @@ public class QQAdapter implements ApiAdapter<QQ> {
     /**
      * 在某些社交网站上有用
      * QQ不需要配置
+     *
      * @param api
      * @param message
      */

@@ -21,28 +21,28 @@ import java.io.Serializable;
 @TableName("es_find_goods_gallery")
 public class EsFindGoodsGallery extends Model<EsFindGoodsGallery> {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 主键ID
-	 */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    /**
+     * 主键ID
+     */
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
 
-	/**
-	 * 发现好货ID
-	 */
-	@TableField("find_goods_id")
-	private Long findGoodsId;
+    /**
+     * 发现好货ID
+     */
+    @TableField("find_goods_id")
+    private Long findGoodsId;
 
-	/**
-	 * 图片路径
-	 */
-	@TableField("url")
-	private String url;
+    /**
+     * 图片路径
+     */
+    @TableField("url")
+    private String url;
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 }

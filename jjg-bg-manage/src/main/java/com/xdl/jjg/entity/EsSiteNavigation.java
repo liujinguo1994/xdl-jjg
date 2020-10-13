@@ -11,7 +11,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -26,35 +26,35 @@ public class EsSiteNavigation extends Model<EsSiteNavigation> {
     /**
      * 主键ID
      */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
     /**
      * 导航名称
      */
     @TableField("navigation_name")
-	private String navigationName;
+    private String navigationName;
     /**
      * 导航地址
      */
-	private String url;
+    private String url;
     /**
      * 客户端类型
      */
     @TableField("client_type")
-	private String clientType;
+    private String clientType;
     /**
      * 图片
      */
-	private String image;
+    private String image;
     /**
      * 排序
      */
-	private Integer sort;
+    private Integer sort;
 
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 
 }

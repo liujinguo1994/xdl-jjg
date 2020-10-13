@@ -43,6 +43,7 @@ public class WeixinOAuth2Template extends OAuth2Template {
 
     /**
      * 向微信发送Oauth2请求
+     *
      * @param clientId
      * @param clientSecret
      * @param authorizeUrl
@@ -59,6 +60,7 @@ public class WeixinOAuth2Template extends OAuth2Template {
 
     /**
      * 封装用于获取微信access_token地址
+     *
      * @param authorizationCode
      * @param redirectUri
      * @param additionalParameters
@@ -92,6 +94,7 @@ public class WeixinOAuth2Template extends OAuth2Template {
 
     /**
      * 构建获取授权码的请求，也就是引导用户跳转到微信的地址
+     *
      * @param parameters
      * @return
      */
@@ -109,6 +112,7 @@ public class WeixinOAuth2Template extends OAuth2Template {
 
     /**
      * 微信返回的contentType是html/text，添加相应的HttpMessageConverter来处理。
+     *
      * @return
      */
     @Override
@@ -121,11 +125,11 @@ public class WeixinOAuth2Template extends OAuth2Template {
     @SuppressWarnings("unchecked")
     private AccessGrant getAccessToken(StringBuilder accessTokenRequestUrl) {
 
-        logger.info("获取access_token, 请求URL: "+accessTokenRequestUrl.toString());
+        logger.info("获取access_token, 请求URL: " + accessTokenRequestUrl.toString());
 
         String response = getRestTemplate().getForObject(accessTokenRequestUrl.toString(), String.class);
 
-        logger.info("获取access_token, 响应内容: "+response);
+        logger.info("获取access_token, 响应内容: " + response);
 
         Map<String, Object> result = null;
         try {
@@ -135,10 +139,10 @@ public class WeixinOAuth2Template extends OAuth2Template {
             e.printStackTrace();
         }
         //返回错误码时直接返回空
-        if(StringUtils.isNotBlank(MapUtils.getString(result, "errcode"))){
+        if (StringUtils.isNotBlank(MapUtils.getString(result, "errcode"))) {
             String errcode = MapUtils.getString(result, "errcode");
             String errmsg = MapUtils.getString(result, "errmsg");
-            throw new RuntimeException("获取access token失败, errcode:"+errcode+", errmsg:"+errmsg);
+            throw new RuntimeException("获取access token失败, errcode:" + errcode + ", errmsg:" + errmsg);
         }
         WeixinAccessGrant accessToken = new WeixinAccessGrant(
                 MapUtils.getString(result, "access_token"),

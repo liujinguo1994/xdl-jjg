@@ -4,9 +4,9 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsHotKeyword">
-        <id column="id" property="id" />
-        <result column="hot_name" property="hotName" />
-        <result column="sort" property="sort" />
+        <id column="id" property="id"/>
+        <result column="hot_name" property="hotName"/>
+        <result column="sort" property="sort"/>
     </resultMap>
 
 </mapper>

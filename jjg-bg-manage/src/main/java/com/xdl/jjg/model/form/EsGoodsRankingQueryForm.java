@@ -17,11 +17,11 @@ import lombok.Data;
 @ApiModel
 public class EsGoodsRankingQueryForm extends QueryPageForm {
 
-private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 榜单名称
-	 */
-	@ApiModelProperty(value = "榜单名称")
-	private String rankingName;
+    /**
+     * 榜单名称
+     */
+    @ApiModelProperty(value = "榜单名称")
+    private String rankingName;
 }

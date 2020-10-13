@@ -13,7 +13,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -28,48 +28,48 @@ public class EsMessage extends Model<EsMessage> {
     /**
      * 主键ID
      */
-	@TableId(value="id", type= IdType.AUTO)
-	private Long id;
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
     /**
      * 标题
      */
-	private String title;
+    private String title;
     /**
      * 消息内容
      */
-	private String content;
+    private String content;
     /**
      * 会员id
      */
     @TableField("member_ids")
-	private String memberIds;
+    private String memberIds;
     /**
      * 管理员id
      */
     @JsonSerialize(using = ToStringSerializer.class)
     @TableField("admin_id")
-	private Long adminId;
+    private Long adminId;
     /**
      * 管理员名称
      */
     @TableField("admin_name")
-	private String adminName;
+    private String adminName;
     /**
      * 发送时间
      */
     @JsonSerialize(using = ToStringSerializer.class)
     @TableField("send_time")
-	private Long sendTime;
+    private Long sendTime;
     /**
      * 发送类型
      */
     @TableField("send_type")
-	private Integer sendType;
+    private Integer sendType;
 
 
-	@Override
-	protected Serializable pkVal() {
-		return this.id;
-	}
+    @Override
+    protected Serializable pkVal() {
+        return this.id;
+    }
 
 }

@@ -30,43 +30,44 @@ public class RestResult<T> implements Serializable {
         this.res_code = 0;
         this.res_msg = "成功";
     }
+
     public RestResult(String msg) {
         this.res_code = -1;
         this.res_msg = msg;
     }
+
     public static RestResult ok() {
         return ok(null);
     }
 
     public static RestResult ok(Object data) {
-        return ok("成功",data);
+        return ok("成功", data);
     }
 
 
-    public static RestResult ok(String msg,Object data) {
-        return set(0,msg,data);
+    public static RestResult ok(String msg, Object data) {
+        return set(0, msg, data);
     }
 
     public static RestResult fail() {
         return fail("失败");
     }
+
     public static RestResult fail(String msg) {
         return fail(-1, msg);
     }
 
     public static RestResult fail(Integer code, String msg) {
-        return set(code,msg,null);
+        return set(code, msg, null);
     }
 
-    public static RestResult set(Integer code, String msg,Object data) {
+    public static RestResult set(Integer code, String msg, Object data) {
         RestResult r = new RestResult();
         r.res_code = code;
         r.res_msg = msg;
         r.data = data;
         return r;
     }
-
-
 
 
 }

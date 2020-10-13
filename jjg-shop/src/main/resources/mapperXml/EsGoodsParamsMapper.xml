@@ -1,0 +1,34 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.goods.dao.mapper.EsGoodsParamsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shopx.goods.dao.entity.EsGoodsParams">
+        <id column="id" property="id" />
+        <result column="goods_id" property="goodsId" />
+        <result column="param_id" property="paramId" />
+        <result column="param_name" property="paramName" />
+        <result column="param_value" property="paramValue" />
+    </resultMap>
+    <select id="getGoodsParamsByGoodsId" resultMap="BaseResultMap">
+        SELECT
+            gp.*
+        FROM
+            es_goods_params gp
+            INNER JOIN es_parameters p ON gp.param_id = p.id
+        WHERE
+            goods_id = #{goodsId}
+            AND p.param_type = 2
+            AND is_index = 1
+    </select>
+    <select id="getParams" resultType="com.shopx.goods.api.model.domain.EsBuyerParamsDO">
+       SELECT
+         p.*,
+         gp.param_value
+        FROM
+         es_parameters p
+         LEFT JOIN es_goods_params gp ON p.id = gp.param_id
+         where  gp.goods_id=#{goodsId}
+         and p.category_id = #{category}
+    </select>
+</mapper>

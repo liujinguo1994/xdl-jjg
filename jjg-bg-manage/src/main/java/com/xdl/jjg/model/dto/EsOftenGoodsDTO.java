@@ -24,42 +24,42 @@ public class EsOftenGoodsDTO implements Serializable {
     /**
      * 主键id
      */
-	private Long id;
+    private Long id;
 
     /**
      * 商品名称
      */
-	private String goodsName;
+    private String goodsName;
 
     /**
      * 自定义分类id
      */
-	@JsonSerialize(using = ToStringSerializer.class)
-	private Long customCategoryId;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long customCategoryId;
 
     /**
      * 商品链接
      */
-	private String goodsUrl;
+    private String goodsUrl;
 
     /**
      * 图片地址
      */
-	private String picUrl;
+    private String picUrl;
 
     /**
      * 商品id
      */
-	@JsonSerialize(using = ToStringSerializer.class)
-	private Long goodsId;
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long goodsId;
 
     /**
      * 创建时间
      */
-	private Long createTime;
+    private Long createTime;
 
     /**
      * 最后修改时间
      */
-	private Long updateTime;
+    private Long updateTime;
 }

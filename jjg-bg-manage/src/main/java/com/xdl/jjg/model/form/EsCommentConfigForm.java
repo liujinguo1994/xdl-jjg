@@ -23,26 +23,26 @@ import java.util.List;
 public class EsCommentConfigForm implements Serializable {
 
 
-	private static final long serialVersionUID = -4939521063856293052L;
+    private static final long serialVersionUID = -4939521063856293052L;
 
 
-	/**
-	 * 权重设置集合
-	 */
-	@ApiModelProperty(required = true,value = "权重设置集合")
-	@Valid
-	@NotNull(message = "权重设置集合不能为空")
-	@Size(min = 1 , message = "至少有一个权重信息")
-	private List<EsGradeWeightConfigForm> gradeWeightConfigFormList;
+    /**
+     * 权重设置集合
+     */
+    @ApiModelProperty(required = true, value = "权重设置集合")
+    @Valid
+    @NotNull(message = "权重设置集合不能为空")
+    @Size(min = 1, message = "至少有一个权重信息")
+    private List<EsGradeWeightConfigForm> gradeWeightConfigFormList;
 
-	/**
-	 * 好中差评设置集合
-	 */
-	@ApiModelProperty(required = true,value = "好中差评设置集合")
-	@Valid
-	@NotNull(message = "好中差评设置集合不能为空")
-	@Size(min = 1 , message = "至少有一个好中差评设置")
-	private List<EsCommentSortConfigForm> commentSortConfigFormList;
+    /**
+     * 好中差评设置集合
+     */
+    @ApiModelProperty(required = true, value = "好中差评设置集合")
+    @Valid
+    @NotNull(message = "好中差评设置集合不能为空")
+    @Size(min = 1, message = "至少有一个好中差评设置")
+    private List<EsCommentSortConfigForm> commentSortConfigFormList;
 
 
 }

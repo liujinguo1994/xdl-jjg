@@ -16,11 +16,11 @@ import lombok.Data;
 @Data
 @ApiModel
 public class EsCustomCategoryQueryForm extends QueryPageForm {
-	private static final long serialVersionUID = 2673743529261293617L;
+    private static final long serialVersionUID = 2673743529261293617L;
 
-	/**
-	 * 所属专区ID
-	 */
-	@ApiModelProperty(value = "所属专区ID")
-	private Long zoneId;
+    /**
+     * 所属专区ID
+     */
+    @ApiModelProperty(value = "所属专区ID")
+    private Long zoneId;
 }

@@ -22,46 +22,46 @@ public class EsArticleDTO implements Serializable {
     /**
      * 主键ID
      */
-	private Long id;
+    private Long id;
 
     /**
      * 文章名称
      */
-	private String articleName;
+    private String articleName;
 
     /**
      * 分类id
      */
-	private Long categoryId;
+    private Long categoryId;
 
     /**
      * 文章排序
      */
-	private Integer sort;
+    private Integer sort;
 
     /**
      * 外链url
      */
-	private String outsideUrl;
+    private String outsideUrl;
 
     /**
      * 文章内容
      */
-	private String content;
+    private String content;
 
     /**
      * 显示位置
      */
-	private String showPosition;
+    private String showPosition;
 
     /**
      * 创建时间
      */
-	private Long createTime;
+    private Long createTime;
 
     /**
      * 修改时间
      */
-	private Long updateTime;
+    private Long updateTime;
 
 }

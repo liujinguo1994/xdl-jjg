@@ -41,7 +41,7 @@ public class SnowFlake {
     private long sequence = 0L; //序列号
     private long lastStmp = -1L;//上一次时间戳
 
-    private  SnowFlake snowFlake;
+    private SnowFlake snowFlake;
 
     public SnowFlake(long datacenterId, long machineId) {
         if (datacenterId > MAX_DATACENTER_NUM || datacenterId < 0) {
@@ -92,14 +92,14 @@ public class SnowFlake {
         }
         return mill;
     }
-    private  SnowFlake getSnowFlake(long datacenterId, long machineId) {
+
+    private SnowFlake getSnowFlake(long datacenterId, long machineId) {
         if (snowFlake == null) {
             snowFlake = new SnowFlake(datacenterId, machineId);
             return snowFlake;
         }
         return snowFlake;
     }
-
 
 
     private long getNewstmp() {

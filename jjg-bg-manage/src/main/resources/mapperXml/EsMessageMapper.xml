@@ -4,14 +4,14 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.xdl.jjg.entity.EsMessage">
-        <id column="id" property="id" />
-        <result column="title" property="title" />
-        <result column="content" property="content" />
-        <result column="member_ids" property="memberIds" />
-        <result column="admin_id" property="adminId" />
-        <result column="admin_name" property="adminName" />
-        <result column="send_time" property="sendTime" />
-        <result column="send_type" property="sendType" />
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="member_ids" property="memberIds"/>
+        <result column="admin_id" property="adminId"/>
+        <result column="admin_name" property="adminName"/>
+        <result column="send_time" property="sendTime"/>
+        <result column="send_type" property="sendType"/>
     </resultMap>
 
 </mapper>

@@ -9,7 +9,6 @@ import java.util.Map;
 
 /**
  * 短信发送接口
- *
  */
 public interface SmsPlatformManage {
     /**
@@ -17,10 +16,11 @@ public interface SmsPlatformManage {
      */
     List<EsConfigItemVO> definitionConfigItem();
 
-    /** 发送短信事件
+    /**
+     * 发送短信事件
      *
      * @param smsSendDTO 发送短信参数
-     * @param param     短信平台配置
+     * @param param      短信平台配置
      */
     boolean onSend(EsSmsSendDTO smsSendDTO, Map param);
 

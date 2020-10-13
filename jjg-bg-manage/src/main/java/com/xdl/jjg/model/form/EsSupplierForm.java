@@ -60,19 +60,19 @@ public class EsSupplierForm implements Serializable {
     /**
      * 公司地址所在省ID
      */
-    @ApiModelProperty(value = "公司地址所在省ID",example = "1")
+    @ApiModelProperty(value = "公司地址所在省ID", example = "1")
     private Long provinceId;
 
     /**
      * 公司地址所在市ID
      */
-    @ApiModelProperty(value = "公司地址所在市ID",example = "1")
+    @ApiModelProperty(value = "公司地址所在市ID", example = "1")
     private Long cityId;
 
     /**
      * 公司地址所在区ID
      */
-    @ApiModelProperty(value = "公司地址所在区ID",example = "1")
+    @ApiModelProperty(value = "公司地址所在区ID", example = "1")
     private Long countyId;
 
     /**
@@ -126,19 +126,19 @@ public class EsSupplierForm implements Serializable {
     /**
      * 合作开始时间
      */
-    @ApiModelProperty(value = "合作开始时间",example = "1")
+    @ApiModelProperty(value = "合作开始时间", example = "1")
     private Long cooperationStartTime;
 
     /**
      * 合作结束时间
      */
-    @ApiModelProperty(value = "合作结束时间",example = "1")
+    @ApiModelProperty(value = "合作结束时间", example = "1")
     private Long cooperationEndTime;
 
     /**
      * 合作年限
      */
-    @ApiModelProperty(value = "合作年限",example = "1")
+    @ApiModelProperty(value = "合作年限", example = "1")
     private Double years;
 
     /**

@@ -37,14 +37,14 @@ public class EsBillDetailQueryForm extends QueryPageForm {
     /**
      * 结算单编号
      */
-    @ApiModelProperty(required = true,value = "结算单编号")
+    @ApiModelProperty(required = true, value = "结算单编号")
     @NotBlank(message = "结算单编号不能为空")
     private String billSn;
 
     /**
      * 结算类型(1店铺结算,2供应商结算,3签约公司结算)
      */
-    @ApiModelProperty(required = true,value = "结算类型(1店铺结算,2供应商结算,3签约公司结算)")
+    @ApiModelProperty(required = true, value = "结算类型(1店铺结算,2供应商结算,3签约公司结算)")
     @NotNull(message = "结算类型不能为空")
     private Integer type;
 }

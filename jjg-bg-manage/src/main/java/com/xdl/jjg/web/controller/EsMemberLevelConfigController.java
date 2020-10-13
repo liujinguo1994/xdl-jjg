@@ -17,31 +17,31 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器-会员等级配置
+ * 前端控制器-会员等级配置
  * </p>
  *
  * @author rm 2817512105@qq.com
  * @since 2019-07-04 09:42:03
  */
 @RestController
-@Api(value = "/esMemberLevelConfig",tags = "会员等级配置")
+@Api(value = "/esMemberLevelConfig", tags = "会员等级配置")
 @RequestMapping("/esMemberLevelConfig")
 public class EsMemberLevelConfigController {
 
     @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
     private IEsMemberLevelConfigService memberLevelConfigService;
 
-    @ApiOperation(value = "分页查询会员等级列表",response = EsMemberLevelConfigVO.class)
+    @ApiOperation(value = "分页查询会员等级列表", response = EsMemberLevelConfigVO.class)
     @GetMapping(value = "/getMemberLevelConfigList")
     @ResponseBody
     public ApiResponse getMemberLevelConfigList(EsMemberLevelQueryForm form) {
         EsQueryMemberLevelConfigDTO dto = new EsQueryMemberLevelConfigDTO();
-        BeanUtil.copyProperties(form,dto);
+        BeanUtil.copyProperties(form, dto);
         DubboPageResult<EsMemberLevelConfigDO> result = memberLevelConfigService.getMemberLevelConfigList(dto, form.getPageSize(), form.getPageNum());
         if (result.isSuccess()) {
             List<EsMemberLevelConfigDO> data = result.getData().getList();
             List<EsMemberLevelConfigVO> esMemberLevelConfigVOList = BeanUtil.copyList(data, EsMemberLevelConfigVO.class);
-            return ApiPageResponse.pageSuccess(result.getData().getTotal(),esMemberLevelConfigVOList);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(), esMemberLevelConfigVOList);
         } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
@@ -50,13 +50,13 @@ public class EsMemberLevelConfigController {
     @ApiOperation(value = "添加会员等级")
     @PostMapping(value = "/insertMemberLevelConfig")
     @ResponseBody
-    public ApiResponse insertMemberLevelConfig(@Valid @RequestBody @ApiParam(name="会员等级form对象",value="form") EsMemberLevelConfigForm form) {
+    public ApiResponse insertMemberLevelConfig(@Valid @RequestBody @ApiParam(name = "会员等级form对象", value = "form") EsMemberLevelConfigForm form) {
         EsMemberLevelConfigDTO esMemberLevelConfigDTO = new EsMemberLevelConfigDTO();
-        BeanUtil.copyProperties(form,esMemberLevelConfigDTO);
+        BeanUtil.copyProperties(form, esMemberLevelConfigDTO);
         DubboResult result = memberLevelConfigService.insertMemberLevelConfig(esMemberLevelConfigDTO);
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -64,20 +64,20 @@ public class EsMemberLevelConfigController {
     @ApiOperation(value = "修改会员等级")
     @PutMapping(value = "/updateMemberLevelConfig/{id}")
     @ResponseBody
-    public ApiResponse updateMember(@Valid @RequestBody @ApiParam(name="会员等级form对象",value="form") EsMemberLevelConfigForm form , @PathVariable Long id) {
+    public ApiResponse updateMember(@Valid @RequestBody @ApiParam(name = "会员等级form对象", value = "form") EsMemberLevelConfigForm form, @PathVariable Long id) {
         EsMemberLevelConfigDTO esMemberLevelConfigDTO = new EsMemberLevelConfigDTO();
-        BeanUtil.copyProperties(form,esMemberLevelConfigDTO);
-        DubboResult result = memberLevelConfigService.updateMemberLevelConfig(esMemberLevelConfigDTO,id);
-        if(result.isSuccess()){
+        BeanUtil.copyProperties(form, esMemberLevelConfigDTO);
+        DubboResult result = memberLevelConfigService.updateMemberLevelConfig(esMemberLevelConfigDTO, id);
+        if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
 
     @ApiOperation(value = "删除会员等级")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "要删除的会员等级id", required = true, dataType = "long", paramType = "path",example = "1")
+            @ApiImplicitParam(name = "id", value = "要删除的会员等级id", required = true, dataType = "long", paramType = "path", example = "1")
     })
     @DeleteMapping(value = "/deleteMemberLevelConfig/{id}")
     @ResponseBody
@@ -85,7 +85,7 @@ public class EsMemberLevelConfigController {
         DubboResult result = memberLevelConfigService.deleteMemberLevelConfig(id);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }

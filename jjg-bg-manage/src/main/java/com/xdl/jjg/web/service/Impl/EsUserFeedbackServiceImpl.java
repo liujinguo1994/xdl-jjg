@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author LiuJG 344009799@qq.com
@@ -128,8 +128,8 @@ public class EsUserFeedbackServiceImpl extends ServiceImpl<EsUserFeedbackMapper,
      * 根据查询列表
      *
      * @param userFeedbackDTO DTO
-     * @param pageSize  行数
-     * @param pageNum   页码
+     * @param pageSize        行数
+     * @param pageNum         页码
      * @auther: LiuJG 344009799@qq.com
      * @date: 2019/06/03 13:42:53
      * @return: com.shopx.common.model.result.DubboPageResult<EsUserFeedbackDO>

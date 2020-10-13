@@ -26,25 +26,25 @@ public class EsMemberDepositQueryForm extends QueryPageForm {
     /**
      * 会员id
      */
-    @ApiModelProperty(required = true,value = "会员id",example = "1")
+    @ApiModelProperty(required = true, value = "会员id", example = "1")
     @NotNull(message = "会员id不能为空")
-	private Long memberId;
+    private Long memberId;
 
     /**
      * 操作类型(1充值，2消费，3退款)
      */
     @ApiModelProperty(value = "操作类型(1充值，2消费，3退款)")
-	private String type;
+    private String type;
     /**
      * 交易时间开始
      */
-    @ApiModelProperty(value = "交易时间开始",example = "1")
-	private Long createTimeStart;
+    @ApiModelProperty(value = "交易时间开始", example = "1")
+    private Long createTimeStart;
     /**
      * 交易时间结束
      */
-    @ApiModelProperty(value = "交易时间结束",example = "1")
-	private Long createTimeEnd;
+    @ApiModelProperty(value = "交易时间结束", example = "1")
+    private Long createTimeEnd;
 
 
 }

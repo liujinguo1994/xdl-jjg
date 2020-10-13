@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * <p>
- * 
+ *
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -21,28 +21,28 @@ public class EsWaybillVO implements Serializable {
     /**
      * 主键ID
      */
-    @ApiModelProperty(value = "主键ID",example = "1")
-	private Long id;
+    @ApiModelProperty(value = "主键ID", example = "1")
+    private Long id;
     /**
      * 名称
      */
     @ApiModelProperty(value = "名称")
-	private String name;
+    private String name;
     /**
      * 是否开启(0未开启，1开启)
      */
-    @ApiModelProperty(value = "是否开启(0未开启，1开启)",example = "1")
-	private Integer open;
+    @ApiModelProperty(value = "是否开启(0未开启，1开启)", example = "1")
+    private Integer open;
     /**
      * 电子面单配置
      */
     @ApiModelProperty(value = "电子面单配置")
-	private String config;
+    private String config;
     /**
      * 电子面单bean
      */
     @ApiModelProperty(value = "电子面单bean")
-	private String bean;
+    private String bean;
 
     /**
      * 电子面单配置项

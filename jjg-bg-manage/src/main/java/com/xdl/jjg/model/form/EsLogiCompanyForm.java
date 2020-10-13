@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * <p>
- *  物流公司
+ * 物流公司
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -24,36 +24,36 @@ public class EsLogiCompanyForm extends QueryPageForm {
     /**
      * 主键ID
      */
-    @ApiModelProperty(value = "主键ID",example = "1")
-	private Long id;
+    @ApiModelProperty(value = "主键ID", example = "1")
+    private Long id;
     /**
      * 物流公司名称
      */
     @ApiModelProperty(required = true, value = "物流公司名称")
     @NotBlank(message = "物流公司名称不能为空")
-	private String name;
+    private String name;
     /**
      * 物流公司code
      */
     @ApiModelProperty(required = true, value = "物流公司code")
     @NotBlank(message = "物流公司code不能为空")
-	private String code;
+    private String code;
     /**
      * 快递鸟物流公司code
      */
     @ApiModelProperty(required = true, value = "快递鸟物流公司code")
     @NotBlank(message = "快递鸟物流公司code不能为空")
-	private String kdcode;
+    private String kdcode;
     /**
      * 是否支持电子面单1：支持 0：不支持
      */
-    @ApiModelProperty(required = true, value = "是否支持电子面单（1：支持， 0：不支持）",example = "1")
+    @ApiModelProperty(required = true, value = "是否支持电子面单（1：支持， 0：不支持）", example = "1")
     @NotNull(message = "是否支持电子面单不能为空")
-	private Integer isWaybill;
+    private Integer isWaybill;
     /**
      * 是否有效 0 有效 1 无效
      */
-    @ApiModelProperty(required = true, value = "是否有效（ 0 有效 ，1 无效）",example = "1")
+    @ApiModelProperty(required = true, value = "是否有效（ 0 有效 ，1 无效）", example = "1")
     @NotNull(message = "是否有效不能为空")
     private Integer state;
 

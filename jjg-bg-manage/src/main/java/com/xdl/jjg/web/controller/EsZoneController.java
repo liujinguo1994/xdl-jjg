@@ -29,7 +29,7 @@ import java.util.List;
  * @author rm 2817512105@qq.com
  * @since 2020-05-12
  */
-@Api(value = "/esZone",tags = "专区管理")
+@Api(value = "/esZone", tags = "专区管理")
 @RestController
 @RequestMapping("/esZone")
 public class EsZoneController {
@@ -55,18 +55,18 @@ public class EsZoneController {
     @ApiOperation(value = "修改")
     @PutMapping(value = "/editEsZone")
     @ResponseBody
-    public ApiResponse editEsZone(@RequestBody @ApiParam(name="专区form对象",value="form") @Valid EsZoneForm form){
+    public ApiResponse editEsZone(@RequestBody @ApiParam(name = "专区form对象", value = "form") @Valid EsZoneForm form) {
         EsZoneDTO dto = new EsZoneDTO();
-        BeanUtil.copyProperties(form,dto);
+        BeanUtil.copyProperties(form, dto);
         DubboResult result = iesZoneService.updateZone(dto);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
 
-    @ApiOperation(value = "分页查询列表",response = EsZoneVO.class)
+    @ApiOperation(value = "分页查询列表", response = EsZoneVO.class)
     @GetMapping(value = "/getZoneList")
     @ResponseBody
     public ApiResponse getZoneList(EsQueryPageForm form) {
@@ -75,7 +75,7 @@ public class EsZoneController {
         if (result.isSuccess()) {
             List<EsZoneDO> data = result.getData().getList();
             List<EsZoneVO> voList = BeanUtil.copyList(data, EsZoneVO.class);
-            return ApiPageResponse.pageSuccess(result.getData().getTotal(),voList);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(), voList);
         } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }

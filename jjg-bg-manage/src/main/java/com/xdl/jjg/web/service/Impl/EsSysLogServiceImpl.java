@@ -63,11 +63,11 @@ public class EsSysLogServiceImpl extends ServiceImpl<EsSysLogMapper, EsSysLog> i
             BeanUtil.copyProperties(sysLogDTO, sysLog);
             this.sysLogMapper.insert(sysLog);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("系统操作日志新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("系统操作日志新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -95,10 +95,10 @@ public class EsSysLogServiceImpl extends ServiceImpl<EsSysLogMapper, EsSysLog> i
             queryWrapper.lambda().eq(EsSysLog::getId, sysLogDTO.getId());
             this.sysLogMapper.update(sysLog, queryWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("系统操作日志更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("系统操作日志更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -126,10 +126,10 @@ public class EsSysLogServiceImpl extends ServiceImpl<EsSysLogMapper, EsSysLog> i
             }
             BeanUtil.copyProperties(sysLog, sysLogDO);
             return DubboResult.success(sysLogDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("系统操作日志查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("系统操作日志查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -139,8 +139,8 @@ public class EsSysLogServiceImpl extends ServiceImpl<EsSysLogMapper, EsSysLog> i
      * 根据查询系统操作日志列表
      *
      * @param sysLogDTO 系统操作日志DTO
-     * @param pageSize     页码
-     * @param pageNum      页数
+     * @param pageSize  页码
+     * @param pageNum   页数
      * @auther: rm 2817512105@qq.com
      * @date: 2019-06-04
      * @return: com.shopx.common.model.result.DubboPageResult<EsSysLogDO>
@@ -162,9 +162,9 @@ public class EsSysLogServiceImpl extends ServiceImpl<EsSysLogMapper, EsSysLog> i
                 }).collect(Collectors.toList());
             }
             return DubboPageResult.success(sysLogDOList);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("系统操作日志分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("系统操作日志分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -190,11 +190,11 @@ public class EsSysLogServiceImpl extends ServiceImpl<EsSysLogMapper, EsSysLog> i
             deleteWrapper.lambda().eq(EsSysLog::getId, id);
             this.sysLogMapper.delete(deleteWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
-             logger.error("系统操作日志删除失败", ae);
-             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+        } catch (ArgumentException ae) {
+            logger.error("系统操作日志删除失败", ae);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("系统操作日志删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());

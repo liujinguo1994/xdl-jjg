@@ -6,11 +6,13 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * JAVA对象&Byte数组之间转化
+ *
  * @author ymx
  */
 public class Object2Array {
@@ -26,6 +28,7 @@ public class Object2Array {
 
     /**
      * 对象转Byte数组
+     *
      * @param obj
      * @return
      */
@@ -64,6 +67,7 @@ public class Object2Array {
 
     /**
      * Byte数组转对象
+     *
      * @param bytes
      * @return
      */

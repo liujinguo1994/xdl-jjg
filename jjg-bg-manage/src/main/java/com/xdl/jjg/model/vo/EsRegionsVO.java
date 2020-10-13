@@ -23,33 +23,33 @@ public class EsRegionsVO implements Serializable {
     /**
      * 主键ID
      */
-    @ApiModelProperty(value = "主键ID",example = "1")
-	private Long id;
+    @ApiModelProperty(value = "主键ID", example = "1")
+    private Long id;
     /**
      * 父地区id
      */
-    @ApiModelProperty(value = "父地区id",example = "1")
-	private Long parentId;
+    @ApiModelProperty(value = "父地区id", example = "1")
+    private Long parentId;
     /**
      * 路径
      */
     @ApiModelProperty(value = "路径")
-	private String regionPath;
+    private String regionPath;
     /**
      * 级别
      */
-    @ApiModelProperty(value = "级别",example = "1")
-	private Integer regionGrade;
+    @ApiModelProperty(value = "级别", example = "1")
+    private Integer regionGrade;
     /**
      * 名称
      */
     @ApiModelProperty(value = "名称")
-	private String localName;
+    private String localName;
     /**
      * 邮编
      */
     @ApiModelProperty(value = "邮编")
-	private String zipcode;
+    private String zipcode;
 
     /**
      * 子对象集合

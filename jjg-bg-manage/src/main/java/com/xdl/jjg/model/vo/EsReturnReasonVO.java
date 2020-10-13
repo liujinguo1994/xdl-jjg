@@ -17,30 +17,30 @@ import java.io.Serializable;
 @Data
 @ApiModel
 public class EsReturnReasonVO implements Serializable {
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * 主键id
-	 */
-	@ApiModelProperty(value = "主键ID",example = "1")
-	private Long id;
+    /**
+     * 主键id
+     */
+    @ApiModelProperty(value = "主键ID", example = "1")
+    private Long id;
 
-	/**
-	 * 原因
-	 */
-	@ApiModelProperty(value = "reason")
-	private String reason;
+    /**
+     * 原因
+     */
+    @ApiModelProperty(value = "reason")
+    private String reason;
 
-	/**
-	 * 售后类型
-	 */
-	@ApiModelProperty(value = "refundType")
-	private String refundType;
+    /**
+     * 售后类型
+     */
+    @ApiModelProperty(value = "refundType")
+    private String refundType;
 
-	/**
-	 * 创建时间
-	 */
-	@ApiModelProperty(value = "createTime")
-	private Long createTime;
+    /**
+     * 创建时间
+     */
+    @ApiModelProperty(value = "createTime")
+    private Long createTime;
 
-	}
+}

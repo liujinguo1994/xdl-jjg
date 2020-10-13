@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -64,9 +64,9 @@ public class EsFocusPictureServiceImpl extends ServiceImpl<EsFocusPictureMapper,
             }
             //焦点图不能超过5个
             QueryWrapper<EsFocusPicture> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsFocusPicture::getClientType,focusPictureDTO.getClientType());
+            queryWrapper.lambda().eq(EsFocusPicture::getClientType, focusPictureDTO.getClientType());
             List<EsFocusPicture> pictureList = focusPictureMapper.selectList(queryWrapper);
-            if (pictureList.size() > 5){
+            if (pictureList.size() > 5) {
                 throw new ArgumentException(ErrorCode.PICTURE_SIZE_TOO_BIG.getErrorCode(), "焦点图数量不能超过五张");
             }
 
@@ -75,18 +75,18 @@ public class EsFocusPictureServiceImpl extends ServiceImpl<EsFocusPictureMapper,
             this.focusPictureMapper.insert(focusPicture);
 
             EsFocusPictureDO pictureDO = new EsFocusPictureDO();
-            BeanUtil.copyProperties(focusPicture,pictureDO);
+            BeanUtil.copyProperties(focusPicture, pictureDO);
 
             //发送mq消息
            /* String[] choosePages = {"INDEX"};
             pageCreateManagerService.create(choosePages);*/
 
             return DubboResult.success(pictureDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -115,17 +115,17 @@ public class EsFocusPictureServiceImpl extends ServiceImpl<EsFocusPictureMapper,
             this.focusPictureMapper.update(focusPicture, queryWrapper);
 
             EsFocusPictureDO pictureDO = new EsFocusPictureDO();
-            BeanUtil.copyProperties(focusPicture,pictureDO);
+            BeanUtil.copyProperties(focusPicture, pictureDO);
 
             //发送mq消息
            /* String[] choosePages = {"INDEX"};
             pageCreateManagerService.create(choosePages);*/
 
             return DubboResult.success(pictureDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -153,10 +153,10 @@ public class EsFocusPictureServiceImpl extends ServiceImpl<EsFocusPictureMapper,
             }
             BeanUtil.copyProperties(focusPicture, focusPictureDO);
             return DubboResult.success(focusPictureDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -166,8 +166,8 @@ public class EsFocusPictureServiceImpl extends ServiceImpl<EsFocusPictureMapper,
      * 根据查询列表
      *
      * @param focusPictureDTO DTO
-     * @param pageSize     页码
-     * @param pageNum      页数
+     * @param pageSize        页码
+     * @param pageNum         页数
      * @auther: rm 2817512105@qq.com
      * @date: 2019-06-04
      * @return: com.shopx.common.model.result.DubboPageResult<EsFocusPictureDO>
@@ -189,9 +189,9 @@ public class EsFocusPictureServiceImpl extends ServiceImpl<EsFocusPictureMapper,
                 }).collect(Collectors.toList());
             }
             return DubboPageResult.success(focusPictureDOList);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -222,11 +222,11 @@ public class EsFocusPictureServiceImpl extends ServiceImpl<EsFocusPictureMapper,
             pageCreateManagerService.create(choosePages);*/
 
             return DubboResult.success();
-        } catch (ArgumentException ae){
-             logger.error("删除失败", ae);
-             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+        } catch (ArgumentException ae) {
+            logger.error("删除失败", ae);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -238,13 +238,13 @@ public class EsFocusPictureServiceImpl extends ServiceImpl<EsFocusPictureMapper,
     public DubboPageResult<EsFocusPictureDO> getList(String clientType) {
         try {
             QueryWrapper<EsFocusPicture> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsFocusPicture::getClientType,clientType).orderByAsc(EsFocusPicture::getId);
+            queryWrapper.lambda().eq(EsFocusPicture::getClientType, clientType).orderByAsc(EsFocusPicture::getId);
             List<EsFocusPicture> data = focusPictureMapper.selectList(queryWrapper);
             List<EsFocusPictureDO> doList = (List<EsFocusPictureDO>) BeanUtil.copyList(data, new EsFocusPictureDO().getClass());
             return DubboPageResult.success(doList);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("根据客户端类型查询轮播图列表失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("根据客户端类型查询轮播图列表失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");

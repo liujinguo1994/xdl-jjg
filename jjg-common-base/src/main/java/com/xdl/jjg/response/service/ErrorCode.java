@@ -6,6 +6,7 @@ import lombok.ToString;
 
 /**
  * 错误code
+ *
  * @author liu
  */
 @ToString
@@ -20,8 +21,6 @@ public class ErrorCode extends BaseErrorCode {
 //
 //    public static final ErrorCode DX_CODE_EXPIRE = new ErrorCode(3100,"短信验证码已失效!");
 //    public static final ErrorCode DX_CODE_INCORRECT = new ErrorCode(3100,"短信验证码输入错误!");
-
-
 
 
     public ErrorCode(int errorCode, String errorMsg) {

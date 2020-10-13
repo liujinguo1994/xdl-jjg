@@ -17,13 +17,13 @@ import javax.validation.Valid;
 
 /**
  * <p>
- *  前端控制器-参数组
+ * 前端控制器-参数组
  * </p>
  *
  * @author rm 2817512105@qq.com
  * @since 2019-06-20 15:30:00
  */
-@Api(value = "/esParameterGroup",tags = "参数组")
+@Api(value = "/esParameterGroup", tags = "参数组")
 @RestController
 @RequestMapping("/esParameterGroup")
 public class EsParameterGroupController {
@@ -34,7 +34,7 @@ public class EsParameterGroupController {
     @PostMapping(value = "/insertEsParameterGroup")
     @ResponseBody
     @ApiOperation(value = "新增参数组信息")
-    public ApiResponse insertEsParameterGroup(@Valid @RequestBody @ApiParam(name="参数组form对象",value="form") EsParameterGroupForm form) {
+    public ApiResponse insertEsParameterGroup(@Valid @RequestBody @ApiParam(name = "参数组form对象", value = "form") EsParameterGroupForm form) {
         EsParameterGroupDTO parameterGroupDTO = new EsParameterGroupDTO();
         BeanUtil.copyProperties(form, parameterGroupDTO);
         DubboResult result = parameterGroupService.insertParameterGroup(parameterGroupDTO);
@@ -48,7 +48,7 @@ public class EsParameterGroupController {
     @PutMapping(value = "/updateParameterGroup/{id}")
     @ResponseBody
     @ApiOperation(value = "编辑参数组信息")
-    public ApiResponse updateParameterGroup(@Valid @RequestBody @ApiParam(name="参数组form对象",value="form") EsParameterGroupForm form, @PathVariable Long id) {
+    public ApiResponse updateParameterGroup(@Valid @RequestBody @ApiParam(name = "参数组form对象", value = "form") EsParameterGroupForm form, @PathVariable Long id) {
         EsParameterGroupDTO parameterGroupDTO = new EsParameterGroupDTO();
         BeanUtil.copyProperties(form, parameterGroupDTO);
         DubboResult result = parameterGroupService.updateParameterGroup(parameterGroupDTO, id);
@@ -62,7 +62,7 @@ public class EsParameterGroupController {
     @DeleteMapping(value = "/deleteParameterGroup/{id}")
     @ResponseBody
     @ApiOperation(value = "删除参数组信息")
-    @ApiImplicitParam(name = "id", value = "参数组id", required = true, dataType = "long", paramType = "path",example = "1")
+    @ApiImplicitParam(name = "id", value = "参数组id", required = true, dataType = "long", paramType = "path", example = "1")
     public ApiResponse deleteParameterGroup(@PathVariable Long id) {
         DubboResult result = parameterGroupService.deleteParameterGroup(id);
         if (result.isSuccess()) {
@@ -75,7 +75,7 @@ public class EsParameterGroupController {
     @ApiOperation(value = "参数组上移或者下移")
     @ApiImplicitParams({
             @ApiImplicitParam(name = "id", value = "参数组id", required = true, paramType = "path", dataType = "long"),
-            @ApiImplicitParam(name = "sortType", value = "排序类型，上移 up，下移down", required = true, paramType = "path", dataType = "String") })
+            @ApiImplicitParam(name = "sortType", value = "排序类型，上移 up，下移down", required = true, paramType = "path", dataType = "String")})
     @PutMapping(value = "/groupSort/{id}/{sortType}")
     @ResponseBody
     public ApiResponse groupSort(@PathVariable Long id, @PathVariable String sortType) {

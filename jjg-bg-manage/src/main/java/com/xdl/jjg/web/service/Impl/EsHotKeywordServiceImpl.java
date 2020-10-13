@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -62,11 +62,11 @@ public class EsHotKeywordServiceImpl extends ServiceImpl<EsHotKeywordMapper, EsH
             BeanUtil.copyProperties(hotKeywordDTO, hotKeyword);
             this.hotKeywordMapper.insert(hotKeyword);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -94,10 +94,10 @@ public class EsHotKeywordServiceImpl extends ServiceImpl<EsHotKeywordMapper, EsH
             queryWrapper.lambda().eq(EsHotKeyword::getId, hotKeywordDTO.getId());
             this.hotKeywordMapper.update(hotKeyword, queryWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -125,10 +125,10 @@ public class EsHotKeywordServiceImpl extends ServiceImpl<EsHotKeywordMapper, EsH
             }
             BeanUtil.copyProperties(hotKeyword, hotKeywordDO);
             return DubboResult.success(hotKeywordDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -138,8 +138,8 @@ public class EsHotKeywordServiceImpl extends ServiceImpl<EsHotKeywordMapper, EsH
      * 根据查询列表
      *
      * @param hotKeywordDTO DTO
-     * @param pageSize     页码
-     * @param pageNum      页数
+     * @param pageSize      页码
+     * @param pageNum       页数
      * @auther: rm 2817512105@qq.com
      * @date: 2019-06-04
      * @return: com.shopx.common.model.result.DubboPageResult<EsHotKeywordDO>
@@ -160,10 +160,10 @@ public class EsHotKeywordServiceImpl extends ServiceImpl<EsHotKeywordMapper, EsH
                     return hotKeywordDO;
                 }).collect(Collectors.toList());
             }
-            return DubboPageResult.success(iPage.getTotal(),hotKeywordDOList);
-        } catch (ArgumentException ae){
+            return DubboPageResult.success(iPage.getTotal(), hotKeywordDOList);
+        } catch (ArgumentException ae) {
             logger.error("分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -189,11 +189,11 @@ public class EsHotKeywordServiceImpl extends ServiceImpl<EsHotKeywordMapper, EsH
             deleteWrapper.lambda().eq(EsHotKeyword::getId, id);
             this.hotKeywordMapper.delete(deleteWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
-             logger.error("删除失败", ae);
-             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+        } catch (ArgumentException ae) {
+            logger.error("删除失败", ae);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -211,9 +211,9 @@ public class EsHotKeywordServiceImpl extends ServiceImpl<EsHotKeywordMapper, EsH
             List<EsHotKeyword> data = hotKeywordMapper.selectList(queryWrapper);
             List<EsHotKeywordDO> doList = BeanUtil.copyList(data, EsHotKeywordDO.class);
             return DubboPageResult.success(doList);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");

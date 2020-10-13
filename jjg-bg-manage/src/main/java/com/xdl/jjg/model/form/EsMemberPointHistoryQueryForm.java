@@ -16,7 +16,7 @@ public class EsMemberPointHistoryQueryForm extends QueryPageForm {
     /**
      * 会员id
      */
-    @ApiModelProperty(required = true,value = "会员id",example = "1")
+    @ApiModelProperty(required = true, value = "会员id", example = "1")
     @NotNull(message = "会员id不能为空")
     private Long memberId;
 

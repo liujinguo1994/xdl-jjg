@@ -24,7 +24,7 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器-邮件设置管理
+ * 前端控制器-邮件设置管理
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -32,7 +32,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("/esSmtp")
-@Api(value="/esSmtp", tags="邮件设置管理")
+@Api(value = "/esSmtp", tags = "邮件设置管理")
 public class EsSmtpController {
 
     @Autowired
@@ -41,16 +41,16 @@ public class EsSmtpController {
     @Autowired
     private IEsSendEmailService sendEmailService;
 
-    @ApiOperation(value = "邮件设置管理分页查询",response = EsSmtpVO.class)
+    @ApiOperation(value = "邮件设置管理分页查询", response = EsSmtpVO.class)
     @GetMapping(value = "/getSmtpList")
     @ResponseBody
-    public ApiResponse getSmtpList(EsQueryPageForm form){
+    public ApiResponse getSmtpList(EsQueryPageForm form) {
         EsSmtpDTO esSmtpDTO = new EsSmtpDTO();
         DubboPageResult<EsSmtpDO> result = iEsSmtpService.getSmtpList(esSmtpDTO, form.getPageSize(), form.getPageNum());
-        if(result.isSuccess()){
-            List<EsSmtpVO> list = BeanUtil.copyList(result.getData().getList(),EsSmtpVO.class);
-            return ApiPageResponse.pageSuccess(result.getData().getTotal(),list);
-        }else{
+        if (result.isSuccess()) {
+            List<EsSmtpVO> list = BeanUtil.copyList(result.getData().getList(), EsSmtpVO.class);
+            return ApiPageResponse.pageSuccess(result.getData().getTotal(), list);
+        } else {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -58,13 +58,13 @@ public class EsSmtpController {
     @ApiOperation(value = "添加邮件设置")
     @PostMapping(value = "/insertSmtp")
     @ResponseBody
-    public ApiResponse insertSmtp(@RequestBody @ApiParam(name="邮件设置form对象",value="form") EsSmtpForm form){
+    public ApiResponse insertSmtp(@RequestBody @ApiParam(name = "邮件设置form对象", value = "form") EsSmtpForm form) {
         EsSmtpDTO esSmtpDTO = new EsSmtpDTO();
-        BeanUtil.copyProperties(form,esSmtpDTO);
+        BeanUtil.copyProperties(form, esSmtpDTO);
         DubboResult result = iEsSmtpService.insertSmtp(esSmtpDTO);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -72,13 +72,13 @@ public class EsSmtpController {
     @ApiOperation(value = "修改邮件设置")
     @PutMapping(value = "/updateSmtp")
     @ResponseBody
-    public ApiResponse updateSmtp(@RequestBody @ApiParam(name="邮件设置form对象",value="form") EsSmtpForm form){
+    public ApiResponse updateSmtp(@RequestBody @ApiParam(name = "邮件设置form对象", value = "form") EsSmtpForm form) {
         EsSmtpDTO esSmtpDTO = new EsSmtpDTO();
-        BeanUtil.copyProperties(form,esSmtpDTO);
+        BeanUtil.copyProperties(form, esSmtpDTO);
         DubboResult result = iEsSmtpService.updateSmtp(esSmtpDTO);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -86,12 +86,12 @@ public class EsSmtpController {
     @DeleteMapping(value = "/deleteSmtp/{id}")
     @ResponseBody
     @ApiOperation(value = "删除")
-    @ApiImplicitParam(name = "id", value = "主键id", required = true, dataType = "long",example = "1", paramType = "path")
-    public ApiResponse deleteSmtp(@PathVariable Long id){
+    @ApiImplicitParam(name = "id", value = "主键id", required = true, dataType = "long", example = "1", paramType = "path")
+    public ApiResponse deleteSmtp(@PathVariable Long id) {
         DubboResult result = iEsSmtpService.deleteSmtp(id);
-        if(result.isSuccess()){
+        if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }

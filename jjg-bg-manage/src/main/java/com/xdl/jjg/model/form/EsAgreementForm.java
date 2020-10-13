@@ -23,8 +23,8 @@ public class EsAgreementForm implements Serializable {
     /**
      * 协议内容
      */
-    @ApiModelProperty(required = true,value = "协议内容")
+    @ApiModelProperty(required = true, value = "协议内容")
     @NotBlank(message = "协议内容不能为空")
-	private String content;
+    private String content;
 
 }

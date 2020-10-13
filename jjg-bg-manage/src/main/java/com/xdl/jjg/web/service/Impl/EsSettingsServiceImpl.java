@@ -23,7 +23,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -57,10 +57,10 @@ public class EsSettingsServiceImpl extends ServiceImpl<EsSettingsMapper, EsSetti
             }
             BeanUtil.copyProperties(settings, settingsDO);
             return DubboResult.success(settingsDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -78,10 +78,10 @@ public class EsSettingsServiceImpl extends ServiceImpl<EsSettingsMapper, EsSetti
                 BeanUtil.copyProperties(settings, settingsDO);
             }
             return DubboResult.success(settingsDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("根据业务标识查系统配置信息失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("根据业务标识查系统配置信息失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -92,26 +92,26 @@ public class EsSettingsServiceImpl extends ServiceImpl<EsSettingsMapper, EsSetti
     public DubboResult updateSecuritySetting(SettingGroup group, EsSecuritySettingsDTO esSecuritySettingsDTO) {
         try {
             QueryWrapper<EsSettings> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsSettings::getCfgGroup,group.name());
+            queryWrapper.lambda().eq(EsSettings::getCfgGroup, group.name());
             EsSettings esSettings = settingsMapper.selectOne(queryWrapper);
             //将要保存的对象 转换成json
             String json = JsonUtil.objectToJson(esSecuritySettingsDTO);
-            if (esSettings == null){
+            if (esSettings == null) {
                 EsSettings settings = new EsSettings();
                 settings.setCfgGroup(group.name());
                 settings.setCfgValue(json);
                 settingsMapper.insert(settings);
-            }else {
+            } else {
                 EsSettings settings = new EsSettings();
                 settings.setId(esSettings.getId());
                 settings.setCfgValue(json);
                 settingsMapper.updateById(settings);
             }
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("修改安全设置失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("修改安全设置失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -124,26 +124,26 @@ public class EsSettingsServiceImpl extends ServiceImpl<EsSettingsMapper, EsSetti
     public DubboResult saveOrderSetting(SettingGroup group, EsOrderSettingDTO esOrderSettingDTO) {
         try {
             QueryWrapper<EsSettings> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsSettings::getCfgGroup,group.name());
+            queryWrapper.lambda().eq(EsSettings::getCfgGroup, group.name());
             EsSettings esSettings = settingsMapper.selectOne(queryWrapper);
             //将要保存的对象 转换成json
             String json = JsonUtil.objectToJson(esOrderSettingDTO);
-            if (esSettings == null){
+            if (esSettings == null) {
                 EsSettings settings = new EsSettings();
                 settings.setCfgGroup(group.name());
                 settings.setCfgValue(json);
                 settingsMapper.insert(settings);
-            }else {
+            } else {
                 EsSettings settings = new EsSettings();
                 settings.setId(esSettings.getId());
                 settings.setCfgValue(json);
                 settingsMapper.updateById(settings);
             }
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("保存订单设置失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("保存订单设置失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -157,26 +157,26 @@ public class EsSettingsServiceImpl extends ServiceImpl<EsSettingsMapper, EsSetti
     public DubboResult saveStaticPageAddress(SettingGroup group, EsPageSettingDTO esPageSettingDTO) {
         try {
             QueryWrapper<EsSettings> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsSettings::getCfgGroup,group.name());
+            queryWrapper.lambda().eq(EsSettings::getCfgGroup, group.name());
             EsSettings esSettings = settingsMapper.selectOne(queryWrapper);
             //将要保存的对象 转换成json
             String json = JsonUtil.objectToJson(esPageSettingDTO);
-            if (esSettings == null){
+            if (esSettings == null) {
                 EsSettings settings = new EsSettings();
                 settings.setCfgGroup(group.name());
                 settings.setCfgValue(json);
                 settingsMapper.insert(settings);
-            }else {
+            } else {
                 EsSettings settings = new EsSettings();
                 settings.setId(esSettings.getId());
                 settings.setCfgValue(json);
                 settingsMapper.updateById(settings);
             }
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("静态页地址参数保存失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("静态页地址参数保存失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -190,26 +190,26 @@ public class EsSettingsServiceImpl extends ServiceImpl<EsSettingsMapper, EsSetti
     public DubboResult saveClearingCycle(SettingGroup group, EsClearingCycleSettingsDTO clearingCycleSettingsDTO) {
         try {
             QueryWrapper<EsSettings> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsSettings::getCfgGroup,group.name());
+            queryWrapper.lambda().eq(EsSettings::getCfgGroup, group.name());
             EsSettings esSettings = settingsMapper.selectOne(queryWrapper);
             //将要保存的对象 转换成json
             String json = JsonUtil.objectToJson(clearingCycleSettingsDTO.getClearingCycleSettings());
-            if (esSettings == null){
+            if (esSettings == null) {
                 EsSettings settings = new EsSettings();
                 settings.setCfgGroup(group.name());
                 settings.setCfgValue(json);
                 settingsMapper.insert(settings);
-            }else {
+            } else {
                 EsSettings settings = new EsSettings();
                 settings.setId(esSettings.getId());
                 settings.setCfgValue(json);
                 settingsMapper.updateById(settings);
             }
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("保存结算周期设置失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("保存结算周期设置失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -223,26 +223,26 @@ public class EsSettingsServiceImpl extends ServiceImpl<EsSettingsMapper, EsSetti
     public DubboResult saveSite(SettingGroup group, EsSiteDTO dto) {
         try {
             QueryWrapper<EsSettings> queryWrapper = new QueryWrapper<>();
-            queryWrapper.lambda().eq(EsSettings::getCfgGroup,group.name());
+            queryWrapper.lambda().eq(EsSettings::getCfgGroup, group.name());
             EsSettings esSettings = settingsMapper.selectOne(queryWrapper);
             //将要保存的对象 转换成json
             String json = JsonUtil.objectToJson(dto);
-            if (esSettings == null){
+            if (esSettings == null) {
                 EsSettings settings = new EsSettings();
                 settings.setCfgGroup(group.name());
                 settings.setCfgValue(json);
                 settingsMapper.insert(settings);
-            }else {
+            } else {
                 EsSettings settings = new EsSettings();
                 settings.setId(esSettings.getId());
                 settings.setCfgValue(json);
                 settingsMapper.updateById(settings);
             }
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("保存站点设置失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("保存站点设置失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();

@@ -45,6 +45,7 @@ public class ArrayUtil {
         }
         return false;
     }
+
     public static boolean isNumeric(String str) {
         try {
             String bigStr = new BigDecimal(str).toString();

@@ -2,7 +2,7 @@
 <configuration>
 
 
-    <appender name="console" class="ch.qos.logback.core.ConsoleAppender" >
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{yyyy-MM-dd HH:mm:ss}[%thread]%-5level %logger{50} - %msg%n</pattern>
             <charset>utf8</charset>
@@ -10,7 +10,7 @@
     </appender>
 
 
-    <appender name="debug_file" class="ch.qos.logback.core.rolling.RollingFileAppender" >
+    <appender name="debug_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!--滚动策略，按照时间滚动 TimeBasedRollingPolicy-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--测试环境文件路径,定义了日志的切分方式——把每一天的日志归档到一个文件中,以防止日志填满整个磁盘空间-->

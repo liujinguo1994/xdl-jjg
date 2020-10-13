@@ -4,7 +4,6 @@
 package com.xdl.jjg.util.security.coder;
 
 
-
 import com.xdl.jjg.util.security.SecurityCoder;
 
 import javax.crypto.*;

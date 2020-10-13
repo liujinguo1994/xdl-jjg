@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  * <p>
- *  菜单
+ * 菜单
  * </p>
  *
  * @author rm 2817512105@qq.com
@@ -24,25 +24,25 @@ public class EsMenuForm implements Serializable {
     /**
      * 父id
      */
-    @ApiModelProperty(value = "父id",example = "1")
-	private Long parentId;
+    @ApiModelProperty(value = "父id", example = "1")
+    private Long parentId;
     /**
      * 菜单标题
      */
     @ApiModelProperty(required = true, value = "菜单标题")
     @NotBlank(message = "菜单标题不能为空")
-	private String title;
+    private String title;
     /**
      * 菜单唯一标识
      */
     @ApiModelProperty(required = true, value = "菜单唯一标识")
     @NotBlank(message = "菜单唯一标识不能为空")
-	private String identifier;
+    private String identifier;
     /**
      * 权限表达式
      */
     @ApiModelProperty(required = true, value = "权限表达式")
     @NotBlank(message = "权限表达式不能为空")
-	private String authExpression;
+    private String authExpression;
 
 }

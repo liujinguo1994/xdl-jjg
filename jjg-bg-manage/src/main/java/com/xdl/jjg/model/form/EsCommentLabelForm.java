@@ -33,7 +33,7 @@ public class EsCommentLabelForm implements Serializable {
     /**
      * 标签类型( 0:商品，1物流，2服务)
      */
-    @ApiModelProperty(required = true, value = "标签类型( 0:商品，1物流，2服务)",example = "1")
+    @ApiModelProperty(required = true, value = "标签类型( 0:商品，1物流，2服务)", example = "1")
     @NotNull(message = "标签类型不能为空")
     private Integer type;
 

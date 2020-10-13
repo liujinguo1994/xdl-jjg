@@ -18,13 +18,13 @@ import java.util.List;
 
 /**
  * <p>
- *  前端控制器-商品好评设置
+ * 前端控制器-商品好评设置
  * </p>
  *
  * @author rm 2817512105@qq.com
  * @since 2019-06-24
  */
-@Api(value = "/esCommentSortConfig",tags = "商品好评设置")
+@Api(value = "/esCommentSortConfig", tags = "商品好评设置")
 @RestController
 @RequestMapping("/esCommentSortConfig")
 public class EsCommentSortConfigController {
@@ -38,7 +38,7 @@ public class EsCommentSortConfigController {
     @PutMapping(value = "/saveConfig")
     @ApiOperation(value = "保存设置")
     @ResponseBody
-    public ApiResponse saveConfig(@Valid @RequestBody @ApiParam(name="设置form对象",value="form") EsCommentConfigForm form) {
+    public ApiResponse saveConfig(@Valid @RequestBody @ApiParam(name = "设置form对象", value = "form") EsCommentConfigForm form) {
         EsCommentConfigDTO esCommentConfigDTO = new EsCommentConfigDTO();
         List<EsGradeWeightConfigDTO> gradeWeightConfigDTOList = BeanUtil.copyList(form.getGradeWeightConfigFormList(), EsGradeWeightConfigDTO.class);
         esCommentConfigDTO.setGradeWeightConfigDTOList(gradeWeightConfigDTOList);
@@ -47,13 +47,13 @@ public class EsCommentSortConfigController {
         DubboResult result = commentSortConfigService.insertCommentSortConfig(esCommentConfigDTO);
         if (result.isSuccess()) {
             return ApiResponse.success();
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
 
 
-    @ApiOperation(value = "查询权重设置",response = EsGradeWeightConfigVO.class)
+    @ApiOperation(value = "查询权重设置", response = EsGradeWeightConfigVO.class)
     @GetMapping(value = "/getGradeWeightConfigList")
     @ResponseBody
     public ApiResponse getGradeWeightConfigList() {
@@ -62,7 +62,7 @@ public class EsCommentSortConfigController {
             List<EsGradeWeightConfigDO> data = result.getData().getList();
             List<EsGradeWeightConfigVO> esGradeWeightConfigVOList = BeanUtil.copyList(data, EsGradeWeightConfigVO.class);
             return ApiResponse.success(esGradeWeightConfigVOList);
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }
@@ -74,9 +74,9 @@ public class EsCommentSortConfigController {
         DubboPageResult<EsCommentSortConfigDO> result = commentSortConfigService.getCommentSortConfigList();
         if (result.isSuccess()) {
             List<EsCommentSortConfigDO> data = result.getData().getList();
-            List<EsCommentSortConfigVO> esCommentSortConfigVOList = BeanUtil.copyList(data,EsCommentSortConfigVO.class);
+            List<EsCommentSortConfigVO> esCommentSortConfigVOList = BeanUtil.copyList(data, EsCommentSortConfigVO.class);
             return ApiResponse.success(esCommentSortConfigVOList);
-        }else{
+        } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));
         }
     }

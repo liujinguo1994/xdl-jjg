@@ -63,11 +63,11 @@ public class EsAgreementServiceImpl extends ServiceImpl<EsAgreementMapper, EsAgr
             BeanUtil.copyProperties(agreementDTO, agreement);
             this.agreementMapper.insert(agreement);
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("协议维护新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }catch (Throwable ae) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable ae) {
             logger.error("协议维护新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -91,21 +91,21 @@ public class EsAgreementServiceImpl extends ServiceImpl<EsAgreementMapper, EsAgr
             }
             QueryWrapper<EsAgreement> queryWrapper = new QueryWrapper<>();
             EsAgreement esAgreement = agreementMapper.selectOne(queryWrapper);
-            if (esAgreement == null){
+            if (esAgreement == null) {
                 EsAgreement agreement = new EsAgreement();
                 agreement.setContent(agreementDTO.getContent());
                 agreementMapper.insert(agreement);
-            }else {
+            } else {
                 EsAgreement agreement = new EsAgreement();
                 agreement.setId(esAgreement.getId());
                 agreement.setContent(agreementDTO.getContent());
                 agreementMapper.updateById(agreement);
             }
             return DubboResult.success();
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("协议维护更新失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("协议维护更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
@@ -133,10 +133,10 @@ public class EsAgreementServiceImpl extends ServiceImpl<EsAgreementMapper, EsAgr
             }
             BeanUtil.copyProperties(agreement, agreementDO);
             return DubboResult.success(agreementDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("协议维护查询失败", ae);
-            return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("协议维护查询失败", th);
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
@@ -169,9 +169,9 @@ public class EsAgreementServiceImpl extends ServiceImpl<EsAgreementMapper, EsAgr
                 }).collect(Collectors.toList());
             }
             return DubboPageResult.success(agreementDOList);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("协议维护分页查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("协议维护分页查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
@@ -197,11 +197,11 @@ public class EsAgreementServiceImpl extends ServiceImpl<EsAgreementMapper, EsAgr
             deleteWrapper.lambda().eq(EsAgreement::getId, id);
             this.agreementMapper.delete(deleteWrapper);
             return DubboResult.success();
-        } catch (ArgumentException ae){
-             logger.error("协议维护删除失败", ae);
-             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
-        }  catch (Throwable th) {
+        } catch (ArgumentException ae) {
+            logger.error("协议维护删除失败", ae);
+            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+        } catch (Throwable th) {
             logger.error("协议维护删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
             return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
@@ -214,13 +214,13 @@ public class EsAgreementServiceImpl extends ServiceImpl<EsAgreementMapper, EsAgr
             QueryWrapper<EsAgreement> queryWrapper = new QueryWrapper<>();
             EsAgreement agreement = agreementMapper.selectOne(queryWrapper);
             EsAgreementDO agreementDO = new EsAgreementDO();
-            if (agreement != null){
-                BeanUtil.copyProperties(agreement,agreementDO);
+            if (agreement != null) {
+                BeanUtil.copyProperties(agreement, agreementDO);
             }
             return DubboResult.success(agreementDO);
-        } catch (ArgumentException ae){
+        } catch (ArgumentException ae) {
             logger.error("协议维护查询失败", ae);
-            return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
+            return DubboPageResult.fail(ae.getExceptionCode(), ae.getMessage());
         } catch (Throwable th) {
             logger.error("协议维护查询失败", th);
             return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
