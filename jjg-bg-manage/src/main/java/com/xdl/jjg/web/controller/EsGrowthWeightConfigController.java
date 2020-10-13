@@ -2,10 +2,15 @@ package com.xdl.jjg.web.controller;
 
 
 import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.model.domain.EsGrowthWeightConfigDO;
+import com.xdl.jjg.model.dto.EsGrowthWeightConfigListDTO;
 import com.xdl.jjg.model.form.EsGrowthWeightConfigForm;
+import com.xdl.jjg.model.vo.EsGrowthWeightConfigVO;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.IEsGrowthWeightConfigService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

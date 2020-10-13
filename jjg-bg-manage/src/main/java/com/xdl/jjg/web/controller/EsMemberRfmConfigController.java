@@ -2,10 +2,15 @@ package com.xdl.jjg.web.controller;
 
 
 import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.model.domain.EsMemberRfmConfigDO;
+import com.xdl.jjg.model.dto.EsRfmConfigDTO;
 import com.xdl.jjg.model.form.EsRfmConfigForm;
+import com.xdl.jjg.model.vo.EsMemberRfmConfigVO;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.IEsMemberRfmConfigService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

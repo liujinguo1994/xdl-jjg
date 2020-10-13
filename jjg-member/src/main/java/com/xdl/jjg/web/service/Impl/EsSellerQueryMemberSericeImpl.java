@@ -1,20 +1,20 @@
 package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.EsMemberQueryActiveDO;
-import com.shopx.member.api.model.domain.dto.EsQueryMemberTypeDTO;
-import com.shopx.member.api.model.domain.enums.MemberActiveSortEnums;
-import com.shopx.member.api.service.IEsSellerQueryMemberSerice;
+import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsMemberActiveConfig;
-import com.shopx.member.dao.mapper.EsMemberActiveConfigMapper;
-import com.shopx.member.dao.mapper.EsMemberShopMapper;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.mapper.EsMemberActiveConfigMapper;
+import com.xdl.jjg.mapper.EsMemberShopMapper;
+import com.xdl.jjg.model.domain.EsMemberQueryActiveDO;
+import com.xdl.jjg.model.dto.EsQueryMemberTypeDTO;
+import com.xdl.jjg.model.enums.MemberActiveSortEnums;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.web.service.IEsSellerQueryMemberSerice;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  * <p>

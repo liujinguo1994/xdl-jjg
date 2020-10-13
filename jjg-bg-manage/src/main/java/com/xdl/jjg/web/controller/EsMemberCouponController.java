@@ -1,10 +1,20 @@
 package com.xdl.jjg.web.controller;
 
 import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.model.domain.EsAdminMemberCouponDO;
+import com.xdl.jjg.model.domain.EsCouponManageMementDO;
+import com.xdl.jjg.model.dto.EsMemberCouponDTO;
+import com.xdl.jjg.model.dto.QueryAdminCouponDTO;
 import com.xdl.jjg.model.form.EsCouponQueryForm;
 import com.xdl.jjg.model.form.EsMemberCouponQueryForm;
+import com.xdl.jjg.model.vo.EsAdminMemberCouponVO;
+import com.xdl.jjg.model.vo.EsCouponManageMementVO;
+import com.xdl.jjg.model.vo.EsMemberCouponVO;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.IEsMemberCouponService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

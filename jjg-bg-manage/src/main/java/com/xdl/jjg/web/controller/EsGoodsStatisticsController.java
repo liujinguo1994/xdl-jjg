@@ -1,19 +1,32 @@
 package com.xdl.jjg.web.controller;
 
-
+import cn.hutool.core.collection.CollUtil;
+import cn.hutool.core.io.IoUtil;
+import cn.hutool.poi.excel.ExcelUtil;
+import cn.hutool.poi.excel.ExcelWriter;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsGoodsTotalStatisticsDO;
+import com.xdl.jjg.constants.OssFileType;
+import com.xdl.jjg.model.domain.*;
+import com.xdl.jjg.model.dto.EsGoodsAveragePriceDTO;
+import com.xdl.jjg.model.dto.EsGoodsHotSellDTO;
+import com.xdl.jjg.model.dto.EsGoodsPaymentConversionRateDTO;
+import com.xdl.jjg.model.dto.EsGoodsSalesDetailDTO;
 import com.xdl.jjg.model.form.EsGoodsAveragePriceForm;
 import com.xdl.jjg.model.form.EsGoodsHotSellForm;
 import com.xdl.jjg.model.form.EsGoodsPaymentConversionRateForm;
 import com.xdl.jjg.model.form.EsGoodsSalesDetailForm;
 import com.xdl.jjg.model.vo.*;
+import com.xdl.jjg.oss.upload.OSSUploader;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.service.FileDTO;
+import com.xdl.jjg.response.service.FileVO;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.util.ExcelUtil;
+import com.xdl.jjg.web.service.IEsGoodsStatisticsService;
 import com.xdl.jjg.web.service.IEsGoodsTotalStatisticsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

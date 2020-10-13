@@ -7,12 +7,10 @@ import com.xdl.jjg.model.dto.EsRegionsDTO;
 import com.xdl.jjg.model.form.EsRegionsForm;
 import com.xdl.jjg.model.vo.EsRegionsVO;
 import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.IEsRegionsService;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

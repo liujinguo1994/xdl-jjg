@@ -4,23 +4,23 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.EsComplaintReasonConfigDO;
-import com.shopx.member.api.model.domain.dto.EsComplaintReasonConfigDTO;
-import com.shopx.member.api.service.IEsComplaintReasonConfigService;
+import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsComplaintReasonConfig;
 import com.xdl.jjg.entity.EsComplaintTypeConfig;
-import  com.xdl.jjg.mapper.EsComplaintReasonConfigMapper;
-import com.shopx.member.dao.mapper.EsComplaintTypeConfigMapper;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.mapper.EsComplaintReasonConfigMapper;
+import com.xdl.jjg.mapper.EsComplaintTypeConfigMapper;
+import com.xdl.jjg.model.domain.EsComplaintReasonConfigDO;
+import com.xdl.jjg.model.dto.EsComplaintReasonConfigDTO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.web.service.IEsComplaintReasonConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
  * @author LINS 1220316142@qq.com
  * @since 2019-07-23 16:07:55
  */
-@Service(version = "${dubbo.application.version}" , interfaceClass = IEsComplaintReasonConfigService.class, timeout = 50000)
+@Service
 public class EsComplaintReasonConfigServiceImpl extends ServiceImpl<EsComplaintReasonConfigMapper, EsComplaintReasonConfig> implements IEsComplaintReasonConfigService {
 
     private static Logger logger = LoggerFactory.getLogger(EsComplaintReasonConfigServiceImpl.class);

@@ -1,0 +1,150 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.trade.dao.mapper.EsBillMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shopx.trade.dao.entity.EsBill">
+        <id column="id" property="id" />
+        <result column="bill_sn" property="billSn" />
+        <result column="start_time" property="startTime" />
+        <result column="end_time" property="endTime" />
+        <result column="money" property="money" />
+        <result column="commission" property="commission" />
+        <result column="refund_money" property="refundMoney" />
+        <result column="refund_commission" property="refundCommission" />
+        <result column="bill_money" property="billMoney" />
+        <result column="state" property="state" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+    </resultMap>
+
+    <resultMap id="IdListResultMap" type="com.shopx.trade.dao.entity.EsBill">
+        <result column="bill_sn" property="billSn" />
+        <result column="start_time" property="startTime" />
+        <result column="end_time" property="endTime" />
+        <result column="money" property="money" />
+        <result column="commission" property="commission" />
+        <result column="refund_money" property="refundMoney" />
+        <result column="refund_commission" property="refundCommission" />
+        <result column="bill_money" property="billMoney" />
+        <result column="state" property="state" />
+        <result column="type" property="type" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <collection property="idList" ofType="string" javaType="list">
+            <result column="id_list" />
+        </collection>
+    </resultMap>
+
+    <select id="summary" resultMap="IdListResultMap">
+        SELECT
+            t1.id AS id_list,
+            IFNULL((  SELECT
+                        SUM( t12.order_money )
+                      FROM
+                         es_bill_detail t11
+                      INNER JOIN es_order t12
+                              ON t11.order_sn = t12.order_sn
+                      WHERE
+                          t12.create_time BETWEEN #{startTime} AND #{endTime}
+                      AND
+                          t11.state = 1
+                      AND
+                          t11.type = #{type} ), 0) AS money,
+            IFNULL(( SELECT
+                         SUM( t12.refund_money )
+                     FROM
+                         es_bill_detail t11
+                     INNER JOIN es_refund t12
+                             ON t11.order_sn = t12.order_sn
+                     WHERE
+                         t12.create_time BETWEEN #{startTime} AND #{endTime}
+                     AND
+                         t11.state = 1
+                     AND
+                         t11.type = #{type} ), 0) AS refund_money,
+            '1' AS state,
+            #{type} AS type,
+            #{startTime} AS start_time,
+            #{endTime} AS end_time
+        FROM
+            es_bill_detail t1
+        INNER JOIN es_order t2
+                ON t1.order_sn = t2.order_sn
+        LEFT JOIN es_refund t3
+                ON t1.order_sn = t3.order_sn
+        WHERE
+            t2.create_time BETWEEN #{startTime} AND #{endTime}
+        AND
+            t1.state = 1
+        AND
+            t1.type = #{type}
+    </select>
+
+    <insert id="insert" parameterType="com.shopx.trade.dao.entity.EsBill">
+        INSERT INTO es_bill
+                (
+                    bill_sn,
+                    start_time,
+                    end_time,
+                    money,
+                    commission,
+                    refund_commission,
+                    bill_money,
+                    state,
+                    create_time,
+                    update_time
+                )
+                VALUES
+                (
+                    #{billSn, jdbcType=VARCHAR},
+                    #{startTime, jdbcType=BIGINT},
+                    #{endTime, jdbcType=BIGINT},
+                    #{money},
+                    #{commission},
+                    #{refundCommission},
+                    #{billMoney},
+                    #{state, jdbcType=INTEGER},
+                    #{createTime, jdbcType=BIGINT},
+                    #{updateTime, jdbcType=BIGINT}
+                )
+    </insert>
+
+    <select id="summaryForSupplier" resultMap="IdListResultMap">
+        SELECT
+            t1.id AS id_list,
+            IFNULL((SELECT
+                        SUM( t12.order_money )
+                    FROM
+                        es_supplier_bill_detail t11
+                    INNER JOIN es_order t12
+                            ON t11.order_sn = t12.order_sn
+                    WHERE
+                        t12.create_time BETWEEN #{startTime} AND #{endTime}
+                      AND
+                        t11.state = 1), 0) AS money,
+            IFNULL((SELECT
+                        SUM( t12.refund_money )
+                    FROM
+                        es_supplier_bill_detail t11
+                    INNER JOIN es_refund t12
+                            ON t11.order_sn = t12.order_sn
+                    WHERE
+                        t12.create_time BETWEEN #{startTime} AND #{endTime}
+                      AND
+                        t11.state = 1), 0) AS refund_money,
+            '1' AS state,
+            #{startTime} AS start_time,
+            #{endTime} AS end_time
+        FROM
+            es_supplier_bill_detail t1
+        INNER JOIN es_order t2
+                ON t1.order_sn = t2.order_sn
+         LEFT JOIN es_refund t3
+                ON t1.order_sn = t3.order_sn
+        WHERE
+            t2.create_time BETWEEN #{startTime} AND #{endTime}
+          AND
+            t1.state = 1
+    </select>
+</mapper>

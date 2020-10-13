@@ -1,0 +1,18 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.trade.dao.mapper.EsPaymentMethodMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shopx.trade.dao.entity.EsPaymentMethod">
+        <id column="id" property="id" />
+        <result column="method_name" property="methodName" />
+        <result column="plugin_id" property="pluginId" />
+        <result column="pc_config" property="pcConfig" />
+        <result column="wap_config" property="wapConfig" />
+        <result column="app_native_config" property="appNativeConfig" />
+        <result column="image" property="image" />
+        <result column="is_retrace" property="isRetrace" />
+        <result column="app_react_config" property="appReactConfig" />
+    </resultMap>
+
+</mapper>

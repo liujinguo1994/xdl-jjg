@@ -1,0 +1,233 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.trade.dao.mapper.EsTradeMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shopx.trade.dao.entity.EsTrade">
+        <id column="id" property="id" />
+        <result column="trade_sn" property="tradeSn" />
+        <result column="member_id" property="memberId" />
+        <result column="member_name" property="memberName" />
+        <result column="payment_method_id" property="paymentMethodId" />
+        <result column="payment_method_name" property="paymentMethodName" />
+        <result column="payment_type" property="paymentType" />
+        <result column="plugin_id" property="pluginId" />
+        <result column="total_money" property="totalMoney" />
+        <result column="goods_money" property="goodsMoney" />
+        <result column="freight_money" property="freightMoney" />
+        <result column="discount_money" property="discountMoney" />
+        <result column="use_balance" property="useBalance"/>
+        <result column="consignee_id" property="consigneeId" />
+        <result column="consignee_name" property="consigneeName" />
+        <result column="consignee_country" property="consigneeCountry" />
+        <result column="consignee_country_id" property="consigneeCountryId" />
+        <result column="consignee_province" property="consigneeProvince" />
+        <result column="consignee_province_id" property="consigneeProvinceId" />
+        <result column="consignee_city" property="consigneeCity" />
+        <result column="consignee_city_id" property="consigneeCityId" />
+        <result column="consignee_county" property="consigneeCounty" />
+        <result column="consignee_county_id" property="consigneeCountyId" />
+        <result column="consignee_town" property="consigneeTown" />
+        <result column="consignee_town_id" property="consigneeTownId" />
+        <result column="consignee_address" property="consigneeAddress" />
+        <result column="consignee_mobile" property="consigneeMobile" />
+        <result column="consignee_telephone" property="consigneeTelephone" />
+        <result column="create_time" property="createTime" />
+        <result column="trade_status" property="tradeStatus" />
+        <result column="is_del" property="isDel" />
+        <result column="ship_method" property="shipMethod"/>
+        <result column="cancel_time" property="cancelTime"/>
+    </resultMap>
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BuyerTradeResultMap" type="com.shopx.trade.dao.entity.EsBuyerTrade">
+        <result column="trade_sn" property="tradeSn" />
+        <result column="order_sn" property="orderSn" />
+        <result column="total_money" property="totalMoney" />
+        <result column="goods_money" property="goodsMoney" />
+        <result column="freight_money" property="freightMoney" />
+        <result column="discount_money" property="discountMoney" />
+        <result column="pay_money" property="payMoney" />
+        <result column="balance" property="balance" />
+        <result column="consignee_name" property="consigneeName" />
+        <result column="consignee_address" property="consigneeAddress" />
+        <result column="create_time" property="createTime" />
+        <result column="order_status" property="orderStatus" />
+        <collection property="orderItemList" ofType="com.shopx.trade.dao.entity.EsOrderItems">
+            <id column="id" property="id" />
+            <result column="goods_id" property="goodsId" />
+            <result column="sku_id" property="skuId" />
+            <result column="num" property="num" />
+            <result column="ship_num" property="shipNum" />
+            <result column="trade_sn" property="tradeSn" />
+            <result column="order_sn" property="orderSn" />
+            <result column="image" property="image" />
+            <result column="name" property="name" />
+            <result column="money" property="money" />
+            <result column="category_id" property="categoryId" />
+            <result column="state" property="state" />
+            <result column="snapshot_id" property="snapshotId" />
+            <result column="spec_json" property="specJson" />
+            <result column="promotion_type" property="promotionType" />
+            <result column="promotion_id" property="promotionId" />
+            <result column="ship_no" property="shipNo" />
+            <result column="the_sign" property="theSign" />
+            <result column="single_comment_status" property="singleCommentStatus" />
+        </collection>
+    </resultMap>
+
+    <select id="getOrderList" parameterType="com.shopx.trade.dao.entity.EsBuyerTrade" resultMap="BuyerTradeResultMap">
+        SELECT
+          t1.trade_sn,
+          t2.order_sn,
+          t1.total_money,
+          t1.goods_money,
+          t1.freight_money,
+          t1.discount_money,
+          t1.pay_money,
+          t1.use_balance AS balance,
+          t1.trade_status AS order_status,
+          t1.consignee_name,
+          CONCAT_WS(t1.consignee_province , t1.consignee_city, t1.consignee_county, t1.consignee_town, t1.consignee_address) AS    		consignee_address,
+          t1.create_time,
+          t2.name,
+          t2.image,
+          t2.spec_json,
+          1 AS sort
+        FROM
+          es_trade t1
+        LEFT JOIN es_order_items t2
+               ON t1.trade_sn = t2.trade_sn
+        WHERE
+          t1.member_id = #{memberId, jdbcType=BIGINT}
+        AND
+          t1.trade_status = 'CONFIRM'
+        <if test="keyword != null and keyword != ''">
+        AND
+          locate (keyword, t2.name) > 0
+        </if>
+      UNION ALL
+        SELECT
+          t1.trade_sn,
+          t2.order_sn,
+          t1.order_money,
+          t1.goods_money,
+          t1.shipping_money AS freight_money,
+          t1.discount_money,
+          t1.pay_money,
+          t1.payed_money AS balance,
+          t1.order_state AS order_status,
+          t1.ship_name,
+          CONCAT_WS(t1.ship_province , t1.ship_city, t1.ship_county, t1.ship_town, t1.ship_addr) AS consignee_address,
+          t1.create_time,
+          t2.name,
+          t2.image,
+          t2.spec_json,
+          2 AS sort
+        FROM
+          es_order t1
+        LEFT JOIN es_order_items t2
+               ON t1.order_sn = t2.order_sn
+        WHERE
+          t1.member_id = #{memberId, jdbcType=BIGINT}
+        AND
+          t1.order_state &gt;&lt; 'CONFIRM'
+        <if test="orderStatus != null and orderStatus != ''">
+        AND
+          t1.order_state = #{orderStatus, jdbcType=VARCHAR}
+        </if>
+        <if test="keyword != null and keyword != ''">
+        AND
+          locate (keyword, t2.name) > 0
+        </if>
+        ORDER BY
+          sort, create_time DESC
+    </select>
+    <select id="getEsTradeByTradeSn" resultType="com.shopx.trade.api.model.domain.EsTradeDO">
+    select et.trade_sn
+        ,et.trade_status
+        ,et.total_money
+        ,eo.ship_method
+        ,eo.payment_type
+				,et.consignee_province
+				,et.consignee_city
+				,et.consignee_town
+				,et.consignee_address
+				,et.consignee_name
+				,et.consignee_mobile
+				,et.pay_money
+				,et.use_balance
+				,et.create_time
+        from es_trade et
+        LEFT JOIN es_order eo
+        on eo.trade_sn = et.trade_sn
+        where et.trade_sn = #{tradeSn}
+        LIMIT 1
+    </select>
+    <sql id="tradeColumn">
+        	et.id,et.trade_sn,et.member_id,et.total_money,et.goods_money,et.freight_money,et.create_time,et.trade_status,et.consignee_address,et.consignee_city,et.consignee_town,et.consignee_county,et.consignee_mobile,et.consignee_name,et.consignee_province
+    </sql>
+    
+    
+    <select id="getTradeList" resultType="com.shopx.trade.dao.entity.EsTrade">
+        SELECT
+            <include refid="tradeColumn"/>
+        FROM
+            es_trade et
+            LEFT JOIN es_order eo ON eo.trade_sn = et.trade_sn 
+        WHERE 1=1
+        <if test="tradeDTO.memberId != null and tradeDTO.memberId != ''">
+            and et.member_id =#{tradeDTO.memberId}
+        </if>
+        <if test="tradeDTO.tradeStatus != null and tradeDTO.tradeStatus != ''">
+            AND eo.order_state = #{tradeDTO.tradeStatus}
+        </if>
+        <if test="tradeDTO.keyword != null and tradeDTO.keyword != ''">
+            AND eo.items_json LIKE CONCAT('%',#{tradeDTO.keyword},'%') or eo.trade_sn =#{tradeDTO.keyword} or eo.order_sn =#{tradeDTO.keyword}
+        </if>
+        <if test="tradeDTO.dateSearch != null and tradeDTO.dateSearch =='oneM'" >
+            AND et.create_time > UNIX_TIMESTAMP(DATE_SUB(CURDATE(), INTERVAL 1 MONTH))*1000
+        </if>
+        <if test="tradeDTO.dateSearch != null and tradeDTO.dateSearch =='threeM'" >
+            AND et.create_time > UNIX_TIMESTAMP(DATE_SUB(CURDATE(), INTERVAL 3 MONTH))*1000
+        </if>
+        <if test="tradeDTO.dateSearch != null and tradeDTO.dateSearch =='sixM'" >
+            AND et.create_time > UNIX_TIMESTAMP(DATE_SUB(CURDATE(), INTERVAL 6 MONTH))*1000
+        </if>
+        <if test="tradeDTO.dateSearch != null and tradeDTO.dateSearch =='thisY'" >
+            AND FROM_UNIXTIME(et.create_time/1000,'%Y%')=YEAR(NOW())
+        </if>
+        <if test="tradeDTO.dateSearch != null and tradeDTO.dateSearch =='lastY'" >
+            AND FROM_UNIXTIME(et.create_time/1000,'%Y%')=YEAR(DATE_SUB(NOW(),interval 1 year))
+        </if>
+        GROUP BY
+        et.trade_sn
+        ORDER BY et.create_time	 desc
+    </select>
+
+    <update id="updateTradeMoney" >
+        UPDATE
+          es_trade
+        SET
+          use_balance = use_balance - #{refundBalance, jdbcType=DECIMAL}
+          <if test="payMoney!=null and payMoney != 0.0">
+              ,pay_money = pay_money - #{refundPayMoney, jdbcType=DECIMAL}
+          </if>
+        WHERE
+          trade_sn = #{tradeSn, jdbcType=VARCHAR}
+        AND
+          use_balance = #{balance, jdbcType=DECIMAL}
+        <if test="payMoney!=null  and payMoney != 0.0">
+            AND
+            pay_money = #{payMoney, jdbcType=DECIMAL}
+        </if>
+    </update>
+
+    <update id="updateTradeStatus">
+        UPDATE
+          es_trade t
+        SET t.trade_status = #{status}
+				WHERE t.trade_sn = #{tradeSn}
+    </update>
+
+</mapper>

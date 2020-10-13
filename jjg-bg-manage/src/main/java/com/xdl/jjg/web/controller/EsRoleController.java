@@ -1,14 +1,6 @@
 package com.xdl.jjg.web.controller;
 
-import com.shopx.common.model.result.ApiPageResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.system.api.model.domain.EsAdminUserDO;
-import com.shopx.system.api.model.domain.EsRoleDO;
-import com.shopx.system.api.model.domain.vo.EsRoleVO;
-import com.shopx.system.api.model.domain.vo.Menus;
-import com.shopx.system.web.constant.ApiStatus;
-import com.shopx.system.web.request.EsRoleQueryForm;
+
 import com.xdl.jjg.constant.ApiStatus;
 import com.xdl.jjg.entity.Menus;
 import com.xdl.jjg.model.domain.EsAdminUserDO;

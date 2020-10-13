@@ -1,0 +1,86 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.trade.dao.mapper.EsOrderItemsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shopx.trade.dao.entity.EsOrderItems">
+        <id column="id" property="id" />
+        <result column="goods_id" property="goodsId" />
+        <result column="sku_id" property="skuId" />
+        <result column="num" property="num" />
+        <result column="ship_num" property="shipNum" />
+        <result column="trade_sn" property="tradeSn" />
+        <result column="goods_sn" property="goodsSn"/>
+        <result column="order_sn" property="orderSn" />
+        <result column="image" property="image" />
+        <result column="name" property="name" />
+        <result column="money" property="money" />
+        <result column="is_fresh" property="isFresh"/>
+        <result column="category_id" property="categoryId" />
+        <result column="state" property="state" />
+        <result column="snapshot_id" property="snapshotId" />
+        <result column="spec_json" property="specJson" />
+        <result column="promotion_type" property="promotionType" />
+        <result column="promotion_id" property="promotionId" />
+        <result column="ship_no" property="shipNo" />
+        <result column="the_sign" property="theSign" />
+        <result column="logi_id" property="logiId" />
+        <result column="logi_name" property="logiName" />
+        <result column="single_comment_status" property="singleCommentStatus" />
+        <result column="has_ship" property="hasShip" />
+        <result column="invoice_number" property="invoiceNumber"/>
+        <result column="delivery_method" property="deliveryMethod"/>
+    </resultMap>
+    <select id="getBuyerOrderCommentList" resultType="com.shopx.trade.api.model.domain.EsBuyerOrderDO">
+        select eo.* from es_order eo
+            LEFT JOIN es_order_items eoi
+            ON eo.order_sn = eoi.order_sn
+           WHERE
+            eo.ship_state='SHIP_ROG'
+            <if test="esOrderItemsDTO.memberId != null and esOrderItemsDTO.memberId != ''">
+                and eo.member_id = #{esOrderItemsDTO.memberId}
+            </if>
+            <if test="esOrderItemsDTO.singleCommentStatus != null and esOrderItemsDTO.singleCommentStatus != ''">
+                and eoi.single_comment_status = #{esOrderItemsDTO.singleCommentStatus}
+            </if>
+            <if test="esOrderItemsDTO.orderSn != null and esOrderItemsDTO.orderSn != ''">
+                and eoi.order_sn = #{esOrderItemsDTO.orderSn}
+            </if>
+
+        group by eo.order_sn
+        order by eo.create_time desc
+    </select>
+
+    <select id="getBuyerOrderCommentCount" resultType="com.shopx.trade.api.model.domain.EsBuyerOrderDO">
+        select eo.* from es_order eo
+        LEFT JOIN es_order_items eoi
+        ON eo.order_sn = eoi.order_sn
+        WHERE
+        eo.ship_state='SHIP_ROG'
+        <if test="memberId != null and memberId != ''">
+            and eo.member_id = #{memberId}
+        </if>
+        group by eo.order_sn
+        order by eo.create_time desc
+    </select>
+    <select id="getBuyerCommentList" resultType="com.shopx.trade.api.model.domain.EsBuyerOrderDO">
+        select eo.* from es_order eo
+        LEFT JOIN es_order_items eoi
+        ON eo.order_sn = eoi.order_sn
+        WHERE
+        eo.ship_state='SHIP_ROG'
+        <if test="esOrderItemsDTO.memberId != null and esOrderItemsDTO.memberId != ''">
+            and eo.member_id = #{esOrderItemsDTO.memberId}
+        </if>
+        <if test="esOrderItemsDTO.singleCommentStatus != null and esOrderItemsDTO.singleCommentStatus != ''">
+            and eoi.single_comment_status = #{esOrderItemsDTO.singleCommentStatus}
+        </if>
+        <if test="esOrderItemsDTO.orderSn != null and esOrderItemsDTO.orderSn != ''">
+            and eoi.order_sn = #{esOrderItemsDTO.orderSn}
+        </if>
+
+        group by eo.order_sn
+        order by eo.create_time desc
+    </select>
+
+</mapper>

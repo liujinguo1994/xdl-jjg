@@ -1,12 +1,12 @@
 package com.xdl.jjg.web.controller;
 
 
-import com.aliyun.openservices.shade.com.alibaba.rocketmq.client.producer.MQProducer;
 import com.xdl.jjg.constant.ApiStatus;
 import com.xdl.jjg.constant.TaskProgressConstant;
 import com.xdl.jjg.model.domain.TaskProgress;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.roketmq.MQProducer;
 import com.xdl.jjg.web.service.IEsProgressManagerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

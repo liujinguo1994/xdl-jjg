@@ -1,0 +1,49 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.trade.dao.mapper.EsShipTemplateMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shopx.trade.dao.entity.EsShipTemplate">
+        <id column="id" property="id" />
+        <result column="mode_name" property="modeName" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="is_del" property="isDel" />
+        <result column="is_fresh" property="isFresh" />
+        <result column="shop_id" property="shopId" />
+        <result column="logi_id" property="logiId" />
+        <result column="logi_name" property="logiName" />
+        <result column="sign" property="sign" />
+        <result column="is_ng" property="isNg" />
+    </resultMap>
+    <insert id="insertTemp" parameterType="com.shopx.trade.dao.entity.EsShipTemplate">
+        INSERT INTO es_ship_template
+                (
+                    id,
+                    mode_name,
+                    create_time,
+                    update_time,
+                    is_del,
+                    shop_id,
+                    logi_id,
+                    logi_name,
+                    sign,
+                    is_fresh
+                )
+                VALUES
+                (
+                    #{id, jdbcType=VARCHAR},
+                    #{modeName},
+                    #{createTime, jdbcType=BIGINT},
+                    #{updateTime, jdbcType=BIGINT},
+                    #{isDel},
+                    #{shopId},
+                    #{logiId, jdbcType=INTEGER},
+                    #{logiName, jdbcType=VARCHAR},
+                    #{sign, jdbcType=INTEGER},
+                    #{isFresh, jdbcType=INTEGER}
+                )
+
+    </insert>
+
+</mapper>

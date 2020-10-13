@@ -1,0 +1,124 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.trade.dao.mapper.EsRefundMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shopx.trade.dao.entity.EsRefund">
+        <id column="id" property="id" />
+        <result column="sn" property="sn" />
+        <result column="member_id" property="memberId" />
+        <result column="member_name" property="memberName" />
+        <result column="shop_id" property="shopId" />
+        <result column="shop_name" property="shopName" />
+        <result column="order_sn" property="orderSn" />
+        <result column="refund_status" property="refundStatus" />
+        <result column="create_time" property="createTime" />
+        <result column="refund_money" property="refundMoney" />
+        <result column="refund_point" property="refundPoint" />
+        <result column="refund_way" property="refundWay" />
+        <result column="account_type" property="accountType" />
+        <result column="return_account" property="returnAccount" />
+        <result column="customer_remark" property="customerRemark" />
+        <result column="seller_remark" property="sellerRemark" />
+        <result column="warehouse_remark" property="warehouseRemark" />
+        <result column="finance_remark" property="financeRemark" />
+        <result column="refund_reason" property="refundReason" />
+        <result column="refuse_reason" property="refuseReason" />
+        <result column="bank_name" property="bankName" />
+        <result column="bank_account_number" property="bankAccountNumber" />
+        <result column="bank_account_name" property="bankAccountName" />
+        <result column="bank_deposit_name" property="bankDepositName" />
+        <result column="trade_sn" property="tradeSn" />
+        <result column="refuse_type" property="refuseType" />
+        <result column="pay_order_no" property="payOrderNo" />
+        <result column="refund_type" property="refundType" />
+        <result column="payment_type" property="paymentType" />
+        <result column="refund_fail_reason" property="refundFailReason" />
+        <result column="refund_time" property="refundTime" />
+        <result column="refund_gift" property="refundGift" />
+        <result column="refund_pay_price" property="refundPayPrice" />
+        <result column="coupon_id" property="couponId" />
+        <result column="url" property="url" />
+        <result column="ship_name" property="shipName" />
+        <result column="is_quantity" property="isQuantity" />
+    </resultMap>
+    <select id="selectRefundPayMoney" resultType="java.lang.Double">
+        select SUM(er.refund_pay_price) from
+        es_refund er where er.order_sn = #{orderSn}
+        AND er.shop_id = #{shopId}
+        AND er.refund_status
+        IN <foreach collection="status" item="sta" index="index" open="(" close=")" separator=",">
+          #{sta}
+    </foreach>
+    </select>
+    <select id="selectRefundList" resultType="com.shopx.trade.dao.entity.EsRefund">
+        SELECT
+        t.*
+        FROM
+        (
+            SELECT
+                er.*,erg.goods_name
+            FROM
+                es_refund er
+                LEFT JOIN es_refund_goods erg ON erg.refund_sn = er.sn
+            WHERE 1=1
+            <if test="esReFundQueryDTO.memberId != null and esReFundQueryDTO.memberId != ''">
+                AND er.member_id = #{esReFundQueryDTO.memberId}
+            </if>
+            <if test="esReFundQueryDTO.time != null and esReFundQueryDTO.time != ''">
+                AND FROM_UNIXTIME( er.create_time / 1000, "%Y-%m-%d" ) > DATE_SUB( CURDATE( ), INTERVAL #{esReFundQueryDTO.time} MONTH )
+            </if>
+        ) as t
+        WHERE
+        1 = 1
+        <if test="esReFundQueryDTO.keyword != null and esReFundQueryDTO.keyword != ''">
+            AND t.goods_name LIKE CONCAT('%',#{esReFundQueryDTO.keyword},'%')
+        </if>
+        <if test="esReFundQueryDTO.keyword != null and esReFundQueryDTO.keyword != ''">
+            OR t.shop_name LIKE CONCAT('%',#{esReFundQueryDTO.keyword},'%')
+        </if>
+        ORDER BY t.create_time DESC
+    </select>
+
+    <select id="getAfterSalesRecords" resultType="com.shopx.trade.dao.entity.EsRefund">
+        SELECT
+        er.*
+        FROM
+        es_refund er
+        WHERE er.process_status != 'COMPLETED'
+        <if test="memberId != null and memberId != ''">
+            AND er.member_id = #{memberId}
+        </if>
+    </select>
+
+    <select id="selectRefundNum" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM es_refund t1
+                INNER JOIN es_refund_goods t2 ON t1.sn = t2.refund_sn
+                WHERE t1.refund_status NOT IN(#{shState}, #{tkState}) AND t1.order_sn = #{orderSn} AND goods_id = #{goodsId}
+    </select>
+    <select id="selectNum" resultType="java.lang.Integer">
+        SELECT
+            count( * )
+        FROM
+            es_refund t1
+            INNER JOIN es_refund_goods t2 ON t1.sn = t2.refund_sn
+        WHERE
+            t1.order_sn = #{orderSn}
+            AND  (t1.refund_status NOT IN ( #{pefundStatus1})
+            OR t1.process_status IN (#{processStatus}))
+
+    </select>
+    <select id="getRefundSn" resultType="com.shopx.trade.dao.entity.EsRefund">
+        SELECT
+        *
+        FROM
+        es_refund er
+        LEFT JOIN es_refund_goods erg ON er.sn = erg.refund_sn
+        WHERE
+        er.order_sn = #{orderSn}
+        AND erg.sku_id = #{skuId}
+        ORDER BY er.id desc
+        LIMIT 1
+    </select>
+
+</mapper>

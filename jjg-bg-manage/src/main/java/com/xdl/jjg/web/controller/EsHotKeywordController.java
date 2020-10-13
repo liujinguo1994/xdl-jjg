@@ -7,6 +7,7 @@ import com.xdl.jjg.model.dto.EsHotKeywordDTO;
 import com.xdl.jjg.model.form.EsHotKeywordForm;
 import com.xdl.jjg.model.form.EsQueryPageForm;
 import com.xdl.jjg.model.vo.EsHotKeywordVO;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;

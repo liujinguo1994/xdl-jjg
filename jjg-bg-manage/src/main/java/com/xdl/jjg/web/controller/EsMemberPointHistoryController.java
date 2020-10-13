@@ -2,10 +2,20 @@ package com.xdl.jjg.web.controller;
 
 
 import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.model.domain.EsMemberAdminDO;
+import com.xdl.jjg.model.domain.EsMemberPointHistoryDO;
+import com.xdl.jjg.model.dto.EsMemberDTO;
+import com.xdl.jjg.model.dto.EsMemberPointHistoryDTO;
 import com.xdl.jjg.model.form.EsMemberPointHistoryQueryForm;
 import com.xdl.jjg.model.form.EsMemberPointQueryForm;
+import com.xdl.jjg.model.vo.EsMemberAdminVO;
+import com.xdl.jjg.model.vo.EsMemberPointHistoryVO;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.IEsMemberPointHistoryService;
+import com.xdl.jjg.web.service.IEsMemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

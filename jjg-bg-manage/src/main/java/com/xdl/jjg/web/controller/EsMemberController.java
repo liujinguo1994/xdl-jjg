@@ -43,7 +43,7 @@ import java.util.List;
 @RestController
 @Api(value = "/esMember", tags = "会员")
 @RequestMapping("/esMember")
-public class EsMemberController extends BaseController {
+public class EsMemberController{
 
     @Value("${aliyun.oss.endpoint}")
     private String endpoint;

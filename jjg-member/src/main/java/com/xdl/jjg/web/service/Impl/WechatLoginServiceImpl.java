@@ -2,7 +2,7 @@ package com.xdl.jjg.web.service.Impl;
 
 
 import com.xdl.jjg.constant.MemberErrorCode;
-import com.xdl.jjg.constant.ThreadContextHolder;
+import com.xdl.jjg.constants.ThreadContextHolder;
 import com.xdl.jjg.model.domain.EsConnectSettingDO;
 import com.xdl.jjg.model.domain.EsMemberDO;
 import com.xdl.jjg.model.enums.ConnectTypeEnum;

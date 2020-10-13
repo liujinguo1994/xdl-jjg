@@ -2,13 +2,13 @@ package com.xdl.jjg.web.controller;
 
 
 import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.model.dto.EsParameterGroupDTO;
 import com.xdl.jjg.model.form.EsParameterGroupForm;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import com.xdl.jjg.web.service.IEsParameterGroupService;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

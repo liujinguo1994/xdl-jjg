@@ -1,0 +1,39 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.trade.dao.mapper.EsPaymentBillMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shopx.trade.dao.entity.EsPaymentBill">
+        <id column="id" property="id" />
+        <result column="order_sn" property="orderSn" />
+        <result column="out_trade_no" property="outTradeNo" />
+        <result column="return_trade_no" property="returnTradeNo" />
+        <result column="is_pay" property="isPay" />
+        <result column="trade_type" property="tradeType" />
+        <result column="payment_name" property="paymentName" />
+        <result column="pay_config" property="payConfig" />
+        <result column="trade_money" property="tradeMoney" />
+        <result column="payment_plugin_id" property="paymentPluginId" />
+    </resultMap>
+    <select id="selectEsPaymentBill" resultType="com.shopx.trade.dao.entity.EsPaymentBill">
+        select *
+        from es_payment_bill et
+        where et.out_trade_no = #{outTradeNo}
+        LIMIT 1
+    </select>
+    <select id="selectByReturnTradeNo" resultType="com.shopx.trade.dao.entity.EsPaymentBill">
+        select *
+        from es_payment_bill et
+        where et.out_trade_no = #{returnTradeNo}
+        LIMIT 1
+    </select>
+
+    <select id="selectTradeCount" resultType="java.lang.Integer">
+        SELECT COUNT(1) FROM  es_order t1 INNER JOIN  es_payment_bill t2 ON t1.trade_sn = t2.sn  where 1=1
+        <if test="outTradeNo != null and outTradeNo != ''">
+        AND out_trade_no = #{outTradeNo}
+        </if>
+        AND t1.order_state not in ('NEW', 'CONFIRM', 'CANCELLED')
+    </select>
+
+</mapper>

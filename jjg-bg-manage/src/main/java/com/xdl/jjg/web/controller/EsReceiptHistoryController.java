@@ -1,5 +1,6 @@
 package com.xdl.jjg.web.controller;
 
+import com.xdl.jjg.web.service.IEsReceiptHistoryService;
 import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

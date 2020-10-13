@@ -1,16 +1,21 @@
 package com.xdl.jjg.web.controller;
 
 import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.model.domain.EsSeckillApplyDO;
+import com.xdl.jjg.model.dto.EsSeckillApplyDTO;
 import com.xdl.jjg.model.form.EsSeckillApplyForm;
 import com.xdl.jjg.model.form.EsSeckillApplyQueryForm;
+import com.xdl.jjg.model.vo.EsSeckillApplyVO;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.IEsSeckillApplyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -29,7 +34,7 @@ import java.util.List;
 @RequestMapping("/esSeckillApply")
 public class EsSeckillApplyController {
 
-    @Reference(version = "${dubbo.application.version}")
+    @Autowired
     private IEsSeckillApplyService seckillApplyService;
 
     @ApiOperation(value = "分页查询限时抢购商品列表", response = EsSeckillApplyVO.class)

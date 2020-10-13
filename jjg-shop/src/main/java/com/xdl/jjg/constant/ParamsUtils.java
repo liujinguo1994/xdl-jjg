@@ -1,6 +1,7 @@
 package com.xdl.jjg.constant;
 
 
+import com.xdl.jjg.constants.ThreadContextHolder;
 import com.xdl.jjg.util.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;

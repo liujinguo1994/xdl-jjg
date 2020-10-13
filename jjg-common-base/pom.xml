@@ -51,7 +51,13 @@
             <version>4.4.0</version>
         </dependency>
         <!-- rocketmq end -->
-
+        <!-- hutool start Excel操作工具-->
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-poi</artifactId>
+            <version>4.5.16</version>
+        </dependency>
+        <!-- hutool end -->
 
         <!-- actuator监控信息完善 -->
         <dependency>

@@ -1,0 +1,31 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.trade.dao.mapper.EsCouponMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shopx.trade.dao.entity.EsCoupon">
+        <id column="id" property="id" />
+        <result column="title" property="title" />
+        <result column="coupon_money" property="couponMoney" />
+        <result column="coupon_threshold_price" property="couponThresholdPrice" />
+        <result column="start_time" property="startTime" />
+        <result column="end_time" property="endTime" />
+        <result column="create_num" property="createNum" />
+        <result column="limit_num" property="limitNum" />
+        <result column="used_num" property="usedNum" />
+        <result column="shop_id" property="shopId" />
+        <result column="received_num" property="receivedNum" />
+        <result column="seller_name" property="sellerName" />
+        <result column="is_del" property="isDel" />
+        <result column="is_receive" property="isReceive" />
+        <result column="valid_day" property="validDay" />
+        <result column="coupon_type" property="couponType"/>
+        <result column="is_coupons" property="isCoupons"/>
+        <result column="is_register" property="isRegister"/>
+    </resultMap>
+    <select id="selectCoupons" resultType="com.shopx.trade.dao.entity.EsCoupon">
+        select  * from es_coupon WHERE is_register = #{isRegister} AND is_del = #{isDel}
+    </select>
+
+
+</mapper>

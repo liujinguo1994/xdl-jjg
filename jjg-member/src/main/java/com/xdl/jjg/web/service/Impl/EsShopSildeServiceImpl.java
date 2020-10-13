@@ -2,20 +2,20 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.EsShopSildeDO;
-import com.shopx.member.api.model.domain.dto.EsShopSildeDTO;
-import com.shopx.member.api.service.IEsShopSildeService;
+import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsShopSilde;
-import  com.xdl.jjg.mapper.EsShopSildeMapper;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.mapper.EsShopSildeMapper;
+import com.xdl.jjg.model.domain.EsShopSildeDO;
+import com.xdl.jjg.model.dto.EsShopSildeDTO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.IEsShopSildeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -48,12 +48,12 @@ public class EsShopSildeServiceImpl extends ServiceImpl<EsShopSildeMapper, EsSho
      */
     @Override
     @Transactional(rollbackFor = Exception.class, propagation = Propagation.REQUIRED)
-    public DubboResult insertShopSilde(List<EsShopSildeDTO> shopSildeDTO,Long shopId) {
+    public DubboResult insertShopSilde(List<EsShopSildeDTO> shopSildeDTO, Long shopId) {
         try {
             QueryWrapper<EsShopSilde> queryWrapper  = new QueryWrapper<>();
             queryWrapper.lambda().eq(EsShopSilde::getShopId,shopId);
             this.shopSildeMapper.delete(queryWrapper);
-            List<EsShopSilde> shopSildeList =BeanUtil.copyList(shopSildeDTO,EsShopSilde.class);
+            List<EsShopSilde> shopSildeList = BeanUtil.copyList(shopSildeDTO,EsShopSilde.class);
             this.saveBatch(shopSildeList);
             return DubboResult.success();
         } catch (ArgumentException ae){

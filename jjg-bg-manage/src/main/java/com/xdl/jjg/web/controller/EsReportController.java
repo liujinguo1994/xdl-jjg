@@ -2,12 +2,18 @@ package com.xdl.jjg.web.controller;
 
 
 import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.model.domain.EsReportDO;
+import com.xdl.jjg.model.dto.ReportQueryParam;
+import com.xdl.jjg.model.enums.ReportEnum;
 import com.xdl.jjg.model.form.EsHandleReportForm;
 import com.xdl.jjg.model.form.EsReportQueryForm;
+import com.xdl.jjg.model.vo.EsReportVO;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.IEsReportService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;

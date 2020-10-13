@@ -1,5 +1,9 @@
 package com.xdl.jjg.web.controller;
 
+import com.xdl.jjg.constants.OssFileType;
+import com.xdl.jjg.oss.upload.OSSUploader;
+import com.xdl.jjg.response.service.FileDTO;
+import com.xdl.jjg.response.service.FileVO;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.FileUtil;
 import io.swagger.annotations.Api;

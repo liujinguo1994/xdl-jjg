@@ -1,0 +1,525 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.trade.dao.mapper.EsOrderMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shopx.trade.dao.entity.EsOrder">
+        <id column="id" property="id" />
+        <result column="trade_sn" property="tradeSn" />
+        <result column="order_sn" property="orderSn" />
+        <result column="shop_id" property="shopId" />
+        <result column="shop_name" property="shopName" />
+        <result column="member_id" property="memberId" />
+        <result column="member_name" property="memberName" />
+        <result column="order_state" property="orderState" />
+        <result column="pay_state" property="payState" />
+        <result column="ship_state" property="shipState" />
+        <result column="service_state" property="serviceState" />
+        <result column="service_type" property="serviceType"/>
+        <result column="bill_state" property="billState" />
+        <result column="comment_status" property="commentStatus" />
+        <result column="payment_method_id" property="paymentMethodId" />
+        <result column="payment_method_name" property="paymentMethodName" />
+        <result column="payment_type" property="paymentType" />
+        <result column="plugin_id" property="pluginId" />
+        <result column="payment_time" property="paymentTime" />
+        <result column="pay_money" property="payMoney" />
+        <result column="order_money" property="orderMoney" />
+        <result column="payed_money" property="payedMoney" />
+        <result column="goods_money" property="goodsMoney" />
+        <result column="discount_money" property="discountMoney" />
+        <result column="shipping_money" property="shippingMoney" />
+        <result column="need_pay_money" property="needPayMoney"/>
+        <result column="common_freight_price" property="commonFreightPrice"/>
+        <result column="fresh_freight_price" property="freshFreightPrice"/>
+        <result column="has_fresh" property="hasFresh"/>
+        <result column="has_comm" property="hasComm"/>
+        <result column="ship_name" property="shipName" />
+        <result column="ship_addr" property="shipAddr" />
+        <result column="ship_zip" property="shipZip" />
+        <result column="ship_mobile" property="shipMobile" />
+        <result column="ship_tel" property="shipTel" />
+        <result column="receive_time" property="receiveTime" />
+        <result column="ship_province_id" property="shipProvinceId" />
+        <result column="ship_city_id" property="shipCityId" />
+        <result column="ship_county_id" property="shipCountyId" />
+        <result column="ship_town_id" property="shipTownId" />
+        <result column="ship_province" property="shipProvince" />
+        <result column="ship_city" property="shipCity" />
+        <result column="ship_county" property="shipCounty" />
+        <result column="ship_town" property="shipTown" />
+        <result column="ship_method" property="shipMethod"/>
+        <result column="is_del" property="isDel" />
+        <result column="goods_num" property="goodsNum" />
+        <result column="remark" property="remark" />
+        <result column="cancel_reason" property="cancelReason" />
+        <result column="items_json" property="itemsJson" />
+        <result column="address_id" property="addressId" />
+        <result column="admin_remark" property="adminRemark" />
+        <result column="complete_time" property="completeTime" />
+        <result column="signing_time" property="signingTime" />
+        <result column="ship_time" property="shipTime" />
+        <result column="pay_order_no" property="payOrderNo" />
+        <result column="client_type" property="clientType" />
+        <result column="need_receipt" property="needReceipt" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="mobile" property="mobile"/>
+        <result column="company_id" property="companyId"/>
+        <result column="cancel_time" property="cancelTime"/>
+        <result column="apply_refund_time" property="applyRefundTime"/>
+        <result column="lch_id" property="lchId"/>
+    </resultMap>
+    <update id="updateOrderPayParamBatch">
+        update es_order eso
+        SET eso.payment_method_name = #{esOrderDTO.paymentMethodName}
+        where eso.trade_sn in
+        <foreach collection="tradeList" item="tradeSn" index="index" open="(" close=")" separator=",">
+        #{tradeSn}
+        </foreach>
+    </update>
+
+    <select id="getEsSellerOrderList" resultType="com.shopx.trade.api.model.domain.EsOrderDO">
+    SELECT
+        eso.*
+     FROM es_order eso
+        WHERE eso.is_del = 0
+        <if test="esSellerOrderQueryDTO.goodsName != null and esSellerOrderQueryDTO.goodsName != ''">
+            AND eso.items_json like CONCAT('%',#{esSellerOrderQueryDTO.goodsName},'%')
+        </if>
+        <if test="esSellerOrderQueryDTO.shopId != null and esSellerOrderQueryDTO.shopId != ''">
+            and  eso.shop_id =#{esSellerOrderQueryDTO.shopId}
+        </if>
+        <if test="esSellerOrderQueryDTO.orderSn != null and esSellerOrderQueryDTO.orderSn != ''">
+            and  eso.order_sn =#{esSellerOrderQueryDTO.orderSn}
+        </if>
+        <if test="esSellerOrderQueryDTO.memberName != null and esSellerOrderQueryDTO.memberName != ''">
+            and  eso.member_name =#{esSellerOrderQueryDTO.memberName}
+        </if>
+        <if test="esSellerOrderQueryDTO.shipName != null and esSellerOrderQueryDTO.shipName != ''">
+            and  eso.ship_name =#{esSellerOrderQueryDTO.shipName}
+        </if>
+        <if test="esSellerOrderQueryDTO.clientType != null and esSellerOrderQueryDTO.clientType != ''">
+            and  eso.client_type =#{esSellerOrderQueryDTO.clientType}
+        </if>
+        <if test="esSellerOrderQueryDTO.orderState != null and esSellerOrderQueryDTO.orderState != ''">
+            and  eso.order_state =#{esSellerOrderQueryDTO.orderState}
+        </if>
+        <if test="esSellerOrderQueryDTO.createTime != null and esSellerOrderQueryDTO.createTime != ''">
+            and  eso.create_time <![CDATA[>= ]]> #{esSellerOrderQueryDTO.createTime}
+        </if>
+        <if test="esSellerOrderQueryDTO.createTimeEnd != null and esSellerOrderQueryDTO.createTimeEnd != ''">
+            and  eso.create_time <![CDATA[<= ]]> #{esSellerOrderQueryDTO.createTimeEnd}
+        </if>
+        order by eso.create_time desc
+    </select>
+    <select id="getEsBuyerOrderList" resultType="com.shopx.trade.api.model.domain.EsBuyerOrderDO">
+        SELECT
+        eso.trade_sn,
+        eso.order_sn,
+        eso.order_money,
+        eso.member_name,
+        eso.ship_name,
+        eso.order_state,
+        eso.pay_state,
+        eso.ship_state,
+        eso.client_type,
+        eso.create_time,
+        eso.items_json,
+        eso.create_time,
+        eso.service_state,
+        eso.mobile
+        FROM es_order eso
+        WHERE eso.is_del = 0
+
+        <if test="esBuyerOrderQueryDTO.orderSn != null and esBuyerOrderQueryDTO.orderSn != ''">
+            and  eso.order_sn =#{esBuyerOrderQueryDTO.orderSn}
+        </if>
+        <if test="esBuyerOrderQueryDTO.memberId != null and esBuyerOrderQueryDTO.memberId != ''">
+            and  eso.member_id =#{esBuyerOrderQueryDTO.memberId}
+        </if>
+
+        <if test="esBuyerOrderQueryDTO.orderState != null and esBuyerOrderQueryDTO.orderState != ''">
+            and  eso.order_state =#{esBuyerOrderQueryDTO.orderState}
+        </if>
+
+    </select>
+    <select id="getEsAdminOrderList" resultType="com.shopx.trade.api.model.domain.EsOrderDO">
+        SELECT
+        eso.trade_sn,
+        eso.order_sn,
+        eso.order_money,
+        eso.member_name,
+        eso.ship_name,
+        eso.order_state,
+        eso.pay_state,
+        eso.ship_state,
+        eso.client_type,
+        eso.create_time,
+        eso.mobile
+        FROM es_order eso
+        WHERE eso.is_del = 0
+        <if test="esAdminOrderQueryDTO.goodsName != null and esAdminOrderQueryDTO.goodsName != ''">
+            AND eso.items_json like CONCAT('%',#{esAdminOrderQueryDTO.goodsName},'%')
+        </if>
+        <if test="esAdminOrderQueryDTO.orderSn != null and esAdminOrderQueryDTO.orderSn != ''">
+            and  eso.order_sn =#{esAdminOrderQueryDTO.orderSn}
+        </if>
+        <if test="esAdminOrderQueryDTO.memberName != null and esAdminOrderQueryDTO.memberName != ''">
+            and  eso.member_name =#{esAdminOrderQueryDTO.memberName}
+        </if>
+        <if test="esAdminOrderQueryDTO.shipName != null and esAdminOrderQueryDTO.shipName != ''">
+            and  eso.ship_name =#{esAdminOrderQueryDTO.shipName}
+        </if>
+        <if test="esAdminOrderQueryDTO.clientType != null and esAdminOrderQueryDTO.clientType != ''">
+            and  eso.client_type =#{esAdminOrderQueryDTO.clientType}
+        </if>
+        <if test="esAdminOrderQueryDTO.orderState != null and esAdminOrderQueryDTO.orderState != ''">
+            and  eso.order_state =#{esAdminOrderQueryDTO.orderState}
+        </if>
+        <if test="esAdminOrderQueryDTO.createTime != null and esAdminOrderQueryDTO.createTime != ''">
+            and  eso.create_time <![CDATA[>= ]]> #{esAdminOrderQueryDTO.createTime}
+        </if>
+        <if test="esAdminOrderQueryDTO.createTimeEnd != null and esAdminOrderQueryDTO.createTimeEnd != ''">
+            and  eso.create_time <![CDATA[<= ]]> #{esAdminOrderQueryDTO.createTimeEnd}
+        </if>
+        order by eso.create_time desc
+    </select>
+
+    <select id="getEsBuyerMemberLevel" resultType="com.shopx.trade.api.model.domain.EsOrderDO">
+        SELECT
+            COUNT(DISTINCT(aa.time)) as frequency,
+            SUM(aa.order_money) AS monetary,
+            aa.member_id,
+            aa.member_name,
+            aa.order_sn,
+            aa.trade_sn
+                from (
+                    SELECT FROM_UNIXTIME(esc.create_time/1000,'%Y-%m%-%d') as time
+                    ,esc.trade_sn
+                    ,esc.order_sn
+                    ,esc.member_id
+                    ,esc.member_name
+                    ,esc.order_money
+                    from es_order esc
+                    WHERE esc.create_time <![CDATA[>= ]]> #{time}
+                    AND esc.create_time <![CDATA[<= ]]> #{currentTime}
+                    ORDER BY esc.create_time asc
+                ) aa
+            GROUP BY aa.member_id
+    </select>
+
+    <select id="getEsBuyerMemberLevelLnsSpace" resultType="com.shopx.trade.api.model.domain.EsRFMTradeDO">
+        SELECT
+        COUNT(DISTINCT(aa.time)) as frequency,
+        SUM(aa.order_money) AS monetary,
+        aa.member_id memberId,
+        aa.member_name memberName,
+        aa.order_sn orderSn,
+        aa.trade_sn tradeSn
+        from (
+        SELECT FROM_UNIXTIME(esc.create_time/1000,'%Y-%m%-%d') as time
+        ,esc.trade_sn
+        ,esc.order_sn
+        ,esc.member_id
+        ,esc.member_name
+        ,esc.order_money
+        from es_order esc
+        WHERE 1=1
+        <if test="judge == 1 ">
+             and FROM_UNIXTIME(esc.create_time/1000,'%Y-%m%-%d') <![CDATA[>= ]]> #{times}
+        </if>
+        <if test="judge ==2">
+            and FROM_UNIXTIME(esc.create_time/1000,'%Y-%m%-%d') <![CDATA[<]]> #{timeSpace}
+            and FROM_UNIXTIME(esc.create_time/1000,'%Y-%m%-%d') <![CDATA[>= ]]> #{times}
+        </if>
+        <if test="judge ==3">
+            and esc.member_id in (
+            SELECT GROUP_CONCAT(ta.member_id) FROM(SELECT t.* FROM	(SELECT es.id,es.member_id,es.create_time,FROM_UNIXTIME(es.create_time/1000,'%Y-%m-%d') times FROM es_order es ORDER BY FROM_UNIXTIME(es.create_time/1000,'%Y-%m-%d') DESC) t
+            GROUP BY t.member_id) ta WHERE ta.times <![CDATA[<]]> #{times}
+            )
+        </if>
+        ORDER BY esc.create_time asc
+        ) aa
+        GROUP BY aa.member_id
+    </select>
+
+    <select id="getEsMemberOrderList" resultType="com.shopx.trade.api.model.domain.EsBuyerOrderDO">
+        SELECT
+        eso.trade_sn,
+        eso.order_sn,
+        eso.order_money,
+        eso.member_name,
+        eso.ship_name,
+        eso.order_state,
+        eso.pay_state,
+        eso.ship_state,
+        eso.client_type,
+        eso.create_time,
+        eso.items_json,
+        eso.create_time,
+        eso.shop_id,
+        eso.shop_name,
+        eso.mobile,
+        eso.ship_province,
+        eso.ship_city,
+        eso.ship_county,
+        eso.ship_town,
+        eso.remark,
+        eso.ship_addr shipAddr
+        FROM es_order eso
+        left join es_order_items eoi
+        on eso.order_sn = eoi.order_sn
+        WHERE eso.is_del = 0
+
+        <if test="esBuyerOrderQueryDTO.orderSn != null and esBuyerOrderQueryDTO.orderSn != ''">
+            and  eso.order_sn =#{esBuyerOrderQueryDTO.orderSn}
+        </if>
+        <if test="esBuyerOrderQueryDTO.memberId != null and esBuyerOrderQueryDTO.memberId != ''">
+            and  eso.member_id =#{esBuyerOrderQueryDTO.memberId}
+        </if>
+
+        <if test="esBuyerOrderQueryDTO.orderState != null and esBuyerOrderQueryDTO.orderState != ''">
+            and  eso.order_state =#{esBuyerOrderQueryDTO.orderState}
+        </if>
+
+        <if test="esBuyerOrderQueryDTO.keyword != null and esBuyerOrderQueryDTO.keyword != ''">
+            and  (eso.order_sn =#{esBuyerOrderQueryDTO.keyword}
+            or   eso.shop_name like CONCAT('%',#{esBuyerOrderQueryDTO.keyword},'%')
+            or   eoi.name like CONCAT('%',#{esBuyerOrderQueryDTO.keyword},'%'))
+        </if>
+
+    </select>
+    <select id="getEsMemberReceiptList" resultType="com.shopx.trade.api.model.domain.EsBuyerOrderDO">
+        SELECT
+        eso.trade_sn,
+        eso.order_sn,
+        eso.order_money,
+        eso.member_name,
+        eso.ship_name,
+        eso.order_state,
+        eso.pay_state,
+        eso.ship_state,
+        eso.client_type,
+        eso.create_time,
+        eso.items_json,
+        eso.create_time,
+        eso.shop_id,
+        eso.shop_name,
+        eso.mobile
+        FROM es_order eso
+        WHERE eso.is_del = 0
+        and eso.order_state in
+        <foreach collection="esBuyerOrderQueryDTO.orderStatus" item="orderStatus" index="index" open="(" close=")" separator=",">
+            #{orderStatus}
+        </foreach>
+        <if test="esBuyerOrderQueryDTO.keyword != null and esBuyerOrderQueryDTO.keyword != ''">
+            and  (eso.order_sn = #{esBuyerOrderQueryDTO.keyword}
+            or eso.items_json like CONCAT('%',#{esBuyerOrderQueryDTO.keyword},'%'))
+        </if>
+        <if test="esBuyerOrderQueryDTO.memberId != null and esBuyerOrderQueryDTO.memberId != ''">
+            and  eso.member_id =#{esBuyerOrderQueryDTO.memberId}
+        </if>
+    </select>
+
+    <select id="selectServiceItemsList" resultType="com.shopx.trade.dao.entity.EsServiceOrderItems">
+        SELECT
+        t.*
+        FROM
+        (
+        SELECT
+        eoi.goods_id,
+        eoi.sku_id,
+        eoi.name,
+        eoi.image,
+        eoi.num,
+        eo.shop_name ,
+        eo.order_sn,
+        eo.create_time
+        FROM
+        es_order eo
+        LEFT JOIN es_order_items eoi ON eoi.order_sn = eo.order_sn
+        WHERE eo.order_state in ('ROG','COMPLETE') and eoi.state ='NOT_APPLY' and eoi.has_ship <![CDATA[ <> 3 ]]>
+        <if test="esReFundQueryDTO.memberId != null and esReFundQueryDTO.memberId != ''">
+            AND eo.member_id = #{esReFundQueryDTO.memberId}
+        </if>
+        <if test="esReFundQueryDTO.time != null and esReFundQueryDTO.time != ''">
+            AND FROM_UNIXTIME( eo.create_time / 1000, "%Y-%m-%d" ) > DATE_SUB( CURDATE( ), INTERVAL #{esReFundQueryDTO.time} MONTH )
+        </if>
+        ) as t
+        WHERE
+        1 = 1
+        <if test="esReFundQueryDTO.keyword != null and esReFundQueryDTO.keyword != ''">
+            AND t.name LIKE CONCAT('%',#{esReFundQueryDTO.keyword},'%')
+        </if>
+        <if test="esReFundQueryDTO.keyword != null and esReFundQueryDTO.keyword != ''">
+            OR t.shop_name LIKE CONCAT('%',#{esReFundQueryDTO.keyword},'%')
+        </if>
+        ORDER BY t.create_time DESC
+    </select>
+
+
+
+
+    <select id="getEsWapOrderItemsList" resultType="com.shopx.trade.api.model.domain.EsWapRefundOrderItemsDO">
+        SELECT
+        t.*
+        FROM
+        (
+        SELECT
+        it.goods_id,
+        it.sku_id,
+        it.name,
+        it.image,
+        it.num,
+        it.money,
+        o.shop_name ,
+        o.order_sn,
+        o.create_time,
+        o.ship_province,
+        o.ship_city,
+        o.ship_county,
+        o.ship_town,
+        o.ship_addr,
+        o.ship_name,
+        o.ship_mobile
+        FROM
+        es_order o
+        LEFT JOIN es_order_items it ON it.order_sn = o.order_sn
+        WHERE o.order_state in ('ROG','COMPLETE') and it.state ='NOT_APPLY' and it.has_ship <![CDATA[ <> 3 ]]>
+        <if test="esReFundQueryDTO.memberId != null and esReFundQueryDTO.memberId != ''">
+            AND o.member_id = #{esReFundQueryDTO.memberId}
+        </if>
+        <if test="esReFundQueryDTO.time != null and esReFundQueryDTO.time != ''">
+            AND FROM_UNIXTIME( o.create_time / 1000, "%Y-%m-%d" ) > DATE_SUB( CURDATE( ), INTERVAL #{esReFundQueryDTO.time} MONTH )
+        </if>
+        ) as t
+        WHERE
+        1 = 1
+        <if test="esReFundQueryDTO.keyword != null and esReFundQueryDTO.keyword != ''">
+            AND t.name LIKE CONCAT('%',#{esReFundQueryDTO.keyword},'%')
+        </if>
+        <if test="esReFundQueryDTO.keyword != null and esReFundQueryDTO.keyword != ''">
+            OR t.shop_name LIKE CONCAT('%',#{esReFundQueryDTO.keyword},'%')
+        </if>
+    </select>
+
+
+    <select id="getCounts" resultType="java.lang.Integer">
+        SELECT
+        count(1)
+        FROM
+        es_order o
+        LEFT JOIN es_order_items it ON it.order_sn = o.order_sn
+        WHERE o.order_state in ('ROG','COMPLETE') and it.state ='NOT_APPLY' and it.has_ship <![CDATA[ <> 3 ]]>
+        <if test="memberId != null and memberId != ''">
+            AND o.member_id = #{memberId}
+        </if>
+    </select>
+
+
+
+    <select id="getOrderStatusNum" resultType="com.shopx.trade.api.model.domain.EsOrderDO">
+            SELECT
+        order_state,
+        count( order_sn ) AS count,
+        order_sn
+        FROM
+        es_order o
+        WHERE
+        o.member_id = #{id}
+        and o.is_del = 0
+        GROUP BY
+        order_state
+    </select>
+    <select id="getEsAdminOrderCountByTradeSn" resultType="java.lang.Integer">
+        SELECT
+        count(trade_sn) AS count
+        FROM
+        es_order o
+        WHERE
+        o.trade_sn = #{tradeSn}
+        and o.is_del = 0
+    </select>
+
+    <select id="getExportOrderList" resultType="com.shopx.trade.api.model.domain.EsExportOrdersDO">
+        SELECT
+        o.order_sn,
+        o.lfc_id,
+        o.member_id,
+        o.member_name,
+        it.sku_id,
+        it.goods_id,
+        it.`name`,
+        it.spec_json,
+        it.money,
+        o.order_state,
+        it.num,
+        o.create_time,
+        o.ship_name,
+        o.ship_mobile,
+        o.ship_province,
+        o.ship_city,
+        o.ship_county,
+        o.ship_town,
+        o.ship_addr,
+        o.remark,
+        it.logi_name,
+        it.ship_no,
+        o.order_state
+        FROM es_order o
+        left join es_order_items it
+        on o.order_sn = it.order_sn
+        WHERE o.is_del = 0
+        <if test="dto.shopId != null and dto.shopId != ''">
+            and  o.shop_id =#{dto.shopId}
+        </if>
+        <if test="dto.orderState != null and dto.orderState != ''">
+            and  o.order_state =#{dto.orderState}
+        </if>
+        <if test="dto.startTime != null and dto.startTime != ''">
+            and  o.create_time <![CDATA[>= ]]> #{dto.startTime}
+        </if>
+        <if test="dto.endTime != null and dto.endTime != ''">
+            and  o.create_time <![CDATA[<= ]]> #{dto.endTime}
+        </if>
+        ORDER BY o.id ASC
+    </select>
+    <select id="getEsLfcOrderList" resultType="com.shopx.trade.api.model.domain.EsOrderDO">
+        SELECT
+        eso.*
+        FROM es_order eso
+        WHERE eso.is_del = 0 and eso.lfc_id  <![CDATA[ <> '' ]]>
+        <if test="esSellerOrderQueryDTO.goodsName != null and esSellerOrderQueryDTO.goodsName != ''">
+            AND eso.items_json like CONCAT('%',#{esSellerOrderQueryDTO.goodsName},'%')
+        </if>
+        <if test="esSellerOrderQueryDTO.shopId != null and esSellerOrderQueryDTO.shopId != ''">
+            and  eso.shop_id =#{esSellerOrderQueryDTO.shopId}
+        </if>
+        <if test="esSellerOrderQueryDTO.orderSn != null and esSellerOrderQueryDTO.orderSn != ''">
+            and  eso.order_sn =#{esSellerOrderQueryDTO.orderSn}
+        </if>
+        <if test="esSellerOrderQueryDTO.memberName != null and esSellerOrderQueryDTO.memberName != ''">
+            and  eso.member_name =#{esSellerOrderQueryDTO.memberName}
+        </if>
+        <if test="esSellerOrderQueryDTO.shipName != null and esSellerOrderQueryDTO.shipName != ''">
+            and  eso.ship_name =#{esSellerOrderQueryDTO.shipName}
+        </if>
+        <if test="esSellerOrderQueryDTO.clientType != null and esSellerOrderQueryDTO.clientType != ''">
+            and  eso.client_type =#{esSellerOrderQueryDTO.clientType}
+        </if>
+        <if test="esSellerOrderQueryDTO.orderState != null and esSellerOrderQueryDTO.orderState != ''">
+            and  eso.order_state =#{esSellerOrderQueryDTO.orderState}
+        </if>
+        <if test="esSellerOrderQueryDTO.createTime != null and esSellerOrderQueryDTO.createTime != ''">
+            and  eso.create_time <![CDATA[>= ]]> #{esSellerOrderQueryDTO.createTime}
+        </if>
+        <if test="esSellerOrderQueryDTO.createTimeEnd != null and esSellerOrderQueryDTO.createTimeEnd != ''">
+            and  eso.create_time <![CDATA[<= ]]> #{esSellerOrderQueryDTO.createTimeEnd}
+        </if>
+        <if test="esSellerOrderQueryDTO.lfcId != null and esSellerOrderQueryDTO.lfcId != ''">
+            and  eso.lfc_id=#{esSellerOrderQueryDTO.lfcId}
+        </if>
+        order by eso.create_time desc
+    </select>
+</mapper>

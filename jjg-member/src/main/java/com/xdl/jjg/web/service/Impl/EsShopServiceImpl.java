@@ -4,36 +4,28 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.model.domain.EsGoodsDO;
-import com.shopx.goods.api.model.domain.EsTagsDO;
-import com.shopx.goods.api.service.IEsGoodsService;
-import com.shopx.goods.api.service.IEsTagGoodsService;
-import com.shopx.goods.api.service.IEsTagsService;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.*;
-import com.shopx.member.api.model.domain.dto.*;
-import com.shopx.member.api.model.domain.enums.GoodTagEnums;
-import com.shopx.member.api.model.domain.enums.ShopStatusEnums;
-import com.shopx.member.api.service.IEsMemberService;
-import com.shopx.member.api.service.IEsShopDetailService;
-import com.shopx.member.api.service.IEsShopService;
+import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsMemberCollectionShop;
 import com.xdl.jjg.entity.EsShop;
 import com.xdl.jjg.entity.EsShopDetail;
-import com.shopx.member.dao.mapper.EsMemberCollectionShopMapper;
-import com.shopx.member.dao.mapper.EsShopDetailMapper;
-import com.shopx.member.dao.mapper.EsShopMapper;
+import com.xdl.jjg.mapper.EsMemberCollectionShopMapper;
+import com.xdl.jjg.mapper.EsShopDetailMapper;
+import com.xdl.jjg.mapper.EsShopMapper;
+import com.xdl.jjg.model.domain.*;
+import com.xdl.jjg.model.dto.*;
+import com.xdl.jjg.model.enums.GoodTagEnums;
+import com.xdl.jjg.model.enums.ShopStatusEnums;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.web.service.*;
 import org.apache.commons.lang.time.DateUtils;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
-import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -440,7 +432,7 @@ public class EsShopServiceImpl extends ServiceImpl<EsShopMapper, EsShop> impleme
      * @return: com.shopx.common.model.result.DubboPageResult<EsShopDO>
      */
     @Override
-    public DubboPageResult<EsShopDO> getShopList(ShopQueryParam shopQueryParam,int pageSize, int pageNum) {
+    public DubboPageResult<EsShopDO> getShopList(ShopQueryParam shopQueryParam, int pageSize, int pageNum) {
         try{
             IPage<EsShopDO> page = this.shopMapper.getAllShop(new Page(pageNum,pageSize),shopQueryParam);
             return DubboPageResult.success(page.getTotal(),page.getRecords());
@@ -575,7 +567,7 @@ public class EsShopServiceImpl extends ServiceImpl<EsShopMapper, EsShop> impleme
      * @return: com.shopx.common.model.result.DubboResult<EsShopDO>
      */
     @Override
-    public DubboResult<ApplyStep1DO> step1(ApplyStep1DTO applyStep1,Long memberId) {
+    public DubboResult<ApplyStep1DO> step1(ApplyStep1DTO applyStep1, Long memberId) {
         try{
             EsShop shop = this.getShopByMemberId(memberId);
             //判断是否拥有店铺

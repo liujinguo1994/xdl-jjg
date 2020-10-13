@@ -1,0 +1,77 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.trade.dao.mapper.EsPromotionGoodsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shopx.trade.dao.entity.EsPromotionGoods">
+        <id column="id" property="id" />
+        <result column="goods_id" property="goodsId" />
+        <result column="create_time" property="createTime" />
+        <result column="update_time" property="updateTime" />
+        <result column="activity_id" property="activityId" />
+        <result column="promotion_type" property="promotionType" />
+        <result column="title" property="title" />
+        <result column="num" property="num" />
+        <result column="price" property="price" />
+        <result column="shop_id" property="shopId" />
+        <result column="is_lower_shelf" property="isLowerShelf"/>
+    </resultMap>
+    
+    <select id="verifyConflict" resultMap="BaseResultMap">
+        SELECT
+          *
+        FROM
+          es_promotion_goods
+        WHERE
+          goods_id IN (#{goodsIdStr})
+        AND
+          promotion_type IN (#{promotionTypes})
+        AND
+          ((start_time &gt;= #{startTime} AND #{startTime} &gt;= end_time ) OR (start_time &gt;= #{endTime} AND #{endTime} &gt;=
+          end_time ))
+        <if test="activityId != null and activityId != ''">
+        AND
+            activity_id != #{activityId}
+        </if>
+    </select>
+    <select id="getPromotionByGoodsId" resultType="com.shopx.trade.dao.entity.EsPromotionGoods">
+        SELECT
+          *
+        FROM
+          es_promotion_goods
+        WHERE
+          goods_id IN
+        <foreach collection="goodsIdList" item="goodsId" index="index" open="(" close=")" separator=",">
+            #{goodsId}
+        </foreach>
+        AND
+        start_time &lt;= #{currentTime} AND #{currentTime} &lt;= end_time
+        AND is_lower_shelf = 0
+    </select>
+    <select id="getPromotionBySkuId" resultType="com.shopx.trade.dao.entity.EsPromotionGoods">
+        SELECT
+        *
+        FROM
+        es_promotion_goods
+        WHERE
+        sku_id IN
+        <foreach collection="skuIdList" item="skuId" index="index" open="(" close=")" separator=",">
+            #{skuId}
+        </foreach>
+        AND
+        start_time &lt;= #{currentTime} AND #{currentTime} &lt;= end_time
+        AND is_lower_shelf = 0
+    </select>
+    <select id="getIsBeOverdueByActivityId" resultType="java.lang.Integer">
+        SELECT
+        COUNT( 0 )
+        FROM
+        es_promotion_goods ep
+        WHERE
+        ep.activity_id = #{activityId}
+        AND ep.start_time &lt;= #{timeMillis}
+        AND #{timeMillis} &lt;= ep.end_time;
+    </select>
+
+
+</mapper>

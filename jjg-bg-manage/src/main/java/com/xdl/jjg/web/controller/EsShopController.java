@@ -1,15 +1,24 @@
 package com.xdl.jjg.web.controller;
 
 import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.model.domain.EsShopAndDetailDO;
+import com.xdl.jjg.model.domain.EsShopDO;
+import com.xdl.jjg.model.dto.EsShopAndDetailDTO;
+import com.xdl.jjg.model.dto.ShopQueryParam;
 import com.xdl.jjg.model.form.EsShopQueryForm;
 import com.xdl.jjg.model.form.EsUpdateShopInfoForm;
+import com.xdl.jjg.model.vo.EsShopAndDetailVO;
+import com.xdl.jjg.model.vo.EsShopVO;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.IEsShopService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,0 +1,46 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.trade.dao.mapper.EsDeliveryServiceMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shopx.trade.dao.entity.EsDeliveryService">
+        <id column="id" property="id" />
+        <result column="delivery_name" property="deliveryName"/>
+        <result column="state" property="state"/>
+        <result column="address" property="address" />
+        <result column="phone" property="phone" />
+        <result column="company_id" property="companyId"/>
+        <result column="company_name" property="deliveryName"/>
+        <result column="company_code" property="companyCode"/>
+        <!--<result column="shop_id" property="shopId" />-->
+    </resultMap>
+
+
+    <resultMap id="TextMessageResultMap" type="com.shopx.trade.dao.entity.EsDeliveryMessage">
+
+        <result column="delivery_name" property="deliveryName"/>
+        <result column="start_time" property="startTime" />
+        <result column="end_time" property="endTime" />
+        <result column="address" property="address" />
+        <result column="self_date" property="selfDate" />
+
+    </resultMap>
+
+    <select id="getDelivery" resultMap="TextMessageResultMap">
+    SELECT
+        eds.delivery_name,
+        eds.address,
+        esd.self_date,
+        est.start_time,
+        est.end_time
+    FROM
+        es_delivery_service eds
+        LEFT JOIN es_delivery_date edd ON edd.delivery_id = eds.id
+        LEFT JOIN es_self_date esd ON esd.id = edd.date_id
+        LEFT JOIN es_self_time est ON est.date_id = edd.date_id
+    WHERE
+        eds.id = #{deliveryId}
+        AND esd.id = #{dateId}
+        AND est.id = #{timeId}
+    </select>
+</mapper>

@@ -1,0 +1,184 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.trade.dao.mapper.EsGoodsStatisticsMapper">
+
+
+    <select id="getGoodsSalesDetailList"
+            resultType="com.shopx.trade.api.model.domain.EsGoodsSalesDetailDO">
+        SELECT
+        eoi.goods_id goodsId,
+        eoi.name goodsName,
+        count(eo.id) orderNum,
+        sum(eoi.num) orderGoodsNum,
+        sum(eoi.money) orderPriceTotal
+
+        from es_order eo
+        join es_order_items eoi on eoi.order_sn = eo.order_sn
+        join es_trade et on et.trade_sn = eo.trade_sn
+        where eo.is_del = '0'
+        and et.is_del = '0'
+        <if test="goodsSalesDetailDTO.orderState != null and goodsSalesDetailDTO.orderState != ''">
+            and eo.order_state = #{goodsSalesDetailDTO.orderState}
+        </if>
+        <if test="goodsSalesDetailDTO.categoryId != null and goodsSalesDetailDTO.categoryId != ''">
+            and eoi.category_id = #{goodsSalesDetailDTO.categoryId}
+        </if>
+        <if test="goodsSalesDetailDTO.shopId != null">
+            and eo.shop_id = #{goodsSalesDetailDTO.shopId}
+        </if>
+        <if test="goodsSalesDetailDTO.queryCycle != null and goodsSalesDetailDTO.queryCycle != ''">
+            <if test="goodsSalesDetailDTO.queryCycleUnit eq 'YEAR'">
+                and FROM_UNIXTIME(et.create_time/1000,"%Y") = #{goodsSalesDetailDTO.queryCycle}
+            </if>
+            <if test="goodsSalesDetailDTO.queryCycleUnit eq 'MONTH'">
+                and FROM_UNIXTIME(et.create_time/1000,"%Y-%m") = #{goodsSalesDetailDTO.queryCycle}
+            </if>
+        </if>
+        GROUP BY eoi.goods_id , eoi.name
+    </select>
+    <select id="getGoodsHotSell" resultType="com.shopx.trade.api.model.domain.EsGoodsHotSellDO">
+        SELECT * from (
+            SELECT
+            eoi.goods_id goodsId,
+            eoi.name goodsName,
+            eoi.category_id categoryId,
+            eoi.category_name categoryName,
+            eoi.spec_json specJson,
+            eo.shop_name shopName,
+            sum(eoi.num) salesNum,
+            sum(eoi.money * eoi.num) totalMoney
+            from es_trade et
+            join es_order eo on eo.trade_sn = et.trade_sn and eo.is_del = '0'
+            join es_order_items eoi on eoi.order_sn = eo.order_sn
+            <where>
+                and eo.order_state = 'COMPLETE' /*订单状态为已完成*/
+                <if test="goodsHotSell.categoryId != null">
+                    and eoi.category_id = #{goodsHotSell.categoryId}
+                </if>
+                <if test="goodsHotSell.categoryName != null and goodsHotSell.categoryName != ''">
+                    and eoi.category_name like concat('%',#{goodsHotSell.categoryName},'%')
+                </if>
+                <if test="goodsHotSell.shopName != null and goodsHotSell.shopName != ''">
+                    and eo.shop_name like concat('%',#{goodsHotSell.shopName},'%')
+                </if>
+                <if test="goodsHotSell.saleTimeStart != null">
+                    and eo.complete_time >= #{goodsHotSell.saleTimeStart}
+                </if>
+                <if test="goodsHotSell.saleTimeEnd != null">
+                    and eo.complete_time <![CDATA[ <= ]]> #{goodsHotSell.saleTimeEnd}
+                </if>
+            </where>
+            GROUP BY eoi.goods_id,eoi.name,eoi.category_id,eoi.category_name,eoi.spec_json,eo.shop_name) p
+        ORDER BY p.salesNum desc
+    </select>
+    <select id="getGoodsPaymentConversionRate"
+            resultType="com.shopx.trade.api.model.domain.EsGoodsPaymentConversionRateDO">
+        SELECT
+            p.goods_name goodsName,
+            p.category_id categoryId,
+            p.category_name categoryName,
+            p.spec_json specJson,
+            p.sales_num salesNum,
+            p.total_money totalMoney,
+            round(p.sales_num / p1.all_sales_num,4) conversionRate
+        FROM
+            (SELECT
+                eoi.goods_id,
+                eoi.NAME goods_name,
+                eoi.category_id category_id,
+                eoi.category_name category_name,
+                eoi.spec_json spec_json,
+                eo.shop_id,
+                sum( eoi.num ) sales_num,
+                sum( eoi.money * eoi.num ) total_money
+            FROM
+                es_trade et
+                JOIN es_order eo ON eo.trade_sn = et.trade_sn AND eo.is_del = '0' AND eo.order_state = 'COMPLETE'
+                JOIN es_order_items eoi ON eoi.order_sn = eo.order_sn
+            <where>
+                <if test="goodsPaymentConversionRate.saleTimeStart != null">
+                    and eo.complete_time >= #{goodsPaymentConversionRate.saleTimeStart}
+                </if>
+                <if test="goodsPaymentConversionRate.saleTimeEnd != null">
+                    and eo.complete_time <![CDATA[ <= ]]> #{goodsPaymentConversionRate.saleTimeEnd}
+                </if>
+            </where>
+            GROUP BY
+                eoi.goods_id,
+                eoi.NAME,
+                eoi.category_id,
+                eoi.category_name,
+                eoi.spec_json
+            ) p,
+            (SELECT
+                eoi.goods_id,
+                sum( eoi.num ) all_sales_num
+            FROM
+                es_trade et
+                JOIN es_order eo ON eo.trade_sn = et.trade_sn
+                AND eo.is_del = '0'
+                JOIN es_order_items eoi ON eoi.order_sn = eo.order_sn
+                <where>
+                    <if test="goodsPaymentConversionRate.saleTimeStart != null">
+                        and eo.complete_time >= #{goodsPaymentConversionRate.saleTimeStart}
+                    </if>
+                    <if test="goodsPaymentConversionRate.saleTimeEnd != null">
+                        and eo.complete_time <![CDATA[ <= ]]> #{goodsPaymentConversionRate.saleTimeEnd}
+                    </if>
+                </where>
+            GROUP BY
+                eoi.goods_id
+            ) p1/*所有订单商品销量*/
+        WHERE
+            p.goods_id = p1.goods_id
+            <if test="goodsPaymentConversionRate.categoryId != null">
+                and p.category_id = #{goodsPaymentConversionRate.categoryId}
+            </if>
+            <if test="goodsPaymentConversionRate.categoryName != null and goodsPaymentConversionRate.categoryName != ''">
+                and p.category_name like concat('%',#{goodsPaymentConversionRate.categoryName},'%')
+            </if>
+            <if test="goodsPaymentConversionRate.shopName != null and goodsPaymentConversionRate.shopName != ''">
+                and p.shop_name like concat('%',#{goodsHotSell.shopName},'%')
+            </if>
+        ORDER BY
+            p.sales_num DESC
+    </select>
+    <select id="getGoodsAveragePrice" resultType="com.shopx.trade.api.model.domain.EsGoodsAveragePriceDO">
+        /*商品客单价排行*/
+        SELECT * from (
+            SELECT
+            eoi.goods_id goodsId,
+            eoi.name goodsName,
+            eoi.category_id categoryId,
+            eoi.category_name categoryName,
+            eoi.spec_json specJson,
+            eo.shop_name shopName,
+            sum(eoi.num) salesNum,
+            round(sum(eoi.money)/count(eoi.id),2) averagePrice
+            from es_trade et
+            join es_order eo on eo.trade_sn = et.trade_sn and eo.is_del = '0'
+            join es_order_items eoi on eoi.order_sn = eo.order_sn
+        <where>
+            and eo.order_state = 'COMPLETE' /*订单状态为已完成*/
+            <if test="goodsAveragePrice.categoryId != null">
+                and eoi.category_id = #{goodsAveragePrice.categoryId}
+            </if>
+            <if test="goodsAveragePrice.categoryName != null and goodsAveragePrice.categoryName != ''">
+                and eoi.category_name like concat('%',#{goodsAveragePrice.categoryName},'%')
+            </if>
+            <if test="goodsAveragePrice.shopName != null and goodsAveragePrice.shopName != ''">
+                and eo.shop_name like concat('%',#{goodsAveragePrice.shopName},'%')
+            </if>
+            <if test="goodsAveragePrice.saleTimeStart != null">
+                and eo.complete_time >= #{goodsAveragePrice.saleTimeStart}
+            </if>
+            <if test="goodsAveragePrice.saleTimeEnd != null">
+                and eo.complete_time <![CDATA[ <= ]]> #{goodsAveragePrice.saleTimeEnd}
+            </if>
+        </where>
+            GROUP BY eoi.goods_id,eoi.name,eoi.category_id,eoi.category_name,eoi.spec_json,eo.shop_name) p
+        ORDER BY p.averagePrice desc
+
+
+    </select>
+</mapper>

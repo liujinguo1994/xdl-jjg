@@ -2,13 +2,20 @@ package com.xdl.jjg.web.controller;
 
 
 import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.model.domain.EsMemberLevelConfigDO;
+import com.xdl.jjg.model.dto.EsMemberLevelConfigDTO;
+import com.xdl.jjg.model.dto.EsQueryMemberLevelConfigDTO;
 import com.xdl.jjg.model.form.EsMemberLevelConfigForm;
 import com.xdl.jjg.model.form.EsMemberLevelQueryForm;
+import com.xdl.jjg.model.vo.EsMemberLevelConfigVO;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.IEsMemberLevelConfigService;
 import io.swagger.annotations.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -28,7 +35,7 @@ import java.util.List;
 @RequestMapping("/esMemberLevelConfig")
 public class EsMemberLevelConfigController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private IEsMemberLevelConfigService memberLevelConfigService;
 
     @ApiOperation(value = "分页查询会员等级列表", response = EsMemberLevelConfigVO.class)

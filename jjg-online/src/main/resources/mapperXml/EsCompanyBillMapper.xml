@@ -1,0 +1,150 @@
+<?Mapper version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.shopx.trade.dao.mapper.EsCompanyBillMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.shopx.trade.dao.entity.EsCompanyBill">
+        <id column="id" property="id" />
+        <result column="bill_sn" property="billSn" />
+        <result column="start_time" property="startTime" />
+        <result column="end_time" property="endTime" />
+        <result column="price" property="price" />
+        <result column="commission" property="commission" />
+        <result column="bill_money" property="billMoney" />
+        <result column="refund_money" property="refundMoney" />
+        <result column="refund_commission" property="refundCommission" />
+        <result column="state" property="state" />
+        <result column="company_id" property="companyId" />
+        <result column="company_name" property="companyName" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_time" property="createTime" />
+    </resultMap>
+
+    <resultMap id="IdListResultMap" type="com.shopx.trade.dao.entity.EsCompanyBill">
+        <result column="bill_sn" property="billSn" />
+        <result column="start_time" property="startTime" />
+        <result column="end_time" property="endTime" />
+        <result column="price" property="price" />
+        <result column="bill_money" property="billMoney" />
+        <result column="commission" property="commission" />
+        <result column="refund_money" property="refundMoney" />
+        <result column="refund_commission" property="refundCommission" />
+        <result column="state" property="state" />
+        <result column="company_id" property="companyId" />
+        <result column="company_name" property="companyName" />
+        <result column="update_time" property="updateTime" />
+        <result column="create_time" property="createTime" />
+        <collection property="idList" ofType="string" javaType="list">
+            <result column="id_list" />
+        </collection>
+    </resultMap>
+
+    <select id="summary" resultMap="IdListResultMap">
+        SELECT
+            t1.id AS id_list,
+            t2.shop_id,
+            t2.shop_name,
+            IFNULL(t3.money, 0) AS price,
+            IFNULL(t4.refund_money, 0) AS refund_money
+        FROM
+            es_bill_detail t1
+        INNER JOIN es_order t2
+                ON t1.order_sn = t2.order_sn
+        INNER JOIN (SELECT
+                        t12.shop_id,
+                        t12.shop_name,
+                        SUM(t12.order_money) AS money
+                    FROM
+                        es_bill_detail t11
+                    INNER JOIN es_order t12
+                            ON t11.order_sn = t12.order_sn
+                    GROUP BY
+                        t12.shop_id, t12.shop_name) t3
+                ON t2.shop_id = t3.shop_id
+        LEFT JOIN (SELECT
+                       t12.shop_id,
+                       t12.shop_name,
+                       SUM(t12.refund_money) AS refund_money
+                   FROM
+                       es_bill_detail t11
+                   INNER JOIN es_refund t12
+                           ON t11.order_sn = t12.order_sn
+                   GROUP BY
+                       t12.shop_id, t12.shop_name) t4
+               ON t2.shop_id = t4.shop_id
+        WHERE
+            t1.id IN
+            <foreach item="item" index="index" collection="list" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        ORDER BY
+            shop_id, price
+        <where>
+
+        </where>
+    </select>
+
+    <select id="getSettlementDetail" resultType="com.shopx.trade.api.model.domain.EsSettlementDetailDO">
+        SELECT
+            t2.order_sn AS orderSn,
+            t2.create_time AS creatTime,
+            t2.order_money AS money,
+            t2.payment_type
+        FROM
+            es_bill_detail t1
+                INNER JOIN es_order t2
+                           ON  t1.order_sn = t2.order_sn
+        WHERE
+            t1.shop_bill_id = #{settlementId}
+    </select>
+
+    <select id="getSettlementRefundDetail" resultType="com.shopx.trade.api.model.domain.EsSettlementDetailDO">
+        SELECT
+            t2.sn AS refundSn,
+            t2.order_sn AS orderSn,
+            t2.create_time AS creatTime,
+            t2.refund_money AS money,
+            t2.payment_type AS  paymentType
+        FROM
+            es_bill_detail t1
+                INNER JOIN es_refund t2
+                           ON  t1.order_sn = t2.order_sn
+        WHERE
+            t1.shop_bill_id = #{settlementId}
+    </select>
+
+    <select id="getExportOrder" resultType="com.shopx.trade.dao.entity.EsExportOrder">
+        SELECT
+            t2.order_sn,
+            t3.name,
+            t3.num,
+            t3.money,
+            t2.order_money,
+            t2.discount_money
+        FROM
+            es_bill_detail t1
+                INNER JOIN es_order t2
+                           ON t1.order_sn = t2.order_sn
+                LEFT JOIN es_order_items t3
+                          ON t1.order_sn = t2.order_sn
+        WHERE
+            t1.shop_bill_id = #{settlementId}
+    </select>
+
+    <select id="getExportRefundOrder" resultType="com.shopx.trade.dao.entity.EsExportOrder">
+        SELECT
+            t2.sn AS refundSn,
+            t2.order_sn AS orderSn,
+            t3.goods_name,
+            t3.return_num,
+            t3.money
+        FROM
+            es_bill_detail t1
+                INNER JOIN es_refund t2
+                           ON t1.order_sn = t2.order_sn
+                LEFT JOIN es_refund_goods t3
+                          ON t2.sn = t3.refund_sn
+        WHERE
+            t1.shop_bill_id = #{settlementId}
+    </select>
+</mapper>

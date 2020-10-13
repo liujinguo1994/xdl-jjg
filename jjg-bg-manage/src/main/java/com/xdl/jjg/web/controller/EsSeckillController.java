@@ -3,14 +3,19 @@ package com.xdl.jjg.web.controller;
 
 import com.xdl.jjg.constant.ApiStatus;
 import com.xdl.jjg.constant.ErrorCode;
+import com.xdl.jjg.model.domain.EsSeckillDO;
+import com.xdl.jjg.model.dto.EsSeckillDTO;
 import com.xdl.jjg.model.form.EsSeckillForm;
 import com.xdl.jjg.model.form.EsSeckillQueryForm;
+import com.xdl.jjg.model.vo.EsSeckillVO;
 import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import com.xdl.jjg.web.service.IEsSeckillService;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

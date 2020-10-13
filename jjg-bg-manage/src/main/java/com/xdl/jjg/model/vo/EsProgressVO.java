@@ -1,7 +1,7 @@
 package com.xdl.jjg.model.vo;
 
-import com.shopx.common.util.StringUtil;
-import com.shopx.system.api.model.domain.TaskProgress;
+import com.xdl.jjg.model.domain.TaskProgress;
+import com.xdl.jjg.util.StringUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
