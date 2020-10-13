@@ -2,23 +2,23 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.EsCommentSortConfigDO;
-import com.shopx.member.api.model.domain.dto.EsCommentConfigDTO;
-import com.shopx.member.api.model.domain.dto.EsCommentSortConfigDTO;
-import com.shopx.member.api.model.domain.enums.GoodsCommentSortEnums;
-import com.shopx.member.api.service.IEsCommentSortConfigService;
-import com.shopx.member.api.service.IEsGradeWeightConfigService;
+import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsCommentSortConfig;
-import com.shopx.member.dao.mapper.EsCommentSortConfigMapper;
-import org.apache.dubbo.config.annotation.Service;
+import com.xdl.jjg.mapper.EsCommentSortConfigMapper;
+import com.xdl.jjg.model.domain.EsCommentSortConfigDO;
+import com.xdl.jjg.model.dto.EsCommentConfigDTO;
+import com.xdl.jjg.model.dto.EsCommentSortConfigDTO;
+import com.xdl.jjg.model.enums.GoodsCommentSortEnums;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.IEsCommentSortConfigService;
+import com.xdl.jjg.web.service.IEsGradeWeightConfigService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -33,7 +33,7 @@ import java.util.List;
  * @author lins 1220316142@qq.com
  * @since 2019-06-29 14:18:11
  */
-@Service(version = "${dubbo.application.version}" , interfaceClass = IEsCommentSortConfigService.class, timeout = 50000)
+@Service
 public class EsCommentSortConfigServiceImpl extends ServiceImpl<EsCommentSortConfigMapper, EsCommentSortConfig> implements IEsCommentSortConfigService {
 
     private static Logger logger = LoggerFactory.getLogger(EsCommentSortConfigServiceImpl.class);

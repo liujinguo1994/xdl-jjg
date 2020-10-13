@@ -1,7 +1,7 @@
 package com.xdl.jjg.model.domain;
 
-import com.shopx.common.util.JsonUtil;
-import com.shopx.member.api.model.domain.vo.ConnectSettingParametersVO;
+import com.xdl.jjg.model.vo.ConnectSettingParametersVO;
+import com.xdl.jjg.util.JsonUtil;
 import lombok.Data;
 
 import java.io.Serializable;

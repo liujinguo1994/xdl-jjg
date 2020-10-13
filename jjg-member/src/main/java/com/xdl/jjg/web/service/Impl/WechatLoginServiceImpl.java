@@ -1,28 +1,26 @@
 package com.xdl.jjg.web.service.Impl;
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.common.util.StringUtil;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.EsConnectSettingDO;
-import com.shopx.member.api.model.domain.EsMemberDO;
-import com.shopx.member.api.model.domain.enums.ConnectTypeEnum;
-import com.shopx.member.api.model.domain.enums.WechatConnectConfigGroupEnum;
-import com.shopx.member.api.model.domain.enums.WechatConnectConfigItemEnm;
-import com.shopx.member.api.model.domain.plugin.ThreadContextHolder;
-import com.shopx.member.api.model.domain.vo.Auth2Token;
-import com.shopx.member.api.model.domain.vo.ConnectSettingConfigItem;
-import com.shopx.member.api.model.domain.vo.ConnectSettingParametersVO;
-import com.shopx.member.api.service.IEsConnectSettingService;
-import com.shopx.member.api.service.WechatLoginService;
-import com.sohu.tv.cachecloud.client.basic.util.HttpUtils;
-import net.sf.json.JSONObject;
-import org.apache.dubbo.config.annotation.Service;
+
+import com.xdl.jjg.constant.MemberErrorCode;
+import com.xdl.jjg.constant.ThreadContextHolder;
+import com.xdl.jjg.model.domain.EsConnectSettingDO;
+import com.xdl.jjg.model.domain.EsMemberDO;
+import com.xdl.jjg.model.enums.ConnectTypeEnum;
+import com.xdl.jjg.model.enums.WechatConnectConfigGroupEnum;
+import com.xdl.jjg.model.enums.WechatConnectConfigItemEnm;
+import com.xdl.jjg.model.vo.Auth2Token;
+import com.xdl.jjg.model.vo.ConnectSettingConfigItem;
+import com.xdl.jjg.model.vo.ConnectSettingParametersVO;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.web.service.IEsConnectSettingService;
+import com.xdl.jjg.web.service.WechatLoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
 import javax.servlet.http.HttpServletRequest;

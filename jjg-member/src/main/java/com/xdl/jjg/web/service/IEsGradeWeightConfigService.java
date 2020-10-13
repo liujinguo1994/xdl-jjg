@@ -6,6 +6,8 @@ import com.xdl.jjg.model.dto.EsGradeWeightConfigDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 
+import java.util.List;
+
 /**
  * <p>
  *  服务类

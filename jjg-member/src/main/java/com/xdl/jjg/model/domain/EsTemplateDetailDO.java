@@ -1,7 +1,8 @@
 package com.xdl.jjg.model.domain;
 
-import com.shopx.member.api.model.domain.dto.EsCategoryTemDTO;
-import com.shopx.member.api.model.domain.dto.EsGoodsTemDTO;
+
+import com.xdl.jjg.model.dto.EsCategoryTemDTO;
+import com.xdl.jjg.model.dto.EsGoodsTemDTO;
 import lombok.Data;
 
 import java.io.Serializable;
