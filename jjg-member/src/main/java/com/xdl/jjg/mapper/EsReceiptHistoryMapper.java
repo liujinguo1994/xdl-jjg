@@ -1,8 +1,8 @@
 package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jjg.member.model.domain.EsReceiptHistoryDO;
 import com.xdl.jjg.entity.EsReceiptHistory;
-import com.xdl.jjg.model.domain.EsReceiptHistoryDO;
 import org.apache.ibatis.annotations.Param;
 
 /**

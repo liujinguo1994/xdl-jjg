@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsMyFootprintDO;
-import com.xdl.jjg.model.dto.EsMyFootprintDTO;
+import com.jjg.member.model.domain.EsMyFootprintDO;
+import com.jjg.member.model.dto.EsMyFootprintDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

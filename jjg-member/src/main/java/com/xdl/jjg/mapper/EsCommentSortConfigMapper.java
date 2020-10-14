@@ -1,8 +1,8 @@
 package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jjg.member.model.domain.EsCommentSortConfigDO;
 import com.xdl.jjg.entity.EsCommentSortConfig;
-import com.xdl.jjg.model.domain.EsCommentSortConfigDO;
 
 import java.util.List;
 

@@ -1,9 +1,9 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.cache.EsCustomCO;
-import com.xdl.jjg.model.domain.EsCustomDO;
-import com.xdl.jjg.model.dto.EsCustomDTO;
+import com.jjg.member.model.cache.EsCustomCO;
+import com.jjg.member.model.domain.EsCustomDO;
+import com.jjg.member.model.dto.EsCustomDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

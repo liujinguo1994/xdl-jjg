@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsCartConfigureDO;
-import com.xdl.jjg.model.dto.EsCartConfigureDTO;
+import com.jjg.member.model.domain.EsCartConfigureDO;
+import com.jjg.member.model.dto.EsCartConfigureDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

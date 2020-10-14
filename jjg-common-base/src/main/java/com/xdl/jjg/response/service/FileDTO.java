@@ -3,8 +3,8 @@ package com.xdl.jjg.response.service;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+import org.hibernate.validator.constraints.NotEmpty;
 
-import javax.validation.constraints.NotEmpty;
 import java.io.InputStream;
 
 /**

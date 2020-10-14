@@ -2,11 +2,10 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xdl.jjg.constant.ErrorCode;
+import com.jjg.member.model.dto.EsSearchKeyWordDTO;
 import com.xdl.jjg.entity.EsSearchKeyWord;
 import com.xdl.jjg.mapper.EsSearchKeyWordMapper;
 import com.xdl.jjg.model.domain.EsSearchKeyWordDO;
-import com.xdl.jjg.model.dto.EsSearchKeyWordDTO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;

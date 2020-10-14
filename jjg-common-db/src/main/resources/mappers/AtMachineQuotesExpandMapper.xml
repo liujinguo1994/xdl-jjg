@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aite.mapper.AtMachineQuotesExpandMapper">
+    <resultMap id="BaseResultMap" type="com.aite.pojo.AtMachineQuotesExpand">
+        <result column="machine_quotes_id" jdbcType="VARCHAR" javaType="java.lang.String" property="machineQuotesId" />
+        <result column="machine_id" jdbcType="VARCHAR" javaType="java.lang.String" property="machineId" />
+        <result column="quotes_id" jdbcType="VARCHAR" javaType="java.lang.String" property="quotesId" />
+        <result column="coin_id" jdbcType="VARCHAR" javaType="java.lang.String" property="coinId" />
+        <result column="symbol" jdbcType="VARCHAR" javaType="java.lang.String" property="symbol" />
+        <result column="logo" jdbcType="VARCHAR" javaType="java.lang.String" property="logo" />
+        <result column="cur_ex_rate" jdbcType="DECIMAL" javaType="java.math.BigDecimal" property="curExRate"/>
+        <result column="late_ex_rate" jdbcType="DECIMAL" javaType="java.math.BigDecimal" property="lateExRate"/>
+        <result column="exchage_type" jdbcType="INTEGER" javaType="java.lang.Integer" property="exchangeType"/>
+        <result column="increament" jdbcType="DECIMAL" javaType="java.math.BigDecimal" property="increment"/>
+    </resultMap>
+
+    <select id="selectMachineQuotesList" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+	    b.machine_quotes_id,
+	    machine_id,
+	    a.quotes_id,
+	    c.coin_id,
+	    c.symbol,
+	    c.logo,
+	    sort,
+	    cur_ex_rate,
+	    late_ex_rate,
+	    exchage_type,
+	    increament
+	FROM
+		at_quotes a
+	LEFT JOIN (select *  from at_machine_quotes WHERE machine_id = #{machineId, jdbcType=VARCHAR}) b
+	on a.quotes_id = b.quotes_id
+	LEFT JOIN dic_coin c
+	on a.coin_id = c.coin_id
+	WHERE a.show_state = '1' AND machine_quotes_id is null
+	GROUP BY
+		a.quotes_id
+    </select>
+
+    <select id="selectMachineQuotesListOrderByCurExRateAsc" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+	    b.machine_quotes_id,
+	    machine_id,
+	    a.quotes_id,
+	    c.coin_id,
+	    c.symbol,
+	    c.logo,
+	    sort,
+	    cur_ex_rate,
+	    late_ex_rate,
+	    exchage_type,
+	    increament
+	FROM
+		at_quotes a
+	LEFT JOIN (select *  from at_machine_quotes WHERE machine_id = #{machineId, jdbcType=VARCHAR}) b
+	on a.quotes_id = b.quotes_id
+	LEFT JOIN dic_coin c
+	on a.coin_id = c.coin_id
+	WHERE a.show_state = '1' AND machine_quotes_id is null
+	GROUP BY
+		a.quotes_id
+    ORDER BY
+	    cur_ex_rate ASC
+    </select>
+
+
+    <select id="selectMachineQuotesListOrderByCurExRateDesc" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+	    b.machine_quotes_id,
+	    machine_id,
+	    a.quotes_id,
+	    c.coin_id,
+	    c.symbol,
+	    c.logo,
+	    sort,
+	    cur_ex_rate,
+	    late_ex_rate,
+	    exchage_type,
+	    increament
+	FROM
+		at_quotes a
+	LEFT JOIN (select *  from at_machine_quotes WHERE machine_id = #{machineId, jdbcType=VARCHAR}) b
+	on a.quotes_id = b.quotes_id
+	LEFT JOIN dic_coin c
+	on a.coin_id = c.coin_id
+	WHERE a.show_state = '1' AND machine_quotes_id is null
+	GROUP BY
+		a.quotes_id
+    ORDER BY
+        cur_ex_rate DESC
+    </select>
+
+
+    <select id="selectMachineQuotesListOrderByIncrementAsc" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+	    b.machine_quotes_id,
+	    machine_id,
+	    a.quotes_id,
+	    c.coin_id,
+	    c.symbol,
+	    c.logo,
+	    sort,
+	    cur_ex_rate,
+	    late_ex_rate,
+	    exchage_type,
+	    increament
+	FROM
+		at_quotes a
+	LEFT JOIN (select *  from at_machine_quotes WHERE machine_id = #{machineId, jdbcType=VARCHAR}) b
+	on a.quotes_id = b.quotes_id
+	LEFT JOIN dic_coin c
+	on a.coin_id = c.coin_id
+	WHERE a.show_state = '1' AND machine_quotes_id is null
+	GROUP BY
+		a.quotes_id
+	ORDER BY
+	    increament ASC
+    </select>
+
+
+    <select id="selectMachineQuotesListOrderByIncrementDesc" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+	    b.machine_quotes_id,
+	    machine_id,
+	    a.quotes_id,
+	    c.coin_id,
+	    c.symbol,
+	    c.logo,
+	    sort,
+	    cur_ex_rate,
+	    late_ex_rate,
+	    exchage_type,
+	    increament
+	FROM
+		at_quotes a
+	LEFT JOIN (select *  from at_machine_quotes WHERE machine_id = #{machineId, jdbcType=VARCHAR}) b
+	on a.quotes_id = b.quotes_id
+	LEFT JOIN dic_coin c
+	on a.coin_id = c.coin_id
+	WHERE a.show_state = '1' AND machine_quotes_id is null
+	GROUP BY
+		a.quotes_id
+	ORDER BY
+	    increament DESC
+    </select>
+
+	<select id="selectQuotesListByMachineId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    SELECT
+	    b.machine_quotes_id,
+	    machine_id,
+	    a.quotes_id,
+	    c.coin_id,
+	    c.symbol,
+	    c.logo,
+	    sort,
+	    cur_ex_rate,
+	    late_ex_rate,
+	    exchage_type,
+	    increament
+	FROM
+		at_quotes a
+	LEFT JOIN (select *  from at_machine_quotes WHERE machine_id = #{machineId, jdbcType=VARCHAR}) b
+	on a.quotes_id = b.quotes_id
+	LEFT JOIN dic_coin c
+	on a.coin_id = c.coin_id
+	WHERE a.show_state = '1'
+	GROUP BY
+		a.quotes_id
+    </select>
+
+	<select id="selectMachineQuotesListByKeyword" resultMap="BaseResultMap">
+    SELECT
+	    b.machine_quotes_id,
+	    machine_id,
+	    a.quotes_id,
+	    c.coin_id,
+	    c.symbol,
+	    c.logo,
+	    sort,
+	    cur_ex_rate,
+	    late_ex_rate,
+	    exchage_type,
+	    increament
+	FROM
+		at_quotes a
+	LEFT JOIN (select *  from at_machine_quotes WHERE machine_id = #{machineId, jdbcType=VARCHAR}) b
+	on a.quotes_id = b.quotes_id
+	LEFT JOIN dic_coin c
+	on a.coin_id = c.coin_id
+	WHERE a.show_state = '1' AND c.symbol like #{keyword, jdbcType=VARCHAR}
+	GROUP BY
+		a.quotes_id
+    </select>
+
+
+</mapper>

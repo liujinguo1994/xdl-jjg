@@ -2,13 +2,13 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.member.model.domain.EsCommentSortConfigDO;
+import com.jjg.member.model.dto.EsCommentConfigDTO;
+import com.jjg.member.model.dto.EsCommentSortConfigDTO;
+import com.jjg.member.model.enums.GoodsCommentSortEnums;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsCommentSortConfig;
 import com.xdl.jjg.mapper.EsCommentSortConfigMapper;
-import com.xdl.jjg.model.domain.EsCommentSortConfigDO;
-import com.xdl.jjg.model.dto.EsCommentConfigDTO;
-import com.xdl.jjg.model.dto.EsCommentSortConfigDTO;
-import com.xdl.jjg.model.enums.GoodsCommentSortEnums;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;

@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsMemberleverGrowthvalueConfigDO;
-import com.xdl.jjg.model.dto.EsMemberleverGrowthvalueConfigDTO;
+import com.jjg.member.model.domain.EsMemberleverGrowthvalueConfigDO;
+import com.jjg.member.model.dto.EsMemberleverGrowthvalueConfigDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

@@ -1,8 +1,8 @@
 package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jjg.member.model.domain.EsCollectCateryNumDO;
 import com.xdl.jjg.entity.EsMemberCollectionGoods;
-import com.xdl.jjg.model.domain.EsCollectCateryNumDO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

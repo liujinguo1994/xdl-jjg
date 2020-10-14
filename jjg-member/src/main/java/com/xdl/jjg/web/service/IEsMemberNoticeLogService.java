@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
+import com.jjg.member.model.dto.EsMemberNoticeLogDTO;
 import com.xdl.jjg.model.domain.EsMemberNoticeLogDO;
-import com.xdl.jjg.model.dto.EsMemberNoticeLogDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

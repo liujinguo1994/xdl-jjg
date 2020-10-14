@@ -4,19 +4,20 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.member.model.dto.EsDiscountDTO;
 import com.xdl.jjg.constant.MemberErrorCode;
+import com.xdl.jjg.entity.EsCompany;
 import com.xdl.jjg.entity.EsDiscount;
 import com.xdl.jjg.mapper.EsCompanyMapper;
 import com.xdl.jjg.mapper.EsDiscountMapper;
 import com.xdl.jjg.model.domain.EsCategoryDO;
 import com.xdl.jjg.model.domain.EsDiscountDO;
-import com.xdl.jjg.model.dto.EsDiscountDTO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsCategoryService;
 import com.xdl.jjg.web.service.IEsDiscountService;
+import com.xdl.jjg.web.service.feignShopService.CategoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -43,8 +44,8 @@ public class EsDiscountServiceImpl extends ServiceImpl<EsDiscountMapper, EsDisco
 
     private static Logger logger = LoggerFactory.getLogger(EsDiscountServiceImpl.class);
 
-    @Reference(version = "${dubbo.application.version}" ,timeout = 50000,check = false)
-    private IEsCategoryService iEsCategoryService;
+    @Autowired
+    private CategoryService iEsCategoryService;
 
     @Autowired
     private EsDiscountMapper discountMapper;

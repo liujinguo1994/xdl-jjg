@@ -66,21 +66,6 @@
             <artifactId>jjg-common-db</artifactId>
             <version>${project.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.xdl.jjg</groupId>
-            <artifactId>jjg-member</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.xdl.jjg</groupId>
-            <artifactId>jjg-shop</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.xdl.jjg</groupId>
-            <artifactId>jjg-bg-manage</artifactId>
-            <version>${project.version}</version>
-        </dependency>
         <!--<dependency>-->
         <!--<groupId>com.xdl.jjg</groupId>-->
         <!--<artifactId>jjg-security-app</artifactId>-->

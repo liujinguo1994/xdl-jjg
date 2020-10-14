@@ -2,12 +2,11 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xdl.jjg.constant.ErrorCode;
+import com.jjg.member.model.dto.EsCouponReceiveCheckDTO;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsCouponReceiveCheck;
 import com.xdl.jjg.mapper.EsCouponReceiveCheckMapper;
 import com.xdl.jjg.model.domain.EsCouponReceiveCheckDO;
-import com.xdl.jjg.model.dto.EsCouponReceiveCheckDTO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
@@ -53,7 +52,7 @@ public class EsCouponReceiveCheckServiceImpl extends ServiceImpl<EsCouponReceive
     public DubboResult insertCouponReceiveCheck(EsCouponReceiveCheckDTO couponReceiveCheckDTO) {
         try {
             if (couponReceiveCheckDTO == null) {
-                throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), ErrorCode.PARAM_ERROR.getErrorMsg());
+                throw new ArgumentException(MemberErrorCode.PARAM_ERROR.getErrorCode(), MemberErrorCode.PARAM_ERROR.getErrorMsg());
             }
             // 验证唯一性
             QueryWrapper<EsCouponReceiveCheck> queryWrapper = new QueryWrapper<>();
@@ -86,7 +85,7 @@ public class EsCouponReceiveCheckServiceImpl extends ServiceImpl<EsCouponReceive
     public DubboResult updateCouponReceiveCheck(EsCouponReceiveCheckDTO couponReceiveCheckDTO) {
         try {
             if (couponReceiveCheckDTO == null) {
-                throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), ErrorCode.PARAM_ERROR.getErrorMsg());
+                throw new ArgumentException(MemberErrorCode.PARAM_ERROR.getErrorCode(), MemberErrorCode.PARAM_ERROR.getErrorMsg());
             }
             EsCouponReceiveCheck couponReceiveCheck = new EsCouponReceiveCheck();
             BeanUtil.copyProperties(couponReceiveCheckDTO, couponReceiveCheck);
@@ -97,7 +96,7 @@ public class EsCouponReceiveCheckServiceImpl extends ServiceImpl<EsCouponReceive
         } catch (Throwable th) {
             logger.error("更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -117,13 +116,13 @@ public class EsCouponReceiveCheckServiceImpl extends ServiceImpl<EsCouponReceive
             EsCouponReceiveCheck couponReceiveCheck = this.couponReceiveCheckMapper.selectOne(queryWrapper);
             EsCouponReceiveCheckDO couponReceiveCheckDO = new EsCouponReceiveCheckDO();
             if (couponReceiveCheck != null) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(MemberErrorCode.DATA_NOT_EXIST.getErrorCode(), MemberErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             BeanUtil.copyProperties(couponReceiveCheck, couponReceiveCheckDO);
             return DubboResult.success(couponReceiveCheckDO);
         } catch (Throwable th) {
             logger.error("查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -156,7 +155,7 @@ public class EsCouponReceiveCheckServiceImpl extends ServiceImpl<EsCouponReceive
             return DubboPageResult.success(couponReceiveCheckDOList);
         } catch (Throwable th) {
             logger.error("查询分页查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -173,7 +172,7 @@ public class EsCouponReceiveCheckServiceImpl extends ServiceImpl<EsCouponReceive
     public DubboResult deleteCouponReceiveCheck(Long id) {
         try {
             if (id == 0) {
-                throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), String.format("参数传入错误ID不能为空[%s]", id));
+                throw new ArgumentException(MemberErrorCode.PARAM_ERROR.getErrorCode(), String.format("参数传入错误ID不能为空[%s]", id));
             }
             QueryWrapper<EsCouponReceiveCheck> deleteWrapper = new QueryWrapper<>();
             deleteWrapper.lambda().eq(EsCouponReceiveCheck::getId, id);
@@ -182,7 +181,7 @@ public class EsCouponReceiveCheckServiceImpl extends ServiceImpl<EsCouponReceive
         } catch (Throwable th) {
             logger.error("查询删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -198,7 +197,7 @@ public class EsCouponReceiveCheckServiceImpl extends ServiceImpl<EsCouponReceive
             return DubboResult.success(false);
         } catch (Throwable th) {
             logger.error("查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.dto;
+package com.jjg.member.model.dto;
 
 import lombok.Data;
 import lombok.experimental.Accessors;

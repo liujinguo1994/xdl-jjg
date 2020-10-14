@@ -2,11 +2,11 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.member.model.domain.EsShopSildeDO;
+import com.jjg.member.model.dto.EsShopSildeDTO;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsShopSilde;
 import com.xdl.jjg.mapper.EsShopSildeMapper;
-import com.xdl.jjg.model.domain.EsShopSildeDO;
-import com.xdl.jjg.model.dto.EsShopSildeDTO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;

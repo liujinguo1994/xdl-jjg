@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.vo;
+package com.jjg.member.model.vo;
 
 import com.shopx.goods.api.model.domain.dto.EsGoodsGalleryDTO;
 import io.swagger.annotations.ApiModel;

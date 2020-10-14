@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsAutoCommentConfigDO;
-import com.xdl.jjg.model.dto.EsAutoCommentConfigDTO;
+import com.jjg.member.model.domain.EsAutoCommentConfigDO;
+import com.jjg.member.model.dto.EsAutoCommentConfigDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

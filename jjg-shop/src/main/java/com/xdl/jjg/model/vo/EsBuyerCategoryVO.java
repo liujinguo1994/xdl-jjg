@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.vo;
+package com.jjg.member.model.vo;
 
 import lombok.Data;
 

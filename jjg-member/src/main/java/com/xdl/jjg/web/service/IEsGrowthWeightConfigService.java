@@ -1,9 +1,9 @@
 package com.xdl.jjg.web.service;
 
 
+import com.jjg.member.model.dto.EsGrowthWeightConfigDTO;
+import com.jjg.member.model.dto.EsGrowthWeightConfigListDTO;
 import com.xdl.jjg.model.domain.EsGrowthWeightConfigDO;
-import com.xdl.jjg.model.dto.EsGrowthWeightConfigDTO;
-import com.xdl.jjg.model.dto.EsGrowthWeightConfigListDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

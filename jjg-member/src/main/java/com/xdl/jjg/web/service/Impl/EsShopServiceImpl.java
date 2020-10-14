@@ -4,6 +4,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.member.model.domain.ApplyStep1DO;
+import com.jjg.member.model.domain.EsGoodsDO;
+import com.jjg.member.model.domain.EsShopDO;
+import com.jjg.member.model.dto.*;
+import com.jjg.member.model.enums.GoodTagEnums;
+import com.jjg.member.model.enums.ShopStatusEnums;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsMemberCollectionShop;
 import com.xdl.jjg.entity.EsShop;
@@ -11,16 +17,18 @@ import com.xdl.jjg.entity.EsShopDetail;
 import com.xdl.jjg.mapper.EsMemberCollectionShopMapper;
 import com.xdl.jjg.mapper.EsShopDetailMapper;
 import com.xdl.jjg.mapper.EsShopMapper;
-import com.xdl.jjg.model.domain.*;
-import com.xdl.jjg.model.dto.*;
-import com.xdl.jjg.model.enums.GoodTagEnums;
-import com.xdl.jjg.model.enums.ShopStatusEnums;
+import com.xdl.jjg.model.domain.EsMemberDO;
+import com.xdl.jjg.model.domain.EsShopAndDetailDO;
+import com.xdl.jjg.model.domain.EsShopDetailDO;
+import com.xdl.jjg.model.domain.EsTagsDO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.CollectionUtils;
-import com.xdl.jjg.web.service.*;
+import com.xdl.jjg.web.service.IEsMemberService;
+import com.xdl.jjg.web.service.IEsShopDetailService;
+import com.xdl.jjg.web.service.IEsShopService;
 import org.apache.commons.lang.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -372,26 +380,26 @@ public class EsShopServiceImpl extends ServiceImpl<EsShopMapper, EsShop> impleme
             }
 
             //热销商品
-            List<EsMemberGoodsDO> memberHotGoodsDOList = new ArrayList<>();
+            List<com.xdl.jjg.model.domain.EsMemberGoodsDO> memberHotGoodsDOList = new ArrayList<>();
             if(hotId != 0L){
                 DubboPageResult<EsGoodsDO> goodsDOHotResult = esTagGoodsService.getBuyerAdminGoodsTags(id, hotId, GoodTagEnums.HOT.getValue());
                 if(goodsDOHotResult.isSuccess()){
                     List<EsGoodsDO> list = goodsDOHotResult.getData().getList();
                     if(CollectionUtils.isNotEmpty(list)){
-                        memberHotGoodsDOList = BeanUtil.copyList(list, EsMemberGoodsDO.class);
+                        memberHotGoodsDOList = BeanUtil.copyList(list, com.xdl.jjg.model.domain.EsMemberGoodsDO.class);
                     }
                 }
             }
             shopDO.setHotGoodList(memberHotGoodsDOList);
 
             //上新商品
-            List<EsMemberGoodsDO> memberNewGoodsDOList = new ArrayList<>();
+            List<com.xdl.jjg.model.domain.EsMemberGoodsDO> memberNewGoodsDOList = new ArrayList<>();
             if(newId != 0L){
                 DubboPageResult<EsGoodsDO> goodsDONewResult = esTagGoodsService.getBuyerAdminGoodsTags(id, newId, GoodTagEnums.NEW.getValue());
                 if(goodsDONewResult.isSuccess()){
                     List<EsGoodsDO> list = goodsDONewResult.getData().getList();
                     if(CollectionUtils.isNotEmpty(list)){
-                        memberNewGoodsDOList = BeanUtil.copyList(list, EsMemberGoodsDO.class);
+                        memberNewGoodsDOList = BeanUtil.copyList(list, com.xdl.jjg.model.domain.EsMemberGoodsDO.class);
                     }
                 }
             }
@@ -606,7 +614,7 @@ public class EsShopServiceImpl extends ServiceImpl<EsShopMapper, EsShop> impleme
      * @return: com.shopx.common.model.result.DubboResult<EsShopDO>
      */
     @Override
-    public DubboResult<ApplyStep2DO> step2(ApplyStep2DTO applyStep2,Long memberId) {
+    public DubboResult<com.xdl.jjg.model.domain.ApplyStep2DO> step2(ApplyStep2DTO applyStep2, Long memberId) {
         try {
             EsShop shopByMemberId = this.getShopByMemberId(memberId);
             if (shopByMemberId == null) {
@@ -659,7 +667,7 @@ public class EsShopServiceImpl extends ServiceImpl<EsShopMapper, EsShop> impleme
      * @return: com.shopx.common.model.result.DubboResult<EsShopDO>
      */
     @Override
-    public DubboResult<ApplyStep3DO> step3(ApplyStep3DTO applyStep3,Long memberId) {
+    public DubboResult<com.xdl.jjg.model.domain.ApplyStep3DO> step3(ApplyStep3DTO applyStep3, Long memberId) {
         try{
             EsShop shopByMemberId = this.getShopByMemberId(memberId);
             if (shopByMemberId ==null){
@@ -703,7 +711,7 @@ public class EsShopServiceImpl extends ServiceImpl<EsShopMapper, EsShop> impleme
      * @return: com.shopx.common.model.result.DubboResult<EsShopDO>
      */
     @Override
-    public DubboResult<ApplyStep4DO> step4(ApplyStep4DTO applyStep4,Long memberId) {
+    public DubboResult<com.xdl.jjg.model.domain.ApplyStep4DO> step4(ApplyStep4DTO applyStep4, Long memberId) {
         try{
             EsShop shopByMemberId = this.getShopByMemberId(memberId);
             if (shopByMemberId ==null){

@@ -1,10 +1,15 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.*;
-import com.xdl.jjg.model.dto.EsMemberCouponDTO;
-import com.xdl.jjg.model.dto.QueryAdminCouponDTO;
-import com.xdl.jjg.model.dto.QuerySellerCouponDTO;
+import com.jjg.member.model.domain.EsAdminMemberCouponDO;
+import com.jjg.member.model.domain.EsCouponManageMementDO;
+import com.jjg.member.model.domain.EsMemberCouponDO;
+import com.jjg.member.model.dto.EsMemberCouponDTO;
+import com.jjg.member.model.dto.QueryAdminCouponDTO;
+import com.jjg.member.model.dto.QuerySellerCouponDTO;
+import com.xdl.jjg.model.domain.EsMemberCouponStatDO;
+import com.xdl.jjg.model.domain.EsSellerMemberCouponDO;
+import com.xdl.jjg.model.domain.EsTradeCouponDO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
+import com.jjg.member.model.dto.EsGradeWeightConfigDTO;
 import com.xdl.jjg.model.domain.EsGradeWeightConfigDO;
-import com.xdl.jjg.model.dto.EsGradeWeightConfigDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

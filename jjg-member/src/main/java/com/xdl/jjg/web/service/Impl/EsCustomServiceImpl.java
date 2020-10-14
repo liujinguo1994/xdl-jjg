@@ -4,16 +4,16 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.member.model.cache.ESCustomChildrenCO;
+import com.jjg.member.model.cache.EsCustomCO;
+import com.jjg.member.model.domain.EsCustomDO;
+import com.jjg.member.model.domain.EsGoodsDO;
+import com.jjg.member.model.dto.EsCustomDTO;
+import com.jjg.member.model.dto.EsGoodsQueryDTO;
+import com.jjg.member.model.enums.CustomCachePrefix;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsCustom;
 import com.xdl.jjg.mapper.EsCustomMapper;
-import com.xdl.jjg.model.cache.ESCustomChildrenCO;
-import com.xdl.jjg.model.cache.EsCustomCO;
-import com.xdl.jjg.model.domain.EsCustomDO;
-import com.xdl.jjg.model.domain.EsGoodsDO;
-import com.xdl.jjg.model.dto.EsCustomDTO;
-import com.xdl.jjg.model.dto.EsGoodsQueryDTO;
-import com.xdl.jjg.model.enums.CustomCachePrefix;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
@@ -21,7 +21,7 @@ import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.CollectionUtils;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.web.service.IEsCustomService;
-import com.xdl.jjg.web.service.IEsGoodsService;
+import com.xdl.jjg.web.service.feignShopService.GoodsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +54,8 @@ public class EsCustomServiceImpl extends ServiceImpl<EsCustomMapper, EsCustom> i
     @Autowired
     private JedisCluster jedisCluster;
 
-    @Reference(version = "${dubbo.application.version}" ,timeout = 50000,check = false)
-    private IEsGoodsService esGoodsService;
+    @Autowired
+    private GoodsService esGoodsService;
 
     private final String CUSTOM_CACHE_ALL = CustomCachePrefix.CUSTOM_CAT.getPrefix();
 

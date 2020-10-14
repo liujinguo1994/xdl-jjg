@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
+import com.jjg.member.model.dto.EsMemberCompanyDTO;
 import com.xdl.jjg.model.domain.EsMemberCompanyDO;
-import com.xdl.jjg.model.dto.EsMemberCompanyDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

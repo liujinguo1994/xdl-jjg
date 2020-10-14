@@ -1,10 +1,14 @@
 package com.xdl.jjg.web.service;
 
-import com.xdl.jjg.model.domain.*;
-import com.xdl.jjg.model.dto.*;
-import com.xdl.jjg.model.vo.EsExportMemberVO;
-import com.xdl.jjg.model.vo.EsImportBalanceVO;
-import com.xdl.jjg.model.vo.EsImportMemberVO;
+import com.jjg.member.model.domain.EsAdminMemberDO;
+import com.jjg.member.model.dto.*;
+import com.jjg.member.model.vo.EsExportMemberVO;
+import com.jjg.member.model.vo.EsImportBalanceVO;
+import com.jjg.member.model.vo.EsImportMemberVO;
+import com.xdl.jjg.model.domain.EsMemberAdminDO;
+import com.xdl.jjg.model.domain.EsMemberDO;
+import com.xdl.jjg.model.domain.EsMyMeansDO;
+import com.xdl.jjg.model.domain.EsSellerMemberAdminDO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

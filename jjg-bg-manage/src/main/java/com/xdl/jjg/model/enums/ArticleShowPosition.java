@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.enums;
+package com.jjg.member.model.enums;
 
 /**
  * @Description: 文章显示位置

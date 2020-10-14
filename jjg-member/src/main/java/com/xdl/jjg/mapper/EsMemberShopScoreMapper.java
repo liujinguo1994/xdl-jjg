@@ -1,8 +1,8 @@
 package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.shopx.member.api.model.domain.EsGradeWeightConfigDO;
 import com.xdl.jjg.entity.EsMemberShopScore;
+import com.xdl.jjg.model.domain.EsGradeWeightConfigDO;
 
 /**
  * <p>

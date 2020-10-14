@@ -1,9 +1,9 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsShopMenuDO;
-import com.xdl.jjg.model.domain.EsShopRoleDO;
-import com.xdl.jjg.model.dto.EsShopRoleDTO;
+import com.jjg.member.model.domain.EsShopMenuDO;
+import com.jjg.member.model.domain.EsShopRoleDO;
+import com.jjg.member.model.dto.EsShopRoleDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

@@ -2,17 +2,17 @@ package com.xdl.jjg.web.service.Impl;
 
 
 import com.alibaba.fastjson.JSONObject;
+import com.jjg.member.model.enums.ConnectTypeEnum;
+import com.jjg.member.model.enums.QqConnectConfigGroupEnum;
+import com.jjg.member.model.enums.QqConnectConfigItemEnum;
+import com.jjg.member.model.vo.Auth2Token;
+import com.jjg.member.model.vo.ConnectSettingConfigItem;
+import com.jjg.member.model.vo.ConnectSettingParametersVO;
 import com.sohu.tv.cachecloud.client.basic.util.HttpUtils;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.constants.ThreadContextHolder;
 import com.xdl.jjg.model.domain.EsConnectSettingDO;
 import com.xdl.jjg.model.domain.EsMemberDO;
-import com.xdl.jjg.model.enums.ConnectTypeEnum;
-import com.xdl.jjg.model.enums.QqConnectConfigGroupEnum;
-import com.xdl.jjg.model.enums.QqConnectConfigItemEnum;
-import com.xdl.jjg.model.vo.Auth2Token;
-import com.xdl.jjg.model.vo.ConnectSettingConfigItem;
-import com.xdl.jjg.model.vo.ConnectSettingParametersVO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;

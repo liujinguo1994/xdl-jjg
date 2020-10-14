@@ -2,8 +2,8 @@ package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.shopx.member.api.model.domain.EsReportDO;
-import com.shopx.member.api.model.domain.dto.ReportQueryParam;
+import com.jjg.member.model.domain.EsReportDO;
+import com.jjg.member.model.dto.ReportQueryParam;
 import com.xdl.jjg.entity.EsReport;
 
 /**

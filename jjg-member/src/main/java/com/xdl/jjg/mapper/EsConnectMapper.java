@@ -1,8 +1,8 @@
 package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jjg.member.model.dto.EsConnectDTO;
 import com.xdl.jjg.entity.EsConnect;
-import com.xdl.jjg.model.dto.EsConnectDTO;
 import org.apache.ibatis.annotations.Param;
 
 /**

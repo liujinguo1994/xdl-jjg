@@ -1,9 +1,9 @@
 package com.xdl.jjg.web.service;
 
 
+import com.jjg.member.model.vo.Auth2Token;
 import com.xdl.jjg.model.domain.EsConnectSettingDO;
 import com.xdl.jjg.model.domain.EsMemberDO;
-import com.xdl.jjg.model.vo.Auth2Token;
 import com.xdl.jjg.response.service.DubboResult;
 
 /**

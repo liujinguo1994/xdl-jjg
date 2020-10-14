@@ -1,12 +1,12 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsMemberActiveConfigDO;
+import com.jjg.member.model.domain.EsMemberActiveConfigDO;
+import com.jjg.member.model.dto.EsActiveMemberDTO;
+import com.jjg.member.model.dto.EsMemberActiveConfigDTO;
+import com.jjg.member.model.dto.EsQueryConditionActiveInfoDTO;
 import com.xdl.jjg.model.domain.EsSellerMemberActiveConfigDO;
 import com.xdl.jjg.model.domain.EsSellerMemberInFoDO;
-import com.xdl.jjg.model.dto.EsActiveMemberDTO;
-import com.xdl.jjg.model.dto.EsMemberActiveConfigDTO;
-import com.xdl.jjg.model.dto.EsQueryConditionActiveInfoDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

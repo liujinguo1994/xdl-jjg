@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.vo;/**
+package com.jjg.member.model.vo;/**
  * @author wangaf
  * @date 2019/11/2 14:37
  **/

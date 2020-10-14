@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.vo;
+package com.jjg.member.model.vo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

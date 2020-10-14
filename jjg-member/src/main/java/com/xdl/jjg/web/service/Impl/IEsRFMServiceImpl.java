@@ -1,6 +1,8 @@
 package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.jjg.member.model.dto.EsMemberDTO;
+import com.jjg.member.model.dto.EsRFMTradeDTO;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsMember;
 import com.xdl.jjg.entity.EsMemberRfmConfig;
@@ -9,8 +11,6 @@ import com.xdl.jjg.mapper.EsMemberRfmConfigMapper;
 import com.xdl.jjg.model.domain.EsMemberDO;
 import com.xdl.jjg.model.domain.EsMemberRfmConfigDO;
 import com.xdl.jjg.model.domain.EsRFMTradeDO;
-import com.xdl.jjg.model.dto.EsMemberDTO;
-import com.xdl.jjg.model.dto.EsRFMTradeDTO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;

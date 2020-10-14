@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.dto;
+package com.jjg.member.model.dto;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

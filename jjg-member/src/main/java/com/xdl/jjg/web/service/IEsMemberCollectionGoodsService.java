@@ -1,12 +1,9 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsCollectCateryNumDO;
-import com.xdl.jjg.model.domain.EsCutAndEffectDO;
-import com.xdl.jjg.model.domain.EsMemberCollectionGoodsDO;
-import com.xdl.jjg.model.domain.EsMemberCollectionGoodsSortStatisticsDO;
-import com.xdl.jjg.model.dto.EsMemberCollectionGoodsDTO;
-import com.xdl.jjg.model.dto.EsQueryMemberCollectionGoodsDTO;
+import com.jjg.member.model.domain.EsCollectCateryNumDO;
+import com.jjg.member.model.dto.EsMemberCollectionGoodsDTO;
+import com.jjg.member.model.dto.EsQueryMemberCollectionGoodsDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

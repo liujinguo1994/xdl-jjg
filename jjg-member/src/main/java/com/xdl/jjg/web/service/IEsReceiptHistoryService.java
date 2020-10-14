@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsReceiptHistoryDO;
-import com.xdl.jjg.model.dto.EsReceiptHistoryDTO;
+import com.jjg.member.model.domain.EsReceiptHistoryDO;
+import com.jjg.member.model.dto.EsReceiptHistoryDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

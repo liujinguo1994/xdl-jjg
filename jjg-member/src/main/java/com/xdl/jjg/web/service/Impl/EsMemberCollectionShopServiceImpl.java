@@ -4,6 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.member.model.domain.EsCollectionShopInfoDO;
+import com.jjg.member.model.domain.EsGoodsDO;
+import com.jjg.member.model.domain.EsMemberCollectionShopLabelDO;
+import com.jjg.member.model.dto.EsMemberCollectionShopDTO;
+import com.jjg.member.model.dto.EsQueryCollectShopDTO;
+import com.jjg.member.model.dto.EsUpdateTopShopDTO;
+import com.jjg.member.model.enums.ShopStatusEnums;
 import com.xdl.jjg.constant.MemberConstant;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsMemberCollectionShop;
@@ -11,16 +18,17 @@ import com.xdl.jjg.entity.EsMemberShop;
 import com.xdl.jjg.entity.EsShop;
 import com.xdl.jjg.entity.EsShopDetail;
 import com.xdl.jjg.mapper.*;
-import com.xdl.jjg.model.domain.*;
-import com.xdl.jjg.model.dto.EsMemberCollectionShopDTO;
-import com.xdl.jjg.model.dto.EsQueryCollectShopDTO;
-import com.xdl.jjg.model.dto.EsUpdateTopShopDTO;
-import com.xdl.jjg.model.enums.ShopStatusEnums;
+import com.xdl.jjg.model.domain.EsAdminTagGoodsDO;
+import com.xdl.jjg.model.domain.EsGrowthValueStrategyDO;
+import com.xdl.jjg.model.domain.EsMemberCollectionShopDO;
+import com.xdl.jjg.model.domain.EsQueryCollectionShopDO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.*;
+import com.xdl.jjg.web.service.IEsGrowthValueStrategyService;
+import com.xdl.jjg.web.service.IEsMemberCollectionShopService;
+import com.xdl.jjg.web.service.IEsMemberService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -458,17 +466,17 @@ public class EsMemberCollectionShopServiceImpl extends ServiceImpl<EsMemberColle
                 List<EsAdminTagGoodsDO> adminTagGoodsList = adminTagGoodsResult.getData().getList();
                 Map<Long, List<EsAdminTagGoodsDO>> map = adminTagGoodsList.stream().collect(Collectors.groupingBy(EsAdminTagGoodsDO::getTagId));
                 for(Map.Entry<Long, List<EsAdminTagGoodsDO>> entry: map.entrySet()){
-                    DubboResult<EsAdminTagsDO> adminTagsDOResult = adminTagsService.getAdminTags(entry.getKey());
+                    DubboResult<com.xdl.jjg.model.domain.EsAdminTagsDO> adminTagsDOResult = adminTagsService.getAdminTags(entry.getKey());
                     EsMemberCollectionShopLabelDO memberCollectionShopLabelDO = new EsMemberCollectionShopLabelDO();
                     if(adminTagsDOResult.isSuccess() && adminTagsDOResult.getData() != null){
-                        EsAdminTagsDO adminTagsDO = adminTagsDOResult.getData();
+                        com.xdl.jjg.model.domain.EsAdminTagsDO adminTagsDO = adminTagsDOResult.getData();
                         BeanUtil.copyProperties(adminTagsDO, memberCollectionShopLabelDO);
                     }
                     List<EsAdminTagGoodsDO> adminTagGoodsDOList = entry.getValue();
                     Long[] goodsArray = adminTagGoodsDOList.stream().map(EsAdminTagGoodsDO::getGoodsId).toArray(Long[]::new);
                     DubboPageResult<EsGoodsDO> goodsDOPageResult = iEsGoodsService.getEsGoods(goodsArray);
                     if(goodsDOPageResult.isSuccess() && goodsDOPageResult.getData() != null){
-                        memberCollectionShopLabelDO.setMemberGoodsDO(BeanUtil.copyList(goodsDOPageResult.getData().getList(), EsMemberGoodsDO.class));
+                        memberCollectionShopLabelDO.setMemberGoodsDO(BeanUtil.copyList(goodsDOPageResult.getData().getList(), com.xdl.jjg.model.domain.EsMemberGoodsDO.class));
                     }
                     labelList.add(memberCollectionShopLabelDO);
                 }
@@ -537,11 +545,11 @@ public class EsMemberCollectionShopServiceImpl extends ServiceImpl<EsMemberColle
         }
     }
 
-    private List<EsMemberGoodsDO> getHotOrNewGoods(Long shopId, Long tagId, Long type){
+    private List<com.xdl.jjg.model.domain.EsMemberGoodsDO> getHotOrNewGoods(Long shopId, Long tagId, Long type){
         DubboPageResult<EsGoodsDO> goodsDOHotResult = adminTagGoodsService.getBuyerAdminGoodsTags(shopId, tagId, type);
-        List<EsMemberGoodsDO> goodsDOList = new ArrayList<>();
+        List<com.xdl.jjg.model.domain.EsMemberGoodsDO> goodsDOList = new ArrayList<>();
         if(goodsDOHotResult.isSuccess() && goodsDOHotResult.getData() != null){
-            goodsDOList = BeanUtil.copyList(goodsDOHotResult.getData().getList(), EsMemberGoodsDO.class);
+            goodsDOList = BeanUtil.copyList(goodsDOHotResult.getData().getList(), com.xdl.jjg.model.domain.EsMemberGoodsDO.class);
         }
         return goodsDOList;
     }

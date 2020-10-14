@@ -4,11 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xdl.jjg.constant.ErrorCode;
+import com.jjg.member.model.dto.EsAddCommentPictureDTO;
+import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsAddCommentPicture;
 import com.xdl.jjg.mapper.EsAddCommentPictureMapper;
 import com.xdl.jjg.model.domain.EsAddCommentPictureDO;
-import com.xdl.jjg.model.dto.EsAddCommentPictureDTO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
@@ -66,7 +66,7 @@ public class EsAddCommentPictureServiceImpl extends ServiceImpl<EsAddCommentPict
         }catch (Throwable ae) {
             logger.error(" 追加评论图片新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -85,7 +85,7 @@ public class EsAddCommentPictureServiceImpl extends ServiceImpl<EsAddCommentPict
         try {
             EsAddCommentPicture addCommentPicture = this.addCommentPictureMapper.selectById(id);
             if (addCommentPicture == null) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(MemberErrorCode.DATA_NOT_EXIST.getErrorCode(), MemberErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             BeanUtil.copyProperties(addCommentPictureDTO, addCommentPicture);
             QueryWrapper<EsAddCommentPicture> queryWrapper = new QueryWrapper<>();
@@ -99,7 +99,7 @@ public class EsAddCommentPictureServiceImpl extends ServiceImpl<EsAddCommentPict
         } catch (Throwable th) {
             logger.error(" 追加评论图片更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -116,7 +116,7 @@ public class EsAddCommentPictureServiceImpl extends ServiceImpl<EsAddCommentPict
         try {
             EsAddCommentPicture addCommentPicture = this.addCommentPictureMapper.selectById(id);
             if (addCommentPicture == null) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(MemberErrorCode.DATA_NOT_EXIST.getErrorCode(), MemberErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             EsAddCommentPictureDO addCommentPictureDO = new EsAddCommentPictureDO();
             BeanUtil.copyProperties(addCommentPicture, addCommentPictureDO);
@@ -126,7 +126,7 @@ public class EsAddCommentPictureServiceImpl extends ServiceImpl<EsAddCommentPict
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
         }  catch (Throwable th) {
             logger.error(" 追加评论图片查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -162,7 +162,7 @@ public class EsAddCommentPictureServiceImpl extends ServiceImpl<EsAddCommentPict
             return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
         } catch (Throwable th) {
             logger.error(" 追加评论图片分页查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
     public DubboPageResult<EsAddCommentPictureDO> getAddCommentPictureList(Long commentId) {
@@ -184,7 +184,7 @@ public class EsAddCommentPictureServiceImpl extends ServiceImpl<EsAddCommentPict
             return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
         } catch (Throwable th) {
             logger.error(" 追加评论图片查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
     /**
@@ -208,7 +208,7 @@ public class EsAddCommentPictureServiceImpl extends ServiceImpl<EsAddCommentPict
         }  catch (Throwable th) {
             logger.error(" 追加评论图片删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -217,7 +217,7 @@ public class EsAddCommentPictureServiceImpl extends ServiceImpl<EsAddCommentPict
     public DubboResult addPictureBatch(Long addCommentId, List<String> list) {
         try {
             if(CollectionUtils.isEmpty(list)){
-                return DubboResult.fail(ErrorCode.PARAM_ERROR.getErrorCode(), ErrorCode.PARAM_ERROR.getErrorMsg());
+                return DubboResult.fail(MemberErrorCode.PARAM_ERROR.getErrorCode(), MemberErrorCode.PARAM_ERROR.getErrorMsg());
             }
             EsAddCommentPicture addCommentPicture = new EsAddCommentPicture();
             addCommentPicture.setCommentId(addCommentId);
@@ -234,7 +234,7 @@ public class EsAddCommentPictureServiceImpl extends ServiceImpl<EsAddCommentPict
         }  catch (Throwable th) {
             logger.error(" 追加评论图片删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 }

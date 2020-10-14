@@ -1,9 +1,9 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsMemberLevelConfigDO;
-import com.xdl.jjg.model.dto.EsMemberLevelConfigDTO;
-import com.xdl.jjg.model.dto.EsQueryMemberLevelConfigDTO;
+import com.jjg.member.model.domain.EsMemberLevelConfigDO;
+import com.jjg.member.model.dto.EsMemberLevelConfigDTO;
+import com.jjg.member.model.dto.EsQueryMemberLevelConfigDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

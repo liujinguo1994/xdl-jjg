@@ -1,9 +1,9 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsReportDO;
-import com.xdl.jjg.model.dto.EsReportDTO;
-import com.xdl.jjg.model.dto.ReportQueryParam;
+import com.jjg.member.model.domain.EsReportDO;
+import com.jjg.member.model.dto.EsReportDTO;
+import com.jjg.member.model.dto.ReportQueryParam;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

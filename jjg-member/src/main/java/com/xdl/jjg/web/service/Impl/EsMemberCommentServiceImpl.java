@@ -1,27 +1,28 @@
 package com.xdl.jjg.web.service.Impl;
 
 
+import cn.hutool.core.date.DateUnit;
+import cn.hutool.core.date.DateUtil;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.trade.api.model.domain.EsOrderDO;
-import com.shopx.trade.api.model.domain.EsOrderItemsDO;
-import com.shopx.trade.api.service.IEsOrderItemsService;
-import com.shopx.trade.api.service.IEsOrderService;
+import com.jjg.member.model.domain.*;
+import com.jjg.member.model.dto.*;
+import com.jjg.member.model.enums.CommentSortEnums;
+import com.jjg.member.model.enums.GoodsCommentSortEnums;
+import com.jjg.member.model.vo.wap.EsWapMemberSpecValuesVO;
 import com.xdl.jjg.constant.MemberConstant;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.*;
 import com.xdl.jjg.mapper.*;
 import com.xdl.jjg.model.co.EsGoodsSkuCO;
-import com.xdl.jjg.model.domain.*;
-import com.xdl.jjg.model.dto.*;
-import com.xdl.jjg.model.enums.CommentSortEnums;
-import com.xdl.jjg.model.enums.GoodsCommentSortEnums;
-import com.xdl.jjg.model.vo.CommentImageVO;
-import com.xdl.jjg.model.vo.wap.EsWapMemberSpecValuesVO;
+import com.xdl.jjg.model.domain.EsGrowthValueStrategyDO;
+import com.xdl.jjg.model.domain.EsMemberCommentDO;
+import com.xdl.jjg.model.domain.EsMemberDO;
+import com.xdl.jjg.model.domain.EsOrderDO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
@@ -30,13 +31,10 @@ import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.util.MathUtil;
 import com.xdl.jjg.web.service.*;
 import jodd.typeconverter.Convert;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.common.utils.StringUtils;
-import org.apache.dubbo.config.annotation.Reference;
-import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -297,9 +295,9 @@ public class EsMemberCommentServiceImpl extends ServiceImpl<EsMemberCommentMappe
                 throw new ArgumentException(MemberErrorCode.PARAM_ERROR.getErrorCode(), String.format("参数传入错误ID不能为空[%s]", memberShopScoreDTO));
             }
             //查询不同服务类型的权重
-            EsGradeWeightConfigDO deliveryDO = this.memberShopScoreMapper.getScoreWeightValue(Integer.valueOf(CommentSortEnums.DELIVERY.getKey()));
-            EsGradeWeightConfigDO goodsDO = this.memberShopScoreMapper.getScoreWeightValue(Integer.valueOf(CommentSortEnums.DESCRIPTION.getKey()));
-            EsGradeWeightConfigDO serviceDO = this.memberShopScoreMapper.getScoreWeightValue(Integer.valueOf(CommentSortEnums.SERVICE.getKey()));
+            com.xdl.jjg.model.domain.EsGradeWeightConfigDO deliveryDO = this.memberShopScoreMapper.getScoreWeightValue(Integer.valueOf(CommentSortEnums.DELIVERY.getKey()));
+            com.xdl.jjg.model.domain.EsGradeWeightConfigDO goodsDO = this.memberShopScoreMapper.getScoreWeightValue(Integer.valueOf(CommentSortEnums.DESCRIPTION.getKey()));
+            com.xdl.jjg.model.domain.EsGradeWeightConfigDO serviceDO = this.memberShopScoreMapper.getScoreWeightValue(Integer.valueOf(CommentSortEnums.SERVICE.getKey()));
             if (null == deliveryDO || null == deliveryDO.getWeightValue() || null == goodsDO || null == goodsDO.getWeightValue() || null == serviceDO || null == serviceDO.getWeightValue()) {
                 throw new ArgumentException(MemberErrorCode.ERROR_WEIGHT_VALUE.getErrorCode(), MemberErrorCode.ERROR_WEIGHT_VALUE.getErrorMsg());
             }
@@ -408,10 +406,10 @@ public class EsMemberCommentServiceImpl extends ServiceImpl<EsMemberCommentMappe
      * @param orderSn
      * @return
      */
-    public DubboResult<EsCommentInfoDO> getPCCommentInfoByGoodsIdAndOrderSn(Long goodsId, String orderSn,Long skuId) {
+    public DubboResult<com.xdl.jjg.model.domain.EsCommentInfoDO> getPCCommentInfoByGoodsIdAndOrderSn(Long goodsId, String orderSn, Long skuId) {
         try {
-            EsCommentInfoDO esCommentInfoCopyDO = new EsCommentInfoDO();
-            EsCommentInfoDO esCommentInfoDO = memberCommentMapper.getCommentByOrdersAndGoodsId(goodsId, orderSn,skuId);
+            com.xdl.jjg.model.domain.EsCommentInfoDO esCommentInfoCopyDO = new com.xdl.jjg.model.domain.EsCommentInfoDO();
+            com.xdl.jjg.model.domain.EsCommentInfoDO esCommentInfoDO = memberCommentMapper.getCommentByOrdersAndGoodsId(goodsId, orderSn,skuId);
             if (null == esCommentInfoDO) {
                 return DubboResult.success(esCommentInfoCopyDO);
             }
@@ -419,13 +417,13 @@ public class EsMemberCommentServiceImpl extends ServiceImpl<EsMemberCommentMappe
 
 
             List<String> labelList = new ArrayList<>();
-            List<EsCommentGalleryDO> commentGalleryList = this.commentGalleryMapper.getCommentGalleryList(esCommentInfoDO.getId());
+            List<com.xdl.jjg.model.domain.EsCommentGalleryDO> commentGalleryList = this.commentGalleryMapper.getCommentGalleryList(esCommentInfoDO.getId());
             if (CollectionUtils.isNotEmpty(commentGalleryList)) {
                 //查询图片信息
 
                 List<CommentImageVO> commentImageVOList = new ArrayList<>();
 
-                for (EsCommentGalleryDO esCommentGalleryDO : commentGalleryList) {
+                for (com.xdl.jjg.model.domain.EsCommentGalleryDO esCommentGalleryDO : commentGalleryList) {
                     CommentImageVO commentImageVO1 = new CommentImageVO();
                     commentImageVO1.setUrl(esCommentGalleryDO.getOriginal());
                     commentImageVOList.add(commentImageVO1);
@@ -447,7 +445,7 @@ public class EsMemberCommentServiceImpl extends ServiceImpl<EsMemberCommentMappe
                 esCommentInfoCopyDO.setTags(labelList);
             }
             // 服务评分
-            DubboResult<EsMemberShopScoreDO> scoreResult = iEsMemberShopScoreService.getMemberShopScoreByGoodAndMemberAndSn(goodsId, esCommentInfoDO.getMemberId(), orderSn, esCommentInfoDO.getShopId());
+            DubboResult<com.xdl.jjg.model.domain.EsMemberShopScoreDO> scoreResult = iEsMemberShopScoreService.getMemberShopScoreByGoodAndMemberAndSn(goodsId, esCommentInfoDO.getMemberId(), orderSn, esCommentInfoDO.getShopId());
             if(scoreResult.isSuccess()){
                 esCommentInfoCopyDO.setDescriptionScore(scoreResult.getData().getDeliveryScore());
                 esCommentInfoCopyDO.setServiceScore(scoreResult.getData().getServiceScore());
@@ -456,7 +454,7 @@ public class EsMemberCommentServiceImpl extends ServiceImpl<EsMemberCommentMappe
 
             //追加评论
             EsAddComment addComment = addCommentMapper.getAddCommentByCommentId(esCommentInfoCopyDO.getId());
-            EsAddCommentDO addCommentDo = new EsAddCommentDO();
+            com.xdl.jjg.model.domain.EsAddCommentDO addCommentDo = new com.xdl.jjg.model.domain.EsAddCommentDO();
             if(addComment != null){
                 BeanUtil.copyProperties(addComment, addCommentDo);
                 DubboPageResult<EsAddCommentPictureDO> result= addCommentPictureService.getAddCommentPictureList(addComment.getId());
@@ -487,10 +485,10 @@ public class EsMemberCommentServiceImpl extends ServiceImpl<EsMemberCommentMappe
      * @param orderSn
      * @return
      */
-    public DubboResult<EsCommentInfoDO> getCommentInfoByGoodsIdAndOrderSn(Long goodsId, String orderSn,Long skuId) {
+    public DubboResult<com.xdl.jjg.model.domain.EsCommentInfoDO> getCommentInfoByGoodsIdAndOrderSn(Long goodsId, String orderSn, Long skuId) {
         try {
-            EsCommentInfoDO esCommentInfoCopyDO = new EsCommentInfoDO();
-            EsCommentInfoDO esCommentInfoDO = memberCommentMapper.getCommentByOrdersAndGoodsId(goodsId, orderSn,skuId);
+            com.xdl.jjg.model.domain.EsCommentInfoDO esCommentInfoCopyDO = new com.xdl.jjg.model.domain.EsCommentInfoDO();
+            com.xdl.jjg.model.domain.EsCommentInfoDO esCommentInfoDO = memberCommentMapper.getCommentByOrdersAndGoodsId(goodsId, orderSn,skuId);
             if (null == esCommentInfoDO) {
                 return DubboResult.success(esCommentInfoCopyDO);
             }
@@ -501,9 +499,9 @@ public class EsMemberCommentServiceImpl extends ServiceImpl<EsMemberCommentMappe
             //查询图片信息
             List<String> images = new ArrayList<>();
             List<String> labelList = new ArrayList<>();
-            List<EsCommentGalleryDO> commentGalleryList = this.commentGalleryMapper.getCommentGalleryList(esCommentInfoDO.getId());
+            List<com.xdl.jjg.model.domain.EsCommentGalleryDO> commentGalleryList = this.commentGalleryMapper.getCommentGalleryList(esCommentInfoDO.getId());
             if (CollectionUtils.isNotEmpty(commentGalleryList)) {
-                for (EsCommentGalleryDO esCommentGalleryDO : commentGalleryList) {
+                for (com.xdl.jjg.model.domain.EsCommentGalleryDO esCommentGalleryDO : commentGalleryList) {
                     images.add(esCommentGalleryDO.getOriginal());
                 }
                 esCommentInfoCopyDO.setOriginals(images);
@@ -536,7 +534,7 @@ public class EsMemberCommentServiceImpl extends ServiceImpl<EsMemberCommentMappe
                 esCommentInfoCopyDO.setTags(labelList);
             }
             // 服务评分
-            DubboResult<EsMemberShopScoreDO> scoreResult = iEsMemberShopScoreService.getMemberShopScoreByGoodAndMemberAndSn(goodsId, esCommentInfoDO.getMemberId(), orderSn, esCommentInfoDO.getShopId());
+            DubboResult<com.xdl.jjg.model.domain.EsMemberShopScoreDO> scoreResult = iEsMemberShopScoreService.getMemberShopScoreByGoodAndMemberAndSn(goodsId, esCommentInfoDO.getMemberId(), orderSn, esCommentInfoDO.getShopId());
             if(scoreResult.isSuccess()){
                 esCommentInfoCopyDO.setDescriptionScore(scoreResult.getData().getDeliveryScore());
                 esCommentInfoCopyDO.setServiceScore(scoreResult.getData().getServiceScore());
@@ -545,7 +543,7 @@ public class EsMemberCommentServiceImpl extends ServiceImpl<EsMemberCommentMappe
 
             //追加评论
             EsAddComment addComment = addCommentMapper.getAddCommentByCommentId(esCommentInfoCopyDO.getId());
-            EsAddCommentDO addCommentDo = new EsAddCommentDO();
+            com.xdl.jjg.model.domain.EsAddCommentDO addCommentDo = new com.xdl.jjg.model.domain.EsAddCommentDO();
             if(addComment != null){
                 BeanUtil.copyProperties(addComment, addCommentDo);
                 DubboPageResult<EsAddCommentPictureDO> result= addCommentPictureService.getAddCommentPictureList(addComment.getId());
@@ -615,13 +613,13 @@ public class EsMemberCommentServiceImpl extends ServiceImpl<EsMemberCommentMappe
                 queryWrapperImage.lambda().eq(EsCommentGallery::getCommentId, memberComment.getId());
                 List<EsCommentGallery> resultImage = this.commentGalleryMapper.selectList(queryWrapperImage);
                 if (CollectionUtils.isNotEmpty(resultImage)) {
-                    List<EsCommentGalleryDO> es = BeanUtil.copyList(resultImage, EsCommentGalleryDO.class);
+                    List<com.xdl.jjg.model.domain.EsCommentGalleryDO> es = BeanUtil.copyList(resultImage, com.xdl.jjg.model.domain.EsCommentGalleryDO.class);
                     memberCommentDO.setCommentsImage(es);
                 }
 
                 //追加评论
                 EsAddComment addComment = addCommentMapper.getAddCommentByCommentId(memberComment.getId());
-                EsAddCommentDO addCommentDo = new EsAddCommentDO();
+                com.xdl.jjg.model.domain.EsAddCommentDO addCommentDo = new com.xdl.jjg.model.domain.EsAddCommentDO();
                 if(addComment != null){
                     BeanUtil.copyProperties(addComment, addCommentDo);
                     memberCommentDO.setAddContent(addCommentDo);
@@ -629,7 +627,7 @@ public class EsMemberCommentServiceImpl extends ServiceImpl<EsMemberCommentMappe
 
                 //商家回复
                 EsCommentReply commentReply = commentReplyMapper.getCommentReplyByCommentId(memberComment.getId());
-                EsCommentReplyDO commentReplyDo = new EsCommentReplyDO();
+                com.xdl.jjg.model.domain.EsCommentReplyDO commentReplyDo = new com.xdl.jjg.model.domain.EsCommentReplyDO();
                 if(commentReply != null){
                     BeanUtil.copyProperties(commentReply, commentReplyDo);
                 }
@@ -812,7 +810,7 @@ public class EsMemberCommentServiceImpl extends ServiceImpl<EsMemberCommentMappe
                 queryWrapperImage.lambda().eq(EsCommentGallery::getCommentId, memberComment.getId());
                 List<EsCommentGallery> resultImage = this.commentGalleryMapper.selectList(queryWrapperImage);
                 if (CollectionUtils.isNotEmpty(resultImage)) {
-                    List<EsCommentGalleryDO> es = BeanUtil.copyList(resultImage, EsCommentGalleryDO.class);
+                    List<com.xdl.jjg.model.domain.EsCommentGalleryDO> es = BeanUtil.copyList(resultImage, com.xdl.jjg.model.domain.EsCommentGalleryDO.class);
                     memberCommentDO.setCommentsImage(es);
                 }
                 DubboResult<EsGoodsSkuCO> sku = skuService.getGoodsSku(memberComment.getSkuId());
@@ -841,7 +839,7 @@ public class EsMemberCommentServiceImpl extends ServiceImpl<EsMemberCommentMappe
 
                 //追加评论
                 EsAddComment addComment = addCommentMapper.getAddCommentByCommentId(memberComment.getId());
-                EsAddCommentDO addCommentDo = new EsAddCommentDO();
+                com.xdl.jjg.model.domain.EsAddCommentDO addCommentDo = new com.xdl.jjg.model.domain.EsAddCommentDO();
                 if(addComment != null){
                     BeanUtil.copyProperties(addComment, addCommentDo);
                     DubboPageResult<EsAddCommentPictureDO> result= addCommentPictureService.getAddCommentPictureList(addComment.getId());
@@ -858,7 +856,7 @@ public class EsMemberCommentServiceImpl extends ServiceImpl<EsMemberCommentMappe
 
                 //商家回复
                 EsCommentReply commentReply = commentReplyMapper.getCommentReplyByCommentId(memberComment.getId());
-                EsCommentReplyDO commentReplyDo = new EsCommentReplyDO();
+                com.xdl.jjg.model.domain.EsCommentReplyDO commentReplyDo = new com.xdl.jjg.model.domain.EsCommentReplyDO();
                 if(commentReply != null){
                     BeanUtil.copyProperties(commentReply, commentReplyDo);
                 }
@@ -925,13 +923,13 @@ public class EsMemberCommentServiceImpl extends ServiceImpl<EsMemberCommentMappe
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberCommentDO>
      */
     @Override
-    public DubboResult<GradeLevelDO> getCountComment(Long goodsId) {
+    public DubboResult<com.xdl.jjg.model.domain.GradeLevelDO> getCountComment(Long goodsId) {
         QueryWrapper<EsMemberComment> queryWrapper = new QueryWrapper<>();
         QueryWrapper<EsMemberComment> queryWrapperGood = new QueryWrapper<>();
         QueryWrapper<EsMemberComment> queryWrapperComment = new QueryWrapper<>();
         QueryWrapper<EsMemberComment> queryWrapperBad = new QueryWrapper<>();
         QueryWrapper<EsMemberComment> queryWrapperImg = new QueryWrapper<>();
-        GradeLevelDO gradeLevelDO = new GradeLevelDO();
+        com.xdl.jjg.model.domain.GradeLevelDO gradeLevelDO = new com.xdl.jjg.model.domain.GradeLevelDO();
         try {
             queryWrapper.lambda().eq(EsMemberComment::getGoodsId,goodsId);
             //评论总数
@@ -993,8 +991,8 @@ public class EsMemberCommentServiceImpl extends ServiceImpl<EsMemberCommentMappe
                 if (resultItems.isSuccess() && null != resultItems.getData()
                         && !StringUtils.isBlank(resultItems.getData().getSpecJson())) {
                     esAdminManagerDO.setSpecValues(resultItems.getData().getSpecJson());
-                    List<EsMemberSpecValuesDO> resultSpecValueList = JSON.parseObject(resultItems.getData().getSpecJson(),
-                            new TypeReference<List<EsMemberSpecValuesDO>>() {
+                    List<com.xdl.jjg.model.domain.EsMemberSpecValuesDO> resultSpecValueList = JSON.parseObject(resultItems.getData().getSpecJson(),
+                            new TypeReference<List<com.xdl.jjg.model.domain.EsMemberSpecValuesDO>>() {
                     });
                     esAdminManagerDO.setEsMemberSpecValuesDO(resultSpecValueList);
                 }
@@ -1006,7 +1004,7 @@ public class EsMemberCommentServiceImpl extends ServiceImpl<EsMemberCommentMappe
                 }
                 //查询已回复
                 if (memberComment.getReplyStatus() == MemberConstant.repalyContent) {
-                    DubboResult<EsCommentReplyDO> resultReplay = iEsCommentReplyService.getCommentReplyByCommentId(memberComment.getId());
+                    DubboResult<com.xdl.jjg.model.domain.EsCommentReplyDO> resultReplay = iEsCommentReplyService.getCommentReplyByCommentId(memberComment.getId());
                     if (resultReplay.isSuccess() && null != resultReplay.getData() && !StringUtils.isBlank(resultReplay.getData().getContent())) {
                         esAdminManagerDO.setReplayContent(resultReplay.getData().getContent());
                     }
@@ -1015,10 +1013,10 @@ public class EsMemberCommentServiceImpl extends ServiceImpl<EsMemberCommentMappe
                 //获取详细评分
                 if(org.apache.commons.lang3.StringUtils.isNotBlank(memberComment.getOrderSn())
                         && memberComment.getGoodsId() != null && memberComment.getId() != null){
-                    DubboResult<EsMemberShopScoreDO> memberShopScoreDODubboResult = iEsMemberShopScoreService
+                    DubboResult<com.xdl.jjg.model.domain.EsMemberShopScoreDO> memberShopScoreDODubboResult = iEsMemberShopScoreService
                             .getMemberShopScoreByGoodAndMemberAndSn(memberComment.getGoodsId(), memberComment.getMemberId(), memberComment.getOrderSn(), memberComment.getShopId());
                     if(memberShopScoreDODubboResult.isSuccess() && memberShopScoreDODubboResult.getData() != null){
-                        EsMemberShopScoreDO memberShopScoreDO = memberShopScoreDODubboResult.getData();
+                        com.xdl.jjg.model.domain.EsMemberShopScoreDO memberShopScoreDO = memberShopScoreDODubboResult.getData();
                         esAdminManagerDO.setDeliveryScore(memberShopScoreDO.getDeliveryScore());
                         esAdminManagerDO.setDescriptionScore(memberShopScoreDO.getDescriptionScore());
                         esAdminManagerDO.setServiceScore(memberShopScoreDO.getServiceScore());

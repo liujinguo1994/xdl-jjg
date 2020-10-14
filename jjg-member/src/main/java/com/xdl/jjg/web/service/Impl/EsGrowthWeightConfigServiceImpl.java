@@ -2,13 +2,13 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.member.model.dto.EsGrowthWeightConfigDTO;
+import com.jjg.member.model.dto.EsGrowthWeightConfigListDTO;
 import com.xdl.jjg.constant.MemberConstant;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsGrowthWeightConfig;
 import com.xdl.jjg.mapper.EsGrowthWeightConfigMapper;
 import com.xdl.jjg.model.domain.EsGrowthWeightConfigDO;
-import com.xdl.jjg.model.dto.EsGrowthWeightConfigDTO;
-import com.xdl.jjg.model.dto.EsGrowthWeightConfigListDTO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
  * @author LINS 1220316142@qq.com
  * @since 2019-08-08 11:06:57
  */
-@Service(version = "${dubbo.application.version}" , interfaceClass = IEsGrowthWeightConfigService.class, timeout = 50000)
+@Service
 public class EsGrowthWeightConfigServiceImpl extends ServiceImpl<EsGrowthWeightConfigMapper, EsGrowthWeightConfig> implements IEsGrowthWeightConfigService {
 
     private static Logger logger = LoggerFactory.getLogger(EsGrowthWeightConfigServiceImpl.class);

@@ -9,8 +9,6 @@ import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsMember;
 import com.xdl.jjg.mapper.EsMemberMapper;
 import com.xdl.jjg.model.domain.EsMemberDO;
-import com.xdl.jjg.model.dto.EsMemberCouponDTO;
-import com.xdl.jjg.model.dto.EsMemberDTO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;

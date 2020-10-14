@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.aite.mapper.AtFlashConvertExpandMapper">
+    <resultMap id="BaseResultMap" type="com.aite.expdo.AtFlashConvertBlackExpandDO">
+        <id column="black_id" jdbcType="VARCHAR" property="blackId"/>
+        <id column="flash_convert_id" jdbcType="VARCHAR" property="flashConvertId"/>
+        <result column="coin_id" jdbcType="VARCHAR" property="coinId"/>
+        <result column="exchange_rate" jdbcType="DECIMAL" property="exchangeRate"/>
+        <result column="add_time" jdbcType="TIMESTAMP" property="addTime"/>
+    </resultMap>
+
+
+    <select id="getFlashConvertBlackList" resultMap="BaseResultMap">
+        SELECT
+        abl.black_id,
+        abl.target_flash_convert_id as flash_convert_id,
+        afc.exchange_rate,
+        abl.add_time,
+        afc.coin_id
+    FROM
+        at_black_list abl
+        LEFT JOIN at_flash_convert afc
+        on afc.flash_convert_id = abl.target_flash_convert_id
+        WHERE
+        afc.coin_id in
+        <foreach item="item" index="index" collection="coinId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        <if test="flashConvertId != null and flashConvertId != ''">
+            and abl.source_flash_convert_id = #{flashConvertId}
+        </if>
+
+  </select>
+
+    <resultMap id="WhiteBaseResultMap" type="com.aite.expdo.AtFlashConvertWhiteExpandDO">
+        <id column="white_id" jdbcType="VARCHAR" property="whiteId"/>
+        <id column="flash_convert_id" jdbcType="VARCHAR" property="flashConvertId"/>
+        <result column="coin_id" jdbcType="VARCHAR" property="coinId"/>
+        <result column="exchange_rate" jdbcType="DECIMAL" property="exchangeRate"/>
+        <result column="add_time" jdbcType="TIMESTAMP" property="addTime"/>
+    </resultMap>
+
+
+    <select id="getFlashConvertWhiteList" resultMap="WhiteBaseResultMap">
+        SELECT
+        awl.white_id,
+        awl.target_flash_convert_id as flash_convert_id,
+        afc.exchange_rate,
+        awl.add_time,
+        afc.coin_id
+        FROM
+        at_white_list awl
+        LEFT JOIN at_flash_convert afc ON afc.flash_convert_id = awl.target_flash_convert_id
+        WHERE
+        afc.coin_id in
+        <foreach item="item" index="index" collection="coinId" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+        <if test="flashConvertId != null and flashConvertId != ''">
+            and awl.source_flash_convert_id = #{flashConvertId}
+        </if>
+
+    </select>
+
+</mapper>

@@ -1,5 +1,6 @@
 package com.xdl.jjg.util;
 
+
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.NameValuePair;
 import org.apache.commons.httpclient.methods.GetMethod;

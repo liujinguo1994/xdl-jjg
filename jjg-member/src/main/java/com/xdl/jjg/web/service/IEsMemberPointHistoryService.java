@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsMemberPointHistoryDO;
-import com.xdl.jjg.model.dto.EsMemberPointHistoryDTO;
+import com.jjg.member.model.domain.EsMemberPointHistoryDO;
+import com.jjg.member.model.dto.EsMemberPointHistoryDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

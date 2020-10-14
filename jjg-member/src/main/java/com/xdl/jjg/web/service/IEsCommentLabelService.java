@@ -1,9 +1,9 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsCommentLabelDO;
+import com.jjg.member.model.domain.EsCommentLabelDO;
+import com.jjg.member.model.dto.EsCommentLabelDTO;
 import com.xdl.jjg.model.domain.EsTagLabelListDO;
-import com.xdl.jjg.model.dto.EsCommentLabelDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

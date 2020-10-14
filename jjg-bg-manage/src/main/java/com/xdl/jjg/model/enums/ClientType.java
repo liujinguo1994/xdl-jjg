@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.enums;
+package com.jjg.member.model.enums;
 
 /**
  * 支付客户端类型

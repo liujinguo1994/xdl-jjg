@@ -45,7 +45,7 @@ public class EsAddCommentServiceImpl extends ServiceImpl<EsAddCommentMapper, EsA
     @Autowired
     private EsAddCommentMapper addCommentMapper;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private IEsAddCommentPictureService addCommentPictureService;
 
     /**

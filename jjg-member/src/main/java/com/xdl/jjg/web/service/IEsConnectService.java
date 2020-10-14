@@ -1,9 +1,9 @@
 package com.xdl.jjg.web.service;
 
 
+import com.jjg.member.model.dto.EsConnectDTO;
 import com.xdl.jjg.model.domain.EsConnectDO;
 import com.xdl.jjg.model.domain.EsMemberDO;
-import com.xdl.jjg.model.dto.EsConnectDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

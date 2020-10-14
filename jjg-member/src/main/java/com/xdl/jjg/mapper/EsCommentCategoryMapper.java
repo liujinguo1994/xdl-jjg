@@ -2,8 +2,8 @@ package com.xdl.jjg.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jjg.member.model.domain.EsCommentCategoryDO;
 import com.xdl.jjg.entity.EsCommentCategory;
-import com.xdl.jjg.model.domain.EsCommentCategoryDO;
 
 import java.util.List;
 

@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
+import com.jjg.member.model.dto.EsMemberAskDTO;
 import com.xdl.jjg.model.domain.EsMemberAskDO;
-import com.xdl.jjg.model.dto.EsMemberAskDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

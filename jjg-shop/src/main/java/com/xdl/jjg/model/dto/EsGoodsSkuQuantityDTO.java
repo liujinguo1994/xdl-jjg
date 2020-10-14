@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.dto;
+package com.jjg.member.model.dto;
 
 import com.shopx.goods.api.model.domain.cache.EsGoodsCO;
 import com.shopx.goods.api.model.domain.cache.EsGoodsSkuCO;

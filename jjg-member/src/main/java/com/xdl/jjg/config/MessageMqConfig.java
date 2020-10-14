@@ -1,7 +1,8 @@
 package com.xdl.jjg.config;
 
-import com.shopx.common.roketmq.MQConsumer;
-import com.shopx.common.roketmq.MQProducer;
+
+import com.xdl.jjg.roketmq.MQConsumer;
+import com.xdl.jjg.roketmq.MQProducer;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

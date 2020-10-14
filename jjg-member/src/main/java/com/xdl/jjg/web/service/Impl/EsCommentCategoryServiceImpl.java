@@ -4,7 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xdl.jjg.constant.GoodsErrorCode;
+import com.jjg.member.model.domain.EsCommentCategoryDO;
+import com.jjg.member.model.dto.EsCommentCategoryDTO;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsCommentCategory;
 import com.xdl.jjg.entity.EsCommentLabel;
@@ -14,16 +15,14 @@ import com.xdl.jjg.model.co.EsGoodsCO;
 import com.xdl.jjg.model.domain.EsCategoryBrandDO;
 import com.xdl.jjg.model.domain.EsCategoryDO;
 import com.xdl.jjg.model.domain.EsCommentCategoryClassifyDO;
-import com.xdl.jjg.model.domain.EsCommentCategoryDO;
-import com.xdl.jjg.model.dto.EsCommentCategoryDTO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.CollectionUtils;
-import com.xdl.jjg.web.service.IEsCategoryService;
 import com.xdl.jjg.web.service.IEsCommentCategoryService;
-import com.xdl.jjg.web.service.IEsGoodsService;
+import com.xdl.jjg.web.service.feignShopService.CategoryService;
+import com.xdl.jjg.web.service.feignShopService.GoodsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,13 +51,15 @@ public class EsCommentCategoryServiceImpl extends ServiceImpl<EsCommentCategoryM
 
     @Autowired
     private EsCommentCategoryMapper commentCategoryMapper;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000,check = false)
-    private IEsCategoryService iEsCategoryService;
+
+    @Autowired
+    private CategoryService iEsCategoryService;
+
     @Autowired
     private EsCommentLabelMapper esCommentLabelMapper;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000,check = false)
-    private IEsGoodsService goodsService;
+    @Autowired
+    private GoodsService goodsService;
 
     /**
      * 插入数据
@@ -76,14 +77,14 @@ public class EsCommentCategoryServiceImpl extends ServiceImpl<EsCommentCategoryM
             //查询分类是否存在
             DubboResult<EsCategoryDO> esCategory = iEsCategoryService.getCategory(categoryId);
             if (null == esCategory.getData()) {
-               throw new ArgumentException(GoodsErrorCode.DATA_NOT_EXIST.getErrorCode(), "商品分类不存在");
+               throw new ArgumentException(MemberErrorCode.DATA_NOT_EXIST.getErrorCode(), "商品分类不存在");
             }
             //查询标签是否存在
             QueryWrapper<EsCommentLabel> queryWrapper = new QueryWrapper<>();
             queryWrapper.lambda().in(EsCommentLabel::getId, labelId);
             List<EsCommentLabel> esBrandList = this.esCommentLabelMapper.selectList(queryWrapper);
             if (CollectionUtils.isEmpty(esBrandList) || (esBrandList.size() != labelId.length)) {
-                throw new ArgumentException(GoodsErrorCode.PARAM_ERROR.getErrorCode(), "传入的评论标签异常!");
+                throw new ArgumentException(MemberErrorCode.PARAM_ERROR.getErrorCode(), "传入的评论标签异常!");
             }
 
             //先删除该分类下所有标签

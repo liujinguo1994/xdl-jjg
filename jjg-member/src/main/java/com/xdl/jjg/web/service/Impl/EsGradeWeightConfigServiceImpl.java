@@ -2,12 +2,12 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.member.model.dto.EsGradeWeightConfigDTO;
+import com.jjg.member.model.enums.CommentSortScoreEnums;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsGradeWeightConfig;
 import com.xdl.jjg.mapper.EsGradeWeightConfigMapper;
 import com.xdl.jjg.model.domain.EsGradeWeightConfigDO;
-import com.xdl.jjg.model.dto.EsGradeWeightConfigDTO;
-import com.xdl.jjg.model.enums.CommentSortScoreEnums;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;

@@ -1,7 +1,7 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.dto.EsSearchKeyWordDTO;
+import com.jjg.member.model.dto.EsSearchKeyWordDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

@@ -2,10 +2,10 @@ package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.jjg.member.model.domain.EsShopDO;
+import com.jjg.member.model.dto.ShopQueryParam;
 import com.xdl.jjg.entity.EsShop;
 import com.xdl.jjg.model.domain.EsShopAndDetailDO;
-import com.xdl.jjg.model.domain.EsShopDO;
-import com.xdl.jjg.model.dto.ShopQueryParam;
 
 /**
  * <p>
