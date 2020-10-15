@@ -13,6 +13,7 @@ import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
 import com.xdl.jjg.web.service.IEsMemberReceiptService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

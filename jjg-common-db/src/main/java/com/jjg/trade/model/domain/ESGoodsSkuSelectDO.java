@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.domain;
+package com.jjg.trade.model.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.shopx.goods.api.model.domain.EsSpecValuesDO;
 import lombok.Data;

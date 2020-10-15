@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.form;
+package com.jjg.shop.model.form;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
@@ -132,7 +132,7 @@ public class EsGoodsForm implements Serializable {
 	private String original;
 
 	@ApiModelProperty(value = "商品SKU集合")
-	private List<EsGoodsSkuForm> skuList;
+	private List<com.xdl.jjg.model.form.EsGoodsSkuForm> skuList;
 	/**
 	 * 商品标签集合
 	 */
@@ -152,7 +152,7 @@ public class EsGoodsForm implements Serializable {
 	@ApiModelProperty(value = "售后服务")
 	private String afterService;
 	@ApiModelProperty(value = "商品参数集合")
-	private List<EsGoodsParamsForm> paramsList;
+	private List<com.xdl.jjg.model.form.EsGoodsParamsForm> paramsList;
 
 	private Integer isLfc;
 	private Integer isVirtual;

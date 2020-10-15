@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.domain;/**
+package com.jjg.system.model.domain;/**
  * @author wangaf
  * @date 2020/3/10 18:37
  **/

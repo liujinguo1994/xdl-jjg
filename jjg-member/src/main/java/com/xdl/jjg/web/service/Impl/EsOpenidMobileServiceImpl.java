@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjg.member.model.dto.EsOpenidMobileDTO;
+import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsOpenidMobile;
 import com.xdl.jjg.mapper.EsOpenidMobileMapper;
 import com.xdl.jjg.model.domain.EsOpenidMobileDO;
@@ -55,7 +56,7 @@ public class EsOpenidMobileServiceImpl extends ServiceImpl<EsOpenidMobileMapper,
     public DubboResult insertOpenidMobile(EsOpenidMobileDTO openidMobileDTO) {
         try {
             if (openidMobileDTO == null) {
-                throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), ErrorCode.PARAM_ERROR.getErrorMsg());
+                throw new ArgumentException(MemberErrorCode.PARAM_ERROR.getErrorCode(), MemberErrorCode.PARAM_ERROR.getErrorMsg());
             }
             //先判断该手机号是否已经关联此微信
             QueryWrapper<EsOpenidMobile> queryWrapper = new QueryWrapper<>();
@@ -74,7 +75,7 @@ public class EsOpenidMobileServiceImpl extends ServiceImpl<EsOpenidMobileMapper,
         }catch (Throwable ae) {
             logger.error("微信关联手机号新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -91,7 +92,7 @@ public class EsOpenidMobileServiceImpl extends ServiceImpl<EsOpenidMobileMapper,
     public DubboResult updateOpenidMobile(EsOpenidMobileDTO openidMobileDTO) {
         try {
             if (openidMobileDTO == null) {
-                throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), ErrorCode.PARAM_ERROR.getErrorMsg());
+                throw new ArgumentException(MemberErrorCode.PARAM_ERROR.getErrorCode(), MemberErrorCode.PARAM_ERROR.getErrorMsg());
             }
             EsOpenidMobile openidMobile = new EsOpenidMobile();
             BeanUtil.copyProperties(openidMobileDTO, openidMobile);
@@ -106,7 +107,7 @@ public class EsOpenidMobileServiceImpl extends ServiceImpl<EsOpenidMobileMapper,
         } catch (Throwable th) {
             logger.error("微信关联手机号更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -126,7 +127,7 @@ public class EsOpenidMobileServiceImpl extends ServiceImpl<EsOpenidMobileMapper,
             EsOpenidMobile openidMobile = this.openidMobileMapper.selectOne(queryWrapper);
             EsOpenidMobileDO openidMobileDO = new EsOpenidMobileDO();
             if (openidMobile == null) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(MemberErrorCode.DATA_NOT_EXIST.getErrorCode(), MemberErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             BeanUtil.copyProperties(openidMobile, openidMobileDO);
             return DubboResult.success(openidMobileDO);
@@ -135,7 +136,7 @@ public class EsOpenidMobileServiceImpl extends ServiceImpl<EsOpenidMobileMapper,
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
         }  catch (Throwable th) {
             logger.error("微信关联手机号查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -171,7 +172,7 @@ public class EsOpenidMobileServiceImpl extends ServiceImpl<EsOpenidMobileMapper,
             return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
         } catch (Throwable th) {
             logger.error("微信关联手机号分页查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -188,7 +189,7 @@ public class EsOpenidMobileServiceImpl extends ServiceImpl<EsOpenidMobileMapper,
     public DubboResult deleteOpenidMobile(Long id) {
         try {
             if (id == 0) {
-                throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), String.format("参数传入错误ID不能为空[%s]", id));
+                throw new ArgumentException(MemberErrorCode.PARAM_ERROR.getErrorCode(), String.format("参数传入错误ID不能为空[%s]", id));
             }
             QueryWrapper<EsOpenidMobile> deleteWrapper = new QueryWrapper<>();
             deleteWrapper.lambda().eq(EsOpenidMobile::getId, id);
@@ -201,7 +202,7 @@ public class EsOpenidMobileServiceImpl extends ServiceImpl<EsOpenidMobileMapper,
         }  catch (Throwable th) {
             logger.error("微信关联手机号删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -226,7 +227,7 @@ public class EsOpenidMobileServiceImpl extends ServiceImpl<EsOpenidMobileMapper,
             return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
         } catch (Throwable th) {
             logger.error("微信关联手机号分页查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 }

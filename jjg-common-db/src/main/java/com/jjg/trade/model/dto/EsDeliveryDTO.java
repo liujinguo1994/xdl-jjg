@@ -1,4 +1,4 @@
-package com.jjg.member.model.dto;
+package com.jjg.trade.model.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

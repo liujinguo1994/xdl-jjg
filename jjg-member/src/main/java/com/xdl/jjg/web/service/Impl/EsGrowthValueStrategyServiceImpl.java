@@ -2,6 +2,7 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.member.model.domain.EsGrowthValueStrategyDO;
 import com.jjg.member.model.dto.EsGrowthStrategyDTO;
 import com.jjg.member.model.dto.EsGrowthValueStrategyDTO;
 import com.jjg.member.model.vo.EsGrowthValueStrategyVO;
@@ -9,11 +10,11 @@ import com.xdl.jjg.constant.MemberConstant;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsGrowthValueStrategy;
 import com.xdl.jjg.mapper.EsGrowthValueStrategyMapper;
-import com.xdl.jjg.model.domain.EsGrowthValueStrategyDO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
 import com.xdl.jjg.web.service.IEsGrowthValueStrategyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -160,7 +161,7 @@ public class EsGrowthValueStrategyServiceImpl extends ServiceImpl<EsGrowthValueS
     /**
      * 根据收藏类型查询成长值
      *
-     * @param id 主键id
+     * @param
      * @auther: lins 1220316142@qq.com
      * @date: 2019/05/31 16:37:16
      * @return: com.shopx.common.model.result.DubboResult<EsGrowthValueStrategyDO>

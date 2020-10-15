@@ -1,4 +1,4 @@
-package com.jjg.member.model.vo;
+package com.jjg.trade.model.vo;
 
 import com.shopx.common.util.BeanUtil;
 import io.swagger.annotations.ApiModel;

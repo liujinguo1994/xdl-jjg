@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.form;
+package com.jjg.system.model.form;
 
 import com.shopx.member.api.model.domain.vo.EsMemberRfmConfigVO;
 import io.swagger.annotations.ApiModel;

@@ -1,4 +1,4 @@
-package com.jjg.member.model.enums;
+package com.jjg.system.model.enums;
 
 /**
  * @Description 短信模板编号枚举类

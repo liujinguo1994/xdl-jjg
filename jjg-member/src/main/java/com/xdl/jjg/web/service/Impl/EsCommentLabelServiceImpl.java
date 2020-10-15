@@ -5,12 +5,12 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjg.member.model.domain.EsCommentLabelDO;
+import com.jjg.member.model.domain.EsTagLabelListDO;
 import com.jjg.member.model.dto.EsCommentLabelDTO;
 import com.xdl.jjg.constant.MemberConstant;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsCommentLabel;
 import com.xdl.jjg.mapper.EsCommentLabelMapper;
-import com.xdl.jjg.model.domain.EsTagLabelListDO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
@@ -254,7 +254,7 @@ public class EsCommentLabelServiceImpl extends ServiceImpl<EsCommentLabelMapper,
     /**
      * 批量删除标签内容
      *
-     * @param goodIds
+     * @param
      * @auther: lins 1220316142@qq.com
      * @date: 2019/05/31 16:39:30
      * @return: package com.shopx.member.dao.domain.DubboResult

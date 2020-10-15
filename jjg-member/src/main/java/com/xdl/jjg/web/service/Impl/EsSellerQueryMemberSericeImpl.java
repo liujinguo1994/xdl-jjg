@@ -1,13 +1,13 @@
 package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.jjg.member.model.domain.EsMemberQueryActiveDO;
 import com.jjg.member.model.dto.EsQueryMemberTypeDTO;
 import com.jjg.member.model.enums.MemberActiveSortEnums;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsMemberActiveConfig;
 import com.xdl.jjg.mapper.EsMemberActiveConfigMapper;
 import com.xdl.jjg.mapper.EsMemberShopMapper;
-import com.xdl.jjg.model.domain.EsMemberQueryActiveDO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.web.service.IEsSellerQueryMemberSerice;

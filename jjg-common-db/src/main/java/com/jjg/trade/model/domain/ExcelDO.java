@@ -1,4 +1,4 @@
-package com.jjg.member.model.domain;
+package com.jjg.trade.model.domain;
 
 import lombok.Data;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;

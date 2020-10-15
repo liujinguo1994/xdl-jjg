@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.form;
+package com.jjg.member.model.form;
 
 import com.shopx.common.model.result.QueryPageForm;
 import io.swagger.annotations.ApiModel;

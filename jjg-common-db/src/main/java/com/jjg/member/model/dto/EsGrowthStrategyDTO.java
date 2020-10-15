@@ -1,6 +1,6 @@
 package com.jjg.member.model.dto;
 
-import com.shopx.member.api.model.domain.vo.EsGrowthValueStrategyVO;
+import com.jjg.member.model.vo.EsGrowthValueStrategyVO;
 import lombok.Data;
 import lombok.ToString;
 

@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.domain;
+package com.jjg.shop.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;

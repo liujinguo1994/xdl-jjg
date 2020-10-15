@@ -5,12 +5,14 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjg.member.model.domain.EsCollectionShopInfoDO;
-import com.jjg.member.model.domain.EsGoodsDO;
 import com.jjg.member.model.domain.EsMemberCollectionShopLabelDO;
 import com.jjg.member.model.dto.EsMemberCollectionShopDTO;
 import com.jjg.member.model.dto.EsQueryCollectShopDTO;
 import com.jjg.member.model.dto.EsUpdateTopShopDTO;
 import com.jjg.member.model.enums.ShopStatusEnums;
+import com.jjg.shop.model.domain.EsAdminTagGoodsDO;
+import com.jjg.shop.model.domain.EsAdminTagsDO;
+import com.jjg.shop.model.domain.EsGoodsDO;
 import com.xdl.jjg.constant.MemberConstant;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsMemberCollectionShop;
@@ -18,7 +20,6 @@ import com.xdl.jjg.entity.EsMemberShop;
 import com.xdl.jjg.entity.EsShop;
 import com.xdl.jjg.entity.EsShopDetail;
 import com.xdl.jjg.mapper.*;
-import com.xdl.jjg.model.domain.EsAdminTagGoodsDO;
 import com.xdl.jjg.model.domain.EsGrowthValueStrategyDO;
 import com.xdl.jjg.model.domain.EsMemberCollectionShopDO;
 import com.xdl.jjg.model.domain.EsQueryCollectionShopDO;
@@ -466,10 +467,10 @@ public class EsMemberCollectionShopServiceImpl extends ServiceImpl<EsMemberColle
                 List<EsAdminTagGoodsDO> adminTagGoodsList = adminTagGoodsResult.getData().getList();
                 Map<Long, List<EsAdminTagGoodsDO>> map = adminTagGoodsList.stream().collect(Collectors.groupingBy(EsAdminTagGoodsDO::getTagId));
                 for(Map.Entry<Long, List<EsAdminTagGoodsDO>> entry: map.entrySet()){
-                    DubboResult<com.xdl.jjg.model.domain.EsAdminTagsDO> adminTagsDOResult = adminTagsService.getAdminTags(entry.getKey());
+                    DubboResult<EsAdminTagsDO> adminTagsDOResult = adminTagsService.getAdminTags(entry.getKey());
                     EsMemberCollectionShopLabelDO memberCollectionShopLabelDO = new EsMemberCollectionShopLabelDO();
                     if(adminTagsDOResult.isSuccess() && adminTagsDOResult.getData() != null){
-                        com.xdl.jjg.model.domain.EsAdminTagsDO adminTagsDO = adminTagsDOResult.getData();
+                        EsAdminTagsDO adminTagsDO = adminTagsDOResult.getData();
                         BeanUtil.copyProperties(adminTagsDO, memberCollectionShopLabelDO);
                     }
                     List<EsAdminTagGoodsDO> adminTagGoodsDOList = entry.getValue();

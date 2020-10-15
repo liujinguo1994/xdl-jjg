@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.domain;
+package com.jjg.member.model.domain;
 
 import lombok.Data;
 import lombok.ToString;

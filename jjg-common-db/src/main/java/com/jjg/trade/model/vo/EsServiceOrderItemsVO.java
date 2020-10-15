@@ -1,4 +1,4 @@
-package com.jjg.member.model.vo;
+package com.jjg.trade.model.vo;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;

@@ -1,4 +1,4 @@
-package com.jjg.member.model.vo;
+package com.jjg.trade.model.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import org.apache.commons.lang.builder.EqualsBuilder;

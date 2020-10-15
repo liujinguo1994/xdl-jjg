@@ -1,4 +1,4 @@
-package com.jjg.member.model.vo;
+package com.jjg.shop.model.vo;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Data;

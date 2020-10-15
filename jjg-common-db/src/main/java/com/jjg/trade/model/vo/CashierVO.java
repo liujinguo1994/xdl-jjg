@@ -1,4 +1,4 @@
-package com.jjg.member.model.vo;
+package com.jjg.trade.model.vo;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

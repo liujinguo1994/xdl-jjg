@@ -1,4 +1,4 @@
-package com.jjg.member.model.dto;
+package com.jjg.system.model.dto;
 
 import com.shopx.system.api.model.domain.vo.Menus;
 import lombok.Data;

@@ -1,4 +1,4 @@
-package com.jjg.member.model.dto;
+package com.jjg.system.model.dto;
 
 import com.xdl.jjg.model.vo.EsClearingCycleVO;
 import lombok.Data;

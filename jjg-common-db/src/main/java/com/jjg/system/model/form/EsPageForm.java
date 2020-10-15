@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.form;
+package com.jjg.system.model.form;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

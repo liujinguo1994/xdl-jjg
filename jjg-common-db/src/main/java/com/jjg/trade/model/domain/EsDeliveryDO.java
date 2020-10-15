@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.domain;
+package com.jjg.trade.model.domain;
 
 import io.swagger.annotations.ApiModel;
 import lombok.Data;

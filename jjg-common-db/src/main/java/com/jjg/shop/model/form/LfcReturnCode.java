@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.form;
+package com.jjg.shop.model.form;
 
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import com.xdl.jjg.util.PropertyUpperStrategy;

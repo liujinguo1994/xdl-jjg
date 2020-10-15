@@ -1,7 +1,7 @@
-package com.xdl.jjg.model.domain;
+package com.jjg.system.model.domain;
 
-import com.xdl.jjg.model.vo.EsFindGoodsVO;
-import com.xdl.jjg.model.vo.EsOftenGoodsVO;
+import com.jjg.member.model.vo.EsFindGoodsVO;
+import com.jjg.member.model.vo.EsOftenGoodsVO;
 import lombok.Data;
 
 import java.io.Serializable;

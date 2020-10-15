@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.form;
+package com.jjg.system.model.form;
 
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import lombok.Data;

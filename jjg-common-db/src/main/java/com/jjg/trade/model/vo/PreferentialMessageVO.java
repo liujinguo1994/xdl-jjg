@@ -1,4 +1,4 @@
-package com.jjg.member.model.vo;/**
+package com.jjg.trade.model.vo;/**
  * Description: zhuox-shop-trade
  * <p>
  * Created by Administrator on 2020/4/24 13:37

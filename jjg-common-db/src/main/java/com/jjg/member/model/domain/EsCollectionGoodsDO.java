@@ -1,5 +1,6 @@
 package com.jjg.member.model.domain;
 
+import com.xdl.jjg.model.domain.EsMemberCollectionGoodsDO;
 import lombok.Data;
 
 import java.io.Serializable;

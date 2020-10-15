@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.domain;
+package com.jjg.member.model.domain;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;

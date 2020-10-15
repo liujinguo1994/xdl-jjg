@@ -1,5 +1,6 @@
-package com.xdl.jjg.model.domain;
+package com.jjg.member.model.domain;
 
+import com.jjg.member.model.domain.EsCommentCategoryDO;
 import lombok.Data;
 
 import java.io.Serializable;

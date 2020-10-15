@@ -1,4 +1,4 @@
-package com.jjg.member.model.enums;
+package com.jjg.trade.model.enums;
 
 /**
  * 订单元Key

@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.form;
+package com.jjg.member.model.form;
 
 
 import io.swagger.annotations.ApiModel;

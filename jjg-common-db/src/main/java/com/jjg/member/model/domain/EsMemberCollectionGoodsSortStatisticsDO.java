@@ -1,6 +1,7 @@
-package com.xdl.jjg.model.domain;
+package com.jjg.member.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.jjg.member.model.domain.EsCategoryMemberDO;
 import lombok.Data;
 
 import java.io.Serializable;

@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.co;
+package com.jjg.shop.model.co;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;

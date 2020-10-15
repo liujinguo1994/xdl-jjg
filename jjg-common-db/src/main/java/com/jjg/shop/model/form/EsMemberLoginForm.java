@@ -1,5 +1,4 @@
-package com.xdl.jjg.model.form;
-
+package com.jjg.shop.model.form;
 public class EsMemberLoginForm {
 
 }

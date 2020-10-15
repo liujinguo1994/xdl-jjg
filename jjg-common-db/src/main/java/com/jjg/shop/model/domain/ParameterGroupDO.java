@@ -1,5 +1,4 @@
-package com.xdl.jjg.model.domain;
-
+package com.jjg.shop.model.domain;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -12,5 +11,5 @@ public class ParameterGroupDO implements Serializable {
     //参数组ID
     private Long groupId;
    //参数组关联的参数集合
-    private List<EsParametersDO>  params;
+    private List<com.xdl.jjg.model.domain.EsParametersDO>  params;
 }

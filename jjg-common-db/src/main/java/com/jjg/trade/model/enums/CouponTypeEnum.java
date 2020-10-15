@@ -1,4 +1,4 @@
-package com.jjg.member.model.enums;/**
+package com.jjg.trade.model.enums;/**
  * @author wangaf
  * @date 2019/11/29 16:42
  **/

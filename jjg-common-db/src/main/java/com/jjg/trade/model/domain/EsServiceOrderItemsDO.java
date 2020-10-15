@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.domain;
+package com.jjg.trade.model.domain;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;

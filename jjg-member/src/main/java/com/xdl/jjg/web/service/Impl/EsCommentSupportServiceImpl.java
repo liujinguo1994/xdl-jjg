@@ -15,6 +15,7 @@ import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.CollectionUtils;
 import com.xdl.jjg.web.service.IEsCommentSupportService;
+import org.apache.ibatis.annotations.Mapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,7 +101,7 @@ public class EsCommentSupportServiceImpl extends ServiceImpl<EsCommentSupportMap
         } catch (Throwable th) {
             logger.error("更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -124,7 +125,7 @@ public class EsCommentSupportServiceImpl extends ServiceImpl<EsCommentSupportMap
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
         }  catch (Throwable th) {
             logger.error("查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -141,7 +142,7 @@ public class EsCommentSupportServiceImpl extends ServiceImpl<EsCommentSupportMap
         try {
             EsCommentSupport commentSupport = this.commentSupportMapper.selectById(id);
             if (commentSupport == null) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(MemberErrorCode.DATA_NOT_EXIST.getErrorCode(), MemberErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             EsCommentSupportDO commentSupportDO = new EsCommentSupportDO();
             BeanUtil.copyProperties(commentSupport, commentSupportDO);
@@ -151,7 +152,7 @@ public class EsCommentSupportServiceImpl extends ServiceImpl<EsCommentSupportMap
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
         }  catch (Throwable th) {
             logger.error("查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -187,7 +188,7 @@ public class EsCommentSupportServiceImpl extends ServiceImpl<EsCommentSupportMap
             return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
         } catch (Throwable th) {
             logger.error("分页查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -212,7 +213,7 @@ public class EsCommentSupportServiceImpl extends ServiceImpl<EsCommentSupportMap
         }  catch (Throwable th) {
             logger.error("删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -228,7 +229,7 @@ public class EsCommentSupportServiceImpl extends ServiceImpl<EsCommentSupportMap
         }catch (Throwable th) {
             logger.error("查询失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 }

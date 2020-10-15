@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.domain;
+package com.jjg.member.model.domain;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;

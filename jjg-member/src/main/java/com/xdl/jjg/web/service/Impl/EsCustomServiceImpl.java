@@ -21,7 +21,7 @@ import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.CollectionUtils;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.web.service.IEsCustomService;
-import com.xdl.jjg.web.service.feignShopService.GoodsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.jjg.member.model.dto;
+package com.jjg.trade.model.dto;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;

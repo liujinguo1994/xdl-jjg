@@ -1,4 +1,5 @@
-package com.xdl.jjg.model.domain;/**
+package com.jjg.shop.model.domain;
+/**
  * @author wangaf
  * @date 2019/11/2 16:29
  **/
@@ -19,7 +20,7 @@ public class EsBuyerGoodsParamsDO implements Serializable {
     /**
      * 参数组关联的参数集合
      */
-    private List<EsBuyerParamsDO> params;
+    private List<com.xdl.jjg.model.domain.EsBuyerParamsDO> params;
 
     /**
      * 参数组名称

@@ -1,8 +1,8 @@
-package com.xdl.jjg.model.co;
+package com.jjg.shop.model.co;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.xdl.jjg.model.domain.EsBuyerGoodsParamsDO;
-import com.xdl.jjg.model.vo.EsPromotionGoodsVO;
+import com.jjg.shop.model.domain.EsBuyerGoodsParamsDO;
+import com.jjg.shop.model.vo.EsPromotionGoodsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

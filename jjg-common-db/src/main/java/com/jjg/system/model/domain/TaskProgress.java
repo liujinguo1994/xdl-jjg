@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.domain;
+package com.jjg.system.model.domain;
 
 import com.shopx.system.api.model.enums.ProgressEnum;
 import lombok.Data;

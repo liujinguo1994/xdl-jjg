@@ -1,6 +1,7 @@
-package com.xdl.jjg.model.form.query;
+package com.jjg.trade.model.form.query;
 
-import com.shopx.common.model.result.QueryPageForm;
+
+import com.xdl.jjg.response.web.QueryPageForm;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

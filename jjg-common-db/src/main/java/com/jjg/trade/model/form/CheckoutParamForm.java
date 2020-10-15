@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.form;
+package com.jjg.trade.model.form;
 
 import com.shopx.trade.api.model.domain.vo.ReceiptVO;
 import com.shopx.trade.api.model.enums.PaymentTypeEnum;

@@ -1,4 +1,4 @@
-package com.jjg.member.model.domain;/**
+package com.jjg.trade.model.domain;/**
  * @author wangaf
  * @date 2019/11/15 13:57
  **/

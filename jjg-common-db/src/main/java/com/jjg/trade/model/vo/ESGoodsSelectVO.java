@@ -1,4 +1,4 @@
-package com.jjg.member.model.vo;/**
+package com.jjg.trade.model.vo;/**
  * @author wangaf
  * @date 2019/11/15 13:57
  **/

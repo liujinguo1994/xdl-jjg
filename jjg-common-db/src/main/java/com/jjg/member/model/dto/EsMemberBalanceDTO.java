@@ -1,6 +1,6 @@
 package com.jjg.member.model.dto;
 
-import com.shopx.member.api.model.domain.enums.ConsumeEnumType;
+import com.jjg.member.model.enums.ConsumeEnumType;
 import lombok.Data;
 import lombok.ToString;
 

@@ -2,10 +2,11 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.member.model.domain.EsSearchKeyWordDO;
 import com.jjg.member.model.dto.EsSearchKeyWordDTO;
+import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsSearchKeyWord;
 import com.xdl.jjg.mapper.EsSearchKeyWordMapper;
-import com.xdl.jjg.model.domain.EsSearchKeyWordDO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
@@ -52,7 +53,7 @@ public class EsSearchKeyWordServiceImpl extends ServiceImpl<EsSearchKeyWordMappe
     public DubboResult insertSearchKeyWord(EsSearchKeyWordDTO searchKeyWordDTO) {
         try {
             if (searchKeyWordDTO == null) {
-                throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), ErrorCode.PARAM_ERROR.getErrorMsg());
+                throw new ArgumentException(MemberErrorCode.PARAM_ERROR.getErrorCode(), MemberErrorCode.PARAM_ERROR.getErrorMsg());
             }
 
             EsSearchKeyWord searchKeyWord = new EsSearchKeyWord();
@@ -63,7 +64,7 @@ public class EsSearchKeyWordServiceImpl extends ServiceImpl<EsSearchKeyWordMappe
         } catch (Throwable ae) {
             logger.error("失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -94,7 +95,7 @@ public class EsSearchKeyWordServiceImpl extends ServiceImpl<EsSearchKeyWordMappe
             return DubboPageResult.success(searchKeyWordDOList);
         } catch (Throwable th) {
             logger.error("查询分页查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -119,7 +120,7 @@ public class EsSearchKeyWordServiceImpl extends ServiceImpl<EsSearchKeyWordMappe
             return DubboPageResult.success(collect);
         } catch (Throwable th) {
             logger.error("查询分页查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -136,7 +137,7 @@ public class EsSearchKeyWordServiceImpl extends ServiceImpl<EsSearchKeyWordMappe
     public DubboResult deleteSearchKeyWord(Long id) {
         try {
             if (id == 0) {
-                throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), String.format("参数传入错误ID不能为空[%s]", id));
+                throw new ArgumentException(MemberErrorCode.PARAM_ERROR.getErrorCode(), String.format("参数传入错误ID不能为空[%s]", id));
             }
             QueryWrapper<EsSearchKeyWord> deleteWrapper = new QueryWrapper<>();
             deleteWrapper.lambda().eq(EsSearchKeyWord::getId, id);
@@ -145,7 +146,7 @@ public class EsSearchKeyWordServiceImpl extends ServiceImpl<EsSearchKeyWordMappe
         } catch (Throwable th) {
             logger.error("查询删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -153,7 +154,7 @@ public class EsSearchKeyWordServiceImpl extends ServiceImpl<EsSearchKeyWordMappe
     public DubboResult deleteSearchKeyWordBatch(Long memberId) {
         try {
             if (memberId == null) {
-                throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), String.format("参数传入错误memberId不能为空[%s]", memberId));
+                throw new ArgumentException(MemberErrorCode.PARAM_ERROR.getErrorCode(), String.format("参数传入错误memberId不能为空[%s]", memberId));
             }
             QueryWrapper<EsSearchKeyWord> deleteWrapper = new QueryWrapper<>();
             deleteWrapper.lambda().eq(EsSearchKeyWord::getMemberId, memberId);
@@ -162,7 +163,7 @@ public class EsSearchKeyWordServiceImpl extends ServiceImpl<EsSearchKeyWordMappe
         } catch (Throwable th) {
             logger.error("查询删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 }

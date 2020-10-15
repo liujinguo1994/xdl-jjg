@@ -1,7 +1,7 @@
-package com.jjg.member.model.vo;
+package com.jjg.shop.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.shopx.goods.api.model.domain.cache.*;
+import com.jjg.shop.model.co.*;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;

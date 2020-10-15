@@ -1,4 +1,4 @@
-package com.jjg.member.model.enums;
+package com.jjg.trade.model.enums;
 
 /**
  * 申请售后的状态

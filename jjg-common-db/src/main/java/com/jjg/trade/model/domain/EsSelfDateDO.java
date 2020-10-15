@@ -1,4 +1,4 @@
-package com.jjg.member.model.domain;
+package com.jjg.trade.model.domain;
 
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.extension.activerecord.Model;

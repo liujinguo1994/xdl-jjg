@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
+import com.jjg.member.model.domain.EsGradeWeightConfigDO;
 import com.jjg.member.model.dto.EsGradeWeightConfigDTO;
-import com.xdl.jjg.model.domain.EsGradeWeightConfigDO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 
@@ -22,7 +22,7 @@ public interface IEsGradeWeightConfigService {
      * 插入数据
      * @auther: lins 1220316142@qq.com
      * @date: 2019/05/31 16:39:30
-     * @param gradeWeightConfigDTO    DTO
+     * @param
      * @return: com.shopx.common.model.result.DubboResult<EsGradeWeightConfigDO>
      */
     DubboResult insertGradeWeightConfig(List<EsGradeWeightConfigDTO> gradeWeightConfigDTOList);
@@ -31,8 +31,8 @@ public interface IEsGradeWeightConfigService {
      * 根据条件更新更新数据
      * @auther: lins 1220316142@qq.com
      * @date: 2019/05/31 16:40:10
-     * @param gradeWeightConfigDTO   DTO
-     * @param id                            主键id
+     * @param
+     * @param
      * @return: com.shopx.common.model.result.DubboResult<EsGradeWeightConfigDO>
      */
     DubboResult updateGradeWeightConfig(List<EsGradeWeightConfigDTO> gradeWeightConfigDTOList);

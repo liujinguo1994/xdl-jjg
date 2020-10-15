@@ -1,4 +1,4 @@
-package com.jjg.member.model.dto;
+package com.jjg.shop.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.Api;

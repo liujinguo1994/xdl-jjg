@@ -1,7 +1,7 @@
-package com.jjg.member.model.dto;
+package com.jjg.shop.model.dto;
 
-import com.shopx.goods.api.model.domain.cache.EsGoodsCO;
-import com.shopx.goods.api.model.domain.cache.EsGoodsSkuCO;
+import com.jjg.shop.model.co.EsGoodsCO;
+import com.jjg.shop.model.co.EsGoodsSkuCO;
 import lombok.Data;
 
 import java.io.Serializable;

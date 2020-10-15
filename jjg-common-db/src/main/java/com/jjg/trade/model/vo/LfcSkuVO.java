@@ -1,4 +1,4 @@
-package com.jjg.member.model.vo;
+package com.jjg.trade.model.vo;
 
 import com.shopx.goods.api.model.domain.cache.EsGoodsSkuCO;
 import io.swagger.annotations.ApiModel;

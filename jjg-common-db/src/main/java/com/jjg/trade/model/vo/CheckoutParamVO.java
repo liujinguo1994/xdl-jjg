@@ -1,4 +1,4 @@
-package com.jjg.member.model.vo;
+package com.jjg.trade.model.vo;
 
 import com.shopx.trade.api.model.enums.PaymentTypeEnum;
 import io.swagger.annotations.ApiModel;

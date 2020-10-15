@@ -1,4 +1,4 @@
-package com.jjg.member.model.enums;
+package com.jjg.system.model.enums;
 
 /**
  * 系统设置分组枚举

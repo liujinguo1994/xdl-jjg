@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.form.query;
+package com.jjg.trade.model.form.query;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.shopx.common.model.result.QueryPageForm;

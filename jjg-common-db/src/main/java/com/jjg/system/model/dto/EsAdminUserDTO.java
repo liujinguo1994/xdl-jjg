@@ -1,4 +1,4 @@
-package com.jjg.member.model.dto;
+package com.jjg.system.model.dto;
 
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;

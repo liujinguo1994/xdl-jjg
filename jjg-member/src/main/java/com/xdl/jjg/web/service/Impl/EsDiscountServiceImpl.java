@@ -17,7 +17,7 @@ import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.IEsDiscountService;
-import com.xdl.jjg.web.service.feignShopService.CategoryService;
+import com.xdl.jjg.web.service.feign.shop.CategoryService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;

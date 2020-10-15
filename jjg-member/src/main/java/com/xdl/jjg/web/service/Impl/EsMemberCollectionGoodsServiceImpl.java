@@ -4,12 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.member.model.domain.EsCategoryMemberDO;
 import com.jjg.member.model.domain.EsCollectCateryNumDO;
-import com.jjg.member.model.domain.EsGoodsDO;
+import com.jjg.member.model.domain.EsMemberCollectionGoodsDO;
 import com.jjg.member.model.dto.EsMemberCollectionGoodsDTO;
 import com.jjg.member.model.dto.EsQueryMemberCollectionGoodsDTO;
-import com.jjg.member.model.dto.EsSmsSendDTO;
-import com.jjg.member.model.enums.SmsTemplateCodeEnum;
 import com.jjg.member.model.vo.EsCollVO;
 import com.xdl.jjg.constant.MemberConstant;
 import com.xdl.jjg.constant.MemberErrorCode;
@@ -18,22 +17,20 @@ import com.xdl.jjg.entity.EsMemberShop;
 import com.xdl.jjg.mapper.EsMemberCollectionGoodsMapper;
 import com.xdl.jjg.mapper.EsMemberMapper;
 import com.xdl.jjg.mapper.EsMemberShopMapper;
-import com.xdl.jjg.model.co.EsGoodsCO;
-import com.xdl.jjg.model.domain.EsCategoryDO;
 import com.xdl.jjg.model.domain.EsEffectAndPriceCollectionGoodsDO;
-import com.xdl.jjg.model.domain.EsGoodsSkuDO;
-import com.xdl.jjg.model.domain.EsMemberCollectionGoodsDO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
 import com.xdl.jjg.util.MathUtil;
 import com.xdl.jjg.web.service.IEsGrowthValueStrategyService;
 import com.xdl.jjg.web.service.IEsMemberCollectionGoodsService;
 import com.xdl.jjg.web.service.IEsMemberService;
-import com.xdl.jjg.web.service.feignShopService.CategoryService;
-import com.xdl.jjg.web.service.feignShopService.GoodsService;
-import com.xdl.jjg.web.service.feignShopService.GoodsSkuService;
+import com.xdl.jjg.web.service.feign.shop.CategoryService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsSkuService;
+import com.xdl.jjg.web.service.feign.system.SmsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,8 +75,8 @@ public class EsMemberCollectionGoodsServiceImpl extends ServiceImpl<EsMemberColl
     //短信验证码长度
     @Value("${zhuo.member.code.length}")
     private int SMSLENGTH;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsSmsService esSmsService;
+    @Autowired
+    private SmsService esSmsService;
     @Autowired
     private IEsGrowthValueStrategyService iEsGrowthValueStrategyService;
 
@@ -116,7 +113,7 @@ public class EsMemberCollectionGoodsServiceImpl extends ServiceImpl<EsMemberColl
                     EsMemberCollectionGoodsDO esMemberCollectionGoodsDO = new EsMemberCollectionGoodsDO();
                     BeanUtil.copyProperties(esMemberCollectionShop, esMemberCollectionGoodsDO);
                     DubboResult<EsGoodsSkuDO> result = iEsGoodsSkuService.buyGetGoodsSku(esMemberCollectionGoodsDO.getSkuId(), esMemberCollectionGoodsDO.getGoodsId());
-                    if (!result.isSuccess() && result.getCode() == GoodsErrorCode.DATA_NOT_EXIST.getErrorCode()) {
+                    if (!result.isSuccess() && result.getCode() == MemberErrorCode.DATA_NOT_EXIST.getErrorCode()) {
                         //失效商品添加标识
                         esMemberCollectionGoodsDO.setLoseSign(MemberConstant.effect);
                     } else {
@@ -210,7 +207,7 @@ public class EsMemberCollectionGoodsServiceImpl extends ServiceImpl<EsMemberColl
                 EsMemberCollectionGoodsDO esMemberCollectionGoodsDO = new EsMemberCollectionGoodsDO();
                 BeanUtil.copyProperties(esMemberCollectionShop, esMemberCollectionGoodsDO);
                 DubboResult<EsGoodsSkuDO> result = iEsGoodsSkuService.buyGetGoodsSku(esMemberCollectionGoodsDO.getSkuId(), esMemberCollectionGoodsDO.getGoodsId());
-                if (!result.isSuccess() && result.getCode() == GoodsErrorCode.DATA_NOT_EXIST.getErrorCode() && judge == 3) {
+                if (!result.isSuccess() && result.getCode() == MemberErrorCode.DATA_NOT_EXIST.getErrorCode() && judge == 3) {
                     //失效商品添加标识
                     esMemberCollectionGoodsDO.setLoseSign(MemberConstant.effect);
                     esMemberCollectionGoodsDOList.add(esMemberCollectionGoodsDO);
@@ -218,7 +215,7 @@ public class EsMemberCollectionGoodsServiceImpl extends ServiceImpl<EsMemberColl
                 } else {
                     //降价商品
                     if (judge == 2) {
-                        if (!result.isSuccess() && result.getCode() == GoodsErrorCode.DATA_NOT_EXIST.getErrorCode()) {
+                        if (!result.isSuccess() && result.getCode() == MemberErrorCode.DATA_NOT_EXIST.getErrorCode()) {
                             continue;
                         }
                         if (!result.isSuccess()) {
@@ -348,7 +345,7 @@ public class EsMemberCollectionGoodsServiceImpl extends ServiceImpl<EsMemberColl
             // 查询所有商品信息 查询商品信息不需要判断是否上架或者删除
             DubboResult<EsGoodsSkuDO> result = iEsGoodsSkuService.buyGetGoodsSku(esMemberCollectionGoods.getSkuId(), esMemberCollectionGoods.getGoodsId());
             //查询失效商品id
-            if (!result.isSuccess() && result.getCode() == GoodsErrorCode.DATA_NOT_EXIST.getErrorCode()) {
+            if (!result.isSuccess() && result.getCode() == MemberErrorCode.DATA_NOT_EXIST.getErrorCode()) {
                 listEfect.add(esMemberCollectionGoods.getSkuId());
                 continue;
             }
@@ -891,7 +888,7 @@ public class EsMemberCollectionGoodsServiceImpl extends ServiceImpl<EsMemberColl
         }
         //标签列表
         Map<Long, List<EsCategoryDO>> categoryMap = new HashMap<>();
-        List<com.xdl.jjg.model.domain.EsCategoryMemberDO> list = new ArrayList<>();
+        List<EsCategoryMemberDO> list = new ArrayList<>();
         DubboPageResult<EsCategoryDO> categoryDO = iEsCategoryService.getCategoryByIds(categoryIds);
         if(categoryDO.isSuccess() && categoryDO.getData().getList() != null){
             List<EsCategoryDO> categoryDOList = categoryDO.getData().getList();
@@ -901,7 +898,7 @@ public class EsMemberCollectionGoodsServiceImpl extends ServiceImpl<EsMemberColl
                 List<EsCategoryDO> parentIdList = parentCategoryDO.getData().getList();
                 categoryMap = categoryDOList.stream().collect(Collectors.groupingBy(EsCategoryDO::getParentId));
                 for(EsCategoryDO esCategoryDO : parentIdList){
-                    com.xdl.jjg.model.domain.EsCategoryMemberDO categoryMemberDO = new com.xdl.jjg.model.domain.EsCategoryMemberDO();
+                    EsCategoryMemberDO categoryMemberDO = new EsCategoryMemberDO();
                     BeanUtil.copyProperties(esCategoryDO, categoryMemberDO);
                     int num = 0;
                     if(categoryMap.containsKey(esCategoryDO.getId())){
@@ -992,8 +989,8 @@ public class EsMemberCollectionGoodsServiceImpl extends ServiceImpl<EsMemberColl
         return resultList;
     }
 
-    private List<com.xdl.jjg.model.domain.EsCategoryMemberDO> labelsAssemble(Map<Long, List<EsCategoryDO>> categoryMap, List<com.xdl.jjg.model.domain.EsCategoryMemberDO> categoryList){
-        for(com.xdl.jjg.model.domain.EsCategoryMemberDO categoryDO : categoryList){
+    private List<EsCategoryMemberDO> labelsAssemble(Map<Long, List<EsCategoryDO>> categoryMap, List<EsCategoryMemberDO> categoryList){
+        for(EsCategoryMemberDO categoryDO : categoryList){
           if(categoryMap.containsKey(categoryDO.getId())){
               categoryDO.setNum(categoryMap.get(categoryDO.getId()).size());
           }

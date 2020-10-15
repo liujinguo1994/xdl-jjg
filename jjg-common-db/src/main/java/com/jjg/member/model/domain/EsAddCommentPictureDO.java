@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.domain;
+package com.jjg.member.model.domain;
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import lombok.Data;

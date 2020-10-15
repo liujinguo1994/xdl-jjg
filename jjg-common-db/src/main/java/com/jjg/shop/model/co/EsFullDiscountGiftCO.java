@@ -1,7 +1,7 @@
-package com.xdl.jjg.model.co;
+package com.jjg.shop.model.co;
 
 
-import com.shopx.goods.api.model.domain.EsSellerGoodsSkuDO;
+import com.jjg.shop.model.domain.EsSellerGoodsSkuDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.domain;
+package com.jjg.trade.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;

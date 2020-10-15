@@ -1,5 +1,6 @@
-package com.xdl.jjg.model.co;
+package com.jjg.shop.model.co;
 
+import com.jjg.shop.model.co.ESCategoryChildrenCO;
 import lombok.Data;
 
 import java.io.Serializable;

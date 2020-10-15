@@ -1,4 +1,6 @@
-package com.xdl.jjg.model.domain;/**
+package com.jjg.shop.model.domain;
+
+/**
  * @author wangaf
  * @date 2019/11/2 16:29
  **/

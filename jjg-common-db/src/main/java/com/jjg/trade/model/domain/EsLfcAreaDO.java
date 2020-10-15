@@ -1,4 +1,4 @@
-package com.jjg.member.model.domain;
+package com.jjg.trade.model.domain;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

@@ -1,4 +1,4 @@
-package com.jjg.member.model.dto;
+package com.jjg.trade.model.dto;
 
 import com.shopx.common.model.result.QueryPageForm;
 import io.swagger.annotations.ApiModel;

@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.domain;
+package com.jjg.member.model.domain;
 
 import com.shopx.member.api.model.domain.vo.CommentImageVO;
 import lombok.Data;

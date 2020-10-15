@@ -1,5 +1,4 @@
-package com.xdl.jjg.model.domain;
-
+package com.jjg.shop.model.domain;
 import lombok.Data;
 
 import java.io.Serializable;

@@ -1,6 +1,6 @@
-package com.xdl.jjg.model.co;
+package com.jjg.shop.model.co;
 
-import com.shopx.common.util.StringUtil;
+import com.xdl.jjg.util.StringUtil;
 import lombok.Data;
 
 import java.io.Serializable;

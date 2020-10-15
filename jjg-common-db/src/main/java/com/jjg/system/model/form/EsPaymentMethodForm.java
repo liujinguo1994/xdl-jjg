@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.form;
+package com.jjg.system.model.form;
 
 import com.shopx.trade.api.model.domain.vo.ClientConfigVO;
 import io.swagger.annotations.ApiModel;

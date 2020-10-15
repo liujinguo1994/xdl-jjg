@@ -1,4 +1,4 @@
-package com.jjg.member.model.dto;/**
+package com.jjg.trade.model.dto;/**
  * Description: zhuox-shop-trade
  * <p>
  * Created by Administrator on 2019/10/15 14:54

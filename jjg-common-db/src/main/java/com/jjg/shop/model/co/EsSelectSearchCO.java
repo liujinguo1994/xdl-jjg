@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.co;/**
+package com.jjg.shop.model.co;/**
  * @author wangaf
  * @date 2019/10/29 10:26
  **/
@@ -22,11 +22,11 @@ import java.util.List;
 public class EsSelectSearchCO implements Serializable {
 
     @ApiModelProperty(value = "分类")
-    private List<SearchSelector> cat;
+    private List<com.xdl.jjg.model.co.SearchSelector> cat;
     @ApiModelProperty(value = "已选择分类")
-    private List<SearchSelector> selectedCat;
+    private List<com.xdl.jjg.model.co.SearchSelector> selectedCat;
     @ApiModelProperty(value = "品牌")
-    private List<SearchSelector> brand;
+    private List<com.xdl.jjg.model.co.SearchSelector> brand;
     @ApiModelProperty(value = "参数")
     private List<PropSelector> prop;
     @ApiModelProperty("猜你喜欢")

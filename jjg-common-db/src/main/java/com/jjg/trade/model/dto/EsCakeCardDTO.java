@@ -1,4 +1,4 @@
-package com.jjg.member.model.dto;/**
+package com.jjg.trade.model.dto;/**
  * @author wangaf
  * @date 2020/3/31 14:56
  **/

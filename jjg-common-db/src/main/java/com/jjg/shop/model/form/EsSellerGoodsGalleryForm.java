@@ -1,4 +1,5 @@
-package com.xdl.jjg.model.form;/**
+package com.jjg.shop.model.form;
+/**
  * @author wangaf
  * @date 2019/12/6 10:00
  **/

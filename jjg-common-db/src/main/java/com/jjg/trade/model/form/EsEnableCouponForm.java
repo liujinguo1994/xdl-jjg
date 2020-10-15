@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.form;/**
+package com.jjg.trade.model.form;/**
  * @author wangaf
  * @date 2020/3/16 18:10
  **/

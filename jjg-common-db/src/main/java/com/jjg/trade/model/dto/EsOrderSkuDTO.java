@@ -1,4 +1,4 @@
-package com.jjg.member.model.dto;
+package com.jjg.trade.model.dto;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;

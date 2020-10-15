@@ -1,4 +1,4 @@
-package com.jjg.member.model.dto;
+package com.jjg.trade.model.dto;
 
 import lombok.Data;
 import lombok.ToString;

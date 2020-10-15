@@ -1,7 +1,8 @@
-package com.xdl.jjg.model.domain;
+package com.jjg.trade.model.domain;
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.shopx.trade.api.model.domain.vo.CartItemsVO;
+import com.jjg.member.model.domain.EsOrderItemsDO;
+import com.jjg.member.model.vo.CartItemsVO;
 import lombok.Data;
 
 import java.io.Serializable;

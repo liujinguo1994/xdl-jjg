@@ -42,8 +42,6 @@ public class EsAutoCommentConfigServiceImpl extends ServiceImpl<EsAutoCommentCon
 
     @Autowired
     private EsAutoCommentConfigMapper autoCommentConfigMapper;
-    @Reference(version = "${dubbo.application.version}",timeout = 5000,check = false)
-    private IEsOrderService iEsOrderService;
 
     /**
      * 插入数据

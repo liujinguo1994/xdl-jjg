@@ -1,6 +1,6 @@
 package com.jjg.member.model.dto;
 
-import com.shopx.common.model.result.QueryPageForm;
+import com.xdl.jjg.response.web.QueryPageForm;
 import lombok.Data;
 import lombok.ToString;
 

@@ -4,15 +4,27 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.member.model.domain.EsAdminMemberDO;
+import com.jjg.member.model.domain.EsLevelValueDO;
+import com.jjg.member.model.dto.*;
+import com.jjg.member.model.enums.ConsumeEnumType;
+import com.jjg.member.model.vo.*;
+import com.jjg.trade.model.domain.EsCouponDO;
+import com.jjg.trade.model.dto.EsCouponDTO;
 import com.xdl.jjg.constant.MemberConstant;
 import com.xdl.jjg.constant.MemberErrorCode;
-import com.xdl.jjg.entity.EsMember;
-import com.xdl.jjg.mapper.EsMemberMapper;
+import com.xdl.jjg.entity.*;
+import com.xdl.jjg.mapper.*;
 import com.xdl.jjg.model.domain.EsMemberDO;
 import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.shiro.oath.ShiroKit;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.CollectionUtils;
+import com.xdl.jjg.util.MathUtil;
 import com.xdl.jjg.web.service.*;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -334,9 +346,9 @@ public class EsMemberServiceImpl extends ServiceImpl<EsMemberMapper, EsMember> i
      * @return: com.shopx.common.model.result.DubboResult<EsMemberDO>
      */
     @Override
-    public DubboResult<EsSellerMemberAdminDO> getSellerMember(Long memberId, Long shopId) {
+    public DubboResult<com.xdl.jjg.model.domain.EsSellerMemberAdminDO> getSellerMember(Long memberId, Long shopId) {
         try {
-            EsSellerMemberAdminDO esSellerMemberAdminDO = memberMapper.getSellerAdmin(memberId, shopId);
+            com.xdl.jjg.model.domain.EsSellerMemberAdminDO esSellerMemberAdminDO = memberMapper.getSellerAdmin(memberId, shopId);
             if (esSellerMemberAdminDO == null) {
                 throw new ArgumentException(MemberErrorCode.DATA_NOT_EXIST.getErrorCode(), MemberErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
@@ -795,7 +807,7 @@ public class EsMemberServiceImpl extends ServiceImpl<EsMemberMapper, EsMember> i
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberDO>
      */
     @Override
-    public DubboPageResult<EsMemberAdminDO> getMemberList(EsMemberDTO memberDTO, int pageSize, int pageNum) {
+    public DubboPageResult<com.xdl.jjg.model.domain.EsMemberAdminDO> getMemberList(EsMemberDTO memberDTO, int pageSize, int pageNum) {
         QueryWrapper<EsMember> queryWrapper = new QueryWrapper<>();
         try {
             // 查询条件
@@ -813,10 +825,10 @@ public class EsMemberServiceImpl extends ServiceImpl<EsMemberMapper, EsMember> i
             }
 
             IPage<EsMember> iPage = this.page(page, queryWrapper);
-            List<EsMemberAdminDO> memberDOList = new ArrayList<>();
+            List<com.xdl.jjg.model.domain.EsMemberAdminDO> memberDOList = new ArrayList<>();
             if (CollectionUtils.isNotEmpty(iPage.getRecords())) {
                 memberDOList = iPage.getRecords().stream().map(member -> {
-                    EsMemberAdminDO memberAdminDO = new EsMemberAdminDO();
+                    com.xdl.jjg.model.domain.EsMemberAdminDO memberAdminDO = new com.xdl.jjg.model.domain.EsMemberAdminDO();
                     BeanUtil.copyProperties(member, memberAdminDO);
                     return memberAdminDO;
                 }).collect(Collectors.toList());
@@ -1402,7 +1414,7 @@ public class EsMemberServiceImpl extends ServiceImpl<EsMemberMapper, EsMember> i
     }
 
     @Override
-    public DubboResult<EsMyMeansDO> meansCensus(Long memberId) {
+    public DubboResult<com.xdl.jjg.model.domain.EsMyMeansDO> meansCensus(Long memberId) {
         QueryWrapper<EsMember> queryWrapper = new QueryWrapper<>();
         try {
             queryWrapper.lambda().eq(EsMember::getId, memberId);
@@ -1411,7 +1423,7 @@ public class EsMemberServiceImpl extends ServiceImpl<EsMemberMapper, EsMember> i
                 throw new ArgumentException(MemberErrorCode.DATA_NOT_EXIST.getErrorCode(), MemberErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
 
-            EsMyMeansDO myMeansDO = new EsMyMeansDO();
+            com.xdl.jjg.model.domain.EsMyMeansDO myMeansDO = new com.xdl.jjg.model.domain.EsMyMeansDO();
             myMeansDO.setBalanceAccount(member.getMemberBalance());
             myMeansDO.setPointNum(member.getConsumPoint());
 

@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.form;/**
+package com.jjg.trade.model.form;/**
  * Description: zhuox-shop-trade
  * <p>
  * Created by Administrator on 2019/10/15 14:54

@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.form;
+package com.jjg.trade.model.form;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.annotations.ApiModel;

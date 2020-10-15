@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.form.query;
+package com.jjg.trade.model.form.query;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

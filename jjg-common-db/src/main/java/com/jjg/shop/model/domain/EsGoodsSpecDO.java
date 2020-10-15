@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.domain;
+package com.jjg.shop.model.domain;
 
 public class EsGoodsSpecDO {
 

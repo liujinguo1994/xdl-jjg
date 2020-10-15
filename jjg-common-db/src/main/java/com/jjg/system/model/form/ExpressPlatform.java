@@ -1,4 +1,4 @@
-package com.xdl.jjg.model.form;
+package com.jjg.system.model.form;
 
 import com.xdl.jjg.model.vo.EsConfigItemVO;
 import com.xdl.jjg.model.vo.ExpressDetailVO;

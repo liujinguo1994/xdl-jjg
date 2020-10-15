@@ -13,6 +13,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>com.xdl.jjg</groupId>
+            <artifactId>jjg-common-base</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
         </dependency>
@@ -63,6 +68,21 @@
             <artifactId>emoji-java</artifactId>
             <version>1.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-annotation</artifactId>
+            <version>3.3.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-elasticsearch -->
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-elasticsearch</artifactId>
+            <version>3.1.9.RELEASE</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>

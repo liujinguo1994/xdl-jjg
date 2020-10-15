@@ -1,4 +1,4 @@
-package com.jjg.member.model.dto;
+package com.jjg.trade.model.dto;
 
 import com.shopx.trade.api.model.domain.EsFullDiscountGiftDO;
 import com.shopx.trade.api.model.domain.vo.EsCouponVO;

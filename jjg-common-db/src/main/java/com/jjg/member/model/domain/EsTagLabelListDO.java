@@ -1,5 +1,6 @@
-package com.xdl.jjg.model.domain;
+package com.jjg.member.model.domain;
 
+import com.jjg.member.model.domain.EsCommentLabelDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

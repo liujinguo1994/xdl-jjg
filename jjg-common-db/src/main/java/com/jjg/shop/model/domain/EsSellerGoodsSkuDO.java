@@ -1,5 +1,5 @@
-package com.xdl.jjg.model.domain;
-
+package com.jjg.shop.model.domain;
+import com.jjg.shop.model.domain.EsSpecValuesDO;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -143,6 +143,6 @@ public class EsSellerGoodsSkuDO implements  Serializable{
     private String specText;
     private Integer warningValue;
     private List<EsSpecValuesDO> specList;
-    private List<EsGoodsGalleryDO> goodsGallery;
+    private List<com.xdl.jjg.model.domain.EsGoodsGalleryDO> goodsGallery;
     private String albumNo;
 }

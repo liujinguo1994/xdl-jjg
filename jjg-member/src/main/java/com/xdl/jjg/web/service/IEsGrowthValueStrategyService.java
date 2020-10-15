@@ -1,9 +1,9 @@
 package com.xdl.jjg.web.service;
 
 
+import com.jjg.member.model.domain.EsGrowthValueStrategyDO;
 import com.jjg.member.model.dto.EsGrowthStrategyDTO;
 import com.jjg.member.model.dto.EsGrowthValueStrategyDTO;
-import com.xdl.jjg.model.domain.EsGrowthValueStrategyDO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 
