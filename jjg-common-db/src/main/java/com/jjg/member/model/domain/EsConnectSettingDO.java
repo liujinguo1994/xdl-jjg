@@ -1,6 +1,6 @@
 package com.jjg.member.model.domain;
 
-import com.xdl.jjg.model.vo.ConnectSettingParametersVO;
+import com.jjg.member.model.vo.ConnectSettingParametersVO;
 import com.xdl.jjg.util.JsonUtil;
 import lombok.Data;
 

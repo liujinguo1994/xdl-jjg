@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
+import com.jjg.member.model.domain.EsOpenidMobileDO;
 import com.jjg.member.model.dto.EsOpenidMobileDTO;
-import com.xdl.jjg.model.domain.EsOpenidMobileDO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

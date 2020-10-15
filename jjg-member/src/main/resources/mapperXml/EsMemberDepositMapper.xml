@@ -11,7 +11,7 @@
         <result column="create_time" property="createTime"/>
     </resultMap>
 
-    <select id="getRecentlyThreeMonth" parameterType="com.xdl.jjg.model.domain.dto.EsMemberDepositDTO" resultType="com.xdl.jjg.model.domain.EsMemberDepositDO">
+    <select id="getRecentlyThreeMonth" parameterType="com.jjg.member.model.dto.EsMemberDepositDTO" resultType="com.jjg.member.model.domain.EsMemberDepositDO">
         SELECT
             t.id,
             t.member_id,
@@ -48,7 +48,7 @@
         ORDER BY t.create_time desc
     </select>
 
-    <select id="getWapBalance" resultType="com.xdl.jjg.model.domain.EsMemberDepositDO">
+    <select id="getWapBalance" resultType="com.jjg.member.model.domain.EsMemberDepositDO">
         SELECT
         t.id,
         t.member_id,

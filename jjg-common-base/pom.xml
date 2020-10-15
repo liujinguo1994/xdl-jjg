@@ -37,7 +37,6 @@
         <commons-net.version>3.6</commons-net.version>
         <commons-pool2.version>2.5.0</commons-pool2.version>
         <joda-time.version>2.10</joda-time.version>
-        <httpclient.version>4.5.3</httpclient.version>
         <!-- dom4j -->
         <dom4j.version>1.6.1</dom4j.version>
         <!-- guava -->
@@ -460,6 +459,12 @@
             <groupId>org.redisson</groupId>
             <artifactId>redisson</artifactId>
             <version>${redisson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sohu.tv</groupId>
+            <artifactId>cachecloud-open-client-redis</artifactId>
+            <version>${cache-cloud.version}</version>
         </dependency>
     </dependencies>
 

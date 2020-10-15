@@ -1,21 +1,21 @@
 package com.xdl.jjg.web.service.Impl;
 
 
+import com.jjg.member.model.domain.EsConnectSettingDO;
+import com.jjg.member.model.domain.EsMemberDO;
 import com.jjg.member.model.enums.ConnectTypeEnum;
 import com.jjg.member.model.enums.WechatConnectConfigGroupEnum;
 import com.jjg.member.model.enums.WechatConnectConfigItemEnm;
 import com.jjg.member.model.vo.Auth2Token;
 import com.jjg.member.model.vo.ConnectSettingConfigItem;
 import com.jjg.member.model.vo.ConnectSettingParametersVO;
-import com.sohu.tv.cachecloud.client.basic.util.HttpUtils;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.constants.ThreadContextHolder;
-import com.xdl.jjg.model.domain.EsConnectSettingDO;
-import com.xdl.jjg.model.domain.EsMemberDO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.util.StringUtil;
 import com.xdl.jjg.web.service.IEsConnectSettingService;
 import com.xdl.jjg.web.service.WechatLoginService;
 import net.sf.json.JSONObject;

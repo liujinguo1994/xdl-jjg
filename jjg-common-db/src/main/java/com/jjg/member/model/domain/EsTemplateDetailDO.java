@@ -1,8 +1,8 @@
 package com.jjg.member.model.domain;
 
 
-import com.xdl.jjg.model.dto.EsCategoryTemDTO;
-import com.xdl.jjg.model.dto.EsGoodsTemDTO;
+import com.jjg.member.model.dto.EsCategoryTemDTO;
+import com.jjg.member.model.dto.EsGoodsTemDTO;
 import lombok.Data;
 
 import java.io.Serializable;

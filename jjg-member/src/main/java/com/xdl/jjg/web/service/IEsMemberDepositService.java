@@ -1,10 +1,10 @@
 package com.xdl.jjg.web.service;
 
 
+import com.jjg.member.model.domain.EsMemberDepositDO;
 import com.jjg.member.model.dto.EsMemberBalanceDTO;
 import com.jjg.member.model.dto.EsMemberDepositDTO;
 import com.jjg.member.model.dto.EsQueryAdminMemberDepositDTO;
-import com.xdl.jjg.model.domain.EsMemberDepositDO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

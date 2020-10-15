@@ -9,6 +9,7 @@ import com.jjg.member.model.domain.EsTemplateDetailDO;
 import com.jjg.member.model.dto.EsCategoryTemDTO;
 import com.jjg.member.model.dto.EsGoodsTemDTO;
 import com.jjg.member.model.dto.EsTemplateDetailDTO;
+import com.jjg.shop.model.constant.GoodsErrorCode;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsTemplateDetail;
 import com.xdl.jjg.mapper.EsTemplateDetailMapper;
@@ -219,7 +220,7 @@ public class EsTemplateDetailServiceImpl extends ServiceImpl<EsTemplateDetailMap
         }  catch (Throwable th) {
             logger.error("批量删除商品相册失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(GoodsErrorCode.SYS_ERROR.getErrorCode(), GoodsErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 }
