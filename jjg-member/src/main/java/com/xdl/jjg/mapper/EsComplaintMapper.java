@@ -2,9 +2,10 @@ package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.jjg.member.model.domain.EsComplaintDO;
 import com.jjg.member.model.dto.ComplaintQueryParam;
 import com.xdl.jjg.entity.EsComplaint;
-import com.xdl.jjg.model.domain.EsComplaintDO;
+
 
 /**
  * <p>

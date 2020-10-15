@@ -1,7 +1,7 @@
 package com.jjg.trade.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.shopx.trade.api.model.domain.EsSelfDateDO;
+import com.jjg.trade.model.domain.EsSelfDateDO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

@@ -1,6 +1,7 @@
 package com.jjg.member.model.domain;
 
-import com.shopx.member.api.model.domain.vo.CommentImageVO;
+
+import com.jjg.member.model.vo.CommentImageVO;
 import lombok.Data;
 
 import java.io.Serializable;

@@ -2,7 +2,7 @@ package com.jjg.trade.model.domain;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.shopx.common.util.JsonUtil;
+import com.xdl.jjg.util.JsonUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
 

@@ -2,6 +2,7 @@ package com.xdl.jjg.web.service;
 
 
 import com.jjg.member.model.domain.EsCollectCateryNumDO;
+import com.jjg.member.model.domain.EsCutAndEffectDO;
 import com.jjg.member.model.domain.EsMemberCollectionGoodsDO;
 import com.jjg.member.model.dto.EsMemberCollectionGoodsDTO;
 import com.jjg.member.model.dto.EsQueryMemberCollectionGoodsDTO;
@@ -44,7 +45,7 @@ public interface IEsMemberCollectionGoodsService {
      * @param memberId
      * @return
      */
-     DubboResult<com.xdl.jjg.model.domain.EsCutAndEffectDO> getCutAndEffetNum(Long memberId);
+     DubboResult<EsCutAndEffectDO> getCutAndEffetNum(Long memberId);
 
     /**
      * 分页查询会员收藏商品列表

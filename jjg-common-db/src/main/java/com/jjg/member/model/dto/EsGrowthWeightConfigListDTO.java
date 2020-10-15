@@ -1,6 +1,7 @@
 package com.jjg.member.model.dto;
 
-import com.shopx.member.api.model.domain.vo.EsGrowthWeightConfigVO;
+
+import com.jjg.member.model.vo.EsGrowthWeightConfigVO;
 import lombok.Data;
 import lombok.ToString;
 

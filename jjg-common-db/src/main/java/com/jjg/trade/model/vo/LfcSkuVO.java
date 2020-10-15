@@ -1,6 +1,7 @@
 package com.jjg.trade.model.vo;
 
-import com.shopx.goods.api.model.domain.cache.EsGoodsSkuCO;
+
+import com.jjg.shop.model.co.EsGoodsSkuCO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

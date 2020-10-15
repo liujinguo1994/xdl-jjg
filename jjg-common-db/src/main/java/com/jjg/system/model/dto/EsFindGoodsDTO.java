@@ -1,6 +1,6 @@
 package com.jjg.system.model.dto;
 
-import com.xdl.jjg.model.domain.EsFindGoodsGalleryDTO;
+import com.jjg.system.model.domain.EsFindGoodsGalleryDTO;
 import lombok.Data;
 import lombok.ToString;
 

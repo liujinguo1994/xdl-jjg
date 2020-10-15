@@ -1,8 +1,7 @@
 package com.jjg.trade.model.vo;
 
-import com.shopx.trade.api.model.enums.ClientType;
-import com.shopx.trade.api.model.enums.RequestParam;
-import com.shopx.trade.api.model.enums.TradeType;
+import com.jjg.trade.model.enums.ClientType;
+import com.jjg.trade.model.enums.TradeType;
 import lombok.Data;
 
 import java.io.Serializable;

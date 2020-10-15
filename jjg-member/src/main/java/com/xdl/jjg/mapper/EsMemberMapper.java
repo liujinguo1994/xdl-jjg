@@ -4,12 +4,12 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jjg.member.model.domain.EsAdminMemberDO;
+import com.jjg.member.model.domain.EsMemberDO;
+import com.jjg.member.model.domain.EsSellerMemberAdminDO;
 import com.jjg.member.model.dto.EsAdminDepositDTO;
 import com.jjg.member.model.dto.EsQueryAdminMemberDTO;
 import com.jjg.member.model.vo.EsExportMemberVO;
 import com.xdl.jjg.entity.EsMember;
-import com.xdl.jjg.model.domain.EsMemberDO;
-import com.xdl.jjg.model.domain.EsSellerMemberAdminDO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

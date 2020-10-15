@@ -1,6 +1,6 @@
 package com.jjg.system.model.vo;
 
-import com.xdl.jjg.entity.Menus;
+
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

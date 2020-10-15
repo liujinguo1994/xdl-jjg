@@ -132,7 +132,7 @@ public class EsGoodsForm implements Serializable {
 	private String original;
 
 	@ApiModelProperty(value = "商品SKU集合")
-	private List<com.xdl.jjg.model.form.EsGoodsSkuForm> skuList;
+	private List<EsGoodsSkuForm> skuList;
 	/**
 	 * 商品标签集合
 	 */
@@ -152,7 +152,7 @@ public class EsGoodsForm implements Serializable {
 	@ApiModelProperty(value = "售后服务")
 	private String afterService;
 	@ApiModelProperty(value = "商品参数集合")
-	private List<com.xdl.jjg.model.form.EsGoodsParamsForm> paramsList;
+	private List< EsGoodsParamsForm> paramsList;
 
 	private Integer isLfc;
 	private Integer isVirtual;

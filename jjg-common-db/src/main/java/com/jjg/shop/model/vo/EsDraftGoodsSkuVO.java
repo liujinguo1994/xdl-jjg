@@ -1,6 +1,7 @@
 package com.jjg.shop.model.vo;
 
-import com.shopx.goods.api.model.domain.dto.EsGoodsGalleryDTO;
+
+import com.jjg.shop.model.dto.EsGoodsGalleryDTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

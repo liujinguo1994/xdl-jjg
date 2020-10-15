@@ -1,6 +1,7 @@
 package com.jjg.system.model.form;
 
-import com.shopx.member.api.model.domain.vo.EsGrowthValueStrategyVO;
+
+import com.jjg.member.model.vo.EsGrowthValueStrategyVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

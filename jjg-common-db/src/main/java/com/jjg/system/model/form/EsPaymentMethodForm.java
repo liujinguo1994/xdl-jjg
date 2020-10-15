@@ -1,6 +1,7 @@
 package com.jjg.system.model.form;
 
-import com.shopx.trade.api.model.domain.vo.ClientConfigVO;
+
+import com.jjg.trade.model.vo.ClientConfigVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

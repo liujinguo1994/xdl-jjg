@@ -1,6 +1,7 @@
 package com.jjg.trade.model.dto;
 
-import com.shopx.trade.api.model.domain.vo.ClientConfigVO;
+
+import com.jjg.trade.model.vo.ClientConfigVO;
 import lombok.Data;
 import lombok.ToString;
 

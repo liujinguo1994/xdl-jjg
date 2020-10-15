@@ -1,6 +1,7 @@
 package com.jjg.system.model.dto;
 
-import com.shopx.system.api.model.domain.vo.Menus;
+
+import com.jjg.system.model.vo.Menus;
 import lombok.Data;
 import lombok.ToString;
 

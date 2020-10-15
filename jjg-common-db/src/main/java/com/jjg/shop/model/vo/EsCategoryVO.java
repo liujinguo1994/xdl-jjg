@@ -1,7 +1,7 @@
 package com.jjg.shop.model.vo;
 
-import com.shopx.goods.api.model.domain.EsCategoryDO;
-import com.shopx.goods.api.model.domain.ParameterGroupDO;
+import com.jjg.shop.model.domain.EsCategoryDO;
+import com.jjg.shop.model.domain.ParameterGroupDO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

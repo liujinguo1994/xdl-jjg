@@ -1,11 +1,13 @@
 package com.jjg.system.model.form;
 
 
-import com.xdl.jjg.model.enums.OrderStatusEnum;
+import com.jjg.trade.model.enums.OrderStatusEnum;
 import com.xdl.jjg.response.web.QueryPageForm;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
+
+
 
 @Data
 @ApiModel("商品销售明细")

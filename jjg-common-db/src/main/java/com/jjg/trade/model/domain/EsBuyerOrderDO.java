@@ -2,7 +2,7 @@ package com.jjg.trade.model.domain;
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.shopx.trade.api.model.domain.vo.CartItemsVO;
+import com.jjg.trade.model.vo.CartItemsVO;
 import lombok.Data;
 
 import java.io.Serializable;

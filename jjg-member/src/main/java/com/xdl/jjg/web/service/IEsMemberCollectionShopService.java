@@ -1,11 +1,11 @@
 package com.xdl.jjg.web.service;
 
 import com.jjg.member.model.domain.EsCollectionShopInfoDO;
+import com.jjg.member.model.domain.EsMemberCollectionShopDO;
+import com.jjg.member.model.domain.EsQueryCollectionShopDO;
 import com.jjg.member.model.dto.EsMemberCollectionShopDTO;
 import com.jjg.member.model.dto.EsQueryCollectShopDTO;
 import com.jjg.member.model.dto.EsUpdateTopShopDTO;
-import com.xdl.jjg.model.domain.EsMemberCollectionShopDO;
-import com.xdl.jjg.model.domain.EsQueryCollectionShopDO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

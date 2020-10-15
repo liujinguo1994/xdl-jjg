@@ -1,16 +1,11 @@
 package com.xdl.jjg.web.service;
 
 
-import com.jjg.member.model.domain.EsAdminManagerDO;
-import com.jjg.member.model.domain.EsCommentCountDO;
-import com.jjg.member.model.domain.EsMemberCommentDetailDO;
+import com.jjg.member.model.domain.*;
 import com.jjg.member.model.dto.EsMemberCommentCopyDTO;
 import com.jjg.member.model.dto.EsMemberCommentDTO;
 import com.jjg.member.model.dto.EsQueryDetailCommentDTO;
 import com.jjg.member.model.dto.QueryCommentListDTO;
-import com.xdl.jjg.model.domain.EsCommentInfoDO;
-import com.xdl.jjg.model.domain.EsMemberCommentDO;
-import com.xdl.jjg.model.domain.GradeLevelDO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

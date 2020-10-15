@@ -1,7 +1,7 @@
 package com.jjg.member.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.xdl.jjg.model.domain.EsCategoryMemberDO;
+import com.jjg.member.model.domain.EsCategoryMemberDO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

@@ -2,6 +2,7 @@ package com.jjg.trade.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jjg.trade.model.dto.BuyerUrlDTO;
+import com.xdl.jjg.constants.AfterSaleOperateAllowable;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;

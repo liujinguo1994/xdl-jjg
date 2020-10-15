@@ -1,6 +1,7 @@
 package com.jjg.system.model.form;
 
-import com.xdl.jjg.entity.Menus;
+
+import com.jjg.system.model.vo.Menus;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

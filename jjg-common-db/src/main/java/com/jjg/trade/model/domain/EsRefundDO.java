@@ -1,7 +1,7 @@
 package com.jjg.trade.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.shopx.trade.api.constant.AfterSaleOperateAllowable;
+import com.xdl.jjg.constants.AfterSaleOperateAllowable;
 import lombok.Data;
 
 import java.io.Serializable;

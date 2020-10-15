@@ -1,6 +1,7 @@
 package com.jjg.system.model.dto;
 
-import com.xdl.jjg.model.vo.EsClearingCycleVO;
+
+import com.jjg.system.model.vo.EsClearingCycleVO;
 import lombok.Data;
 
 import java.io.Serializable;

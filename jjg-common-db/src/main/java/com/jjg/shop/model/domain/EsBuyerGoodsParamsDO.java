@@ -20,7 +20,7 @@ public class EsBuyerGoodsParamsDO implements Serializable {
     /**
      * 参数组关联的参数集合
      */
-    private List<com.xdl.jjg.model.domain.EsBuyerParamsDO> params;
+    private List< EsBuyerParamsDO> params;
 
     /**
      * 参数组名称

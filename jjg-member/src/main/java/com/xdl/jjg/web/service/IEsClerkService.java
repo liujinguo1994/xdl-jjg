@@ -1,10 +1,10 @@
 package com.xdl.jjg.web.service;
 
 
+import com.jjg.member.model.domain.EsClerkDO;
+import com.jjg.member.model.domain.EsClerkListDO;
 import com.jjg.member.model.dto.ClerkQueryParamDTO;
 import com.jjg.member.model.dto.EsClerkDTO;
-import com.xdl.jjg.model.domain.EsClerkDO;
-import com.xdl.jjg.model.domain.EsClerkListDO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

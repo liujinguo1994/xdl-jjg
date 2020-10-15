@@ -2,8 +2,8 @@ package com.jjg.system.model.vo;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
-import com.xdl.jjg.model.domain.EsExpressPlatformDO;
-import com.xdl.jjg.model.form.ExpressPlatform;
+import com.jjg.system.model.domain.EsExpressPlatformDO;
+import com.jjg.system.model.form.ExpressPlatform;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

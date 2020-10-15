@@ -1,8 +1,9 @@
 package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jjg.member.model.domain.EsCartNumDO;
 import com.xdl.jjg.entity.EsCart;
-import com.xdl.jjg.model.domain.EsCartNumDO;
+
 
 /**
  * <p>
