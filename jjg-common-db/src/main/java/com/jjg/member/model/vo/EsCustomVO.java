@@ -1,6 +1,6 @@
 package com.jjg.member.model.vo;
 
-import com.shopx.member.api.model.domain.EsCustomDO;
+import com.jjg.member.model.domain.EsCustomDO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

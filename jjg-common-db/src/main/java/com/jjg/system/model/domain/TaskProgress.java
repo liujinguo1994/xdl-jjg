@@ -1,6 +1,6 @@
 package com.jjg.system.model.domain;
 
-import com.shopx.system.api.model.enums.ProgressEnum;
+import com.jjg.system.model.enums.ProgressEnum;
 import lombok.Data;
 
 import java.io.Serializable;

@@ -1,6 +1,6 @@
 package com.jjg.shop.model.form;
 
-import com.jjg.form.QueryPageForm;
+import com.xdl.jjg.response.web.QueryPageForm;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

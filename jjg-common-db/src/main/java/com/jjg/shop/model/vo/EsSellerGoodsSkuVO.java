@@ -1,7 +1,7 @@
 package com.jjg.shop.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.shopx.goods.api.model.domain.EsSpecValuesDO;
+import com.jjg.shop.model.domain.EsSpecValuesDO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

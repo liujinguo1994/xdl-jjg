@@ -1,4 +1,4 @@
-package com.jjg.member.model.form;
+package com.jjg.trade.model.form;
 
 import lombok.Data;
 import lombok.ToString;

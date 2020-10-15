@@ -1,7 +1,7 @@
 package com.jjg.trade.model.form.query;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.shopx.common.model.result.QueryPageForm;
+import com.xdl.jjg.response.web.QueryPageForm;
 import lombok.Data;
 import lombok.ToString;
 import lombok.experimental.Accessors;

@@ -1,9 +1,9 @@
 package com.jjg.trade.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.util.StringUtil;
-import com.shopx.trade.api.model.enums.PromotionTypeEnum;
+import com.jjg.trade.model.enums.PromotionTypeEnum;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.StringUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -89,7 +89,7 @@ public class TradePromotionGoodsVO implements Serializable {
     public String getContent(){
         if(StringUtil.isEmpty(promotionType))return title;
         // 满减满赠
-        if(StringUtil.equals(promotionType,PromotionTypeEnum.FULL_DISCOUNT.name())){
+        if(StringUtil.equals(promotionType, PromotionTypeEnum.FULL_DISCOUNT.name())){
             if(StringUtil.equals(preferentialType,"FullMinus")){
                 return String.format("满%s减%s",preferentialThreshold,fullDiscount.getMinusValue());
             }else if(StringUtil.equals(preferentialType,"FullDiscount")){

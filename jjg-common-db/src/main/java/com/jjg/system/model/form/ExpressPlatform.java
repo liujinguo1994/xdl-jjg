@@ -1,7 +1,7 @@
 package com.jjg.system.model.form;
 
-import com.xdl.jjg.model.vo.EsConfigItemVO;
-import com.xdl.jjg.model.vo.ExpressDetailVO;
+import com.jjg.system.model.vo.EsConfigItemVO;
+import com.jjg.system.model.vo.ExpressDetailVO;
 import com.xdl.jjg.response.service.DubboResult;
 
 import java.util.List;

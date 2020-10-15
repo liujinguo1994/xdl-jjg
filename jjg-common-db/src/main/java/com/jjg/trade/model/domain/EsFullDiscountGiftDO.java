@@ -1,7 +1,7 @@
 package com.jjg.trade.model.domain;
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.shopx.goods.api.model.domain.EsSellerGoodsSkuDO;
+import com.jjg.shop.model.domain.EsSellerGoodsSkuDO;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 

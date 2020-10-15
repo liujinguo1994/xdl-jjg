@@ -1,10 +1,11 @@
 package com.jjg.trade.model.dto;
 
-import com.shopx.trade.api.model.domain.EsFullDiscountGiftDO;
-import com.shopx.trade.api.model.domain.vo.EsCouponVO;
-import com.shopx.trade.api.model.domain.vo.EsFreightTemplateDetailVO;
-import com.shopx.trade.api.model.domain.vo.OrderCouponVO;
-import com.shopx.trade.api.model.domain.vo.PriceDetailVO;
+
+import com.jjg.trade.model.domain.EsFullDiscountGiftDO;
+import com.jjg.trade.model.vo.EsCouponVO;
+import com.jjg.trade.model.vo.EsFreightTemplateDetailVO;
+import com.jjg.trade.model.vo.OrderCouponVO;
+import com.jjg.trade.model.vo.PriceDetailVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

@@ -142,7 +142,7 @@ public class EsSellerDraftGoodsSkuDO implements  Serializable {
     private String skuSn;
     private String albumNo;
 
-    private List<com.xdl.jjg.model.domain.EsGoodsGalleryDO> goodsGallery;
+    private List<EsGoodsGalleryDO> goodsGallery;
 
 
 }

@@ -11,5 +11,5 @@ public class ParameterGroupDO implements Serializable {
     //参数组ID
     private Long groupId;
    //参数组关联的参数集合
-    private List<com.xdl.jjg.model.domain.EsParametersDO>  params;
+    private List<EsParametersDO>  params;
 }

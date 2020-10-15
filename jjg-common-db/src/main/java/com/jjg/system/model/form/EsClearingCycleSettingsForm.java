@@ -1,6 +1,6 @@
 package com.jjg.system.model.form;
 
-import com.shopx.system.api.model.domain.vo.EsClearingCycleVO;
+import com.jjg.system.model.vo.EsClearingCycleVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

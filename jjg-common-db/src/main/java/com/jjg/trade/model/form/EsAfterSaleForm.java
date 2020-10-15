@@ -1,4 +1,4 @@
-package com.jjg.member.model.form;
+package com.jjg.trade.model.form;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;

@@ -143,6 +143,6 @@ public class EsSellerGoodsSkuDO implements  Serializable{
     private String specText;
     private Integer warningValue;
     private List<EsSpecValuesDO> specList;
-    private List<com.xdl.jjg.model.domain.EsGoodsGalleryDO> goodsGallery;
+    private List<EsGoodsGalleryDO> goodsGallery;
     private String albumNo;
 }

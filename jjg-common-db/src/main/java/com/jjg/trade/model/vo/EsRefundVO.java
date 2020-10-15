@@ -1,8 +1,7 @@
 package com.jjg.trade.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.shopx.trade.api.constant.AfterSaleOperateAllowable;
-import com.shopx.trade.api.model.domain.dto.BuyerUrlDTO;
+import com.jjg.trade.model.dto.BuyerUrlDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;

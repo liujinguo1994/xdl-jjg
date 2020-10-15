@@ -1,6 +1,6 @@
 package com.jjg.member.model.domain;
 
-import com.shopx.member.api.model.domain.vo.wap.EsWapMemberSpecValuesVO;
+import com.jjg.member.model.vo.wap.EsWapMemberSpecValuesVO;
 import lombok.Data;
 
 import java.io.Serializable;

@@ -1,7 +1,6 @@
 package com.jjg.shop.model.domain;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.jjg.member.model.domain.EsGoodsDO;
 import lombok.Data;
 
 import java.io.Serializable;

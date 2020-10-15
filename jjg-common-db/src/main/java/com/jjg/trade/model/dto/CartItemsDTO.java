@@ -2,8 +2,9 @@ package com.jjg.trade.model.dto;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.xdl.jjg.model.vo.EsSpecValuesVO;
-import com.xdl.jjg.model.vo.TradePromotionGoodsVO;
+import com.jjg.shop.model.dto.EsGoodsSkuDTO;
+import com.jjg.shop.model.vo.EsSpecValuesVO;
+import com.jjg.trade.model.vo.TradePromotionGoodsVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

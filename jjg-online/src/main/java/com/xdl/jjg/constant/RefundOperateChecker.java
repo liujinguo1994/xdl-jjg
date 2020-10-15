@@ -1,12 +1,14 @@
 package com.xdl.jjg.constant;
 
-import com.xdl.jjg.model.enums.ProcessStatusEnum;
-import com.xdl.jjg.model.enums.RefundOperateEnum;
-import com.xdl.jjg.model.enums.RefundTypeEnum;
-import com.xdl.jjg.model.vo.RefundStep;
+import com.jjg.trade.model.enums.ProcessStatusEnum;
+import com.jjg.trade.model.enums.RefundOperateEnum;
+import com.jjg.trade.model.enums.RefundTypeEnum;
+import com.jjg.trade.model.vo.RefundStep;
 
 import java.util.HashMap;
 import java.util.Map;
+
+
 
 /**
  * 退货操作检测，看某状态下是否允许某操作

@@ -1,8 +1,8 @@
 package com.jjg.trade.model.vo;
 
 
-import com.xdl.jjg.model.enums.ProcessStatusEnum;
-import com.xdl.jjg.model.enums.RefundOperateEnum;
+import com.jjg.trade.model.enums.ProcessStatusEnum;
+import com.jjg.trade.model.enums.RefundOperateEnum;
 
 import java.io.Serializable;
 import java.util.ArrayList;

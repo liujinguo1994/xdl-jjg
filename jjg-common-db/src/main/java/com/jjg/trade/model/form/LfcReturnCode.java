@@ -1,7 +1,7 @@
-package com.jjg.member.model.form;
+package com.jjg.trade.model.form;
 
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.shopx.trade.api.utils.PropertyUpperStrategy;
+import com.xdl.jjg.util.PropertyUpperStrategy;
 import io.swagger.annotations.ApiModelProperty;
 import springfox.documentation.annotations.ApiIgnore;
 

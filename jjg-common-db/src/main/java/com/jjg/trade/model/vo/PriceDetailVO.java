@@ -2,7 +2,7 @@ package com.jjg.trade.model.vo;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.shopx.common.util.MathUtil;
+import com.xdl.jjg.util.MathUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

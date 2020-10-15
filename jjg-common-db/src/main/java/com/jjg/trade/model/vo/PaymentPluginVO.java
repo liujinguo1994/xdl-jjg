@@ -1,6 +1,6 @@
 package com.jjg.trade.model.vo;
 
-import com.shopx.trade.api.model.domain.EsPaymentMethodDO;
+import com.jjg.trade.model.domain.EsPaymentMethodDO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

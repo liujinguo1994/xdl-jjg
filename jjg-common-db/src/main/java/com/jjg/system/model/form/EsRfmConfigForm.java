@@ -1,6 +1,6 @@
 package com.jjg.system.model.form;
 
-import com.shopx.member.api.model.domain.vo.EsMemberRfmConfigVO;
+import com.jjg.member.model.vo.EsMemberRfmConfigVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

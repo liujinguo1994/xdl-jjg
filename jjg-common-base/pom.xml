@@ -45,19 +45,33 @@
         <jackson.version>2.9.8</jackson.version>
         <!-- fastjson -->
         <fastjson.version>1.2.54</fastjson.version>
+        <mybatis-plus-boot-starter.version>3.1.0</mybatis-plus-boot-starter.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>com.xdl.jjg</groupId>
-            <artifactId>jjg-common-db</artifactId>
-            <version>${project.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>org.redisson</groupId>
             <artifactId>redisson</artifactId>
             <version>${redisson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
+        <!-- 最好使用最新版本的依赖,因为其中所有客户端的软件版本一直在更新中,使用最新的依赖才能准确的得到客户端的类型 -->
+        <dependency>
+            <groupId>eu.bitwalker</groupId>
+            <artifactId>UserAgentUtils</artifactId>
+            <version>1.21</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus-boot-starter.version}</version>
         </dependency>
 
         <!-- jackson begin -->
@@ -465,6 +479,12 @@
             <groupId>com.sohu.tv</groupId>
             <artifactId>cachecloud-open-client-redis</artifactId>
             <version>${cache-cloud.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.6</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 

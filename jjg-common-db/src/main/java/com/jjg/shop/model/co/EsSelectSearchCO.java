@@ -3,8 +3,8 @@ package com.jjg.shop.model.co;/**
  * @date 2019/10/29 10:26
  **/
 
-import com.xdl.jjg.constant.PropSelector;
-import com.xdl.jjg.model.vo.EsSearchGoodsVO;
+import com.jjg.shop.model.constant.PropSelector;
+import com.jjg.shop.model.vo.EsSearchGoodsVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -22,11 +22,11 @@ import java.util.List;
 public class EsSelectSearchCO implements Serializable {
 
     @ApiModelProperty(value = "分类")
-    private List<com.xdl.jjg.model.co.SearchSelector> cat;
+    private List<SearchSelector> cat;
     @ApiModelProperty(value = "已选择分类")
-    private List<com.xdl.jjg.model.co.SearchSelector> selectedCat;
+    private List<SearchSelector> selectedCat;
     @ApiModelProperty(value = "品牌")
-    private List<com.xdl.jjg.model.co.SearchSelector> brand;
+    private List<SearchSelector> brand;
     @ApiModelProperty(value = "参数")
     private List<PropSelector> prop;
     @ApiModelProperty("猜你喜欢")

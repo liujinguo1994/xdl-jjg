@@ -1,5 +1,6 @@
 package com.jjg.trade.model.form.query;
 
+
 import com.xdl.jjg.response.web.QueryPageForm;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

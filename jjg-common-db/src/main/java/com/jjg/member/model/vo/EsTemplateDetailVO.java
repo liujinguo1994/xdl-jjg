@@ -1,7 +1,7 @@
 package com.jjg.member.model.vo;
 
-import com.shopx.member.api.model.domain.dto.EsCategoryTemDTO;
-import com.shopx.member.api.model.domain.dto.EsGoodsTemDTO;
+import com.jjg.member.model.dto.EsCategoryTemDTO;
+import com.jjg.member.model.dto.EsGoodsTemDTO;
 import lombok.Data;
 
 import java.io.Serializable;

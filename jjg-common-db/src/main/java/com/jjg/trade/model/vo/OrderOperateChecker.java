@@ -1,7 +1,8 @@
 package com.jjg.trade.model.vo;
 
-import com.shopx.trade.api.model.enums.OrderOperateEnum;
-import com.shopx.trade.api.model.enums.OrderStatusEnum;
+
+import com.jjg.trade.model.enums.OrderOperateEnum;
+import com.jjg.trade.model.enums.OrderStatusEnum;
 
 import java.util.HashMap;
 import java.util.Map;
