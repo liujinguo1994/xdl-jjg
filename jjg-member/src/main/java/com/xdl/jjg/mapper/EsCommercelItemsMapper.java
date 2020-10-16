@@ -1,8 +1,8 @@
 package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jjg.member.model.domain.EsCommercelItemsDO;
 import com.xdl.jjg.entity.EsCommercelItems;
-import com.xdl.jjg.model.domain.EsCommercelItemsDO;
 
 import java.util.List;
 

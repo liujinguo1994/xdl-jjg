@@ -4,9 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.jjg.member.model.domain.EsAdminMemberDO;
-import com.jjg.member.model.domain.EsLevelValueDO;
-import com.jjg.member.model.domain.EsMemberDO;
+import com.jjg.member.model.domain.*;
 import com.jjg.member.model.dto.*;
 import com.jjg.member.model.enums.ConsumeEnumType;
 import com.jjg.member.model.vo.*;
@@ -24,6 +22,7 @@ import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.CollectionUtils;
 import com.xdl.jjg.util.MathUtil;
 import com.xdl.jjg.web.service.*;
+import com.xdl.jjg.web.service.feign.trade.CouponService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
@@ -106,13 +105,13 @@ public class EsMemberServiceImpl extends ServiceImpl<EsMemberMapper, EsMember> i
     @Autowired
     private EsCompanyMapper companyMapper;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsCouponService iesCouponService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
+    private CouponService iesCouponService;
+    @Autowired
     private IEsMemberCouponService iesMemberCouponService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private IEsMemberService iesMemberService;
-    @Reference(version = "${dubbo.application.version}",timeout = 5000,check = false)
+    @Autowired
     private IEsCouponReceiveCheckService iesCouponReceiveCheckService;
 
     /**
@@ -346,9 +345,9 @@ public class EsMemberServiceImpl extends ServiceImpl<EsMemberMapper, EsMember> i
      * @return: com.shopx.common.model.result.DubboResult<EsMemberDO>
      */
     @Override
-    public DubboResult<com.xdl.jjg.model.domain.EsSellerMemberAdminDO> getSellerMember(Long memberId, Long shopId) {
+    public DubboResult<EsSellerMemberAdminDO> getSellerMember(Long memberId, Long shopId) {
         try {
-            com.xdl.jjg.model.domain.EsSellerMemberAdminDO esSellerMemberAdminDO = memberMapper.getSellerAdmin(memberId, shopId);
+             EsSellerMemberAdminDO esSellerMemberAdminDO = memberMapper.getSellerAdmin(memberId, shopId);
             if (esSellerMemberAdminDO == null) {
                 throw new ArgumentException(MemberErrorCode.DATA_NOT_EXIST.getErrorCode(), MemberErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
@@ -807,7 +806,7 @@ public class EsMemberServiceImpl extends ServiceImpl<EsMemberMapper, EsMember> i
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberDO>
      */
     @Override
-    public DubboPageResult<com.xdl.jjg.model.domain.EsMemberAdminDO> getMemberList(EsMemberDTO memberDTO, int pageSize, int pageNum) {
+    public DubboPageResult< EsMemberAdminDO> getMemberList(EsMemberDTO memberDTO, int pageSize, int pageNum) {
         QueryWrapper<EsMember> queryWrapper = new QueryWrapper<>();
         try {
             // 查询条件
@@ -825,10 +824,10 @@ public class EsMemberServiceImpl extends ServiceImpl<EsMemberMapper, EsMember> i
             }
 
             IPage<EsMember> iPage = this.page(page, queryWrapper);
-            List<com.xdl.jjg.model.domain.EsMemberAdminDO> memberDOList = new ArrayList<>();
+            List<EsMemberAdminDO> memberDOList = new ArrayList<>();
             if (CollectionUtils.isNotEmpty(iPage.getRecords())) {
                 memberDOList = iPage.getRecords().stream().map(member -> {
-                    com.xdl.jjg.model.domain.EsMemberAdminDO memberAdminDO = new com.xdl.jjg.model.domain.EsMemberAdminDO();
+                     EsMemberAdminDO memberAdminDO = new  EsMemberAdminDO();
                     BeanUtil.copyProperties(member, memberAdminDO);
                     return memberAdminDO;
                 }).collect(Collectors.toList());
@@ -1414,7 +1413,7 @@ public class EsMemberServiceImpl extends ServiceImpl<EsMemberMapper, EsMember> i
     }
 
     @Override
-    public DubboResult<com.xdl.jjg.model.domain.EsMyMeansDO> meansCensus(Long memberId) {
+    public DubboResult< EsMyMeansDO> meansCensus(Long memberId) {
         QueryWrapper<EsMember> queryWrapper = new QueryWrapper<>();
         try {
             queryWrapper.lambda().eq(EsMember::getId, memberId);
@@ -1423,7 +1422,7 @@ public class EsMemberServiceImpl extends ServiceImpl<EsMemberMapper, EsMember> i
                 throw new ArgumentException(MemberErrorCode.DATA_NOT_EXIST.getErrorCode(), MemberErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
 
-            com.xdl.jjg.model.domain.EsMyMeansDO myMeansDO = new com.xdl.jjg.model.domain.EsMyMeansDO();
+             EsMyMeansDO myMeansDO = new  EsMyMeansDO();
             myMeansDO.setBalanceAccount(member.getMemberBalance());
             myMeansDO.setPointNum(member.getConsumPoint());
 

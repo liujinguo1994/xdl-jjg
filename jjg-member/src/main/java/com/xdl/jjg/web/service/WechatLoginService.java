@@ -30,7 +30,7 @@ public interface WechatLoginService {
      *
      * @return
      */
-    DubboResult<Auth2Token> loginCallback();
+//    DubboResult<Auth2Token> loginCallback();
 
     /**
      * 填充会员信息
@@ -39,7 +39,7 @@ public interface WechatLoginService {
      * @param esMemberDO
      * @return
      */
-    DubboResult<EsMemberDO> fillInformation(Auth2Token auth2Token, EsMemberDO esMemberDO);
+//    DubboResult<EsMemberDO> fillInformation(Auth2Token auth2Token, EsMemberDO esMemberDO);
 
 
 

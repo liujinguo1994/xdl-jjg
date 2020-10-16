@@ -1,12 +1,7 @@
 package com.xdl.jjg.web.service;
 
-import com.jjg.member.model.domain.ApplyStep1DO;
-import com.jjg.member.model.domain.EsShopDO;
+import com.jjg.member.model.domain.*;
 import com.jjg.member.model.dto.*;
-import com.xdl.jjg.model.domain.ApplyStep2DO;
-import com.xdl.jjg.model.domain.ApplyStep3DO;
-import com.xdl.jjg.model.domain.ApplyStep4DO;
-import com.xdl.jjg.model.domain.EsShopAndDetailDO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

@@ -16,6 +16,7 @@ import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.CollectionUtils;
 import com.xdl.jjg.web.service.IEsMyFootprintService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,8 +46,8 @@ public class EsMyFootprintServiceImpl extends ServiceImpl<EsMyFootprintMapper, E
     @Autowired
     private EsMyFootprintMapper myFootprintMapper;
 
-    @Reference(version = "${dubbo.application.version}" ,timeout = 50000,check = false)
-    private IEsGoodsService goodsService;
+    @Autowired
+    private GoodsService goodsService;
 
     /**
      * 插入数据

@@ -68,7 +68,7 @@ public class ShiroKit {
     }
 
     /**
-     * 验证当前用户是否属于该角色？,使用时与lacksRole 搭配使用
+     * 验证当前用户是否属于该角色？,使用时与lacksRole 搭配使用入库操作耗时
      *
      * @param roleName 角色名
      * @return 属于该角色：true，否则false

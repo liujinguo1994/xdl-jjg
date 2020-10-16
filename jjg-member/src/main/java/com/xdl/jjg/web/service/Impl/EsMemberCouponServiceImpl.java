@@ -5,26 +5,27 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.jjg.member.model.domain.EsAdminMemberCouponDO;
-import com.jjg.member.model.domain.EsMemberCouponDO;
+import com.jjg.member.model.domain.*;
 import com.jjg.member.model.dto.EsMemberCouponDTO;
 import com.jjg.member.model.dto.QueryAdminCouponDTO;
 import com.jjg.member.model.dto.QuerySellerCouponDTO;
 import com.jjg.trade.model.domain.EsCouponDO;
 import com.jjg.trade.model.dto.EsCouponDTO;
+import com.jjg.trade.model.dto.EsMemberTradeCouponDTO;
 import com.xdl.jjg.constant.MemberConstant;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsMemberCoupon;
 import com.xdl.jjg.entity.EsShop;
 import com.xdl.jjg.mapper.EsMemberCouponMapper;
 import com.xdl.jjg.mapper.EsShopMapper;
-import com.xdl.jjg.model.domain.EsSellerMemberCouponDO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.IEsMemberCouponService;
 import com.xdl.jjg.web.service.IEsShopDetailService;
+import com.xdl.jjg.web.service.feign.trade.CouponService;
+import org.apache.dubbo.common.utils.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,9 +53,9 @@ public class EsMemberCouponServiceImpl extends ServiceImpl<EsMemberCouponMapper,
 
     @Autowired
     private EsMemberCouponMapper memberCouponMapper;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsCouponService iEsCouponService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
+    private CouponService iEsCouponService;
+    @Autowired
     private IEsShopDetailService iEsShopDetailService;
     @Autowired
     private EsShopMapper esShopMapper;
@@ -590,7 +591,8 @@ public class EsMemberCouponServiceImpl extends ServiceImpl<EsMemberCouponMapper,
                 List<EsMemberCouponDO> lists = result.getData().getList();
                 List<EsMemberTradeCouponDTO> esMemberTradeCouponDTOList = BeanUtil.copyList(lists, EsMemberTradeCouponDTO.class);
                 //调用交易模块接口
-                resultTrade = iEsCouponService.getNotReceivedCouponList(esMemberTradeCouponDTOList, pageSize, pageNum);
+//                resultTrade = iEsCouponService.getNotReceivedCouponList(esMemberTradeCouponDTOList, pageSize, pageNum);
+                resultTrade = null;
                 if (!resultTrade.isSuccess()) {
                     logger.error("交易模块会员优惠券分页查询失败");
                     return DubboPageResult.fail(MemberErrorCode.TRADE_COUPON_ERROR.getErrorCode(), MemberErrorCode.TRADE_COUPON_ERROR.getErrorMsg());

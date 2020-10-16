@@ -11,7 +11,7 @@
         <result column="comment_type" property="commentType" />
     </resultMap>
 
-    <select id="getCommentSortConfigList" resultType="com.xdl.jjg.model.domain.EsCommentSortConfigDO">
+    <select id="getCommentSortConfigList" resultType="com.jjg.member.model.domain.EsCommentSortConfigDO">
         select id,min_score minScore,max_score maxScore,comment_type commentType,comment_sort commentSort FROM es_comment_sort_config
     </select>
 
@@ -19,7 +19,7 @@
         delete from  es_comment_sort_config
     </delete>
 
-    <select id="getCommentSortLevel" resultType="com.xdl.jjg.model.domain.EsCommentSortConfigDO" >
+    <select id="getCommentSortLevel" resultType="com.jjg.member.model.domain.EsCommentSortConfigDO" >
         SELECT min_score minScore,max_score maxScore,comment_type commentType  FROM es_comment_sort_config where comment_type = #{commentType}
     </select>
 

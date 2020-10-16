@@ -45,7 +45,8 @@
         <jackson.version>2.9.8</jackson.version>
         <!-- fastjson -->
         <fastjson.version>1.2.54</fastjson.version>
-        <mybatis-plus-boot-starter.version>3.1.0</mybatis-plus-boot-starter.version>
+        <!-- dubbo -->
+        <dubbo.version>2.7.1</dubbo.version>
     </properties>
 
     <dependencies>
@@ -68,11 +69,29 @@
             <version>1.21</version>
         </dependency>
 
+        <!--<dependency>-->
+            <!--<groupId>com.baomidou</groupId>-->
+            <!--<artifactId>mybatis-plus-boot-starter</artifactId>-->
+            <!--<version>${mybatis-plus-boot-starter.version}</version>-->
+        <!--</dependency>-->
+
+        <!-- mybatis-plus begin -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid-spring-boot-starter</artifactId>
+            <version>${druid-spring-boot-starter.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${mybatis-plus-boot-starter.version}</version>
+            <artifactId>mybatis-plus-extension</artifactId>
+            <version>3.1.0</version>
         </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.baomidou</groupId>-->
+            <!--<artifactId>dynamic-datasource-spring-boot-starter</artifactId>-->
+            <!--<version>${dynamic-datasource-spring-boot-starter.version}</version>-->
+        <!--</dependency>-->
+        <!-- mybatis-plus end -->
 
         <!-- jackson begin -->
         <dependency>
@@ -102,7 +121,11 @@
             <classifier>jdk15</classifier>
         </dependency>
         <!-- jackson end -->
-
+        <dependency>
+            <groupId>com.sohu.tv</groupId>
+            <artifactId>cachecloud-open-jedis-stat</artifactId>
+            <version>1.0</version>
+        </dependency>
         <!-- jackson begin -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -117,7 +140,11 @@
             <version>${guava.version}</version>
         </dependency>
         <!-- guava end -->
-
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo</artifactId>
+            <version>${dubbo.version}</version>
+        </dependency>
         <!-- dom4j begin-->
         <dependency>
             <groupId>dom4j</groupId>
@@ -398,29 +425,6 @@
             <version>3.1.0</version>
         </dependency>
 
-        <!-- mybatis-plus begin -->
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>druid-spring-boot-starter</artifactId>
-            <version>${druid-spring-boot-starter.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${mybatis-plus-boot-starter.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-extension</artifactId>
-            <version>3.1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
-            <version>${dynamic-datasource-spring-boot-starter.version}</version>
-        </dependency>
-        <!-- mybatis-plus end -->
-
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
@@ -469,17 +473,13 @@
             <artifactId>jedis</artifactId>
             <version>${jedis.version}</version>
         </dependency>
-        <dependency>
-            <groupId>org.redisson</groupId>
-            <artifactId>redisson</artifactId>
-            <version>${redisson.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>com.sohu.tv</groupId>
             <artifactId>cachecloud-open-client-redis</artifactId>
             <version>${cache-cloud.version}</version>
         </dependency>
+
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

@@ -1,24 +1,23 @@
 package com.xdl.jjg.web.service.Impl;
 
 
-import com.alibaba.fastjson.JSONObject;
+import com.jjg.member.model.domain.EsConnectSettingDO;
+import com.jjg.member.model.domain.EsMemberDO;
 import com.jjg.member.model.enums.ConnectTypeEnum;
 import com.jjg.member.model.enums.QqConnectConfigGroupEnum;
 import com.jjg.member.model.enums.QqConnectConfigItemEnum;
 import com.jjg.member.model.vo.Auth2Token;
 import com.jjg.member.model.vo.ConnectSettingConfigItem;
 import com.jjg.member.model.vo.ConnectSettingParametersVO;
-import com.sohu.tv.cachecloud.client.basic.util.HttpUtils;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.constants.ThreadContextHolder;
-import com.xdl.jjg.model.domain.EsConnectSettingDO;
-import com.xdl.jjg.model.domain.EsMemberDO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.web.service.IEsConnectSettingService;
 import com.xdl.jjg.web.service.QqLoginService;
+import net.sf.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,78 +103,78 @@ public class QqLoginServiceImpl implements QqLoginService {
         }
     }
 
-    @Override
-    public DubboResult<Auth2Token> loginCallback() {
-        try{
-            initConnectSetting();
-            //通过Authorization Code获取Access Token
-            String code = request.getParameter("code");
-            String redirectUri = this.getCallBackUrl(ConnectTypeEnum.QQ.value());
-            String url = "https://graph.qq.com/oauth2.0/token?" +
-                    "grant_type=authorization_code" +
-                    "&client_id=" + map.get("qq_pc_app_id") +
-                    "&client_secret=" + map.get("qq_pc_app_key") +
-                    "&code=" + code +
-                    "&redirect_uri=" + redirectUri;
-            String content = HttpUtils.doGet(url, "UTF-8", 1000, 1000);
-            String accessToken = "";
-            Matcher matcher = accessTokenPattern.matcher(content);
-            while (matcher.find()) {
-                accessToken = matcher.group(1);
-            }
-            url = "https://graph.qq.com/oauth2.0/me?access_token=" + accessToken;
-            content = HttpUtils.doGet(url, "UTF-8", 1000, 1000);
-            String unionId = "";
-            Matcher unionIdMatcher = unionidPattern.matcher(content);
-            while (unionIdMatcher.find()) {
-                unionId = unionIdMatcher.group(1);
-            }
-            Auth2Token auth2Token = new Auth2Token();
-            auth2Token.setUnionid(unionId);
-            auth2Token.setAccessToken(accessToken);
-            return DubboResult.success(auth2Token);
-        } catch (ArgumentException ae) {
-            logger.error("登录成功后的回调方法", ae);
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
-        } catch (Throwable th) {
-            logger.error("登录成功后的回调方法", th);
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
-        }
-    }
+//    @Override
+//    public DubboResult<Auth2Token> loginCallback() {
+//        try{
+//            initConnectSetting();
+//            //通过Authorization Code获取Access Token
+//            String code = request.getParameter("code");
+//            String redirectUri = this.getCallBackUrl(ConnectTypeEnum.QQ.value());
+//            String url = "https://graph.qq.com/oauth2.0/token?" +
+//                    "grant_type=authorization_code" +
+//                    "&client_id=" + map.get("qq_pc_app_id") +
+//                    "&client_secret=" + map.get("qq_pc_app_key") +
+//                    "&code=" + code +
+//                    "&redirect_uri=" + redirectUri;
+//            String content = HttpUtils.doGet(url, "UTF-8", 1000, 1000);
+//            String accessToken = "";
+//            Matcher matcher = accessTokenPattern.matcher(content);
+//            while (matcher.find()) {
+//                accessToken = matcher.group(1);
+//            }
+//            url = "https://graph.qq.com/oauth2.0/me?access_token=" + accessToken;
+//            content = HttpUtils.doGet(url, "UTF-8", 1000, 1000);
+//            String unionId = "";
+//            Matcher unionIdMatcher = unionidPattern.matcher(content);
+//            while (unionIdMatcher.find()) {
+//                unionId = unionIdMatcher.group(1);
+//            }
+//            Auth2Token auth2Token = new Auth2Token();
+//            auth2Token.setUnionid(unionId);
+//            auth2Token.setAccessToken(accessToken);
+//            return DubboResult.success(auth2Token);
+//        } catch (ArgumentException ae) {
+//            logger.error("登录成功后的回调方法", ae);
+//            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+//            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+//        } catch (Throwable th) {
+//            logger.error("登录成功后的回调方法", th);
+//            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+//            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
+//        }
+//    }
 
-    @Override
-    public DubboResult<EsMemberDO> fillInformation(Auth2Token auth2Token, EsMemberDO esMemberDO) {
-        try{
-            initConnectSetting();
-            //获取会员信息
-            String url = "https://graph.qq.com/user/get_user_info?" +
-                    "access_token=" + auth2Token.getAccessToken() +
-                    "&oauth_consumer_key=" + map.get("qq_pc_app_id").toString() +
-                    "&openid=" + auth2Token.getUnionid();
-            String content = HttpUtils.doGet(url, "UTF-8", 1000, 1000);
-            JSONObject json = JSONObject.fromObject(content);
-            String gender = json.getString("gender");
-            //完善会员信息
-            esMemberDO.setNickname(json.getString("nickname"));
-            if ("男".equals(gender)) {
-                esMemberDO.setSex(1);
-            } else {
-                esMemberDO.setSex(0);
-            }
-            esMemberDO.setFace(json.getString("figureurl"));
-            return DubboResult.success(esMemberDO);
-        } catch (ArgumentException ae) {
-            logger.error("登录成功后的回调方法", ae);
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
-        } catch (Throwable th) {
-            logger.error("登录成功后的回调方法", th);
-            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
-        }
-    }
+//    @Override
+////    public DubboResult<EsMemberDO> fillInformation(Auth2Token auth2Token, EsMemberDO esMemberDO) {
+////        try{
+////            initConnectSetting();
+////            //获取会员信息
+////            String url = "https://graph.qq.com/user/get_user_info?" +
+////                    "access_token=" + auth2Token.getAccessToken() +
+////                    "&oauth_consumer_key=" + map.get("qq_pc_app_id").toString() +
+////                    "&openid=" + auth2Token.getUnionid();
+////            String content = HttpUtils.doGet(url, "UTF-8", 1000, 1000);
+////            JSONObject json = JSONObject.fromObject(content);
+////            String gender = json.getString("gender");
+////            //完善会员信息
+////            esMemberDO.setNickname(json.getString("nickname"));
+////            if ("男".equals(gender)) {
+////                esMemberDO.setSex(1);
+////            } else {
+////                esMemberDO.setSex(0);
+////            }
+////            esMemberDO.setFace(json.getString("figureurl"));
+////            return DubboResult.success(esMemberDO);
+////        } catch (ArgumentException ae) {
+////            logger.error("登录成功后的回调方法", ae);
+////            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+////            return DubboResult.fail(ae.getExceptionCode(), ae.getMessage());
+////        } catch (Throwable th) {
+////            logger.error("登录成功后的回调方法", th);
+////            TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
+////            return DubboResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(), MemberErrorCode.SYS_ERROR.getErrorMsg());
+////        }
+////    }
 
 
     /**

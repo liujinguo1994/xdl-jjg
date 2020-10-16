@@ -1,10 +1,10 @@
 package com.xdl.jjg.config;
 
 import com.alibaba.fastjson.JSON;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.member.api.model.domain.dto.EsMemberActiveInfoDTO;
-import com.shopx.member.api.model.domain.enums.ActiveTypeEnum;
-import com.shopx.member.api.service.IEsMemberActiveInfoService;
+import com.jjg.member.model.dto.EsMemberActiveInfoDTO;
+import com.jjg.member.model.enums.ActiveTypeEnum;
+import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.web.service.IEsMemberActiveInfoService;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;

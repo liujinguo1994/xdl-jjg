@@ -11,7 +11,7 @@
     </resultMap>
 
 
-    <select id="getCommentGalleryList" parameterType="java.lang.Long" resultType="com.xdl.jjg.model.domain.EsCommentGalleryDO">
+    <select id="getCommentGalleryList" parameterType="java.lang.Long" resultType="com.jjg.member.model.domain.EsCommentGalleryDO">
         SELECT id,comment_id commentId,original FROM es_comment_gallery where comment_id = #{commentId} order by sort
     </select>
 

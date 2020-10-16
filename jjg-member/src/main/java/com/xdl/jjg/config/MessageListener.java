@@ -1,10 +1,10 @@
 package com.xdl.jjg.config;
 
 
+import com.jjg.member.model.domain.EsMemberDO;
+import com.jjg.member.model.dto.EsMemberNoticeLogDTO;
+import com.jjg.system.model.dto.EsMessageDTO;
 import com.xdl.jjg.constant.MemberConstant;
-import com.xdl.jjg.model.domain.EsMemberDO;
-import com.xdl.jjg.model.dto.EsMemberNoticeLogDTO;
-import com.xdl.jjg.model.dto.EsMessageDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.CollectionUtils;

@@ -1,8 +1,8 @@
 package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jjg.member.model.domain.EsMemberAddressDO;
 import com.xdl.jjg.entity.EsMemberAddress;
-import com.xdl.jjg.model.domain.EsMemberAddressDO;
 
 import java.util.List;
 

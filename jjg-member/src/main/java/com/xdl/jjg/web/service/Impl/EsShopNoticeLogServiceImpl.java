@@ -18,6 +18,7 @@ import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.CollectionUtils;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.web.service.IEsShopNoticeLogService;
+import com.xdl.jjg.web.service.feign.trade.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,8 +47,8 @@ public class EsShopNoticeLogServiceImpl extends ServiceImpl<EsShopNoticeLogMappe
     @Autowired
     private EsShopNoticeLogMapper shopNoticeLogMapper;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsOrderService orderService;
+    @Autowired
+    private OrderService orderService;
 
     /**
      * 插入店铺站内消息(平台-店铺)数据

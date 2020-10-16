@@ -1,6 +1,5 @@
 package com.xdl.jjg.shiro.cache;
 
-
 import com.xdl.jjg.shiro.oath.ShiroUser;
 import com.xdl.jjg.util.SerializeUtil;
 import org.apache.ibatis.cache.CacheException;

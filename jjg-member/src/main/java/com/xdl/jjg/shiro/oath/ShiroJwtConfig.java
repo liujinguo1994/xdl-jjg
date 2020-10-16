@@ -32,7 +32,7 @@ public class ShiroJwtConfig {
     public RedisCacheManager redisCacheManager;
 
     /**
-     * ShiroFilterFactoryBean 处理拦截资源文件问题。 注意：单独一个ShiroFilterFactoryBean配置是或报错的，以为在
+     * ShiroPermissionFactory 处理拦截资源文件问题。 注意：单独一个ShiroFilterFactoryBean配置是或报错的，以为在
      * 初始化ShiroFilterFactoryBean的时候需要注入：SecurityManager Filter Chain定义说明
      * 1、一个URL可以配置多个Filter，使用逗号分隔 2、当设置多个过滤器时，全部验证通过，才视为通过 3、部分过滤器可指定参数，如perms，roles
      */
@@ -44,6 +44,7 @@ public class ShiroJwtConfig {
         Map<String, Filter> filtersMap = shiroFilterFactoryBean.getFilters();
         //oauth过滤
         filtersMap.put("oauth2", new OAuth2Filter());
+        //filtersMap.put("pathMatch",new URLPathMatchingFilter());
         shiroFilterFactoryBean.setFilters(filtersMap);
         // 拦截器
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
@@ -67,15 +68,76 @@ public class ShiroJwtConfig {
         filterChainDefinitionMap.put("/qr/**", "anon");
         filterChainDefinitionMap.put("/test/**", "anon");
 
-        //用户相关
-        filterChainDefinitionMap.put("/esAdminUser/**", "anon");// 新增用户
-        filterChainDefinitionMap.put("/adminUser/captcha.jpg", "anon");// 图片验证码(kaptcha框架)
-        filterChainDefinitionMap.put("/adminUser/login", "anon");//管理员登录
-        filterChainDefinitionMap.put("/esRegions/children/**", "anon");//获取某地区的子地区
-        filterChainDefinitionMap.put("/esSystemFile/upload/**", "anon");//文件上传
-        filterChainDefinitionMap.put("/ueditor/**", "anon");//文件上传
+        // 商品相关
+        filterChainDefinitionMap.put("/goods/**","anon");
 
+        // 配置相关
+        filterChainDefinitionMap.put("/esRegions/**","anon");
+
+        //会员相关
+        filterChainDefinitionMap.put("/member/captcha.jpg", "anon");// 图片验证码(kaptcha框架)
+        filterChainDefinitionMap.put("/member/login", "anon");
+        filterChainDefinitionMap.put("/member/pcInsertMember", "anon");
+        filterChainDefinitionMap.put("/member/queryCompanyByNotes", "anon");
+        filterChainDefinitionMap.put("/registerMember/queryRepeatMobile/**","anon");
+        filterChainDefinitionMap.put("/registerMember/queryCompanyByNotes/**","anon");
+        filterChainDefinitionMap.put("/registerMember/checkPassword","anon");
+        filterChainDefinitionMap.put("/registerMember/newPassword","anon");
+        filterChainDefinitionMap.put("/memberActiveConfig/**","anon");
+        filterChainDefinitionMap.put("/zhuox/home/**","anon");
+        filterChainDefinitionMap.put("/zhuox/pages/**","anon");
+        filterChainDefinitionMap.put("/member/sendSMSCode/**","anon");
+        filterChainDefinitionMap.put("/member/fastLogin", "anon");
+        filterChainDefinitionMap.put("/member/checkCode", "anon");
+        filterChainDefinitionMap.put("/zhuox/goods/shop/**", "anon");
+        filterChainDefinitionMap.put("/zhuox/esMemberComment/getDetailCommentList/**", "anon");
+        filterChainDefinitionMap.put("/zhuox/esMemberComment/getCountComment/**", "anon");
+        filterChainDefinitionMap.put("/zhuox/esMemberComment/getGoodCommentRate/**", "anon");
+        filterChainDefinitionMap.put("/zhuox/esMemberComment/getLabelsGroup/**", "anon");
+        filterChainDefinitionMap.put("/site-show/**", "anon");
+        filterChainDefinitionMap.put("/seller/trade/orders/**", "anon");
+
+
+        //wap会员登录
+        filterChainDefinitionMap.put("/wap/member/memberLogin/login", "anon");
+        filterChainDefinitionMap.put("/wap/member/memberLogin/fastLogin", "anon");
+        filterChainDefinitionMap.put("/wap/member/memberLogin/sendSMSCode", "anon");
+
+        //wap会员注册
+        filterChainDefinitionMap.put("/wap/registerMember/**", "anon");
+
+        //会员支付跳转 暂时放开
+        filterChainDefinitionMap.put("/order/pay/wechat/**", "anon");
+        filterChainDefinitionMap.put("/order/pay/**", "anon");
+
+        // 手机端商品相关
+        filterChainDefinitionMap.put("/wap/goods/goods/**","anon");
+        filterChainDefinitionMap.put("/wap/home/**","anon");
+        filterChainDefinitionMap.put("/wap/goods/category/**","anon");
+        filterChainDefinitionMap.put("/wap/goods/shopCa/**","anon");
+
+        // 移动端秒杀相关
+        filterChainDefinitionMap.put("/wap/promotion/seckill/timetableToday","anon");
+        filterChainDefinitionMap.put("/wap/promotion/seckill/seckillTimelineGoodsList","anon");
+
+        filterChainDefinitionMap.put("/wap/member/comment/getDetailCommentList","anon");
+        filterChainDefinitionMap.put("/wap/member/comment/getGoodCommentRate/**","anon");
+        filterChainDefinitionMap.put("/wap/member/comment/getEsCommentCategoryList","anon");
+
+        // 过滤掉小程序相关接口
+        filterChainDefinitionMap.put("/applet/**","anon");
+
+        // 用户协议
+        filterChainDefinitionMap.put("/esAgreement/**","anon");
+        filterChainDefinitionMap.put("/esWapAgreement/**","anon");
+        //app端支付回调
+        filterChainDefinitionMap.put("/wap/trade/pay/callback/**", "anon");
+        filterChainDefinitionMap.put("/wap/trade/pay/wxCallback/**", "anon");
         filterChainDefinitionMap.put("/**", "oauth2");
+        //filterChainDefinitionMap.put("/**", "pathMatch");
+
+
+
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);
         return shiroFilterFactoryBean;
     }

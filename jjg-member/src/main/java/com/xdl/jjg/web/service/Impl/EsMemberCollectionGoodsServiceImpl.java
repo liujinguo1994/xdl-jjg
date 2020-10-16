@@ -4,12 +4,16 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.jjg.member.model.domain.EsCategoryMemberDO;
-import com.jjg.member.model.domain.EsCollectCateryNumDO;
-import com.jjg.member.model.domain.EsMemberCollectionGoodsDO;
+import com.jjg.member.model.domain.*;
 import com.jjg.member.model.dto.EsMemberCollectionGoodsDTO;
 import com.jjg.member.model.dto.EsQueryMemberCollectionGoodsDTO;
 import com.jjg.member.model.vo.EsCollVO;
+import com.jjg.shop.model.co.EsGoodsCO;
+import com.jjg.shop.model.domain.EsCategoryDO;
+import com.jjg.shop.model.domain.EsGoodsDO;
+import com.jjg.shop.model.domain.EsGoodsSkuDO;
+import com.jjg.system.model.dto.EsSmsSendDTO;
+import com.jjg.system.model.enums.SmsTemplateCodeEnum;
 import com.xdl.jjg.constant.MemberConstant;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsMemberCollectionGoods;
@@ -17,7 +21,6 @@ import com.xdl.jjg.entity.EsMemberShop;
 import com.xdl.jjg.mapper.EsMemberCollectionGoodsMapper;
 import com.xdl.jjg.mapper.EsMemberMapper;
 import com.xdl.jjg.mapper.EsMemberShopMapper;
-import com.xdl.jjg.model.domain.EsEffectAndPriceCollectionGoodsDO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
@@ -294,10 +297,10 @@ public class EsMemberCollectionGoodsServiceImpl extends ServiceImpl<EsMemberColl
      * @param memberId
      * @return
      */
-    public DubboResult<com.xdl.jjg.model.domain.EsCutAndEffectDO> getCutAndEffetNum(Long memberId) {
+    public DubboResult< EsCutAndEffectDO> getCutAndEffetNum(Long memberId) {
         try {
             //查询所有收藏商品
-            com.xdl.jjg.model.domain.EsCutAndEffectDO esCutAndEffectDO = new com.xdl.jjg.model.domain.EsCutAndEffectDO();
+             EsCutAndEffectDO esCutAndEffectDO = new  EsCutAndEffectDO();
             QueryWrapper<EsMemberCollectionGoods> queryWrapper = new QueryWrapper<>();
             queryWrapper.orderByDesc("id");
             queryWrapper.lambda().eq(EsMemberCollectionGoods::getMemberId, memberId);
@@ -413,7 +416,7 @@ public class EsMemberCollectionGoodsServiceImpl extends ServiceImpl<EsMemberColl
             }
             this.esMemberCollectionGoodsMapper.delete(queryWrapper);
             //调用会员收藏成长值服务
-            DubboResult<com.xdl.jjg.model.domain.EsGrowthValueStrategyDO> resultInfo = iEsGrowthValueStrategyService.getComandcolleGrowthvalueConfigByType(MemberConstant.collectionShop);
+            DubboResult< EsGrowthValueStrategyDO> resultInfo = iEsGrowthValueStrategyService.getComandcolleGrowthvalueConfigByType(MemberConstant.collectionShop);
             //判断是否添加成长值
             if (resultInfo.isSuccess() && null != resultInfo.getData() && null != resultInfo.getData().getGrowthValue()) {
                 iEsMemberService.updateGrowthValue(memberId, resultInfo.getData().getGrowthValue(), false, MemberConstant.collectionStragety);
@@ -450,7 +453,7 @@ public class EsMemberCollectionGoodsServiceImpl extends ServiceImpl<EsMemberColl
             //删除成长值
             int num = goodIds.size();
             //调用会员收藏成长值服务
-            DubboResult<com.xdl.jjg.model.domain.EsGrowthValueStrategyDO> resultInfo = iEsGrowthValueStrategyService.getComandcolleGrowthvalueConfigByType(MemberConstant.collectionGoods);
+            DubboResult< EsGrowthValueStrategyDO> resultInfo = iEsGrowthValueStrategyService.getComandcolleGrowthvalueConfigByType(MemberConstant.collectionGoods);
             //判断是否添加成长值
             if (resultInfo.isSuccess() && null != resultInfo.getData() && null != resultInfo.getData().getGrowthValue()) {
                 int value = num * resultInfo.getData().getGrowthValue();
@@ -535,7 +538,7 @@ public class EsMemberCollectionGoodsServiceImpl extends ServiceImpl<EsMemberColl
             esMemberCollectionGood.setCategoryId(categoryResult.getData().getParentId());
             this.save(esMemberCollectionGood);
             //调用会员收藏成长值服务
-            DubboResult<com.xdl.jjg.model.domain.EsGrowthValueStrategyDO> resultInfo = iEsGrowthValueStrategyService.getComandcolleGrowthvalueConfigByType(MemberConstant.collectionGoods);
+            DubboResult< EsGrowthValueStrategyDO> resultInfo = iEsGrowthValueStrategyService.getComandcolleGrowthvalueConfigByType(MemberConstant.collectionGoods);
             int num = getCollectNum(dto.getMemberId());
             //判断是否添加成长值
             if (resultInfo.isSuccess() && null != resultInfo.getData() && null != resultInfo.getData().getLimitNum()) {
@@ -674,7 +677,7 @@ public class EsMemberCollectionGoodsServiceImpl extends ServiceImpl<EsMemberColl
         if (CollectionUtils.isNotEmpty(lists)) {
             if (lists.get(0).getGoodsPrice() > price) {
                 //查询该用户手机号
-                DubboResult<com.xdl.jjg.model.domain.EsMemberDO> resultMember = iEsMemberService.getMemberByIdInfo(lists.get(0).getMemberId());
+                DubboResult< EsMemberDO> resultMember = iEsMemberService.getMemberByIdInfo(lists.get(0).getMemberId());
                 if (resultMember.isSuccess() && null != resultMember.getData().getState() && resultMember.getData().getState() == MemberConstant.IsCommon && null != resultMember.getData().getMobile()) {
                     // 发送短信验证码
                     this.sendSMSCode(resultMember.getData().getMobile(), lists.get(0).getGoodsName());
@@ -826,14 +829,14 @@ public class EsMemberCollectionGoodsServiceImpl extends ServiceImpl<EsMemberColl
     }
 
     @Override
-    public DubboResult<com.xdl.jjg.model.domain.EsMemberCollectionGoodsSortStatisticsDO> getMemberCollectionGoodNumBuyer(Long memberId) {
+    public DubboResult< EsMemberCollectionGoodsSortStatisticsDO> getMemberCollectionGoodNumBuyer(Long memberId) {
         try {
             //查询所有收藏商品Id
             QueryWrapper<EsMemberCollectionGoods> queryWrapper = new QueryWrapper<>();
             queryWrapper.lambda().eq(EsMemberCollectionGoods::getMemberId, memberId);
             List<EsMemberCollectionGoods> esMemberCollectionGoodsList = this.esMemberCollectionGoodsMapper.selectList(queryWrapper);
             if(esMemberCollectionGoodsList.size() == 0){
-                return DubboResult.success(new com.xdl.jjg.model.domain.EsMemberCollectionGoodsSortStatisticsDO());
+                return DubboResult.success(new  EsMemberCollectionGoodsSortStatisticsDO());
             }
             List<Long> categoryIds = esMemberCollectionGoodsList.stream().map(e -> e.getCategoryId()).collect(Collectors.toList());
             //查询所有收藏商品的信息
@@ -843,7 +846,7 @@ public class EsMemberCollectionGoodsServiceImpl extends ServiceImpl<EsMemberColl
             DubboPageResult<EsGoodsDO> goodsResult = iEsGoodsService.getEsGoods(ids);
             List<EsGoodsDO> goodList = goodsResult.isSuccess() ? goodsResult.getData().getList() : Arrays.asList();
             //判断是否下架、失效
-            com.xdl.jjg.model.domain.EsMemberCollectionGoodsSortStatisticsDO sortStatisticsDO = sortGoods(categoryIds, goodList, esMemberCollectionGoodsList);
+            EsMemberCollectionGoodsSortStatisticsDO sortStatisticsDO = sortGoods(categoryIds, goodList, esMemberCollectionGoodsList);
             return DubboResult.success(sortStatisticsDO);
         } catch (ArgumentException ae) {
             logger.error("查詢商品列表失敗", ae);
@@ -868,7 +871,7 @@ public class EsMemberCollectionGoodsServiceImpl extends ServiceImpl<EsMemberColl
     }
 
     //分类统计
-    private com.xdl.jjg.model.domain.EsMemberCollectionGoodsSortStatisticsDO sortGoods(List<Long> categoryIds, List<EsGoodsDO> goodList, List<EsMemberCollectionGoods> esMemberCollectionGoodsList){
+    private EsMemberCollectionGoodsSortStatisticsDO sortGoods(List<Long> categoryIds, List<EsGoodsDO> goodList, List<EsMemberCollectionGoods> esMemberCollectionGoodsList){
         Map<Long, Long> goodMap = categoryIds.stream().collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
         AtomicInteger invalidNum = new AtomicInteger();
         AtomicInteger cutNum = new AtomicInteger();
@@ -914,7 +917,7 @@ public class EsMemberCollectionGoodsServiceImpl extends ServiceImpl<EsMemberColl
                 }
             }
         }
-        com.xdl.jjg.model.domain.EsMemberCollectionGoodsSortStatisticsDO sortStatisticsDO = new com.xdl.jjg.model.domain.EsMemberCollectionGoodsSortStatisticsDO();
+         EsMemberCollectionGoodsSortStatisticsDO sortStatisticsDO = new  EsMemberCollectionGoodsSortStatisticsDO();
         sortStatisticsDO.setAllNum(esMemberCollectionGoodsList.size());
         sortStatisticsDO.setInvalidNum(invalidNum.get());
         sortStatisticsDO.setCutNum(cutNum.get());

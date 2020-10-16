@@ -15,7 +15,7 @@ public class OAuth2Token implements AuthenticationToken {
     private String uid;         //用户的标识
     private String token;           //json web token值
 
-    public OAuth2Token(String token, String uid) {
+    public OAuth2Token(String token,String uid) {
         this.token = token;
         this.uid = uid;
     }

@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsAdminTagsDO;
-import com.xdl.jjg.model.dto.EsAdminTagsDTO;
+import com.jjg.shop.model.domain.EsAdminTagsDO;
+import com.jjg.shop.model.dto.EsAdminTagsDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

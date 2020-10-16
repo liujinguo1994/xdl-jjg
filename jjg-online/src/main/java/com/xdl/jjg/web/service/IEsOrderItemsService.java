@@ -1,12 +1,14 @@
 package com.xdl.jjg.web.service;
 
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.trade.api.model.domain.*;
-import com.shopx.trade.api.model.domain.dto.CartItemsDTO;
-import com.shopx.trade.api.model.domain.dto.EsOrderDTO;
-import com.shopx.trade.api.model.domain.dto.EsOrderItemsDTO;
-import com.shopx.trade.api.model.domain.dto.EsReFundQueryBuyerDTO;
+
+
+import com.jjg.trade.model.domain.*;
+import com.jjg.trade.model.dto.CartItemsDTO;
+import com.jjg.trade.model.dto.EsOrderDTO;
+import com.jjg.trade.model.dto.EsOrderItemsDTO;
+import com.jjg.trade.model.dto.EsReFundQueryBuyerDTO;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
 
 import java.util.List;
 import java.util.Map;

@@ -1,7 +1,7 @@
 package com.xdl.jjg.web.service;
 
 
-import com.jjg.member.model.dto.EsSmsSendDTO;
+import com.jjg.system.model.dto.EsSmsSendDTO;
 import com.xdl.jjg.response.service.DubboResult;
 
 /**

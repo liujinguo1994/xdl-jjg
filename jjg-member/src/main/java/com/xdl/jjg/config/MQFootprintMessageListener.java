@@ -9,7 +9,8 @@ import com.aliyun.openservices.shade.com.alibaba.rocketmq.client.consumer.listen
 import com.aliyun.openservices.shade.com.alibaba.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import com.aliyun.openservices.shade.com.alibaba.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import com.aliyun.openservices.shade.com.alibaba.rocketmq.common.message.MessageExt;
-import com.xdl.jjg.model.dto.EsMyFootprintDTO;
+
+import com.jjg.member.model.dto.EsMyFootprintDTO;
 import com.xdl.jjg.util.CollectionUtils;
 import com.xdl.jjg.web.service.IEsMyFootprintService;
 import org.slf4j.Logger;

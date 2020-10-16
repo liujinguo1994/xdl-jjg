@@ -15,7 +15,7 @@
     </resultMap>
 
 
-    <select id="getAllClerk"  resultType="com.xdl.jjg.model.domain.EsClerkListDO">
+    <select id="getAllClerk"  resultType="com.jjg.member.model.domain.EsClerkListDO">
         select c.*,m.`name`,m.mobile,m.email,if(c.is_admin = 1 and c.role_id=0,'超级店员',er.role_name) roleName from  es_clerk c inner JOIN es_member m on c.member_id=m.id
         LEFT JOIN es_shop_role er on c.role_id = er.id
         where  c.shop_id =#{es.shopId}

@@ -1,8 +1,9 @@
 package com.xdl.jjg.plugin.sms;
 
 
-import com.xdl.jjg.model.dto.EsSmsSendDTO;
-import com.xdl.jjg.model.vo.EsConfigItemVO;
+
+import com.jjg.system.model.dto.EsSmsSendDTO;
+import com.jjg.system.model.vo.EsConfigItemVO;
 
 import java.util.List;
 import java.util.Map;

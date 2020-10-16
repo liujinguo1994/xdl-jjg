@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
+import com.jjg.member.model.domain.EsRFMTradeDO;
 import com.jjg.member.model.dto.EsRFMTradeDTO;
-import com.xdl.jjg.model.domain.EsRFMTradeDO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

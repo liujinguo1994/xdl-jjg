@@ -1,12 +1,12 @@
 package com.xdl.jjg.web.service;
 
 
+import com.jjg.member.model.domain.EsComplaintDO;
+import com.jjg.member.model.domain.EsComplaintOrderDO;
+import com.jjg.member.model.domain.EsComplaintStatDO;
 import com.jjg.member.model.dto.ComplaintQueryParam;
 import com.jjg.member.model.dto.EsComplaintDTO;
 import com.jjg.member.model.vo.wap.EsWapComplaintVO;
-import com.xdl.jjg.model.domain.EsComplaintDO;
-import com.xdl.jjg.model.domain.EsComplaintOrderDO;
-import com.xdl.jjg.model.domain.EsComplaintStatDO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

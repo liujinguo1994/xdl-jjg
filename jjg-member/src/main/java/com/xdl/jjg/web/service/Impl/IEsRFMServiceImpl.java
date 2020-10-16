@@ -3,6 +3,7 @@ package com.xdl.jjg.web.service.Impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.jjg.member.model.domain.EsMemberDO;
 import com.jjg.member.model.domain.EsMemberRfmConfigDO;
+import com.jjg.member.model.domain.EsRFMTradeDO;
 import com.jjg.member.model.dto.EsMemberDTO;
 import com.jjg.member.model.dto.EsRFMTradeDTO;
 import com.xdl.jjg.constant.MemberErrorCode;
@@ -47,7 +48,7 @@ public class IEsRFMServiceImpl implements IEsRFMService {
     private EsMemberMapper esMemberMapper;
     @Autowired
     private EsMemberRfmConfigMapper esMemberRfmConfigMapper;
-    @Reference(version = "${dubbo.application.version}", timeout = 50000,check = false)
+    @Autowired
     private IEsMemberRfmConfigService iEsMemberRfmConfigService;
     @Autowired
     private IEsGrowthWeightConfigService iEsGrowthWeightConfigService;

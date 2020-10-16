@@ -4,23 +4,22 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.jjg.member.model.domain.EsOrderItemsDO;
+import com.jjg.member.model.domain.*;
 import com.jjg.member.model.dto.ComplaintQueryParam;
 import com.jjg.member.model.dto.EsComplaintDTO;
 import com.jjg.member.model.dto.EsComrImglDTO;
 import com.jjg.member.model.enums.ComplaintEnumType;
 import com.jjg.member.model.vo.wap.EsWapComplaintOrderItemsVO;
 import com.jjg.member.model.vo.wap.EsWapComplaintVO;
+import com.jjg.trade.model.domain.EsOrderDO;
+import com.jjg.trade.model.domain.EsOrderItemsDO;
 import com.xdl.jjg.constant.MemberConstant;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsComplaint;
 import com.xdl.jjg.entity.EsComplaintReasonConfig;
 import com.xdl.jjg.entity.EsComplaintTypeConfig;
 import com.xdl.jjg.entity.EsShop;
-import com.xdl.jjg.model.domain.EsComplaintDO;
-import com.xdl.jjg.model.domain.EsComplaintOrderDO;
-import com.xdl.jjg.model.domain.EsComrImglDO;
-import com.xdl.jjg.model.domain.EsMemberDO;
+import com.xdl.jjg.mapper.*;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
@@ -30,6 +29,7 @@ import com.xdl.jjg.util.DateUtils;
 import com.xdl.jjg.util.StringUtil;
 import com.xdl.jjg.web.service.IEsComplaintService;
 import com.xdl.jjg.web.service.IEsComrImglService;
+import com.xdl.jjg.web.service.feign.trade.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,8 +73,8 @@ public class EsComplaintServiceImpl extends ServiceImpl<EsComplaintMapper, EsCom
     @Autowired
     private IEsComrImglService comrImglService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsOrderService orderService;
+    @Autowired
+    private OrderService orderService;
 
 
     @Override
@@ -256,15 +256,15 @@ public class EsComplaintServiceImpl extends ServiceImpl<EsComplaintMapper, EsCom
             List<EsComplaintOrderDO> list = complaintDOS.stream().map(e -> {
                 EsComplaintOrderDO complaintOrderDO = new EsComplaintOrderDO();
                 BeanUtil.copyProperties(e, complaintOrderDO);
-                DubboResult<com.xdl.jjg.model.domain.EsOrderDO> orderDOResult = orderService.getEsBuyerOrderInfo(e.getOrderSn());
-                com.xdl.jjg.model.domain.EsOrderDO orderDO = orderDOResult.getData();
+                DubboResult<EsOrderDO> orderDOResult = orderService.getEsBuyerOrderInfo(e.getOrderSn());
+                 EsOrderDO orderDO = orderDOResult.getData();
                 if(orderDOResult.isSuccess() && orderDO != null){
                     complaintOrderDO.setShopId(orderDO.getShopId());
                     complaintOrderDO.setShopName(orderDO.getShopName());
                     complaintOrderDO.setPayMoney(orderDO.getPayMoney());
                     complaintOrderDO.setShipName(orderDO.getShipName());
                     List<EsOrderItemsDO> orderItemsDOList = orderDO.getEsOrderItemsDO();
-                    List<com.xdl.jjg.model.domain.EsComplaintBuyerOrderItemsDO> complaintBuyerOrderItemsDOList = BeanUtil.copyList(orderItemsDOList, com.xdl.jjg.model.domain.EsComplaintBuyerOrderItemsDO.class);
+                    List<EsComplaintBuyerOrderItemsDO> complaintBuyerOrderItemsDOList = BeanUtil.copyList(orderItemsDOList,  EsComplaintBuyerOrderItemsDO.class);
                     complaintOrderDO.setEsBuyerOrderItemsDO(complaintBuyerOrderItemsDOList);
                 }
                 return complaintOrderDO;
@@ -385,9 +385,9 @@ public class EsComplaintServiceImpl extends ServiceImpl<EsComplaintMapper, EsCom
                     }
                 }
                 //订单商品集合
-                DubboResult<com.xdl.jjg.model.domain.EsOrderDO> orderDODubboResult = orderService.getEsBuyerOrderInfo(wapComplaintVO.getOrderSn());
+                DubboResult< EsOrderDO> orderDODubboResult = orderService.getEsBuyerOrderInfo(wapComplaintVO.getOrderSn());
                 if (orderDODubboResult.isSuccess() && orderDODubboResult.getData() != null){
-                    com.xdl.jjg.model.domain.EsOrderDO orderDO = orderDODubboResult.getData();
+                     EsOrderDO orderDO = orderDODubboResult.getData();
                     List<EsOrderItemsDO> orderItemsDO = orderDO.getEsOrderItemsDO();
                     if (CollectionUtils.isNotEmpty(orderItemsDO)){
                         List<EsWapComplaintOrderItemsVO> itemsVOList = BeanUtil.copyList(orderItemsDO, EsWapComplaintOrderItemsVO.class);
@@ -406,7 +406,7 @@ public class EsComplaintServiceImpl extends ServiceImpl<EsComplaintMapper, EsCom
     }
 
     @Override
-    public DubboResult<com.xdl.jjg.model.domain.EsComplaintStatDO> getComplaintStat(Long memberId) {
+    public DubboResult< EsComplaintStatDO> getComplaintStat(Long memberId) {
         try {
             QueryWrapper<EsComplaint> queryWrapper1 = new QueryWrapper<>();
             queryWrapper1.lambda().eq(EsComplaint::getMemberId, memberId).eq(EsComplaint::getState,"WAIT");
@@ -417,7 +417,7 @@ public class EsComplaintServiceImpl extends ServiceImpl<EsComplaintMapper, EsCom
             QueryWrapper<EsComplaint> queryWrapper3 = new QueryWrapper<>();
             queryWrapper3.lambda().eq(EsComplaint::getMemberId, memberId).eq(EsComplaint::getState,"APPLYED");
             Integer count3 = esComplaintMapper.selectCount(queryWrapper3);
-            com.xdl.jjg.model.domain.EsComplaintStatDO complaintStatDO = new com.xdl.jjg.model.domain.EsComplaintStatDO();
+             EsComplaintStatDO complaintStatDO = new  EsComplaintStatDO();
             complaintStatDO.setWaitCount(count1);
             complaintStatDO.setRunningCount(count2);
             complaintStatDO.setFinishCount(count3);

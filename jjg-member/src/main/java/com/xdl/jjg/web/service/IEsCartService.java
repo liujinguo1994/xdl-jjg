@@ -1,9 +1,9 @@
 package com.xdl.jjg.web.service;
 
 
+import com.jjg.member.model.domain.EsCartDO;
+import com.jjg.member.model.domain.EsCartNumDO;
 import com.jjg.member.model.dto.EsCartDTO;
-import com.xdl.jjg.model.domain.EsCartDO;
-import com.xdl.jjg.model.domain.EsCartNumDO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

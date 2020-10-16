@@ -3,8 +3,8 @@ package com.xdl.jjg.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.jjg.member.model.domain.EsComplaintReasonConfigDO;
 import com.xdl.jjg.entity.EsComplaintReasonConfig;
-import com.xdl.jjg.model.domain.EsComplaintReasonConfigDO;
 
 /**
  * <p>

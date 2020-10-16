@@ -4,8 +4,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.jjg.member.model.domain.EsCollectionShopInfoDO;
-import com.jjg.member.model.domain.EsMemberCollectionShopLabelDO;
+import com.jjg.member.model.domain.*;
 import com.jjg.member.model.dto.EsMemberCollectionShopDTO;
 import com.jjg.member.model.dto.EsQueryCollectShopDTO;
 import com.jjg.member.model.dto.EsUpdateTopShopDTO;
@@ -20,9 +19,6 @@ import com.xdl.jjg.entity.EsMemberShop;
 import com.xdl.jjg.entity.EsShop;
 import com.xdl.jjg.entity.EsShopDetail;
 import com.xdl.jjg.mapper.*;
-import com.xdl.jjg.model.domain.EsGrowthValueStrategyDO;
-import com.xdl.jjg.model.domain.EsMemberCollectionShopDO;
-import com.xdl.jjg.model.domain.EsQueryCollectionShopDO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
@@ -30,7 +26,12 @@ import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.IEsGrowthValueStrategyService;
 import com.xdl.jjg.web.service.IEsMemberCollectionShopService;
 import com.xdl.jjg.web.service.IEsMemberService;
+import com.xdl.jjg.web.service.feign.shop.AdminTagGoodsService;
+import com.xdl.jjg.web.service.feign.shop.AdminTagsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
+import com.xdl.jjg.web.service.feign.shop.TagsService;
 import org.apache.commons.lang.StringUtils;
+import org.apache.dubbo.common.utils.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,18 +71,16 @@ public class EsMemberCollectionShopServiceImpl extends ServiceImpl<EsMemberColle
     private EsShopMapper esShopMapper;
     @Autowired
     private EsShopDetailMapper esShopDetailMapper;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsGoodsService iEsGoodsService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsTagsService iEsTagsService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
+    private GoodsService iEsGoodsService;
+    @Autowired
     private IEsGrowthValueStrategyService iEsGrowthValueStrategyService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private IEsMemberService iEsMemberService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsAdminTagGoodsService adminTagGoodsService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsAdminTagsService adminTagsService;
+    @Autowired
+    private AdminTagGoodsService adminTagGoodsService;
+    @Autowired
+    private AdminTagsService adminTagsService;
 
     /**
      * 添加会员收藏店铺
@@ -477,7 +476,7 @@ public class EsMemberCollectionShopServiceImpl extends ServiceImpl<EsMemberColle
                     Long[] goodsArray = adminTagGoodsDOList.stream().map(EsAdminTagGoodsDO::getGoodsId).toArray(Long[]::new);
                     DubboPageResult<EsGoodsDO> goodsDOPageResult = iEsGoodsService.getEsGoods(goodsArray);
                     if(goodsDOPageResult.isSuccess() && goodsDOPageResult.getData() != null){
-                        memberCollectionShopLabelDO.setMemberGoodsDO(BeanUtil.copyList(goodsDOPageResult.getData().getList(), com.xdl.jjg.model.domain.EsMemberGoodsDO.class));
+                        memberCollectionShopLabelDO.setMemberGoodsDO(BeanUtil.copyList(goodsDOPageResult.getData().getList(),  EsMemberGoodsDO.class));
                     }
                     labelList.add(memberCollectionShopLabelDO);
                 }
@@ -546,11 +545,11 @@ public class EsMemberCollectionShopServiceImpl extends ServiceImpl<EsMemberColle
         }
     }
 
-    private List<com.xdl.jjg.model.domain.EsMemberGoodsDO> getHotOrNewGoods(Long shopId, Long tagId, Long type){
+    private List< EsMemberGoodsDO> getHotOrNewGoods(Long shopId, Long tagId, Long type){
         DubboPageResult<EsGoodsDO> goodsDOHotResult = adminTagGoodsService.getBuyerAdminGoodsTags(shopId, tagId, type);
-        List<com.xdl.jjg.model.domain.EsMemberGoodsDO> goodsDOList = new ArrayList<>();
+        List< EsMemberGoodsDO> goodsDOList = new ArrayList<>();
         if(goodsDOHotResult.isSuccess() && goodsDOHotResult.getData() != null){
-            goodsDOList = BeanUtil.copyList(goodsDOHotResult.getData().getList(), com.xdl.jjg.model.domain.EsMemberGoodsDO.class);
+            goodsDOList = BeanUtil.copyList(goodsDOHotResult.getData().getList(),  EsMemberGoodsDO.class);
         }
         return goodsDOList;
     }

@@ -1,8 +1,8 @@
 package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jjg.member.model.domain.EsGradeWeightConfigDO;
 import com.xdl.jjg.entity.EsGradeWeightConfig;
-import com.xdl.jjg.model.domain.EsGradeWeightConfigDO;
 
 import java.util.List;
 

@@ -4,6 +4,7 @@ package com.xdl.jjg.web.service;
 import com.jjg.member.model.domain.EsCollectCateryNumDO;
 import com.jjg.member.model.domain.EsCutAndEffectDO;
 import com.jjg.member.model.domain.EsMemberCollectionGoodsDO;
+import com.jjg.member.model.domain.EsMemberCollectionGoodsSortStatisticsDO;
 import com.jjg.member.model.dto.EsMemberCollectionGoodsDTO;
 import com.jjg.member.model.dto.EsQueryMemberCollectionGoodsDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
@@ -151,7 +152,7 @@ public interface IEsMemberCollectionGoodsService {
      * @param memberId
      * @return
      */
-    DubboResult<com.xdl.jjg.model.domain.EsMemberCollectionGoodsSortStatisticsDO> getMemberCollectionGoodNumBuyer(Long memberId);
+    DubboResult<EsMemberCollectionGoodsSortStatisticsDO> getMemberCollectionGoodNumBuyer(Long memberId);
 
     /**
      * @Description: 查询商品是够被收藏

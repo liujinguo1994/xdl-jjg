@@ -1,7 +1,7 @@
 package com.xdl.jjg.config;
 
 
-import com.xdl.jjg.model.domain.EsGoodsMqDO;
+import com.jjg.shop.model.domain.EsGoodsMqDO;
 import com.xdl.jjg.util.CollectionUtils;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.web.service.IEsMemberCollectionGoodsService;

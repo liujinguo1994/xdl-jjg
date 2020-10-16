@@ -3,15 +3,11 @@ package com.xdl.jjg.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.jjg.member.model.domain.EsAdminMemberCouponDO;
-import com.jjg.member.model.domain.EsCouponManageMementDO;
-import com.jjg.member.model.domain.EsMemberCouponCountDO;
-import com.jjg.member.model.domain.EsMemberCouponDO;
+import com.jjg.member.model.domain.*;
 import com.jjg.member.model.dto.EsMemberCouponDTO;
 import com.jjg.member.model.dto.QueryAdminCouponDTO;
 import com.jjg.member.model.dto.QuerySellerCouponDTO;
 import com.xdl.jjg.entity.EsMemberCoupon;
-import com.xdl.jjg.model.domain.EsSellerMemberCouponDO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

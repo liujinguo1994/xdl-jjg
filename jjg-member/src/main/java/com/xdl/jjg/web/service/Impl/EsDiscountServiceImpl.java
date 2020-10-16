@@ -2,22 +2,24 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.core.toolkit.Assert;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.member.model.domain.EsDiscountDO;
 import com.jjg.member.model.dto.EsDiscountDTO;
+import com.jjg.shop.model.domain.EsCategoryDO;
 import com.xdl.jjg.constant.MemberErrorCode;
 import com.xdl.jjg.entity.EsCompany;
 import com.xdl.jjg.entity.EsDiscount;
 import com.xdl.jjg.mapper.EsCompanyMapper;
 import com.xdl.jjg.mapper.EsDiscountMapper;
-import com.xdl.jjg.model.domain.EsCategoryDO;
-import com.xdl.jjg.model.domain.EsDiscountDO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.IEsDiscountService;
 import com.xdl.jjg.web.service.feign.shop.CategoryService;
+import org.apache.dubbo.common.utils.CollectionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -234,7 +236,7 @@ public class EsDiscountServiceImpl extends ServiceImpl<EsDiscountMapper, EsDisco
             return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
         }catch (Exception e) {
             logger.error("公司折扣查询失败",e);
-            return DubboPageResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(),"系统错误");
+            return DubboPageResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(),"系统错误");
         }
     }
     @Override
@@ -275,7 +277,7 @@ public class EsDiscountServiceImpl extends ServiceImpl<EsDiscountMapper, EsDisco
             return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
         }catch (Exception e) {
             logger.error("公司折扣查询失败",e);
-            return DubboPageResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(),"系统错误");
+            return DubboPageResult.fail(MemberErrorCode.SYS_ERROR.getErrorCode(),"系统错误");
         }
     }
 

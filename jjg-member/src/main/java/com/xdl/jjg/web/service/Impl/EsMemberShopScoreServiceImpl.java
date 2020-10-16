@@ -21,6 +21,7 @@ import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.CollectionUtils;
 import com.xdl.jjg.web.service.IEsMemberCommentService;
 import com.xdl.jjg.web.service.IEsMemberShopScoreService;
+import com.xdl.jjg.web.service.feign.trade.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,9 +49,8 @@ public class EsMemberShopScoreServiceImpl extends ServiceImpl<EsMemberShopScoreM
 
     @Autowired
     private EsMemberShopScoreMapper memberShopScoreMapper;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsOrderService iEsOrderService;
-    private IEsMemberCommentService esMemberCommentService;
+    @Autowired
+    private OrderService iEsOrderService;
     @Autowired
     private EsCommentSortConfigMapper esCommentSortConfigMapper;
 
@@ -94,8 +94,7 @@ public class EsMemberShopScoreServiceImpl extends ServiceImpl<EsMemberShopScoreM
             //添加评论
             EsOrderDTO esOrderDTO = new EsOrderDTO();
             BeanUtil.copyProperties(result, esOrderDTO);
-            //  esMemberCommentService.insertMemberCommentOrder(memberShopScoreDTO.getEsMemberCommentDTO(),esOrderDTO);
-            return DubboResult.success();
+           return DubboResult.success();
         } catch (ArgumentException ae) {
             logger.error("店铺评分新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
