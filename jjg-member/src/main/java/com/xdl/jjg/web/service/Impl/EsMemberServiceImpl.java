@@ -33,11 +33,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import redis.clients.jedis.JedisCluster;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -100,7 +100,7 @@ public class EsMemberServiceImpl extends ServiceImpl<EsMemberMapper, EsMember> i
     private IEsMemberCollectionShopService memberCollectionShopService;
 
     @Autowired
-    private JedisCluster jedisCluster;
+    private RedisTemplate redisTemplate;
 
     @Autowired
     private EsCompanyMapper companyMapper;
@@ -1467,7 +1467,7 @@ public class EsMemberServiceImpl extends ServiceImpl<EsMemberMapper, EsMember> i
             memberMapper.updateById(member);
 
             if(state == 1){
-                jedisCluster.del("zhuox-dubbo-shiro-cache-authenticationCache:" + memberId);
+                redisTemplate.delete("zhuox-dubbo-shiro-cache-authenticationCache:" + memberId);
             }
             return DubboPageResult.success();
         } catch (ArgumentException ae) {

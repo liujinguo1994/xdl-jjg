@@ -79,7 +79,7 @@ public class MemberMqConfig {
      */
     @Bean
     public MessageListenerConcurrently mqFootprintMessageListener(){
-        MessageListenerConcurrently listenerConcurrently = (MessageListenerConcurrently) new MQFootprintMessageListener();
+        MessageListenerConcurrently listenerConcurrently = new MQFootprintMessageListener();
         return listenerConcurrently;
     }
 }

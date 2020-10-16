@@ -25,11 +25,11 @@ import com.xdl.jjg.web.service.feign.shop.GoodsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import redis.clients.jedis.JedisCluster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,7 +52,7 @@ public class EsCustomServiceImpl extends ServiceImpl<EsCustomMapper, EsCustom> i
     private EsCustomMapper customMapper;
 
     @Autowired
-    private JedisCluster jedisCluster;
+    private RedisTemplate redisTemplate;
 
     @Autowired
     private GoodsService esGoodsService;
@@ -356,7 +356,7 @@ public class EsCustomServiceImpl extends ServiceImpl<EsCustomMapper, EsCustom> i
     public DubboPageResult<EsCustomCO> getCategoryList(Long shopId) {
         try{
             //先从缓存获取
-            String cacheList = jedisCluster.get(CUSTOM_CACHE_ALL + shopId);
+            String cacheList = (String) redisTemplate.opsForValue().get(CUSTOM_CACHE_ALL + shopId);
             logger.info("分类缓存"+cacheList);
             List<EsCustomCO> dataList = JsonUtil.jsonToList(cacheList, EsCustomCO.class);
             if(!CollectionUtils.isEmpty(dataList)){
@@ -397,7 +397,7 @@ public class EsCustomServiceImpl extends ServiceImpl<EsCustomMapper, EsCustom> i
             }).collect(Collectors.toList());
             //将分类存在缓存
             String key = CUSTOM_CACHE_ALL + shopId;
-            jedisCluster.setex(key, CACHE_TIME, JsonUtil.objectToJson(dataList));
+            redisTemplate.opsForValue().set(key, JsonUtil.objectToJson(dataList), CACHE_TIME);
             return DubboPageResult.success(dataList);
         }catch (ArgumentException ae){
             logger.error("卖家自定义商品分类查询失败", ae);
