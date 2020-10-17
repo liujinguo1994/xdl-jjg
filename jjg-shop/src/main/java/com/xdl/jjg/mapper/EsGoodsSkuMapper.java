@@ -3,9 +3,9 @@ package com.xdl.jjg.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.jjg.shop.model.domain.EsGoodsSkuDO;
+import com.jjg.shop.model.dto.EsGoodsSkuQueryDTO;
 import com.xdl.jjg.entity.EsGoodsSku;
-import com.xdl.jjg.model.domain.EsGoodsSkuDO;
-import com.xdl.jjg.model.dto.EsGoodsSkuQueryDTO;
 import org.apache.ibatis.annotations.Param;
 
 /**

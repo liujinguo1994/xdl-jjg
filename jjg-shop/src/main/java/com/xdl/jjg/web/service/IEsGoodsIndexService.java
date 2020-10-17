@@ -1,10 +1,10 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.co.EsPcSelectSearchCO;
-import com.xdl.jjg.model.co.EsSelectSearchCO;
-import com.xdl.jjg.model.domain.EsGoodsIndexDO;
-import com.xdl.jjg.model.dto.EsGoodsIndexDTO;
+import com.jjg.shop.model.co.EsPcSelectSearchCO;
+import com.jjg.shop.model.co.EsSelectSearchCO;
+import com.jjg.shop.model.domain.EsGoodsIndexDO;
+import com.jjg.shop.model.dto.EsGoodsIndexDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

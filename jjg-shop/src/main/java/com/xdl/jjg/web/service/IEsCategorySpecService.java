@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsCategorySpecDO;
-import com.xdl.jjg.model.dto.EsCategorySpecDTO;
+import com.jjg.shop.model.domain.EsCategorySpecDO;
+import com.jjg.shop.model.dto.EsCategorySpecDTO;
 import com.xdl.jjg.response.service.DubboResult;
 
 /**

@@ -1,16 +1,16 @@
 package com.xdl.jjg.web.service.Impl;
 
 
-import com.aliyun.openservices.shade.com.alibaba.rocketmq.client.producer.MQProducer;
-import com.xdl.jjg.constant.*;
-import com.xdl.jjg.model.co.*;
-import com.xdl.jjg.model.domain.*;
-import com.xdl.jjg.model.dto.EsGoodsIndexDTO;
-import com.xdl.jjg.model.dto.EsGoodsWordsDTO;
-import com.xdl.jjg.model.vo.EsSearchGoodsVO;
+import com.jjg.shop.model.co.*;
+import com.jjg.shop.model.constant.*;
+import com.jjg.shop.model.domain.*;
+import com.jjg.shop.model.dto.EsGoodsIndexDTO;
+import com.jjg.shop.model.dto.EsGoodsWordsDTO;
+import com.jjg.shop.model.vo.EsSearchGoodsVO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.roketmq.MQProducer;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.CollectionUtils;
 import com.xdl.jjg.util.PinyinUtil;
@@ -74,7 +74,7 @@ public class EsGoodsIndexServiceImpl   implements IEsGoodsIndexService {
     private IEsBrandService esBrandService;
     @Autowired
     private IEsGoodsParamsService esGoodsParamsService;
-    private  String active =SpringContextUtil.getActiveProfile();
+    private  String active = SpringContextUtil.getActiveProfile();
     @Autowired
     private MQProducer mqProducer;
 

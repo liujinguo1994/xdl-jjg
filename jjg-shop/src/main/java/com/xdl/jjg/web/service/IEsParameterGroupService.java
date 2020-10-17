@@ -1,9 +1,9 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsParameterGroupDO;
-import com.xdl.jjg.model.domain.ParameterGroupDO;
-import com.xdl.jjg.model.dto.EsParameterGroupDTO;
+import com.jjg.shop.model.domain.EsParameterGroupDO;
+import com.jjg.shop.model.domain.ParameterGroupDO;
+import com.jjg.shop.model.dto.EsParameterGroupDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

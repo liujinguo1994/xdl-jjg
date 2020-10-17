@@ -1,8 +1,8 @@
 package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jjg.shop.model.dto.EsGoodsWordsDTO;
 import com.xdl.jjg.entity.EsGoodsWords;
-import com.xdl.jjg.model.dto.EsGoodsWordsDTO;
 import org.apache.ibatis.annotations.Param;
 
 /**

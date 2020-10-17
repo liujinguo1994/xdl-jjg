@@ -1,6 +1,7 @@
 package com.xdl.jjg.mapper;
 
-import com.shopx.goods.api.model.domain.EsGoodsTotalStatisticsDO;
+
+import com.jjg.shop.model.domain.EsGoodsTotalStatisticsDO;
 
 /**
  * 商品总数统计Mapper

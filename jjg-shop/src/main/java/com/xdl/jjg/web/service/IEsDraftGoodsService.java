@@ -1,10 +1,10 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsDraftGoodsDO;
-import com.xdl.jjg.model.domain.EsSellerDraftGoodsDO;
-import com.xdl.jjg.model.dto.EsDraftGoodsDTO;
-import com.xdl.jjg.model.dto.EsDraftGoodsQueryDTO;
+import com.jjg.shop.model.domain.EsDraftGoodsDO;
+import com.jjg.shop.model.domain.EsSellerDraftGoodsDO;
+import com.jjg.shop.model.dto.EsDraftGoodsDTO;
+import com.jjg.shop.model.dto.EsDraftGoodsQueryDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

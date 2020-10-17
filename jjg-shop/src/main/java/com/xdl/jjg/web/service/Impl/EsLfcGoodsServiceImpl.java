@@ -1,6 +1,7 @@
 package com.xdl.jjg.web.service.Impl;
 
-import com.xdl.jjg.constant.GoodsErrorCode;
+
+import com.jjg.shop.model.constant.GoodsErrorCode;
 import com.xdl.jjg.mapper.EsLfcGoodsMapper;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboResult;

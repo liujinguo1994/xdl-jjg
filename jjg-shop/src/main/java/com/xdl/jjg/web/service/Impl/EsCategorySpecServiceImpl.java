@@ -1,11 +1,11 @@
 package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xdl.jjg.constant.GoodsErrorCode;
+import com.jjg.shop.model.constant.GoodsErrorCode;
+import com.jjg.shop.model.domain.EsCategorySpecDO;
+import com.jjg.shop.model.dto.EsCategorySpecDTO;
 import com.xdl.jjg.entity.EsCategorySpec;
 import com.xdl.jjg.mapper.EsCategorySpecMapper;
-import com.xdl.jjg.model.domain.EsCategorySpecDO;
-import com.xdl.jjg.model.dto.EsCategorySpecDTO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;

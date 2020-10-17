@@ -1,8 +1,8 @@
 package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jjg.shop.model.domain.EsBrandDO;
 import com.xdl.jjg.entity.EsBrand;
-import com.xdl.jjg.model.domain.EsBrandDO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

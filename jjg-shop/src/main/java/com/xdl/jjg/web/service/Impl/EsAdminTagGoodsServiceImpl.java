@@ -2,14 +2,14 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.xdl.jjg.constant.GoodsErrorCode;
+import com.jjg.shop.model.constant.GoodsErrorCode;
+import com.jjg.shop.model.domain.EsAdminTagGoodsDO;
+import com.jjg.shop.model.domain.EsGoodsDO;
 import com.xdl.jjg.entity.EsAdminTagGoods;
 import com.xdl.jjg.entity.EsGoods;
 import com.xdl.jjg.entity.EsTags;
 import com.xdl.jjg.mapper.EsAdminTagGoodsMapper;
 import com.xdl.jjg.mapper.EsGoodsMapper;
-import com.xdl.jjg.model.domain.EsAdminTagGoodsDO;
-import com.xdl.jjg.model.domain.EsGoodsDO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
@@ -27,6 +27,8 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+
 
 /**
  * <p>

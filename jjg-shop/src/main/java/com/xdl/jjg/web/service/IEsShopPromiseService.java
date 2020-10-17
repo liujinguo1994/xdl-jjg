@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsShopPromiseDO;
-import com.xdl.jjg.model.dto.EsShopPromiseDTO;
+import com.jjg.shop.model.domain.EsShopPromiseDO;
+import com.jjg.shop.model.dto.EsShopPromiseDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

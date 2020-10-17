@@ -1,8 +1,14 @@
 package com.xdl.jjg.shiro.oath;
 
+import com.jjg.system.model.domain.EsAdminUserDO;
+import com.jjg.system.model.domain.EsAdminUserTokenDO;
+import com.jjg.system.model.domain.EsRoleDO;
+import com.jjg.system.model.dto.EsAdminUserDTO;
+import com.jjg.system.model.dto.EsAdminUserTokenDTO;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import net.sf.json.JSONArray;
+import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;

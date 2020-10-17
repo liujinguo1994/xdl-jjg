@@ -1,7 +1,7 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsGoodsTotalStatisticsDO;
+import com.jjg.shop.model.domain.EsGoodsTotalStatisticsDO;
 import com.xdl.jjg.response.service.DubboResult;
 
 /**

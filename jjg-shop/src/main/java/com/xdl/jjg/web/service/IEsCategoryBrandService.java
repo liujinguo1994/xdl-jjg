@@ -1,9 +1,9 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsBrandDO;
-import com.xdl.jjg.model.domain.EsBrandSelectDO;
-import com.xdl.jjg.model.domain.EsCategoryBrandDO;
+import com.jjg.shop.model.domain.EsBrandDO;
+import com.jjg.shop.model.domain.EsBrandSelectDO;
+import com.jjg.shop.model.domain.EsCategoryBrandDO;
 import com.xdl.jjg.response.service.DubboPageResult;
 
 /**

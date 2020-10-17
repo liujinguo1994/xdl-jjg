@@ -1,6 +1,7 @@
 package com.xdl.jjg.web.controller.feign;
 
-import com.jjg.member.model.co.EsGoodsCO;
+
+import com.jjg.shop.model.co.EsGoodsCO;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.web.service.IEsGoodsService;
 import org.springframework.beans.factory.annotation.Autowired;

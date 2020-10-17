@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service.Impl;
 
 
+import com.jjg.shop.model.domain.EsGoodsTotalStatisticsDO;
 import com.xdl.jjg.mapper.EsGoodsTotalStatisticsMapper;
-import com.xdl.jjg.model.domain.EsGoodsTotalStatisticsDO;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.web.service.IEsGoodsTotalStatisticsService;
 import org.springframework.beans.factory.annotation.Autowired;

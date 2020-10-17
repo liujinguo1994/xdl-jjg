@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.xdl.jjg.model.domain.EsGoodsArchDO;
-import com.xdl.jjg.model.dto.EsGoodsArchDTO;
+import com.jjg.shop.model.domain.EsGoodsArchDO;
+import com.jjg.shop.model.dto.EsGoodsArchDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 
