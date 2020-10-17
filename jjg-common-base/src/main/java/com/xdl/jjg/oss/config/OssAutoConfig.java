@@ -7,13 +7,12 @@ import com.xdl.jjg.oss.upload.OSSUploader;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * @author: HQL 236154186@qq.com
  * @since: 2019/6/17 14:19
  */
-@Configuration
+//@Configuration
 @ConditionalOnClass({OSSClient.class})
 @EnableConfigurationProperties(OssProperties.class)
 public class OssAutoConfig {
