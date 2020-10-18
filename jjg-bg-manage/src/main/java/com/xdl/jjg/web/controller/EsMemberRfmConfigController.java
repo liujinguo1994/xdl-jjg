@@ -1,16 +1,16 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.member.model.domain.EsMemberRfmConfigDO;
+import com.jjg.member.model.dto.EsRfmConfigDTO;
+import com.jjg.member.model.vo.EsMemberRfmConfigVO;
+import com.jjg.system.model.form.EsRfmConfigForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsMemberRfmConfigDO;
-import com.xdl.jjg.model.dto.EsRfmConfigDTO;
-import com.xdl.jjg.model.form.EsRfmConfigForm;
-import com.xdl.jjg.model.vo.EsMemberRfmConfigVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsMemberRfmConfigService;
+import com.xdl.jjg.web.service.feign.member.MemberRfmConfigService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -33,7 +33,7 @@ import java.util.List;
 public class EsMemberRfmConfigController {
 
     @Autowired
-    private IEsMemberRfmConfigService memberRfmConfigService;
+    private MemberRfmConfigService memberRfmConfigService;
 
 
     @ApiOperation(value = "保存会员RFM配置")

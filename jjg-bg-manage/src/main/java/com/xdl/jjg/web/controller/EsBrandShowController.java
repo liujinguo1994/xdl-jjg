@@ -1,17 +1,17 @@
 package com.xdl.jjg.web.controller;
 
+import com.jjg.shop.model.domain.EsBrandShowDO;
+import com.jjg.shop.model.dto.EsBrandShowDTO;
+import com.jjg.shop.model.vo.EsBrandShowVO;
+import com.jjg.system.model.form.EsBrandShowForm;
+import com.jjg.system.model.form.EsQueryPageForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsBrandShowDO;
-import com.xdl.jjg.model.dto.EsBrandShowDTO;
-import com.xdl.jjg.model.form.EsBrandShowForm;
-import com.xdl.jjg.model.form.EsQueryPageForm;
-import com.xdl.jjg.model.vo.EsBrandShowVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsBrandShowService;
+import com.xdl.jjg.web.service.feign.shop.BrandShowService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -36,7 +36,7 @@ import java.util.List;
 public class EsBrandShowController {
 
     @Autowired
-    private IEsBrandShowService iEsBrandShowService;
+    private BrandShowService iEsBrandShowService;
 
     @ApiOperation(value = "新增品牌展示")
     @ResponseBody

@@ -1,7 +1,7 @@
 package com.xdl.jjg.web.service;
 
-import com.xdl.jjg.model.domain.EsMenuDO;
-import com.xdl.jjg.model.dto.EsMenuDTO;
+import com.jjg.system.model.domain.EsMenuDO;
+import com.jjg.system.model.dto.EsMenuDTO;
 import com.xdl.jjg.response.service.DubboResult;
 
 import java.util.List;

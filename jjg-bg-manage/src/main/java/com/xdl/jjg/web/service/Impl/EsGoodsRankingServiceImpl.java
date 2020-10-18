@@ -4,11 +4,14 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.shop.model.co.EsGoodsCO;
+import com.jjg.shop.model.domain.EsGoodsDO;
+import com.jjg.shop.model.domain.EsSalesRankingGoodsDO;
+import com.jjg.system.model.domain.EsGoodsRankingDO;
+import com.jjg.system.model.dto.EsGoodsRankingDTO;
 import com.xdl.jjg.constant.ErrorCode;
 import com.xdl.jjg.entity.EsGoodsRanking;
 import com.xdl.jjg.mapper.EsGoodsRankingMapper;
-import com.xdl.jjg.model.domain.EsGoodsRankingDO;
-import com.xdl.jjg.model.dto.EsGoodsRankingDTO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
@@ -16,6 +19,7 @@ import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.CollectionUtils;
 import com.xdl.jjg.util.StringUtil;
 import com.xdl.jjg.web.service.IEsGoodsRankingService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +48,7 @@ public class EsGoodsRankingServiceImpl extends ServiceImpl<EsGoodsRankingMapper,
     @Autowired
     private EsGoodsRankingMapper goodsRankingMapper;
     @Autowired
-    private IEsGoodsService goodsService;
+    private GoodsService goodsService;
 
     /**
      * 插入热门榜单数据

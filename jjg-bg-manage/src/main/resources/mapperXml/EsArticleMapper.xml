@@ -15,7 +15,7 @@
         <result column="update_time" property="updateTime"/>
     </resultMap>
 
-    <select id="getAllList" resultType="com.shopx.system.api.model.domain.EsArticleDO">
+    <select id="getAllList" resultType="com.jjg.system.model.domain.EsArticleDO">
         select
         ea.* , eac.name
         from es_article ea left join es_article_category eac on ea.category_id=eac.id
@@ -26,7 +26,7 @@
         order by ea.create_time desc
     </select>
 
-    <select id="getListByCategoryId" resultType="com.shopx.system.api.model.domain.EsArticleDO">
+    <select id="getListByCategoryId" resultType="com.jjg.system.model.domain.EsArticleDO">
         select
         ea.* , eac.name
         from es_article ea left join es_article_category eac on ea.category_id=eac.id

@@ -2,26 +2,44 @@ package com.xdl.jjg.web.controller;
 
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.OSSObject;
+import com.jjg.member.model.domain.EsAdminMemberDO;
+import com.jjg.member.model.domain.EsMemberAddressDO;
+import com.jjg.member.model.domain.EsMemberDO;
+import com.jjg.member.model.dto.EsMemberAddressDTO;
+import com.jjg.member.model.dto.EsMemberDTO;
+import com.jjg.member.model.dto.EsQueryAdminMemberDTO;
+import com.jjg.member.model.vo.*;
+import com.jjg.system.model.form.*;
 import com.xdl.jjg.constant.ApiStatus;
 import com.xdl.jjg.constant.ErrorCode;
-import com.xdl.jjg.model.form.*;
+import com.xdl.jjg.constants.OssFileType;
+import com.xdl.jjg.oss.upload.OSSUploader;
 import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.service.FileDTO;
+import com.xdl.jjg.response.service.FileVO;
 import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.FormatValidateUtils;
 import com.xdl.jjg.web.service.IEsRegionsService;
-import io.swagger.annotations.*;
+import com.xdl.jjg.web.service.feign.member.MemberAddressService;
+import com.xdl.jjg.web.service.feign.member.MemberService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import redis.clients.jedis.JedisCluster;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -43,7 +61,7 @@ import java.util.List;
 @RestController
 @Api(value = "/esMember", tags = "会员")
 @RequestMapping("/esMember")
-public class EsMemberController{
+public class EsMemberController extends BaseController{
 
     @Value("${aliyun.oss.endpoint}")
     private String endpoint;
@@ -57,16 +75,16 @@ public class EsMemberController{
     private String accessKeySecret;
 
     @Autowired
-    private IEsMemberService iesMemberService;
+    private MemberService iesMemberService;
 
     @Autowired
     private IEsRegionsService iEsRegionsService;
 
     @Autowired
-    private IEsMemberAddressService memberAddressService;
+    private MemberAddressService memberAddressService;
 
     @Autowired
-    private JedisCluster jedisCluster;
+    private RedisTemplate redisTemplate;
 
     @Autowired
     private OSSUploader ossUploader;
@@ -327,7 +345,7 @@ public class EsMemberController{
             fileDTO.setStream(inputStream);
             //上传阿里云
             FileVO fileVO = ossUploader.upload(fileDTO, OssFileType.EXCEL);
-            logger.info("导出会员上传阿里云的地址:" + fileVO.getUrl());
+
             return ApiResponse.success(fileVO.getUrl());
         } else {
             return ApiResponse.fail(ApiStatus.wrapperException(result));

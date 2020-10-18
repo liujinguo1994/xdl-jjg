@@ -1,17 +1,17 @@
 package com.xdl.jjg.web.controller;
 
+import com.jjg.system.model.form.EsSeckillApplyForm;
+import com.jjg.system.model.form.EsSeckillApplyQueryForm;
+import com.jjg.trade.model.domain.EsSeckillApplyDO;
+import com.jjg.trade.model.dto.EsSeckillApplyDTO;
+import com.jjg.trade.model.vo.EsSeckillApplyVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsSeckillApplyDO;
-import com.xdl.jjg.model.dto.EsSeckillApplyDTO;
-import com.xdl.jjg.model.form.EsSeckillApplyForm;
-import com.xdl.jjg.model.form.EsSeckillApplyQueryForm;
-import com.xdl.jjg.model.vo.EsSeckillApplyVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsSeckillApplyService;
+import com.xdl.jjg.web.service.feign.trade.SeckillApplyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -35,7 +35,7 @@ import java.util.List;
 public class EsSeckillApplyController {
 
     @Autowired
-    private IEsSeckillApplyService seckillApplyService;
+    private SeckillApplyService seckillApplyService;
 
     @ApiOperation(value = "分页查询限时抢购商品列表", response = EsSeckillApplyVO.class)
     @GetMapping(value = "/getSeckillApplyList")

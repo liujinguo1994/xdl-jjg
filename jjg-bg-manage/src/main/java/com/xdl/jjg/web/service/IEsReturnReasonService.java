@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsReturnReasonDO;
-import com.xdl.jjg.model.dto.EsReturnReasonDTO;
+import com.jjg.system.model.domain.EsReturnReasonDO;
+import com.jjg.system.model.dto.EsReturnReasonDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

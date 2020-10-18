@@ -1,18 +1,18 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.shop.model.domain.EsBrandDO;
+import com.jjg.shop.model.dto.EsBrandDTO;
+import com.jjg.shop.model.vo.EsBrandVO;
+import com.jjg.system.model.form.EsBrandForm;
+import com.jjg.system.model.form.EsBrandQueryForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsBrandDO;
-import com.xdl.jjg.model.dto.EsBrandDTO;
-import com.xdl.jjg.model.form.EsBrandForm;
-import com.xdl.jjg.model.form.EsBrandQueryForm;
-import com.xdl.jjg.model.vo.EsBrandVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsBrandService;
+import com.xdl.jjg.web.service.feign.shop.BrandService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -37,7 +37,7 @@ import java.util.List;
 public class EsBrandController {
 
     @Autowired
-    private IEsBrandService iesBrandService;
+    private BrandService iesBrandService;
 
     /**
      * 新增品牌

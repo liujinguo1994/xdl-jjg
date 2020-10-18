@@ -1,11 +1,11 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.system.model.domain.EsAgreementDO;
+import com.jjg.system.model.dto.EsAgreementDTO;
+import com.jjg.system.model.form.EsAgreementForm;
+import com.jjg.system.model.vo.EsAgreementVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsAgreementDO;
-import com.xdl.jjg.model.dto.EsAgreementDTO;
-import com.xdl.jjg.model.form.EsAgreementForm;
-import com.xdl.jjg.model.vo.EsAgreementVO;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;

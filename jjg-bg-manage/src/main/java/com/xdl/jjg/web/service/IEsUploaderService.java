@@ -1,7 +1,7 @@
 package com.xdl.jjg.web.service;
 
-import com.xdl.jjg.model.domain.EsUploaderDO;
-import com.xdl.jjg.model.dto.EsUploaderDTO;
+import com.jjg.system.model.domain.EsUploaderDO;
+import com.jjg.system.model.dto.EsUploaderDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

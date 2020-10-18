@@ -1,11 +1,11 @@
 package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.jjg.system.model.domain.EsAdminUserDO;
+import com.jjg.system.model.dto.EsAdminUserDTO;
 import com.xdl.jjg.constant.ErrorCode;
 import com.xdl.jjg.entity.EsAdminUser;
 import com.xdl.jjg.mapper.EsAdminUserMapper;
-import com.xdl.jjg.model.domain.EsAdminUserDO;
-import com.xdl.jjg.model.dto.EsAdminUserDTO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;

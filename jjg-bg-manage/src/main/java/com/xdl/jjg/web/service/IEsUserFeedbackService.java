@@ -1,7 +1,7 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.dto.EsUserFeedbackDTO;
+import com.jjg.system.model.dto.EsUserFeedbackDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

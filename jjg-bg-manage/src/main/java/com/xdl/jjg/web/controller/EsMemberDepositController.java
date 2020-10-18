@@ -2,15 +2,15 @@ package com.xdl.jjg.web.controller;
 
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.OSSObject;
+import com.jjg.member.model.domain.EsMemberDepositDO;
+import com.jjg.member.model.dto.EsMemberDTO;
+import com.jjg.member.model.dto.EsQueryAdminMemberDepositDTO;
+import com.jjg.member.model.vo.EsImportBalanceVO;
+import com.jjg.member.model.vo.EsMemberDepositVO;
+import com.jjg.system.model.form.EsImportForm;
+import com.jjg.system.model.form.EsMemberDepositQueryForm;
+import com.jjg.system.model.form.EsUpdateBalanceForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsMemberDepositDO;
-import com.xdl.jjg.model.dto.EsMemberDTO;
-import com.xdl.jjg.model.dto.EsQueryAdminMemberDepositDTO;
-import com.xdl.jjg.model.form.EsImportForm;
-import com.xdl.jjg.model.form.EsMemberDepositQueryForm;
-import com.xdl.jjg.model.form.EsUpdateBalanceForm;
-import com.xdl.jjg.model.vo.EsImportBalanceVO;
-import com.xdl.jjg.model.vo.EsMemberDepositVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
@@ -18,8 +18,8 @@ import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.shiro.oath.ShiroKit;
 import com.xdl.jjg.shiro.oath.ShiroUser;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsMemberDepositService;
-import com.xdl.jjg.web.service.IEsMemberService;
+import com.xdl.jjg.web.service.feign.member.MemberDepositService;
+import com.xdl.jjg.web.service.feign.member.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +27,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import redis.clients.jedis.JedisCluster;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -59,13 +58,10 @@ public class EsMemberDepositController {
     private String accessKeySecret;
 
     @Autowired
-    private IEsMemberDepositService iesMemberDepositService;
+    private MemberDepositService iesMemberDepositService;
 
     @Autowired
-    private IEsMemberService iesMemberService;
-
-    @Autowired
-    private JedisCluster jedisCluster;
+    private MemberService iesMemberService;
 
 
     @ApiOperation(value = "分页查询会员账户余额明细列表", response = EsMemberDepositVO.class)

@@ -1,25 +1,25 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.shop.model.domain.EsGoodsArchDO;
+import com.jjg.shop.model.domain.EsGoodsSkuDO;
+import com.jjg.shop.model.dto.EsGoodsArchDTO;
+import com.jjg.shop.model.dto.EsGoodsSkuDTO;
+import com.jjg.shop.model.dto.EsGoodsSkuQueryDTO;
+import com.jjg.shop.model.dto.EsSpecValuesDTO;
+import com.jjg.shop.model.vo.EsGoodsArchVO;
+import com.jjg.shop.model.vo.EsGoodsSkuVO;
+import com.jjg.system.model.form.EsGoodsArchDetailQueryForm;
+import com.jjg.system.model.form.EsGoodsArchForm;
+import com.jjg.system.model.form.EsGoodsArchQueryForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsGoodsArchDO;
-import com.xdl.jjg.model.domain.EsGoodsSkuDO;
-import com.xdl.jjg.model.dto.EsGoodsArchDTO;
-import com.xdl.jjg.model.dto.EsGoodsSkuDTO;
-import com.xdl.jjg.model.dto.EsGoodsSkuQueryDTO;
-import com.xdl.jjg.model.dto.EsSpecValuesDTO;
-import com.xdl.jjg.model.form.EsGoodsArchDetailQueryForm;
-import com.xdl.jjg.model.form.EsGoodsArchForm;
-import com.xdl.jjg.model.form.EsGoodsArchQueryForm;
-import com.xdl.jjg.model.vo.EsGoodsArchVO;
-import com.xdl.jjg.model.vo.EsGoodsSkuVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsGoodsArchService;
-import com.xdl.jjg.web.service.IEsGoodsSkuService;
+import com.xdl.jjg.web.service.feign.shop.GoodsArchService;
+import com.xdl.jjg.web.service.feign.shop.GoodsSkuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -44,10 +44,10 @@ import java.util.List;
 public class EsGoodsArchController {
 
     @Autowired
-    private IEsGoodsArchService iesGoodsArchService;
+    private GoodsArchService iesGoodsArchService;
 
     @Autowired
-    private IEsGoodsSkuService iEsGoodsSkuService;
+    private GoodsSkuService iEsGoodsSkuService;
 
     @ApiOperation(value = "商品档案分页查询", response = EsGoodsArchVO.class)
     @GetMapping(value = "/getGoodsArchList")

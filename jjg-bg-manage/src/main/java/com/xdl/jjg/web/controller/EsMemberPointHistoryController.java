@@ -1,21 +1,21 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.member.model.domain.EsMemberAdminDO;
+import com.jjg.member.model.domain.EsMemberPointHistoryDO;
+import com.jjg.member.model.dto.EsMemberDTO;
+import com.jjg.member.model.dto.EsMemberPointHistoryDTO;
+import com.jjg.member.model.vo.EsMemberAdminVO;
+import com.jjg.member.model.vo.EsMemberPointHistoryVO;
+import com.jjg.system.model.form.EsMemberPointHistoryQueryForm;
+import com.jjg.system.model.form.EsMemberPointQueryForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsMemberAdminDO;
-import com.xdl.jjg.model.domain.EsMemberPointHistoryDO;
-import com.xdl.jjg.model.dto.EsMemberDTO;
-import com.xdl.jjg.model.dto.EsMemberPointHistoryDTO;
-import com.xdl.jjg.model.form.EsMemberPointHistoryQueryForm;
-import com.xdl.jjg.model.form.EsMemberPointQueryForm;
-import com.xdl.jjg.model.vo.EsMemberAdminVO;
-import com.xdl.jjg.model.vo.EsMemberPointHistoryVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsMemberPointHistoryService;
-import com.xdl.jjg.web.service.IEsMemberService;
+import com.xdl.jjg.web.service.feign.member.MemberPointHistoryService;
+import com.xdl.jjg.web.service.feign.member.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,10 +41,10 @@ import java.util.List;
 public class EsMemberPointHistoryController {
 
     @Autowired
-    private IEsMemberPointHistoryService iesMemberPointHistoryService;
+    private MemberPointHistoryService iesMemberPointHistoryService;
 
     @Autowired
-    private IEsMemberService memberService;
+    private MemberService memberService;
 
     @ApiOperation(value = "分页查询会员积分列表", response = EsMemberAdminVO.class)
     @GetMapping(value = "/getMemberPointList")

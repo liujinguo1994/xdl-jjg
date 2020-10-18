@@ -1,10 +1,11 @@
 package com.xdl.jjg.web.service;
 
-import com.xdl.jjg.model.domain.EsSeckillApplyDO;
-import com.xdl.jjg.model.domain.EsSeckillTimetableDO;
-import com.xdl.jjg.model.dto.EsSeckillApplyDTO;
-import com.xdl.jjg.model.dto.EsSeckillTimelineGoodsDTO;
-import com.xdl.jjg.model.vo.SeckillGoodsVO;
+
+import com.jjg.trade.model.domain.EsSeckillApplyDO;
+import com.jjg.trade.model.domain.EsSeckillTimetableDO;
+import com.jjg.trade.model.dto.EsSeckillApplyDTO;
+import com.jjg.trade.model.dto.EsSeckillTimelineGoodsDTO;
+import com.jjg.trade.model.vo.SeckillGoodsVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

@@ -1,13 +1,13 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.shop.model.dto.EsParameterGroupDTO;
+import com.jjg.system.model.form.EsParameterGroupForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.dto.EsParameterGroupDTO;
-import com.xdl.jjg.model.form.EsParameterGroupForm;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsParameterGroupService;
+import com.xdl.jjg.web.service.feign.shop.ParameterGroupService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +29,7 @@ import javax.validation.Valid;
 public class EsParameterGroupController {
 
     @Autowired
-    private IEsParameterGroupService parameterGroupService;
+    private ParameterGroupService parameterGroupService;
 
     @PostMapping(value = "/insertEsParameterGroup")
     @ResponseBody

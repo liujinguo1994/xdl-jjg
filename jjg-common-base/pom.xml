@@ -24,7 +24,7 @@
         <jjwt.version>0.9.1</jjwt.version>
         <!-- shiro -->
         <shiro.version>1.4.0</shiro.version>
-
+        <thymeleaf-extras-shiro.version>2.0.0</thymeleaf-extras-shiro.version>
         <cache-cloud.version>1.0-SNAPSHOT</cache-cloud.version>
         <httpclient.version>4.5.3</httpclient.version>
         <redisson.version>3.5.4</redisson.version>
@@ -121,11 +121,11 @@
             <classifier>jdk15</classifier>
         </dependency>
         <!-- jackson end -->
-        <dependency>
-            <groupId>com.sohu.tv</groupId>
-            <artifactId>cachecloud-open-jedis-stat</artifactId>
-            <version>1.0</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.sohu.tv</groupId>-->
+            <!--<artifactId>cachecloud-open-jedis-stat</artifactId>-->
+            <!--<version>1.0</version>-->
+        <!--</dependency>-->
         <!-- jackson begin -->
         <dependency>
             <groupId>com.alibaba</groupId>
@@ -468,17 +468,24 @@
             <artifactId>shiro-spring</artifactId>
             <version>${shiro.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.theborakompanioni</groupId>
+            <artifactId>thymeleaf-extras-shiro</artifactId>
+            <version>${thymeleaf-extras-shiro.version}</version>
+        </dependency>
+
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
             <version>${jedis.version}</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.sohu.tv</groupId>
-            <artifactId>cachecloud-open-client-redis</artifactId>
-            <version>${cache-cloud.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.sohu.tv</groupId>-->
+            <!--<artifactId>cachecloud-open-client-redis</artifactId>-->
+            <!--<version>${cache-cloud.version}</version>-->
+        <!--</dependency>-->
 
         <dependency>
             <groupId>org.projectlombok</groupId>

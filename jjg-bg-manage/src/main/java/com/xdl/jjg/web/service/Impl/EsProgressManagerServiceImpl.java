@@ -1,6 +1,7 @@
 package com.xdl.jjg.web.service.Impl;
 
-import com.xdl.jjg.model.domain.TaskProgress;
+
+import com.jjg.system.model.domain.TaskProgress;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.util.StringUtil;
@@ -8,8 +9,8 @@ import com.xdl.jjg.web.service.IEsProgressManagerService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
-import redis.clients.jedis.JedisCluster;
 
 
 /**
@@ -26,7 +27,7 @@ public class EsProgressManagerServiceImpl implements IEsProgressManagerService {
     private static Logger logger = LoggerFactory.getLogger(EsProgressManagerServiceImpl.class);
 
     @Autowired
-    private JedisCluster jedisCluster;
+    private RedisTemplate redisTemplate;
 
     /**
      * 获取进度信息
@@ -34,7 +35,7 @@ public class EsProgressManagerServiceImpl implements IEsProgressManagerService {
     @Override
     public DubboResult<TaskProgress> getProgress(String id) {
         id = TaskProgress.PROCESS + id;
-        String s = jedisCluster.get(id);
+        String s = (String) redisTemplate.opsForValue().get(id);
         TaskProgress taskProgress = null;
         if (!StringUtil.isEmpty(s)) {
             taskProgress = JsonUtil.jsonToObject(s, TaskProgress.class);
@@ -50,7 +51,7 @@ public class EsProgressManagerServiceImpl implements IEsProgressManagerService {
         id = TaskProgress.PROCESS + id;
         progress.setId(id);
         String s = JsonUtil.objectToJson(progress);
-        jedisCluster.set(id, s);
+        redisTemplate.opsForValue().set(id, s);
         return DubboResult.success();
     }
 
@@ -60,7 +61,7 @@ public class EsProgressManagerServiceImpl implements IEsProgressManagerService {
     @Override
     public DubboResult remove(String id) {
         id = TaskProgress.PROCESS + id;
-        jedisCluster.del(id);
+        redisTemplate.delete(id);
         return DubboResult.success();
     }
 }

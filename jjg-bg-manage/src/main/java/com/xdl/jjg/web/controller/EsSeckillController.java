@@ -1,20 +1,20 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.system.model.form.EsSeckillForm;
+import com.jjg.system.model.form.EsSeckillQueryForm;
+import com.jjg.trade.model.domain.EsSeckillDO;
+import com.jjg.trade.model.dto.EsSeckillDTO;
+import com.jjg.trade.model.vo.EsSeckillVO;
 import com.xdl.jjg.constant.ApiStatus;
 import com.xdl.jjg.constant.ErrorCode;
-import com.xdl.jjg.model.domain.EsSeckillDO;
-import com.xdl.jjg.model.dto.EsSeckillDTO;
-import com.xdl.jjg.model.form.EsSeckillForm;
-import com.xdl.jjg.model.form.EsSeckillQueryForm;
-import com.xdl.jjg.model.vo.EsSeckillVO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsSeckillService;
+import com.xdl.jjg.web.service.feign.trade.SeckillService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +37,7 @@ import java.util.List;
 public class EsSeckillController {
 
     @Autowired
-    private IEsSeckillService seckillService;
+    private SeckillService seckillService;
 
     @ApiOperation(value = "分页查询限时抢购活动列表", response = EsSeckillVO.class)
     @GetMapping(value = "/getSeckillList")

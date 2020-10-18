@@ -4,12 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.shop.model.co.EsGoodsCO;
+import com.jjg.system.model.domain.EsCustomCategoryDO;
+import com.jjg.system.model.domain.EsOftenGoodsDO;
+import com.jjg.system.model.dto.EsOftenGoodsDTO;
 import com.xdl.jjg.constant.ErrorCode;
 import com.xdl.jjg.entity.EsOftenGoods;
 import com.xdl.jjg.mapper.EsOftenGoodsMapper;
-import com.xdl.jjg.model.domain.EsCustomCategoryDO;
-import com.xdl.jjg.model.domain.EsOftenGoodsDO;
-import com.xdl.jjg.model.dto.EsOftenGoodsDTO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
@@ -17,6 +18,7 @@ import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.CollectionUtils;
 import com.xdl.jjg.web.service.IEsCustomCategoryService;
 import com.xdl.jjg.web.service.IEsOftenGoodsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +49,7 @@ public class EsOftenGoodsServiceImpl extends ServiceImpl<EsOftenGoodsMapper, EsO
     @Autowired
     private IEsCustomCategoryService customCategoryService;
     @Autowired
-    private IEsGoodsService goodsService;
+    private GoodsService goodsService;
 
     /**
      * 插入常买商品数据

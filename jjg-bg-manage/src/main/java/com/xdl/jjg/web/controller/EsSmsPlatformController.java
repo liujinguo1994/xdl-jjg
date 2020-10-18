@@ -1,9 +1,9 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.system.model.form.EsQueryPageForm;
+import com.jjg.system.model.vo.EsSmsPlatformVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.form.EsQueryPageForm;
-import com.xdl.jjg.model.vo.EsSmsPlatformVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;

@@ -1,17 +1,17 @@
 package com.xdl.jjg.web.controller;
 
+import com.jjg.shop.model.domain.EsGoodsDO;
+import com.jjg.shop.model.dto.EsGoodsQueryDTO;
+import com.jjg.shop.model.vo.EsGoodsVO;
+import com.jjg.system.model.form.EsAuthEsGoodsForm;
+import com.jjg.system.model.form.EsGoodsQueryForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsGoodsDO;
-import com.xdl.jjg.model.dto.EsGoodsQueryDTO;
-import com.xdl.jjg.model.form.EsAuthEsGoodsForm;
-import com.xdl.jjg.model.form.EsGoodsQueryForm;
-import com.xdl.jjg.model.vo.EsGoodsVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsGoodsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -37,7 +37,7 @@ import java.util.List;
 public class EsGoodsController {
 
     @Autowired
-    private IEsGoodsService iesGoodsService;
+    private GoodsService iesGoodsService;
 
     /**
      * 分页查询获取商品信息

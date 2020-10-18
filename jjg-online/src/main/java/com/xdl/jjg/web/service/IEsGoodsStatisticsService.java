@@ -2,14 +2,14 @@ package com.xdl.jjg.web.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.xdl.jjg.model.domain.EsGoodsAveragePriceDO;
-import com.xdl.jjg.model.domain.EsGoodsHotSellDO;
-import com.xdl.jjg.model.domain.EsGoodsPaymentConversionRateDO;
-import com.xdl.jjg.model.domain.EsGoodsSalesDetailDO;
-import com.xdl.jjg.model.dto.EsGoodsAveragePriceDTO;
-import com.xdl.jjg.model.dto.EsGoodsHotSellDTO;
-import com.xdl.jjg.model.dto.EsGoodsPaymentConversionRateDTO;
-import com.xdl.jjg.model.dto.EsGoodsSalesDetailDTO;
+import com.jjg.trade.model.domain.EsGoodsAveragePriceDO;
+import com.jjg.trade.model.domain.EsGoodsHotSellDO;
+import com.jjg.trade.model.domain.EsGoodsPaymentConversionRateDO;
+import com.jjg.trade.model.domain.EsGoodsSalesDetailDO;
+import com.jjg.trade.model.dto.EsGoodsAveragePriceDTO;
+import com.jjg.trade.model.dto.EsGoodsHotSellDTO;
+import com.jjg.trade.model.dto.EsGoodsPaymentConversionRateDTO;
+import com.jjg.trade.model.dto.EsGoodsSalesDetailDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

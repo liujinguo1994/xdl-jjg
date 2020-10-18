@@ -1,20 +1,20 @@
 package com.xdl.jjg.web.controller;
 
+import com.jjg.system.model.form.*;
+import com.jjg.trade.model.domain.*;
+import com.jjg.trade.model.dto.EsBillDTO;
+import com.jjg.trade.model.dto.EsBillDetailDTO;
+import com.jjg.trade.model.vo.EsBillDetailVO;
+import com.jjg.trade.model.vo.EsBillVO;
+import com.jjg.trade.model.vo.EsHeaderVO;
+import com.jjg.trade.model.vo.EsSettlementDetailVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.*;
-import com.xdl.jjg.model.dto.EsBillDTO;
-import com.xdl.jjg.model.dto.EsBillDetailDTO;
-import com.xdl.jjg.model.form.*;
-import com.xdl.jjg.model.vo.EsBillDetailVO;
-import com.xdl.jjg.model.vo.EsBillVO;
-import com.xdl.jjg.model.vo.EsHeaderVO;
-import com.xdl.jjg.model.vo.EsSettlementDetailVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsBillService;
+import com.xdl.jjg.web.service.feign.trade.BillService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -42,7 +42,7 @@ import java.util.List;
 public class EsSettlementController {
 
     @Autowired
-    private IEsBillService billService;
+    private BillService billService;
 
     /**
      * 分页查询账单列表

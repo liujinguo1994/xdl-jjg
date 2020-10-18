@@ -12,7 +12,7 @@
         <result column="customer_name" property="customerName"/>
         <result column="customer_pwd" property="customerPwd"/>
     </resultMap>
-    <select id="getLogiByCode" resultType="com.shopx.system.api.model.domain.EsLogiCompanyDO">
+    <select id="getLogiByCode" resultType="com.jjg.system.model.domain.EsLogiCompanyDO">
             select * from es_logi_company t where t.code=#{code}
     </select>
 </mapper>

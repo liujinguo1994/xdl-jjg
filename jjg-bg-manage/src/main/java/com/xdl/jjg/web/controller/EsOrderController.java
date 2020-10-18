@@ -1,21 +1,21 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.system.model.enums.OrderStatusEnum;
+import com.jjg.system.model.form.EsOrderQueryForm;
+import com.jjg.trade.model.domain.EsOrderDO;
+import com.jjg.trade.model.domain.EsSellerOrderDO;
+import com.jjg.trade.model.dto.EsAdminOrderQueryDTO;
+import com.jjg.trade.model.vo.EsAdminOrderVO;
+import com.jjg.trade.model.vo.EsOrderVO;
+import com.jjg.trade.model.vo.LabelValueBeanVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsOrderDO;
-import com.xdl.jjg.model.domain.EsSellerOrderDO;
-import com.xdl.jjg.model.dto.EsAdminOrderQueryDTO;
-import com.xdl.jjg.model.enums.OrderStatusEnum;
-import com.xdl.jjg.model.form.EsOrderQueryForm;
-import com.xdl.jjg.model.vo.EsAdminOrderVO;
-import com.xdl.jjg.model.vo.EsOrderVO;
-import com.xdl.jjg.model.vo.LabelValueBeanVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsOrderService;
+import com.xdl.jjg.web.service.feign.trade.OrderService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -39,7 +39,7 @@ import java.util.List;
 public class EsOrderController {
 
     @Autowired
-    private IEsOrderService orderService;
+    private OrderService orderService;
 
     @ApiOperation(value = "订单信息分页查询", response = EsOrderVO.class)
     @GetMapping(value = "/getEsAdminOrderList")

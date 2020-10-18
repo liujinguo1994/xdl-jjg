@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
+import com.jjg.system.model.domain.EsAdminUserDO;
+import com.jjg.system.model.dto.EsAdminUserDTO;
 import com.xdl.jjg.entity.EsAdminUser;
-import com.xdl.jjg.model.domain.EsAdminUserDO;
-import com.xdl.jjg.model.dto.EsAdminUserDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

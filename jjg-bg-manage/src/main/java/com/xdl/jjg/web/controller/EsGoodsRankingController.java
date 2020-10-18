@@ -1,13 +1,13 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.system.model.domain.EsGoodsRankingDO;
+import com.jjg.system.model.dto.EsGoodsRankingDTO;
+import com.jjg.system.model.form.EsGoodsRankingForm;
+import com.jjg.system.model.form.EsGoodsRankingQueryForm;
+import com.jjg.system.model.vo.EsGoodsRankingVO;
 import com.xdl.jjg.constant.ApiStatus;
 import com.xdl.jjg.constant.ErrorCode;
-import com.xdl.jjg.model.domain.EsGoodsRankingDO;
-import com.xdl.jjg.model.dto.EsGoodsRankingDTO;
-import com.xdl.jjg.model.form.EsGoodsRankingForm;
-import com.xdl.jjg.model.form.EsGoodsRankingQueryForm;
-import com.xdl.jjg.model.vo.EsGoodsRankingVO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;

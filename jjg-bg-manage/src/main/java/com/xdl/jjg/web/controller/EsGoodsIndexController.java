@@ -1,9 +1,9 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.system.model.domain.TaskProgress;
 import com.xdl.jjg.constant.ApiStatus;
 import com.xdl.jjg.constant.TaskProgressConstant;
-import com.xdl.jjg.model.domain.TaskProgress;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.roketmq.MQProducer;

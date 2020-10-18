@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.system.model.enums.PageCreateEnum;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.enums.PageCreateEnum;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.web.service.IEsPageCreateManagerService;

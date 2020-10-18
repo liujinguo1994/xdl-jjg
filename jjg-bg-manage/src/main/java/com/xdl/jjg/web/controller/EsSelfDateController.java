@@ -1,19 +1,19 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.system.model.form.EsQueryPageForm;
+import com.jjg.system.model.form.EsSelfDateForm;
+import com.jjg.trade.model.domain.EsSelfDateDO;
+import com.jjg.trade.model.dto.EsSelfDateDTO;
+import com.jjg.trade.model.dto.EsSelfTimeDTO;
+import com.jjg.trade.model.vo.EsSelfDateVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsSelfDateDO;
-import com.xdl.jjg.model.dto.EsSelfDateDTO;
-import com.xdl.jjg.model.dto.EsSelfTimeDTO;
-import com.xdl.jjg.model.form.EsQueryPageForm;
-import com.xdl.jjg.model.form.EsSelfDateForm;
-import com.xdl.jjg.model.vo.EsSelfDateVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsSelfDateService;
+import com.xdl.jjg.web.service.feign.trade.SelfDateService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -38,7 +38,7 @@ import java.util.List;
 public class EsSelfDateController {
 
     @Autowired
-    private IEsSelfDateService selfDateService;
+    private SelfDateService selfDateService;
 
 
     @ApiOperation(value = "分页查询自提日期列表", response = EsSelfDateVO.class)

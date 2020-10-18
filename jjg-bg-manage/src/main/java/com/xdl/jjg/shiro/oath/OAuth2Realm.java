@@ -1,10 +1,10 @@
 package com.xdl.jjg.shiro.oath;
 
-import com.xdl.jjg.model.domain.EsAdminUserDO;
-import com.xdl.jjg.model.domain.EsAdminUserTokenDO;
-import com.xdl.jjg.model.domain.EsRoleDO;
-import com.xdl.jjg.model.dto.EsAdminUserDTO;
-import com.xdl.jjg.model.dto.EsAdminUserTokenDTO;
+import com.jjg.system.model.domain.EsAdminUserDO;
+import com.jjg.system.model.domain.EsAdminUserTokenDO;
+import com.jjg.system.model.domain.EsRoleDO;
+import com.jjg.system.model.dto.EsAdminUserDTO;
+import com.jjg.system.model.dto.EsAdminUserTokenDTO;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.IEsAdminUserService;

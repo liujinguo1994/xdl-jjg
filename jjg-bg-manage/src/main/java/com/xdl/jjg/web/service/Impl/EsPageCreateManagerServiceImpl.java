@@ -1,13 +1,13 @@
 package com.xdl.jjg.web.service.Impl;
 
 
-import com.aliyun.openservices.shade.com.alibaba.rocketmq.client.producer.MQProducer;
+import com.jjg.system.model.domain.TaskProgress;
+import com.jjg.system.model.enums.ProgressEnum;
 import com.xdl.jjg.constant.ErrorCode;
 import com.xdl.jjg.constant.TaskProgressConstant;
-import com.xdl.jjg.model.domain.TaskProgress;
-import com.xdl.jjg.model.enums.ProgressEnum;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.roketmq.MQProducer;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.web.service.IEsPageCreateManagerService;
 import com.xdl.jjg.web.service.IEsProgressManagerService;
@@ -35,6 +35,7 @@ public class EsPageCreateManagerServiceImpl implements IEsPageCreateManagerServi
 
     @Autowired
     private MQProducer mqProducer;
+
     @Value("${rocketmq.static.page.topic}")
     private String static_page_topic;
 

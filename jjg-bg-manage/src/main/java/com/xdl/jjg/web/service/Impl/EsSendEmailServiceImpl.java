@@ -1,12 +1,12 @@
 package com.xdl.jjg.web.service.Impl;
 
+import com.jjg.system.model.domain.EsSmtpDO;
+import com.jjg.system.model.dto.EsSendEmailDTO;
 import com.xdl.jjg.constant.ErrorCode;
 import com.xdl.jjg.entity.EsEmail;
 import com.xdl.jjg.entity.EsSmtp;
 import com.xdl.jjg.mapper.EsEmailMapper;
 import com.xdl.jjg.mapper.EsSmtpMapper;
-import com.xdl.jjg.model.domain.EsSmtpDO;
-import com.xdl.jjg.model.dto.EsSendEmailDTO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.web.service.IEsSendEmailService;

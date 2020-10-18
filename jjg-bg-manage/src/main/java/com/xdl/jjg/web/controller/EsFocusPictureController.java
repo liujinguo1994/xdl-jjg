@@ -1,10 +1,10 @@
 package com.xdl.jjg.web.controller;
 
+import com.jjg.system.model.domain.EsFocusPictureDO;
+import com.jjg.system.model.dto.EsFocusPictureDTO;
+import com.jjg.system.model.form.EsFocusPictureForm;
+import com.jjg.system.model.vo.EsFocusPictureVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsFocusPictureDO;
-import com.xdl.jjg.model.dto.EsFocusPictureDTO;
-import com.xdl.jjg.model.form.EsFocusPictureForm;
-import com.xdl.jjg.model.vo.EsFocusPictureVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;

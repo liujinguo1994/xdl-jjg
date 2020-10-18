@@ -1,19 +1,19 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.member.model.domain.EsReportDO;
+import com.jjg.member.model.dto.ReportQueryParam;
+import com.jjg.member.model.enums.ReportEnum;
+import com.jjg.member.model.vo.EsReportVO;
+import com.jjg.system.model.form.EsHandleReportForm;
+import com.jjg.system.model.form.EsReportQueryForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsReportDO;
-import com.xdl.jjg.model.dto.ReportQueryParam;
-import com.xdl.jjg.model.enums.ReportEnum;
-import com.xdl.jjg.model.form.EsHandleReportForm;
-import com.xdl.jjg.model.form.EsReportQueryForm;
-import com.xdl.jjg.model.vo.EsReportVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsReportService;
+import com.xdl.jjg.web.service.feign.member.ReportService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -38,7 +38,7 @@ import java.util.List;
 public class EsReportController {
 
     @Autowired
-    private IEsReportService reportService;
+    private ReportService reportService;
 
     @ApiOperation(value = "分页查询举报信息", response = EsReportVO.class)
     @GetMapping(value = "/getReportList")

@@ -1,11 +1,11 @@
 package com.xdl.jjg.web.controller;
 
+import com.jjg.system.model.domain.EsSmtpDO;
+import com.jjg.system.model.dto.EsSmtpDTO;
+import com.jjg.system.model.form.EsQueryPageForm;
+import com.jjg.system.model.form.EsSmtpForm;
+import com.jjg.system.model.vo.EsSmtpVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsSmtpDO;
-import com.xdl.jjg.model.dto.EsSmtpDTO;
-import com.xdl.jjg.model.form.EsQueryPageForm;
-import com.xdl.jjg.model.form.EsSmtpForm;
-import com.xdl.jjg.model.vo.EsSmtpVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;

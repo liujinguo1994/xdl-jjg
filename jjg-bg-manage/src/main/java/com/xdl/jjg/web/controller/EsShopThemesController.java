@@ -1,17 +1,17 @@
 package com.xdl.jjg.web.controller;
 
+import com.jjg.member.model.domain.EsShopThemesDO;
+import com.jjg.member.model.dto.EsShopThemesDTO;
+import com.jjg.member.model.form.EsShopThemesForm;
+import com.jjg.member.model.vo.EsShopThemesVO;
+import com.jjg.system.model.form.EsShopThemesQueryForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsShopThemesDO;
-import com.xdl.jjg.model.dto.EsShopThemesDTO;
-import com.xdl.jjg.model.form.EsShopThemesForm;
-import com.xdl.jjg.model.form.EsShopThemesQueryForm;
-import com.xdl.jjg.model.vo.EsShopThemesVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsShopThemesService;
+import com.xdl.jjg.web.service.feign.member.ShopThemesService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +33,7 @@ import java.util.List;
 public class EsShopThemesController {
 
     @Autowired
-    private IEsShopThemesService iEsShopThemesService;
+    private ShopThemesService iEsShopThemesService;
 
     @ApiOperation(value = "分页查询店铺模板列表", response = EsShopThemesVO.class)
     @GetMapping(value = "/getShopThemesList")
@@ -54,7 +54,7 @@ public class EsShopThemesController {
     @ApiOperation(value = "添加店铺模板")
     @PostMapping(value = "/insertEsShopThemes")
     @ResponseBody
-    public ApiResponse insertEsShopThemes(@Valid @RequestBody @ApiParam(name = "店铺模板form对象", value = "form") EsShopThemesForm form) {
+    public ApiResponse insertEsShopThemes(@Valid @RequestBody @ApiParam(name = "店铺模板form对象", value = "form")  EsShopThemesForm form) {
         EsShopThemesDTO esShopThemesDTO = new EsShopThemesDTO();
         BeanUtil.copyProperties(form, esShopThemesDTO);
         DubboResult result = iEsShopThemesService.insertShopThemes(esShopThemesDTO);
@@ -68,7 +68,7 @@ public class EsShopThemesController {
     @ApiOperation(value = "修改店铺模板")
     @PutMapping(value = "/updateEsShopThemes/{id}")
     @ResponseBody
-    public ApiResponse updateEsShopThemes(@Valid @RequestBody @ApiParam(name = "店铺模板form对象", value = "form") EsShopThemesForm form, @PathVariable Long id) {
+    public ApiResponse updateEsShopThemes(@Valid @RequestBody @ApiParam(name = "店铺模板form对象", value = "form")  EsShopThemesForm form, @PathVariable Long id) {
         EsShopThemesDTO esShopThemesDTO = new EsShopThemesDTO();
         BeanUtil.copyProperties(form, esShopThemesDTO);
         DubboResult result = iEsShopThemesService.updateShopThemes(esShopThemesDTO, id);

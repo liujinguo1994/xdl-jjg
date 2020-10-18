@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsSiteNavigationDO;
-import com.xdl.jjg.model.dto.EsSiteNavigationDTO;
+import com.jjg.system.model.domain.EsSiteNavigationDO;
+import com.jjg.system.model.dto.EsSiteNavigationDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

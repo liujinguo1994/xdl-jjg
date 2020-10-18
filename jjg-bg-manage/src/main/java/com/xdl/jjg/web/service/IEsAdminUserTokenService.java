@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
+import com.jjg.system.model.domain.EsAdminUserTokenDO;
+import com.jjg.system.model.dto.EsAdminUserTokenDTO;
 import com.xdl.jjg.entity.EsAdminUserToken;
-import com.xdl.jjg.model.domain.EsAdminUserTokenDO;
-import com.xdl.jjg.model.dto.EsAdminUserTokenDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

@@ -2,12 +2,12 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.system.model.domain.EsSettingsDO;
+import com.jjg.system.model.dto.*;
+import com.jjg.system.model.enums.SettingGroup;
 import com.xdl.jjg.constant.ErrorCode;
 import com.xdl.jjg.entity.EsSettings;
 import com.xdl.jjg.mapper.EsSettingsMapper;
-import com.xdl.jjg.model.domain.EsSettingsDO;
-import com.xdl.jjg.model.dto.*;
-import com.xdl.jjg.model.enums.SettingGroup;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;

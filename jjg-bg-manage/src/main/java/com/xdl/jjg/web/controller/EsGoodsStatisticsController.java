@@ -6,18 +6,22 @@ import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.jjg.shop.model.domain.EsGoodsTotalStatisticsDO;
+import com.jjg.system.model.form.EsGoodsAveragePriceForm;
+import com.jjg.system.model.form.EsGoodsHotSellForm;
+import com.jjg.system.model.form.EsGoodsPaymentConversionRateForm;
+import com.jjg.system.model.form.EsGoodsSalesDetailForm;
+import com.jjg.system.model.vo.*;
+import com.jjg.trade.model.domain.EsGoodsAveragePriceDO;
+import com.jjg.trade.model.domain.EsGoodsHotSellDO;
+import com.jjg.trade.model.domain.EsGoodsPaymentConversionRateDO;
+import com.jjg.trade.model.domain.EsGoodsSalesDetailDO;
+import com.jjg.trade.model.dto.EsGoodsAveragePriceDTO;
+import com.jjg.trade.model.dto.EsGoodsHotSellDTO;
+import com.jjg.trade.model.dto.EsGoodsPaymentConversionRateDTO;
+import com.jjg.trade.model.dto.EsGoodsSalesDetailDTO;
 import com.xdl.jjg.constant.ApiStatus;
 import com.xdl.jjg.constants.OssFileType;
-import com.xdl.jjg.model.domain.*;
-import com.xdl.jjg.model.dto.EsGoodsAveragePriceDTO;
-import com.xdl.jjg.model.dto.EsGoodsHotSellDTO;
-import com.xdl.jjg.model.dto.EsGoodsPaymentConversionRateDTO;
-import com.xdl.jjg.model.dto.EsGoodsSalesDetailDTO;
-import com.xdl.jjg.model.form.EsGoodsAveragePriceForm;
-import com.xdl.jjg.model.form.EsGoodsHotSellForm;
-import com.xdl.jjg.model.form.EsGoodsPaymentConversionRateForm;
-import com.xdl.jjg.model.form.EsGoodsSalesDetailForm;
-import com.xdl.jjg.model.vo.*;
 import com.xdl.jjg.oss.upload.OSSUploader;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
@@ -26,8 +30,8 @@ import com.xdl.jjg.response.service.FileVO;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsGoodsStatisticsService;
-import com.xdl.jjg.web.service.IEsGoodsTotalStatisticsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsTotalStatisticsService;
+import com.xdl.jjg.web.service.feign.trade.GoodsStatisticsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -46,9 +50,9 @@ import java.util.List;
 @RequestMapping("/esGoodsStatistics")
 public class EsGoodsStatisticsController {
     @Autowired
-    private IEsGoodsStatisticsService esGoodsStatisticsService;
+    private GoodsStatisticsService esGoodsStatisticsService;
     @Autowired
-    private IEsGoodsTotalStatisticsService esGoodsTotalStatisticsService;
+    private GoodsTotalStatisticsService esGoodsTotalStatisticsService;
 
     @Autowired
     private OSSUploader ossUploader;

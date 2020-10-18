@@ -2,13 +2,13 @@ package com.xdl.jjg.web.service.Impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.system.model.form.ExpressPlatform;
+import com.jjg.system.model.vo.EsConfigItemVO;
+import com.jjg.system.model.vo.EsRadioOptionVO;
+import com.jjg.system.model.vo.ExpressDetailVO;
 import com.xdl.jjg.constant.ErrorCode;
 import com.xdl.jjg.entity.EsLogiCompany;
 import com.xdl.jjg.mapper.EsLogiCompanyMapper;
-import com.xdl.jjg.model.form.ExpressPlatform;
-import com.xdl.jjg.model.vo.EsConfigItemVO;
-import com.xdl.jjg.model.vo.EsRadioOptionVO;
-import com.xdl.jjg.model.vo.ExpressDetailVO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.HttpRequest;

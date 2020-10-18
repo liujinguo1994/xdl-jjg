@@ -1,20 +1,20 @@
 package com.xdl.jjg.web.controller;
 
+import com.jjg.member.model.domain.EsAdminMemberCouponDO;
+import com.jjg.member.model.domain.EsCouponManageMementDO;
+import com.jjg.member.model.dto.EsMemberCouponDTO;
+import com.jjg.member.model.dto.QueryAdminCouponDTO;
+import com.jjg.member.model.vo.EsAdminMemberCouponVO;
+import com.jjg.member.model.vo.EsCouponManageMementVO;
+import com.jjg.member.model.vo.EsMemberCouponVO;
+import com.jjg.system.model.form.EsCouponQueryForm;
+import com.jjg.system.model.form.EsMemberCouponQueryForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsAdminMemberCouponDO;
-import com.xdl.jjg.model.domain.EsCouponManageMementDO;
-import com.xdl.jjg.model.dto.EsMemberCouponDTO;
-import com.xdl.jjg.model.dto.QueryAdminCouponDTO;
-import com.xdl.jjg.model.form.EsCouponQueryForm;
-import com.xdl.jjg.model.form.EsMemberCouponQueryForm;
-import com.xdl.jjg.model.vo.EsAdminMemberCouponVO;
-import com.xdl.jjg.model.vo.EsCouponManageMementVO;
-import com.xdl.jjg.model.vo.EsMemberCouponVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsMemberCouponService;
+import com.xdl.jjg.web.service.feign.member.MemberCouponService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ import java.util.List;
 public class EsMemberCouponController {
 
     @Autowired
-    private IEsMemberCouponService iesMemberCouponService;
+    private MemberCouponService iesMemberCouponService;
 
     @ApiOperation(value = "分页查询会员优惠券列表", response = EsAdminMemberCouponVO.class)
     @GetMapping(value = "/getCouponList")

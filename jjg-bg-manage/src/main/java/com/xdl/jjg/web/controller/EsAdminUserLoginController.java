@@ -1,14 +1,14 @@
 package com.xdl.jjg.web.controller;
 
 import com.google.code.kaptcha.Producer;
-import com.xdl.jjg.model.domain.EsAdminUserDO;
-import com.xdl.jjg.model.domain.EsAdminUserTokenDO;
-import com.xdl.jjg.model.dto.EsAdminUserDTO;
-import com.xdl.jjg.model.dto.EsAdminUserTokenDTO;
-import com.xdl.jjg.model.enums.CachePrefix;
-import com.xdl.jjg.model.form.EsLoginForm;
-import com.xdl.jjg.model.form.EsUpdatePasswordForm;
-import com.xdl.jjg.model.vo.EsAdminUserTokenVO;
+import com.jjg.system.model.domain.EsAdminUserDO;
+import com.jjg.system.model.domain.EsAdminUserTokenDO;
+import com.jjg.system.model.dto.EsAdminUserDTO;
+import com.jjg.system.model.dto.EsAdminUserTokenDTO;
+import com.jjg.system.model.enums.CachePrefix;
+import com.jjg.system.model.form.EsLoginForm;
+import com.jjg.system.model.form.EsUpdatePasswordForm;
+import com.jjg.system.model.vo.EsAdminUserTokenVO;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.RestResult;
 import com.xdl.jjg.shiro.oath.ShiroKit;

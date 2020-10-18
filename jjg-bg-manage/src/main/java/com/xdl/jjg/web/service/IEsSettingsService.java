@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
-import com.xdl.jjg.model.domain.EsSettingsDO;
-import com.xdl.jjg.model.dto.*;
-import com.xdl.jjg.model.enums.SettingGroup;
+import com.jjg.system.model.domain.EsSettingsDO;
+import com.jjg.system.model.dto.*;
+import com.jjg.system.model.enums.SettingGroup;
 import com.xdl.jjg.response.service.DubboResult;
 
 /**

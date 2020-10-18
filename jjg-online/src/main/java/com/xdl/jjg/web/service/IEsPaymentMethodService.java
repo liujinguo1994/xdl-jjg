@@ -1,8 +1,6 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsPaymentMethodDO;
-import com.xdl.jjg.model.dto.EsPaymentMethodDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

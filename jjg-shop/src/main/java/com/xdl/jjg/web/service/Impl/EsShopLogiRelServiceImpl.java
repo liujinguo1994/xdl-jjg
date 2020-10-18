@@ -12,7 +12,6 @@ import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.CollectionUtils;
-import com.xdl.jjg.web.service.IEsLogiCompanyService;
 import com.xdl.jjg.web.service.IEsShopLogiRelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

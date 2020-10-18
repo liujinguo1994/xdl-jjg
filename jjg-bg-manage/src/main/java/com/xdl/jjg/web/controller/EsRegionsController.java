@@ -1,11 +1,11 @@
 package com.xdl.jjg.web.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.jjg.system.model.domain.EsRegionsDO;
+import com.jjg.system.model.dto.EsRegionsDTO;
+import com.jjg.system.model.form.EsRegionsForm;
+import com.jjg.system.model.vo.EsRegionsVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsRegionsDO;
-import com.xdl.jjg.model.dto.EsRegionsDTO;
-import com.xdl.jjg.model.form.EsRegionsForm;
-import com.xdl.jjg.model.vo.EsRegionsVO;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;

@@ -7,7 +7,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import com.xdl.jjg.model.domain.EsRegionsDO;
+import com.jjg.system.model.domain.EsRegionsDO;
 import lombok.Data;
 
 import java.io.Serializable;

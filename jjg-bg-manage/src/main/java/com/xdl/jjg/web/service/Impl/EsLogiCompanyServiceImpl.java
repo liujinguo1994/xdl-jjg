@@ -4,18 +4,18 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.system.model.domain.EsLogiCompanyDO;
+import com.jjg.system.model.dto.EsLogiCompanyDTO;
 import com.xdl.jjg.constant.ErrorCode;
 import com.xdl.jjg.entity.EsLogiCompany;
 import com.xdl.jjg.mapper.EsLogiCompanyMapper;
-import com.xdl.jjg.model.domain.EsLogiCompanyDO;
-import com.xdl.jjg.model.dto.EsLogiCompanyDTO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.CollectionUtils;
 import com.xdl.jjg.web.service.IEsLogiCompanyService;
-import com.xdl.jjg.web.service.IEsShopLogiRelService;
+import com.xdl.jjg.web.service.feign.shop.ShopLogiRelService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +45,7 @@ public class EsLogiCompanyServiceImpl extends ServiceImpl<EsLogiCompanyMapper, E
     private EsLogiCompanyMapper logiCompanyMapper;
 
     @Autowired
-    private IEsShopLogiRelService shopLogiRelService;
+    private ShopLogiRelService shopLogiRelService;
 
     /**
      * 插入数据

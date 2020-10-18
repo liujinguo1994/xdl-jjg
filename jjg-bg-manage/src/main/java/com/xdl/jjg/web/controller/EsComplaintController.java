@@ -1,13 +1,19 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.member.model.domain.EsComplaintDO;
+import com.jjg.member.model.dto.ComplaintQueryParam;
+import com.jjg.member.model.enums.ComplaintEnumType;
+import com.jjg.member.model.vo.EsComplaintVO;
+import com.jjg.system.model.form.EsComplaintForm;
+import com.jjg.system.model.form.EsHandleComplaintForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.form.EsComplaintForm;
-import com.xdl.jjg.model.form.EsHandleComplaintForm;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.feign.member.ComplaintService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -32,7 +38,7 @@ import java.util.List;
 public class EsComplaintController {
 
     @Autowired
-    private IEsComplaintService complaintService;
+    private ComplaintService complaintService;
 
     @ApiOperation(value = "分页查询投诉信息", response = EsComplaintVO.class)
     @GetMapping(value = "/getComplaintList")

@@ -1,10 +1,10 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsExpressPlatformDO;
-import com.xdl.jjg.model.dto.EsExpressPlatformDTO;
-import com.xdl.jjg.model.vo.EsExpressPlatformVO;
-import com.xdl.jjg.model.vo.ExpressDetailVO;
+import com.jjg.system.model.domain.EsExpressPlatformDO;
+import com.jjg.system.model.dto.EsExpressPlatformDTO;
+import com.jjg.system.model.vo.EsExpressPlatformVO;
+import com.jjg.system.model.vo.ExpressDetailVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

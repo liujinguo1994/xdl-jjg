@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsHotKeywordDO;
-import com.xdl.jjg.model.dto.EsHotKeywordDTO;
+import com.jjg.system.model.domain.EsHotKeywordDO;
+import com.jjg.system.model.dto.EsHotKeywordDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

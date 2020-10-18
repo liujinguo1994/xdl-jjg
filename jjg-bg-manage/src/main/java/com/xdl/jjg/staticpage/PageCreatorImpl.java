@@ -1,24 +1,23 @@
 package com.xdl.jjg.staticpage;
 
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.goods.api.model.domain.EsGoodsDO;
-import com.shopx.goods.api.service.IEsGoodsService;
-import com.shopx.system.api.constant.TaskProgressConstant;
-import com.shopx.system.api.model.domain.EsArticleDO;
-import com.shopx.system.api.model.domain.EsSettingsDO;
-import com.shopx.system.api.model.domain.TaskProgress;
-import com.shopx.system.api.model.domain.vo.EsPageSettingVO;
-import com.shopx.system.api.model.enums.ClientType;
-import com.shopx.system.api.model.enums.PageCreatePrefixEnum;
-import com.shopx.system.api.model.enums.SettingGroup;
-import com.shopx.system.api.service.IEsArticleService;
-import com.shopx.system.api.service.IEsProgressManagerService;
-import com.shopx.system.api.service.IEsSettingsService;
+import com.jjg.shop.model.domain.EsGoodsDO;
+import com.jjg.system.model.domain.EsArticleDO;
+import com.jjg.system.model.domain.EsSettingsDO;
+import com.jjg.system.model.domain.TaskProgress;
+import com.jjg.system.model.enums.ClientType;
+import com.jjg.system.model.enums.PageCreatePrefixEnum;
+import com.jjg.system.model.enums.SettingGroup;
+import com.jjg.system.model.vo.EsPageSettingVO;
+import com.xdl.jjg.constant.TaskProgressConstant;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.web.service.IEsArticleService;
+import com.xdl.jjg.web.service.IEsProgressManagerService;
+import com.xdl.jjg.web.service.IEsSettingsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.dubbo.config.annotation.Reference;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -27,8 +26,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-import redis.clients.jedis.JedisCluster;
 
 import java.io.IOException;
 import java.util.List;
@@ -42,7 +41,7 @@ public class PageCreatorImpl implements PageCreator {
     protected final Log logger = LogFactory.getLog(this.getClass());
 
     @Autowired
-    private JedisCluster jedisCluster;
+    private RedisTemplate redisTemplate;
 
     @Autowired
     private IEsProgressManagerService progressManager;
@@ -50,8 +49,8 @@ public class PageCreatorImpl implements PageCreator {
     @Autowired
     private IEsSettingsService settingsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsGoodsService goodsService;
+    @Autowired
+    private GoodsService goodsService;
 
     @Autowired
     private IEsArticleService articleService;
@@ -62,7 +61,7 @@ public class PageCreatorImpl implements PageCreator {
         String url = getUrl(path, type);
         //通过http 来获取html存储redis
         String html = this.getHTML(url, type);
-        jedisCluster.set(name, html);
+        redisTemplate.opsForValue().set(name, html);
 
     }
 

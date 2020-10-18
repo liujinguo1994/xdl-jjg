@@ -4,16 +4,15 @@ import com.xdl.jjg.shiro.cache.RedisCacheManager;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
+import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.CookieRememberMeManager;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.apache.shiro.mgt.SecurityManager;
 
 import javax.servlet.Filter;
 import java.util.LinkedHashMap;
@@ -25,8 +24,8 @@ import java.util.Map;
 @Configuration
 public class ShiroJwtConfig {
 
-    @Value("${zhuox.shiro.cookie}")
-    private String shiroCookie;
+//    @Value("${zhuox.shiro.cookies}")
+    private String shiroCookie = "/zhuox-shop-system";
 
     @Autowired
     public RedisCacheManager redisCacheManager;

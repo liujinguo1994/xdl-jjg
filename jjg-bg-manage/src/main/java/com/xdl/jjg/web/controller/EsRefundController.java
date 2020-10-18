@@ -1,17 +1,17 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.system.model.form.EsReFundQueryForm;
+import com.jjg.trade.model.domain.EsRefundDO;
+import com.jjg.trade.model.dto.EsReFundQueryDTO;
+import com.jjg.trade.model.vo.EsRefundVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsRefundDO;
-import com.xdl.jjg.model.dto.EsReFundQueryDTO;
-import com.xdl.jjg.model.form.EsReFundQueryForm;
-import com.xdl.jjg.model.vo.EsRefundVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsRefundService;
+import com.xdl.jjg.web.service.feign.trade.RefundService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -34,7 +34,7 @@ import java.util.List;
 public class EsRefundController {
 
     @Autowired
-    private IEsRefundService refundService;
+    private RefundService refundService;
 
     @ApiOperation(value = "售后订单分页查询", response = EsRefundVO.class)
     @GetMapping(value = "/getRefundList")

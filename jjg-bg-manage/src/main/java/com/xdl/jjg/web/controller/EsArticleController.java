@@ -1,13 +1,11 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.shop.model.domain.EsBrandDO;
+import com.jjg.system.model.domain.EsArticleDO;
+import com.jjg.system.model.dto.EsArticleDTO;
+import com.jjg.system.model.vo.EsArticleVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsArticleDO;
-import com.xdl.jjg.model.domain.EsBrandDO;
-import com.xdl.jjg.model.dto.EsArticleDTO;
-import com.xdl.jjg.model.form.EsArticleForm;
-import com.xdl.jjg.model.form.EsArticleQueryForm;
-import com.xdl.jjg.model.vo.EsArticleVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
@@ -43,7 +41,7 @@ public class EsArticleController {
     @ApiOperation(value = "分页查询文章列表", response = EsArticleVO.class)
     @GetMapping(value = "/getArticleList")
     @ResponseBody
-    public ApiResponse getArticleList(EsArticleQueryForm form) {
+    public ApiResponse getArticleList(com.jjg.member.model.form.EsArticleQueryForm form) {
         EsArticleDTO dto = new EsArticleDTO();
         BeanUtil.copyProperties(form, dto);
         DubboPageResult<EsArticleDO> result = articleService.getArticleList(dto, form.getPageSize(), form.getPageNum());
@@ -59,7 +57,7 @@ public class EsArticleController {
     @ApiOperation(value = "新增文章")
     @ResponseBody
     @PostMapping(value = "/insertArticle")
-    public ApiResponse insertArticle(@Valid @RequestBody @ApiParam(name = "文章form对象", value = "form") EsArticleForm form) {
+    public ApiResponse insertArticle(@Valid @RequestBody @ApiParam(name = "文章form对象", value = "form") com.jjg.member.model.form.EsArticleForm form) {
         EsArticleDTO dto = new EsArticleDTO();
         BeanUtil.copyProperties(form, dto);
         DubboResult<EsBrandDO> result = articleService.insertArticle(dto);
@@ -73,7 +71,7 @@ public class EsArticleController {
     @ApiOperation(value = "修改文章")
     @PutMapping(value = "/updateEsBrand/{id}")
     @ResponseBody
-    public ApiResponse updateEsBrand(@Valid @RequestBody @ApiParam(name = "文章form对象", value = "form") EsArticleForm form) {
+    public ApiResponse updateEsBrand(@Valid @RequestBody @ApiParam(name = "文章form对象", value = "form") com.jjg.member.model.form.EsArticleForm form) {
         EsArticleDTO dto = new EsArticleDTO();
         BeanUtil.copyProperties(form, dto);
         DubboResult<EsBrandDO> result = articleService.updateArticle(dto);

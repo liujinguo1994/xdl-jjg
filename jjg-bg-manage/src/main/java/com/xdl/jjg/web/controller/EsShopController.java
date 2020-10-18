@@ -1,20 +1,20 @@
 package com.xdl.jjg.web.controller;
 
+import com.jjg.member.model.domain.EsShopAndDetailDO;
+import com.jjg.member.model.domain.EsShopDO;
+import com.jjg.member.model.dto.EsShopAndDetailDTO;
+import com.jjg.member.model.dto.ShopQueryParam;
+import com.jjg.member.model.vo.EsShopAndDetailVO;
+import com.jjg.member.model.vo.EsShopVO;
+import com.jjg.system.model.form.EsShopQueryForm;
+import com.jjg.system.model.form.EsUpdateShopInfoForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsShopAndDetailDO;
-import com.xdl.jjg.model.domain.EsShopDO;
-import com.xdl.jjg.model.dto.EsShopAndDetailDTO;
-import com.xdl.jjg.model.dto.ShopQueryParam;
-import com.xdl.jjg.model.form.EsShopQueryForm;
-import com.xdl.jjg.model.form.EsUpdateShopInfoForm;
-import com.xdl.jjg.model.vo.EsShopAndDetailVO;
-import com.xdl.jjg.model.vo.EsShopVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsShopService;
+import com.xdl.jjg.web.service.feign.member.ShopService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -38,7 +38,7 @@ import java.util.List;
 public class EsShopController {
 
     @Autowired
-    private IEsShopService iEsShopService;
+    private ShopService iEsShopService;
 
     @ApiOperation(value = "分页查询店铺列表", response = EsShopVO.class)
     @GetMapping(value = "/getShopThemesList")

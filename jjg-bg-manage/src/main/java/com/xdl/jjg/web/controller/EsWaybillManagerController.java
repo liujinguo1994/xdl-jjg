@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.system.model.vo.EsWaybillVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.vo.EsWaybillVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;

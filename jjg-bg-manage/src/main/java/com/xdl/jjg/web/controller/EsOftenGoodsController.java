@@ -1,13 +1,13 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.system.model.domain.EsOftenGoodsDO;
+import com.jjg.system.model.dto.EsOftenGoodsDTO;
+import com.jjg.system.model.form.EsOftenGoodsForm;
+import com.jjg.system.model.form.EsOftenGoodsQueryForm;
+import com.jjg.system.model.vo.EsOftenGoodsVO;
 import com.xdl.jjg.constant.ApiStatus;
 import com.xdl.jjg.constant.ErrorCode;
-import com.xdl.jjg.model.domain.EsOftenGoodsDO;
-import com.xdl.jjg.model.dto.EsOftenGoodsDTO;
-import com.xdl.jjg.model.form.EsOftenGoodsForm;
-import com.xdl.jjg.model.form.EsOftenGoodsQueryForm;
-import com.xdl.jjg.model.vo.EsOftenGoodsVO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;

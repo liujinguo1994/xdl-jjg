@@ -1,21 +1,22 @@
 package com.xdl.jjg.web.service.Impl;
 
-import com.aliyun.openservices.shade.com.alibaba.rocketmq.client.producer.MQProducer;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.system.model.domain.EsMessageDO;
+import com.jjg.system.model.dto.EsMessageDTO;
 import com.xdl.jjg.constant.ErrorCode;
 import com.xdl.jjg.entity.EsMessage;
 import com.xdl.jjg.mapper.EsMessageMapper;
-import com.xdl.jjg.model.domain.EsMessageDO;
-import com.xdl.jjg.model.dto.EsMessageDTO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.roketmq.MQProducer;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.CollectionUtils;
 import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.util.StringUtil;
 import com.xdl.jjg.web.service.IEsMessageService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,6 +49,7 @@ public class EsMessageServiceImpl extends ServiceImpl<EsMessageMapper, EsMessage
 
     @Autowired
     private MQProducer mqProducer;
+
     @Value("${rocketmq.message.topic}")
     private String message_topic;
 

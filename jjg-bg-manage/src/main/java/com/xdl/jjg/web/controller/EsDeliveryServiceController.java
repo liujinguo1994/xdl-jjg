@@ -1,18 +1,18 @@
 package com.xdl.jjg.web.controller;
 
+import com.jjg.system.model.form.EsDeliveryServiceForm;
+import com.jjg.system.model.form.EsQueryPageForm;
+import com.jjg.trade.model.domain.EsDeliveryServiceDO;
+import com.jjg.trade.model.dto.EsDeliveryServiceDTO;
+import com.jjg.trade.model.vo.EsDeliveryServiceVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsDeliveryServiceDO;
-import com.xdl.jjg.model.dto.EsDeliveryServiceDTO;
-import com.xdl.jjg.model.form.EsDeliveryServiceForm;
-import com.xdl.jjg.model.form.EsQueryPageForm;
-import com.xdl.jjg.model.vo.EsDeliveryServiceVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsCompanyService;
-import com.xdl.jjg.web.service.IEsDeliveryServiceService;
+import com.xdl.jjg.web.service.feign.member.CompanyService;
+import com.xdl.jjg.web.service.feign.trade.DeliveryServiceService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -34,10 +34,10 @@ import java.util.List;
 public class EsDeliveryServiceController {
 
     @Autowired
-    private IEsDeliveryServiceService deliveryServiceService;
+    private DeliveryServiceService deliveryServiceService;
 
     @Autowired
-    private IEsCompanyService companyService;
+    private CompanyService companyService;
 
     @ApiOperation(value = "新增自提点")
     @PostMapping(value = "/insertDeliveryService")

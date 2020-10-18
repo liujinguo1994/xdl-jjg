@@ -1,16 +1,16 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.member.model.domain.EsGrowthWeightConfigDO;
+import com.jjg.member.model.dto.EsGrowthWeightConfigListDTO;
+import com.jjg.member.model.vo.EsGrowthWeightConfigVO;
+import com.jjg.system.model.form.EsGrowthWeightConfigForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsGrowthWeightConfigDO;
-import com.xdl.jjg.model.dto.EsGrowthWeightConfigListDTO;
-import com.xdl.jjg.model.form.EsGrowthWeightConfigForm;
-import com.xdl.jjg.model.vo.EsGrowthWeightConfigVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsGrowthWeightConfigService;
+import com.xdl.jjg.web.service.feign.member.GrowthWeightConfigService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -33,7 +33,7 @@ import java.util.List;
 public class EsGrowthWeightConfigController {
 
     @Autowired
-    private IEsGrowthWeightConfigService growthWeightConfigService;
+    private GrowthWeightConfigService growthWeightConfigService;
 
     @ApiOperation(value = "保存成长值权重设置")
     @PutMapping(value = "/saveGrowthWeightConfig")

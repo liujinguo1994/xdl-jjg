@@ -1,13 +1,18 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.member.model.domain.EsCompanyDO;
+import com.jjg.member.model.dto.EsCompanyDTO;
+import com.jjg.member.model.vo.EsCompanyVO;
+import com.jjg.system.model.form.EsCompanyForm;
+import com.jjg.system.model.form.EsCompanyQueryForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.form.EsCompanyForm;
-import com.xdl.jjg.model.form.EsCompanyQueryForm;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.feign.member.CompanyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -35,7 +40,7 @@ public class EsCompanyController {
     private static Logger logger = LoggerFactory.getLogger(EsCompanyController.class);
 
     @Autowired
-    private IEsCompanyService iesCompanyService;
+    private CompanyService iesCompanyService;
 
     @ApiOperation(value = "分页查询签约公司", response = EsCompanyVO.class)
     @GetMapping(value = "/getCompanyList")

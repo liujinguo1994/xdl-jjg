@@ -1,18 +1,18 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.system.model.form.EsPaymentMethodForm;
+import com.jjg.system.model.form.EsQueryPageForm;
+import com.jjg.trade.model.domain.PaymentPluginDO;
+import com.jjg.trade.model.dto.EsPaymentMethodDTO;
+import com.jjg.trade.model.vo.PaymentPluginVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.PaymentPluginDO;
-import com.xdl.jjg.model.dto.EsPaymentMethodDTO;
-import com.xdl.jjg.model.form.EsPaymentMethodForm;
-import com.xdl.jjg.model.form.EsQueryPageForm;
-import com.xdl.jjg.model.vo.PaymentPluginVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsPaymentMethodService;
+import com.xdl.jjg.web.service.feign.trade.PaymentMethodService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -37,7 +37,7 @@ import java.util.List;
 public class EsPaymentMethodController {
 
     @Autowired
-    private IEsPaymentMethodService iesPaymentMethodService;
+    private PaymentMethodService iesPaymentMethodService;
 
     @ApiOperation(value = "分页查询支付方式列表")
     @GetMapping(value = "/getPaymentMethodList")

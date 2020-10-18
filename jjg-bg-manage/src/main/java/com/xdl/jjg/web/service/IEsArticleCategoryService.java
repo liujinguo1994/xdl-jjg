@@ -1,7 +1,7 @@
 package com.xdl.jjg.web.service;
 
-import com.xdl.jjg.model.domain.EsArticleCategoryDO;
-import com.xdl.jjg.model.dto.EsArticleCategoryDTO;
+import com.jjg.system.model.domain.EsArticleCategoryDO;
+import com.jjg.system.model.dto.EsArticleCategoryDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

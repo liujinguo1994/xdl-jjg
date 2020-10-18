@@ -1,12 +1,12 @@
 package com.xdl.jjg.web.controller;
 
+import com.jjg.system.model.domain.EsGoodGoodsDO;
+import com.jjg.system.model.dto.EsGoodGoodsDTO;
+import com.jjg.system.model.form.EsGoodGoodsForm;
+import com.jjg.system.model.form.EsGoodGoodsQueryForm;
+import com.jjg.system.model.form.EsSoldOutGoodsForm;
+import com.jjg.system.model.vo.EsGoodGoodsVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsGoodGoodsDO;
-import com.xdl.jjg.model.dto.EsGoodGoodsDTO;
-import com.xdl.jjg.model.form.EsGoodGoodsForm;
-import com.xdl.jjg.model.form.EsGoodGoodsQueryForm;
-import com.xdl.jjg.model.form.EsSoldOutGoodsForm;
-import com.xdl.jjg.model.vo.EsGoodGoodsVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;

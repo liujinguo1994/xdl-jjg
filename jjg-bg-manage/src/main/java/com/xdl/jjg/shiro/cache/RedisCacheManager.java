@@ -4,10 +4,8 @@ import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.apache.shiro.cache.CacheManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
-import redis.clients.jedis.JedisCluster;
 
 /**
  * 实现shiro的CacheManager
@@ -15,12 +13,12 @@ import redis.clients.jedis.JedisCluster;
 @Component
 public class RedisCacheManager implements CacheManager {
 
-    @Value("${zhuox.shiro.cache}")
-    private String redisShiroCache;
+//    @Value("${zhuox.shiro.cache}")
+    private String redisShiroCache = "zhuox-shiro-system-cache-";
 
     //30分钟过期
-    @Value("${zhuox.shiro.expire}")
-    private int expire;
+//    @Value("${zhuox.shiro.expire}")
+    private int expire = 31536000;
 
     @Autowired
     private RedisTemplate redisTemplate;

@@ -1,9 +1,9 @@
 package com.xdl.jjg.web.controller;
 
+import com.jjg.system.model.dto.EsAdminUserTokenDTO;
+import com.jjg.system.model.form.EsAdminUserTokenForm;
+import com.jjg.system.model.vo.EsAdminUserTokenVO;
 import com.xdl.jjg.entity.EsAdminUserToken;
-import com.xdl.jjg.model.dto.EsAdminUserTokenDTO;
-import com.xdl.jjg.model.form.EsAdminUserTokenForm;
-import com.xdl.jjg.model.vo.EsAdminUserTokenVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;

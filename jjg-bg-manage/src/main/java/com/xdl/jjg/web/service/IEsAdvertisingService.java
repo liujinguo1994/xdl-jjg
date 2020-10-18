@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsAdvertisingDO;
-import com.xdl.jjg.model.dto.EsAdvertisingDTO;
+import com.jjg.system.model.domain.EsAdvertisingDO;
+import com.jjg.system.model.dto.EsAdvertisingDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

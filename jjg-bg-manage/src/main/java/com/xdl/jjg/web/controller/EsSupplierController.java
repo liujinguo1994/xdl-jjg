@@ -1,18 +1,18 @@
 package com.xdl.jjg.web.controller;
 
+import com.jjg.shop.model.domain.EsSupplierDO;
+import com.jjg.shop.model.dto.EsSupplierDTO;
+import com.jjg.shop.model.vo.EsSupplierVO;
+import com.jjg.system.model.form.EsSupplierForm;
+import com.jjg.system.model.form.EsSupplierQueryForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsSupplierDO;
-import com.xdl.jjg.model.dto.EsSupplierDTO;
-import com.xdl.jjg.model.form.EsSupplierForm;
-import com.xdl.jjg.model.form.EsSupplierQueryForm;
-import com.xdl.jjg.model.vo.EsSupplierVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.IEsRegionsService;
-import com.xdl.jjg.web.service.IEsSupplierService;
+import com.xdl.jjg.web.service.feign.shop.SupplierService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -36,7 +36,7 @@ import java.util.List;
 public class EsSupplierController {
 
     @Autowired
-    private IEsSupplierService iEsSupplierService;
+    private SupplierService iEsSupplierService;
 
     @Autowired
     private IEsRegionsService iEsRegionsService;

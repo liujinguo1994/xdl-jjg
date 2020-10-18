@@ -4,11 +4,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.system.model.domain.EsSiteNavigationDO;
+import com.jjg.system.model.dto.EsSiteNavigationDTO;
 import com.xdl.jjg.constant.ErrorCode;
 import com.xdl.jjg.entity.EsSiteNavigation;
 import com.xdl.jjg.mapper.EsSiteNavigationMapper;
-import com.xdl.jjg.model.domain.EsSiteNavigationDO;
-import com.xdl.jjg.model.dto.EsSiteNavigationDTO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
@@ -23,7 +23,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import redis.clients.jedis.JedisCluster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +44,6 @@ public class EsSiteNavigationServiceImpl extends ServiceImpl<EsSiteNavigationMap
     @Autowired
     private EsSiteNavigationMapper siteNavigationMapper;
 
-    @Autowired
-    private JedisCluster jedisCluster;
 
     /**
      * 插入数据

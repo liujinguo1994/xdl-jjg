@@ -1,7 +1,7 @@
 package com.xdl.jjg.config;
 
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
@@ -16,10 +16,14 @@ import redis.clients.jedis.JedisPoolConfig;
  * @description redis配置文件
  */
 @Configuration
+@EnableConfigurationProperties(RedisProperties.class)
 public class RedisConfig {
 
-    @Autowired
-    private RedisProperties redisProperties;
+    private final RedisProperties redisProperties;
+
+    public RedisConfig(RedisProperties redisProperties) {
+        this.redisProperties = redisProperties;
+    }
 
     @Bean
     public JedisConnectionFactory oneConnectionFactory() {

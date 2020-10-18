@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsSensitiveWordsDO;
-import com.xdl.jjg.model.dto.EsSensitiveWordsDTO;
+import com.jjg.system.model.domain.EsSensitiveWordsDO;
+import com.jjg.system.model.dto.EsSensitiveWordsDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

@@ -1,12 +1,12 @@
 package com.xdl.jjg.web.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.jjg.system.model.domain.EsAdminUserDO;
+import com.jjg.system.model.domain.EsDepartmentDO;
+import com.jjg.system.model.dto.EsDepartmentDTO;
+import com.jjg.system.model.form.EsDepartmentForm;
+import com.jjg.system.model.vo.EsDepartmentVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsAdminUserDO;
-import com.xdl.jjg.model.domain.EsDepartmentDO;
-import com.xdl.jjg.model.dto.EsDepartmentDTO;
-import com.xdl.jjg.model.form.EsDepartmentForm;
-import com.xdl.jjg.model.vo.EsDepartmentVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;

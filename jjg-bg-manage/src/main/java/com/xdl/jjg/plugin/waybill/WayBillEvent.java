@@ -1,6 +1,7 @@
 package com.xdl.jjg.plugin.waybill;
 
-import com.xdl.jjg.model.vo.EsConfigItemVO;
+
+import com.jjg.system.model.vo.EsConfigItemVO;
 
 import java.util.List;
 

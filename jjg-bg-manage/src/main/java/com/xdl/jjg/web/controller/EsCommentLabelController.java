@@ -1,13 +1,18 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.member.model.domain.EsCommentLabelDO;
+import com.jjg.member.model.dto.EsCommentLabelDTO;
+import com.jjg.member.model.vo.EsCommentLabelVO;
+import com.jjg.system.model.form.EsCommentLabelForm;
+import com.jjg.system.model.form.EsCommentLabelQueryForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.form.EsCommentLabelForm;
-import com.xdl.jjg.model.form.EsCommentLabelQueryForm;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.feign.member.CommentLabelService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -31,7 +36,7 @@ import java.util.List;
 public class EsCommentLabelController {
 
     @Autowired
-    private IEsCommentLabelService iesCommentLabelService;
+    private CommentLabelService iesCommentLabelService;
 
 
     @ApiOperation(value = "分页查询商品评价标签列表", response = EsCommentLabelVO.class)

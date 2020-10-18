@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsCustomCategoryDO;
-import com.xdl.jjg.model.dto.EsCustomCategoryDTO;
+import com.jjg.system.model.domain.EsCustomCategoryDO;
+import com.jjg.system.model.dto.EsCustomCategoryDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

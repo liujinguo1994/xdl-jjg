@@ -1,8 +1,6 @@
 package com.xdl.jjg.web.controller;
 
-import com.xdl.jjg.web.service.IEsReceiptHistoryService;
 import io.swagger.annotations.Api;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "/esReceiptHistory", tags = "发票历史")
 public class EsReceiptHistoryController {
 
-    @Autowired
-    private IEsReceiptHistoryService receiptHistoryService;
+//    @Autowired
+//    private IEsReceiptHistoryService receiptHistoryService;
 
 
    /* @ApiOperation(value = "分页获取发票历史")

@@ -1,13 +1,18 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.member.model.domain.EsComplaintReasonConfigDO;
+import com.jjg.member.model.dto.EsComplaintReasonConfigDTO;
+import com.jjg.member.model.vo.EsComplaintReasonConfigVO;
+import com.jjg.system.model.form.EsComplaintReasonConfigForm;
+import com.jjg.system.model.form.EsQueryPageForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.form.EsComplaintReasonConfigForm;
-import com.xdl.jjg.model.form.EsQueryPageForm;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.feign.member.ComplaintReasonConfigService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -32,7 +37,7 @@ import java.util.List;
 public class EsComplaintReasonConfigController {
 
     @Autowired
-    private IEsComplaintReasonConfigService complaintReasonConfigService;
+    private ComplaintReasonConfigService complaintReasonConfigService;
 
     @ApiOperation(value = "分页查询投诉原因", response = EsComplaintReasonConfigVO.class)
     @GetMapping(value = "/getComplaintReasonConfigList")

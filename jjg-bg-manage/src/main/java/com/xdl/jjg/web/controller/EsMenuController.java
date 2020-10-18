@@ -1,11 +1,11 @@
 package com.xdl.jjg.web.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.jjg.system.model.domain.EsMenuDO;
+import com.jjg.system.model.dto.EsMenuDTO;
+import com.jjg.system.model.form.EsMenuForm;
+import com.jjg.system.model.vo.EsMenuVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsMenuDO;
-import com.xdl.jjg.model.dto.EsMenuDTO;
-import com.xdl.jjg.model.form.EsMenuForm;
-import com.xdl.jjg.model.vo.EsMenuVO;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;

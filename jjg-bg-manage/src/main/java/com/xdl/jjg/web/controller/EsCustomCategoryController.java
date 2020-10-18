@@ -1,12 +1,12 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.system.model.domain.EsCustomCategoryDO;
+import com.jjg.system.model.dto.EsCustomCategoryDTO;
+import com.jjg.system.model.form.EsCustomCategoryForm;
+import com.jjg.system.model.form.EsCustomCategoryQueryForm;
+import com.jjg.system.model.vo.EsCustomCategoryVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsCustomCategoryDO;
-import com.xdl.jjg.model.dto.EsCustomCategoryDTO;
-import com.xdl.jjg.model.form.EsCustomCategoryForm;
-import com.xdl.jjg.model.form.EsCustomCategoryQueryForm;
-import com.xdl.jjg.model.vo.EsCustomCategoryVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;

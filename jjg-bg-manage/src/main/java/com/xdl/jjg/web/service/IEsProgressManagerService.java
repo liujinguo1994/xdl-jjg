@@ -1,7 +1,7 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.TaskProgress;
+import com.jjg.system.model.domain.TaskProgress;
 import com.xdl.jjg.response.service.DubboResult;
 
 /**

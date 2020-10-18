@@ -1,13 +1,18 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.member.model.domain.EsComplaintTypeConfigDO;
+import com.jjg.member.model.dto.EsComplaintTypeConfigDTO;
+import com.jjg.member.model.vo.EsComplaintTypeConfigVO;
+import com.jjg.system.model.form.EsComplaintTypeConfigForm;
+import com.jjg.system.model.form.EsQueryPageForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.form.EsComplaintTypeConfigForm;
-import com.xdl.jjg.model.form.EsQueryPageForm;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.feign.member.ComplaintTypeConfigService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -16,6 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * <p>
@@ -31,7 +37,7 @@ import javax.validation.Valid;
 public class EsComplaintTypeConfigController {
 
     @Autowired
-    private IEsComplaintTypeConfigService complaintTypeConfigService;
+    private ComplaintTypeConfigService complaintTypeConfigService;
 
     @ApiOperation(value = "分页查询投诉类型", response = EsComplaintTypeConfigVO.class)
     @GetMapping(value = "/getComplaintTypeConfigList")

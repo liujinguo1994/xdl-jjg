@@ -3,8 +3,8 @@ package com.xdl.jjg.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.jjg.system.model.domain.EsArticleDO;
 import com.xdl.jjg.entity.EsArticle;
-import com.xdl.jjg.model.domain.EsArticleDO;
 import org.apache.ibatis.annotations.Param;
 
 /**

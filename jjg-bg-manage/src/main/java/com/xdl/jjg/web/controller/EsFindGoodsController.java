@@ -1,14 +1,14 @@
 package com.xdl.jjg.web.controller;
 
+import com.jjg.system.model.domain.EsFindGoodsDO;
+import com.jjg.system.model.domain.EsFindGoodsGalleryDTO;
+import com.jjg.system.model.dto.EsFindGoodsDTO;
+import com.jjg.system.model.form.EsFindGoodsForm;
+import com.jjg.system.model.form.EsFindGoodsQueryForm;
+import com.jjg.system.model.vo.EsFindGoodsGalleryVO;
+import com.jjg.system.model.vo.EsFindGoodsVO;
 import com.xdl.jjg.constant.ApiStatus;
 import com.xdl.jjg.constant.ErrorCode;
-import com.xdl.jjg.model.domain.EsFindGoodsDO;
-import com.xdl.jjg.model.domain.EsFindGoodsGalleryDTO;
-import com.xdl.jjg.model.dto.EsFindGoodsDTO;
-import com.xdl.jjg.model.form.EsFindGoodsForm;
-import com.xdl.jjg.model.form.EsFindGoodsQueryForm;
-import com.xdl.jjg.model.vo.EsFindGoodsGalleryVO;
-import com.xdl.jjg.model.vo.EsFindGoodsVO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;

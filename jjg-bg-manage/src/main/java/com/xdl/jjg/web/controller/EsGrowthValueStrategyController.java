@@ -1,16 +1,16 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.member.model.domain.EsGrowthValueStrategyDO;
+import com.jjg.member.model.dto.EsGrowthStrategyDTO;
+import com.jjg.member.model.vo.EsGrowthValueStrategyVO;
+import com.jjg.system.model.form.EsGrowthValueStrategyForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsGrowthValueStrategyDO;
-import com.xdl.jjg.model.dto.EsGrowthStrategyDTO;
-import com.xdl.jjg.model.form.EsGrowthValueStrategyForm;
-import com.xdl.jjg.model.vo.EsGrowthValueStrategyVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsGrowthValueStrategyService;
+import com.xdl.jjg.web.service.feign.member.GrowthValueStrategyService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -33,7 +33,7 @@ import java.util.List;
 public class EsGrowthValueStrategyController {
 
     @Autowired
-    private IEsGrowthValueStrategyService growthValueStrategyService;
+    private GrowthValueStrategyService growthValueStrategyService;
 
     @ApiOperation(value = "保存评论及收藏成长值设置")
     @PutMapping(value = "/saveGrowthValueStrategy")

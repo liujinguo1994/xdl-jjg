@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsAgreementDO;
-import com.xdl.jjg.model.dto.EsAgreementDTO;
+import com.jjg.system.model.domain.EsAgreementDO;
+import com.jjg.system.model.dto.EsAgreementDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

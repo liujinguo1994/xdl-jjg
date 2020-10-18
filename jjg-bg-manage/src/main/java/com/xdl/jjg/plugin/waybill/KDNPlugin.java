@@ -1,7 +1,7 @@
 package com.xdl.jjg.plugin.waybill;
 
 
-import com.xdl.jjg.model.vo.EsConfigItemVO;
+import com.jjg.system.model.vo.EsConfigItemVO;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;

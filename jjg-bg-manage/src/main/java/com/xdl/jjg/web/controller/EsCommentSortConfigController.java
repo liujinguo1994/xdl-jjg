@@ -1,11 +1,21 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.member.model.domain.EsCommentSortConfigDO;
+import com.jjg.member.model.domain.EsGradeWeightConfigDO;
+import com.jjg.member.model.dto.EsCommentConfigDTO;
+import com.jjg.member.model.dto.EsCommentSortConfigDTO;
+import com.jjg.member.model.dto.EsGradeWeightConfigDTO;
+import com.jjg.member.model.vo.EsCommentSortConfigVO;
+import com.jjg.member.model.vo.EsGradeWeightConfigVO;
+import com.jjg.system.model.form.EsCommentConfigForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.form.EsCommentConfigForm;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.feign.member.CommentSortConfigService;
+import com.xdl.jjg.web.service.feign.member.GradeWeightConfigService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -30,10 +40,10 @@ import java.util.List;
 public class EsCommentSortConfigController {
 
     @Autowired
-    private IEsCommentSortConfigService commentSortConfigService;
+    private CommentSortConfigService commentSortConfigService;
 
     @Autowired
-    private IEsGradeWeightConfigService gradeWeightConfigService;
+    private GradeWeightConfigService gradeWeightConfigService;
 
     @PutMapping(value = "/saveConfig")
     @ApiOperation(value = "保存设置")

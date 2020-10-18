@@ -1,14 +1,14 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.system.model.domain.EsAdminUserDO;
+import com.jjg.system.model.domain.EsRoleDO;
+import com.jjg.system.model.dto.EsRoleDTO;
+import com.jjg.system.model.form.EsRoleForm;
+import com.jjg.system.model.form.EsRoleQueryForm;
+import com.jjg.system.model.vo.EsRoleVO;
+import com.jjg.system.model.vo.Menus;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.entity.Menus;
-import com.xdl.jjg.model.domain.EsAdminUserDO;
-import com.xdl.jjg.model.domain.EsRoleDO;
-import com.xdl.jjg.model.dto.EsRoleDTO;
-import com.xdl.jjg.model.form.EsRoleForm;
-import com.xdl.jjg.model.form.EsRoleQueryForm;
-import com.xdl.jjg.model.vo.EsRoleVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;

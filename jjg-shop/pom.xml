@@ -104,7 +104,7 @@
                     <version>2.1.7.RELEASE</version>
                     <configuration>
                         <!-- 指定该Main Class为全局的唯一入口 -->
-                        <mainClass>com.xdl.jjg.JjgServiceBootstrap</mainClass>
+                        <mainClass>com.xdl.jjg.JjgShopApplication</mainClass>
                         <layout>ZIP</layout>
                     </configuration>
                     <executions>

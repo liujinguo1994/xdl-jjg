@@ -1,19 +1,19 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.member.model.domain.EsMemberLevelConfigDO;
+import com.jjg.member.model.dto.EsMemberLevelConfigDTO;
+import com.jjg.member.model.dto.EsQueryMemberLevelConfigDTO;
+import com.jjg.member.model.vo.EsMemberLevelConfigVO;
+import com.jjg.system.model.form.EsMemberLevelConfigForm;
+import com.jjg.system.model.form.EsMemberLevelQueryForm;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsMemberLevelConfigDO;
-import com.xdl.jjg.model.dto.EsMemberLevelConfigDTO;
-import com.xdl.jjg.model.dto.EsQueryMemberLevelConfigDTO;
-import com.xdl.jjg.model.form.EsMemberLevelConfigForm;
-import com.xdl.jjg.model.form.EsMemberLevelQueryForm;
-import com.xdl.jjg.model.vo.EsMemberLevelConfigVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsMemberLevelConfigService;
+import com.xdl.jjg.web.service.feign.member.MemberLevelConfigService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +36,7 @@ import java.util.List;
 public class EsMemberLevelConfigController {
 
     @Autowired
-    private IEsMemberLevelConfigService memberLevelConfigService;
+    private MemberLevelConfigService memberLevelConfigService;
 
     @ApiOperation(value = "分页查询会员等级列表", response = EsMemberLevelConfigVO.class)
     @GetMapping(value = "/getMemberLevelConfigList")

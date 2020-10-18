@@ -4,17 +4,17 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.google.common.reflect.TypeToken;
 import com.google.gson.Gson;
+import com.jjg.system.model.domain.EsExpressPlatformDO;
+import com.jjg.system.model.domain.EsLogiCompanyDO;
+import com.jjg.system.model.dto.EsExpressPlatformDTO;
+import com.jjg.system.model.enums.CachePrefix;
+import com.jjg.system.model.form.ExpressPlatform;
+import com.jjg.system.model.vo.EsConfigItemVO;
+import com.jjg.system.model.vo.EsExpressPlatformVO;
+import com.jjg.system.model.vo.ExpressDetailVO;
 import com.xdl.jjg.constant.ErrorCode;
 import com.xdl.jjg.entity.EsExpressPlatform;
 import com.xdl.jjg.mapper.EsExpressPlatformMapper;
-import com.xdl.jjg.model.domain.EsExpressPlatformDO;
-import com.xdl.jjg.model.domain.EsLogiCompanyDO;
-import com.xdl.jjg.model.dto.EsExpressPlatformDTO;
-import com.xdl.jjg.model.enums.CachePrefix;
-import com.xdl.jjg.model.form.ExpressPlatform;
-import com.xdl.jjg.model.vo.EsConfigItemVO;
-import com.xdl.jjg.model.vo.EsExpressPlatformVO;
-import com.xdl.jjg.model.vo.ExpressDetailVO;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
@@ -23,15 +23,15 @@ import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.util.StringUtil;
 import com.xdl.jjg.web.service.IEsExpressPlatformService;
 import com.xdl.jjg.web.service.IEsLogiCompanyService;
+import org.elasticsearch.ResourceNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ResourceNotFoundException;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import redis.clients.jedis.JedisCluster;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -59,7 +59,7 @@ public class EsExpressPlatformServiceImpl extends ServiceImpl<EsExpressPlatformM
     @Autowired
     private IEsLogiCompanyService logiCompanyService;
     @Autowired
-    private JedisCluster jedisCluster;
+    private RedisTemplate redisTemplate;
 
     /**
      * 插入数据
@@ -132,7 +132,7 @@ public class EsExpressPlatformServiceImpl extends ServiceImpl<EsExpressPlatformM
             BeanUtil.copyProperties(expressPlatformDTO, expressPlatform);
             queryWrapper.lambda().eq(EsExpressPlatform::getBean, expressPlatformDTO.getBean());
 
-            jedisCluster.del(CachePrefix.EXPRESS.getPrefix());
+            redisTemplate.delete(CachePrefix.EXPRESS.getPrefix());
             this.expressPlatformMapper.update(expressPlatform, queryWrapper);
             return DubboResult.success();
         } catch (ArgumentException ae) {
@@ -247,7 +247,7 @@ public class EsExpressPlatformServiceImpl extends ServiceImpl<EsExpressPlatformM
             esExpressPlatform.setIsOpen(1);
 
             this.expressPlatformMapper.updateById(esExpressPlatform);
-            jedisCluster.del(CachePrefix.EXPRESS.getPrefix());
+            redisTemplate.delete(CachePrefix.EXPRESS.getPrefix());
             return DubboResult.success();
         } catch (ArgumentException ae) {
             logger.error("更新失败", ae);
@@ -308,7 +308,7 @@ public class EsExpressPlatformServiceImpl extends ServiceImpl<EsExpressPlatformM
                 }
                 //从缓存中获取开启的快递平台
                 //jedisCluster.del(CachePrefix.EXPRESS.getPrefix());
-                String s = jedisCluster.get(CachePrefix.EXPRESS.getPrefix());
+                String s = (String) redisTemplate.opsForValue().get(CachePrefix.EXPRESS.getPrefix());
                 EsExpressPlatformVO expressPlatformVO = null;
                 if (!StringUtil.isEmpty(s)) {
                     expressPlatformVO = JsonUtil.jsonToObject(s, EsExpressPlatformVO.class);
@@ -325,7 +325,7 @@ public class EsExpressPlatformServiceImpl extends ServiceImpl<EsExpressPlatformM
                     expressPlatformVO.setConfig(platform.getConfig());
                     expressPlatformVO.setBean(platform.getBean());
                     String json = JsonUtil.objectToJson(expressPlatformVO);
-                    jedisCluster.set(CachePrefix.EXPRESS.getPrefix(), json);
+                    redisTemplate.opsForValue().set(CachePrefix.EXPRESS.getPrefix(), json);
                 }
                 //得到开启的快递平台方案
                 ExpressPlatform expressPlatform = this.findByBeanid(expressPlatformVO.getBean());
@@ -357,7 +357,7 @@ public class EsExpressPlatformServiceImpl extends ServiceImpl<EsExpressPlatformM
      */
     private Map getConfig() {
         //从缓存中获取开启的快递平台
-        String s = jedisCluster.get(CachePrefix.EXPRESS.getPrefix());
+        String s = (String) redisTemplate.opsForValue().get(CachePrefix.EXPRESS.getPrefix());
 
         EsExpressPlatformVO platformVO = JsonUtil.jsonToObject(s, EsExpressPlatformVO.class);
         if (StringUtil.isEmpty(platformVO.getConfig())) {

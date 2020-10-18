@@ -1,12 +1,12 @@
 package com.xdl.jjg.web.controller;
 
 
+import com.jjg.system.model.domain.EsSiteNavigationDO;
+import com.jjg.system.model.dto.EsSiteNavigationDTO;
+import com.jjg.system.model.form.EsNavigationQueryForm;
+import com.jjg.system.model.form.EsSiteNavigationForm;
+import com.jjg.system.model.vo.EsSiteNavigationVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsSiteNavigationDO;
-import com.xdl.jjg.model.dto.EsSiteNavigationDTO;
-import com.xdl.jjg.model.form.EsNavigationQueryForm;
-import com.xdl.jjg.model.form.EsSiteNavigationForm;
-import com.xdl.jjg.model.vo.EsSiteNavigationVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiPageResponse;

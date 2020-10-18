@@ -1,22 +1,29 @@
 package com.xdl.jjg.web.controller;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.jjg.member.model.domain.EsCommentCategoryDO;
+import com.jjg.member.model.vo.EsCommentCategoryVO;
+import com.jjg.shop.model.domain.EsBrandSelectDO;
+import com.jjg.shop.model.domain.EsCategoryDO;
+import com.jjg.shop.model.domain.ParameterGroupDO;
+import com.jjg.shop.model.dto.EsCategoryDTO;
+import com.jjg.shop.model.vo.EsBrandSelectVO;
+import com.jjg.shop.model.vo.EsCategoryVO;
+import com.jjg.shop.model.vo.ParameterGroupVO;
+import com.jjg.system.model.form.EsCategoryForm;
+import com.jjg.trade.model.domain.EsShipTemplateDO;
+import com.jjg.trade.model.vo.EsShipTemplateVO;
 import com.xdl.jjg.constant.ApiStatus;
-import com.xdl.jjg.model.domain.EsBrandSelectDO;
-import com.xdl.jjg.model.domain.EsCategoryDO;
-import com.xdl.jjg.model.domain.ParameterGroupDO;
-import com.xdl.jjg.model.dto.EsCategoryDTO;
-import com.xdl.jjg.model.form.EsCategoryForm;
-import com.xdl.jjg.model.vo.EsBrandSelectVO;
-import com.xdl.jjg.model.vo.EsCategoryVO;
-import com.xdl.jjg.model.vo.ParameterGroupVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.web.service.IEsCategoryBrandService;
-import com.xdl.jjg.web.service.IEsCategoryService;
-import com.xdl.jjg.web.service.IEsParameterGroupService;
+import com.xdl.jjg.web.service.feign.member.CommentCategoryService;
+import com.xdl.jjg.web.service.feign.shop.CategoryBrandService;
+import com.xdl.jjg.web.service.feign.shop.CategoryService;
+import com.xdl.jjg.web.service.feign.shop.ParameterGroupService;
+import com.xdl.jjg.web.service.feign.trade.GoodsFreightService;
+import com.xdl.jjg.web.service.feign.trade.ShipTemplateService;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -43,22 +50,22 @@ import java.util.stream.Collectors;
 public class EsCategoryController {
 
     @Autowired
-    private IEsCategoryService iEsCategoryService;
+    private CategoryService iEsCategoryService;
 
     @Autowired
-    private IEsCategoryBrandService iEsCategoryBrandService;
+    private CategoryBrandService iEsCategoryBrandService;
 
     @Autowired
-    private IEsShipTemplateService iEsShipTemplateService;
+    private ShipTemplateService iEsShipTemplateService;
 
     @Autowired
-    private IEsParameterGroupService iEsParameterGroupService;
+    private ParameterGroupService iEsParameterGroupService;
 
     @Autowired
-    private IEsGoodsFreightService iEsGoodsFreightService;
+    private GoodsFreightService iEsGoodsFreightService;
 
     @Autowired
-    private IEsCommentCategoryService iEsCommentCategoryService;
+    private CommentCategoryService iEsCommentCategoryService;
 
 
     @ApiOperation(value = "根据父ID获取分类下面的子类", response = EsCategoryVO.class)

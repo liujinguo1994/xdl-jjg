@@ -2,8 +2,8 @@ package com.xdl.jjg.mapper;
 
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.jjg.system.model.domain.EsLogiCompanyDO;
 import com.xdl.jjg.entity.EsLogiCompany;
-import com.xdl.jjg.model.domain.EsLogiCompanyDO;
 import org.apache.ibatis.annotations.Param;
 
 /**
