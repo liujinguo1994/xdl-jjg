@@ -95,6 +95,7 @@ public interface BillService {
      * @date: 2019/08/31 10:27:58
      * @return: com.shopx.common.model.result.DubboResult
      */
+    @PostMapping("/exportExcel")
     DubboResult exportExcel(@RequestParam("settlementId") Long settlementId,@RequestParam("type") int type);
 
 

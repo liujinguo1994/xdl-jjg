@@ -1,7 +1,6 @@
 package com.xdl.jjg.web.service.feign.trade;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jjg.trade.model.domain.EsGoodsAveragePriceDO;
 import com.jjg.trade.model.domain.EsGoodsHotSellDO;
 import com.jjg.trade.model.domain.EsGoodsPaymentConversionRateDO;
@@ -15,6 +14,7 @@ import com.xdl.jjg.response.service.DubboResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(value = "jjg-online")
 public interface GoodsStatisticsService {
@@ -23,22 +23,22 @@ public interface GoodsStatisticsService {
      * 商品销售详情Page
      */
     @GetMapping("/getGoodsSalesDetailList")
-    DubboPageResult<EsGoodsSalesDetailDO> getGoodsSalesDetailList(@RequestBody EsGoodsSalesDetailDTO esGoodsSalesDetailDTO, Page page);
+    DubboPageResult<EsGoodsSalesDetailDO> getGoodsSalesDetailList(@RequestBody EsGoodsSalesDetailDTO esGoodsSalesDetailDTO,@RequestParam("pageSize") int pageSize,@RequestParam("pageNum") int pageNum);
     /**
      * 热销排行
      */
     @GetMapping("/getGoodsHotSell")
-    DubboResult<IPage<EsGoodsHotSellDO>> getGoodsHotSell(@RequestBody EsGoodsHotSellDTO esGoodsHotSellDTO, Page page);
+    DubboResult<IPage<EsGoodsHotSellDO>> getGoodsHotSell(@RequestBody EsGoodsHotSellDTO esGoodsHotSellDTO,@RequestParam("pageSize") int pageSize,@RequestParam("pageNum") int pageNum);
 
     /**
      * 付款转换率
      */
     @GetMapping("/getGoodsPaymentConversionRate")
-    DubboResult<IPage<EsGoodsPaymentConversionRateDO>> getGoodsPaymentConversionRate(@RequestBody EsGoodsPaymentConversionRateDTO esGoodsPaymentConversionRateDTO, Page page);
+    DubboResult<IPage<EsGoodsPaymentConversionRateDO>> getGoodsPaymentConversionRate(@RequestBody EsGoodsPaymentConversionRateDTO esGoodsPaymentConversionRateDTO,@RequestParam("pageSize") int pageSize,@RequestParam("pageNum")int pageNum);
 
     /**
      * 商品客单价排行
      */
     @GetMapping("/getGoodsAveragePrice")
-    DubboResult<IPage<EsGoodsAveragePriceDO>> getGoodsAveragePrice(@RequestBody EsGoodsAveragePriceDTO esGoodsAveragePriceDTO, Page page);
+    DubboResult<IPage<EsGoodsAveragePriceDO>> getGoodsAveragePrice(@RequestBody EsGoodsAveragePriceDTO esGoodsAveragePriceDTO, @RequestParam("pageSize") int pageSize, @RequestParam("pageNum") int pageNum);
 }

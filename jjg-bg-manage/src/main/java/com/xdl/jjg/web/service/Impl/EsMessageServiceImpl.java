@@ -47,7 +47,6 @@ public class EsMessageServiceImpl extends ServiceImpl<EsMessageMapper, EsMessage
     @Autowired
     private EsMessageMapper messageMapper;
 
-    @Autowired
     private MQProducer mqProducer;
 
     @Value("${rocketmq.message.topic}")

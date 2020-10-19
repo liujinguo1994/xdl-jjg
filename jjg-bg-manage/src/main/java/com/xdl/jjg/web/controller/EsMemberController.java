@@ -86,7 +86,6 @@ public class EsMemberController extends BaseController{
     @Autowired
     private RedisTemplate redisTemplate;
 
-    @Autowired
     private OSSUploader ossUploader;
 
 

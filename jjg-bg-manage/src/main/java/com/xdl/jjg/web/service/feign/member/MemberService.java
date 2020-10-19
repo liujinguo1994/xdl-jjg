@@ -77,11 +77,14 @@ public interface MemberService {
     DubboResult<EsMemberDO> getAdminMember(@RequestParam("id") Long id);
 
     //批量导入会员
-    DubboResult<EsImportMemberVO> importMember(byte[] base64);
+    @PostMapping("/importMember")
+    DubboResult<EsImportMemberVO> importMember(@RequestBody byte[] base64);
     //导出会员
-    DubboPageResult<EsExportMemberVO> exportMember(EsQueryAdminMemberDTO dto);
+    @PostMapping("/exportMember")
+    DubboPageResult<EsExportMemberVO> exportMember(@RequestBody EsQueryAdminMemberDTO dto);
     //批量调整会员余额
-    DubboResult<EsImportBalanceVO> importBalance(byte[] base64);
+    @PostMapping("/importBalance")
+    DubboResult<EsImportBalanceVO> importBalance(@RequestBody byte[] base64);
 
     /**
      * 后台-根据查询条件查询列表

@@ -35,7 +35,6 @@ public class EsGoodsIndexController {
     @Autowired
     private IEsProgressManagerService progressManager;
 
-    @Autowired
     private MQProducer mqProducer;
 
     @Value("${rocketmq.goods.index.topic}")

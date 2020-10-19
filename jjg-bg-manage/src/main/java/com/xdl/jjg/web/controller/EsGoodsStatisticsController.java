@@ -5,7 +5,6 @@ import cn.hutool.core.io.IoUtil;
 import cn.hutool.poi.excel.ExcelUtil;
 import cn.hutool.poi.excel.ExcelWriter;
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jjg.shop.model.domain.EsGoodsTotalStatisticsDO;
 import com.jjg.system.model.form.EsGoodsAveragePriceForm;
 import com.jjg.system.model.form.EsGoodsHotSellForm;
@@ -54,7 +53,7 @@ public class EsGoodsStatisticsController {
     @Autowired
     private GoodsTotalStatisticsService esGoodsTotalStatisticsService;
 
-    @Autowired
+
     private OSSUploader ossUploader;
 
     @ApiOperation(value = "商品销售明细", hidden = true)
@@ -62,7 +61,7 @@ public class EsGoodsStatisticsController {
     public ApiResponse<EsGoodsSalesDetailVO> goodsSalesDetail(@ApiParam(name = "商品销售明细", value = "form") @Valid EsGoodsSalesDetailForm form) {
         EsGoodsSalesDetailDTO esGoodsSalesDetailDTO = new EsGoodsSalesDetailDTO();
         BeanUtil.copyProperties(form, esGoodsSalesDetailDTO);
-        DubboPageResult<EsGoodsSalesDetailDO> result = esGoodsStatisticsService.getGoodsSalesDetailList(esGoodsSalesDetailDTO, new Page(form.getPageNum(), form.getPageSize()));
+        DubboPageResult<EsGoodsSalesDetailDO> result = esGoodsStatisticsService.getGoodsSalesDetailList(esGoodsSalesDetailDTO,form.getPageSize(),form.getPageNum());
         if (!result.isSuccess()) {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
@@ -75,7 +74,7 @@ public class EsGoodsStatisticsController {
     public ApiResponse goodsSalesDetailExport(@ApiParam(name = "商品销售明细", value = "form") @Valid EsGoodsSalesDetailForm form) {
         EsGoodsSalesDetailDTO esGoodsSalesDetailDTO = new EsGoodsSalesDetailDTO();
         BeanUtil.copyProperties(form, esGoodsSalesDetailDTO);
-        DubboPageResult<EsGoodsSalesDetailDO> result = esGoodsStatisticsService.getGoodsSalesDetailList(esGoodsSalesDetailDTO, new Page(form.getPageNum(), form.getPageSize()));
+        DubboPageResult<EsGoodsSalesDetailDO> result = esGoodsStatisticsService.getGoodsSalesDetailList(esGoodsSalesDetailDTO, form.getPageSize(),form.getPageNum());
         if (!result.isSuccess()) {
             return ApiPageResponse.fail(ApiStatus.wrapperException(result));
         }
@@ -106,7 +105,7 @@ public class EsGoodsStatisticsController {
     public ApiResponse<EsGoodsHotSellVO> goodsHotSell(@ApiParam(name = "商品热卖榜") @Valid EsGoodsHotSellForm form) {
         EsGoodsHotSellDTO esGoodsHotSellDTO = new EsGoodsHotSellDTO();
         BeanUtil.copyProperties(form, esGoodsHotSellDTO);
-        DubboResult<IPage<EsGoodsHotSellDO>> result = esGoodsStatisticsService.getGoodsHotSell(esGoodsHotSellDTO, new Page(form.getPageNum(), form.getPageSize()));
+        DubboResult<IPage<EsGoodsHotSellDO>> result = esGoodsStatisticsService.getGoodsHotSell(esGoodsHotSellDTO, form.getPageSize(),form.getPageNum());
         List<EsGoodsHotSellVO> esGoodsHotSellVOS = BeanUtil.copyList(result.getData().getRecords(), EsGoodsHotSellVO.class);
         return ApiPageResponse.pageSuccess(result.getData().getTotal(), esGoodsHotSellVOS);
     }
@@ -116,7 +115,7 @@ public class EsGoodsStatisticsController {
     public ApiResponse<EsGoodsHotSellVO> goodsHotSellExport(@ApiParam(name = "商品热卖榜") @Valid EsGoodsHotSellForm form) {
         EsGoodsHotSellDTO esGoodsHotSellDTO = new EsGoodsHotSellDTO();
         BeanUtil.copyProperties(form, esGoodsHotSellDTO);
-        DubboResult<IPage<EsGoodsHotSellDO>> result = esGoodsStatisticsService.getGoodsHotSell(esGoodsHotSellDTO, new Page(form.getPageNum(), form.getPageSize()));
+        DubboResult<IPage<EsGoodsHotSellDO>> result = esGoodsStatisticsService.getGoodsHotSell(esGoodsHotSellDTO,form.getPageSize(),form.getPageNum());
         List<EsGoodsHotSellVO> esGoodsHotSellVOS = BeanUtil.copyList(result.getData().getRecords(), EsGoodsHotSellVO.class);
         ExcelWriter writer = ExcelUtil.getWriter();
         writer.merge(5, "商品热卖榜");
@@ -142,7 +141,7 @@ public class EsGoodsStatisticsController {
     public ApiResponse<EsGoodsPaymentConversionRateVO> goodsPaymentConversionRate(@ApiParam(name = "商品转化率榜") @Valid EsGoodsPaymentConversionRateForm form) {
         EsGoodsPaymentConversionRateDTO esGoodsPaymentConversionRateDTO = new EsGoodsPaymentConversionRateDTO();
         BeanUtil.copyProperties(form, esGoodsPaymentConversionRateDTO);
-        DubboResult<IPage<EsGoodsPaymentConversionRateDO>> result = esGoodsStatisticsService.getGoodsPaymentConversionRate(esGoodsPaymentConversionRateDTO, new Page(form.getPageNum(), form.getPageSize()));
+        DubboResult<IPage<EsGoodsPaymentConversionRateDO>> result = esGoodsStatisticsService.getGoodsPaymentConversionRate(esGoodsPaymentConversionRateDTO,form.getPageSize(),form.getPageNum());
         List<EsGoodsPaymentConversionRateVO> esGoodsPaymentConversionRateVOS = BeanUtil.copyList(result.getData().getRecords(), EsGoodsPaymentConversionRateVO.class);
         return ApiPageResponse.pageSuccess(result.getData().getTotal(), esGoodsPaymentConversionRateVOS);
     }
@@ -152,7 +151,7 @@ public class EsGoodsStatisticsController {
     public ApiResponse<EsGoodsPaymentConversionRateVO> goodsPaymentConversionRateExport(@ApiParam(name = "商品转化率榜") @Valid EsGoodsPaymentConversionRateForm form) {
         EsGoodsPaymentConversionRateDTO esGoodsPaymentConversionRateDTO = new EsGoodsPaymentConversionRateDTO();
         BeanUtil.copyProperties(form, esGoodsPaymentConversionRateDTO);
-        DubboResult<IPage<EsGoodsPaymentConversionRateDO>> result = esGoodsStatisticsService.getGoodsPaymentConversionRate(esGoodsPaymentConversionRateDTO, new Page(form.getPageNum(), form.getPageSize()));
+        DubboResult<IPage<EsGoodsPaymentConversionRateDO>> result = esGoodsStatisticsService.getGoodsPaymentConversionRate(esGoodsPaymentConversionRateDTO,form.getPageSize(),form.getPageNum());
         List<EsGoodsPaymentConversionRateVO> esGoodsPaymentConversionRateVOS = BeanUtil.copyList(result.getData().getRecords(), EsGoodsPaymentConversionRateVO.class);
         ExcelWriter writer = ExcelUtil.getWriter();
         writer.merge(5, "商品转化率榜");
@@ -178,7 +177,7 @@ public class EsGoodsStatisticsController {
     public ApiResponse<EsGoodsAveragePriceVO> goodsAveragePrice(@ApiParam(name = "商品客单价") @Valid EsGoodsAveragePriceForm form) {
         EsGoodsAveragePriceDTO esGoodsAveragePriceDTO = new EsGoodsAveragePriceDTO();
         BeanUtil.copyProperties(form, esGoodsAveragePriceDTO);
-        DubboResult<IPage<EsGoodsAveragePriceDO>> result = esGoodsStatisticsService.getGoodsAveragePrice(esGoodsAveragePriceDTO, new Page(form.getPageNum(), form.getPageSize()));
+        DubboResult<IPage<EsGoodsAveragePriceDO>> result = esGoodsStatisticsService.getGoodsAveragePrice(esGoodsAveragePriceDTO,form.getPageSize(),form.getPageNum());
         List<EsGoodsAveragePriceVO> esGoodsAveragePriceVOS = BeanUtil.copyList(result.getData().getRecords(), EsGoodsAveragePriceVO.class);
         return ApiPageResponse.pageSuccess(result.getData().getTotal(), esGoodsAveragePriceVOS);
     }
@@ -188,7 +187,7 @@ public class EsGoodsStatisticsController {
     public ApiResponse<EsGoodsAveragePriceVO> goodsAveragePriceExport(@ApiParam(name = "商品客单价") @Valid EsGoodsAveragePriceForm form) {
         EsGoodsAveragePriceDTO esGoodsAveragePriceDTO = new EsGoodsAveragePriceDTO();
         BeanUtil.copyProperties(form, esGoodsAveragePriceDTO);
-        DubboResult<IPage<EsGoodsAveragePriceDO>> result = esGoodsStatisticsService.getGoodsAveragePrice(esGoodsAveragePriceDTO, new Page(form.getPageNum(), form.getPageSize()));
+        DubboResult<IPage<EsGoodsAveragePriceDO>> result = esGoodsStatisticsService.getGoodsAveragePrice(esGoodsAveragePriceDTO, form.getPageSize(),form.getPageNum());
         List<EsGoodsAveragePriceVO> esGoodsAveragePriceVOS = BeanUtil.copyList(result.getData().getRecords(), EsGoodsAveragePriceVO.class);
         ExcelWriter writer = ExcelUtil.getWriter();
         writer.merge(4, "商品客单价");

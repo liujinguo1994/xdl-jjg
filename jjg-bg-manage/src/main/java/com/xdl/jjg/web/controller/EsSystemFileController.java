@@ -9,7 +9,6 @@ import com.xdl.jjg.util.FileUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,7 +27,7 @@ import java.io.IOException;
 @Api(value = "/esSystemFile", tags = "文件管理")
 public class EsSystemFileController {
 
-    @Autowired
+
     private OSSUploader ossUploader;
 
     @ApiOperation(value = "文件上传", response = FileVO.class)

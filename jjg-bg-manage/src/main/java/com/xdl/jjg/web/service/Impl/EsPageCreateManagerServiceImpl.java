@@ -33,7 +33,6 @@ public class EsPageCreateManagerServiceImpl implements IEsPageCreateManagerServi
     @Autowired
     private IEsProgressManagerService progressManager;
 
-    @Autowired
     private MQProducer mqProducer;
 
     @Value("${rocketmq.static.page.topic}")

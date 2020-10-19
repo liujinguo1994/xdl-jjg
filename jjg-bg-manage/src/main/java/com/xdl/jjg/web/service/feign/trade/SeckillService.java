@@ -17,7 +17,7 @@ public interface SeckillService {
      * @return: com.shopx.common.model.result.DubboResult<EsSeckillDO>
      */
     @GetMapping("/getSeckill")
-    DubboResult<EsSeckillDO> getSeckill(@RequestParam("") Long id);
+    DubboResult<EsSeckillDO> getSeckill(@RequestParam("id") Long id);
 
     /**
      * 系统后台
