@@ -2,7 +2,7 @@ package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.xdl.jjg.entity.EsAdminUser;
-import org.apache.ibatis.annotations.Mapper;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * <p>
@@ -12,7 +12,7 @@ import org.apache.ibatis.annotations.Mapper;
  * @author LiuJG 344009799@qq.com
  * @since 2020-10-09
  */
-@Mapper
+@Configuration
 public interface EsAdminUserMapper extends BaseMapper<EsAdminUser> {
 
 }
