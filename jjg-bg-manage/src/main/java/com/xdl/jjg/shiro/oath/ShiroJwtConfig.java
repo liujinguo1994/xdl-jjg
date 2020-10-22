@@ -68,6 +68,8 @@ public class ShiroJwtConfig {
 
         //用户相关
         filterChainDefinitionMap.put("/esAdminUser/**", "anon");// 新增用户
+
+        filterChainDefinitionMap.put("/esOrder/**", "anon");// 测试
         filterChainDefinitionMap.put("/adminUser/captcha.jpg", "anon");// 图片验证码(kaptcha框架)
         filterChainDefinitionMap.put("/adminUser/login", "anon");//管理员登录
         filterChainDefinitionMap.put("/esRegions/children/**", "anon");//获取某地区的子地区

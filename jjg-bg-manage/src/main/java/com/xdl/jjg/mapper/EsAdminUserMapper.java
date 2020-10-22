@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Configuration;
  * @author LiuJG 344009799@qq.com
  * @since 2020-10-09
  */
-@Configuration
 public interface EsAdminUserMapper extends BaseMapper<EsAdminUser> {
 
 }

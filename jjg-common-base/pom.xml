@@ -69,11 +69,11 @@
             <version>1.21</version>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>com.baomidou</groupId>-->
-            <!--<artifactId>mybatis-plus-boot-starter</artifactId>-->
-            <!--<version>${mybatis-plus-boot-starter.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus-boot-starter.version}</version>
+        </dependency>
 
         <!-- mybatis-plus begin -->
         <dependency>
@@ -86,11 +86,11 @@
             <artifactId>mybatis-plus-extension</artifactId>
             <version>3.1.0</version>
         </dependency>
-        <!--<dependency>-->
-            <!--<groupId>com.baomidou</groupId>-->
-            <!--<artifactId>dynamic-datasource-spring-boot-starter</artifactId>-->
-            <!--<version>${dynamic-datasource-spring-boot-starter.version}</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>dynamic-datasource-spring-boot-starter</artifactId>
+            <version>${dynamic-datasource-spring-boot-starter.version}</version>
+        </dependency>
         <!-- mybatis-plus end -->
 
         <!-- jackson begin -->
