@@ -1,19 +1,17 @@
 package com.xdl.jjg.web.controller.pc.feedback;
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.web.BaseController;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.system.api.model.domain.dto.EsUserFeedbackDTO;
-import com.shopx.system.api.model.domain.vo.EsUserFeedbackVO;
-import com.shopx.system.api.service.IEsUserFeedbackService;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.request.EsUserFeedbackForm;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
-import com.shopx.trade.web.shiro.oath.ShiroUser;
+
+import com.jjg.system.model.dto.EsUserFeedbackDTO;
+import com.jjg.system.model.vo.EsUserFeedbackVO;
+import com.jjg.trade.model.form.EsUserFeedbackForm;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.web.controller.BaseController;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.PostMapping;

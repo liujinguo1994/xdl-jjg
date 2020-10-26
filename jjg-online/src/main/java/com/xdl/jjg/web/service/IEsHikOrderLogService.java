@@ -1,7 +1,7 @@
 package com.xdl.jjg.web.service;
 
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.trade.api.model.domain.dto.EsHikOrderLogDTO;
+import com.jjg.trade.model.dto.EsHikOrderLogDTO;
+import com.xdl.jjg.response.service.DubboResult;
 
 /**
  * <p>

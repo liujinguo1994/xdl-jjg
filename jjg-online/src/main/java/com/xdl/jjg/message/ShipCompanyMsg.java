@@ -1,6 +1,6 @@
 package com.xdl.jjg.message;
 
-import com.shopx.trade.api.model.domain.dto.EsShipTemplateDTO;
+import com.jjg.trade.model.dto.EsShipTemplateDTO;
 import lombok.Data;
 
 import java.io.Serializable;

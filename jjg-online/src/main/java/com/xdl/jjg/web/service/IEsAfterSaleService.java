@@ -1,13 +1,13 @@
 package com.xdl.jjg.web.service;
 
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.trade.api.model.domain.EsAfterSaleDO;
-import com.shopx.trade.api.model.domain.EsServiceOrderDO;
-import com.shopx.trade.api.model.domain.dto.BuyerRefundApplyDTO;
-import com.shopx.trade.api.model.domain.dto.EsAfterSaleDTO;
-import com.shopx.trade.api.model.domain.dto.SellerRefundApprovalDTO;
-import com.shopx.trade.api.model.domain.vo.RefundApplyVO;
+
+import com.jjg.trade.model.domain.EsAfterSaleDO;
+import com.jjg.trade.model.domain.EsServiceOrderDO;
+import com.jjg.trade.model.dto.BuyerRefundApplyDTO;
+import com.jjg.trade.model.dto.EsAfterSaleDTO;
+import com.jjg.trade.model.dto.SellerRefundApprovalDTO;
+import com.jjg.trade.model.vo.RefundApplyVO;
+import com.xdl.jjg.response.service.DubboResult;
 
 /**
  * <p>

@@ -1,10 +1,11 @@
 package com.xdl.jjg.web.service;
 
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.trade.api.model.domain.EsFullDiscountGiftDO;
-import com.shopx.trade.api.model.domain.dto.EsFullDiscountGiftDTO;
-import com.shopx.trade.api.model.domain.dto.EsGiftSkuQuantityDTO;
+
+import com.jjg.trade.model.domain.EsFullDiscountGiftDO;
+import com.jjg.trade.model.dto.EsFullDiscountGiftDTO;
+import com.jjg.trade.model.dto.EsGiftSkuQuantityDTO;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
 
 import java.util.List;
 

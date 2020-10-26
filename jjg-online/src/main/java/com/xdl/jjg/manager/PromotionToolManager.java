@@ -1,29 +1,25 @@
 package com.xdl.jjg.manager;
 
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.MathUtil;
-import com.shopx.goods.api.model.domain.EsCategoryDO;
-import com.shopx.goods.api.service.IEsCategoryService;
-import com.shopx.member.api.model.domain.EsMemberAddressDO;
-import com.shopx.member.api.model.domain.EsMemberDO;
-import com.shopx.member.api.model.domain.dto.EsMemberCouponDTO;
-import com.shopx.member.api.service.IEsMemberAddressService;
-import com.shopx.member.api.service.IEsMemberCouponService;
-import com.shopx.member.api.service.IEsMemberService;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.EsFullDiscountDO;
-import com.shopx.trade.api.model.domain.EsShipCompanyDetailsDO;
-import com.shopx.trade.api.model.domain.vo.*;
-import com.shopx.trade.api.model.enums.PromotionTypeEnum;
-import com.shopx.trade.api.service.IEsFullDiscountService;
-import com.shopx.trade.api.service.IEsShipCompanyDetailsService;
-import com.shopx.trade.api.utils.CurrencyUtil;
-import com.shopx.trade.web.constant.ApplicationContextHolder;
-import com.shopx.trade.web.manager.event.PromotionEvent;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
+import com.jjg.member.model.domain.EsMemberAddressDO;
+import com.jjg.member.model.domain.EsMemberDO;
+import com.jjg.member.model.dto.EsMemberCouponDTO;
+import com.jjg.shop.model.domain.EsCategoryDO;
+import com.jjg.trade.model.domain.EsFullDiscountDO;
+import com.jjg.trade.model.domain.EsShipCompanyDetailsDO;
+import com.jjg.trade.model.enums.PromotionTypeEnum;
+import com.jjg.trade.model.vo.*;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.context.ApplicationContextHolder;
+import com.xdl.jjg.manager.event.PromotionEvent;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.util.MathUtil;
+import com.xdl.jjg.utils.CurrencyUtil;
+import com.xdl.jjg.web.service.IEsFullDiscountService;
+import com.xdl.jjg.web.service.IEsShipCompanyDetailsService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
@@ -136,7 +132,7 @@ public class PromotionToolManager {
                     DubboResult fullDiscountResult = this.fullDiscountService.getFullDiscountForCache(activityId);
 
                     if (!fullDiscountResult.isSuccess()){
-                        throw new  ArgumentException(fullDiscountResult.getCode(),fullDiscountResult.getMsg());
+                        throw new ArgumentException(fullDiscountResult.getCode(),fullDiscountResult.getMsg());
                     }
 
                     groupPromotionVo.setActivityDetail(fullDiscountResult.getData());

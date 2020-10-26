@@ -1,9 +1,9 @@
 package com.xdl.jjg.web.service;
 
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.trade.api.model.domain.EsGroupBuyActiveDO;
-import com.shopx.trade.api.model.domain.dto.EsGroupBuyActiveDTO;
+import com.jjg.trade.model.domain.EsGroupBuyActiveDO;
+import com.jjg.trade.model.dto.EsGroupBuyActiveDTO;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
 
 /**
  * <p>

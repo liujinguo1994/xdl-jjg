@@ -1,8 +1,8 @@
 package com.xdl.jjg.message;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.shopx.trade.api.model.domain.dto.EsOrderDTO;
-import com.shopx.trade.api.model.enums.OrderStatusEnum;
+import com.jjg.trade.model.dto.EsOrderDTO;
+import com.jjg.trade.model.enums.OrderStatusEnum;
 import lombok.Data;
 
 import java.io.Serializable;

@@ -1,8 +1,8 @@
 package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.shopx.trade.dao.entity.EsDeliveryMessage;
-import com.shopx.trade.dao.entity.EsDeliveryService;
+import com.xdl.jjg.entity.EsDeliveryMessage;
+import com.xdl.jjg.entity.EsDeliveryService;
 import org.apache.ibatis.annotations.Param;
 
 /**

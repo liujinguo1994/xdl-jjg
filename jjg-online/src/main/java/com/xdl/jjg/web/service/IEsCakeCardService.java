@@ -3,12 +3,13 @@ package com.xdl.jjg.web.service;/**
  * @date 2020/3/31 13:43
  **/
 
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.trade.api.model.domain.EsCakeCardDO;
-import com.shopx.trade.api.model.domain.dto.EsCakeCardDTO;
-import com.shopx.trade.api.model.domain.dto.EsCakeCardQueryDTO;
-import com.shopx.trade.api.model.domain.dto.EsCakeImportDTO;
+
+import com.jjg.trade.model.domain.EsCakeCardDO;
+import com.jjg.trade.model.dto.EsCakeCardDTO;
+import com.jjg.trade.model.dto.EsCakeCardQueryDTO;
+import com.jjg.trade.model.dto.EsCakeImportDTO;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
 
 /**
  @Author wangaf 826988665@qq.com
@@ -30,7 +31,7 @@ public interface IEsCakeCardService {
      *            商品
      * @return Goods 商品
      */
-    DubboPageResult<EsCakeCardDO>  list(EsCakeCardQueryDTO param);
+    DubboPageResult<EsCakeCardDO> list(EsCakeCardQueryDTO param);
 
     DubboResult<EsCakeCardDO>  getCakeCardByOrderSn(String orderSn);
     /**

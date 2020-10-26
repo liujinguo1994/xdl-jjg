@@ -1,9 +1,9 @@
 package com.xdl.jjg.web.service;
 
 
+import com.jjg.trade.model.domain.EsShipCompanyDetailsDO;
+import com.jjg.trade.model.dto.EsShipCompanyDetailsDTO;
 import com.xdl.jjg.message.ShipCompanyMsg;
-import com.xdl.jjg.model.domain.EsShipCompanyDetailsDO;
-import com.xdl.jjg.model.dto.EsShipCompanyDetailsDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

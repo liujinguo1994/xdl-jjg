@@ -1,15 +1,12 @@
 package com.xdl.jjg.web.controller.pc.goods;
 
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.goods.api.service.IEsGoodsService;
-import com.shopx.member.api.service.IEsMemberCollectionGoodsService;
-import com.shopx.member.api.service.IEsMemberCommentService;
-import com.shopx.member.api.service.IEsMemberCouponService;
-import com.shopx.trade.api.model.domain.vo.GoodsDetailMessageVO;
-import com.shopx.trade.api.service.IEsCouponService;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
-import com.shopx.trade.web.shiro.oath.ShiroUser;
+
+import com.jjg.trade.model.vo.GoodsDetailMessageVO;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.web.service.IEsCouponService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;

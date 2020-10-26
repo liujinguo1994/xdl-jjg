@@ -1,17 +1,21 @@
 package com.xdl.jjg.plugin;
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.common.util.StringUtil;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.EsPaymentMethodDO;
-import com.shopx.trade.api.model.domain.vo.FormItemVO;
-import com.shopx.trade.api.model.domain.vo.FormVO;
-import com.shopx.trade.api.model.domain.vo.PayBillVO;
-import com.shopx.trade.api.model.enums.*;
-import com.shopx.trade.api.service.IEsPaymentBillService;
-import com.shopx.trade.api.service.IEsPaymentMethodService;
+
+import com.jjg.trade.model.domain.EsPaymentMethodDO;
+import com.jjg.trade.model.enums.ClientType;
+import com.jjg.trade.model.enums.OpenStatus;
+import com.jjg.trade.model.enums.PayConfigParam;
+import com.jjg.trade.model.enums.RequestParam;
+import com.jjg.trade.model.vo.FormItemVO;
+import com.jjg.trade.model.vo.FormVO;
+import com.jjg.trade.model.vo.PayBillVO;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.util.StringUtil;
+import com.xdl.jjg.web.service.IEsPaymentBillService;
+import com.xdl.jjg.web.service.IEsPaymentMethodService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;

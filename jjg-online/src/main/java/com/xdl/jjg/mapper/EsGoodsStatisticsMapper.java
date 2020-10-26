@@ -2,14 +2,14 @@ package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.shopx.trade.api.model.domain.EsGoodsAveragePriceDO;
-import com.shopx.trade.api.model.domain.EsGoodsHotSellDO;
-import com.shopx.trade.api.model.domain.EsGoodsPaymentConversionRateDO;
-import com.shopx.trade.api.model.domain.EsGoodsSalesDetailDO;
-import com.shopx.trade.api.model.domain.dto.EsGoodsAveragePriceDTO;
-import com.shopx.trade.api.model.domain.dto.EsGoodsHotSellDTO;
-import com.shopx.trade.api.model.domain.dto.EsGoodsPaymentConversionRateDTO;
-import com.shopx.trade.api.model.domain.dto.EsGoodsSalesDetailDTO;
+import com.jjg.trade.model.domain.EsGoodsAveragePriceDO;
+import com.jjg.trade.model.domain.EsGoodsHotSellDO;
+import com.jjg.trade.model.domain.EsGoodsPaymentConversionRateDO;
+import com.jjg.trade.model.domain.EsGoodsSalesDetailDO;
+import com.jjg.trade.model.dto.EsGoodsAveragePriceDTO;
+import com.jjg.trade.model.dto.EsGoodsHotSellDTO;
+import com.jjg.trade.model.dto.EsGoodsPaymentConversionRateDTO;
+import com.jjg.trade.model.dto.EsGoodsSalesDetailDTO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

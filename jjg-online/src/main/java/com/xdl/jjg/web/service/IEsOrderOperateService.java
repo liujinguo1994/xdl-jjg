@@ -1,13 +1,14 @@
 package com.xdl.jjg.web.service;
 
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.trade.api.model.domain.EsOrderDO;
-import com.shopx.trade.api.model.domain.dto.EsDeliveryDTO;
-import com.shopx.trade.api.model.domain.vo.CancelVO;
-import com.shopx.trade.api.model.domain.vo.CompleteVO;
-import com.shopx.trade.api.model.domain.vo.RogVO;
-import com.shopx.trade.api.model.enums.OrderPermission;
-import com.shopx.trade.api.model.enums.ServiceStatusEnum;
+
+import com.jjg.trade.model.domain.EsOrderDO;
+import com.jjg.trade.model.dto.EsDeliveryDTO;
+import com.jjg.trade.model.enums.OrderPermission;
+import com.jjg.trade.model.enums.ServiceStatusEnum;
+import com.jjg.trade.model.vo.CancelVO;
+import com.jjg.trade.model.vo.CompleteVO;
+import com.jjg.trade.model.vo.RogVO;
+import com.xdl.jjg.response.service.DubboResult;
 
 /**
  * 订单流程操作

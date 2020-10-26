@@ -1,35 +1,30 @@
 package com.xdl.jjg.manager;
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.common.util.SnowflakeIdWorker;
-import com.shopx.goods.api.model.domain.cache.EsGoodsCO;
-import com.shopx.goods.api.model.domain.cache.EsGoodsSkuCO;
-import com.shopx.goods.api.model.domain.enums.GoodsCachePrefix;
-import com.shopx.goods.api.service.IEsGoodsService;
-import com.shopx.goods.api.service.IEsGoodsSkuService;
-import com.shopx.member.api.model.domain.EsCompanyDO;
-import com.shopx.member.api.model.domain.EsMemberAddressDO;
-import com.shopx.member.api.model.domain.EsMemberDO;
-import com.shopx.member.api.service.IEsCompanyService;
-import com.shopx.member.api.service.IEsMemberAddressService;
-import com.shopx.member.api.service.IEsMemberService;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.constant.cacheprefix.PromotionCacheKeys;
-import com.shopx.trade.api.model.domain.EsDeliveryMessageDO;
-import com.shopx.trade.api.model.domain.EsSeckillTimetableDO;
-import com.shopx.trade.api.model.domain.dto.CartDTO;
-import com.shopx.trade.api.model.domain.dto.CartItemsDTO;
-import com.shopx.trade.api.model.domain.dto.EsOrderDTO;
-import com.shopx.trade.api.model.domain.dto.EsTradeDTO;
-import com.shopx.trade.api.model.domain.vo.*;
-import com.shopx.trade.api.model.enums.*;
-import com.shopx.trade.api.service.*;
-import com.shopx.trade.web.manager.event.TradeIntoDbEvent;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
-import com.shopx.trade.web.shiro.oath.ShiroUser;
+import com.jjg.member.model.domain.EsCompanyDO;
+import com.jjg.member.model.domain.EsMemberAddressDO;
+import com.jjg.member.model.domain.EsMemberDO;
+import com.jjg.shop.model.co.EsGoodsCO;
+import com.jjg.shop.model.co.EsGoodsSkuCO;
+import com.jjg.shop.model.enums.GoodsCachePrefix;
+import com.jjg.trade.model.domain.EsDeliveryMessageDO;
+import com.jjg.trade.model.domain.EsSeckillTimetableDO;
+import com.jjg.trade.model.dto.CartDTO;
+import com.jjg.trade.model.dto.CartItemsDTO;
+import com.jjg.trade.model.dto.EsOrderDTO;
+import com.jjg.trade.model.dto.EsTradeDTO;
+import com.jjg.trade.model.enums.*;
+import com.jjg.trade.model.vo.*;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.constant.cacheprefix.PromotionCacheKeys;
+import com.xdl.jjg.manager.event.TradeIntoDbEvent;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.util.SnowflakeIdWorker;
+import com.xdl.jjg.web.service.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
@@ -44,7 +39,8 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 
-import static com.shopx.common.util.BeanUtil.copyList;
+import static com.xdl.jjg.util.BeanUtil.copyList;
+
 
 /**
  * @ClassName: TradeManager
@@ -105,7 +101,7 @@ public class TradeManager {
     @Autowired
     private TradeIntoDbEvent tradeIntoDbEvent;
 
-    public static final  SnowflakeIdWorker snowflakeIdWorker = new SnowflakeIdWorker(0,0);
+    public static final SnowflakeIdWorker snowflakeIdWorker = new SnowflakeIdWorker(0,0);
 
 
     public static EsTradeSnMoneyVO esTradeSnMoneyVO = new EsTradeSnMoneyVO();

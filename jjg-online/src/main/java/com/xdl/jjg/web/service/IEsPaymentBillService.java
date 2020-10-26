@@ -1,10 +1,11 @@
 package com.xdl.jjg.web.service;
 
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.trade.api.model.domain.EsPaymentBillDO;
-import com.shopx.trade.api.model.domain.dto.EsPaymentBillDTO;
-import com.shopx.trade.api.model.enums.TradeType;
+
+import com.jjg.trade.model.domain.EsPaymentBillDO;
+import com.jjg.trade.model.dto.EsPaymentBillDTO;
+import com.jjg.trade.model.enums.TradeType;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
 
 /**
  * <p>

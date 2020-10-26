@@ -1,10 +1,11 @@
 package com.xdl.jjg.transaction;
 
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.trade.api.model.domain.dto.EsTradeDTO;
-import com.shopx.trade.web.config.RocketMqAddress;
-import com.shopx.trade.web.manager.TradeManager;
+
+import com.jjg.trade.model.dto.EsTradeDTO;
+import com.xdl.jjg.config.RocketMqAddress;
+import com.xdl.jjg.manager.TradeManager;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.util.JsonUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.LocalTransactionState;

@@ -3,7 +3,7 @@ package com.xdl.jjg.utils;/**
  * @date 2020/4/3 15:13
  **/
 
-import com.shopx.common.util.security.BASE64Decoder;
+import com.xdl.jjg.util.security.BASE64Decoder;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.*;

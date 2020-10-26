@@ -1,9 +1,10 @@
 package com.xdl.jjg.web.service;
 
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.trade.api.model.domain.EsPromotionGoodsDO;
-import com.shopx.trade.api.model.domain.dto.EsPromotionGoodsDTO;
+
+import com.jjg.trade.model.domain.EsPromotionGoodsDO;
+import com.jjg.trade.model.dto.EsPromotionGoodsDTO;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
 
 import java.util.List;
 

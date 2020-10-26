@@ -1,8 +1,8 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.dto.EsBillDTO;
-import com.xdl.jjg.model.dto.EsBillDetailDTO;
+import com.jjg.trade.model.dto.EsBillDTO;
+import com.jjg.trade.model.dto.EsBillDetailDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

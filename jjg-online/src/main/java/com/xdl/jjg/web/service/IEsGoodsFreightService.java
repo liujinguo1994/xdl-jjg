@@ -1,10 +1,11 @@
 package com.xdl.jjg.web.service;
 
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.trade.api.model.domain.EsGoodsFreightDO;
-import com.shopx.trade.api.model.domain.EsShipTemplateDO;
-import com.shopx.trade.api.model.domain.dto.EsGoodsFreightDTO;
+
+import com.jjg.trade.model.domain.EsGoodsFreightDO;
+import com.jjg.trade.model.domain.EsShipTemplateDO;
+import com.jjg.trade.model.dto.EsGoodsFreightDTO;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
 
 /**
  * <p>

@@ -1,12 +1,13 @@
 package com.xdl.jjg.mapper;
 
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.shopx.trade.api.model.domain.EsTradeDO;
-import com.shopx.trade.api.model.domain.dto.EsTradeDTO;
-import com.shopx.trade.dao.entity.EsBuyerTrade;
-import com.shopx.trade.dao.entity.EsTrade;
+import com.jjg.trade.model.domain.EsTradeDO;
+import com.jjg.trade.model.dto.EsTradeDTO;
+import com.xdl.jjg.entity.EsBuyerTrade;
+import com.xdl.jjg.entity.EsTrade;
 import org.apache.ibatis.annotations.Param;
 
 /**

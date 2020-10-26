@@ -1,8 +1,9 @@
 package com.xdl.jjg.mapper;
 
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.shopx.trade.api.model.domain.EsCakeCardDO;
-import com.shopx.trade.dao.entity.EsCakeCard;
+import com.jjg.trade.model.domain.EsCakeCardDO;
+import com.xdl.jjg.entity.EsCakeCard;
 
 /**
  * <p>

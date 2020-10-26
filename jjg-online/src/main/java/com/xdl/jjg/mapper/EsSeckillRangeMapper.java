@@ -1,8 +1,8 @@
 package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.shopx.trade.api.model.domain.EsSeckillRangeDO;
-import com.shopx.trade.dao.entity.EsSeckillRange;
+import com.jjg.trade.model.domain.EsSeckillRangeDO;
+import com.xdl.jjg.entity.EsSeckillRange;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

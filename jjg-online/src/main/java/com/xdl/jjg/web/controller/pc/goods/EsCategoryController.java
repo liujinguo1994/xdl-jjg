@@ -1,28 +1,23 @@
 package com.xdl.jjg.web.controller.pc.goods;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.model.domain.*;
-import com.shopx.goods.api.model.domain.vo.*;
-import com.shopx.goods.api.service.IEsBrandService;
-import com.shopx.goods.api.service.IEsCategoryService;
-import com.shopx.goods.api.service.IEsGoodsService;
-import com.shopx.goods.api.service.IEsParameterGroupService;
-import com.shopx.member.api.service.IEsMemberCollectionGoodsService;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
+import com.jjg.shop.model.domain.*;
+import com.jjg.shop.model.vo.*;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.util.BeanUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.Reference;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
-import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

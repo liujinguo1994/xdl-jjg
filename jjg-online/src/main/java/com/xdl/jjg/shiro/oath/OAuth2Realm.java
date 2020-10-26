@@ -1,14 +1,12 @@
 package com.xdl.jjg.shiro.oath;
 
 
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.member.api.model.domain.EsMemberDO;
-import com.shopx.member.api.model.domain.EsMemberTokenDO;
-import com.shopx.member.api.model.domain.dto.EsMemberDTO;
-import com.shopx.member.api.model.domain.dto.EsMemberTokenDTO;
-import com.shopx.member.api.service.IEsMemberService;
-import com.shopx.member.api.service.IEsMemberTokenService;
+import com.jjg.member.model.domain.EsMemberDO;
+import com.jjg.member.model.domain.EsMemberTokenDO;
+import com.jjg.member.model.dto.EsMemberDTO;
+import com.jjg.member.model.dto.EsMemberTokenDTO;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;

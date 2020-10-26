@@ -1,8 +1,8 @@
 package com.xdl.jjg.shiro.oath;
 
 
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.util.JsonUtil;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.util.JsonUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.apache.shiro.authc.AuthenticationException;

@@ -1,7 +1,7 @@
 package com.xdl.jjg.shiro.cache;
 
-import com.shopx.common.util.SerializeUtil;
-import com.shopx.trade.web.shiro.oath.ShiroUser;
+import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.util.SerializeUtil;
 import org.apache.shiro.cache.Cache;
 import org.apache.shiro.cache.CacheException;
 import org.slf4j.Logger;

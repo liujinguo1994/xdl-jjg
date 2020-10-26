@@ -1,11 +1,12 @@
 package com.xdl.jjg.web.service;
 
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.trade.api.model.domain.dto.SynPaymentParameter;
-import com.shopx.trade.api.model.domain.vo.FormVO;
-import com.shopx.trade.api.model.domain.vo.PayBillVO;
-import com.shopx.trade.api.model.enums.ClientType;
-import com.shopx.trade.api.model.enums.TradeType;
+
+import com.jjg.trade.model.dto.SynPaymentParameter;
+import com.jjg.trade.model.enums.ClientType;
+import com.jjg.trade.model.enums.TradeType;
+import com.jjg.trade.model.vo.FormVO;
+import com.jjg.trade.model.vo.PayBillVO;
+import com.xdl.jjg.response.service.DubboResult;
 
 import java.util.Map;
 

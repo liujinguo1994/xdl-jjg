@@ -1,7 +1,8 @@
 package com.xdl.jjg.web.service;
 
-import com.shopx.trade.api.model.domain.EsTradeDO;
-import com.shopx.trade.api.model.domain.dto.EsLfcOrderDTO;
+
+import com.jjg.trade.model.domain.EsTradeDO;
+import com.jjg.trade.model.dto.EsLfcOrderDTO;
 
 /**
  * 交易入库业务接口

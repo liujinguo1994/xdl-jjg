@@ -1,12 +1,13 @@
 package com.xdl.jjg.web.controller.wap.trade;
 
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.web.BaseController;
-import com.shopx.trade.api.model.domain.vo.EsSelfTimeVO;
-import com.shopx.trade.api.service.*;
-import com.shopx.trade.web.constant.ApiStatus;
+
+import com.jjg.trade.model.vo.EsSelfTimeVO;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.IEsSelfTimeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

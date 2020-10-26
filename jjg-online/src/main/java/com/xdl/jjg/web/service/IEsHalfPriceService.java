@@ -1,9 +1,10 @@
 package com.xdl.jjg.web.service;
 
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.trade.api.model.domain.EsHalfPriceDO;
-import com.shopx.trade.api.model.domain.dto.EsHalfPriceDTO;
+
+import com.jjg.trade.model.domain.EsHalfPriceDO;
+import com.jjg.trade.model.dto.EsHalfPriceDTO;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
 
 /**
  * <p>

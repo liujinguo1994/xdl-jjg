@@ -3,8 +3,8 @@ package com.xdl.jjg.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.shopx.trade.api.model.domain.dto.EsReFundQueryDTO;
-import com.shopx.trade.dao.entity.EsRefund;
+import com.jjg.trade.model.dto.EsReFundQueryDTO;
+import com.xdl.jjg.entity.EsRefund;
 import org.apache.ibatis.annotations.Param;
 
 /**

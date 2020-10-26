@@ -1,11 +1,11 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.model.domain.EsRefundDO;
-import com.xdl.jjg.model.dto.EsReFundQueryDTO;
-import com.xdl.jjg.model.dto.EsRefundDTO;
-import com.xdl.jjg.model.dto.EsWapAfterSaleRecordQueryDTO;
-import com.xdl.jjg.model.vo.EsWapRefundCountVO;
+import com.jjg.trade.model.domain.EsRefundDO;
+import com.jjg.trade.model.dto.EsReFundQueryDTO;
+import com.jjg.trade.model.dto.EsRefundDTO;
+import com.jjg.trade.model.dto.EsWapAfterSaleRecordQueryDTO;
+import com.jjg.trade.model.vo.EsWapRefundCountVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

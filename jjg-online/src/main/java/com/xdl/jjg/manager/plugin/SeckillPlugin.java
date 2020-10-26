@@ -1,10 +1,11 @@
 package com.xdl.jjg.manager.plugin;
 
-import com.shopx.common.util.MathUtil;
-import com.shopx.trade.api.model.domain.vo.*;
-import com.shopx.trade.api.model.enums.PromotionTypeEnum;
-import com.shopx.trade.web.manager.SeckillManager;
-import com.shopx.trade.web.manager.event.PromotionEvent;
+
+import com.jjg.trade.model.enums.PromotionTypeEnum;
+import com.jjg.trade.model.vo.*;
+import com.xdl.jjg.manager.SeckillManager;
+import com.xdl.jjg.manager.event.PromotionEvent;
+import com.xdl.jjg.util.MathUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

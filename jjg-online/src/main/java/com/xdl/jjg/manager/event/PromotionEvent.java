@@ -1,6 +1,7 @@
 package com.xdl.jjg.manager.event;
 
-import com.shopx.trade.api.model.domain.vo.CartVO;
+
+import com.jjg.trade.model.vo.CartVO;
 
 /**
  * 促销插件接口

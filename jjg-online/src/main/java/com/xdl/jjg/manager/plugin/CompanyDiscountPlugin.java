@@ -1,11 +1,12 @@
 package com.xdl.jjg.manager.plugin;
 
-import com.shopx.common.util.MathUtil;
-import com.shopx.trade.api.model.domain.vo.CartItemsVO;
-import com.shopx.trade.api.model.domain.vo.CartVO;
-import com.shopx.trade.api.model.domain.vo.TradePromotionGoodsVO;
-import com.shopx.trade.api.model.enums.PromotionTypeEnum;
-import com.shopx.trade.web.manager.event.PromotionEvent;
+
+import com.jjg.trade.model.enums.PromotionTypeEnum;
+import com.jjg.trade.model.vo.CartItemsVO;
+import com.jjg.trade.model.vo.CartVO;
+import com.jjg.trade.model.vo.TradePromotionGoodsVO;
+import com.xdl.jjg.manager.event.PromotionEvent;
+import com.xdl.jjg.util.MathUtil;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.springframework.stereotype.Component;
 

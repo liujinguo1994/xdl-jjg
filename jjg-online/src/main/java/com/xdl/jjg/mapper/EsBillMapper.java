@@ -1,7 +1,8 @@
 package com.xdl.jjg.mapper;
 
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.shopx.trade.dao.entity.EsBill;
+import com.xdl.jjg.entity.EsBill;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

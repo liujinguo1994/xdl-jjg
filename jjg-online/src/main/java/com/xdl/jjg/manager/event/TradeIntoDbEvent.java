@@ -1,8 +1,9 @@
 package com.xdl.jjg.manager.event;
 
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.trade.api.model.domain.dto.EsTradeDTO;
-import com.shopx.trade.api.model.domain.vo.EsTradeSnMoneyVO;
+
+import com.jjg.trade.model.dto.EsTradeDTO;
+import com.jjg.trade.model.vo.EsTradeSnMoneyVO;
+import com.xdl.jjg.response.service.DubboResult;
 
 /**
  * 交易入库事件

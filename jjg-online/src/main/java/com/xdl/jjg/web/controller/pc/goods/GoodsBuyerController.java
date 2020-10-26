@@ -1,39 +1,30 @@
 package com.xdl.jjg.web.controller.pc.goods;
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.ApiPageResponse;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.model.domain.EsGoodsDO;
-import com.shopx.goods.api.model.domain.EsGoodsIndexDO;
-import com.shopx.goods.api.model.domain.cache.*;
-import com.shopx.goods.api.model.domain.dto.EsGoodsIndexDTO;
-import com.shopx.goods.api.model.domain.vo.EsCategoryVO;
-import com.shopx.goods.api.model.domain.vo.EsGoodsVO;
-import com.shopx.goods.api.model.domain.vo.EsPromotionGoodsVO;
-import com.shopx.goods.api.service.IEsCategoryService;
-import com.shopx.goods.api.service.IEsGoodsIndexService;
-import com.shopx.goods.api.service.IEsGoodsService;
-import com.shopx.goods.api.service.IEsGoodsSkuService;
-import com.shopx.member.api.model.domain.EsDiscountDO;
-import com.shopx.member.api.model.domain.EsMemberDO;
-import com.shopx.member.api.service.IEsDiscountService;
-import com.shopx.member.api.service.IEsMemberService;
-import com.shopx.member.api.service.IEsSearchKeyWordService;
-import com.shopx.trade.api.constant.ErrorDate;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.*;
-import com.shopx.trade.api.model.domain.vo.EsFreightTemplateDetailVO;
-import com.shopx.trade.api.model.domain.vo.EsGoodsIndexVO;
-import com.shopx.trade.api.model.domain.vo.SeckillGoodsVO;
-import com.shopx.trade.api.model.enums.PromotionTypeEnum;
-import com.shopx.trade.api.service.*;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.manager.SeckillManager;
-import com.shopx.trade.web.request.query.GoodsQueryForm;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
+import com.jjg.member.model.domain.EsDiscountDO;
+import com.jjg.member.model.domain.EsMemberDO;
+import com.jjg.shop.model.co.*;
+import com.jjg.shop.model.domain.EsGoodsDO;
+import com.jjg.shop.model.domain.EsGoodsIndexDO;
+import com.jjg.shop.model.dto.EsGoodsIndexDTO;
+import com.jjg.shop.model.vo.EsCategoryVO;
+import com.jjg.shop.model.vo.EsGoodsVO;
+import com.jjg.trade.model.domain.*;
+import com.jjg.trade.model.enums.PromotionTypeEnum;
+import com.jjg.trade.model.form.query.GoodsQueryForm;
+import com.jjg.trade.model.vo.EsFreightTemplateDetailVO;
+import com.jjg.trade.model.vo.SeckillGoodsVO;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.ErrorDate;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.manager.SeckillManager;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -82,7 +73,7 @@ public class GoodsBuyerController {
     private IEsPromotionGoodsService iEsPromotionGoodsService;
 
     @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMinusService  iEsMinusService;
+    private IEsMinusService iEsMinusService;
 
     @Reference(version = "${dubbo.application.version}", timeout = 5000)
     private IEsFullDiscountService iEsFullDiscountService;

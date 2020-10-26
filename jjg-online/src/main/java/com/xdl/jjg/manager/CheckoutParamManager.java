@@ -3,29 +3,26 @@ package com.xdl.jjg.manager;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.goods.api.model.domain.cache.EsGoodsSkuCO;
-import com.shopx.goods.api.service.IEsGoodsSkuService;
-import com.shopx.member.api.model.domain.EsMemberAddressDO;
-import com.shopx.member.api.model.domain.EsMemberDO;
-import com.shopx.member.api.service.IEsMemberAddressService;
-import com.shopx.member.api.service.IEsMemberService;
-import com.shopx.system.api.model.enums.CachePrefix;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.constant.cacheprefix.CheckoutParamCachePrefix;
-import com.shopx.trade.api.model.domain.EsDeliveryMessageDO;
-import com.shopx.trade.api.model.domain.dto.EsDeliveryMessageDTO;
-import com.shopx.trade.api.model.domain.vo.CartItemsVO;
-import com.shopx.trade.api.model.domain.vo.CartVO;
-import com.shopx.trade.api.model.domain.vo.CheckoutParamVO;
-import com.shopx.trade.api.model.domain.vo.ReceiptVO;
-import com.shopx.trade.api.model.enums.PaymentTypeEnum;
-import com.shopx.trade.api.service.IEsDeliveryServiceService;
-import com.shopx.trade.web.request.DeliveryMessageForm;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
-import com.shopx.trade.web.shiro.oath.ShiroUser;
+import com.jjg.member.model.domain.EsMemberAddressDO;
+import com.jjg.member.model.domain.EsMemberDO;
+import com.jjg.shop.model.co.EsGoodsSkuCO;
+import com.jjg.system.model.enums.CachePrefix;
+import com.jjg.trade.model.domain.EsDeliveryMessageDO;
+import com.jjg.trade.model.dto.EsDeliveryMessageDTO;
+import com.jjg.trade.model.enums.PaymentTypeEnum;
+import com.jjg.trade.model.form.DeliveryMessageForm;
+import com.jjg.trade.model.vo.CartItemsVO;
+import com.jjg.trade.model.vo.CartVO;
+import com.jjg.trade.model.vo.CheckoutParamVO;
+import com.jjg.trade.model.vo.ReceiptVO;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.constant.cacheprefix.CheckoutParamCachePrefix;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.web.service.IEsDeliveryServiceService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.BeanUtils;
@@ -126,7 +123,7 @@ public class CheckoutParamManager {
         this.jedisCluster.hset(key, CheckoutParamCachePrefix.ADDRESS_ID.name(), String.valueOf(addressId));
     }
 
-    public void setDeliveryReceiveMessage(DeliveryMessageForm deliveryMessageForm,Long shopId,String skey) {
+    public void setDeliveryReceiveMessage(DeliveryMessageForm deliveryMessageForm, Long shopId, String skey) {
         EsDeliveryMessageDTO deliveryMessageDTO = new EsDeliveryMessageDTO();
         BeanUtils.copyProperties(deliveryMessageForm,deliveryMessageDTO);
         DubboResult dubboResult = esDeliveryServiceService.getDeliveryTextMessage(deliveryMessageDTO);

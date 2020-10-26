@@ -1,16 +1,16 @@
 package com.xdl.jjg.web.controller.pc.goods;
 
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.web.BaseController;
-import com.shopx.member.api.model.domain.dto.EsSearchKeyWordDTO;
-import com.shopx.member.api.model.domain.vo.EsSearchKeyWordVO;
-import com.shopx.member.api.service.IEsSearchKeyWordService;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
+
+import com.jjg.member.model.dto.EsSearchKeyWordDTO;
+import com.jjg.member.model.vo.EsSearchKeyWordVO;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

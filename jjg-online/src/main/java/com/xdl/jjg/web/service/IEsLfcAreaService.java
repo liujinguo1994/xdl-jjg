@@ -1,6 +1,7 @@
 package com.xdl.jjg.web.service;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.trade.api.model.domain.EsLfcAreaDO;
+
+import com.jjg.trade.model.domain.EsLfcAreaDO;
+import com.xdl.jjg.response.service.DubboResult;
 
 /**
  * 订单号业务层

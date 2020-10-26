@@ -2,7 +2,7 @@ package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.shopx.trade.dao.entity.EsSelfDate;
+import com.xdl.jjg.entity.EsSelfDate;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

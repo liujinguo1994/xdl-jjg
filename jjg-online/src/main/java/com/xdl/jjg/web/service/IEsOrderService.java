@@ -1,15 +1,12 @@
 package com.xdl.jjg.web.service;
 
 
-import com.xdl.jjg.message.OrderStatusChangeMsg;
-import com.xdl.jjg.model.domain.*;
-import com.xdl.jjg.model.dto.*;
-import com.xdl.jjg.model.enums.OrderPermission;
-import com.xdl.jjg.model.vo.*;
+import com.jjg.trade.model.domain.*;
+import com.jjg.trade.model.dto.*;
+import com.jjg.trade.model.enums.OrderPermission;
+import com.jjg.trade.model.vo.*;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
-
-import java.util.List;
 
 /**
  * <p>

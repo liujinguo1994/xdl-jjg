@@ -58,6 +58,8 @@ public enum PromotionTypeEnum {
      */
     COMPANY_DISCOUNT("companyDiscountPlugin", "公司折扣"),
 
+    BLACK_CARDS("blackCardDiscountPlugin","黑卡用户"),
+
     /**
      * 限时抢购
      * 如果商品参与的显示抢购活动，则不允许参与其他活动。
@@ -65,6 +67,8 @@ public enum PromotionTypeEnum {
      * 1、如果购买的数量没有超过售空数量，则商品价格为商家设置的活动价，如果超过售空数量，则将商品的价格设置为原价。
      */
     SECKILL("seckillPlugin", "限时抢购");
+
+
 
     private String pluginId;
     private String promotionName;
@@ -94,6 +98,13 @@ public enum PromotionTypeEnum {
 
     public void setPluginId(String pluginId) {
         this.pluginId = pluginId;
+    }
+
+    public static List<String> getBlackCard() {
+        List<String> pluginId = new ArrayList<>();
+        pluginId.add(PromotionTypeEnum.BLACK_CARDS.getPluginId());
+
+        return pluginId;
     }
 
     /**

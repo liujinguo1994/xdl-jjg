@@ -1,30 +1,27 @@
 package com.xdl.jjg.manager;
 
 import com.alibaba.fastjson.JSON;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.util.MathUtil;
-import com.shopx.goods.api.model.domain.vo.EsGoodsVO;
-import com.shopx.member.api.model.domain.EsMemberAddressDO;
-import com.shopx.member.api.model.domain.EsMemberDO;
-import com.shopx.member.api.service.IEsMemberAddressService;
-import com.shopx.member.api.service.IEsMemberService;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.constant.cacheprefix.TradeCachePrefix;
-import com.shopx.trade.api.model.domain.EsFreightTemplateDetailDO;
-import com.shopx.trade.api.model.domain.EsShipCompanyDetailsDO;
-import com.shopx.trade.api.model.domain.ShippingPrice;
-import com.shopx.trade.api.model.domain.vo.CartItemsVO;
-import com.shopx.trade.api.model.domain.vo.CartVO;
-import com.shopx.trade.api.model.domain.vo.EsBuyerOrderVO;
-import com.shopx.trade.api.model.domain.vo.EsFreightTemplateDetailVO;
-import com.shopx.trade.api.service.IEsFreightTemplateDetailService;
-import com.shopx.trade.api.service.IEsShipCompanyDetailsService;
-import com.shopx.trade.api.service.IEsShipTemplateService;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
-import com.shopx.trade.web.shiro.oath.ShiroUser;
+import com.jjg.member.model.domain.EsMemberAddressDO;
+import com.jjg.member.model.domain.EsMemberDO;
+import com.jjg.shop.model.vo.EsGoodsVO;
+import com.jjg.trade.model.domain.EsFreightTemplateDetailDO;
+import com.jjg.trade.model.domain.EsShipCompanyDetailsDO;
+import com.jjg.trade.model.domain.ShippingPrice;
+import com.jjg.trade.model.vo.CartItemsVO;
+import com.jjg.trade.model.vo.CartVO;
+import com.jjg.trade.model.vo.EsBuyerOrderVO;
+import com.jjg.trade.model.vo.EsFreightTemplateDetailVO;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.constant.cacheprefix.TradeCachePrefix;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.util.MathUtil;
+import com.xdl.jjg.web.service.IEsFreightTemplateDetailService;
+import com.xdl.jjg.web.service.IEsShipCompanyDetailsService;
+import com.xdl.jjg.web.service.IEsShipTemplateService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -293,7 +290,7 @@ public class ShippingManager {
             return shippingPrice;
     }
 
-    public Double countFreight(EsBuyerOrderVO buyerOrder, Double price, Double normalSum, Integer type,Long shopId) {
+    public Double countFreight(EsBuyerOrderVO buyerOrder, Double price, Double normalSum, Integer type, Long shopId) {
         //1 生鲜 2 非生鲜
         if (type == 1){
             //生鲜先判断配送区域

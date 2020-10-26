@@ -1,17 +1,18 @@
 package com.xdl.jjg.manager.plugin;
 
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.util.MathUtil;
-import com.shopx.trade.api.model.domain.EsCouponDO;
-import com.shopx.trade.api.model.domain.EsFullDiscountDO;
-import com.shopx.trade.api.model.domain.EsFullDiscountGiftDO;
-import com.shopx.trade.api.model.domain.vo.*;
-import com.shopx.trade.api.model.enums.PromotionTypeEnum;
-import com.shopx.trade.api.service.IEsCouponService;
-import com.shopx.trade.api.service.IEsFullDiscountGiftService;
-import com.shopx.trade.api.service.IEsFullDiscountService;
-import com.shopx.trade.web.manager.event.PromotionEvent;
+
+import com.jjg.trade.model.domain.EsCouponDO;
+import com.jjg.trade.model.domain.EsFullDiscountDO;
+import com.jjg.trade.model.domain.EsFullDiscountGiftDO;
+import com.jjg.trade.model.enums.PromotionTypeEnum;
+import com.jjg.trade.model.vo.*;
+import com.xdl.jjg.manager.event.PromotionEvent;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.MathUtil;
+import com.xdl.jjg.web.service.IEsCouponService;
+import com.xdl.jjg.web.service.IEsFullDiscountGiftService;
+import com.xdl.jjg.web.service.IEsFullDiscountService;
 import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

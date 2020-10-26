@@ -1,6 +1,7 @@
 package com.xdl.jjg.web.service;
 
-import com.shopx.common.model.result.DubboResult;
+
+import com.xdl.jjg.response.service.DubboResult;
 
 /**
  * Description: zhuox-shop-trade

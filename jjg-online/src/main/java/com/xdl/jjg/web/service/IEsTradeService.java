@@ -1,12 +1,12 @@
 package com.xdl.jjg.web.service;
 
 
+import com.jjg.trade.model.domain.EsBuyerTradeDO;
+import com.jjg.trade.model.domain.EsTradeDO;
+import com.jjg.trade.model.domain.EsWapBalanceTradeDO;
+import com.jjg.trade.model.dto.EsTradeDTO;
+import com.jjg.trade.model.vo.PriceDetailVO;
 import com.xdl.jjg.message.OrderStatusChangeMsg;
-import com.xdl.jjg.model.domain.EsBuyerTradeDO;
-import com.xdl.jjg.model.domain.EsTradeDO;
-import com.xdl.jjg.model.domain.EsWapBalanceTradeDO;
-import com.xdl.jjg.model.dto.EsTradeDTO;
-import com.xdl.jjg.model.vo.PriceDetailVO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 

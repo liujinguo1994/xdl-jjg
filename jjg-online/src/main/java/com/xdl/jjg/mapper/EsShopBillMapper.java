@@ -1,11 +1,12 @@
 package com.xdl.jjg.mapper;
 
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.shopx.trade.api.model.domain.EsSettlementDetailDO;
-import com.shopx.trade.dao.entity.EsExportOrder;
-import com.shopx.trade.dao.entity.EsShopBill;
+import com.jjg.trade.model.domain.EsSettlementDetailDO;
+import com.xdl.jjg.entity.EsExportOrder;
+import com.xdl.jjg.entity.EsShopBill;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 

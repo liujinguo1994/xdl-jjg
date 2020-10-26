@@ -1,7 +1,6 @@
 package com.xdl.jjg.web.controller.pc.member;
 
-import com.shopx.common.web.BaseController;
-import com.shopx.member.api.service.IEsComplaintReasonConfigService;
+import com.xdl.jjg.web.controller.BaseController;
 import io.swagger.annotations.Api;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.RequestMapping;

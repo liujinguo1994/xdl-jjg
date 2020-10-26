@@ -1,7 +1,8 @@
 package com.xdl.jjg.mapper;
 
+
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.shopx.trade.dao.entity.EsGroupBuyGoods;
+import com.xdl.jjg.entity.EsGroupBuyGoods;
 
 /**
  * <p>

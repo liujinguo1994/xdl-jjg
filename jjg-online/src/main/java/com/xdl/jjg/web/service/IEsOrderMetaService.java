@@ -1,8 +1,9 @@
 package com.xdl.jjg.web.service;
 
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.trade.api.model.domain.EsOrderMetaDO;
-import com.shopx.trade.api.model.domain.dto.EsOrderMetaDTO;
+
+import com.jjg.trade.model.domain.EsOrderMetaDO;
+import com.jjg.trade.model.dto.EsOrderMetaDTO;
+import com.xdl.jjg.response.service.DubboResult;
 
 /**
  * <p>

@@ -1,8 +1,9 @@
 package com.xdl.jjg.plugin;
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.dto.EsPromotionGoodsDTO;
+
+import com.jjg.trade.model.dto.EsPromotionGoodsDTO;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.response.exception.ArgumentException;
 
 import java.util.List;
 
