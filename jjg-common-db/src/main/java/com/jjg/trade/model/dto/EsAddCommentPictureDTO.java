@@ -8,15 +8,15 @@ import java.io.Serializable;
 
 /**
  * <p>
- * 结算单
+ *  追加评论图片
  * </p>
  *
  * @author LBW 981087977@qq.com
- * @since 2019-08-20 15:12:54
+ * @since 2019-11-12 14:44:46
  */
 @Data
 @Accessors(chain = true)
-public class EsSettlementDTO implements Serializable {
+public class EsAddCommentPictureDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -26,41 +26,20 @@ public class EsSettlementDTO implements Serializable {
 	private Long id;
 
     /**
-     * 结算单编号
-     */
-	private String settlementSn;
-
-    /**
-     * 结算开始时间
+     * 追加评论ID
      */
 	@JsonSerialize(using = ToStringSerializer.class)
-	private Long startTime;
+	private Long addCommentId;
 
     /**
-     * 结算结束时间
+     * 图片路径
      */
-	@JsonSerialize(using = ToStringSerializer.class)
-	private Long endTime;
+	private String original;
 
     /**
-     * 总金额
+     * 排序
      */
-	private Double money;
-
-    /**
-     * 结算金额
-     */
-	private Double billMoney;
-
-    /**
-     * 出账日期
-     */
-	private Long createTime;
-
-    /**
-     * 付款时间
-     */
-	private Long updateTime;
+	private Integer sort;
 
 	protected Serializable pkVal() {
 		return this.id;

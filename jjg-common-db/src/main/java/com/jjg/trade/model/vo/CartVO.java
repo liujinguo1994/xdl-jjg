@@ -1,6 +1,6 @@
 package com.jjg.trade.model.vo;
 
-import com.xdl.jjg.util.BeanUtil;
+import com.shopx.common.util.BeanUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -74,6 +74,11 @@ public class CartVO implements Serializable {
 
 	@ApiModelProperty(value = "选中的配送方式名称" )
 	private String shippingTypeName = "快递";
+
+	@ApiModelProperty(value = "是否是黑卡用户 1 是 ；2 否" )
+	private Integer blackCard = 2;
+	@ApiModelProperty(value = "黑卡用户折扣力度" )
+	private Double blackCardDiscount = 1.0;
 
 	/**
 	 * 构造器

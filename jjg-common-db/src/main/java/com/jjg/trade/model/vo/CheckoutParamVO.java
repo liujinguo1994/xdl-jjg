@@ -1,6 +1,6 @@
 package com.jjg.trade.model.vo;
 
-import com.jjg.trade.model.enums.PaymentTypeEnum;
+import com.shopx.trade.api.model.enums.PaymentTypeEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

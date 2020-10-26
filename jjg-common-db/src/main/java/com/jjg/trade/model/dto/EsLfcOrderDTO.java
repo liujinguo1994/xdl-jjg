@@ -2,8 +2,8 @@ package com.jjg.trade.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.jjg.trade.model.domain.EsLfcOrderSkuDO;
-import com.xdl.jjg.util.PropertyUpperStrategy;
+import com.shopx.trade.api.model.domain.EsLfcOrderSkuDO;
+import com.shopx.trade.api.utils.PropertyUpperStrategy;
 import io.swagger.annotations.ApiModelProperty;
 import springfox.documentation.annotations.ApiIgnore;
 

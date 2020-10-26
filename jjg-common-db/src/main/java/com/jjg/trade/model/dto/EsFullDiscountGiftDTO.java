@@ -3,7 +3,7 @@ package com.jjg.trade.model.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
-import com.jjg.shop.model.dto.EsGoodsSkuDTO;
+import com.shopx.goods.api.model.domain.dto.EsGoodsSkuDTO;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

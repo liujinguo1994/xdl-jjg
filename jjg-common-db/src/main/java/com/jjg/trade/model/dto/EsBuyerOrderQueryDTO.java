@@ -1,6 +1,7 @@
 package com.jjg.trade.model.dto;
 
 import lombok.Data;
+import lombok.ToString;
 
 import java.io.Serializable;
 import java.util.List;

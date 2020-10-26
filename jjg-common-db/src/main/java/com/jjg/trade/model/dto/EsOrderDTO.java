@@ -1,7 +1,7 @@
 package com.jjg.trade.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.jjg.trade.model.vo.ReceiptVO;
+import com.shopx.trade.api.model.domain.vo.ReceiptVO;
 import lombok.Data;
 import lombok.ToString;
 

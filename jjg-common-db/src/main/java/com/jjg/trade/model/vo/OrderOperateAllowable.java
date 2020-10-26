@@ -1,6 +1,6 @@
 package com.jjg.trade.model.vo;
 
-import com.jjg.trade.model.enums.*;
+import com.shopx.trade.api.model.enums.*;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

@@ -2,8 +2,8 @@ package com.jjg.trade.model.vo;
 
 import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.jjg.shop.model.co.EsGoodsSkuCO;
-import com.jjg.shop.model.vo.EsSpecValuesVO;
+import com.shopx.goods.api.model.domain.cache.EsGoodsSkuCO;
+import com.shopx.goods.api.model.domain.vo.EsSpecValuesVO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

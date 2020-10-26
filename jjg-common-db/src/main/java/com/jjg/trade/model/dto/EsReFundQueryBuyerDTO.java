@@ -1,6 +1,6 @@
 package com.jjg.trade.model.dto;
 
-import com.xdl.jjg.response.web.QueryPageForm;
+import com.shopx.common.model.result.QueryPageForm;
 import io.swagger.annotations.ApiModel;
 import lombok.Data;
 

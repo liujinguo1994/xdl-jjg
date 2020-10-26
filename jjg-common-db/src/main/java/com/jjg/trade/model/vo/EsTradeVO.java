@@ -1,8 +1,8 @@
 package com.jjg.trade.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.jjg.trade.model.dto.EsCouponDTO;
-import com.jjg.trade.model.dto.EsOrderDTO;
+import com.shopx.trade.api.model.domain.dto.EsCouponDTO;
+import com.shopx.trade.api.model.domain.dto.EsOrderDTO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;

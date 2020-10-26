@@ -1,13 +1,11 @@
 package com.jjg.trade.model.vo;
 
-
-import com.jjg.trade.model.enums.ProcessStatusEnum;
-import com.jjg.trade.model.enums.RefundOperateEnum;
+import com.shopx.trade.api.model.enums.ProcessStatusEnum;
+import com.shopx.trade.api.model.enums.RefundOperateEnum;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
 
 /**
  * @author wangaf

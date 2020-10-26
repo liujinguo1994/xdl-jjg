@@ -2,8 +2,8 @@ package com.jjg.trade.model.vo;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.jjg.trade.model.domain.EsBuyerOrderItemsDO;
-import com.jjg.trade.model.domain.EsOrderDO;
+import com.shopx.trade.api.model.domain.EsBuyerOrderItemsDO;
+import com.shopx.trade.api.model.domain.EsOrderDO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

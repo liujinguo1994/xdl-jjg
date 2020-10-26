@@ -1,6 +1,7 @@
 package com.jjg.trade.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.shopx.trade.api.model.domain.EsSellerFreightTemplateDetailDO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;

@@ -1,10 +1,9 @@
 package com.jjg.trade.model.dto;
 
-import com.xdl.jjg.response.web.QueryPageForm;
+import com.shopx.common.model.result.QueryPageForm;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
-
 /**
  * @Description: 系统后台售后单查询DTO
  * @Author       LiuJG 344009799@qq.com
