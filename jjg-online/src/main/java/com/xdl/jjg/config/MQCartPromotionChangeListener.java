@@ -1,6 +1,10 @@
 package com.xdl.jjg.config;
 
 import com.alibaba.fastjson.JSON;
+import com.jjg.trade.model.enums.PromotionTypeEnum;
+import com.jjg.trade.model.vo.CartItemsVO;
+import com.jjg.trade.model.vo.CartVO;
+import com.jjg.trade.model.vo.TradePromotionGoodsVO;
 import com.xdl.jjg.manager.CartManager;
 import com.xdl.jjg.message.CartPromotionChangeMsg;
 import com.xdl.jjg.model.enums.PromotionTypeEnum;
