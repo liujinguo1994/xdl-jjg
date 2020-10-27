@@ -1,22 +1,22 @@
 package com.xdl.jjg.web.service.impl;
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.EsPaymentBillDO;
-import com.shopx.trade.api.model.domain.EsPaymentMethodDO;
-import com.shopx.trade.api.model.domain.dto.SynPaymentParameter;
-import com.shopx.trade.api.model.domain.vo.FormVO;
-import com.shopx.trade.api.model.domain.vo.PayBillVO;
-import com.shopx.trade.api.model.domain.vo.RefundBillVO;
-import com.shopx.trade.api.model.enums.ClientType;
-import com.shopx.trade.api.model.enums.RequestParam;
-import com.shopx.trade.api.model.enums.TradeType;
-import com.shopx.trade.api.plugin.PaymentPluginManager;
-import com.shopx.trade.api.service.IEsPaymentBillService;
-import com.shopx.trade.api.service.IPayService;
-import com.shopx.trade.service.service.AbstractPaymentPlugin;
+import com.jjg.trade.model.domain.EsPaymentBillDO;
+import com.jjg.trade.model.domain.EsPaymentMethodDO;
+import com.jjg.trade.model.dto.SynPaymentParameter;
+import com.jjg.trade.model.enums.ClientType;
+import com.jjg.trade.model.enums.RequestParam;
+import com.jjg.trade.model.enums.TradeType;
+import com.jjg.trade.model.vo.FormVO;
+import com.jjg.trade.model.vo.PayBillVO;
+import com.jjg.trade.model.vo.RefundBillVO;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.plugin.AbstractPaymentPlugin;
+import com.xdl.jjg.plugin.PaymentPluginManager;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.web.service.IEsPaymentBillService;
+import com.xdl.jjg.web.service.IPayService;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -85,7 +85,7 @@ public class PayServiceImpl implements IPayService {
      * @return: com.shopx.common.model.result.DubboResult
      */
     @Override
-    public DubboResult onReturn(TradeType tradeType, String paymentPluginId,SynPaymentParameter parameter) {
+    public DubboResult onReturn(TradeType tradeType, String paymentPluginId, SynPaymentParameter parameter) {
         try {
             PaymentPluginManager plugin = this.findPlugin(paymentPluginId);
             DubboResult dubboResult = null;
@@ -108,7 +108,7 @@ public class PayServiceImpl implements IPayService {
      * @return: java.lang.String
      */
     @Override
-    public DubboResult onCallback(TradeType tradeType,String paymentPluginId, ClientType clientType,SynPaymentParameter parameter) {
+    public DubboResult onCallback(TradeType tradeType, String paymentPluginId, ClientType clientType, SynPaymentParameter parameter) {
         PaymentPluginManager plugin = this.findPlugin(paymentPluginId);
         if (plugin != null) {
             String s = plugin.onCallback(tradeType, clientType,parameter);

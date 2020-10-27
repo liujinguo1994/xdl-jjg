@@ -1,11 +1,12 @@
 package com.xdl.jjg.web.controller.pc.system;
 
-import com.shopx.common.constant.OssFileType;
-import com.shopx.common.model.domain.FileDTO;
-import com.shopx.common.model.domain.FileVO;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.oss.upload.OSSUploader;
-import com.shopx.common.util.FileUtil;
+
+import com.xdl.jjg.constants.OssFileType;
+import com.xdl.jjg.oss.upload.OSSUploader;
+import com.xdl.jjg.response.service.FileDTO;
+import com.xdl.jjg.response.service.FileVO;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.util.FileUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;

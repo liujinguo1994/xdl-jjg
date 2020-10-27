@@ -1,6 +1,7 @@
 package com.xdl.jjg.web.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjg.trade.model.domain.EsPaymentMethodDO;
 import com.jjg.trade.model.domain.PaymentPluginDO;
 import com.jjg.trade.model.dto.EsPaymentMethodDTO;

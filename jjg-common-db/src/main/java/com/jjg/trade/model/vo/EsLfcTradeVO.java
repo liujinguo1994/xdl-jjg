@@ -2,7 +2,7 @@ package com.jjg.trade.model.vo;
 
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.shopx.trade.api.model.domain.dto.EsOrderDTO;
+import com.jjg.trade.model.dto.EsOrderDTO;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 

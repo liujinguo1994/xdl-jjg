@@ -2,11 +2,11 @@ package com.xdl.jjg.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.trade.api.model.domain.EsGoodsSkuAndLfcDO;
-import com.shopx.trade.api.model.domain.dto.EsLfcOrderDTO;
-import com.shopx.trade.api.model.enums.*;
-import com.shopx.trade.api.utils.CurrencyUtil;
+import com.jjg.trade.model.domain.EsGoodsSkuAndLfcDO;
+import com.jjg.trade.model.dto.EsLfcOrderDTO;
+import com.jjg.trade.model.enums.*;
+import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.utils.CurrencyUtil;
 import lombok.Data;
 
 import java.io.Serializable;

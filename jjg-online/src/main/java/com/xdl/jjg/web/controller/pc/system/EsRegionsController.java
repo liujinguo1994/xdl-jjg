@@ -1,13 +1,11 @@
 package com.xdl.jjg.web.controller.pc.system;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.system.api.model.domain.EsRegionsDO;
-import com.shopx.system.api.model.domain.vo.EsRegionsVO;
-import com.shopx.system.api.service.IEsRegionsService;
-import com.shopx.trade.web.constant.ApiStatus;
+import com.jjg.system.model.domain.EsRegionsDO;
+import com.jjg.system.model.vo.EsRegionsVO;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

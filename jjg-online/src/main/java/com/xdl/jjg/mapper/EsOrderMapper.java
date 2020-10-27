@@ -3,10 +3,10 @@ package com.xdl.jjg.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.shopx.trade.api.model.domain.*;
-import com.shopx.trade.api.model.domain.dto.*;
-import com.shopx.trade.dao.entity.EsOrder;
-import com.shopx.trade.dao.entity.EsServiceOrderItems;
+import com.jjg.trade.model.domain.*;
+import com.jjg.trade.model.dto.*;
+import com.xdl.jjg.entity.EsOrder;
+import com.xdl.jjg.entity.EsServiceOrderItems;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -70,8 +70,7 @@ public interface EsOrderMapper extends BaseMapper<EsOrder> {
      * 根据订单id和商品id 查询订单数据及详情
      * @author: libw 981087977@qq.com
      * @date: 2019/09/19 14:07:54
-     * @param orderSn   订单编号
-     * @param goodsId   商品id
+
      * @return: com.shopx.trade.api.model.domain.EsOrderDO
      */
 //    EsOrderDO getOrderItem(@Param("orderSn") String orderSn, @Param("goodsId") Long goodsId);

@@ -1,9 +1,8 @@
 package com.xdl.jjg.web.controller.pc.shop;
 
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.system.api.model.domain.EsPageDO;
-import com.shopx.system.api.service.IEsPageService;
+import com.jjg.system.model.domain.EsPageDO;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

@@ -1,25 +1,21 @@
 package com.xdl.jjg.web.controller.applet.member;
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.ArrayUtil;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.util.MathUtil;
-import com.shopx.common.util.StringUtil;
-import com.shopx.goods.api.model.domain.cache.EsGoodsSkuCO;
-import com.shopx.goods.api.service.IEsGoodsSkuService;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.EsCartNumDO;
-import com.shopx.member.api.model.domain.EsCommercelItemsDO;
-import com.shopx.member.api.model.domain.EsMemberDO;
-import com.shopx.member.api.service.*;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.vo.*;
-import com.shopx.trade.api.model.enums.PromotionTypeEnum;
-import com.shopx.trade.web.manager.CartManager;
-import com.shopx.trade.web.manager.TradePriceManager;
-import com.shopx.trade.web.request.*;
+import com.jjg.member.model.domain.EsCartNumDO;
+import com.jjg.member.model.domain.EsCommercelItemsDO;
+import com.jjg.member.model.domain.EsMemberDO;
+import com.jjg.shop.model.co.EsGoodsSkuCO;
+import com.jjg.trade.model.enums.PromotionTypeEnum;
+import com.jjg.trade.model.form.*;
+import com.jjg.trade.model.vo.*;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.manager.CartManager;
+import com.xdl.jjg.manager.TradePriceManager;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.util.ArrayUtil;
+import com.xdl.jjg.util.MathUtil;
+import com.xdl.jjg.util.StringUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -194,7 +190,7 @@ public class EsAppletCartController {
         return ApiResponse.success();
     }
 
-    @ApiOperation(value = "获取购物车总价",response =PriceDetailVO.class )
+    @ApiOperation(value = "获取购物车总价",response = PriceDetailVO.class )
     @GetMapping(value = "/price/{skey}")
     @ApiImplicitParam(name = "skey", value = "登录态标识", required =true, dataType = "String" ,paramType="path")
     public ApiResponse totalPrice(@PathVariable String skey) {

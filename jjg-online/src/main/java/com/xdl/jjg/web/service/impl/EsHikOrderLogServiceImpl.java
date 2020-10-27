@@ -1,13 +1,12 @@
 package com.xdl.jjg.web.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.dto.EsHikOrderLogDTO;
-import com.shopx.trade.api.service.IEsHikOrderLogService;
-import com.shopx.trade.dao.entity.EsHikOrderLog;
-import com.shopx.trade.dao.mapper.EsHikOrderLogMapper;
+import com.jjg.trade.model.dto.EsHikOrderLogDTO;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.entity.EsHikOrderLog;
+import com.xdl.jjg.mapper.EsHikOrderLogMapper;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.web.service.IEsHikOrderLogService;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

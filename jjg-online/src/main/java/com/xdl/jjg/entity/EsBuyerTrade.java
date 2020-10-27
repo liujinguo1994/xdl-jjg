@@ -2,8 +2,8 @@ package com.xdl.jjg.entity;
 
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.xdl.jjg.model.domain.EsTradeDO;
-import com.xdl.jjg.model.vo.EsOrderItemsVO;
+import com.jjg.trade.model.domain.EsTradeDO;
+import com.jjg.trade.model.vo.EsOrderItemsVO;
 import lombok.Data;
 
 import java.util.List;

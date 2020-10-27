@@ -3,6 +3,7 @@ package com.xdl.jjg.web.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjg.member.model.dto.EsMemberCouponDTO;
 import com.jjg.trade.model.domain.EsCouponDO;
 import com.jjg.trade.model.domain.EsOrderDO;

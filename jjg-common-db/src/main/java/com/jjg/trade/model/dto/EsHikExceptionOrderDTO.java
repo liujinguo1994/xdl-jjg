@@ -1,14 +1,9 @@
 package com.jjg.trade.model.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.databind.annotation.JsonNaming;
-import com.shopx.common.model.result.QueryPageForm;
-import com.shopx.trade.api.utils.PropertyUpperStrategy;
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import com.xdl.jjg.response.web.QueryPageForm;
 import lombok.Data;
 import lombok.ToString;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.io.Serializable;
 

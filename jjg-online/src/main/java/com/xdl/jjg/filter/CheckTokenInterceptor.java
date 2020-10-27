@@ -1,12 +1,11 @@
 package com.xdl.jjg.filter;
 
 
-import com.xdl.jjg.model.domain.EsMemberTokenDO;
+import com.jjg.member.model.domain.EsMemberTokenDO;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.shiro.oath.ShiroKit;
 import com.xdl.jjg.util.JsonUtil;
-import com.xdl.jjg.web.service.IEsMemberTokenService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
@@ -14,7 +13,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

@@ -1,8 +1,8 @@
 package com.xdl.jjg.converter;
 
 
-import com.xdl.jjg.model.vo.GoodsSkuVO;
-import com.xdl.jjg.model.vo.TradeConvertGoodsSkuVO;
+import com.jjg.trade.model.vo.GoodsSkuVO;
+import com.jjg.trade.model.vo.TradeConvertGoodsSkuVO;
 import com.xdl.jjg.util.BeanUtil;
 
 /**

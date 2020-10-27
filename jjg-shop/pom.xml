@@ -23,8 +23,8 @@
                 </snapshots>
                 <id>release</id>
                 <name>Release</name>
-                <url>http://app.moacchina.info:8081/nexus/content/repositories/releases/</url>
-
+                <!--<url>http://app.moacchina.info:8081/nexus/content/repositories/releases/</url>-->
+                <url>http://39.100.88.135:8081/repository/maven-releases/</url>
                 <releases>
                     <enabled>true</enabled>
                     <checksumPolicy>warn</checksumPolicy>
@@ -38,8 +38,8 @@
                 </snapshots>
                 <id>snapshot</id>
                 <name>Snapshots</name>
-                <url>http://app.moacchina.info:8081/nexus/content/repositories/releases/</url>
-
+                <!--<url>http://app.moacchina.info:8081/nexus/content/repositories/releases/</url>-->
+                <url>http://39.100.88.135:8081/repository/maven-releases/</url>
                 <releases>
                     <enabled>true</enabled>
                     <checksumPolicy>warn</checksumPolicy>
@@ -55,7 +55,8 @@
                 </snapshots>
                 <id>release</id>
                 <name>Release</name>
-                <url>http://app.moacchina.info:8081/nexus/content/repositories/releases/</url>
+                <!--<url>http://app.moacchina.info:8081/nexus/content/repositories/releases/</url>-->
+                <url>http://39.100.88.135:8081/repository/maven-releases/</url>
             </pluginRepository>
         </pluginRepositories>
 

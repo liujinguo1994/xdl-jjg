@@ -1,11 +1,25 @@
 package com.xdl.jjg.web.service.impl;
 
 
+import com.jjg.shop.model.co.EsGoodsSkuCO;
+import com.jjg.trade.model.domain.EsGoodsSkuAndLfcDO;
+import com.jjg.trade.model.domain.EsLfcOrderSkuDO;
+import com.jjg.trade.model.domain.EsTradeDO;
+import com.jjg.trade.model.dto.EsLfcOrderDTO;
+import com.jjg.trade.model.enums.*;
+import com.xdl.jjg.entity.EsOrder;
+import com.xdl.jjg.entity.EsOrderItems;
+import com.xdl.jjg.entity.EsOrderLog;
+import com.xdl.jjg.entity.EsTrade;
 import com.xdl.jjg.mapper.EsOrderItemsMapper;
 import com.xdl.jjg.mapper.EsOrderLogMapper;
 import com.xdl.jjg.mapper.EsOrderMapper;
 import com.xdl.jjg.mapper.EsTradeMapper;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.util.SnowflakeIdWorker;
+import com.xdl.jjg.utils.CurrencyUtil;
 import com.xdl.jjg.web.service.IEsTradeIntodbService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -66,7 +80,7 @@ public class EsTradeIntodbServiceImpl implements IEsTradeIntodbService {
             DubboResult<EsGoodsSkuCO> result = esGoodsSkuService.getGoodsSku(Long.valueOf(skuId));
             if(result.isSuccess()){
                 EsGoodsSkuCO esGoodsSkuCO = result.getData();
-                orderPrice=CurrencyUtil.add(orderPrice, CurrencyUtil.mul(esGoodsSkuCO.getMoney(),orderSku.getSaleCount()));
+                orderPrice= CurrencyUtil.add(orderPrice, CurrencyUtil.mul(esGoodsSkuCO.getMoney(),orderSku.getSaleCount()));
                 EsGoodsSkuAndLfcDO goodsSkuAndLfcDO=new EsGoodsSkuAndLfcDO();
                 BeanUtil.copyProperties(esGoodsSkuCO,goodsSkuAndLfcDO);
                 goodsSkuAndLfcDO.setSaleCount(orderSku.getSaleCount());

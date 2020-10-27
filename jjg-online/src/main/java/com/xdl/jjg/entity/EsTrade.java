@@ -2,9 +2,9 @@ package com.xdl.jjg.entity;
 
 import com.baomidou.mybatisplus.annotation.*;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.xdl.jjg.model.domain.EsLfcOrderSkuDO;
-import com.xdl.jjg.model.enums.PaymentTypeEnum;
-import com.xdl.jjg.model.enums.TradeStatusEnum;
+import com.jjg.trade.model.domain.EsLfcOrderSkuDO;
+import com.jjg.trade.model.enums.PaymentTypeEnum;
+import com.jjg.trade.model.enums.TradeStatusEnum;
 import lombok.Data;
 
 import java.io.Serializable;

@@ -3,32 +3,27 @@ package com.xdl.jjg.web.service.impl;/**
  * @date 2020/3/31 13:48
  **/
 
-import com.aliyun.oss.OSSClient;
-import com.aliyun.oss.common.utils.DateUtil;
-import com.aliyun.oss.model.OSSObject;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.util.StringUtil;
-import com.shopx.goods.api.constant.GoodsErrorCode;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.EsCakeCardDO;
-import com.shopx.trade.api.model.domain.dto.EsCakeCardDTO;
-import com.shopx.trade.api.model.domain.dto.EsCakeCardQueryDTO;
-import com.shopx.trade.api.model.domain.dto.EsCakeImportDTO;
-import com.shopx.trade.api.model.domain.dto.FailCakeData;
-import com.shopx.trade.api.service.IEsCakeCardService;
-import com.shopx.trade.dao.entity.EsCakeCard;
-import com.shopx.trade.dao.mapper.EsCakeCardMapper;
+import com.jjg.shop.model.constant.GoodsErrorCode;
+import com.jjg.trade.model.domain.EsCakeCardDO;
+import com.jjg.trade.model.dto.EsCakeCardDTO;
+import com.jjg.trade.model.dto.EsCakeCardQueryDTO;
+import com.jjg.trade.model.dto.EsCakeImportDTO;
+import com.jjg.trade.model.dto.FailCakeData;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.entity.EsCakeCard;
+import com.xdl.jjg.mapper.EsCakeCardMapper;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.IEsCakeCardService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Service;
-import org.apache.ibatis.annotations.Arg;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -37,17 +32,13 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 /**

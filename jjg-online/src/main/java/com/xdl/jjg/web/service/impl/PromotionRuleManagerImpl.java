@@ -1,15 +1,15 @@
 package com.xdl.jjg.web.service.impl;
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.StringUtil;
-import com.shopx.goods.api.service.IEsGoodsService;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.dto.EsPromotionGoodsDTO;
-import com.shopx.trade.api.model.enums.PromotionTypeEnum;
-import com.shopx.trade.dao.entity.*;
-import com.shopx.trade.dao.mapper.*;
-import com.shopx.trade.service.service.PromotionRuleManager;
+
+import com.jjg.trade.model.dto.EsPromotionGoodsDTO;
+import com.jjg.trade.model.enums.PromotionTypeEnum;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.entity.*;
+import com.xdl.jjg.manager.PromotionRuleManager;
+import com.xdl.jjg.mapper.*;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.StringUtil;
 import org.apache.commons.lang.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;

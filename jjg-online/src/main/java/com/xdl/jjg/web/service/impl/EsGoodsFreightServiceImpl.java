@@ -4,19 +4,18 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.EsGoodsFreightDO;
-import com.shopx.trade.api.model.domain.EsShipTemplateDO;
-import com.shopx.trade.api.model.domain.dto.EsGoodsFreightDTO;
-import com.shopx.trade.api.service.IEsGoodsFreightService;
-import com.shopx.trade.dao.entity.EsGoodsFreight;
-import com.shopx.trade.dao.entity.EsShipTemplate;
-import com.shopx.trade.dao.mapper.EsGoodsFreightMapper;
-import com.shopx.trade.dao.mapper.EsShipTemplateMapper;
+import com.jjg.trade.model.domain.EsGoodsFreightDO;
+import com.jjg.trade.model.domain.EsShipTemplateDO;
+import com.jjg.trade.model.dto.EsGoodsFreightDTO;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.entity.EsGoodsFreight;
+import com.xdl.jjg.entity.EsShipTemplate;
+import com.xdl.jjg.mapper.EsGoodsFreightMapper;
+import com.xdl.jjg.mapper.EsShipTemplateMapper;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.web.service.IEsGoodsFreightService;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
@@ -138,7 +137,7 @@ public class EsGoodsFreightServiceImpl extends ServiceImpl<EsGoodsFreightMapper,
     }
 
     @Override
-    public DubboResult<EsShipTemplateDO> getGoodsFreightByCategoryId(Long categoryId,Long shopId) {
+    public DubboResult<EsShipTemplateDO> getGoodsFreightByCategoryId(Long categoryId, Long shopId) {
         try {
             QueryWrapper<EsGoodsFreight> queryWrapper = new QueryWrapper<>();
             queryWrapper.lambda().eq(EsGoodsFreight::getCategoryId,categoryId);

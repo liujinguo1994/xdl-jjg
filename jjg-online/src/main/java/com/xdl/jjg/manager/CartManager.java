@@ -15,6 +15,7 @@ import com.jjg.trade.model.vo.*;
 import com.xdl.jjg.constant.TradeErrorCode;
 import com.xdl.jjg.constant.cacheprefix.TradeCachePrefix;
 import com.xdl.jjg.converter.TradeGoodsConverter;
+import com.xdl.jjg.redisson.RedissonLock;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
@@ -24,10 +25,13 @@ import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.DateUtils;
 import com.xdl.jjg.util.MathUtil;
 import com.xdl.jjg.web.service.*;
+import com.xdl.jjg.web.service.feign.member.*;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsSkuService;
+import com.xdl.jjg.web.service.feign.shop.ShopService;
 import org.apache.commons.collections.map.HashedMap;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -35,8 +39,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import redis.clients.jedis.JedisCluster;
+
 import java.util.*;
 import java.util.stream.Collectors;
+
 import static java.util.Comparator.comparingLong;
 import static java.util.stream.Collectors.collectingAndThen;
 import static java.util.stream.Collectors.toCollection;
@@ -51,49 +57,44 @@ import static java.util.stream.Collectors.toCollection;
 @Component
 public class CartManager {
     private Logger logger = LoggerFactory.getLogger(PromotionGoodsManager.class);
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsCartService cartService;
+    @Autowired
+    private CartService cartService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsCartConfigureService cartConfigureService;
+    @Autowired
+    private CartConfigureService cartConfigureService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsCommercelItemsService commerceItemsService;
+    @Autowired
+    private CommercelItemsService commerceItemsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsSkuService goodsSkuService;
+    @Autowired
+    private GoodsSkuService goodsSkuService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsService goodsService;
+    @Autowired
+    private GoodsService goodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsShopService shopService;
+    @Autowired
+    private ShopService shopService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberCouponService iEsMemberCouponService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsPromotionGoodsService iEsPromotionGoodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsShipCompanyDetailsService shipCompanyDetailsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberAddressService iEsMemberAddressService;
-
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsFreightTemplateDetailService freightTemplateDetailService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsOrderItemsService itemsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberAddressService iesMemberAddressService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
+    private MemberAddressService iesMemberAddressService;
+    @Autowired
     private IEsCouponService iEsCouponService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberCouponService iesMemberCouponService;
+    @Autowired
+    private MemberCouponService iesMemberCouponService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberService memberService;
+    @Autowired
+    private MemberService memberService;
 
     @Autowired
     private PromotionGoodsManager promotionGoodsManager;
@@ -1243,7 +1244,7 @@ public class CartManager {
 
         CheckoutParamVO param = checkoutParamManager.getParam(skey);
         Long addressId = param.getAddressId();
-        DubboResult<EsMemberAddressDO> memberAddress = iEsMemberAddressService.getMemberAddress(addressId);
+        DubboResult<EsMemberAddressDO> memberAddress = iesMemberAddressService.getMemberAddress(addressId);
         if (memberAddress.isSuccess() && memberAddress.getData() != null){
             Long areaId = shippingManager.actualAddress(memberAddress.getData());
             if (cartItems.getIsFresh() == 2){
@@ -1951,7 +1952,7 @@ public class CartManager {
             esMemberCouponDTO.setCouponId(couponId);
             esMemberCouponDTO.setMemberId(memberId);
             // 通过优惠券ID 和会员ID 检测该会员是否存在该优惠券
-            DubboPageResult<EsMemberCouponDO> byMemberIdAndCouponIdList = this.iEsMemberCouponService.getByMemberIdAndCouponIdList(esMemberCouponDTO);
+            DubboPageResult<EsMemberCouponDO> byMemberIdAndCouponIdList = this.iesMemberCouponService.getByMemberIdAndCouponIdList(esMemberCouponDTO);
             List<EsMemberCouponDO> memberCouponDOList = byMemberIdAndCouponIdList.getData().getList();
             if (memberCouponDOList.size() > 0){
                 // 获取第一条

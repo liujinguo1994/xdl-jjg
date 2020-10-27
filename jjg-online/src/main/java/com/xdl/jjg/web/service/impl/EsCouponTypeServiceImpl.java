@@ -1,27 +1,24 @@
 package com.xdl.jjg.web.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.system.api.constant.ErrorCode;
-import com.shopx.trade.api.model.domain.EsCouponTypeDO;
-import com.shopx.trade.api.model.domain.dto.EsCouponTypeDTO;
-import com.shopx.trade.api.service.IEsCouponTypeService;
-import com.shopx.trade.dao.entity.EsCouponType;
-import com.shopx.trade.dao.mapper.EsCouponTypeMapper;
+import com.jjg.trade.model.domain.EsCouponTypeDO;
+import com.jjg.trade.model.dto.EsCouponTypeDTO;
+import com.xdl.jjg.entity.EsCouponType;
+import com.xdl.jjg.mapper.EsCouponTypeMapper;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.web.service.IEsCouponTypeService;
+import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.apache.dubbo.common.utils.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

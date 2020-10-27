@@ -6,11 +6,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjg.trade.model.domain.EsSettlementDO;
 import com.jjg.trade.model.dto.EsSettlementDTO;
+import com.xdl.jjg.constant.TradeErrorCode;
 import com.xdl.jjg.entity.EsSettlement;
 import com.xdl.jjg.mapper.EsSettlementMapper;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.IEsSettlementService;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.config.annotation.Service;
@@ -64,7 +66,7 @@ public class EsSettlementServiceImpl extends ServiceImpl<EsSettlementMapper, EsS
         }catch (Throwable ae) {
             logger.error("结算单新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -83,7 +85,7 @@ public class EsSettlementServiceImpl extends ServiceImpl<EsSettlementMapper, EsS
         try {
             EsSettlement settlement = this.settlementMapper.selectById(id);
             if (settlement == null) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(TradeErrorCode.DATA_NOT_EXIST.getErrorCode(), TradeErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             BeanUtil.copyProperties(settlementDTO, settlement);
             QueryWrapper<EsSettlement> queryWrapper = new QueryWrapper<>();
@@ -97,7 +99,7 @@ public class EsSettlementServiceImpl extends ServiceImpl<EsSettlementMapper, EsS
         } catch (Throwable th) {
             logger.error("结算单更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -114,7 +116,7 @@ public class EsSettlementServiceImpl extends ServiceImpl<EsSettlementMapper, EsS
         try {
             EsSettlement settlement = this.settlementMapper.selectById(id);
             if (settlement == null) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(TradeErrorCode.DATA_NOT_EXIST.getErrorCode(), TradeErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             EsSettlementDO settlementDO = new EsSettlementDO();
             BeanUtil.copyProperties(settlement, settlementDO);
@@ -124,7 +126,7 @@ public class EsSettlementServiceImpl extends ServiceImpl<EsSettlementMapper, EsS
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
         }  catch (Throwable th) {
             logger.error("结算单查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -160,7 +162,7 @@ public class EsSettlementServiceImpl extends ServiceImpl<EsSettlementMapper, EsS
             return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
         } catch (Throwable th) {
             logger.error("结算单分页查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -185,7 +187,7 @@ public class EsSettlementServiceImpl extends ServiceImpl<EsSettlementMapper, EsS
         }  catch (Throwable th) {
             logger.error("结算单删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 }

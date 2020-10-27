@@ -2,8 +2,8 @@ package com.jjg.trade.model.vo;
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.shopx.goods.api.model.domain.EsGoodsSkuDO;
-import com.shopx.goods.api.model.domain.vo.EsSpecValuesVO;
+import com.jjg.shop.model.domain.EsGoodsSkuDO;
+import com.jjg.shop.model.vo.EsSpecValuesVO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;

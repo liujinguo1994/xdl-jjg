@@ -1,31 +1,33 @@
 package com.xdl.jjg.manager;
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.SnowflakeIdWorker;
-import com.shopx.common.util.StringUtil;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.EsOrderDO;
-import com.shopx.trade.api.model.domain.EsPaymentMethodDO;
-import com.shopx.trade.api.model.domain.EsTradeDO;
-import com.shopx.trade.api.model.domain.dto.*;
-import com.shopx.trade.api.model.domain.vo.FormVO;
-import com.shopx.trade.api.model.domain.vo.PayBillVO;
-import com.shopx.trade.api.model.enums.ClientType;
-import com.shopx.trade.api.model.enums.OrderStatusEnum;
-import com.shopx.trade.api.model.enums.RequestParam;
-import com.shopx.trade.api.model.enums.TradeType;
-import com.shopx.trade.api.plugin.PaymentPluginManager;
-import com.shopx.trade.api.service.*;
-import com.shopx.trade.web.request.PayParamForm;
+
+import com.jjg.trade.model.domain.EsOrderDO;
+import com.jjg.trade.model.domain.EsPaymentMethodDO;
+import com.jjg.trade.model.domain.EsTradeDO;
+import com.jjg.trade.model.dto.EsOrderDTO;
+import com.jjg.trade.model.dto.EsPaymentBillDTO;
+import com.jjg.trade.model.dto.EsTradeDTO;
+import com.jjg.trade.model.dto.SynPaymentParameter;
+import com.jjg.trade.model.enums.ClientType;
+import com.jjg.trade.model.enums.OrderStatusEnum;
+import com.jjg.trade.model.enums.RequestParam;
+import com.jjg.trade.model.enums.TradeType;
+import com.jjg.trade.model.form.PayParamForm;
+import com.jjg.trade.model.vo.FormVO;
+import com.jjg.trade.model.vo.PayBillVO;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.plugin.PaymentPluginManager;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.SnowflakeIdWorker;
+import com.xdl.jjg.util.StringUtil;
+import com.xdl.jjg.web.service.*;
 import org.apache.dubbo.config.annotation.Reference;
-import org.apache.dubbo.rpc.RpcContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
@@ -67,7 +69,7 @@ public class OrderPayManager {
     @Value("${server.address.serverNameBuyerApi}")
     private String serverNameBuyerApi;
 
-    private static final  SnowflakeIdWorker SNOWFLAKE_ID_WORKER = new SnowflakeIdWorker(5,5);
+    private static final SnowflakeIdWorker SNOWFLAKE_ID_WORKER = new SnowflakeIdWorker(5,5);
 
     /**
      * 订单支付

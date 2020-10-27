@@ -4,13 +4,13 @@ package com.xdl.jjg.web.service.impl;/**
  **/
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.EsLfcAreaDO;
-import com.shopx.trade.api.service.IEsLfcAreaService;
-import com.shopx.trade.dao.entity.EsLfcArea;
-import com.shopx.trade.dao.mapper.EsLfcAreaMapper;
+import com.jjg.trade.model.domain.EsLfcAreaDO;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.entity.EsLfcArea;
+import com.xdl.jjg.mapper.EsLfcAreaMapper;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.web.service.IEsLfcAreaService;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

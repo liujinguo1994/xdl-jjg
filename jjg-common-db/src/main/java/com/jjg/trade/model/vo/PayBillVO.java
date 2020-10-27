@@ -1,9 +1,9 @@
 package com.jjg.trade.model.vo;
 
-import com.shopx.trade.api.model.enums.ClientType;
-import com.shopx.trade.api.model.enums.RequestParam;
-import com.shopx.trade.api.model.enums.TradeType;
+import com.jjg.trade.model.enums.ClientType;
+import com.jjg.trade.model.enums.TradeType;
 import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Map;
 
@@ -55,7 +55,7 @@ public class PayBillVO implements Serializable {
     /**
      * 请求传来的一些支付要用到的处理信息
      *
-     * @see RequestParam
+     * @see
      */
     private Map<String, String> requestInfo;
 

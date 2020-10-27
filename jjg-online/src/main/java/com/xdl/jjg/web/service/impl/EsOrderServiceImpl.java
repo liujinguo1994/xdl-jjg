@@ -6,18 +6,21 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.member.model.domain.EsMemberRfmConfigDO;
 import com.jjg.member.model.domain.EsReceiptHistoryDO;
 import com.jjg.member.model.dto.EsMemberActiveInfoDTO;
 import com.jjg.member.model.enums.ActiveTypeEnum;
+import com.jjg.shop.model.co.EsGoodsCO;
+import com.jjg.shop.model.constant.GoodsErrorCode;
 import com.jjg.shop.model.domain.EsSpecValuesDO;
+import com.jjg.system.model.domain.EsLogiCompanyDO;
+import com.jjg.system.model.dto.EsSmsSendDTO;
+import com.jjg.system.model.enums.SmsTemplateCodeEnum;
+import com.jjg.system.model.vo.ExpressDetailVO;
 import com.jjg.trade.model.domain.*;
 import com.jjg.trade.model.dto.*;
-import com.jjg.trade.model.enums.DelStatus;
-import com.jjg.trade.model.enums.PayStatusEnum;
-import com.jjg.trade.model.enums.ServiceStatusEnum;
-import com.jjg.trade.model.enums.ShipStatusEnum;
-import com.jjg.trade.model.vo.EsTradeVO;
-import com.jjg.trade.model.vo.OrderOperateAllowable;
+import com.jjg.trade.model.enums.*;
+import com.jjg.trade.model.vo.*;
 import com.xdl.jjg.constant.TradeErrorCode;
 import com.xdl.jjg.constant.cacheprefix.TradeCachePrefix;
 import com.xdl.jjg.entity.*;
@@ -26,6 +29,7 @@ import com.xdl.jjg.message.OrderStatusChangeMsg;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.roketmq.MQProducer;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.util.MathUtil;
@@ -1286,7 +1290,7 @@ public class EsOrderServiceImpl extends ServiceImpl<EsOrderMapper, EsOrder> impl
     }
 
     @Override
-    public DubboPageResult<EsOrderFlow> getOrderFlow(String orderSn,Long shopId) {
+    public DubboPageResult<EsOrderFlow> getOrderFlow(String orderSn, Long shopId) {
         try{
             QueryWrapper<EsOrder> queryWrapper = new QueryWrapper<>();
             queryWrapper.lambda().eq(EsOrder::getOrderSn, orderSn).eq(EsOrder::getShopId, shopId);
@@ -2102,7 +2106,7 @@ public class EsOrderServiceImpl extends ServiceImpl<EsOrderMapper, EsOrder> impl
     }
 
     @Override
-    public DubboResult<EsOrderDO> cancelLfc(CancelVO cancelVO, OrderPermission permission,Long shopId) {
+    public DubboResult<EsOrderDO> cancelLfc(CancelVO cancelVO, OrderPermission permission, Long shopId) {
         try{
             // 获取此订单
             String orderSn = cancelVO.getOrderSn();

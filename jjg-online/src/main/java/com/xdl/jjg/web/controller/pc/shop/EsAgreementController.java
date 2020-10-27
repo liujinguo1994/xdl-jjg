@@ -1,12 +1,9 @@
 package com.xdl.jjg.web.controller.pc.shop;
 
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.system.api.model.domain.EsAgreementDO;
-import com.shopx.system.api.model.domain.vo.EsAgreementVO;
-import com.shopx.system.api.service.IEsAgreementService;
-import com.shopx.trade.web.constant.ApiStatus;
+import com.jjg.system.model.domain.EsAgreementDO;
+import com.jjg.system.model.vo.EsAgreementVO;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.response.web.ApiResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.Reference;

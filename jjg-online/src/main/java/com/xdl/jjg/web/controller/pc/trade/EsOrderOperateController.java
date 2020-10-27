@@ -1,14 +1,15 @@
 package com.xdl.jjg.web.controller.pc.trade;
 
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.web.BaseController;
-import com.shopx.trade.api.model.domain.EsOrderDO;
-import com.shopx.trade.api.model.domain.vo.CancelVO;
-import com.shopx.trade.api.model.domain.vo.RogVO;
-import com.shopx.trade.api.model.enums.OrderPermission;
-import com.shopx.trade.api.service.IEsOrderOperateService;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
+
+import com.jjg.trade.model.domain.EsOrderDO;
+import com.jjg.trade.model.enums.OrderPermission;
+import com.jjg.trade.model.vo.CancelVO;
+import com.jjg.trade.model.vo.RogVO;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.IEsOrderOperateService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;

@@ -9,8 +9,12 @@ import com.jjg.trade.model.enums.PromotionTypeEnum;
 import com.jjg.trade.model.vo.*;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.StringUtil;
 import com.xdl.jjg.web.service.*;
-import org.apache.dubbo.config.annotation.Reference;
+import com.xdl.jjg.web.service.feign.member.DiscountService;
+import com.xdl.jjg.web.service.feign.member.MemberService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -33,36 +37,35 @@ public class PromotionGoodsManager {
     @Autowired
     private JedisCluster jedisCluster;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsFullDiscountService fullDiscountService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsPromotionGoodsService promotionGoodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsFullDiscountGiftService fullDiscountGiftService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsMinusService minusService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsHalfPriceService halfPriceService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsGoodsDiscountService goodsDiscountService;
-
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsCouponService couponService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsService goodsService;
+    @Autowired
+    private GoodsService goodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberService memberService;
+    @Autowired
+    private MemberService memberService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsDiscountService iEsDiscountService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
+    private DiscountService iEsDiscountService;
+    @Autowired
     private IEsSeckillApplyService iEsSeckillApplyService;
 
     @Autowired

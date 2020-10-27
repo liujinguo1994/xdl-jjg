@@ -3,11 +3,13 @@ package com.xdl.jjg.web.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjg.member.model.domain.EsCompanyDO;
 import com.jjg.member.model.domain.EsMemberDO;
 import com.jjg.trade.model.domain.EsOrderDO;
 import com.jjg.trade.model.domain.EsSupplierBillDetailDO;
 import com.jjg.trade.model.dto.EsSupplierBillDetailDTO;
+import com.xdl.jjg.constant.TradeErrorCode;
 import com.xdl.jjg.entity.EsBillDetail;
 import com.xdl.jjg.entity.EsOrderItems;
 import com.xdl.jjg.entity.EsSupplierBillDetail;
@@ -73,7 +75,7 @@ public class EsSupplierBillDetailServiceImpl extends ServiceImpl<EsSupplierBillD
     public DubboResult insertSupplierBillDetail(EsSupplierBillDetailDTO supplierBillDetailDTO) {
         try {
             if (supplierBillDetailDTO == null) {
-                throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), ErrorCode.PARAM_ERROR.getErrorMsg());
+                throw new ArgumentException(TradeErrorCode.PARAM_ERROR.getErrorCode(), TradeErrorCode.PARAM_ERROR.getErrorMsg());
             }
 
             EsSupplierBillDetail supplierBillDetail = new EsSupplierBillDetail();
@@ -83,7 +85,7 @@ public class EsSupplierBillDetailServiceImpl extends ServiceImpl<EsSupplierBillD
         } catch (Throwable ae) {
             logger.error("失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -100,7 +102,7 @@ public class EsSupplierBillDetailServiceImpl extends ServiceImpl<EsSupplierBillD
     public DubboResult updateSupplierBillDetail(EsSupplierBillDetailDTO supplierBillDetailDTO) {
         try {
             if (supplierBillDetailDTO == null) {
-                throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), ErrorCode.PARAM_ERROR.getErrorMsg());
+                throw new ArgumentException(TradeErrorCode.PARAM_ERROR.getErrorCode(), TradeErrorCode.PARAM_ERROR.getErrorMsg());
             }
             EsSupplierBillDetail supplierBillDetail = new EsSupplierBillDetail();
             BeanUtils.copyProperties(supplierBillDetailDTO, supplierBillDetail);
@@ -111,7 +113,7 @@ public class EsSupplierBillDetailServiceImpl extends ServiceImpl<EsSupplierBillD
         } catch (Throwable th) {
             logger.error("更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -131,13 +133,13 @@ public class EsSupplierBillDetailServiceImpl extends ServiceImpl<EsSupplierBillD
             EsSupplierBillDetail supplierBillDetail = this.supplierBillDetailMapper.selectOne(queryWrapper);
             EsSupplierBillDetailDO supplierBillDetailDO = new EsSupplierBillDetailDO();
             if (supplierBillDetail != null) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(TradeErrorCode.DATA_NOT_EXIST.getErrorCode(), TradeErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             BeanUtils.copyProperties(supplierBillDetail, supplierBillDetailDO);
             return DubboResult.success(supplierBillDetailDO);
         } catch (Throwable th) {
             logger.error("查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -171,7 +173,7 @@ public class EsSupplierBillDetailServiceImpl extends ServiceImpl<EsSupplierBillD
             return DubboPageResult.success(supplierBillDetailDOList);
         } catch (Throwable th) {
             logger.error("查询分页查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -188,7 +190,7 @@ public class EsSupplierBillDetailServiceImpl extends ServiceImpl<EsSupplierBillD
     public DubboResult deleteSupplierBillDetail(Long id) {
         try {
             if (id == 0) {
-                throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), String.format("参数传入错误ID不能为空[%s]", id));
+                throw new ArgumentException(TradeErrorCode.PARAM_ERROR.getErrorCode(), String.format("参数传入错误ID不能为空[%s]", id));
             }
             QueryWrapper<EsSupplierBillDetail> deleteWrapper = new QueryWrapper<>();
             deleteWrapper.lambda().eq(EsSupplierBillDetail::getId, id);
@@ -197,7 +199,7 @@ public class EsSupplierBillDetailServiceImpl extends ServiceImpl<EsSupplierBillD
         } catch (Throwable th) {
             logger.error("查询删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 

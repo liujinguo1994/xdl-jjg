@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjg.trade.model.domain.EsShipCompanyDetailsDO;
 import com.jjg.trade.model.dto.EsShipCompanyDetailsDTO;
 import com.jjg.trade.model.dto.EsShipTemplateDTO;
+import com.xdl.jjg.constant.TradeErrorCode;
 import com.xdl.jjg.entity.EsShipCompanyDetails;
 import com.xdl.jjg.mapper.EsFreightTemplateDetailMapper;
 import com.xdl.jjg.mapper.EsShipCompanyDetailsMapper;
@@ -15,6 +16,7 @@ import com.xdl.jjg.message.ShipCompanyMsg;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.web.service.IEsShipCompanyDetailsService;
 import org.apache.dubbo.common.utils.CollectionUtils;
@@ -78,7 +80,7 @@ public class EsShipCompanyDetailsServiceImpl extends ServiceImpl<EsShipCompanyDe
         }catch (Throwable ae) {
             logger.error("公司运费模版详情新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -97,7 +99,7 @@ public class EsShipCompanyDetailsServiceImpl extends ServiceImpl<EsShipCompanyDe
         try {
             EsShipCompanyDetails shipCompanyDetails = this.shipCompanyDetailsMapper.selectById(id);
             if (shipCompanyDetails == null) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(TradeErrorCode.DATA_NOT_EXIST.getErrorCode(), TradeErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             BeanUtil.copyProperties(shipCompanyDetailsDTO, shipCompanyDetails);
             QueryWrapper<EsShipCompanyDetails> queryWrapper = new QueryWrapper<>();
@@ -111,7 +113,7 @@ public class EsShipCompanyDetailsServiceImpl extends ServiceImpl<EsShipCompanyDe
         } catch (Throwable th) {
             logger.error("公司运费模版详情更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -128,7 +130,7 @@ public class EsShipCompanyDetailsServiceImpl extends ServiceImpl<EsShipCompanyDe
         try {
             EsShipCompanyDetails shipCompanyDetails = this.shipCompanyDetailsMapper.selectById(id);
             if (shipCompanyDetails == null) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(TradeErrorCode.DATA_NOT_EXIST.getErrorCode(), TradeErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             EsShipCompanyDetailsDO shipCompanyDetailsDO = new EsShipCompanyDetailsDO();
             BeanUtil.copyProperties(shipCompanyDetails, shipCompanyDetailsDO);
@@ -138,7 +140,7 @@ public class EsShipCompanyDetailsServiceImpl extends ServiceImpl<EsShipCompanyDe
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
         }  catch (Throwable th) {
             logger.error("公司运费模版详情查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -174,7 +176,7 @@ public class EsShipCompanyDetailsServiceImpl extends ServiceImpl<EsShipCompanyDe
             return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
         } catch (Throwable th) {
             logger.error("公司运费模版详情分页查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -199,7 +201,7 @@ public class EsShipCompanyDetailsServiceImpl extends ServiceImpl<EsShipCompanyDe
         }  catch (Throwable th) {
             logger.error("公司运费模版详情删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -220,7 +222,7 @@ public class EsShipCompanyDetailsServiceImpl extends ServiceImpl<EsShipCompanyDe
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
         }catch (Throwable th) {
             logger.error("公司运费模版查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -242,7 +244,7 @@ public class EsShipCompanyDetailsServiceImpl extends ServiceImpl<EsShipCompanyDe
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
         }catch (Throwable th) {
             logger.error("公司运费模版查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -276,7 +278,7 @@ public class EsShipCompanyDetailsServiceImpl extends ServiceImpl<EsShipCompanyDe
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
         }catch (Throwable th) {
             logger.error("公司运费模版查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
     public DubboResult<EsShipCompanyDetailsDO> getPrice(int type, String areaId,Long shopId,Long templateId,Long isNg) {
@@ -300,7 +302,7 @@ public class EsShipCompanyDetailsServiceImpl extends ServiceImpl<EsShipCompanyDe
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
         }catch (Throwable th) {
             logger.error("公司运费模版查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
     public DubboResult<EsShipCompanyDetailsDO> getPrice(Long areaId) {
@@ -318,7 +320,7 @@ public class EsShipCompanyDetailsServiceImpl extends ServiceImpl<EsShipCompanyDe
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
         }catch (Throwable th) {
             logger.error("公司运费模版查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
     public DubboResult saveShipCompanyDetail(ShipCompanyMsg shipCompanyMsg){
@@ -388,7 +390,7 @@ public class EsShipCompanyDetailsServiceImpl extends ServiceImpl<EsShipCompanyDe
         }catch (Throwable th) {
             logger.error("公司运费模版操作失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
 
     }

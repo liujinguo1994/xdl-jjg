@@ -1,6 +1,6 @@
 package com.jjg.trade.model.vo;
 
-import com.shopx.common.util.BeanUtil;
+import com.xdl.jjg.util.BeanUtil;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

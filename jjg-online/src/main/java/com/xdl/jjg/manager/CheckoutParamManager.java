@@ -23,8 +23,10 @@ import com.xdl.jjg.shiro.oath.ShiroKit;
 import com.xdl.jjg.shiro.oath.ShiroUser;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.web.service.IEsDeliveryServiceService;
+import com.xdl.jjg.web.service.feign.member.MemberAddressService;
+import com.xdl.jjg.web.service.feign.member.MemberService;
+import com.xdl.jjg.web.service.feign.shop.GoodsSkuService;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -52,17 +54,17 @@ public class CheckoutParamManager {
     @Autowired
     private CartManager cartManager;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsGoodsSkuService iEsGoodsSkuService;
+    @Autowired
+    private GoodsSkuService iEsGoodsSkuService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberAddressService memberAddressService;
+    @Autowired
+    private MemberAddressService memberAddressService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsDeliveryServiceService esDeliveryServiceService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberService memberService;
+    @Autowired
+    private MemberService memberService;
 
 
     public CheckoutParamVO getParam(String skey) {

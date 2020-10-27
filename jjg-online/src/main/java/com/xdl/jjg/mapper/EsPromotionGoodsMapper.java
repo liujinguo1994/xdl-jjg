@@ -1,7 +1,7 @@
 package com.xdl.jjg.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.shopx.trade.dao.entity.EsPromotionGoods;
+import com.xdl.jjg.entity.EsPromotionGoods;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

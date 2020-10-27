@@ -1,13 +1,13 @@
 package com.xdl.jjg.web.controller.api;
 
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.web.BaseController;
-import com.shopx.member.api.model.domain.dto.EsCouponReceiveCheckDTO;
-import com.shopx.member.api.service.IEsCouponReceiveCheckService;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.request.EsCouponReceiveCheckForm;
+
+import com.jjg.member.model.dto.EsCouponReceiveCheckDTO;
+import com.jjg.trade.model.form.EsCouponReceiveCheckForm;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.controller.BaseController;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.PostMapping;

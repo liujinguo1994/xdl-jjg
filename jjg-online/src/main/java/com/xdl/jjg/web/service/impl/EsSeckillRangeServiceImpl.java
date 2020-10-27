@@ -3,6 +3,7 @@ package com.xdl.jjg.web.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjg.trade.model.domain.EsSeckillRangeDO;
 import com.jjg.trade.model.dto.EsSeckillRangeDTO;
 import com.jjg.trade.model.vo.TimeLineVO;

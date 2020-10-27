@@ -1,28 +1,24 @@
 package com.xdl.jjg.web.controller.api;
 
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.common.util.StringUtil;
-import com.shopx.goods.api.model.domain.EsGoodsGalleryDO;
-import com.shopx.goods.api.model.domain.cache.EsGoodsCO;
-import com.shopx.goods.api.model.domain.cache.EsGoodsSkuCO;
-import com.shopx.goods.api.model.domain.vo.EsSpecValuesVO;
-import com.shopx.goods.api.service.IEsGoodsService;
-import com.shopx.goods.api.service.IEsLfcGoodsService;
-import com.shopx.system.api.model.domain.vo.ExpressDetailVO;
-import com.shopx.system.api.service.IEsExpressPlatformService;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.EsLfcAreaDO;
-import com.shopx.trade.api.model.domain.EsOrderDO;
-import com.shopx.trade.api.model.domain.EsOrderItemsDO;
-import com.shopx.trade.api.model.domain.dto.EsLfcOrderDTO;
-import com.shopx.trade.api.model.domain.vo.*;
-import com.shopx.trade.api.service.IEsLfcAreaService;
-import com.shopx.trade.api.service.IEsOrderItemsService;
-import com.shopx.trade.api.service.IEsOrderService;
-import com.shopx.trade.api.service.IEsTradeIntodbService;
-import com.shopx.trade.web.constant.OrderCheck;
-import com.shopx.trade.web.request.LfcResultForm;
+import com.jjg.shop.model.co.EsGoodsCO;
+import com.jjg.shop.model.co.EsGoodsSkuCO;
+import com.jjg.shop.model.domain.EsGoodsGalleryDO;
+import com.jjg.shop.model.vo.EsSpecValuesVO;
+import com.jjg.system.model.vo.ExpressDetailVO;
+import com.jjg.trade.model.domain.EsLfcAreaDO;
+import com.jjg.trade.model.domain.EsOrderDO;
+import com.jjg.trade.model.domain.EsOrderItemsDO;
+import com.jjg.trade.model.dto.EsLfcOrderDTO;
+import com.jjg.trade.model.vo.*;
+import com.xdl.jjg.constant.OrderCheck;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.util.StringUtil;
+import com.xdl.jjg.web.service.IEsLfcAreaService;
+import com.xdl.jjg.web.service.IEsOrderItemsService;
+import com.xdl.jjg.web.service.IEsOrderService;
+import com.xdl.jjg.web.service.IEsTradeIntodbService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -78,7 +74,7 @@ public class GoodsLfcBuyerController {
 			@ApiImplicitParam(name = "timestamp", value = "時間", dataType = "int", paramType = "query"),
 	})
 	@PostMapping("/getGoodsIds")
-	public LfcResult getLfcGoodsId(String sign,String appKey,String method,String timestamp) {
+	public LfcResult getLfcGoodsId(String sign, String appKey, String method, String timestamp) {
 		OrderCheck.checkKey(sign,appSecret,appKey,method,timestamp);
 		LfcResult lfcResult=new LfcResult();
 		DubboResult<Long> result = this.lfcGoodsService.getGoodsList();

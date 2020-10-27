@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.shopx.goods.api.model.domain.cache.EsGoodsSkuCO;
+import com.jjg.shop.model.co.EsGoodsSkuCO;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
