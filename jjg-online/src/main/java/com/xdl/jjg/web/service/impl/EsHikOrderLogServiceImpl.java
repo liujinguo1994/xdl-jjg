@@ -6,6 +6,7 @@ import com.xdl.jjg.constant.TradeErrorCode;
 import com.xdl.jjg.entity.EsHikOrderLog;
 import com.xdl.jjg.mapper.EsHikOrderLogMapper;
 import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.IEsHikOrderLogService;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;

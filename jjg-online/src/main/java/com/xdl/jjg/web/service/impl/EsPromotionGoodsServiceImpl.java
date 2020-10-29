@@ -19,6 +19,7 @@ import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.IEsPromotionGoodsService;
 import com.xdl.jjg.web.service.IEsSeckillApplyService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
@@ -47,7 +48,7 @@ import java.util.stream.Collectors;
 public class EsPromotionGoodsServiceImpl extends ServiceImpl<EsPromotionGoodsMapper, EsPromotionGoods> implements IEsPromotionGoodsService {
 
     @Reference(version = "${dubbo.application.version}", timeout = 10000)
-    private IEsGoodsService esGoodsService;
+    private GoodsService esGoodsService;
     @Autowired
     private IEsSeckillApplyService iEsSeckillApplyService;
 

@@ -6,11 +6,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjg.trade.model.domain.EsDeliveryDateDO;
 import com.jjg.trade.model.dto.EsDeliveryDateDTO;
+import com.xdl.jjg.constant.TradeErrorCode;
 import com.xdl.jjg.entity.EsDeliveryDate;
 import com.xdl.jjg.mapper.EsDeliveryDateMapper;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.IEsDeliveryDateService;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.config.annotation.Service;
@@ -54,7 +56,7 @@ public class EsDeliveryDateServiceImpl extends ServiceImpl<EsDeliveryDateMapper,
     public DubboResult insertDeliveryDate(EsDeliveryDateDTO deliveryDateDTO) {
         try {
             if (deliveryDateDTO == null) {
-                throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), ErrorCode.PARAM_ERROR.getErrorMsg());
+                throw new ArgumentException(TradeErrorCode.PARAM_ERROR.getErrorCode(), TradeErrorCode.PARAM_ERROR.getErrorMsg());
             }
 
             EsDeliveryDate deliveryDate = new EsDeliveryDate();
@@ -64,7 +66,7 @@ public class EsDeliveryDateServiceImpl extends ServiceImpl<EsDeliveryDateMapper,
         } catch (Throwable ae) {
             logger.error("失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -81,7 +83,7 @@ public class EsDeliveryDateServiceImpl extends ServiceImpl<EsDeliveryDateMapper,
     public DubboResult updateDeliveryDate(EsDeliveryDateDTO deliveryDateDTO) {
         try {
             if (deliveryDateDTO == null) {
-                throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), ErrorCode.PARAM_ERROR.getErrorMsg());
+                throw new ArgumentException(TradeErrorCode.PARAM_ERROR.getErrorCode(), TradeErrorCode.PARAM_ERROR.getErrorMsg());
             }
             EsDeliveryDate deliveryDate = new EsDeliveryDate();
             BeanUtil.copyProperties(deliveryDateDTO, deliveryDate);
@@ -92,7 +94,7 @@ public class EsDeliveryDateServiceImpl extends ServiceImpl<EsDeliveryDateMapper,
         } catch (Throwable th) {
             logger.error("更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -112,13 +114,13 @@ public class EsDeliveryDateServiceImpl extends ServiceImpl<EsDeliveryDateMapper,
             EsDeliveryDate deliveryDate = this.deliveryDateMapper.selectOne(queryWrapper);
             EsDeliveryDateDO deliveryDateDO = new EsDeliveryDateDO();
             if (deliveryDate != null) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(TradeErrorCode.DATA_NOT_EXIST.getErrorCode(), TradeErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             BeanUtil.copyProperties(deliveryDate, deliveryDateDO);
             return DubboResult.success(deliveryDateDO);
         } catch (Throwable th) {
             logger.error("查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -151,7 +153,7 @@ public class EsDeliveryDateServiceImpl extends ServiceImpl<EsDeliveryDateMapper,
             return DubboPageResult.success(deliveryDateDOList);
         } catch (Throwable th) {
             logger.error("查询分页查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -168,7 +170,7 @@ public class EsDeliveryDateServiceImpl extends ServiceImpl<EsDeliveryDateMapper,
     public DubboResult deleteDeliveryDate(Long id) {
         try {
             if (id == 0) {
-                throw new ArgumentException(ErrorCode.PARAM_ERROR.getErrorCode(), String.format("参数传入错误ID不能为空[%s]", id));
+                throw new ArgumentException(TradeErrorCode.PARAM_ERROR.getErrorCode(), String.format("参数传入错误ID不能为空[%s]", id));
             }
             QueryWrapper<EsDeliveryDate> deleteWrapper = new QueryWrapper<>();
             deleteWrapper.lambda().eq(EsDeliveryDate::getId, id);
@@ -177,7 +179,7 @@ public class EsDeliveryDateServiceImpl extends ServiceImpl<EsDeliveryDateMapper,
         } catch (Throwable th) {
             logger.error("查询删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -199,7 +201,7 @@ public class EsDeliveryDateServiceImpl extends ServiceImpl<EsDeliveryDateMapper,
             return DubboPageResult.success(deliveryDateDOList);
         } catch (Throwable th) {
             logger.error("查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 }

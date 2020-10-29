@@ -16,16 +16,21 @@ import com.jjg.trade.model.vo.EsHalfPriceVO;
 import com.xdl.jjg.constant.TradeErrorCode;
 import com.xdl.jjg.constant.cacheprefix.PromotionCacheKeys;
 import com.xdl.jjg.entity.EsHalfPrice;
+import com.xdl.jjg.manager.PromotionRuleManager;
 import com.xdl.jjg.mapper.EsHalfPriceMapper;
 import com.xdl.jjg.message.CartPromotionChangeMsg;
 import com.xdl.jjg.plugin.PromotionValid;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.roketmq.MQProducer;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.web.service.IEsHalfPriceService;
 import com.xdl.jjg.web.service.IEsPromotionGoodsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsSkuService;
+import com.xdl.jjg.web.service.job.ResponseEntityMsg;
+import com.xdl.jjg.web.service.job.execute.XXLHttpClient;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
@@ -80,7 +85,7 @@ public class EsHalfPriceServiceImpl extends ServiceImpl<EsHalfPriceMapper, EsHal
     @Value("${rocketmq.promotion.change.topic}")
     private String promotion_change_topic;
 
-    private IEsGoodsSkuService esGoodsSkuService;
+    private GoodsSkuService esGoodsSkuService;
     /**
      * 插入第二件半价活动表数据
      *

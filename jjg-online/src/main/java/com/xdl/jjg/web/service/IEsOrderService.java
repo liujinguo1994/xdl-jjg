@@ -5,8 +5,11 @@ import com.jjg.trade.model.domain.*;
 import com.jjg.trade.model.dto.*;
 import com.jjg.trade.model.enums.OrderPermission;
 import com.jjg.trade.model.vo.*;
+import com.xdl.jjg.message.OrderStatusChangeMsg;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
+
+import java.util.List;
 
 /**
  * <p>

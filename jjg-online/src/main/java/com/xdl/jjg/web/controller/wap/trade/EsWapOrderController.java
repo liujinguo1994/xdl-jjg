@@ -1,5 +1,6 @@
 package com.xdl.jjg.web.controller.wap.trade;
 
+import com.jjg.operateChecker.OrderOperateAllowable;
 import com.jjg.shop.model.co.EsGoodsCO;
 import com.jjg.shop.model.vo.EsSpecValuesVO;
 import com.jjg.system.model.domain.EsSettingsDO;

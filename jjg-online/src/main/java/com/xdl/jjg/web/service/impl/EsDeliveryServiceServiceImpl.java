@@ -24,8 +24,10 @@ import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.SnowflakeIdWorker;
 import com.xdl.jjg.web.service.IEsDeliveryServiceService;
+import com.xdl.jjg.web.service.feign.member.CompanyService;
+import com.xdl.jjg.web.service.feign.member.MemberService;
+import com.xdl.jjg.web.service.feign.shop.GoodsSkuService;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -63,12 +65,12 @@ public class EsDeliveryServiceServiceImpl extends ServiceImpl<EsDeliveryServiceM
 
     @Autowired
     private EsDeliveryDateMapper deliveryDateMapper;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberService esMemberService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsCompanyService esCompanyService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsSkuService esGoodsSkuService;
+    @Autowired
+    private MemberService esMemberService;
+    @Autowired
+    private CompanyService esCompanyService;
+    @Autowired
+    private GoodsSkuService esGoodsSkuService;
 
     private static SnowflakeIdWorker snowflakeIdWorker = new SnowflakeIdWorker(0,0);
     // TODO 调用店铺接口

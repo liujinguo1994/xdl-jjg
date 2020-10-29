@@ -8,6 +8,8 @@ import com.jjg.member.model.dto.EsMemberActiveInfoDTO;
 import com.jjg.member.model.dto.EsMemberBalanceDTO;
 import com.jjg.member.model.enums.ActiveTypeEnum;
 import com.jjg.member.model.enums.ConsumeEnumType;
+import com.jjg.operateChecker.OrderOperateAllowable;
+import com.jjg.operateChecker.OrderOperateChecker;
 import com.jjg.shop.model.domain.EsCategoryDO;
 import com.jjg.shop.model.dto.EsGoodsSkuQuantityDTO;
 import com.jjg.trade.model.domain.EsBuyerTradeDO;
@@ -20,8 +22,6 @@ import com.jjg.trade.model.dto.EsTradeDTO;
 import com.jjg.trade.model.dto.TradePromotionGoodsDTO;
 import com.jjg.trade.model.enums.*;
 import com.jjg.trade.model.vo.EsTradeVO;
-import com.jjg.trade.model.vo.OrderOperateAllowable;
-import com.jjg.trade.model.vo.OrderOperateChecker;
 import com.jjg.trade.model.vo.PriceDetailVO;
 import com.xdl.jjg.constant.TradeErrorCode;
 import com.xdl.jjg.constant.cacheprefix.TradeCachePrefix;
@@ -33,17 +33,19 @@ import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.roketmq.MQProducer;
-import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.util.JsonUtil;
-import com.xdl.jjg.util.MathUtil;
-import com.xdl.jjg.util.SnowflakeIdWorker;
+import com.xdl.jjg.util.*;
 import com.xdl.jjg.utils.CurrencyUtil;
 import com.xdl.jjg.web.service.IEsFullDiscountGiftService;
 import com.xdl.jjg.web.service.IEsOrderService;
 import com.xdl.jjg.web.service.IEsTradeService;
+import com.xdl.jjg.web.service.feign.member.MemberActiveInfoService;
+import com.xdl.jjg.web.service.feign.member.MemberDepositService;
+import com.xdl.jjg.web.service.feign.member.MemberService;
+import com.xdl.jjg.web.service.feign.shop.CategoryService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsSkuQuantityService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.apache.rocketmq.client.producer.MessageQueueSelector;
 import org.apache.rocketmq.common.message.Message;
@@ -95,24 +97,24 @@ public class EsTradeServiceImpl extends ServiceImpl<EsTradeMapper, EsTrade> impl
     @Autowired
     private MQProducer mqProducer;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberActiveInfoService iEsMemberActiveInfoService;
+    @Autowired
+    private MemberActiveInfoService iEsMemberActiveInfoService;
 
     private static SnowflakeIdWorker snowflakeIdWorker = new SnowflakeIdWorker(0,0);
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsGoodsService iEsGoodsService;
+    @Autowired
+    private GoodsService iEsGoodsService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsMemberDepositService iEsMemberDepositService;
+    @Autowired
+    private MemberDepositService iEsMemberDepositService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberService memberService;
+    @Autowired
+    private MemberService memberService;
 
-    @Reference(version = "${dubbo.application.version}"/*,timeout = 5000*/)
-    private IEsGoodsSkuQuantityService iEsGoodsSkuQuantityService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsCategoryService categoryService;
+    @Autowired
+    private GoodsSkuQuantityService iEsGoodsSkuQuantityService;
+    @Autowired
+    private CategoryService categoryService;
 
     @Autowired
     private IEsOrderService orderService;

@@ -329,7 +329,7 @@ public class EsSelfDateServiceImpl extends ServiceImpl<EsSelfDateMapper, EsSelfD
             return DubboPageResult.success(esSelfDatesDOList);
         } catch (Throwable th) {
             logger.error("查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
 
     }

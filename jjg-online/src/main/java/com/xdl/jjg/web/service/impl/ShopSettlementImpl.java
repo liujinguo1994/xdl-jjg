@@ -6,10 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.jjg.member.model.domain.EsShopDO;
 import com.jjg.member.model.domain.EsShopDetailDO;
 import com.jjg.system.model.vo.EsClearingCycleVO;
-import com.jjg.trade.model.domain.EsBillDetailDO;
-import com.jjg.trade.model.domain.EsHeaderDO;
-import com.jjg.trade.model.domain.EsSettlementDetailDO;
-import com.jjg.trade.model.domain.ExcelDO;
+import com.jjg.trade.model.domain.*;
 import com.jjg.trade.model.dto.EsBillDetailDTO;
 import com.jjg.trade.model.enums.BillType;
 import com.xdl.jjg.constant.TradeErrorCode;
@@ -25,6 +22,8 @@ import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.ExcelUtil;
 import com.xdl.jjg.util.MathUtil;
 import com.xdl.jjg.util.SnowflakeIdWorker;
+import com.xdl.jjg.web.service.feign.member.ShopDetailService;
+import com.xdl.jjg.web.service.feign.shop.ShopService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
@@ -59,10 +58,10 @@ public class ShopSettlementImpl extends AbstractStatementSettlement {
     private EsBillDetailMapper billDetailMapper;
 
     @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsShopService shopService;
+    private ShopService shopService;
 
     @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsShopDetailService shopDetailService;
+    private ShopDetailService shopDetailService;
 
     private static SnowflakeIdWorker snowflakeIdWorker = new SnowflakeIdWorker(0,0);
 

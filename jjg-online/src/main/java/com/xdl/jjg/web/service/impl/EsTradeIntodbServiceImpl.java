@@ -21,6 +21,7 @@ import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.util.SnowflakeIdWorker;
 import com.xdl.jjg.utils.CurrencyUtil;
 import com.xdl.jjg.web.service.IEsTradeIntodbService;
+import com.xdl.jjg.web.service.feign.shop.GoodsSkuService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.dubbo.config.annotation.Reference;
@@ -44,7 +45,7 @@ public class EsTradeIntodbServiceImpl implements IEsTradeIntodbService {
     public static final SnowflakeIdWorker snowflakeIdWorker = new SnowflakeIdWorker(0,0);
 
     @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsSkuService esGoodsSkuService;
+    private GoodsSkuService esGoodsSkuService;
     @Autowired
     private EsTradeMapper esTradeMapper;
     @Autowired

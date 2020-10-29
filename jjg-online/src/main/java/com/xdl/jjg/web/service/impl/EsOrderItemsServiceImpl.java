@@ -10,10 +10,7 @@ import com.jjg.shop.model.domain.EsCategoryDO;
 import com.jjg.shop.model.domain.EsSpecValuesDO;
 import com.jjg.trade.model.domain.*;
 import com.jjg.trade.model.dto.*;
-import com.jjg.trade.model.enums.CommentStatusEnum;
-import com.jjg.trade.model.enums.OrderMetaKeyEnum;
-import com.jjg.trade.model.enums.PromotionTypeEnum;
-import com.jjg.trade.model.enums.ServiceStatusEnum;
+import com.jjg.trade.model.enums.*;
 import com.xdl.jjg.constant.TradeErrorCode;
 import com.xdl.jjg.entity.EsDeliveryInfo;
 import com.xdl.jjg.entity.EsOrder;
@@ -28,10 +25,13 @@ import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.util.SnowflakeIdWorker;
+import com.xdl.jjg.util.StringUtil;
 import com.xdl.jjg.web.service.IEsOrderItemsService;
 import com.xdl.jjg.web.service.IEsOrderMetaService;
 import com.xdl.jjg.web.service.IEsOrderService;
 import com.xdl.jjg.web.service.IEsPromotionGoodsService;
+import com.xdl.jjg.web.service.feign.member.AutoCommentConfigService;
+import com.xdl.jjg.web.service.feign.shop.CategoryService;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
@@ -66,10 +66,10 @@ public class EsOrderItemsServiceImpl extends ServiceImpl<EsOrderItemsMapper, EsO
 
 
     @Reference(version = "${dubbo.application.version}", timeout = 5000,check = false)
-    private IEsCategoryService categoryService;
+    private CategoryService categoryService;
 
     @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsAutoCommentConfigService iEsAutoCommentConfigService;
+    private AutoCommentConfigService iEsAutoCommentConfigService;
 
     @Autowired
     private IEsPromotionGoodsService promotionGoodsService;

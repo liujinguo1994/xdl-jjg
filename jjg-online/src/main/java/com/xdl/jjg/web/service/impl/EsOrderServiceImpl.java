@@ -10,6 +10,7 @@ import com.jjg.member.model.domain.EsMemberRfmConfigDO;
 import com.jjg.member.model.domain.EsReceiptHistoryDO;
 import com.jjg.member.model.dto.EsMemberActiveInfoDTO;
 import com.jjg.member.model.enums.ActiveTypeEnum;
+import com.jjg.operateChecker.OrderOperateAllowable;
 import com.jjg.shop.model.co.EsGoodsCO;
 import com.jjg.shop.model.constant.GoodsErrorCode;
 import com.jjg.shop.model.domain.EsSpecValuesDO;
@@ -35,9 +36,16 @@ import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.util.MathUtil;
 import com.xdl.jjg.utils.OrderStatusUtils;
 import com.xdl.jjg.web.service.*;
+import com.xdl.jjg.web.service.feign.member.ExpressPlatformService;
+import com.xdl.jjg.web.service.feign.member.MemberRfmConfigService;
+import com.xdl.jjg.web.service.feign.member.ReceiptHistoryService;
+import com.xdl.jjg.web.service.feign.shop.CategoryService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsSkuService;
+import com.xdl.jjg.web.service.feign.system.LogiCompanyService;
+import com.xdl.jjg.web.service.feign.system.SmsService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
@@ -100,26 +108,26 @@ public class EsOrderServiceImpl extends ServiceImpl<EsOrderMapper, EsOrder> impl
     @Value("${rocketmq.member.active.topic}")
     private String member_active_topic;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsReceiptHistoryService iEsReceiptHistoryService;
+    @Autowired
+    private ReceiptHistoryService iEsReceiptHistoryService;
 
     @Autowired
     private IEsOrderItemsService iEsOrderItemsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsCategoryService iEsCategoryService;
+    @Autowired
+    private CategoryService iEsCategoryService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsGoodsSkuService iEsGoodsSkuService;
+    @Autowired
+    private GoodsSkuService iEsGoodsSkuService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberRfmConfigService iEsMemberRfmConfigService;
+    @Autowired
+    private MemberRfmConfigService iEsMemberRfmConfigService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsGoodsService goodsService;
+    @Autowired
+    private GoodsService goodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsExpressPlatformService expressPlatformService;
+    @Autowired
+    private ExpressPlatformService expressPlatformService;
 
     @Autowired
     private IEsRefundService esRefundService;
@@ -130,14 +138,14 @@ public class EsOrderServiceImpl extends ServiceImpl<EsOrderMapper, EsOrder> impl
     private IEsOrderOperateService esOrderOperateService;
 
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsLogiCompanyService logiCompanyService;
+    @Autowired
+    private LogiCompanyService logiCompanyService;
 
     @Autowired
     private IEsCakeCardService esCakeCardService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsSmsService esSmsService;
+    @Autowired
+    private SmsService esSmsService;
 
     /**
      * TODO 卖家端 查看订单详情信息

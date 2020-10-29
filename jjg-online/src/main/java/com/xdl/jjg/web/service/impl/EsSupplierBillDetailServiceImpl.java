@@ -20,6 +20,8 @@ import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.web.service.IEsSupplierBillDetailService;
+import com.xdl.jjg.web.service.feign.member.CompanyService;
+import com.xdl.jjg.web.service.feign.member.MemberService;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
@@ -58,10 +60,10 @@ public class EsSupplierBillDetailServiceImpl extends ServiceImpl<EsSupplierBillD
     private EsBillDetailMapper esBillDetailMapper;
 
     @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberService memberService;
+    private MemberService memberService;
 
     @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsCompanyService companyService;
+    private CompanyService companyService;
     /**
      * 插入数据
      *

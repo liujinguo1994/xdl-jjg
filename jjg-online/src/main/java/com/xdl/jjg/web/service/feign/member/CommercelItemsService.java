@@ -3,7 +3,9 @@ package com.xdl.jjg.web.service.feign.member;
 import com.jjg.member.model.domain.EsCommercelItemsDO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
+import org.springframework.cloud.netflix.feign.FeignClient;
 
+@FeignClient(value = "jjg-member")
 public interface CommercelItemsService {
 
     /**

@@ -7,6 +7,7 @@ import com.jjg.trade.model.dto.BuyerRefundApplyDTO;
 import com.jjg.trade.model.dto.EsAfterSaleDTO;
 import com.jjg.trade.model.dto.SellerRefundApprovalDTO;
 import com.jjg.trade.model.vo.RefundApplyVO;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 
 /**

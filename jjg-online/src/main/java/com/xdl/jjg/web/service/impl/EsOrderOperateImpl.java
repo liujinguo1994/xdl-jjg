@@ -2,6 +2,7 @@ package com.xdl.jjg.web.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.jjg.member.model.enums.ConsumeEnumType;
+import com.jjg.operateChecker.OrderOperateChecker;
 import com.jjg.trade.model.domain.EsOrderDO;
 import com.jjg.trade.model.domain.EsOrderItemsDO;
 import com.jjg.trade.model.dto.EsDeliveryDTO;
@@ -9,7 +10,6 @@ import com.jjg.trade.model.dto.EsOrderDTO;
 import com.jjg.trade.model.enums.*;
 import com.jjg.trade.model.vo.CancelVO;
 import com.jjg.trade.model.vo.CompleteVO;
-import com.jjg.trade.model.vo.OrderOperateChecker;
 import com.jjg.trade.model.vo.RogVO;
 import com.xdl.jjg.constant.TradeErrorCode;
 import com.xdl.jjg.entity.EsOrder;
@@ -26,6 +26,11 @@ import com.xdl.jjg.web.service.IEsOrderItemsService;
 import com.xdl.jjg.web.service.IEsOrderOperateService;
 import com.xdl.jjg.web.service.IEsSupplierBillDetailService;
 import com.xdl.jjg.web.service.IEsTradeService;
+import com.xdl.jjg.web.service.feign.member.CompanyService;
+import com.xdl.jjg.web.service.feign.member.MemberActiveInfoService;
+import com.xdl.jjg.web.service.feign.member.MemberDepositService;
+import com.xdl.jjg.web.service.feign.member.MemberService;
+import com.xdl.jjg.web.service.feign.system.SettingsService;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
@@ -63,19 +68,19 @@ public class EsOrderOperateImpl implements IEsOrderOperateService {
     private EsOrderItemsMapper esOrderItemsMapper;
 
     @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberActiveInfoService iEsMemberActiveInfoService;
+    private MemberActiveInfoService iEsMemberActiveInfoService;
 
     @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberDepositService iEsMemberDepositService;
+    private MemberDepositService iEsMemberDepositService;
 
     @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberService memberService;
+    private MemberService memberService;
 
     @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsSettingsService iEsSettingsService;
+    private SettingsService iEsSettingsService;
 
     @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsCompanyService companyService;
+    private CompanyService companyService;
 
     @Autowired
     private IEsTradeService iEsTradeService;

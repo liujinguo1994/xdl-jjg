@@ -9,7 +9,7 @@ import com.jjg.shop.model.domain.EsCategoryDO;
 import com.jjg.trade.model.domain.*;
 import com.jjg.trade.model.dto.*;
 import com.jjg.trade.model.enums.*;
-import com.jjg.trade.model.vo.OrderOperateAllowable;
+import com.jjg.operateChecker.OrderOperateAllowable;
 import com.jjg.trade.model.vo.RefundApplyVO;
 import com.xdl.jjg.constant.RefundOperateChecker;
 import com.xdl.jjg.constant.TradeErrorCode;
@@ -21,9 +21,10 @@ import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.util.MathUtil;
+import com.xdl.jjg.util.StringUtil;
 import com.xdl.jjg.web.service.*;
+import com.xdl.jjg.web.service.feign.shop.CategoryService;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,8 +59,8 @@ public class EsAfterSaleServiceImpl extends ServiceImpl<EsAfterSaleMapper, EsAft
     @Autowired
     private EsAfterSaleMapper afterSaleMapper;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000,check = false)
-    private IEsCategoryService categoryService;
+    @Autowired
+    private CategoryService categoryService;
 
     @Autowired
     private IEsOrderService esOrderService;

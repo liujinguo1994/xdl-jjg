@@ -10,7 +10,7 @@ import com.jjg.trade.model.dto.EsBuyerOrderQueryDTO;
 import com.jjg.trade.model.enums.OrderStatusEnum1;
 import com.jjg.trade.model.enums.ServiceStatusEnum;
 import com.jjg.trade.model.vo.EsOrderVO;
-import com.jjg.trade.model.vo.OrderOperateAllowable;
+import com.jjg.operateChecker.OrderOperateAllowable;
 import com.xdl.jjg.constant.ApiStatus;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;

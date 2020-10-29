@@ -3,6 +3,7 @@ package com.xdl.jjg.web.service;
 
 import com.jjg.trade.model.domain.EsGroupBuyCatDO;
 import com.jjg.trade.model.dto.EsGroupBuyCatDTO;
+import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 
 /**

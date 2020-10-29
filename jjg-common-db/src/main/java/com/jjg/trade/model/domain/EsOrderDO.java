@@ -4,7 +4,7 @@ import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.jjg.trade.model.enums.*;
 import com.jjg.trade.model.vo.CartItemsVO;
-import com.jjg.trade.model.vo.OrderOperateAllowable;
+import com.jjg.operateChecker.OrderOperateAllowable;
 import com.xdl.jjg.util.JsonUtil;
 import lombok.Data;
 

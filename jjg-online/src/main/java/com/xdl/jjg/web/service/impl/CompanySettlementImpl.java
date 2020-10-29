@@ -20,8 +20,8 @@ import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.ExcelUtil;
 import com.xdl.jjg.util.SnowflakeIdWorker;
+import com.xdl.jjg.web.service.feign.member.CompanyService;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -51,8 +51,8 @@ public class CompanySettlementImpl extends AbstractStatementSettlement {
     @Autowired
     private EsBillDetailMapper billDetailMapper;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsCompanyService companyService;
+    @Autowired
+    private CompanyService companyService;
 
     /**
      * 订单结算

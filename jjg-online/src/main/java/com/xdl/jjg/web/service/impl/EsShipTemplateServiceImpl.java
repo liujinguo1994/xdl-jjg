@@ -28,6 +28,7 @@ import com.xdl.jjg.util.CollectionUtils;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.web.service.IEsShipCompanyDetailsService;
 import com.xdl.jjg.web.service.IEsShipTemplateService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,6 +36,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -51,7 +53,7 @@ import java.util.stream.Collectors;
  * @author LiuJG 344009799@qq.com
  * @since 2019-06-03
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsShipTemplateService.class, timeout = 50000)
+@Service
 public class EsShipTemplateServiceImpl extends ServiceImpl<EsShipTemplateMapper, EsShipTemplate> implements IEsShipTemplateService {
 
     private static Logger logger = LoggerFactory.getLogger(EsShipTemplateServiceImpl.class);
@@ -73,8 +75,8 @@ public class EsShipTemplateServiceImpl extends ServiceImpl<EsShipTemplateMapper,
 
     @Value("${rocketmq.ship.topic}")
     private String ship_topic;
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsGoodsService esGoodsService;
+    @Autowired
+    private GoodsService esGoodsService;
     /**
      * 插入运费模板表数据
      *

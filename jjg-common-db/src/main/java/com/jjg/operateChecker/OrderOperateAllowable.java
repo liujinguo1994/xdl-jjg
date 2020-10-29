@@ -1,4 +1,4 @@
-package com.jjg.trade.model.vo;
+package com.jjg.operateChecker;
 
 import com.jjg.trade.model.enums.*;
 import io.swagger.annotations.ApiModelProperty;
@@ -57,19 +57,19 @@ public class OrderOperateAllowable implements Serializable {
     public OrderOperateAllowable(OrderStatusEnum orderStatus, ServiceStatusEnum serviceStatus) {
 
         // 是否允许被取消
-        this.allowCancel = OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.CANCEL);
+        this.allowCancel = com.jjg.trade.model.vo.OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.CANCEL);
         // 是否允许被确认
-        this.allowConfirm = OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.CONFIRM);
+        this.allowConfirm = com.jjg.trade.model.vo.OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.CONFIRM);
         // 是否允许被支付
-        this.allowPay = OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.PAY);
+        this.allowPay = com.jjg.trade.model.vo.OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.PAY);
         // 是否允许被发货
-        this.allowShip = OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.SHIP)
+        this.allowShip = com.jjg.trade.model.vo.OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.SHIP)
                 && !ServiceStatusEnum.APPLY.name().equals(serviceStatus.name())
                 && !ServiceStatusEnum.PASS.name().equals(serviceStatus.name());
         // 是否允许被收货
-        this.allowRog = OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.ROG);
+        this.allowRog = com.jjg.trade.model.vo.OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.ROG);
         // 是否允许被完成
-        this.allowComplete = OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.COMPLETE);
+        this.allowComplete = com.jjg.trade.model.vo.OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.COMPLETE);
 
         boolean defaultServiceStatus = ServiceStatusEnum.NOT_APPLY.value().equals(serviceStatus.value());
     }
@@ -83,17 +83,17 @@ public class OrderOperateAllowable implements Serializable {
             PayStatusEnum payStatus) {
 
         // 是否允许被取消
-        this.allowCancel = OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.CANCEL);
+        this.allowCancel = com.jjg.trade.model.vo.OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.CANCEL);
         // 是否允许被确认
-        this.allowConfirm = OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.CONFIRM);
+        this.allowConfirm = com.jjg.trade.model.vo.OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.CONFIRM);
         // 是否允许被支付
-        this.allowPay = OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.PAY);
+        this.allowPay = com.jjg.trade.model.vo.OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.PAY);
         // 是否允许被发货
-        this.allowShip = OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.SHIP)
+        this.allowShip = com.jjg.trade.model.vo.OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.SHIP)
                 && !ServiceStatusEnum.APPLY.name().equals(serviceStatus.name())
                 && !ServiceStatusEnum.PASS.name().equals(serviceStatus.name());
         // 是否允许被收货
-        this.allowRog = OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.ROG);
+        this.allowRog = com.jjg.trade.model.vo.OrderOperateChecker.checkAllowable(orderStatus, OrderOperateEnum.ROG);
         //是否允许被评论
         this.allowComment = CommentStatusEnum.UNFINISHED.value().equals(commentStatus.value())&& ShipStatusEnum.SHIP_ROG.value().equals(shipStatus.value());
         // 是否允许被完成

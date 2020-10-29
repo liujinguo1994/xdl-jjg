@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjg.shop.model.domain.EsGoodsSkuDO;
 import com.jjg.trade.model.domain.ESGoodsSkuSelectDO;
 import com.jjg.trade.model.domain.EsGoodsDiscountDO;
@@ -15,19 +16,23 @@ import com.jjg.trade.model.vo.EsGoodsDiscountVO;
 import com.xdl.jjg.constant.TradeErrorCode;
 import com.xdl.jjg.constant.cacheprefix.PromotionCacheKeys;
 import com.xdl.jjg.entity.EsGoodsDiscount;
+import com.xdl.jjg.manager.PromotionRuleManager;
 import com.xdl.jjg.mapper.EsGoodsDiscountMapper;
 import com.xdl.jjg.message.CartPromotionChangeMsg;
 import com.xdl.jjg.plugin.PromotionValid;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.roketmq.MQProducer;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.web.service.IEsGoodsDiscountService;
 import com.xdl.jjg.web.service.IEsPromotionGoodsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsSkuService;
+import com.xdl.jjg.web.service.job.ResponseEntityMsg;
+import com.xdl.jjg.web.service.job.execute.XXLHttpClient;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -78,8 +83,8 @@ public class EsGoodsDiscountServiceImpl extends ServiceImpl<EsGoodsDiscountMappe
     @Value("${rocketmq.promotion.change.topic}")
     private String promotion_change_topic;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsGoodsSkuService esGoodsSkuService;
+    @Autowired
+    private GoodsSkuService esGoodsSkuService;
 
     /**
      * 插入商品折扣活动表数据
@@ -165,7 +170,7 @@ public class EsGoodsDiscountServiceImpl extends ServiceImpl<EsGoodsDiscountMappe
         }catch (Throwable ae) {
             logger.error("商品折扣活动表新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -232,7 +237,7 @@ public class EsGoodsDiscountServiceImpl extends ServiceImpl<EsGoodsDiscountMappe
         } catch (Throwable th) {
             logger.error("商品折扣活动表更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -249,7 +254,7 @@ public class EsGoodsDiscountServiceImpl extends ServiceImpl<EsGoodsDiscountMappe
         try {
             EsGoodsDiscount goodsDiscount = this.goodsDiscountMapper.selectById(id);
             if (goodsDiscount == null) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(TradeErrorCode.DATA_NOT_EXIST.getErrorCode(), TradeErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             EsGoodsDiscountDO goodsDiscountDO = new EsGoodsDiscountDO();
             BeanUtil.copyProperties(goodsDiscount, goodsDiscountDO);
@@ -259,7 +264,7 @@ public class EsGoodsDiscountServiceImpl extends ServiceImpl<EsGoodsDiscountMappe
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
         }  catch (Throwable th) {
             logger.error("商品折扣活动表查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -309,7 +314,7 @@ public class EsGoodsDiscountServiceImpl extends ServiceImpl<EsGoodsDiscountMappe
             return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
         } catch (Throwable th) {
             logger.error("商品折扣活动表分页查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -428,7 +433,7 @@ public class EsGoodsDiscountServiceImpl extends ServiceImpl<EsGoodsDiscountMappe
         }  catch (Throwable th) {
             logger.error("商品折扣活动表删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 

@@ -1,7 +1,7 @@
 package com.jjg.trade.model.domain;
 
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.jjg.trade.model.vo.OrderOperateAllowable;
+import com.jjg.operateChecker.OrderOperateAllowable;
 import lombok.Data;
 
 import java.io.Serializable;

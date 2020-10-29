@@ -1,4 +1,4 @@
-package com.jjg.trade.model.vo;
+package com.jjg.operateChecker;
 
 
 import com.jjg.trade.model.enums.OrderOperateEnum;

@@ -26,8 +26,8 @@ import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.StringUtil;
 import com.xdl.jjg.web.service.IEsBillService;
+import com.xdl.jjg.web.service.feign.system.SettingsService;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,8 +55,8 @@ public class EsBillServiceImpl extends ServiceImpl<EsBillMapper, EsBill> impleme
     @Autowired
     private EsBillMapper billMapper;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsSettingsService settingsService;
+    @Autowired
+    private SettingsService settingsService;
 
     /**
      * 根据条件查询账单列表

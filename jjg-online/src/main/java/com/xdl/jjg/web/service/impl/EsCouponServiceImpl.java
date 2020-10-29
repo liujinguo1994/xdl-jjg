@@ -23,6 +23,7 @@ import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.IEsCouponService;
 import com.xdl.jjg.web.service.IEsOrderService;
+import com.xdl.jjg.web.service.feign.member.MemberCouponService;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
@@ -59,7 +60,7 @@ public class EsCouponServiceImpl extends ServiceImpl<EsCouponMapper, EsCoupon> i
     private IEsOrderService iEsOrderService;
 
     @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsMemberCouponService iEsMemberCouponService;
+    private MemberCouponService iEsMemberCouponService;
 
     /**
      * 插入优惠券数据

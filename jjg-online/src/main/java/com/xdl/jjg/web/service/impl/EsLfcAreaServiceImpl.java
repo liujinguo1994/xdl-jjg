@@ -11,17 +11,17 @@ import com.xdl.jjg.mapper.EsLfcAreaMapper;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.web.service.IEsLfcAreaService;
-import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  @Author wangaf 826988665@qq.com
  @Date 2020/3/25
  @Version V1.0
  **/
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsLfcAreaService.class, timeout = 50000)
+@Service
 public class EsLfcAreaServiceImpl implements IEsLfcAreaService {
     private static Logger logger = LoggerFactory.getLogger(EsLfcAreaServiceImpl.class);
     @Autowired

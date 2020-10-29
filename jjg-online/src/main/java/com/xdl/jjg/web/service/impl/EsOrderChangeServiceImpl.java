@@ -13,6 +13,7 @@ import com.xdl.jjg.web.service.IEsTradeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -23,7 +24,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
  * <p>
  * Created by LIUJG on 2019/6/29 10:39
  */
-@Service(version = "${dubbo.application.version}",interfaceClass = IEsOrderChangeService.class,timeout = 5000)
+@Service
 public class EsOrderChangeServiceImpl implements IEsOrderChangeService {
     private static Logger logger = LoggerFactory.getLogger(EsOrderChangeServiceImpl.class);
     @Autowired

@@ -10,8 +10,8 @@ import com.xdl.jjg.mapper.*;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.StringUtil;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
 import org.apache.commons.lang.StringUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -45,8 +45,8 @@ public class PromotionRuleManagerImpl implements PromotionRuleManager {
     @Autowired
     private EsPromotionGoodsMapper promotionGoodsMapper;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsGoodsService goodsService;
+    @Autowired
+    private GoodsService goodsService;
 
     /**
      * 检测活动与活动之间的规则冲突

@@ -21,6 +21,7 @@ import com.xdl.jjg.constant.cacheprefix.PromotionCacheKeys;
 import com.xdl.jjg.entity.EsPromotionGoods;
 import com.xdl.jjg.entity.EsSeckill;
 import com.xdl.jjg.entity.EsSeckillApply;
+import com.xdl.jjg.manager.PromotionRuleManager;
 import com.xdl.jjg.mapper.EsPromotionGoodsMapper;
 import com.xdl.jjg.mapper.EsSeckillApplyMapper;
 import com.xdl.jjg.mapper.EsSeckillMapper;
@@ -28,11 +29,11 @@ import com.xdl.jjg.redisson.annotation.DistributedLock;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
-import com.xdl.jjg.util.ArrayUtil;
-import com.xdl.jjg.util.BeanUtil;
-import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.util.*;
 import com.xdl.jjg.web.service.IEsSeckillApplyService;
 import com.xdl.jjg.web.service.IEsSeckillRangeService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
+import com.xdl.jjg.web.service.job.execute.XXLHttpClient;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
@@ -91,7 +92,7 @@ public class EsSeckillApplyServiceImpl extends ServiceImpl<EsSeckillApplyMapper,
     @Autowired
     private IEsSeckillRangeService iEsSeckillRangeService;
     @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsService esGoodsService;
+    private GoodsService esGoodsService;
 
     /**
      * 活动报名，以及秒杀商品数据添加
@@ -610,6 +611,6 @@ public class EsSeckillApplyServiceImpl extends ServiceImpl<EsSeckillApplyMapper,
                 return DubboResult.success(collect.get(0));
             }
         }
-        return DubboResult.fail(ErrorCode.DATA_NOT_EXIST);
+        return DubboResult.fail(TradeErrorCode.DATA_NOT_EXIST);
     }
 }

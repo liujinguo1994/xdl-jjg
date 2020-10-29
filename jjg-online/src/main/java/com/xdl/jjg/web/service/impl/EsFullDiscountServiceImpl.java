@@ -5,13 +5,34 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.jjg.shop.model.domain.EsGoodsDO;
+import com.jjg.trade.model.domain.ESGoodsSelectDO;
+import com.jjg.trade.model.domain.EsFullDiscountDO;
+import com.jjg.trade.model.domain.EsPromotionGoodsDO;
+import com.jjg.trade.model.dto.EsFullDiscountDTO;
+import com.jjg.trade.model.dto.EsPromotionGoodsDTO;
+import com.jjg.trade.model.enums.PromotionTypeEnum;
+import com.jjg.trade.model.vo.EsFullDiscountVO;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.constant.cacheprefix.PromotionCacheKeys;
 import com.xdl.jjg.entity.EsFullDiscount;
+import com.xdl.jjg.manager.PromotionRuleManager;
 import com.xdl.jjg.mapper.EsFullDiscountMapper;
+import com.xdl.jjg.message.CartPromotionChangeMsg;
+import com.xdl.jjg.plugin.PromotionValid;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.roketmq.MQProducer;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.web.service.IEsFullDiscountService;
 import com.xdl.jjg.web.service.IEsPromotionGoodsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
+import com.xdl.jjg.web.service.job.ResponseEntityMsg;
+import com.xdl.jjg.web.service.job.execute.XXLHttpClient;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,8 +80,8 @@ public class EsFullDiscountServiceImpl extends ServiceImpl<EsFullDiscountMapper,
     @Autowired
     private IEsPromotionGoodsService promotionGoodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsGoodsService esGoodsService;
+    @Autowired
+    private GoodsService esGoodsService;
 
     @Value("${xxl.job.admin.addresses}")
     private String addresses;

@@ -29,9 +29,9 @@ import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.MathUtil;
 import com.xdl.jjg.web.service.*;
+import com.xdl.jjg.web.service.feign.member.MemberService;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -97,8 +97,8 @@ public class EsRefundServiceImpl extends ServiceImpl<EsRefundMapper, EsRefund> i
     @Value("${black.card.discount}")
     private Double discount;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberService memberService;
+    @Autowired
+    private MemberService memberService;
 
     /**
      * 插入数据

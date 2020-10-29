@@ -16,16 +16,21 @@ import com.jjg.trade.model.vo.EsMinusVO;
 import com.xdl.jjg.constant.TradeErrorCode;
 import com.xdl.jjg.constant.cacheprefix.PromotionCacheKeys;
 import com.xdl.jjg.entity.EsMinus;
+import com.xdl.jjg.manager.PromotionRuleManager;
 import com.xdl.jjg.mapper.EsMinusMapper;
 import com.xdl.jjg.message.CartPromotionChangeMsg;
 import com.xdl.jjg.plugin.PromotionValid;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.roketmq.MQProducer;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.web.service.IEsMinusService;
 import com.xdl.jjg.web.service.IEsPromotionGoodsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsSkuService;
+import com.xdl.jjg.web.service.job.ResponseEntityMsg;
+import com.xdl.jjg.web.service.job.execute.XXLHttpClient;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
@@ -80,7 +85,7 @@ public class EsMinusServiceImpl extends ServiceImpl<EsMinusMapper, EsMinus> impl
     private String addresses;
 
     @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsGoodsSkuService esGoodsSkuService;
+    private GoodsSkuService esGoodsSkuService;
     /**
      * 插入数据
      *

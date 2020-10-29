@@ -1,6 +1,5 @@
 package com.xdl.jjg.mapper;
 
-
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -50,5 +49,7 @@ public interface EsTradeMapper extends BaseMapper<EsTrade> {
     EsTradeDO getEsTradeByTradeSn(@Param("tradeSn") String tradeSn);
 
     IPage<EsTrade> getTradeList(Page page, @Param("tradeDTO") EsTradeDTO tradeDTO);
+
+    Double getBlackCardUserMessage(Long black_card_end, Long black_card_start, Long memberId);
 
 }

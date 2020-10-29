@@ -25,9 +25,9 @@ import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.IEsFullDiscountGiftService;
+import com.xdl.jjg.web.service.feign.shop.*;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -61,16 +61,16 @@ public class EsFullDiscountGiftServiceImpl extends ServiceImpl<EsFullDiscountGif
     @Autowired
     private EsFullDiscountMapper fullDiscountMapper;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsQuantityLogService esGoodsQuantityLogService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000,check = false)
-    private IEsGoodsArchService goodsArchService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000,check = false)
-    private IEsGoodsSkuService esGoodsSkuService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000,check = false)
-    private IEsGoodsSkuQuantityService esGoodsSkuQuantityService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000,check = false)
-    private IEsGoodsService esGoodsService;
+    @Autowired
+    private GoodsQuantityLogService esGoodsQuantityLogService;
+    @Autowired
+    private GoodsArchService goodsArchService;
+    @Autowired
+    private GoodsSkuService esGoodsSkuService;
+    @Autowired
+    private GoodsSkuQuantityService esGoodsSkuQuantityService;
+    @Autowired
+    private GoodsService esGoodsService;
     /**
      * 插入满减赠品表数据
      *

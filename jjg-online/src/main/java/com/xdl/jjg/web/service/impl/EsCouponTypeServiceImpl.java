@@ -4,11 +4,13 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.jjg.trade.model.domain.EsCouponTypeDO;
 import com.jjg.trade.model.dto.EsCouponTypeDTO;
+import com.xdl.jjg.constant.TradeErrorCode;
 import com.xdl.jjg.entity.EsCouponType;
 import com.xdl.jjg.mapper.EsCouponTypeMapper;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.IEsCouponTypeService;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.config.annotation.Service;
@@ -62,7 +64,7 @@ public class EsCouponTypeServiceImpl extends ServiceImpl<EsCouponTypeMapper, EsC
         }catch (Throwable ae) {
             logger.error("新增失败", ae);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -81,7 +83,7 @@ public class EsCouponTypeServiceImpl extends ServiceImpl<EsCouponTypeMapper, EsC
         try {
             EsCouponType couponType = this.couponTypeMapper.selectById(id);
             if (couponType == null) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(TradeErrorCode.DATA_NOT_EXIST.getErrorCode(), TradeErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             BeanUtil.copyProperties(couponTypeDTO, couponType);
             QueryWrapper<EsCouponType> queryWrapper = new QueryWrapper<>();
@@ -95,7 +97,7 @@ public class EsCouponTypeServiceImpl extends ServiceImpl<EsCouponTypeMapper, EsC
         } catch (Throwable th) {
             logger.error("更新失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 
@@ -112,7 +114,7 @@ public class EsCouponTypeServiceImpl extends ServiceImpl<EsCouponTypeMapper, EsC
         try {
             EsCouponType couponType = this.couponTypeMapper.selectById(id);
             if (couponType == null) {
-                throw new ArgumentException(ErrorCode.DATA_NOT_EXIST.getErrorCode(), ErrorCode.DATA_NOT_EXIST.getErrorMsg());
+                throw new ArgumentException(TradeErrorCode.DATA_NOT_EXIST.getErrorCode(), TradeErrorCode.DATA_NOT_EXIST.getErrorMsg());
             }
             EsCouponTypeDO couponTypeDO = new EsCouponTypeDO();
             BeanUtil.copyProperties(couponType, couponTypeDO);
@@ -122,7 +124,7 @@ public class EsCouponTypeServiceImpl extends ServiceImpl<EsCouponTypeMapper, EsC
             return DubboResult.fail(ae.getExceptionCode(),ae.getMessage());
         }  catch (Throwable th) {
             logger.error("查询失败", th);
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -151,7 +153,7 @@ public class EsCouponTypeServiceImpl extends ServiceImpl<EsCouponTypeMapper, EsC
             return DubboPageResult.fail(ae.getExceptionCode(),ae.getMessage());
         } catch (Throwable th) {
             logger.error("分页查询失败", th);
-            return DubboPageResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
+            return DubboPageResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), "系统错误");
         }
     }
 
@@ -176,7 +178,7 @@ public class EsCouponTypeServiceImpl extends ServiceImpl<EsCouponTypeMapper, EsC
         }  catch (Throwable th) {
             logger.error("删除失败", th);
             TransactionAspectSupport.currentTransactionStatus().setRollbackOnly();
-            return DubboResult.fail(ErrorCode.SYS_ERROR.getErrorCode(), ErrorCode.SYS_ERROR.getErrorMsg());
+            return DubboResult.fail(TradeErrorCode.SYS_ERROR.getErrorCode(), TradeErrorCode.SYS_ERROR.getErrorMsg());
         }
     }
 }

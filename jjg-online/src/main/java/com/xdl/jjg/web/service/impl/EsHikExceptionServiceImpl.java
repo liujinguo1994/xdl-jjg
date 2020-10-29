@@ -10,6 +10,7 @@ import com.xdl.jjg.mapper.EsHikExceptionMapper;
 import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.IEsHikExceptionService;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
