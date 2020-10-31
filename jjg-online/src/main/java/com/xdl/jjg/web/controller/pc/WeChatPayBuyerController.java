@@ -5,18 +5,17 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.web.BaseController;
-import com.shopx.trade.api.model.domain.vo.PayBillVO;
-import com.shopx.trade.api.model.enums.ClientType;
-import com.shopx.trade.api.model.enums.PayMode;
-import com.shopx.trade.api.model.enums.TradeType;
-import com.shopx.trade.api.service.IPayService;
-import com.shopx.trade.web.manager.DomainSettings;
-import com.shopx.trade.web.manager.OrderPayManager;
+import com.jjg.trade.model.enums.ClientType;
+import com.jjg.trade.model.enums.PayMode;
+import com.jjg.trade.model.enums.TradeType;
+import com.jjg.trade.model.vo.PayBillVO;
+import com.xdl.jjg.manager.DomainSettings;
+import com.xdl.jjg.manager.OrderPayManager;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.IPayService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -47,7 +46,7 @@ public class WeChatPayBuyerController extends BaseController {
     private OrderPayManager orderPayManager;
     @Autowired
     private DomainSettings domainSettings;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private IPayService payService;
 
     @ApiOperation(value = "微信二维码显示页")

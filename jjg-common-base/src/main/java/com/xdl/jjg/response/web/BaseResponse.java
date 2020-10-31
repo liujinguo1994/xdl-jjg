@@ -12,31 +12,31 @@ import lombok.Getter;
 public abstract class BaseResponse extends BaseDO {
 
     @Getter
-    protected int res_code = BaseApiStatus.SUCCESS;
+    protected int status = BaseApiStatus.SUCCESS;
 
     @Getter
-    protected String res_msg = "";
+    protected String error = "";
 
-    protected BaseResponse(int res_code, String error) {
-        this.res_code = res_code;
-        this.res_msg = error;
+    protected BaseResponse(int status, String error) {
+        this.status = status;
+        this.error = error;
     }
 
     public abstract static class Builder<R extends BaseResponse, B extends Builder<R, B>> {
 
         private B theBuilder;
 
-        protected Integer res_code;
+        protected Integer status;
         protected String error;
 
-        public Builder() {
+        public Builder () {
             theBuilder = getThis();
         }
 
         protected abstract B getThis();
 
-        public B res_code(Integer res_code) {
-            this.res_code = res_code;
+        public B status(Integer status) {
+            this.status = status;
             return theBuilder;
         }
 

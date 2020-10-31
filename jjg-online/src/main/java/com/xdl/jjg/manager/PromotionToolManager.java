@@ -20,6 +20,10 @@ import com.xdl.jjg.util.MathUtil;
 import com.xdl.jjg.utils.CurrencyUtil;
 import com.xdl.jjg.web.service.IEsFullDiscountService;
 import com.xdl.jjg.web.service.IEsShipCompanyDetailsService;
+import com.xdl.jjg.web.service.feign.member.MemberAddressService;
+import com.xdl.jjg.web.service.feign.member.MemberCouponService;
+import com.xdl.jjg.web.service.feign.member.MemberService;
+import com.xdl.jjg.web.service.feign.shop.CategoryService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
@@ -62,22 +66,22 @@ public class PromotionToolManager {
     private JedisCluster jedisCluster;
 
     @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsCategoryService categoryService;
+    private CategoryService categoryService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberAddressService iesMemberAddressService;
+    @Autowired
+    private MemberAddressService iesMemberAddressService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsShipCompanyDetailsService shipCompanyDetailsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsFullDiscountService fullDiscountService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberCouponService iEsMemberCouponService;
+    @Autowired
+    private MemberCouponService iEsMemberCouponService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberService memberService;
+    @Autowired
+    private MemberService memberService;
 
 
 

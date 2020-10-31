@@ -1,23 +1,23 @@
 package com.xdl.jjg.web.controller.pc.trade;
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.FormatValidateUtils;
-import com.shopx.common.web.BaseController;
-import com.shopx.goods.api.service.IEsGoodsSkuService;
-import com.shopx.trade.api.model.domain.EsTradeDO;
-import com.shopx.trade.api.model.domain.vo.CartItemsVO;
-import com.shopx.trade.api.model.domain.vo.CartVO;
-import com.shopx.trade.api.model.domain.vo.ReturnCouponMsgVO;
-import com.shopx.trade.api.service.IEsOrderOperateService;
-import com.shopx.trade.api.service.IEsTradeService;
-import com.shopx.trade.web.constant.AgentTypeUtils;
-import com.shopx.trade.web.manager.CartManager;
-import com.shopx.trade.web.manager.CheckoutParamManager;
-import com.shopx.trade.web.manager.TradeManager;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
+import com.jjg.trade.model.domain.EsTradeDO;
+import com.jjg.trade.model.vo.CartItemsVO;
+import com.jjg.trade.model.vo.CartVO;
+import com.jjg.trade.model.vo.ReturnCouponMsgVO;
+import com.xdl.jjg.constant.AgentTypeUtils;
+import com.xdl.jjg.manager.CartManager;
+import com.xdl.jjg.manager.CheckoutParamManager;
+import com.xdl.jjg.manager.TradeManager;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.util.FormatValidateUtils;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.IEsOrderOperateService;
+import com.xdl.jjg.web.service.IEsTradeService;
+import com.xdl.jjg.web.service.feign.shop.GoodsSkuService;
 import io.swagger.annotations.*;
-import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,13 +43,13 @@ import java.util.List;
 public class EsTradeController extends BaseController {
     private static Logger logger = LoggerFactory.getLogger(EsTradeController.class);
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
+    @Autowired
     private IEsTradeService iesTradeService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsGoodsSkuService iEsGoodsSkuService;
+    @Autowired
+    private GoodsSkuService iEsGoodsSkuService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
+    @Autowired
     private IEsOrderOperateService iEsOrderOperateService;
 
     @Autowired

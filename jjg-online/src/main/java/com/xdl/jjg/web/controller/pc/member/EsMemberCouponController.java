@@ -17,15 +17,17 @@ import com.xdl.jjg.response.web.ApiPageResponse;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.shiro.oath.ShiroKit;
 import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.controller.BaseController;
 import com.xdl.jjg.web.service.IEsCouponService;
 import com.xdl.jjg.web.service.IEsSeckillApplyService;
+import com.xdl.jjg.web.service.feign.member.MemberCouponService;
+import com.xdl.jjg.web.service.feign.member.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -48,22 +50,19 @@ import java.util.stream.Collectors;
 @RequestMapping("/esMemberCoupon")
 public class EsMemberCouponController extends BaseController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberCouponService iesMemberCouponService;
+    @Autowired
+    private MemberCouponService iesMemberCouponService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private IEsCouponService iesCouponService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberService iesMemberService;
-
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberCouponService iEsMemberCouponService;
+    @Autowired
+    private MemberService iesMemberService;
 
     @Autowired
     private CartManager cartManager;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private IEsSeckillApplyService esSeckillApplyService;
 
 /*
@@ -78,7 +77,7 @@ public class EsMemberCouponController extends BaseController {
     public ApiResponse getesMemberCouponList(@ApiIgnore int pageNo, @ApiIgnore int pageSize, int type) {
         Long userId = ShiroKit.getUser().getId();
         if (null == userId) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         EsMemberCouponDTO esMemberCouponDTO = new EsMemberCouponDTO();
         esMemberCouponDTO.setMemberId(userId);
@@ -110,7 +109,7 @@ public class EsMemberCouponController extends BaseController {
     public ApiResponse getesMemberCouponListByTrade(Integer pageNum, Integer pageSize) {
         Long userId = ShiroKit.getUser().getId();
         if (null == userId) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         if(pageNum == null || pageSize == null){
             pageNum = 1;
@@ -138,12 +137,12 @@ public class EsMemberCouponController extends BaseController {
     public ApiResponse updateMemberCouponList(){
         Long memberId = ShiroKit.getUser().getId();
         if (null == memberId) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
 
         List<CartVO> checkedItems = cartManager.getCheckedItems(null);
         List<Long> shopIdList = checkedItems.stream().map(CartVO::getShopId).distinct().collect(Collectors.toList());
-        iEsMemberCouponService.updateIsCheckByMemberIdAndShopId(memberId, shopIdList);
+        iesMemberCouponService.updateIsCheckByMemberIdAndShopId(memberId, shopIdList);
         return ApiResponse.success();
     }
 
@@ -153,7 +152,7 @@ public class EsMemberCouponController extends BaseController {
     public ApiResponse getMemberCouponList(){
         Long memberId = ShiroKit.getUser().getId();
         if (null == memberId) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
 
         List<CartVO> checkedItems = cartManager.getCheckedGoodsItems(null);
@@ -164,7 +163,7 @@ public class EsMemberCouponController extends BaseController {
             shopIdPrice.put(shopId,totalPrice);
         });
 
-        DubboResult memberCouponInOrder = iEsMemberCouponService.getMemberCouponInOrder(memberId,shopIdPrice);
+        DubboResult memberCouponInOrder = iesMemberCouponService.getMemberCouponInOrder(memberId,shopIdPrice);
 
         if (memberCouponInOrder.isSuccess()) {
             return ApiResponse.success(memberCouponInOrder.getData());
@@ -178,7 +177,7 @@ public class EsMemberCouponController extends BaseController {
     public ApiResponse getMemberCouponNum() {
         Long userId = ShiroKit.getUser().getId();
         if (null == userId) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         DubboResult<Integer> result = this.iesMemberCouponService.getCouponNum(userId);
         if (result.isSuccess()) {
@@ -194,7 +193,7 @@ public class EsMemberCouponController extends BaseController {
     public ApiResponse addMemberCoupon(@PathVariable("couponId") Long couponId ) {
         Long userId = ShiroKit.getUser().getId();
         if (null == userId) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
 
         EsMemberCouponDTO memberCouponDTO = new EsMemberCouponDTO();
@@ -202,7 +201,7 @@ public class EsMemberCouponController extends BaseController {
         DubboResult<EsCouponDO> resultEsCouponDO = iesCouponService.getCoupon(couponId);
         EsCouponDO esCouponDO = resultEsCouponDO.getData();
         if(esCouponDO == null){
-            return ApiResponse.fail(MemberErrorCode.DATA_NOT_EXIST.getErrorCode(), MemberErrorCode.DATA_NOT_EXIST.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.DATA_NOT_EXIST.getErrorCode(), TradeErrorCode.DATA_NOT_EXIST.getErrorMsg());
         }
 
         //判断是否优惠券领取数是否已达上限
@@ -226,7 +225,7 @@ public class EsMemberCouponController extends BaseController {
         DubboResult<EsMemberDO> resultEsMemberDO = iesMemberService.getMember(userId);
         EsMemberDO esMemberDO = resultEsMemberDO.getData();
         if(esMemberDO == null){
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         memberCouponDTO.setMemberId(userId);
         memberCouponDTO.setMemberName(esMemberDO.getName());
@@ -245,7 +244,7 @@ public class EsMemberCouponController extends BaseController {
     public ApiResponse getBuyerMemberCouponList() {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         DubboResult result = iesMemberCouponService.getBuyerMemberCouponList(userId);
@@ -261,7 +260,7 @@ public class EsMemberCouponController extends BaseController {
     public ApiResponse getBuyerMemberCouponNumList() {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         DubboResult result = iesMemberCouponService.getBuyerMemberCouponNumList(userId);

@@ -1,39 +1,10 @@
-package com.xdl.jjg.web.controller.pc.system;/*
-package com.shopx.trade.web.controller;
+package com.xdl.jjg.web.controller.pc.system;
 
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.web.BaseController;
-import com.shopx.trade.api.model.domain.EsShipTemplateDO;
-import com.shopx.trade.api.model.domain.dto.EsShipTemplateDTO;
-import com.shopx.trade.api.model.domain.vo.EsShipTemplateVO;
-import com.shopx.trade.api.service.IEsShipTemplateService;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.request.EsShipTemplateForm;
-import com.shopx.trade.web.request.query.EsShipTemplateQueryForm;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
-import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
-*/
-
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.web.BaseController;
-import com.shopx.trade.api.service.IEsShipTemplateService;
-import com.shopx.trade.web.constant.ApiStatus;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.IEsShipTemplateService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;

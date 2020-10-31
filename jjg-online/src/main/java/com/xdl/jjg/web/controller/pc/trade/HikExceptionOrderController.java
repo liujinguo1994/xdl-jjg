@@ -1,12 +1,12 @@
 package com.xdl.jjg.web.controller.pc.trade;
 
 
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.dto.EsHikExceptionOrderDTO;
-import com.shopx.trade.api.service.IEsHikExceptionService;
-import com.shopx.trade.web.request.query.EsHikExceptionOrderForm;
+import com.jjg.trade.model.dto.EsHikExceptionOrderDTO;
+import com.jjg.trade.model.form.query.EsHikExceptionOrderForm;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.web.service.IEsHikExceptionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.config.annotation.Reference;

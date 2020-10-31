@@ -2,34 +2,33 @@ package com.xdl.jjg.web.controller.pc.member;
 
 import cn.hutool.core.util.RandomUtil;
 import com.google.code.kaptcha.Producer;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.web.BaseController;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.EsMemberDO;
-import com.shopx.member.api.model.domain.EsMemberLevelConfigDO;
-import com.shopx.member.api.model.domain.EsMyMeansDO;
-import com.shopx.member.api.model.domain.dto.EsMemberDTO;
-import com.shopx.member.api.model.domain.vo.EsEditPersonInfoVO;
-import com.shopx.member.api.model.domain.vo.EsMyMeansVO;
-import com.shopx.member.api.service.*;
-import com.shopx.system.api.model.domain.dto.EsSmsSendDTO;
-import com.shopx.system.api.model.enums.SmsTemplateCodeEnum;
-import com.shopx.system.api.service.IEsSmsService;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.request.EsModifyMobileForm;
-import com.shopx.trade.web.request.EsModifyPassWordForm;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
-import com.shopx.trade.web.shiro.oath.ShiroUser;
+import com.jjg.member.model.domain.EsMemberDO;
+import com.jjg.member.model.domain.EsMemberLevelConfigDO;
+import com.jjg.member.model.domain.EsMyMeansDO;
+import com.jjg.member.model.dto.EsMemberDTO;
+import com.jjg.member.model.vo.EsEditPersonInfoVO;
+import com.jjg.member.model.vo.EsMyMeansVO;
+import com.jjg.system.model.dto.EsSmsSendDTO;
+import com.jjg.system.model.enums.SmsTemplateCodeEnum;
+import com.jjg.trade.model.form.EsModifyMobileForm;
+import com.jjg.trade.model.form.EsModifyPassWordForm;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.MemberErrorCode;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.feign.member.*;
+import com.xdl.jjg.web.service.feign.system.SmsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -55,10 +54,10 @@ import java.io.IOException;
 @RequestMapping("/personalSave")
 public class EsMemberPersonlSaveController extends BaseController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberService iesMemberService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsCompanyService iEsCompanyService;
+    @Autowired
+    private MemberService iesMemberService;
+    @Autowired
+    private CompanyService iEsCompanyService;
     @Autowired
     private Producer producer;
     @Autowired
@@ -68,24 +67,24 @@ public class EsMemberPersonlSaveController extends BaseController {
     private int ENLENGTH;
     @Value("${zhuo.member.code.length}")
     private int SMSLENGTH;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsSmsService esSmsService;
+    @Autowired
+    private SmsService esSmsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberLevelConfigService esMemberLevelConfigService;
+    @Autowired
+    private MemberLevelConfigService esMemberLevelConfigService;
 
     //短信/图片验证码失效时间为10分钟
     @Value("${zhuox.shiro.member.sms.expire}")
     private int SMSEXPIRE;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberCouponService memberCouponService;
+    @Autowired
+    private MemberCouponService memberCouponService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberCollectionGoodsService memberCollectionGoodsService;
+    @Autowired
+    private MemberCollectionGoodsService memberCollectionGoodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberCollectionShopService memberCollectionShopService;
+    @Autowired
+    private MemberCollectionShopService memberCollectionShopService;
 
 
 
@@ -107,7 +106,7 @@ public class EsMemberPersonlSaveController extends BaseController {
         ShiroUser user = ShiroKit.getUser();
 
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         DubboResult<EsMemberDO> memberInfo = iesMemberService.getMember(userId);
@@ -171,7 +170,7 @@ public class EsMemberPersonlSaveController extends BaseController {
     public ApiResponse sendSMSModifyMobile() {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         EsSmsSendDTO esSmsSendDTO = new EsSmsSendDTO();
@@ -195,7 +194,7 @@ public class EsMemberPersonlSaveController extends BaseController {
     public ApiResponse judeSmsCode(String smsCode) {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         DubboResult<EsMemberDO> memberInfo = iesMemberService.getMember(userId);
@@ -222,7 +221,7 @@ public class EsMemberPersonlSaveController extends BaseController {
         //获取当前用户
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         if (StringUtils.isBlank(esModifyMobileForm.getCode())) {
@@ -272,7 +271,7 @@ public class EsMemberPersonlSaveController extends BaseController {
     public ApiResponse sendMobileSmsCode(String mobile) {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         DubboResult<EsMemberDO> memberInfo = iesMemberService.getMember(userId);
@@ -308,7 +307,7 @@ public class EsMemberPersonlSaveController extends BaseController {
     public ApiResponse getPersonInfo() {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         DubboResult<EsMemberDO> result = iesMemberService.getAdminMember(userId);
@@ -332,7 +331,7 @@ public class EsMemberPersonlSaveController extends BaseController {
     public ApiResponse myMeans() {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         EsMyMeansVO myMeansVO = new EsMyMeansVO();

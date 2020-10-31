@@ -1,5 +1,6 @@
 package com.xdl.jjg.shiro.oath;
-import com.shopx.trade.web.shiro.cache.RedisCacheManager;
+
+import com.xdl.jjg.shiro.cache.RedisCacheManager;
 import org.apache.shiro.codec.Base64;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;

@@ -1,47 +1,48 @@
 package com.xdl.jjg.web.controller.pc.member;
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.ApiPageResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.web.BaseController;
-import com.shopx.member.api.constant.MemberConstant;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.EsCommentCategoryClassifyDO;
-import com.shopx.member.api.model.domain.EsCommentInfoDO;
-import com.shopx.member.api.model.domain.EsMemberCommentDetailDO;
-import com.shopx.member.api.model.domain.GradeLevelDO;
-import com.shopx.member.api.model.domain.dto.EsAddCommentDTO;
-import com.shopx.member.api.model.domain.dto.EsCommentSupportDTO;
-import com.shopx.member.api.model.domain.dto.EsMemberCommentCopyDTO;
-import com.shopx.member.api.model.domain.dto.EsQueryDetailCommentDTO;
-import com.shopx.member.api.model.domain.vo.EsCommentCategoryClassifyVO;
-import com.shopx.member.api.model.domain.vo.EsCommentCategoryVO;
-import com.shopx.member.api.model.domain.vo.EsMemberCommentDetailVO;
-import com.shopx.member.api.model.domain.vo.GradeLevelVO;
-import com.shopx.member.api.service.IEsAddCommentService;
-import com.shopx.member.api.service.IEsCommentCategoryService;
-import com.shopx.member.api.service.IEsCommentSupportService;
-import com.shopx.member.api.service.IEsMemberCommentService;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.EsBuyerOrderDO;
-import com.shopx.trade.api.model.domain.EsBuyerOrderItemsDO;
-import com.shopx.trade.api.model.domain.vo.*;
-import com.shopx.trade.api.model.enums.CommentStatusEnum;
-import com.shopx.trade.api.service.IEsOrderItemsService;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.request.CommentImageForm;
-import com.shopx.trade.web.request.EsAddCommentForm;
-import com.shopx.trade.web.request.EsCommentSupportForm;
-import com.shopx.trade.web.request.EsMemberCommentCopyForm;
-import com.shopx.trade.web.request.query.EsQueryDetailCommentForm;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
-import com.shopx.trade.web.shiro.oath.ShiroUser;
+import com.jjg.member.model.domain.EsCommentCategoryClassifyDO;
+import com.jjg.member.model.domain.EsCommentInfoDO;
+import com.jjg.member.model.domain.EsMemberCommentDetailDO;
+import com.jjg.member.model.domain.GradeLevelDO;
+import com.jjg.member.model.dto.EsAddCommentDTO;
+import com.jjg.member.model.dto.EsCommentSupportDTO;
+import com.jjg.member.model.dto.EsMemberCommentCopyDTO;
+import com.jjg.member.model.dto.EsQueryDetailCommentDTO;
+import com.jjg.member.model.vo.EsCommentCategoryClassifyVO;
+import com.jjg.member.model.vo.EsCommentCategoryVO;
+import com.jjg.member.model.vo.EsMemberCommentDetailVO;
+import com.jjg.member.model.vo.GradeLevelVO;
+import com.jjg.trade.model.domain.EsBuyerOrderDO;
+import com.jjg.trade.model.domain.EsBuyerOrderItemsDO;
+import com.jjg.trade.model.enums.CommentStatusEnum;
+import com.jjg.trade.model.form.CommentImageForm;
+import com.jjg.trade.model.form.EsAddCommentForm;
+import com.jjg.trade.model.form.EsCommentSupportForm;
+import com.jjg.trade.model.form.EsMemberCommentCopyForm;
+import com.jjg.trade.model.form.query.EsQueryDetailCommentForm;
+import com.jjg.trade.model.vo.*;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.constants.MemberConstant;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.IEsOrderItemsService;
+import com.xdl.jjg.web.service.feign.member.AddCommentService;
+import com.xdl.jjg.web.service.feign.member.CommentCategoryService;
+import com.xdl.jjg.web.service.feign.member.CommentSupportService;
+import com.xdl.jjg.web.service.feign.member.MemberCommentService;
 import io.swagger.annotations.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -62,16 +63,16 @@ import java.util.stream.Collectors;
 @RequestMapping("/zhuox/esMemberComment")
 public class EsMemberCommentController extends BaseController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberCommentService iesMemberCommentService;
+    @Autowired
+    private MemberCommentService iesMemberCommentService;
     @Reference(version = "${dubbo.application.version}", timeout = 5000,check = false)
     private IEsOrderItemsService iEsOrderItemsService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsCommentSupportService commentSupportService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsAddCommentService addCommentService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    IEsCommentCategoryService commentCategoryService;
+    @Autowired
+    private CommentSupportService commentSupportService;
+    @Autowired
+    private AddCommentService addCommentService;
+    @Autowired
+    private CommentCategoryService commentCategoryService;
 
     @ApiOperation(value = "订单评论详情",response = OrderCommentVO.class)
     @ApiImplicitParam(name = "orderSn",value = "订单编号",required = true,dataType = "String",paramType = "query")
@@ -80,7 +81,7 @@ public class EsMemberCommentController extends BaseController {
     public ApiResponse getCommentDetailsList(@RequestParam(value = "orderSn",required = false) String orderSn){
         Long memberId = ShiroKit.getUser().getId();
         if (null == memberId) {
-            return  ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return  ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         DubboResult<EsBuyerOrderDO> result = iEsOrderItemsService.getBuyerCommentGoodsList(memberId, orderSn, CommentStatusEnum.FINISHED.value());
 
@@ -109,7 +110,7 @@ public class EsMemberCommentController extends BaseController {
                     List <CommentImageVO> commentImageVOList = new ArrayList<>();
                     if (CollectionUtils.isNotEmpty(commentInfoDO.getCommentImageVOList())){
 
-                        List<com.shopx.member.api.model.domain.vo.CommentImageVO> imageVOList = commentInfoDO.getCommentImageVOList();
+                        List<CommentImageVO> imageVOList = commentInfoDO.getCommentImageVOList();
                         imageVOList.forEach(commentImageVO1 -> {
                             CommentImageVO commentImageVO = new CommentImageVO();
                             commentImageVO.setUrl(commentImageVO1.getUrl());
@@ -166,7 +167,7 @@ public class EsMemberCommentController extends BaseController {
     public ApiPageResponse getOrdersAndCommentList(@ApiIgnore @RequestParam(value = "pageNum",defaultValue = "1",required = false) int pageNum, @ApiIgnore @RequestParam(value = "pageSize",defaultValue = Integer.MAX_VALUE+"",required = false)int pageSize, @ApiIgnore String type, @ApiIgnore @RequestParam(value = "orderSn",required = false) String reqOrderSn) {
         Long memberId = ShiroKit.getUser().getId();
         if (null == memberId) {
-            return (ApiPageResponse) ApiPageResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return (ApiPageResponse) ApiPageResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         DubboPageResult<EsBuyerOrderDO> result;
         if (null == type){
@@ -306,7 +307,7 @@ public class EsMemberCommentController extends BaseController {
     public ApiResponse insertComment(@RequestBody @ApiParam(name = "esMemberCommentCopyForm",value = "评论对象",required = true) @Valid EsMemberCommentCopyForm esMemberCommentCopyForm) {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         EsMemberCommentCopyDTO esMemberCommentCopyDTO = new EsMemberCommentCopyDTO();
@@ -325,7 +326,7 @@ public class EsMemberCommentController extends BaseController {
     public ApiResponse batchInsertComment(@RequestBody List<EsMemberCommentCopyForm> esMemberCommentCopyForms) {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         esMemberCommentCopyForms = esMemberCommentCopyForms.stream().filter(o -> o.getGoodsId() != null).collect(Collectors.toList());
 
@@ -360,7 +361,7 @@ public class EsMemberCommentController extends BaseController {
     public ApiResponse add(@Valid EsCommentSupportForm esCommentSupportForm) {
         Long userId = ShiroKit.getUser().getId();
         if (null == userId) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         EsCommentSupportDTO esCommentSupportDTO = new EsCommentSupportDTO();
         BeanUtil.copyProperties(esCommentSupportForm, esCommentSupportDTO);
@@ -378,7 +379,7 @@ public class EsMemberCommentController extends BaseController {
     public ApiResponse deleteSupport(@Valid EsCommentSupportForm esCommentSupportForm) {
         Long userId = ShiroKit.getUser().getId();
         if (null == userId) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         EsCommentSupportDTO esCommentSupportDTO = new EsCommentSupportDTO();
         BeanUtil.copyProperties(esCommentSupportForm, esCommentSupportDTO);

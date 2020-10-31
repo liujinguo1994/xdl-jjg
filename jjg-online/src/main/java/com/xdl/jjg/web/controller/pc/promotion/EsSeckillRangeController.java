@@ -1,13 +1,14 @@
 package com.xdl.jjg.web.controller.pc.promotion;
 
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.web.BaseController;
-import com.shopx.trade.api.model.domain.vo.TimeLineVO;
-import com.shopx.trade.api.service.IEsSeckillRangeService;
+
+import com.jjg.trade.model.vo.TimeLineVO;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.IEsSeckillRangeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -29,7 +30,7 @@ import java.util.List;
 @RequestMapping("/seckillRange")
 public class EsSeckillRangeController extends BaseController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsSeckillRangeService seckillRangeService;
 
     @ApiOperation(value = "读取秒杀时刻")

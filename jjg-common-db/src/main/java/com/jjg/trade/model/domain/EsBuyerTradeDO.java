@@ -3,7 +3,7 @@ package com.jjg.trade.model.domain;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.jjg.trade.model.vo.EsOrderItemsVO;
 import com.jjg.trade.model.vo.EsOrderVO;
-import com.jjg.operateChecker.OrderOperateAllowable;
+import com.jjg.trade.orderCheck.OrderOperateAllowable;
 import lombok.Data;
 
 import java.util.List;

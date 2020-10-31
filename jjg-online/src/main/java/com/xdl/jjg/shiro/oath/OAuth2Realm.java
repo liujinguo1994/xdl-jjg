@@ -7,7 +7,8 @@ import com.jjg.member.model.dto.EsMemberDTO;
 import com.jjg.member.model.dto.EsMemberTokenDTO;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
-import org.apache.dubbo.config.annotation.Reference;
+import com.xdl.jjg.web.service.feign.member.MemberService;
+import com.xdl.jjg.web.service.feign.member.MemberTokenService;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -15,6 +16,7 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -28,12 +30,12 @@ public class OAuth2Realm extends AuthorizingRealm {
 
     private static final Logger logger = LoggerFactory.getLogger(OAuth2Realm.class);
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsMemberTokenService ieMemberUserTokenService;
+    @Autowired
+    private MemberTokenService ieMemberUserTokenService;
    // private IEMemberUserTokenService userTokenService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsMemberService iEsMemberService;
+    @Autowired
+    private MemberService iEsMemberService;
     //private IEMemberUserService userService;
 
     @Override

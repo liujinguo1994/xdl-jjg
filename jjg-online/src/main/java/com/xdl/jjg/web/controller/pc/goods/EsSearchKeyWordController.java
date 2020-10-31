@@ -11,6 +11,7 @@ import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.shiro.oath.ShiroKit;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.feign.member.SearchKeyWordService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -34,7 +35,7 @@ import java.util.List;
 public class EsSearchKeyWordController extends BaseController {
 
     @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsSearchKeyWordService iesSearchKeyWordService;
+    private SearchKeyWordService iesSearchKeyWordService;
 
     @ApiOperation(value = "搜索栏 搜索历史列表",response = EsSearchKeyWordVO.class)
     @GetMapping(value = "/getSearchKeyWordList")

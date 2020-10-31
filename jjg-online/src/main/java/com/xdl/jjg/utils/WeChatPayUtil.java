@@ -1,6 +1,6 @@
 package com.xdl.jjg.utils;
 
-import com.shopx.common.util.StringUtil;
+import com.xdl.jjg.util.StringUtil;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

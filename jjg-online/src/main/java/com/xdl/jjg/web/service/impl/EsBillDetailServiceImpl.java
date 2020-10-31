@@ -46,7 +46,7 @@ public class EsBillDetailServiceImpl extends ServiceImpl<EsBillDetailMapper, EsB
     private EsBillDetailMapper billDetailMapper;
 
     // TODO 判断签约公司存不存在
-//    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+//    @Autowired
 
     // TODO 判断卖家存不存在
 //    @Reference(version = "${dubbo.application.version}" , timeout = 5000, check = false)

@@ -1,27 +1,27 @@
 package com.xdl.jjg.web.controller.pc.member;
 
-import com.shopx.common.model.result.ApiPageResponse;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.web.BaseController;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.EsMemberDO;
-import com.shopx.member.api.model.domain.EsMemberPointHistoryDO;
-import com.shopx.member.api.model.domain.vo.EsMemberPointHistoryBuyerVO;
-import com.shopx.member.api.model.domain.vo.EsMemberPointHistoryVO;
-import com.shopx.member.api.service.IEsMemberPointHistoryService;
-import com.shopx.member.api.service.IEsMemberService;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
-import com.shopx.trade.web.shiro.oath.ShiroUser;
+import com.jjg.member.model.domain.EsMemberDO;
+import com.jjg.member.model.domain.EsMemberPointHistoryDO;
+import com.jjg.member.model.vo.EsMemberPointHistoryBuyerVO;
+import com.jjg.member.model.vo.EsMemberPointHistoryVO;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.feign.member.MemberPointHistoryService;
+import com.xdl.jjg.web.service.feign.member.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -44,11 +44,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/esMemberPointHistory")
 public class EsMemberPointHistoryController extends BaseController {
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000,check = false)
-    private IEsMemberPointHistoryService iesMemberPointHistoryService;
+    @Autowired
+    private MemberPointHistoryService iesMemberPointHistoryService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000,check = false)
-    private IEsMemberService memberService;
+    @Autowired
+    private MemberService memberService;
 
     @ApiOperation(value = "积分详细列表", notes = "积分详细列表", response = EsMemberPointHistoryVO.class)
     @GetMapping("/selectList")
@@ -59,7 +59,7 @@ public class EsMemberPointHistoryController extends BaseController {
     public ApiResponse selectList(Integer gradePointType, int pageSize, int pageNum) {
         ShiroUser user = ShiroKit.getUser();
         if(user == null){
-            return ApiPageResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiPageResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
 
@@ -83,7 +83,7 @@ public class EsMemberPointHistoryController extends BaseController {
     public ApiResponse pointStatistics() {
         ShiroUser user = ShiroKit.getUser();
         if(user == null){
-            return ApiPageResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiPageResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         EsMemberPointHistoryBuyerVO memberPointHistoryBuyerVO = new EsMemberPointHistoryBuyerVO();

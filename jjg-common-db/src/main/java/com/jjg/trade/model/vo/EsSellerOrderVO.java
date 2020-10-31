@@ -1,7 +1,7 @@
 package com.jjg.trade.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.jjg.operateChecker.OrderOperateAllowable;
+import com.jjg.trade.orderCheck.OrderOperateAllowable;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

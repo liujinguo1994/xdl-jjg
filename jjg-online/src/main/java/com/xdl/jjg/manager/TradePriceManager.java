@@ -14,8 +14,8 @@ import com.xdl.jjg.shiro.oath.ShiroKit;
 import com.xdl.jjg.shiro.oath.ShiroUser;
 import com.xdl.jjg.util.DateUtils;
 import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.web.service.feign.member.MemberService;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +35,8 @@ import java.util.Date;
 @Component
 public class TradePriceManager {
     private static Logger logger = LoggerFactory.getLogger(TradePriceManager.class);
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberService memberService;
+    @Autowired
+    private MemberService memberService;
     @Autowired
     RedissonLock redissonLock;
     @Autowired

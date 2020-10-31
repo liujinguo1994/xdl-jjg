@@ -1,54 +1,57 @@
 package com.xdl.jjg.web.controller.pc.shop;
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.ApiPageResponse;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.util.StringUtil;
-import com.shopx.goods.api.model.domain.*;
-import com.shopx.goods.api.model.domain.cache.EsPcSelectSearchCO;
-import com.shopx.goods.api.model.domain.cache.EsSelectSearchCO;
-import com.shopx.goods.api.model.domain.dto.EsGoodsIndexDTO;
-import com.shopx.goods.api.model.domain.vo.*;
-import com.shopx.goods.api.service.*;
-import com.shopx.member.api.model.domain.EsCommercelItemsDO;
-import com.shopx.member.api.service.IEsCommercelItemsService;
-import com.shopx.member.api.service.IEsMemberCollectionGoodsService;
-import com.shopx.system.api.model.domain.EsFocusPictureDO;
-import com.shopx.system.api.model.domain.EsGoodGoodsDO;
-import com.shopx.system.api.model.domain.EsHotKeywordDO;
-import com.shopx.system.api.model.domain.EsSiteNavigationDO;
-import com.shopx.system.api.model.domain.vo.EsFocusPictureVO;
-import com.shopx.system.api.model.domain.vo.EsGoodGoodsVO;
-import com.shopx.system.api.model.domain.vo.EsHotKeywordVO;
-import com.shopx.system.api.model.domain.vo.EsSiteNavigationVO;
-import com.shopx.system.api.service.IEsFocusPictureService;
-import com.shopx.system.api.service.IEsGoodGoodsService;
-import com.shopx.system.api.service.IEsHotKeywordService;
-import com.shopx.system.api.service.IEsSiteNavigationService;
-import com.shopx.trade.api.model.domain.EsCouponDO;
-import com.shopx.trade.api.model.domain.EsPromotionGoodsDO;
-import com.shopx.trade.api.model.domain.vo.EsCouponVO;
-import com.shopx.trade.api.model.domain.vo.EsGoodsIndexVO;
-import com.shopx.trade.api.service.IEsCouponService;
-import com.shopx.trade.api.service.IEsPromotionGoodsService;
-import com.shopx.trade.web.constant.AgentTypeUtils;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.request.PcSelectorQueryForm;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
-import com.shopx.trade.web.shiro.oath.ShiroUser;
+
+import com.jjg.member.model.domain.EsCommercelItemsDO;
+import com.jjg.shop.model.co.EsPcSelectSearchCO;
+import com.jjg.shop.model.co.EsSelectSearchCO;
+import com.jjg.shop.model.domain.*;
+import com.jjg.shop.model.dto.EsGoodsIndexDTO;
+import com.jjg.shop.model.vo.*;
+import com.jjg.trade.model.vo.EsGoodsIndexVO;
+import com.jjg.system.model.domain.EsFocusPictureDO;
+import com.jjg.system.model.domain.EsGoodGoodsDO;
+import com.jjg.system.model.domain.EsHotKeywordDO;
+import com.jjg.system.model.domain.EsSiteNavigationDO;
+import com.jjg.system.model.vo.EsFocusPictureVO;
+import com.jjg.system.model.vo.EsGoodGoodsVO;
+import com.jjg.system.model.vo.EsHotKeywordVO;
+import com.jjg.system.model.vo.EsSiteNavigationVO;
+import com.jjg.trade.model.domain.EsCouponDO;
+import com.jjg.trade.model.domain.EsPromotionGoodsDO;
+import com.jjg.trade.model.form.PcSelectorQueryForm;
+import com.jjg.trade.model.vo.EsCouponVO;
+import com.xdl.jjg.constant.AgentTypeUtils;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.StringUtil;
+import com.xdl.jjg.web.service.IEsCouponService;
+import com.xdl.jjg.web.service.IEsPromotionGoodsService;
+import com.xdl.jjg.web.service.feign.member.CommercelItemsService;
+import com.xdl.jjg.web.service.feign.shop.CategoryService;
+import com.xdl.jjg.web.service.feign.shop.GoodsIndexService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsWordsService;
+import com.xdl.jjg.web.service.feign.system.FocusPictureService;
+import com.xdl.jjg.web.service.feign.system.GoodGoodsService;
+import com.xdl.jjg.web.service.feign.system.HotKeywordService;
+import com.xdl.jjg.web.service.feign.system.SiteNavigationService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.NotEmpty;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -59,53 +62,38 @@ import java.util.stream.Collectors;
 @RequestMapping("/zhuox/home")
 public class EsHomeController {
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsCategoryService esCategoryService;
+    @Autowired
+    private CategoryService iEsCategoryService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsParameterGroupService iEsParameterGroupService;
-
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsCategoryService iEsCategoryService;
-
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsBrandService esBrandService;
-
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsCouponService iEsCouponService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsFocusPictureService iEsFocusPictureService;
+    @Autowired
+    private FocusPictureService iEsFocusPictureService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberCollectionGoodsService esMemberCollectionGoodsService;
+    @Autowired
+    private GoodsService esGoodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsService esGoodsService;
+    @Autowired
+    private SiteNavigationService iEsSiteNavigationService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsSiteNavigationService iEsSiteNavigationService;
+    @Autowired
+    private HotKeywordService iEsHotKeywordService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsHotKeywordService iEsHotKeywordService;
+    @Autowired
+    private GoodGoodsService iEsGoodGoodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodGoodsService iEsGoodGoodsService;
+    @Autowired
+    private GoodsWordsService iEsGoodsWordsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsWordsService iEsGoodsWordsService;
+    @Autowired
+    private GoodsIndexService iEsGoodsIndexService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsIndexService iEsGoodsIndexService;
-
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsPromotionGoodsService iEsPromotionGoodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsBrandService iEsBrandService;
-
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsCommercelItemsService commerceItemsService;
+    @Autowired
+    private CommercelItemsService commerceItemsService;
 
     @ApiOperation(value = "商城首页 获取父类列表",response = EsCategoryVO.class)
     @GetMapping(value = "/getCategoryParentList")

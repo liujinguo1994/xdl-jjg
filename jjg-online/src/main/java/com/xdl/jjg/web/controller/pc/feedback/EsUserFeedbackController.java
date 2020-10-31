@@ -11,9 +11,11 @@ import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.shiro.oath.ShiroKit;
 import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.feign.system.UserFeedbackService;
 import io.swagger.annotations.ApiOperation;
-import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,8 +34,8 @@ import javax.validation.Valid;
 @RequestMapping("/esUserFeedback")
 public class EsUserFeedbackController extends BaseController {
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsUserFeedbackService iesUserFeedbackService;
+    @Autowired
+    private UserFeedbackService iesUserFeedbackService;
 
 
     /**
@@ -47,7 +49,7 @@ public class EsUserFeedbackController extends BaseController {
         this.isAuth();
         ShiroUser user = ShiroKit.getUser();
         if (user ==  null){
-            return com.shopx.common.model.result.ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         EsUserFeedbackDTO esUserFeedbackDTO = new EsUserFeedbackDTO();
         BeanUtil.copyProperties(esUserFeedbackForm,esUserFeedbackDTO);

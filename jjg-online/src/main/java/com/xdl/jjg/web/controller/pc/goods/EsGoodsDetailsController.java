@@ -7,10 +7,14 @@ import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.shiro.oath.ShiroKit;
 import com.xdl.jjg.shiro.oath.ShiroUser;
 import com.xdl.jjg.web.service.IEsCouponService;
+import com.xdl.jjg.web.service.feign.member.MemberCollectionGoodsService;
+import com.xdl.jjg.web.service.feign.member.MemberCommentService;
+import com.xdl.jjg.web.service.feign.member.MemberCouponService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,19 +25,20 @@ import java.util.Map;
 @RequestMapping("/zhuox/goodsDetail")
 public class EsGoodsDetailsController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsCouponService iEsCouponService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberCollectionGoodsService esMemberCollectionGoodsService;
+    @Autowired
+    private MemberCollectionGoodsService esMemberCollectionGoodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsService esGoodsService;
+    @Autowired
+    private GoodsService esGoodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberCouponService iesMemberCouponService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberCommentService iesMemberCommentService;
+    @Autowired
+    private MemberCouponService iesMemberCouponService;
+
+    @Autowired
+    private MemberCommentService iesMemberCommentService;
 
 
     // TODO 商品详情页面待优化

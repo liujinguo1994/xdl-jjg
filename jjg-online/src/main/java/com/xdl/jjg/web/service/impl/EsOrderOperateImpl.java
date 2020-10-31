@@ -2,7 +2,6 @@ package com.xdl.jjg.web.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.jjg.member.model.enums.ConsumeEnumType;
-import com.jjg.operateChecker.OrderOperateChecker;
 import com.jjg.trade.model.domain.EsOrderDO;
 import com.jjg.trade.model.domain.EsOrderItemsDO;
 import com.jjg.trade.model.dto.EsDeliveryDTO;
@@ -31,8 +30,8 @@ import com.xdl.jjg.web.service.feign.member.MemberActiveInfoService;
 import com.xdl.jjg.web.service.feign.member.MemberDepositService;
 import com.xdl.jjg.web.service.feign.member.MemberService;
 import com.xdl.jjg.web.service.feign.system.SettingsService;
+import com.xdl.jjg.web.service.support.OrderOperateChecker;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,19 +66,19 @@ public class EsOrderOperateImpl implements IEsOrderOperateService {
     @Autowired
     private EsOrderItemsMapper esOrderItemsMapper;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private MemberActiveInfoService iEsMemberActiveInfoService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private MemberDepositService iEsMemberDepositService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private MemberService memberService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private SettingsService iEsSettingsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private CompanyService companyService;
 
     @Autowired

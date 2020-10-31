@@ -1,44 +1,43 @@
 package com.xdl.jjg.web.controller.pc.trade;
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.ApiPageResponse;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.common.util.MathUtil;
-import com.shopx.common.web.BaseController;
-import com.shopx.goods.api.model.domain.cache.EsGoodsCO;
-import com.shopx.goods.api.model.domain.vo.EsSpecValuesVO;
-import com.shopx.goods.api.service.IEsGoodsService;
-import com.shopx.goods.api.service.IEsGoodsSkuService;
-import com.shopx.system.api.model.domain.EsSettingsDO;
-import com.shopx.system.api.model.domain.vo.EsOrderSettingVO;
-import com.shopx.system.api.model.domain.vo.ExpressDetailVO;
-import com.shopx.system.api.model.enums.SettingGroup;
-import com.shopx.system.api.service.IEsExpressPlatformService;
-import com.shopx.system.api.service.IEsSettingsService;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.EsOrderDO;
-import com.shopx.trade.api.model.domain.EsOrderItemsDO;
-import com.shopx.trade.api.model.domain.EsRefundDO;
-import com.shopx.trade.api.model.domain.EsTradeDO;
-import com.shopx.trade.api.model.domain.dto.EsTradeDTO;
-import com.shopx.trade.api.model.domain.vo.*;
-import com.shopx.trade.api.model.enums.OrderStatusEnum;
-import com.shopx.trade.api.model.enums.ProcessStatusEnum;
-import com.shopx.trade.api.model.enums.RefundTypeEnum;
-import com.shopx.trade.api.service.*;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.manager.OrderPayManager;
-import com.shopx.trade.web.request.PayParamForm;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
+import com.jjg.shop.model.co.EsGoodsCO;
+import com.jjg.shop.model.vo.EsSpecValuesVO;
+import com.jjg.system.model.domain.EsSettingsDO;
+import com.jjg.system.model.enums.SettingGroup;
+import com.jjg.system.model.vo.ExpressDetailVO;
+import com.jjg.trade.model.domain.EsOrderDO;
+import com.jjg.trade.model.domain.EsOrderItemsDO;
+import com.jjg.trade.model.domain.EsRefundDO;
+import com.jjg.trade.model.domain.EsTradeDO;
+import com.jjg.trade.model.dto.EsTradeDTO;
+import com.jjg.trade.model.enums.OrderStatusEnum;
+import com.jjg.trade.model.enums.ProcessStatusEnum;
+import com.jjg.trade.model.enums.RefundTypeEnum;
+import com.jjg.trade.model.form.PayParamForm;
+import com.jjg.trade.model.vo.*;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.manager.OrderPayManager;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.util.MathUtil;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.*;
+import com.xdl.jjg.web.service.feign.member.ExpressPlatformService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsSkuService;
+import com.xdl.jjg.web.service.feign.system.SettingsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.dubbo.config.annotation.Reference;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -46,7 +45,6 @@ import redis.clients.jedis.JedisCluster;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -68,31 +66,31 @@ import java.util.stream.Collectors;
 @RequestMapping("/esOrder")
 public class EsOrderController extends BaseController {
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
+    @Autowired
     private IEsOrderService iesOrderService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000,check = false)
+    @Autowired
     private IEsOrderItemsService iEsOrderItemsService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000,check = false)
-    private IEsGoodsSkuService iEsGoodsSkuService;
+    @Autowired
+    private GoodsSkuService iEsGoodsSkuService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
+    @Autowired
     private IEsOrderOperateService iEsOrderOperateService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
+    @Autowired
     private IEsTradeService iEsTradeService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsSettingsService iEsSettingsService;
+    @Autowired
+    private SettingsService iEsSettingsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsService goodsService;
+    @Autowired
+    private GoodsService goodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsRefundService esRefundService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsExpressPlatformService expressPlatformService;
+    @Autowired
+    private ExpressPlatformService expressPlatformService;
 
     @Autowired
     private JedisCluster jedisCluster;

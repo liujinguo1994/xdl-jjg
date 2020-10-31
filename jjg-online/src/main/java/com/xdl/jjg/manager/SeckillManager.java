@@ -13,7 +13,7 @@ import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.web.service.IEsSeckillApplyService;
-import org.apache.dubbo.config.annotation.Reference;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.JedisCluster;
@@ -32,11 +32,11 @@ import java.util.stream.Collectors;
 @Component
 public class SeckillManager {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private IEsSeckillApplyService seckillApplyService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsGoodsService goodsService;
+    @Autowired
+    private GoodsService goodsService;
 
     @Autowired
     private JedisCluster jedisCluster;

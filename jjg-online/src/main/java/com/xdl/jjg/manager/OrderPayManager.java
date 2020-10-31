@@ -22,9 +22,9 @@ import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.SnowflakeIdWorker;
 import com.xdl.jjg.util.StringUtil;
 import com.xdl.jjg.web.service.*;
-import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -48,22 +48,22 @@ public class OrderPayManager {
     /** Http请求默认端口 */
     private static final String HTTP_PORT = "80";
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private IEsOrderService orderService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private IEsTradeService tradeService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private IEsPaymentMethodService paymentMethodService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private IEsPaymentBillService paymentBillService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private IPayService payService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private List<PaymentPluginManager> paymentPluginList;
 
     @Value("${server.address.serverNameBuyerApi}")

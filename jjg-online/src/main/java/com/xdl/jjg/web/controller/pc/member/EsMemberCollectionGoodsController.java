@@ -1,27 +1,28 @@
 package com.xdl.jjg.web.controller.pc.member;
 
-import com.shopx.common.model.result.ApiPageResponse;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.web.BaseController;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.EsMemberCollectionGoodsDO;
-import com.shopx.member.api.model.domain.dto.EsMemberCollectionGoodsDTO;
-import com.shopx.member.api.model.domain.dto.EsQueryMemberCollectionGoodsDTO;
-import com.shopx.member.api.model.domain.vo.EsMemberCollectionGoodsSortStatisticsVO;
-import com.shopx.member.api.model.domain.vo.EsMemberCollectionGoodsVO;
-import com.shopx.member.api.service.IEsMemberCollectionGoodsService;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.request.query.EsMemberCollectionGoodsQueryForm;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
-import com.shopx.trade.web.shiro.oath.ShiroUser;
+
+import com.jjg.member.model.domain.EsMemberCollectionGoodsDO;
+import com.jjg.member.model.dto.EsMemberCollectionGoodsDTO;
+import com.jjg.member.model.dto.EsQueryMemberCollectionGoodsDTO;
+import com.jjg.member.model.vo.EsMemberCollectionGoodsSortStatisticsVO;
+import com.jjg.member.model.vo.EsMemberCollectionGoodsVO;
+import com.jjg.trade.model.form.query.EsMemberCollectionGoodsQueryForm;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.feign.member.MemberCollectionGoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,8 +40,8 @@ import java.util.List;
 @RequestMapping("/collectionGoods")
 public class EsMemberCollectionGoodsController extends BaseController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 10000, check = false)
-    private IEsMemberCollectionGoodsService memberCollectionGoodsService;
+    @Autowired
+    private MemberCollectionGoodsService memberCollectionGoodsService;
 
 
     @ApiOperation(value = "查询会员商品收藏列表", notes = "根据页码分页分类展示商品收藏数据", response = EsMemberCollectionGoodsVO.class)
@@ -49,7 +50,7 @@ public class EsMemberCollectionGoodsController extends BaseController {
     public ApiResponse getMemberCollectionGoodListBuyer(EsMemberCollectionGoodsQueryForm queryMemberCollectionGoodsForm) {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         EsQueryMemberCollectionGoodsDTO dto = new EsQueryMemberCollectionGoodsDTO();
@@ -70,7 +71,7 @@ public class EsMemberCollectionGoodsController extends BaseController {
     public ApiResponse getMemberCollectionGoodNumBuyer() {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         DubboResult result = memberCollectionGoodsService.getMemberCollectionGoodNumBuyer(userId);
@@ -91,7 +92,7 @@ public class EsMemberCollectionGoodsController extends BaseController {
     public ApiResponse setRemind(@PathVariable Long goodId) {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         DubboResult result = memberCollectionGoodsService.updateRemind(goodId, userId);
@@ -109,7 +110,7 @@ public class EsMemberCollectionGoodsController extends BaseController {
     public ApiResponse cancelRemind(@PathVariable Long goodId) {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         DubboResult result = memberCollectionGoodsService.deleteRemind(goodId, userId);
@@ -125,7 +126,7 @@ public class EsMemberCollectionGoodsController extends BaseController {
 //    public ApiResponse getGoodSort() {
 //        Long userId = ShiroKit.getUser().getId();
 //        if (null == userId) {
-//            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+//            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
 //        }
 //        DubboPageResult<EsCollectCateryNumDO> result = this.iesMemberCollectionGoodsService.getGoodSort(userId);
 //        List<EsCollectCateryNumVO> list;
@@ -142,7 +143,7 @@ public class EsMemberCollectionGoodsController extends BaseController {
 //    public ApiResponse getCutAndEffetNum() {
 //        Long userId = ShiroKit.getUser().getId();
 //        if (null == userId) {
-//            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+//            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
 //        }
 //        DubboResult<EsCutAndEffectDO> result = this.iesMemberCollectionGoodsService.getCutAndEffetNum(userId);
 //        if (result.isSuccess()) {
@@ -160,7 +161,7 @@ public class EsMemberCollectionGoodsController extends BaseController {
 //    public ApiResponse getCountGoodsNum() {
 //        Long userId = ShiroKit.getUser().getId();
 //        if (null == userId) {
-//            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+//            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
 //        }
 //        DubboResult<Integer> result = this.iesMemberCollectionGoodsService.getCountGoodsNum(userId);
 //        if (result.isSuccess()) {
@@ -175,7 +176,7 @@ public class EsMemberCollectionGoodsController extends BaseController {
 //    public ApiResponse add(@Valid EsMemberCollectionGoodsForm esCollectionGoodsForm) {
 //        Long userId = ShiroKit.getUser().getId();
 //        if (null == userId) {
-//            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+//            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
 //        }
 //        EsMemberCollectionGoodsDTO esMemberCollectionGoodsDTO = new EsMemberCollectionGoodsDTO();
 //        BeanUtil.copyProperties(esCollectionGoodsForm, esMemberCollectionGoodsDTO);
@@ -192,7 +193,7 @@ public class EsMemberCollectionGoodsController extends BaseController {
 //    public ApiResponse deleteAllEfect() {
 //        Long userId = ShiroKit.getUser().getId();
 //        if (null == userId) {
-//            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+//            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
 //        }
 //        DubboResult<EsMemberCollectionGoodsDO> result = iesMemberCollectionGoodsService.deleteAllEfect(userId);
 //        if (result.isSuccess()) {
@@ -209,7 +210,7 @@ public class EsMemberCollectionGoodsController extends BaseController {
     public ApiResponse deleteGoods( @PathVariable("goodsId") Long goodsId) {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         DubboResult<EsMemberCollectionGoodsDO> result = memberCollectionGoodsService.deleteMemberCollectionGood(userId, goodsId);
@@ -225,7 +226,7 @@ public class EsMemberCollectionGoodsController extends BaseController {
     public ApiResponse batchDeleteGoods(@PathVariable(value = "goodIds") List<Long> goodIds) {
         Long userId = ShiroKit.getUser().getId();
         if (null == userId) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         DubboResult<EsMemberCollectionGoodsDO> result = memberCollectionGoodsService.deleteMemberCollectionGoodBatch(userId, goodIds);
         if (result.isSuccess()) {
@@ -240,7 +241,7 @@ public class EsMemberCollectionGoodsController extends BaseController {
     public ApiResponse insertGoods(@PathVariable("goodsId") Long goodsId){
         Long userId = ShiroKit.getUser().getId();
         if (null == userId) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         EsMemberCollectionGoodsDTO esMemberCollectionGoodsDTO = new EsMemberCollectionGoodsDTO();
         esMemberCollectionGoodsDTO.setGoodsId(goodsId);
@@ -259,7 +260,7 @@ public class EsMemberCollectionGoodsController extends BaseController {
 //    public ApiResponse upDateRemind(@PathVariable("goodsId") Long goodsId) {
 //        Long userId = ShiroKit.getUser().getId();
 //        if (null == userId) {
-//            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+//            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
 //        }
 //        DubboResult<EsMemberCollectionGoodsDO> result = this.iesMemberCollectionGoodsService.updateRemind(goodsId, userId);
 //        if (result.isSuccess()) {
@@ -274,7 +275,7 @@ public class EsMemberCollectionGoodsController extends BaseController {
 //    public ApiResponse deleteRemind(@PathVariable("goodsId") Long goodsId) {
 //        Long userId = ShiroKit.getUser().getId();
 //        if (null == userId) {
-//            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+//            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
 //        }
 //        DubboResult<EsMemberCollectionGoodsDO> result = this.iesMemberCollectionGoodsService.deleteRemind(goodsId, userId);
 //        if (result.isSuccess()) {

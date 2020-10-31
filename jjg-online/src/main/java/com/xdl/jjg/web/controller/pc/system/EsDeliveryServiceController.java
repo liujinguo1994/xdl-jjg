@@ -1,27 +1,26 @@
 package com.xdl.jjg.web.controller.pc.system;
 
 import com.beust.jcommander.internal.Lists;
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.web.BaseController;
-import com.shopx.member.api.model.domain.EsMemberDO;
-import com.shopx.member.api.service.IEsMemberService;
-import com.shopx.trade.api.model.domain.EsDeliveryServiceDO;
-import com.shopx.trade.api.model.domain.vo.*;
-import com.shopx.trade.api.service.IEsDeliveryServiceService;
-import com.shopx.trade.api.service.IEsSelfDateService;
-import com.shopx.trade.api.service.IEsSelfTimeService;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.manager.CartManager;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
+import com.jjg.member.model.domain.EsMemberDO;
+import com.jjg.trade.model.domain.EsDeliveryServiceDO;
+import com.jjg.trade.model.vo.*;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.manager.CartManager;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.IEsDeliveryServiceService;
+import com.xdl.jjg.web.service.IEsSelfDateService;
+import com.xdl.jjg.web.service.IEsSelfTimeService;
+import com.xdl.jjg.web.service.feign.member.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,16 +42,16 @@ import java.util.stream.Collectors;
 @RequestMapping("/deliveryService")
 public class EsDeliveryServiceController extends BaseController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsDeliveryServiceService deliveryServiceService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsSelfDateService iEsSelfDateService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsSelfTimeService iEsSelfTimeService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberService esMemberService;
+    @Autowired
+    private MemberService esMemberService;
     @Autowired
     private CartManager cartManager;
 

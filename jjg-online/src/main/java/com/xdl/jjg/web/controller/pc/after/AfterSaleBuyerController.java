@@ -1,40 +1,41 @@
 package com.xdl.jjg.web.controller.pc.after;
 
 import com.alibaba.fastjson.JSON;
-import com.shopx.common.model.result.ApiPageResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.system.api.model.domain.EsReturnReasonDO;
-import com.shopx.system.api.model.domain.vo.EsReturnReasonVO;
-import com.shopx.system.api.service.IEsReturnReasonService;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.EsRefundDO;
-import com.shopx.trade.api.model.domain.EsServiceOrderDO;
-import com.shopx.trade.api.model.domain.EsServiceOrderItemsDO;
-import com.shopx.trade.api.model.domain.dto.*;
-import com.shopx.trade.api.model.domain.vo.EsRefundVO;
-import com.shopx.trade.api.model.domain.vo.EsServiceOrderItemsVO;
-import com.shopx.trade.api.model.domain.vo.EsServiceOrderVO;
-import com.shopx.trade.api.model.enums.ProcessStatusEnum;
-import com.shopx.trade.api.model.enums.RefundTypeEnum;
-import com.shopx.trade.api.service.*;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.request.BuyerRefundApplyForm;
-import com.shopx.trade.web.request.BuyerRefundForm;
-import com.shopx.trade.web.request.SellerRefundApprovalForm;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
+import com.jjg.system.model.domain.EsReturnReasonDO;
+import com.jjg.system.model.vo.EsReturnReasonVO;
+import com.jjg.trade.model.domain.EsRefundDO;
+import com.jjg.trade.model.domain.EsServiceOrderDO;
+import com.jjg.trade.model.domain.EsServiceOrderItemsDO;
+import com.jjg.trade.model.dto.*;
+import com.jjg.trade.model.enums.ProcessStatusEnum;
+import com.jjg.trade.model.enums.RefundTypeEnum;
+import com.jjg.trade.model.form.BuyerRefundApplyForm;
+import com.jjg.trade.model.form.BuyerRefundForm;
+import com.jjg.trade.model.form.SellerRefundApprovalForm;
+import com.jjg.trade.model.vo.EsRefundVO;
+import com.jjg.trade.model.vo.EsServiceOrderItemsVO;
+import com.jjg.trade.model.vo.EsServiceOrderVO;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.web.service.*;
+import com.xdl.jjg.web.service.feign.system.ReturnReasonService;
 import io.swagger.annotations.*;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -51,23 +52,23 @@ import java.util.Map;
 @RequestMapping("/after-sales")
 public class AfterSaleBuyerController {
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
+    @Autowired
     private IEsAfterSaleService afterSaleService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
+    @Autowired
     private IEsOrderService iesOrderService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
+    @Autowired
     private IEsOrderItemsService iEsOrderItemsService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
+    @Autowired
     private IEsRefundGoodsService iEsRefundGoodsService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
+    @Autowired
     private IEsRefundService iEsRefundService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsReturnReasonService iEsReturnReasonService;
+    @Autowired
+    private ReturnReasonService iEsReturnReasonService;
 
     @GetMapping(value = "/getEsCancelOrderInfo")
     @ApiOperation(value = "申请 取消订单 订单项页面",notes = "根据订单编号",response = EsServiceOrderVO.class)

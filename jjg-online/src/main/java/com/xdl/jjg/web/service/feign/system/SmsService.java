@@ -11,4 +11,11 @@ public interface SmsService {
      * @param sendDTO
      */
     DubboResult sendLfc(EsSmsSendDTO sendDTO);
+
+    /**
+     * 发送手机短信
+     *
+     * @param sendDTO
+     */
+    DubboResult send(EsSmsSendDTO sendDTO);
 }

@@ -1,7 +1,7 @@
 package com.jjg.member.model.domain;
 
 
-import com.jjg.member.model.vo.CommentImageVO;
+import com.jjg.trade.model.vo.CommentImageVO;
 import lombok.Data;
 
 import java.io.Serializable;

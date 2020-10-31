@@ -12,6 +12,8 @@ import com.jjg.trade.model.domain.*;
 import com.jjg.trade.model.enums.PromotionTypeEnum;
 import com.jjg.trade.model.form.query.GoodsQueryForm;
 import com.jjg.trade.model.vo.EsFreightTemplateDetailVO;
+import com.jjg.trade.model.vo.EsGoodsIndexVO;
+import com.jjg.trade.model.vo.EsPromotionGoodsVO;
 import com.jjg.trade.model.vo.SeckillGoodsVO;
 import com.xdl.jjg.constant.ApiStatus;
 import com.xdl.jjg.constant.ErrorDate;
@@ -25,13 +27,19 @@ import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.shiro.oath.ShiroKit;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.*;
+import com.xdl.jjg.web.service.feign.member.DiscountService;
+import com.xdl.jjg.web.service.feign.member.MemberService;
+import com.xdl.jjg.web.service.feign.member.SearchKeyWordService;
+import com.xdl.jjg.web.service.feign.shop.CategoryService;
+import com.xdl.jjg.web.service.feign.shop.GoodsIndexService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsSkuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,61 +59,59 @@ import java.util.stream.Collectors;
 @RequestMapping("/goods")
 public class GoodsBuyerController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsService iEsGoodsService;
+    @Autowired
+    private GoodsService iEsGoodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsSearchKeyWordService iEsSearchKeyWordService;
+    @Autowired
+    private SearchKeyWordService iEsSearchKeyWordService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsService goodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsIndexService goodsIndexService;
+    @Autowired
+    private GoodsIndexService goodsIndexService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsSkuService goodsSkuService;
+    @Autowired
+    private GoodsSkuService goodsSkuService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsCategoryService categoryService;
+    @Autowired
+    private CategoryService categoryService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsPromotionGoodsService iEsPromotionGoodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsMinusService iEsMinusService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsFullDiscountService iEsFullDiscountService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsFullDiscountGiftService iEsFullDiscountGiftService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsDiscountService iEsDiscountService;
+    @Autowired
+    private DiscountService iEsDiscountService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsHalfPriceService iEsHalfPriceService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsGoodsDiscountService iEsGoodsDiscountService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsCouponService iEsCouponService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsSeckillRangeService iEsSeckillRangeService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsSeckillService iEsSeckillService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberService iEsMemberService;
+    @Autowired
+    private MemberService iEsMemberService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsFreightTemplateDetailService freightTemplateDetailService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsShipCompanyDetailsService shipCompanyDetailsService;
 
     @Autowired
@@ -161,7 +167,7 @@ public class GoodsBuyerController {
     @ApiOperation(value = "查询商品详情", notes = "根据查询条件查询商品", response = EsGoodsCO.class)
     @ApiImplicitParam(name = "goodsId" , value = "商品列表查询Form表单", paramType = "path")
     public ApiResponse getGoodsDetail(@PathVariable Long goodsId) {
-        DubboResult result = this.goodsService.getEsBuyerGoods(goodsId);
+        DubboResult result = this.iEsGoodsService.getEsBuyerGoods(goodsId);
         if (result.isSuccess()) {
             EsGoodsCO esGoodsCO = (EsGoodsCO) result.getData();
             if(esGoodsCO == null || esGoodsCO.getIsDel() == 1|| esGoodsCO.getIsAuth() != 1 || esGoodsCO.getMarketEnable() == 2 || esGoodsCO.getIsGifts() == 1){
@@ -391,7 +397,7 @@ public class GoodsBuyerController {
     @ApiOperation(value = "查询商品详情", notes = "根据查询条件查询商品", response = EsGoodsCO.class)
     @ApiImplicitParam(name = "goodsId" , value = "商品列表查询Form表单", paramType = "path")
     public ApiResponse getGoodsSkuList(@PathVariable Long goodsId) {
-        DubboResult result = this.goodsService.getEsGoods(goodsId);
+        DubboResult result = this.iEsGoodsService.getEsGoods(goodsId);
         if (result.isSuccess()) {
             EsGoodsCO goods = (EsGoodsCO) result.getData();
             return ApiResponse.success(goods.getSkuList());
@@ -426,7 +432,7 @@ public class GoodsBuyerController {
         ErrorDate errorDate = new ErrorDate();
         try {
             // 通过商品ID 查询该商品绑定的运费模板ID
-            DubboResult<EsGoodsCO> esBuyerGoods = goodsService.getEsBuyerGoods(goodsId);
+            DubboResult<EsGoodsCO> esBuyerGoods = iEsGoodsService.getEsBuyerGoods(goodsId);
             if (esBuyerGoods.isSuccess() && esBuyerGoods.getData() != null && esBuyerGoods.getData().getGoodsTransfeeCharge() == 1) {
                 Long templateId = esBuyerGoods.getData().getTemplateId();
                 //运费模版映射
@@ -479,7 +485,7 @@ public class GoodsBuyerController {
                                                 Integer pageSize, Integer pageNum) {
 
         // 根据商品分类查询商品
-        DubboPageResult<EsGoodsDO> pageResult = goodsService.buyerGetGoodsByCategoryId(categoryId,shopId,goodsId,pageNum,pageSize);
+        DubboPageResult<EsGoodsDO> pageResult = iEsGoodsService.buyerGetGoodsByCategoryId(categoryId,shopId,goodsId,pageNum,pageSize);
 
         if (pageResult.isSuccess()) {
             List<EsGoodsVO> esGoodsVOS = BeanUtil.copyList(pageResult.getData().getList(), EsGoodsVO.class);

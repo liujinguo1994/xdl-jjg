@@ -68,7 +68,7 @@ public class EsOrderItemsServiceImpl extends ServiceImpl<EsOrderItemsMapper, EsO
     @Reference(version = "${dubbo.application.version}", timeout = 5000,check = false)
     private CategoryService categoryService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private AutoCommentConfigService iEsAutoCommentConfigService;
 
     @Autowired

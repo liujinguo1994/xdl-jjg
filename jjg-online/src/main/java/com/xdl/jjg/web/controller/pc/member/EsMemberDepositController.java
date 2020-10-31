@@ -1,23 +1,23 @@
 package com.xdl.jjg.web.controller.pc.member;
 
-import com.shopx.common.model.result.ApiPageResponse;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.web.BaseController;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.EsMemberDepositDO;
-import com.shopx.member.api.model.domain.dto.EsMemberDepositDTO;
-import com.shopx.member.api.model.domain.vo.EsMemberDepositVO;
-import com.shopx.member.api.service.IEsMemberDepositService;
-import com.shopx.member.api.service.IEsMemberService;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.request.query.EsMemberDepositQueryForm;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
+import com.jjg.member.model.domain.EsMemberDepositDO;
+import com.jjg.member.model.dto.EsMemberDepositDTO;
+import com.jjg.member.model.vo.EsMemberDepositVO;
+import com.jjg.trade.model.form.query.EsMemberDepositQueryForm;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.feign.member.MemberDepositService;
+import com.xdl.jjg.web.service.feign.member.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -37,11 +37,11 @@ import java.util.List;
 @RequestMapping("/esMemberDeposit")
 public class EsMemberDepositController extends BaseController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberDepositService iesMemberDepositService;
+    @Autowired
+    private MemberDepositService iesMemberDepositService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberService iEsMemberService;
+    @Autowired
+    private MemberService iEsMemberService;
 
     @ApiOperation(value = "余额明细列表", notes = "余额明细列表", response = EsMemberDepositVO.class)
     @GetMapping("/getMemberDepositList")
@@ -49,7 +49,7 @@ public class EsMemberDepositController extends BaseController {
     public ApiResponse getMemberDepositList(@Valid EsMemberDepositQueryForm form) {
         Long userId = ShiroKit.getUser().getId();
         if (null == userId) {
-            return ApiPageResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiPageResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         EsMemberDepositDTO es = new EsMemberDepositDTO();
         es.setThreeMonth(form.getThreeMonth());

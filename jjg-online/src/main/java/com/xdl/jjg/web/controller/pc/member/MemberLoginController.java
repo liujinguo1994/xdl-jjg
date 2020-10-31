@@ -2,38 +2,37 @@ package com.xdl.jjg.web.controller.pc.member;
 
 import cn.hutool.core.util.RandomUtil;
 import com.google.code.kaptcha.Producer;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.util.FormatValidateUtils;
-import com.shopx.common.util.IPUtil;
-import com.shopx.common.util.JwtUtils;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.EsMemberDO;
-import com.shopx.member.api.model.domain.EsMemberTokenDO;
-import com.shopx.member.api.model.domain.dto.EsMemberDTO;
-import com.shopx.member.api.model.domain.dto.EsMemberTokenDTO;
-import com.shopx.member.api.model.domain.vo.EsLoginMemberVO;
-import com.shopx.member.api.model.domain.vo.EsMemberTokenInfoVO;
-import com.shopx.member.api.model.domain.vo.EsMemberTokenVO;
-import com.shopx.member.api.service.IEsMemberService;
-import com.shopx.member.api.service.IEsMemberTokenService;
-import com.shopx.system.api.model.domain.dto.EsSmsSendDTO;
-import com.shopx.system.api.model.enums.SmsTemplateCodeEnum;
-import com.shopx.system.api.service.IEsSmsService;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.request.EsMemberRegistorForm;
-import com.shopx.trade.web.request.MemberCheckCodeForm;
-import com.shopx.trade.web.request.MemberFastLoginForm;
-import com.shopx.trade.web.request.MemberLoginForm;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
+import com.jjg.member.model.domain.EsMemberDO;
+import com.jjg.member.model.domain.EsMemberTokenDO;
+import com.jjg.member.model.dto.EsMemberDTO;
+import com.jjg.member.model.dto.EsMemberTokenDTO;
+import com.jjg.member.model.vo.EsLoginMemberVO;
+import com.jjg.member.model.vo.EsMemberTokenInfoVO;
+import com.jjg.member.model.vo.EsMemberTokenVO;
+import com.jjg.system.model.dto.EsSmsSendDTO;
+import com.jjg.system.model.enums.SmsTemplateCodeEnum;
+import com.jjg.trade.model.form.EsMemberRegistorForm;
+import com.jjg.trade.model.form.MemberCheckCodeForm;
+import com.jjg.trade.model.form.MemberFastLoginForm;
+import com.jjg.trade.model.form.MemberLoginForm;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.MemberErrorCode;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.FormatValidateUtils;
+import com.xdl.jjg.util.IPUtil;
+import com.xdl.jjg.util.JwtUtils;
+import com.xdl.jjg.web.service.feign.member.MemberService;
+import com.xdl.jjg.web.service.feign.member.MemberTokenService;
+import com.xdl.jjg.web.service.feign.system.SmsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,16 +63,18 @@ public class MemberLoginController {
 
     @Autowired
     private Producer producer;
+
     @Autowired
     private JedisCluster jedisCluster;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberTokenService iEsMemberTokenService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberService memberService;
+    @Autowired
+    private MemberTokenService iEsMemberTokenService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000,check = false)
-    private IEsSmsService esSmsService;
+    @Autowired
+    private MemberService memberService;
+
+    @Autowired
+    private SmsService esSmsService;
 
 
     //token过期时间(30天)

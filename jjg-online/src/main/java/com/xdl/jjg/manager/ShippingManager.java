@@ -18,12 +18,13 @@ import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.shiro.oath.ShiroKit;
 import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.MathUtil;
 import com.xdl.jjg.web.service.IEsFreightTemplateDetailService;
 import com.xdl.jjg.web.service.IEsShipCompanyDetailsService;
-import com.xdl.jjg.web.service.IEsShipTemplateService;
+import com.xdl.jjg.web.service.feign.member.MemberAddressService;
+import com.xdl.jjg.web.service.feign.member.MemberService;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import redis.clients.jedis.JedisCluster;
@@ -48,28 +49,18 @@ public class ShippingManager {
     @Autowired
     private CheckoutParamManager checkoutParamManager;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberAddressService memberAddressService;
+    @Autowired
+    private MemberAddressService memberAddressService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsShipTemplateService shipTemplateService;
-
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsFreightTemplateDetailService freightTemplateDetailService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsShipCompanyDetailsService shipCompanyDetailsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberAddressService iesMemberAddressService;
-
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberService memberService;
 
     @Autowired
-    private TradePriceManager tradePriceManager;
-    @Autowired
-    private PromotionToolManager promotionToolManager;
+    private MemberService memberService;
 
     @Autowired
     private JedisCluster jedisCluster;

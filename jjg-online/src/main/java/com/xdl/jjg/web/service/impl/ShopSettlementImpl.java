@@ -57,10 +57,10 @@ public class ShopSettlementImpl extends AbstractStatementSettlement {
     @Autowired
     private EsBillDetailMapper billDetailMapper;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private ShopService shopService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private ShopDetailService shopDetailService;
 
     private static SnowflakeIdWorker snowflakeIdWorker = new SnowflakeIdWorker(0,0);

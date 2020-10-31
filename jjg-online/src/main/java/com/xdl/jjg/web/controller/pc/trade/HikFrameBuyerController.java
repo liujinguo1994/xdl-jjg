@@ -1,6 +1,6 @@
 package com.xdl.jjg.web.controller.pc.trade;
 
-import com.shopx.trade.web.manager.DomainSettings;
+import com.xdl.jjg.manager.DomainSettings;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;

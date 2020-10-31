@@ -6,6 +6,8 @@ import com.jjg.system.model.vo.EsRegionsVO;
 import com.xdl.jjg.constant.ApiStatus;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.feign.system.RegionsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -31,7 +33,7 @@ import java.util.stream.Collectors;
 public class EsRegionsController {
 
     @Reference(version = "${dubbo.application.version}",timeout = 5000,check = false)
-    private IEsRegionsService iEsRegionsService;
+    private RegionsService iEsRegionsService;
 
     @GetMapping(value = "/{id}/children")
     @ApiOperation(value = "获取某地区的子地区")

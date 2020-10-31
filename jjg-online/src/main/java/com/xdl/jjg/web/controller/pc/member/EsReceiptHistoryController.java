@@ -1,27 +1,28 @@
 package com.xdl.jjg.web.controller.pc.member;
 
-import com.shopx.common.model.result.ApiPageResponse;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.web.BaseController;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.dto.EsReceiptHistoryDTO;
-import com.shopx.member.api.service.IEsReceiptHistoryService;
-import com.shopx.trade.api.model.domain.EsBuyerOrderDO;
-import com.shopx.trade.api.model.domain.EsBuyerOrderItemsDO;
-import com.shopx.trade.api.model.domain.dto.EsBuyerOrderQueryDTO;
-import com.shopx.trade.api.model.domain.vo.EsBuyerOrderItemsVO;
-import com.shopx.trade.api.model.domain.vo.EsBuyerOrderVO;
-import com.shopx.trade.api.service.IEsOrderService;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.request.EsReceiptHistoryForm;
-import com.shopx.trade.web.request.QueryReceiptOrdersForm;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
+
+import com.jjg.member.model.dto.EsReceiptHistoryDTO;
+import com.jjg.trade.model.domain.EsBuyerOrderDO;
+import com.jjg.trade.model.domain.EsBuyerOrderItemsDO;
+import com.jjg.trade.model.dto.EsBuyerOrderQueryDTO;
+import com.jjg.trade.model.form.EsReceiptHistoryForm;
+import com.jjg.trade.model.form.QueryReceiptOrdersForm;
+import com.jjg.trade.model.vo.EsBuyerOrderItemsVO;
+import com.jjg.trade.model.vo.EsBuyerOrderVO;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.IEsOrderService;
+import com.xdl.jjg.web.service.feign.member.ReceiptHistoryService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -41,9 +42,9 @@ import java.util.stream.Collectors;
 @RequestMapping("/esReceiptHistory")
 public class EsReceiptHistoryController extends BaseController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000,check = false)
-    private IEsReceiptHistoryService iesReceiptHistoryService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
+    private ReceiptHistoryService iesReceiptHistoryService;
+    @Autowired
     private IEsOrderService iEsOrderService;
 
 
@@ -52,7 +53,7 @@ public class EsReceiptHistoryController extends BaseController {
     public ApiResponse insertesReceiptHistory(EsReceiptHistoryForm esReceiptHistoryForm) {
         Long memberId = ShiroKit.getUser().getId();
         if (null == memberId) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         EsReceiptHistoryDTO esReceiptHistoryDTO = new EsReceiptHistoryDTO();
         BeanUtil.copyProperties(esReceiptHistoryForm, esReceiptHistoryDTO);
@@ -70,7 +71,7 @@ public class EsReceiptHistoryController extends BaseController {
     public ApiResponse getOrdersAndReceipt(QueryReceiptOrdersForm queryReceiptOrdersForm) {
         Long userId = ShiroKit.getUser().getId();
         if (null == userId) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         EsBuyerOrderQueryDTO esBuyerOrderQueryDTO = new EsBuyerOrderQueryDTO();
 //        if(!StringUtils.isBlank(queryReceiptOrdersForm.getGoodsName())){

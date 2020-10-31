@@ -1,29 +1,30 @@
 package com.xdl.jjg.web.controller.pc.member;
 
-import com.shopx.common.model.result.ApiPageResponse;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.web.BaseController;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.EsMemberCollectionShopDO;
-import com.shopx.member.api.model.domain.EsMemberCollectionShopLabelDO;
-import com.shopx.member.api.model.domain.EsMemberGoodsDO;
-import com.shopx.member.api.model.domain.EsQueryCollectionShopDO;
-import com.shopx.member.api.model.domain.dto.EsMemberCollectionShopDTO;
-import com.shopx.member.api.model.domain.dto.EsQueryCollectShopDTO;
-import com.shopx.member.api.model.domain.dto.EsUpdateTopShopDTO;
-import com.shopx.member.api.model.domain.vo.EsMemberCollectionShopLabelVO;
-import com.shopx.member.api.model.domain.vo.EsMemberGoodsVO;
-import com.shopx.member.api.model.domain.vo.EsQueryCollectionShopVO;
-import com.shopx.member.api.service.IEsMemberCollectionShopService;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.request.EsUpdateTopShopForm;
-import com.shopx.trade.web.request.ShopRemarksForm;
-import com.shopx.trade.web.request.query.EsCollectShopQueryForm;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
-import com.shopx.trade.web.shiro.oath.ShiroUser;
+
+import com.jjg.member.model.domain.EsMemberCollectionShopDO;
+import com.jjg.member.model.domain.EsMemberCollectionShopLabelDO;
+import com.jjg.member.model.domain.EsMemberGoodsDO;
+import com.jjg.member.model.domain.EsQueryCollectionShopDO;
+import com.jjg.member.model.dto.EsMemberCollectionShopDTO;
+import com.jjg.member.model.dto.EsQueryCollectShopDTO;
+import com.jjg.member.model.dto.EsUpdateTopShopDTO;
+import com.jjg.member.model.vo.EsMemberCollectionShopLabelVO;
+import com.jjg.member.model.vo.EsMemberGoodsVO;
+import com.jjg.member.model.vo.EsQueryCollectionShopVO;
+import com.jjg.trade.model.form.EsUpdateTopShopForm;
+import com.jjg.trade.model.form.ShopRemarksForm;
+import com.jjg.trade.model.form.query.EsCollectShopQueryForm;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.feign.member.MemberCollectionShopService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -50,7 +51,7 @@ import java.util.stream.Collectors;
 public class EsMemberCollectionShopController extends BaseController {
 
     @Reference(version = "${dubbo.application.version}", timeout = 10000,check = false)
-    private IEsMemberCollectionShopService memberCollectionShopService;
+    private MemberCollectionShopService memberCollectionShopService;
 
     @ApiOperation(value = "取消会员收藏店铺", notes = "依据传递的id取消店铺收藏")
     @ApiImplicitParams({
@@ -61,7 +62,7 @@ public class EsMemberCollectionShopController extends BaseController {
     public ApiResponse deleteShop(@PathVariable("shopId") Long shopId) {
         Long memberId = ShiroKit.getUser().getId();
         if (null == memberId) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         DubboResult<EsMemberCollectionShopDO> result = memberCollectionShopService.deleteMemberCollectionShop(memberId, shopId);
         if (result.isSuccess()) {
@@ -76,7 +77,7 @@ public class EsMemberCollectionShopController extends BaseController {
     public ApiResponse updateRemarks(@Valid ShopRemarksForm remarksForm) {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         EsMemberCollectionShopDTO esMemberCollectionShopDTO = new EsMemberCollectionShopDTO();
         if (null != remarksForm.getMark()) {
@@ -96,7 +97,7 @@ public class EsMemberCollectionShopController extends BaseController {
     public ApiResponse deleteShop(@Valid EsUpdateTopShopForm esUpdateTopShopForm) {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long memberId = user.getId();
         EsUpdateTopShopDTO esUpdateTopShopDTO = new EsUpdateTopShopDTO();
@@ -114,7 +115,7 @@ public class EsMemberCollectionShopController extends BaseController {
     public ApiResponse getMemberCollectionShopList(EsCollectShopQueryForm form) {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiPageResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiPageResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long memberId = user.getId();
         EsQueryCollectShopDTO dto = new EsQueryCollectShopDTO();
@@ -154,7 +155,7 @@ public class EsMemberCollectionShopController extends BaseController {
     public ApiResponse getMemberCollectionShopListNew(EsCollectShopQueryForm form) {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiPageResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiPageResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long memberId = user.getId();
         EsQueryCollectShopDTO dto = new EsQueryCollectShopDTO();

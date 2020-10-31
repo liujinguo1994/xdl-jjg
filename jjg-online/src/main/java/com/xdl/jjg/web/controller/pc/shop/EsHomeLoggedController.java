@@ -1,32 +1,33 @@
 package com.xdl.jjg.web.controller.pc.shop;
 
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.model.domain.EsGoodsDO;
-import com.shopx.goods.api.model.domain.vo.EsGoodsVO;
-import com.shopx.goods.api.service.IEsGoodsService;
-import com.shopx.member.api.service.IEsMemberCollectionGoodsService;
-import com.shopx.member.api.service.IEsMemberCouponService;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.EsCouponDO;
-import com.shopx.trade.api.model.domain.vo.EsCouponVO;
-import com.shopx.trade.api.service.IEsCouponService;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
+
+import com.jjg.shop.model.domain.EsGoodsDO;
+import com.jjg.shop.model.vo.EsGoodsVO;
+import com.jjg.trade.model.domain.EsCouponDO;
+import com.jjg.trade.model.vo.EsCouponVO;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.IEsCouponService;
+import com.xdl.jjg.web.service.feign.member.MemberCollectionGoodsService;
+import com.xdl.jjg.web.service.feign.member.MemberCouponService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.dubbo.config.annotation.Reference;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import springfox.documentation.annotations.ApiIgnore;
 
-import javax.validation.constraints.NotEmpty;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,17 +36,17 @@ import java.util.stream.Collectors;
 @RequestMapping("/zhuox/homeLogged")
 public class EsHomeLoggedController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsCouponService iEsCouponService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberCollectionGoodsService esMemberCollectionGoodsService;
+    @Autowired
+    private MemberCollectionGoodsService esMemberCollectionGoodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsService esGoodsService;
+    @Autowired
+    private GoodsService esGoodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberCouponService iesMemberCouponService;
+    @Autowired
+    private MemberCouponService iesMemberCouponService;
 
 
     @ApiOperation(value = "商城首页 登录的情况 猜你喜欢列表",response = EsGoodsVO.class)

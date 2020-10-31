@@ -9,12 +9,17 @@ import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.shiro.oath.ShiroKit;
 import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.feign.member.MemberCollectionGoodsService;
+import com.xdl.jjg.web.service.feign.shop.BrandService;
+import com.xdl.jjg.web.service.feign.shop.CategoryService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
+import com.xdl.jjg.web.service.feign.shop.ParameterGroupService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.dubbo.config.annotation.Reference;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -27,23 +32,23 @@ import java.util.stream.Collectors;
 @RequestMapping("/seller/category")
 public class EsCategoryController {
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsCategoryService esCategoryService;
+    @Autowired
+    private CategoryService esCategoryService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsParameterGroupService iEsParameterGroupService;
+    @Autowired
+    private ParameterGroupService iEsParameterGroupService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsCategoryService iEsCategoryService;
+    @Autowired
+    private  CategoryService iEsCategoryService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsBrandService esBrandService;
+    @Autowired
+    private BrandService esBrandService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberCollectionGoodsService esMemberCollectionGoodsService;
+    @Autowired
+    private MemberCollectionGoodsService esMemberCollectionGoodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsService esGoodsService;
+    @Autowired
+    private GoodsService esGoodsService;
 
     @ApiOperation(value = "查询所有分类，父子关系",response = EsCategoryVO.class)
     @ApiImplicitParams({

@@ -1,38 +1,38 @@
 package com.xdl.jjg.web.controller.pc.trade;
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.*;
-import com.shopx.goods.api.model.domain.EsGoodsDO;
-import com.shopx.goods.api.model.domain.cache.EsGoodsSkuCO;
-import com.shopx.goods.api.model.domain.vo.EsGoodsVO;
-import com.shopx.goods.api.model.domain.vo.EsSpecValuesVO;
-import com.shopx.goods.api.service.IEsGoodsService;
-import com.shopx.goods.api.service.IEsGoodsSkuService;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.EsCartNumDO;
-import com.shopx.member.api.model.domain.EsCommercelItemsDO;
-import com.shopx.member.api.model.domain.EsMemberCollectionGoodsDO;
-import com.shopx.member.api.model.domain.dto.EsMemberCollectionGoodsDTO;
-import com.shopx.member.api.service.*;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.EsCouponDO;
-import com.shopx.trade.api.model.domain.vo.*;
-import com.shopx.trade.api.model.enums.PromotionTypeEnum;
-import com.shopx.trade.api.service.IEsCouponService;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.manager.CartManager;
-import com.shopx.trade.web.manager.TradePriceManager;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
-import com.shopx.trade.web.shiro.oath.ShiroUser;
+
+import com.jjg.member.model.domain.EsCartNumDO;
+import com.jjg.member.model.domain.EsCommercelItemsDO;
+import com.jjg.member.model.domain.EsMemberCollectionGoodsDO;
+import com.jjg.member.model.dto.EsMemberCollectionGoodsDTO;
+import com.jjg.shop.model.co.EsGoodsSkuCO;
+import com.jjg.shop.model.domain.EsGoodsDO;
+import com.jjg.shop.model.vo.EsGoodsVO;
+import com.jjg.shop.model.vo.EsSpecValuesVO;
+import com.jjg.trade.model.domain.EsCouponDO;
+import com.jjg.trade.model.enums.PromotionTypeEnum;
+import com.jjg.trade.model.vo.*;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.manager.CartManager;
+import com.xdl.jjg.manager.TradePriceManager;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.util.*;
+import com.xdl.jjg.web.service.IEsCouponService;
+import com.xdl.jjg.web.service.feign.member.*;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsSkuService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +42,6 @@ import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -67,24 +66,24 @@ public class CartController {
     @Autowired
     private TradePriceManager tradePriceManager;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsSearchKeyWordService iEsSearchKeyWordService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsService iEsGoodsService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsSkuService iEsGoodsSkuService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsCommercelItemsService iEsCommercelItemsService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsCartService cartService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
+    private SearchKeyWordService iEsSearchKeyWordService;
+    @Autowired
+    private GoodsService iEsGoodsService;
+    @Autowired
+    private GoodsSkuService iEsGoodsSkuService;
+    @Autowired
+    private CommercelItemsService iEsCommercelItemsService;
+    @Autowired
+    private CartService cartService;
+    @Autowired
     private IEsCouponService iEsCouponService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberCouponService iesMemberCouponService;
-    @Reference(version = "${dubbo.application.version}", timeout = 10000, check = false)
-    private IEsMemberCollectionGoodsService memberCollectionGoodsService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsService goodsService;
+    @Autowired
+    private MemberCouponService iesMemberCouponService;
+    @Autowired
+    private MemberCollectionGoodsService memberCollectionGoodsService;
+    @Autowired
+    private GoodsService goodsService;
 
 
 
@@ -622,7 +621,7 @@ public class CartController {
         try {
             Long memberId = ShiroKit.getUser().getId();
             if (null == memberId) {
-                return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+                return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
             }
             CartItemsVO cartItemsVO1 = new CartItemsVO();
             DubboResult<EsGoodsSkuCO> goodsSku = iEsGoodsSkuService.getGoodsSku(skuId);
@@ -653,7 +652,7 @@ public class CartController {
     public ApiResponse insertGoods(@PathVariable("goodsId") Long goodsId){
         Long userId = ShiroKit.getUser().getId();
         if (null == userId) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         EsMemberCollectionGoodsDTO esMemberCollectionGoodsDTO = new EsMemberCollectionGoodsDTO();
         esMemberCollectionGoodsDTO.setGoodsId(goodsId);

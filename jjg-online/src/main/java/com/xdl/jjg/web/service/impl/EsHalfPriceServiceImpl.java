@@ -74,7 +74,7 @@ public class EsHalfPriceServiceImpl extends ServiceImpl<EsHalfPriceMapper, EsHal
 
     @Autowired
     private JedisCluster jedisCluster;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
 
     @Value("${xxl.job.admin.addresses}")
     private String addresses;

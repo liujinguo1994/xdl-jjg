@@ -1,27 +1,27 @@
 package com.xdl.jjg.web.controller.pc.member;
 
-import com.shopx.common.model.result.ApiPageResponse;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.util.FormatValidateUtils;
-import com.shopx.goods.api.model.domain.vo.EsGoodsVO;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.EsMemberAddressDO;
-import com.shopx.member.api.model.domain.EsMemberDO;
-import com.shopx.member.api.model.domain.dto.EsMemberAddressDTO;
-import com.shopx.member.api.model.domain.vo.EsMemberAddressVO;
-import com.shopx.member.api.service.IEsMemberAddressService;
-import com.shopx.member.api.service.IEsMemberService;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.request.EsMemberAddressForm;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
+import com.jjg.member.model.domain.EsMemberAddressDO;
+import com.jjg.member.model.domain.EsMemberDO;
+import com.jjg.member.model.dto.EsMemberAddressDTO;
+import com.jjg.member.model.vo.EsMemberAddressVO;
+import com.jjg.shop.model.vo.EsGoodsVO;
+import com.jjg.trade.model.form.EsMemberAddressForm;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.MemberErrorCode;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.FormatValidateUtils;
+import com.xdl.jjg.web.service.feign.member.MemberAddressService;
+import com.xdl.jjg.web.service.feign.member.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -39,11 +39,11 @@ import java.util.List;
 @RestController
 public class MemberController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberAddressService memberAddressService;
+    @Autowired
+    private MemberAddressService memberAddressService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberService memberService;
+    @Autowired
+    private MemberService memberService;
 
     @GetMapping("/addresses")
     @ResponseBody
@@ -53,7 +53,7 @@ public class MemberController {
         Long memberId = ShiroKit.getUser().getId();
         DubboPageResult result = this.memberAddressService.getMemberAddressListByMemberId(memberId);
         if (result.isSuccess()) {
-            List<EsMemberAddressVO > memberAddressList  = BeanUtil.copyList(result.getData().getList(),
+            List<EsMemberAddressVO> memberAddressList  = BeanUtil.copyList(result.getData().getList(),
                     EsMemberAddressVO.class);
             return ApiPageResponse.pageSuccess(result.getData().getTotal(), memberAddressList);
         } else {

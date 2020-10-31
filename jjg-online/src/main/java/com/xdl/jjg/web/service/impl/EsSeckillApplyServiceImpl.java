@@ -91,7 +91,7 @@ public class EsSeckillApplyServiceImpl extends ServiceImpl<EsSeckillApplyMapper,
 
     @Autowired
     private IEsSeckillRangeService iEsSeckillRangeService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private GoodsService esGoodsService;
 
     /**

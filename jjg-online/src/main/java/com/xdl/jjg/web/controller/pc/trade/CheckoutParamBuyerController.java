@@ -1,30 +1,31 @@
 package com.xdl.jjg.web.controller.pc.trade;
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.util.MathUtil;
-import com.shopx.common.util.StringUtil;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.vo.CheckoutParamVO;
-import com.shopx.trade.api.model.domain.vo.PriceDetailVO;
-import com.shopx.trade.api.model.domain.vo.ReceiptVO;
-import com.shopx.trade.api.model.enums.PaymentTypeEnum;
-import com.shopx.trade.api.model.enums.ReceiptTypeEnum;
-import com.shopx.trade.web.manager.CartManager;
-import com.shopx.trade.web.manager.CheckoutParamManager;
-import com.shopx.trade.web.manager.TradePriceManager;
-import com.shopx.trade.web.request.DeliveryMessageForm;
+
+import com.jjg.trade.model.enums.PaymentTypeEnum;
+import com.jjg.trade.model.enums.ReceiptTypeEnum;
+import com.jjg.trade.model.form.DeliveryMessageForm;
+import com.jjg.trade.model.vo.CheckoutParamVO;
+import com.jjg.trade.model.vo.PriceDetailVO;
+import com.jjg.trade.model.vo.ReceiptVO;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.manager.CartManager;
+import com.xdl.jjg.manager.CheckoutParamManager;
+import com.xdl.jjg.manager.TradePriceManager;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.util.MathUtil;
+import com.xdl.jjg.util.StringUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.Map;
 

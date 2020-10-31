@@ -1,26 +1,27 @@
 package com.xdl.jjg.web.controller.pc.system;
 
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.web.BaseController;
-import com.shopx.trade.api.model.domain.EsPaymentBillDO;
-import com.shopx.trade.api.model.domain.dto.EsPaymentBillDTO;
-import com.shopx.trade.api.model.domain.vo.EsPaymentBillVO;
-import com.shopx.trade.api.service.IEsPaymentBillService;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.request.EsPaymentBillForm;
+
+import com.jjg.trade.model.domain.EsPaymentBillDO;
+import com.jjg.trade.model.dto.EsPaymentBillDTO;
+import com.jjg.trade.model.form.EsPaymentBillForm;
+import com.jjg.trade.model.vo.EsPaymentBillVO;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.IEsPaymentBillService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.config.annotation.Reference;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
-import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

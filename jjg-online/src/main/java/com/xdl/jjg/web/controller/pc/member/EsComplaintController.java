@@ -1,30 +1,35 @@
 package com.xdl.jjg.web.controller.pc.member;
 
-import com.shopx.common.model.result.ApiPageResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.web.BaseController;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.EsComplaintBuyerOrderItemsDO;
-import com.shopx.member.api.model.domain.EsComplaintOrderDO;
-import com.shopx.member.api.model.domain.dto.EsComplaintDTO;
-import com.shopx.member.api.model.domain.dto.EsComrImglDTO;
-import com.shopx.member.api.model.domain.vo.EsComplaintBuyerOrderItemsVO;
-import com.shopx.member.api.model.domain.vo.EsComplaintOrderVO;
-import com.shopx.member.api.model.domain.vo.EsComplaintVO;
-import com.shopx.member.api.service.IEsComplaintService;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.request.EsComplaintForm;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
-import com.shopx.trade.web.shiro.oath.ShiroUser;
-import io.swagger.annotations.*;
+
+import com.jjg.member.model.domain.EsComplaintBuyerOrderItemsDO;
+import com.jjg.member.model.domain.EsComplaintOrderDO;
+import com.jjg.member.model.dto.EsComplaintDTO;
+import com.jjg.member.model.dto.EsComrImglDTO;
+import com.jjg.member.model.vo.EsComplaintBuyerOrderItemsVO;
+import com.jjg.member.model.vo.EsComplaintOrderVO;
+import com.jjg.member.model.vo.EsComplaintVO;
+import com.jjg.trade.model.form.EsComplaintForm;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.feign.member.ComplaintService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
+import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -43,15 +48,15 @@ import java.util.stream.Collectors;
 @RequestMapping("/complaint")
 public class EsComplaintController extends BaseController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsComplaintService complaintService;
+    @Autowired
+    private ComplaintService complaintService;
 
     @PostMapping
     @ApiOperation(value = "新增投诉信息", notes = "新增投诉信息")
     public ApiResponse addComplaint(@Valid EsComplaintForm complaintForm) {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         EsComplaintDTO complaintDTO = new EsComplaintDTO();
@@ -121,7 +126,7 @@ public class EsComplaintController extends BaseController {
                                                           @NotEmpty(message = "页码不能为空") int pageNum) {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         DubboPageResult result = complaintService.getComplaintListBuyerPage(userId, pageSize, pageNum);

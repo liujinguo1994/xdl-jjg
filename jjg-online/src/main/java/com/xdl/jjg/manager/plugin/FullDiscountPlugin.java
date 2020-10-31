@@ -35,13 +35,13 @@ import java.util.stream.Collectors;
 public class FullDiscountPlugin implements PromotionEvent {
     private static Logger logger = LoggerFactory.getLogger(FullDiscountPlugin.class);
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private IEsFullDiscountService fullDiscountService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private IEsFullDiscountGiftService fullDiscountGiftService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private IEsCouponService couponService;
 
     @Override

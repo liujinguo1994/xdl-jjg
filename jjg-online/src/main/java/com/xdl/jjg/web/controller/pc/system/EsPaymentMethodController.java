@@ -1,11 +1,12 @@
 package com.xdl.jjg.web.controller.pc.system;
 
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.web.BaseController;
-import com.shopx.trade.api.model.domain.dto.EsPaymentMethodDTO;
-import com.shopx.trade.api.service.IEsPaymentMethodService;
+
+import com.jjg.trade.model.dto.EsPaymentMethodDTO;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.IEsPaymentMethodService;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.*;
 

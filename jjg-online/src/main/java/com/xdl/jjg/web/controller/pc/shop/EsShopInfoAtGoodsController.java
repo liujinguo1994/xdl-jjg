@@ -1,30 +1,34 @@
 package com.xdl.jjg.web.controller.pc.shop;
 
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.goods.api.model.domain.EsGoodsDO;
-import com.shopx.goods.api.model.domain.vo.EsSearchGoodsVO;
-import com.shopx.goods.api.service.IEsGoodsParamsService;
-import com.shopx.goods.api.service.IEsTagGoodsService;
-import com.shopx.member.api.model.domain.*;
-import com.shopx.member.api.model.domain.cache.EsCustomCO;
-import com.shopx.member.api.model.domain.vo.EsMemberGoodsVO;
-import com.shopx.member.api.model.domain.vo.EsShopDetailVO;
-import com.shopx.member.api.model.domain.vo.EsShopVO;
-import com.shopx.member.api.service.IEsCustomService;
-import com.shopx.member.api.service.IEsShopService;
-import com.shopx.trade.api.model.domain.EsCouponDO;
-import com.shopx.trade.api.model.domain.vo.EsCouponVO;
-import com.shopx.trade.api.service.IEsCouponService;
-import com.shopx.trade.web.constant.ApiStatus;
+
+import com.jjg.member.model.cache.EsCustomCO;
+import com.jjg.member.model.domain.EsMemberGoodsDO;
+import com.jjg.member.model.domain.EsShopAndDetailDO;
+import com.jjg.member.model.domain.EsShopDO;
+import com.jjg.member.model.domain.EsShopDetailDO;
+import com.jjg.member.model.vo.EsMemberGoodsVO;
+import com.jjg.member.model.vo.EsShopDetailVO;
+import com.jjg.member.model.vo.EsShopVO;
+import com.jjg.shop.model.domain.EsGoodsDO;
+import com.jjg.shop.model.vo.EsSearchGoodsVO;
+import com.jjg.trade.model.domain.EsCouponDO;
+import com.jjg.trade.model.vo.EsCouponVO;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.service.IEsCouponService;
+import com.xdl.jjg.web.service.feign.member.CustomService;
+import com.xdl.jjg.web.service.feign.shop.GoodsParamsService;
+import com.xdl.jjg.web.service.feign.shop.ShopService;
+import com.xdl.jjg.web.service.feign.shop.TagGoodsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
@@ -44,20 +48,20 @@ import java.util.List;
 @RequestMapping("/zhuox/goods/shop")
 public class EsShopInfoAtGoodsController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsCustomService customService;
+    @Autowired
+    private CustomService customService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsShopService shopService;
+    @Autowired
+    private ShopService shopService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsTagGoodsService iEsTagGoodsService;
+    @Autowired
+    private TagGoodsService iEsTagGoodsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsCouponService iEsCouponService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsGoodsParamsService iEsGoodsParamsService;
+    @Autowired
+    private GoodsParamsService iEsGoodsParamsService;
 
 
     @ApiOperation(value = "查询所有分类及子分类树形结构", notes = "查询所有分类及子分类树形结构")
@@ -191,7 +195,7 @@ public class EsShopInfoAtGoodsController {
 //    public ApiResponse getMemberCollectionShopListNew(EsCollectShopQueryForm form) {
 //        ShiroUser user = ShiroKit.getUser();
 //        if (null == user) {
-//            return ApiPageResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+//            return ApiPageResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
 //        }
 //        Long memberId = user.getId();
 //        EsQueryCollectShopDTO dto = new EsQueryCollectShopDTO();

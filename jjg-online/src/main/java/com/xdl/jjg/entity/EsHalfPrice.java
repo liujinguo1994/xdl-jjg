@@ -3,7 +3,7 @@ package com.xdl.jjg.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.shopx.trade.api.model.domain.dto.EsPromotionGoodsDTO;
+import com.jjg.trade.model.dto.EsPromotionGoodsDTO;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

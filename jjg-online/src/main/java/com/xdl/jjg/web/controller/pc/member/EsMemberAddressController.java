@@ -1,32 +1,32 @@
 package com.xdl.jjg.web.controller.pc.member;
 
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.util.FormatValidateUtils;
-import com.shopx.common.web.BaseController;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.EsMemberAddressDO;
-import com.shopx.member.api.model.domain.dto.EsMemberAddressDTO;
-import com.shopx.member.api.model.domain.vo.EsMemberAddressVO;
-import com.shopx.member.api.service.IEsMemberAddressService;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.manager.CheckoutParamManager;
-import com.shopx.trade.web.request.EsMemberAddressForm;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
-import com.shopx.trade.web.shiro.oath.ShiroUser;
+
+import com.jjg.member.model.domain.EsMemberAddressDO;
+import com.jjg.member.model.dto.EsMemberAddressDTO;
+import com.jjg.member.model.vo.EsMemberAddressVO;
+import com.jjg.trade.model.form.EsMemberAddressForm;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.manager.CheckoutParamManager;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.FormatValidateUtils;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.feign.member.MemberAddressService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -44,8 +44,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/esMemberAddress")
 public class EsMemberAddressController extends BaseController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberAddressService iesMemberAddressService;
+    @Autowired
+    private MemberAddressService iesMemberAddressService;
     @Autowired
     private CheckoutParamManager checkoutParamManager;
 
@@ -107,7 +107,7 @@ public class EsMemberAddressController extends BaseController {
         //验证用户手机号
         Boolean judgeMobile = FormatValidateUtils.isMobile(esMemberAddressForm.getMobile());
         if (!judgeMobile) {
-            return ApiResponse.fail(MemberErrorCode.FORM_IS_ERROR.getErrorCode(), MemberErrorCode.FORM_IS_ERROR.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.PARAM_ERROR.getErrorCode(), TradeErrorCode.PARAM_ERROR.getErrorMsg());
         }
         EsMemberAddressDTO esMemberAddressDTO = new EsMemberAddressDTO();
         Long userId = ShiroKit.getUser().getId();
@@ -127,7 +127,7 @@ public class EsMemberAddressController extends BaseController {
         //验证用户手机号
         Boolean judgeMobile = FormatValidateUtils.isMobile(esMemberAddressForm.getMobile());
         if (!judgeMobile) {
-            return ApiResponse.fail(MemberErrorCode.FORM_IS_ERROR.getErrorCode(), "手机号格式有误");
+            return ApiResponse.fail(TradeErrorCode.PARAM_ERROR.getErrorCode(), "手机号格式有误");
         }
         EsMemberAddressDTO esMemberAddressDTO = new EsMemberAddressDTO();
         BeanUtil.copyProperties(esMemberAddressForm, esMemberAddressDTO);
@@ -185,7 +185,7 @@ public class EsMemberAddressController extends BaseController {
         //获取当前用户id
         ShiroUser user = ShiroKit.getUser();
         if(user == null){
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         //获取当前用户id

@@ -1,27 +1,27 @@
 package com.xdl.jjg.web.controller.pc.shop;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.roketmq.MQProducer;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.common.web.BaseController;
-import com.shopx.goods.api.model.domain.cache.EsGoodsCO;
-import com.shopx.goods.api.service.IEsGoodsService;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.EsMyFootprintDO;
-import com.shopx.member.api.model.domain.dto.EsMyFootprintDTO;
-import com.shopx.member.api.model.domain.vo.EsMyFootprintVO;
-import com.shopx.member.api.service.IEsMyFootprintService;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.request.EsMyFootprintForm;
-import com.shopx.trade.web.request.query.EsMyFootprintQueryForm;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
-import com.shopx.trade.web.shiro.oath.ShiroUser;
+import com.jjg.member.model.domain.EsMyFootprintDO;
+import com.jjg.member.model.dto.EsMyFootprintDTO;
+import com.jjg.member.model.vo.EsMyFootprintVO;
+import com.jjg.shop.model.co.EsGoodsCO;
+import com.jjg.trade.model.form.EsMyFootprintForm;
+import com.jjg.trade.model.form.query.EsMyFootprintQueryForm;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.MemberErrorCode;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.roketmq.MQProducer;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.feign.member.MyFootprintService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
 import io.swagger.annotations.*;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
@@ -44,13 +44,15 @@ import java.util.stream.Collectors;
 @RequestMapping("/myFootprint")
 public class EsMyFootprintController extends BaseController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 10000)
-    private IEsMyFootprintService myFootprintService;
-    @Reference(version = "${dubbo.application.version}", timeout = 10000)
-    private IEsGoodsService goodsService;
+    @Autowired
+    private MyFootprintService myFootprintService;
+
+    @Autowired
+    private GoodsService goodsService;
 
     @Autowired
     private MQProducer mqProducer;
+
     @Value("${rocketmq.member.footprint.topic}")
     private String member_footprint_topic;
 
@@ -60,7 +62,7 @@ public class EsMyFootprintController extends BaseController {
     public ApiResponse getMyFootList(@Valid EsMyFootprintQueryForm myFootprintQueryForm) {
         Long userId = ShiroKit.getUser().getId();
         if (null == userId) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         myFootprintQueryForm.setMemberId(userId);
         if(myFootprintQueryForm == null){
@@ -116,7 +118,7 @@ public class EsMyFootprintController extends BaseController {
 //    public ApiResponse getMyFoot(@NotEmpty int pageNum, @NotEmpty int pageSize) {
 //        ShiroUser user = ShiroKit.getUser();
 //        if (null == user) {
-//            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+//            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
 //        }
 //        Long userId = user.getId();
 //        DubboPageResult<EsMyFootprintDO> result = myFootprintService.getMyFootprintList(pageSize, pageNum,userId);
@@ -144,7 +146,7 @@ public class EsMyFootprintController extends BaseController {
     public ApiResponse deleteMyFoot(@PathVariable("viewTime") String viewTime) {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         DubboResult result = myFootprintService.deleteMyFoot(userId,viewTime);
@@ -163,7 +165,7 @@ public class EsMyFootprintController extends BaseController {
     public ApiResponse deleteMyFoot(@PathVariable("id") Long id) {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         DubboResult result = myFootprintService.deleteMyFootById(id);
         if (result.isSuccess()) {
@@ -181,7 +183,7 @@ public class EsMyFootprintController extends BaseController {
     public ApiResponse getTopMyFoot(@PathVariable("shopId") Long shopId) {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         if(null == shopId){
@@ -200,7 +202,7 @@ public class EsMyFootprintController extends BaseController {
     public ApiResponse insertMyFootprint(@RequestBody @ApiParam(name = "myFootprintForm",value = "足迹对象",required = true) @Valid EsMyFootprintForm myFootprintForm) {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         if(null == myFootprintForm){

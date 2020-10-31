@@ -1,18 +1,19 @@
 package com.xdl.jjg.web.controller.pc.shop;
 
-import com.shopx.common.model.result.ApiPageResponse;
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.common.web.BaseController;
-import com.shopx.system.api.model.domain.EsSettingsDO;
-import com.shopx.system.api.model.enums.SettingGroup;
-import com.shopx.system.api.service.IEsSettingsService;
-import com.shopx.trade.api.model.domain.vo.SiteSettingVO;
-import com.shopx.trade.web.constant.ApiStatus;
+
+import com.jjg.system.model.domain.EsSettingsDO;
+import com.jjg.system.model.enums.SettingGroup;
+import com.jjg.trade.model.vo.SiteSettingVO;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiPageResponse;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.feign.system.SettingsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -32,8 +33,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/siteShow")
 public class EsSiteShowBaseController extends BaseController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsSettingsService settingManager;
+    @Autowired
+    private SettingsService settingManager;
 
 
 

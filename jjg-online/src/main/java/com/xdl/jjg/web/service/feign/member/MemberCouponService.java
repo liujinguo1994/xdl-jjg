@@ -1,13 +1,22 @@
 package com.xdl.jjg.web.service.feign.member;
 
+import com.jjg.member.model.domain.EsAdminMemberCouponDO;
 import com.jjg.member.model.domain.EsMemberCouponDO;
+import com.jjg.member.model.domain.EsSellerMemberCouponDO;
+import com.jjg.member.model.domain.EsTradeCouponDO;
 import com.jjg.member.model.dto.EsMemberCouponDTO;
+import com.jjg.member.model.dto.QuerySellerCouponDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 
 import java.util.List;
+import java.util.Map;
 
 public interface MemberCouponService {
+
+    DubboResult updateMemberCouponIsNotCheck(EsMemberCouponDTO memberCouponDTO);
+
+    DubboResult updateMemberCouponIsCheck(EsMemberCouponDTO memberCouponDTO);
 
     /**
      * @Author xiaoLin
@@ -18,6 +27,17 @@ public interface MemberCouponService {
     DubboResult getMemberWhetherCouponIds(Long memberId, List<Long> couponIdList);
 
     /**
+     * @Description: 通过店铺以及店铺的价格活动符合条件的优惠券
+     * @Author       LiuJG 344009799@qq.com
+     * @Date         2020/6/16 15:43
+     * @param
+     * @return       com.shopx.common.model.result.DubboResult
+     * @exception
+     *
+     */
+    DubboResult getMemberCouponInOrder(Long memberId, Map<Long, Double> shopIdPrice);
+
+    /**
      * 根据优惠券id和会员id查询优惠券列表
      * @auther: lins 1220316142@qq.com
      * @date: 2019/06/03 13:42:53
@@ -25,6 +45,8 @@ public interface MemberCouponService {
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberCouponDO>
      */
     DubboPageResult<EsMemberCouponDO> getByMemberIdAndCouponIdList(EsMemberCouponDTO memberCouponDTO);
+
+    DubboResult updateIsCheckByMemberIdAndShopId(Long memberId, List<Long> shopIdList);
 
     /**
      * 根据查询后台管理优惠券列表
@@ -67,6 +89,64 @@ public interface MemberCouponService {
      * app端查询优惠券领取数量
      */
     DubboResult<Integer> getCouponCount(Long memberId, Long couponId);
+
+
+    /**
+     * 买家-根据查询条件查询后台会员列表
+     * @auther: 下xl 1220316142@qq.com
+     * @date: 2019/06/03 13:42:53
+     * @return: com.shopx.common.model.result.DubboPageResult<EsMemberCouponDO>
+     */
+    DubboResult<EsAdminMemberCouponDO> getBuyerMemberCouponList(Long memberId);
+
+    /**
+     * 买家-根据查询条件查询后台会员列表
+     * @auther: 下xl 1220316142@qq.com
+     * @date: 2019/06/03 13:42:53
+     * @return: com.shopx.common.model.result.DubboPageResult<EsMemberCouponDO>
+     */
+    DubboResult<EsAdminMemberCouponDO> getBuyerMemberCouponNumList(Long memberId);
+
+    /**
+     * 根据查询条件查询卖家会员列表
+     * @auther: lins 1220316142@qq.com
+     * @date: 2019/06/03 13:42:53
+     * @param querySellerCouponDTO  会员优惠券DTO
+     * @param pageSize  行数
+     * @param pageNum   页码
+     * @return: com.shopx.common.model.result.DubboPageResult<EsMemberCouponDO>
+     */
+    DubboPageResult<EsSellerMemberCouponDO> getSellerMemberCouponList(QuerySellerCouponDTO querySellerCouponDTO, int pageSize, int pageNum);
+
+    /**
+     * 根据查询推荐优惠券列表
+     * @auther: lins 1220316142@qq.com
+     * @date: 2019/06/03 13:42:53
+     * @param memberId  会员ID
+     * @param pageSize  行数
+     * @param pageNum   页码
+     * @return: com.shopx.common.model.result.DubboPageResult<EsMemberCouponDO>
+     */
+    DubboPageResult<EsTradeCouponDO> getMemberCouponRecommendList(Long memberId, int pageSize, int pageNum);
+
+
+    /**
+     * 统计已领取优惠券数目
+     * @return
+     */
+    DubboResult<Integer> getCouponNum(Long memberId);
+
+
+    /**
+     * 查询该优惠券是否已领取
+     * @param memberId
+     * @param couponId
+     * @return
+     */
+    DubboResult<Integer> getCouponNum(Long memberId, Long couponId);
+
+
+
 
 
 }

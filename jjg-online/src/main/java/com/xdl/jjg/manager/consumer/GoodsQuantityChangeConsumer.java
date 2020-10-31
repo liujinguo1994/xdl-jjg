@@ -53,13 +53,13 @@ public class GoodsQuantityChangeConsumer implements TradeIntoDbEvent {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private IEsGoodsSkuQuantityService iEsGoodsSkuQuantityService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsOrderService iEsOrderService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsOrderChangeService iEsOrderChangeService;
     @Autowired
     private MQProducer mqProducer;
@@ -76,12 +76,12 @@ public class GoodsQuantityChangeConsumer implements TradeIntoDbEvent {
     @Autowired
     private TransactionProducer transactionProducer;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsFullDiscountGiftService iEsFullDiscountGiftService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsSeckillService iEsSeckillService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsGoodsService iEsGoodsService;
 
     /**

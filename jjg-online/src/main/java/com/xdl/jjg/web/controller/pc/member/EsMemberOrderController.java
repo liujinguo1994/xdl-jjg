@@ -7,25 +7,30 @@ import com.jjg.system.model.enums.SettingGroup;
 import com.jjg.trade.model.domain.EsBuyerOrderDO;
 import com.jjg.trade.model.domain.EsOrderDO;
 import com.jjg.trade.model.dto.EsBuyerOrderQueryDTO;
+import com.jjg.trade.model.enums.OrderStatusEnum;
 import com.jjg.trade.model.enums.OrderStatusEnum1;
 import com.jjg.trade.model.enums.ServiceStatusEnum;
+import com.jjg.trade.model.form.query.EsOrderQueryForm;
+import com.jjg.trade.model.vo.EsOrderSettingVO;
 import com.jjg.trade.model.vo.EsOrderVO;
-import com.jjg.operateChecker.OrderOperateAllowable;
+import com.jjg.trade.orderCheck.OrderOperateAllowable;
 import com.xdl.jjg.constant.ApiStatus;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.web.controller.BaseController;
 import com.xdl.jjg.web.service.IEsOrderService;
 import com.xdl.jjg.web.service.IEsTradeService;
+import com.xdl.jjg.web.service.feign.system.SettingsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.dubbo.config.annotation.Reference;
 import org.hibernate.validator.constraints.NotEmpty;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -49,12 +54,12 @@ import java.util.stream.Collectors;
 @RequestMapping("/esOrder")
 public class EsMemberOrderController extends BaseController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsOrderService iEsOrderService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsTradeService iEsTradeService;
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsSettingsService iEsSettingsService;
+    @Autowired
+    private SettingsService iEsSettingsService;
 
 
     @ApiOperation(value = "查询会员订单列表(已付款、已发货、待评价)", notes = "查询会员订单列表(已付款、已发货、待评价)")

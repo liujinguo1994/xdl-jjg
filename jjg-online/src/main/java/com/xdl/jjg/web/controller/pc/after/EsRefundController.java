@@ -1,28 +1,29 @@
 package com.xdl.jjg.web.controller.pc.after;
 
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboPageResult;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.web.BaseController;
-import com.shopx.trade.api.model.domain.EsRefundDO;
-import com.shopx.trade.api.model.domain.dto.EsReFundQueryDTO;
-import com.shopx.trade.api.model.domain.dto.EsRefundDTO;
-import com.shopx.trade.api.model.domain.vo.AfterSaleTypeVO;
-import com.shopx.trade.api.model.domain.vo.EsRefundVO;
-import com.shopx.trade.api.service.IEsRefundService;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.request.EsRefundForm;
+
+import com.jjg.trade.model.domain.EsRefundDO;
+import com.jjg.trade.model.dto.EsReFundQueryDTO;
+import com.jjg.trade.model.dto.EsRefundDTO;
+import com.jjg.trade.model.form.EsRefundForm;
+import com.jjg.trade.model.vo.AfterSaleTypeVO;
+import com.jjg.trade.model.vo.EsRefundVO;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.response.service.DubboPageResult;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.IEsRefundService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.config.annotation.Reference;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 import springfox.documentation.annotations.ApiIgnore;
 
-import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;

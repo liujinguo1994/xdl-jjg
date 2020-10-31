@@ -25,8 +25,12 @@ import com.xdl.jjg.shiro.oath.ShiroUser;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.util.SnowflakeIdWorker;
 import com.xdl.jjg.web.service.*;
+import com.xdl.jjg.web.service.feign.member.CompanyService;
+import com.xdl.jjg.web.service.feign.member.MemberAddressService;
+import com.xdl.jjg.web.service.feign.member.MemberService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsSkuService;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -55,35 +59,36 @@ public class TradeManager {
 
 //    @Reference(version = "${dubbo.application.version}",timeout = 5000)
 
-    @Reference(version = "${dubbo.application.version}",interfaceClass = IEsTradeService.class, retries = 3, timeout = 5000, parameters = {
-            "insertEsTradeIntoDB.retries", "0", "insertEsTradeIntoDB.timeout", "5000"})
+//    @Reference(version = "${dubbo.application.version}",interfaceClass = IEsTradeService.class, retries = 3, timeout = 5000, parameters = {
+//            "insertEsTradeIntoDB.retries", "0", "insertEsTradeIntoDB.timeout", "5000"})
+    @Autowired
     private IEsTradeService iesTradeService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsGoodsService iesGoodsService;
+    @Autowired
+    private GoodsService iesGoodsService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
+    @Autowired
     private IEsPromotionGoodsService iEsPromotionGoodsService;
 
-    @Reference(version = "${dubbo.application.version}",timeout = 5000)
-    private IEsGoodsSkuService iEsGoodsSkuService;
+    @Autowired
+    private GoodsSkuService iEsGoodsSkuService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberAddressService memberAddressService;
+    @Autowired
+    private MemberAddressService memberAddressService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberService memberService;
+    @Autowired
+    private MemberService memberService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsCompanyService companyService;
+    @Autowired
+    private CompanyService companyService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsDeliveryServiceService esDeliveryServiceService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsShipCompanyDetailsService shipCompanyDetailsService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private IEsSeckillApplyService esSeckillApplyService;
 
     @Autowired

@@ -3,11 +3,12 @@ package com.xdl.jjg.web.controller.pc.shop;
 import com.jjg.system.model.domain.EsPageDO;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.web.service.feign.system.PageService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +27,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(description = "楼层相关API")
 public class PageDataBuyerController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsPageService pageService;
+    @Autowired
+    private PageService pageService;
 
     @GetMapping(value = "/{client_type}/{page_type}")
     @ApiOperation(value = "查询楼层数据")

@@ -59,10 +59,10 @@ public class EsSupplierBillDetailServiceImpl extends ServiceImpl<EsSupplierBillD
     @Autowired
     private EsBillDetailMapper esBillDetailMapper;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private MemberService memberService;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private CompanyService companyService;
     /**
      * 插入数据

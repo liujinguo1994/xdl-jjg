@@ -44,7 +44,7 @@ public class EsTradeIntodbServiceImpl implements IEsTradeIntodbService {
 
     public static final SnowflakeIdWorker snowflakeIdWorker = new SnowflakeIdWorker(0,0);
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
+    @Autowired
     private GoodsSkuService esGoodsSkuService;
     @Autowired
     private EsTradeMapper esTradeMapper;

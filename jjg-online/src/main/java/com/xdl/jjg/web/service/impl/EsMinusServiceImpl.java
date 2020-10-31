@@ -84,7 +84,7 @@ public class EsMinusServiceImpl extends ServiceImpl<EsMinusMapper, EsMinus> impl
     @Value("${xxl.job.admin.addresses}")
     private String addresses;
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
+    @Autowired
     private GoodsSkuService esGoodsSkuService;
     /**
      * 插入数据

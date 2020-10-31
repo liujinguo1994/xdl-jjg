@@ -1,12 +1,14 @@
 package com.jjg.trade.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.jjg.shop.model.co.*;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * <p>
@@ -34,11 +36,6 @@ public class EsPromotionGoodsVO implements Serializable {
      */
 	@ApiModelProperty(value = "商品id")
 	private Long goodsId;
-	/**
-	 * 商品id
-	 */
-	@ApiModelProperty(value = "SkuId")
-	private Long skuId;
     /**
      * 活动开始时间
      */
@@ -64,6 +61,12 @@ public class EsPromotionGoodsVO implements Serializable {
      */
 	@ApiModelProperty(value = "活动标题")
 	private String title;
+
+	/**
+	 * 活动名称
+	 */
+	@ApiModelProperty(value = "名称")
+	private String  name;
     /**
      * 参与活动的商品数量
      */
@@ -73,18 +76,32 @@ public class EsPromotionGoodsVO implements Serializable {
      * 活动时商品的价格
      */
 	@ApiModelProperty(value = "活动时商品的价格")
-	private Double price;
+	private BigDecimal price;
     /**
      * 商家ID
      */
 	@ApiModelProperty(value = "商家ID")
 	private Long shopId;
+	//单品立减 活动VO
+	@ApiModelProperty(value = "单品立减 活动VO")
+	private EsMinusCO esMinusCO;
+	// 商品折扣活动VO
+	@ApiModelProperty(value = "商品折扣活动VO")
+	private EsGoodsDiscountCO esGoodsDiscountCO;
+	// 满减满赠VO
+	@ApiModelProperty(value = "满减满赠VO")
+	private EsFullDiscountCO esFullDiscountCO;
+	// 第二件半价活动VO
+	@ApiModelProperty(value = "第二件半价活动VO")
+	private EsHalfPriceCO esHalfPriceCO;
+	// 秒杀商品
+	@ApiModelProperty(value = "秒杀商品")
+	private EsSeckillGoodsCO seckillGoodsCO;
+	// 企业用户
+	@ApiModelProperty(value = "企业用户折扣")
+	private EsDiscountCO esDiscountCO;
 
-	/**
-	 * 是否下架 0.没有下架，1 下架
-	 */
-	@ApiModelProperty(value = "活动是否下架 0.没有下架，1 下架")
-	private Integer isLowerShelf;
+
 
 	protected Serializable pkVal() {
 		return this.id;

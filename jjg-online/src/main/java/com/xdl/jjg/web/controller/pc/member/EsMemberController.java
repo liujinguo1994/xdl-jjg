@@ -1,25 +1,27 @@
 package com.xdl.jjg.web.controller.pc.member;
 
-import com.shopx.common.model.result.ApiResponse;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.oss.upload.OSSUploader;
-import com.shopx.common.util.BeanUtil;
-import com.shopx.common.web.BaseController;
-import com.shopx.member.api.constant.MemberErrorCode;
-import com.shopx.member.api.model.domain.EsMemberDO;
-import com.shopx.member.api.model.domain.dto.EsMemberDTO;
-import com.shopx.member.api.model.domain.vo.EsCompanyVO;
-import com.shopx.member.api.model.domain.vo.EsMemberVO;
-import com.shopx.member.api.service.IEsCompanyService;
-import com.shopx.member.api.service.IEsMemberLevelConfigService;
-import com.shopx.member.api.service.IEsMemberService;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.vo.EsCheckPasswordVO;
-import com.shopx.trade.api.service.IEsOrderService;
-import com.shopx.trade.web.constant.ApiStatus;
-import com.shopx.trade.web.request.*;
-import com.shopx.trade.web.shiro.oath.ShiroKit;
-import com.shopx.trade.web.shiro.oath.ShiroUser;
+import com.jjg.member.model.domain.EsMemberDO;
+import com.jjg.member.model.dto.EsMemberDTO;
+import com.jjg.member.model.vo.EsCompanyVO;
+import com.jjg.member.model.vo.EsMemberVO;
+import com.jjg.trade.model.form.EsBindMobileForm;
+import com.jjg.trade.model.form.EsEditPersonInfoForm;
+import com.jjg.trade.model.form.EsPassWordForm;
+import com.jjg.trade.model.form.MemberCheckForm;
+import com.jjg.trade.model.vo.EsCheckPasswordVO;
+import com.xdl.jjg.constant.ApiStatus;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.oss.upload.OSSUploader;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.response.web.ApiResponse;
+import com.xdl.jjg.shiro.oath.ShiroKit;
+import com.xdl.jjg.shiro.oath.ShiroUser;
+import com.xdl.jjg.util.BeanUtil;
+import com.xdl.jjg.web.controller.BaseController;
+import com.xdl.jjg.web.service.IEsOrderService;
+import com.xdl.jjg.web.service.feign.member.CompanyService;
+import com.xdl.jjg.web.service.feign.member.MemberLevelConfigService;
+import com.xdl.jjg.web.service.feign.member.MemberService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -46,14 +48,14 @@ import javax.validation.Valid;
 @RequestMapping("/registerMember")
 public class EsMemberController extends BaseController {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsMemberService iesMemberService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000, check = false)
-    private IEsCompanyService iEsCompanyService;
+    @Autowired
+    private MemberService iesMemberService;
+    @Autowired
+    private CompanyService iEsCompanyService;
     @Reference(version = "${dubbo.application.version}", timeout = 5000,check = false)
     private IEsOrderService iEsOrderService;
-    @Reference(version = "${dubbo.application.version}", timeout = 5000)
-    private IEsMemberLevelConfigService esMemberLevelConfigService;
+    @Autowired
+    private MemberLevelConfigService esMemberLevelConfigService;
 
     @Autowired
     private OSSUploader uploader;
@@ -114,7 +116,7 @@ public class EsMemberController extends BaseController {
     public ApiResponse getOldPassword( @PathVariable("oldPassword") String oldPassword) {
         ShiroUser user = ShiroKit.getUser();
         if (user == null) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         DubboResult<EsMemberDO> result = iesMemberService.getMemberByPassWord(oldPassword, userId);//TODO 密码需要前端加密后传过来，还是我后端加密有待验证
@@ -132,7 +134,7 @@ public class EsMemberController extends BaseController {
     public ApiResponse editPersonInfo(@RequestBody @ApiParam(name = "personInfoForm",value = "用户对象",required = true) @Valid EsEditPersonInfoForm personInfoForm) {
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         EsMemberDTO esMemberDTO = new EsMemberDTO();
@@ -152,11 +154,11 @@ public class EsMemberController extends BaseController {
         String mobileCode = jedisCluster.get("mobile" + "_new_" + personInfoForm.getMobile());
         //比对
         if (StringUtils.isBlank(mobileCode) || !personInfoForm.getCode().equalsIgnoreCase(mobileCode)) {
-            return ApiResponse.fail(MemberErrorCode.MEMBER_CODE_ERROR.getErrorCode(), MemberErrorCode.MEMBER_CODE_ERROR.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.PARAM_ERROR.getErrorCode(),TradeErrorCode.PARAM_ERROR.getErrorMsg());
         }
         ShiroUser user = ShiroKit.getUser();
         if (null == user) {
-            return ApiResponse.fail(MemberErrorCode.NOT_LOGIN.getErrorCode(), MemberErrorCode.NOT_LOGIN.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.NOT_LOGIN.getErrorCode(), TradeErrorCode.NOT_LOGIN.getErrorMsg());
         }
         Long userId = user.getId();
         EsMemberDTO esMemberDTO = new EsMemberDTO();
@@ -176,7 +178,7 @@ public class EsMemberController extends BaseController {
     public ApiResponse updatePassword(@RequestBody @ApiParam(name = "passWordForm",value = "密码对象",required = true) @Valid EsPassWordForm passWordForm) {
         DubboResult<EsMemberDO> result = iesMemberService.getMemberInfoByNameOrMobile(passWordForm.getMobile());
         if (!result.isSuccess() || result.getData() == null) {
-            return ApiResponse.fail(MemberErrorCode.ITEM_NOT_FOUND.getErrorCode(), MemberErrorCode.ITEM_NOT_FOUND.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.PARAM_ERROR.getErrorCode(), TradeErrorCode.PARAM_ERROR.getErrorMsg());
         }
         EsMemberDO memberDO = result.getData();
         String salt = ShiroKit.getRandomSalt(ENLENGTH);
@@ -207,12 +209,12 @@ public class EsMemberController extends BaseController {
         String validateCode = jedisCluster.get("findPassWordCode" + "_" + form.getUuid());
         //比对
         if (StringUtils.isBlank(form.getCaptcha()) || StringUtils.isBlank(validateCode) || !validateCode.equalsIgnoreCase(form.getCaptcha())) {
-            return ApiResponse.fail(MemberErrorCode.MEMBER_CODE_ERROR.getErrorCode(), MemberErrorCode.MEMBER_CODE_ERROR.getErrorMsg());
+            return ApiResponse.fail(TradeErrorCode.PARAM_ERROR.getErrorCode(), TradeErrorCode.PARAM_ERROR.getErrorMsg());
         }
         DubboResult<EsMemberDO> result = iesMemberService.getMemberInfoByNameOrMobile(form.getNameOrMobile());
         if (result.isSuccess()) {
             if (result.getData() == null) {
-                return ApiResponse.fail(MemberErrorCode.MEMBER_ACCOUNT_NOT_EXIST.getErrorCode(), MemberErrorCode.MEMBER_ACCOUNT_NOT_EXIST.getErrorMsg());
+                return ApiResponse.fail(TradeErrorCode.PARAM_ERROR.getErrorCode(), TradeErrorCode.PARAM_ERROR.getErrorMsg());
             }
 //            jedisCluster.del("findPassWordCode" + "_" + form.getUuid());
             EsCheckPasswordVO checkPasswordVO = new EsCheckPasswordVO();

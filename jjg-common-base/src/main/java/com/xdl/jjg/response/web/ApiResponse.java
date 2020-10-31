@@ -1,6 +1,5 @@
 package com.xdl.jjg.response.web;
 
-
 import com.xdl.jjg.response.exception.UnCheckedWebException;
 import lombok.Getter;
 import org.slf4j.Logger;
@@ -17,7 +16,7 @@ public class ApiResponse<D> extends BaseResponse {
     /**
      * 获取request response对象
      */
-    private static ServletRequestAttributes SERVLET_REQUEST_ATTRIBUTES = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+    private static ServletRequestAttributes SERVLET_REQUEST_ATTRIBUTES  = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
 
     @Getter
     protected D data;
@@ -26,8 +25,8 @@ public class ApiResponse<D> extends BaseResponse {
         return new Builder();
     }
 
-    protected ApiResponse(D data, int res_code, String error) {
-        super(res_code, error);
+    protected ApiResponse(D data, int status, String error) {
+        super(status, error);
         this.data = data;
     }
 
@@ -42,7 +41,7 @@ public class ApiResponse<D> extends BaseResponse {
 
         @Override
         public ApiResponse build() {
-            return new ApiResponse(data, res_code, error);
+            return new ApiResponse(data, status, error);
         }
 
         public Builder data(D data) {
@@ -51,11 +50,10 @@ public class ApiResponse<D> extends BaseResponse {
         }
 
         @Override
-        public Builder res_code(Integer status) {
-            this.res_code = status;
+        public Builder status(Integer status) {
+            this.status = status;
             return this;
         }
-
         @Override
         public Builder error(String error) {
             this.error = error;
@@ -64,29 +62,29 @@ public class ApiResponse<D> extends BaseResponse {
     }
 
     public static ApiResponse success() {
-        return newBuilder().data(null).res_code(BaseApiStatus.SUCCESS).error("").build();
+        return newBuilder().data(null).status(BaseApiStatus.SUCCESS).error("").build();
     }
 
     public static <D> ApiResponse success(D data) {
-        return newBuilder().data(data).res_code(BaseApiStatus.SUCCESS).error("").build();
+        return newBuilder().data(data).status(BaseApiStatus.SUCCESS).error("").build();
     }
 
 
     public static ApiResponse fail(int code, String msg) {
-        UnCheckedWebException unCheckedWebException = new UnCheckedWebException(code, msg);
+        UnCheckedWebException unCheckedWebException = new UnCheckedWebException(code,msg);
         return fail(unCheckedWebException);
     }
 
     public static ApiResponse fail(int code, String msg, HttpServletResponse response) {
         Builder builder = newBuilder();
         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        return builder.data(null).res_code(code).error(msg).build();
+        return builder.data(null).status(code).error(msg).build();
     }
 
 
     public static <D> ApiResponse fail(D data, int code, String msg) {
-        UnCheckedWebException unCheckedWebException = new UnCheckedWebException(code, msg);
-        return fail(data, unCheckedWebException);
+        UnCheckedWebException unCheckedWebException = new UnCheckedWebException(code,msg);
+        return fail(data,unCheckedWebException);
     }
 
     /**
@@ -96,20 +94,19 @@ public class ApiResponse<D> extends BaseResponse {
      * @return
      */
     public static ApiResponse fail(UnCheckedWebException exception) {
-        if (SERVLET_REQUEST_ATTRIBUTES == null) {
-            SERVLET_REQUEST_ATTRIBUTES = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if(SERVLET_REQUEST_ATTRIBUTES == null){
+            SERVLET_REQUEST_ATTRIBUTES  = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         }
         HttpServletResponse response = SERVLET_REQUEST_ATTRIBUTES.getResponse();
         Builder builder = newBuilder();
         if (null != exception) {
-            builder.res_code(exception.getExceptionCode());
+            builder.status(exception.getExceptionCode());
             builder.error(exception.getMessage());
-            LOGGER.error(exception.getMessage(), exception);
+            LOGGER.error(exception.getMessage(),exception);
         }
         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
         return builder.data(null).build();
     }
-
     /**
      * web端异常返回结果
      *
@@ -117,17 +114,17 @@ public class ApiResponse<D> extends BaseResponse {
      * @return
      */
     public static <D> ApiResponse fail(D Data, UnCheckedWebException exception) {
-        if (SERVLET_REQUEST_ATTRIBUTES == null) {
-            SERVLET_REQUEST_ATTRIBUTES = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
+        if(SERVLET_REQUEST_ATTRIBUTES == null){
+            SERVLET_REQUEST_ATTRIBUTES  = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         }
         HttpServletResponse response = SERVLET_REQUEST_ATTRIBUTES.getResponse();
         Builder builder = newBuilder();
         if (null != exception) {
-            builder.res_code(exception.getExceptionCode());
+            builder.status(exception.getExceptionCode());
             builder.error(exception.getMessage());
-            LOGGER.error(exception.getMessage(), exception);
+            LOGGER.error(exception.getMessage(),exception);
         }
         response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-        return builder.data(Data).res_code(exception.getExceptionCode()).error(exception.getMessage()).build();
+        return builder.data(Data).status(exception.getExceptionCode()).error(exception.getMessage()).build();
     }
 }
