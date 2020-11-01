@@ -21,4 +21,6 @@ public interface GoodsSkuQuantityService {
      * @return
      */
     DubboResult<EsGoodsSkuQuantityDO> reduceGoodsSkuQuantity(List<EsGoodsSkuQuantityDTO> quantityDTO);
+
+    DubboResult<EsGoodsSkuQuantityDO> reduceGoodsSkuQuantityRedis(List<EsGoodsSkuQuantityDTO> quantityDTO);
 }

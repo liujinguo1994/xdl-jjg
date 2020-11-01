@@ -1,6 +1,5 @@
 package com.xdl.jjg.response.web;
 
-
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -23,14 +22,12 @@ public class ApiPageResponse<D> extends ApiResponse {
     }
 
     public static <D> ApiPageResponse pageSuccess(Long total, List<D> list) {
-        return newBuilder().data(new ListData(total, list)).res_code(BaseApiStatus.SUCCESS).error("").build();
+        return newBuilder().data(new ListData(total,list)).status(BaseApiStatus.SUCCESS).error("").build();
     }
-
     public static <D> ApiPageResponse pageSuccess(List<D> list) {
-        list = null == list ? new ArrayList<D>() : list;
-        return newBuilder().data(new ListData((long) list.size(), list)).res_code(BaseApiStatus.SUCCESS).error("").build();
+        list = null==list? new ArrayList<D>():list;
+        return newBuilder().data(new ListData((long)list.size(),list)).status(BaseApiStatus.SUCCESS).error("").build();
     }
-
     public static class Builder<D> extends ApiResponse.Builder {
 
         private ListData<D> data;
@@ -46,11 +43,10 @@ public class ApiPageResponse<D> extends ApiResponse {
         }
 
         @Override
-        public Builder res_code(Integer status) {
-            this.res_code = status;
+        public Builder status(Integer status) {
+            this.status = status;
             return this;
         }
-
         @Override
         public Builder error(String error) {
             this.error = error;
@@ -59,7 +55,7 @@ public class ApiPageResponse<D> extends ApiResponse {
 
         @Override
         public ApiPageResponse build() {
-            return new ApiPageResponse(data, res_code, error);
+            return new ApiPageResponse(data, status, error);
         }
 
     }
@@ -74,7 +70,7 @@ public class ApiPageResponse<D> extends ApiResponse {
         private List<D> list;
 
         private ListData(List<D> list) {
-            this((long) list.size(), list);
+            this((long)list.size(), list);
         }
 
         private ListData(Long total, List<D> list) {

@@ -1,32 +1,31 @@
 package com.xdl.jjg.manager.consumer;
 
-import com.shopx.common.exception.ArgumentException;
-import com.shopx.common.model.result.DubboResult;
-import com.shopx.common.roketmq.MQProducer;
-import com.shopx.common.util.JsonUtil;
-import com.shopx.common.util.MathUtil;
-import com.shopx.goods.api.model.domain.dto.EsGoodsSkuQuantityDTO;
-import com.shopx.goods.api.service.IEsGoodsService;
-import com.shopx.goods.api.service.IEsGoodsSkuQuantityService;
-import com.shopx.trade.api.constant.TradeErrorCode;
-import com.shopx.trade.api.model.domain.dto.CartItemsDTO;
-import com.shopx.trade.api.model.domain.dto.EsGiftSkuQuantityDTO;
-import com.shopx.trade.api.model.domain.dto.EsOrderDTO;
-import com.shopx.trade.api.model.domain.dto.EsTradeDTO;
-import com.shopx.trade.api.model.domain.vo.EsFullDiscountGiftVO;
-import com.shopx.trade.api.model.domain.vo.EsFullDiscountVO;
-import com.shopx.trade.api.model.domain.vo.EsTradeSnMoneyVO;
-import com.shopx.trade.api.model.domain.vo.TradePromotionGoodsVO;
-import com.shopx.trade.api.model.enums.PromotionTypeEnum;
-import com.shopx.trade.api.service.IEsFullDiscountGiftService;
-import com.shopx.trade.api.service.IEsOrderChangeService;
-import com.shopx.trade.api.service.IEsOrderService;
-import com.shopx.trade.api.service.IEsSeckillService;
-import com.shopx.trade.web.manager.TradeManager;
-import com.shopx.trade.web.manager.event.TradeIntoDbEvent;
-import com.shopx.trade.web.transaction.TransactionProducer;
+import com.jjg.shop.model.dto.EsGoodsSkuQuantityDTO;
+import com.jjg.trade.model.dto.CartItemsDTO;
+import com.jjg.trade.model.dto.EsGiftSkuQuantityDTO;
+import com.jjg.trade.model.dto.EsOrderDTO;
+import com.jjg.trade.model.dto.EsTradeDTO;
+import com.jjg.trade.model.enums.PromotionTypeEnum;
+import com.jjg.trade.model.vo.EsFullDiscountGiftVO;
+import com.jjg.trade.model.vo.EsFullDiscountVO;
+import com.jjg.trade.model.vo.EsTradeSnMoneyVO;
+import com.jjg.trade.model.vo.TradePromotionGoodsVO;
+import com.xdl.jjg.constant.TradeErrorCode;
+import com.xdl.jjg.manager.TradeManager;
+import com.xdl.jjg.manager.event.TradeIntoDbEvent;
+import com.xdl.jjg.response.exception.ArgumentException;
+import com.xdl.jjg.response.service.DubboResult;
+import com.xdl.jjg.roketmq.MQProducer;
+import com.xdl.jjg.transaction.TransactionProducer;
+import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.util.MathUtil;
+import com.xdl.jjg.web.service.IEsFullDiscountGiftService;
+import com.xdl.jjg.web.service.IEsOrderChangeService;
+import com.xdl.jjg.web.service.IEsOrderService;
+import com.xdl.jjg.web.service.IEsSeckillService;
+import com.xdl.jjg.web.service.feign.shop.GoodsService;
+import com.xdl.jjg.web.service.feign.shop.GoodsSkuQuantityService;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.apache.rocketmq.client.producer.SendResult;
 import org.apache.rocketmq.client.producer.SendStatus;
 import org.apache.rocketmq.common.message.Message;
@@ -54,7 +53,7 @@ public class GoodsQuantityChangeConsumer implements TradeIntoDbEvent {
     private final Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
-    private IEsGoodsSkuQuantityService iEsGoodsSkuQuantityService;
+    private GoodsSkuQuantityService iEsGoodsSkuQuantityService;
 
     @Autowired
     private IEsOrderService iEsOrderService;
@@ -82,7 +81,7 @@ public class GoodsQuantityChangeConsumer implements TradeIntoDbEvent {
     @Autowired
     private IEsSeckillService iEsSeckillService;
     @Autowired
-    private IEsGoodsService iEsGoodsService;
+    private GoodsService iEsGoodsService;
 
     /**
      * 交易入库
@@ -161,7 +160,7 @@ public class GoodsQuantityChangeConsumer implements TradeIntoDbEvent {
 
                 long kczzstart = System.currentTimeMillis();
                 // 库存数据库异步处理
-                mqProducer.send(stock_reduce_topic,JsonUtil.objectToJson(goodsQuantityDTO));
+                mqProducer.send(stock_reduce_topic, JsonUtil.objectToJson(goodsQuantityDTO));
                 // 基于缓存库存扣减
                 iEsGoodsSkuQuantityService.reduceGoodsSkuQuantityRedis(goodsQuantityDTO);
                 long kczzEnd = System.currentTimeMillis();

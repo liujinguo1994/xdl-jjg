@@ -6,6 +6,7 @@ import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.response.web.ApiResponse;
 import com.xdl.jjg.shiro.oath.ShiroKit;
 import com.xdl.jjg.util.JsonUtil;
+import com.xdl.jjg.web.service.feign.member.MemberTokenService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpStatus;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,7 +31,7 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
     private static final Logger logger = LoggerFactory.getLogger(CheckTokenInterceptor.class);
 
     @Autowired
-    private IEsMemberTokenService memberTokenService;
+    private MemberTokenService memberTokenService;
 
     /**
      * 在执行controller方法之前进行请求参数处理
@@ -60,6 +62,16 @@ public class CheckTokenInterceptor implements HandlerInterceptor {
         //清除缓存
         ShiroKit.getSubject().logout();
         return false;
+    }
+
+    @Override
+    public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
+
+    }
+
+    @Override
+    public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
+
     }
 
 

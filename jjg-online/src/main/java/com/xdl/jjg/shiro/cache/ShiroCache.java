@@ -2,11 +2,11 @@ package com.xdl.jjg.shiro.cache;
 
 import com.xdl.jjg.shiro.oath.ShiroUser;
 import com.xdl.jjg.util.SerializeUtil;
+import org.apache.ibatis.cache.CacheException;
 import org.apache.shiro.cache.Cache;
-import org.apache.shiro.cache.CacheException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import redis.clients.jedis.JedisCluster;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -20,21 +20,20 @@ import java.util.Set;
  * @param <V>
  */
 public class ShiroCache<K, V> implements Cache<K, V> {
-
     private static final Logger logger = LoggerFactory.getLogger(ShiroCache.class);
 
     private String cacheKey;
-    private JedisCluster jedisCluster;
+    private RedisTemplate redisTemplate;
     private int expire;
 
-    public ShiroCache(String redisShiroCache, String name, JedisCluster jedisCluster,int expire) {
+    public ShiroCache(String redisShiroCache, String name, RedisTemplate redisTemplate, int expire) {
         this.cacheKey = redisShiroCache + name + ":";
-        this.jedisCluster = jedisCluster;
+        this.redisTemplate = redisTemplate;
         this.expire = expire;
     }
 
     @Override
-    public V get(K key) throws CacheException {
+    public V get(K key) throws org.apache.ibatis.cache.CacheException {
         try {
             if (null == key) {
                 return null;
@@ -42,8 +41,8 @@ public class ShiroCache<K, V> implements Cache<K, V> {
                 //序列化KEY
                 byte[] k = serializeK(getCacheKey(key));
                 //序列化VALUE
-                byte[] v = jedisCluster.get(k);
-                if(null != v){
+                byte[] v = (byte[]) redisTemplate.opsForValue().get(k);
+                if (null != v) {
                     logger.debug("Getting object from cache [" + this.cacheKey + "] for key [" + key + "]key type:" + key.getClass());
                     return (V) deserializeV(v);
                 }
@@ -52,31 +51,31 @@ public class ShiroCache<K, V> implements Cache<K, V> {
             }
         } catch (Exception t) {
             logger.error("Getting object from cache error ! ex:" + t);
-            throw new CacheException(t);
+            throw new org.apache.ibatis.cache.CacheException(t);
         }
     }
 
     @Override
-    public V put(K key, V value) throws CacheException {
+    public V put(K key, V value) throws org.apache.ibatis.cache.CacheException {
         try {
             byte[] k = serializeK(getCacheKey(key));
             byte[] v = serializeV(value);
-            jedisCluster.setex(k,expire, v);
+            redisTemplate.opsForValue().set(k, v, expire);
             logger.debug("Putting object in cache [" + this.cacheKey + "] for key [" + key + "]key type:"
                     + key.getClass() + "for value [" + value + "]value type:" + value.getClass());
             return value;
         } catch (Exception t) {
             logger.error("Putting object from cache error ! ex:" + t);
-            throw new CacheException(t);
+            throw new org.apache.ibatis.cache.CacheException(t);
         }
     }
 
     @Override
-    public V remove(K key) throws CacheException {
+    public V remove(K key) throws org.apache.ibatis.cache.CacheException {
         V old = get(key);
-        if(null != old){
+        if (null != old) {
             byte[] k = serializeK(getCacheKey(key));
-            jedisCluster.del(k);
+            redisTemplate.delete(k);
             logger.debug("Removing object from cache [" + this.cacheKey + "] for key [" + key + "]key type:" + key.getClass());
         }
         return old;
@@ -95,7 +94,7 @@ public class ShiroCache<K, V> implements Cache<K, V> {
     @Override
     public Set<K> keys() {
         byte[] k = serializeK(getCacheKey("*"));
-        return (Set<K>)jedisCluster.hkeys(k);
+        return (Set<K>) redisTemplate.opsForValue().get(k);
     }
 
     @Override
@@ -109,11 +108,11 @@ public class ShiroCache<K, V> implements Cache<K, V> {
     }
 
     private String getCacheKey(Object k) {
-        if(k instanceof String){
+        if (k instanceof String) {
             return this.cacheKey + k;
         }
-        if(k instanceof ShiroUser){
-            return this.cacheKey + ((ShiroUser)k).getId();
+        if (k instanceof ShiroUser) {
+            return this.cacheKey + ((ShiroUser) k).getId();
         }
         return this.cacheKey + k;
     }
