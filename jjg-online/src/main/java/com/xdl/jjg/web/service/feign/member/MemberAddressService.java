@@ -4,7 +4,10 @@ import com.jjg.member.model.domain.EsMemberAddressDO;
 import com.jjg.member.model.dto.EsMemberAddressDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
-
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+@FeignClient(value = "jjg-member")
 public interface MemberAddressService {
 
 
@@ -16,7 +19,7 @@ public interface MemberAddressService {
      * @date: 2019/06/03 13:42:53
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberAddressDO>
      */
-    DubboPageResult<EsMemberAddressDO> getMemberAddressListByMemberId(Long memberId);
+    DubboPageResult<EsMemberAddressDO> getMemberAddressListByMemberId(@RequestParam("memberId") Long memberId);
 
     /**
      * 查询默认收货地址
@@ -25,7 +28,7 @@ public interface MemberAddressService {
      * @date: 2019/05/31 16:37:16
      * @return: com.shopx.common.model.result.DubboResult<EsMemberAddressDO>
      */
-    DubboResult<EsMemberAddressDO> getDefaultMemberAddress(Long memberId);
+    DubboResult<EsMemberAddressDO> getDefaultMemberAddress(@RequestParam("memberId") Long memberId);
     /**
      * 根据条件更新更新数据
      *
@@ -34,7 +37,7 @@ public interface MemberAddressService {
      * @date: 2019/05/31 16:40:10
      * @return: com.shopx.common.model.result.DubboResult<EsMemberAddressDO>
      */
-    DubboResult<EsMemberAddressDO> updateMemberAddress(EsMemberAddressDTO memberAddressDTO);
+    DubboResult<EsMemberAddressDO> updateMemberAddress(@RequestBody EsMemberAddressDTO memberAddressDTO);
 
     /**
      * 插入数据
@@ -44,7 +47,7 @@ public interface MemberAddressService {
      * @date: 2019/05/31 16:39:30
      * @return: com.shopx.common.model.result.DubboResult<EsMemberAddressDO>
      */
-    DubboResult<EsMemberAddressDO> insertMemberAddress(EsMemberAddressDTO memberAddressDTO);
+    DubboResult<EsMemberAddressDO> insertMemberAddress(@RequestBody EsMemberAddressDTO memberAddressDTO);
 
     /**
      * 根据主键删除数据
@@ -54,7 +57,7 @@ public interface MemberAddressService {
      * @date: 2019/05/31 16:40:44
      * @return: com.shopx.common.model.result.DubboResult<EsMemberAddressDO>
      */
-    DubboResult deleteMemberAddress(Long id);
+    DubboResult deleteMemberAddress(@RequestParam("id") Long id);
 
     /**
      * 根据id获取数据
@@ -64,7 +67,7 @@ public interface MemberAddressService {
      * @date: 2019/05/31 16:37:16
      * @return: com.shopx.common.model.result.DubboResult<EsMemberAddressDO>
      */
-    DubboResult<EsMemberAddressDO> getMemberAddress(Long id);
+    DubboResult<EsMemberAddressDO> getMemberAddress(@RequestParam("id") Long id);
 
     /**
      * 设置默认收货地址
@@ -73,7 +76,7 @@ public interface MemberAddressService {
      * @date: 2019/12/11 16:37:16
      * @return: com.shopx.common.model.result.DubboResult<EsMemberAddressDO>
      */
-    DubboResult<EsMemberAddressDO> setDefaultMemberAddress(Long id, Long memberId);
+    DubboResult<EsMemberAddressDO> setDefaultMemberAddress(@RequestParam("id") Long id,@RequestParam("memberId")  Long memberId);
 
 
     /**
@@ -86,7 +89,7 @@ public interface MemberAddressService {
      * @date: 2019/06/03 13:42:53
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberAddressDO>
      */
-    DubboPageResult<EsMemberAddressDO> getMemberAddressList(EsMemberAddressDTO memberAddressDTO, int pageSize, int pageNum);
+    DubboPageResult<EsMemberAddressDO> getMemberAddressList(@RequestBody EsMemberAddressDTO memberAddressDTO,@RequestParam("pageSize")  int pageSize,@RequestParam("pageNum")  int pageNum);
 
 
     /**
@@ -97,5 +100,5 @@ public interface MemberAddressService {
      * @date: 2019/06/03 13:42:53
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberAddressDO>
      */
-    DubboPageResult<EsMemberAddressDO> getMemberAddressLists(EsMemberAddressDTO esMemberAddressDTO);
+    DubboPageResult<EsMemberAddressDO> getMemberAddressLists(@RequestBody EsMemberAddressDTO esMemberAddressDTO);
 }

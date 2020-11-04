@@ -4,6 +4,8 @@ import com.jjg.member.model.domain.EsCartNumDO;
 import com.jjg.member.model.dto.EsCartDTO;
 import com.xdl.jjg.response.service.DubboResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @FeignClient(value = "jjg-member")
 public interface CartService {
@@ -15,7 +17,7 @@ public interface CartService {
      * @param memberId    memberId
      * @return: com.shopx.common.model.result.DubboResult<EsCartDO>
      */
-    DubboResult<EsCartNumDO> getByMemberId(Long memberId);
+    DubboResult<EsCartNumDO> getByMemberId(@RequestParam("memberId") Long memberId);
 
     /**
      * 插入数据
@@ -24,5 +26,5 @@ public interface CartService {
      * @param cartDTO    购物车DTO
      * @return: com.shopx.common.model.result.DubboResult<EsCartDO>
      */
-    DubboResult<Long> insertCart(EsCartDTO cartDTO);
+    DubboResult<Long> insertCart(@RequestBody EsCartDTO cartDTO);
 }

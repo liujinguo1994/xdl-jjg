@@ -2,6 +2,7 @@ package com.xdl.jjg.web.service.feign.system;
 
 import com.jjg.system.model.dto.EsSmsSendDTO;
 import com.xdl.jjg.response.service.DubboResult;
+import org.springframework.web.bind.annotation.RequestBody;
 
 public interface SmsService {
 
@@ -10,12 +11,12 @@ public interface SmsService {
      *
      * @param sendDTO
      */
-    DubboResult sendLfc(EsSmsSendDTO sendDTO);
+    DubboResult sendLfc(@RequestBody EsSmsSendDTO sendDTO);
 
     /**
      * 发送手机短信
      *
      * @param sendDTO
      */
-    DubboResult send(EsSmsSendDTO sendDTO);
+    DubboResult send(@RequestBody EsSmsSendDTO sendDTO);
 }

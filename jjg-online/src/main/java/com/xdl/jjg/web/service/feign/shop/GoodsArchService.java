@@ -2,7 +2,9 @@ package com.xdl.jjg.web.service.feign.shop;
 
 import com.jjg.shop.model.domain.EsGoodsArchDO;
 import com.xdl.jjg.response.service.DubboResult;
-
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestParam;
+@FeignClient(value = "jjg-shop")
 public interface GoodsArchService {
 
     /**
@@ -10,5 +12,5 @@ public interface GoodsArchService {
      * @param id
      * @return
      */
-    DubboResult<EsGoodsArchDO> getGoodsArchGifts(Long id);
+    DubboResult<EsGoodsArchDO> getGoodsArchGifts(@RequestParam("id") Long id);
 }

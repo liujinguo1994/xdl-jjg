@@ -7,7 +7,10 @@ import com.jjg.member.model.dto.EsQueryCollectShopDTO;
 import com.jjg.member.model.dto.EsUpdateTopShopDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
-
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+@FeignClient(value = "jjg-member")
 public interface MemberCollectionShopService {
 
     /**
@@ -15,7 +18,7 @@ public interface MemberCollectionShopService {
      *
      * @return
      */
-    DubboPageResult<EsQueryCollectionShopDO> getMemberCollectionShopList(int page, int pageSize, EsQueryCollectShopDTO dto);
+    DubboPageResult<EsQueryCollectionShopDO> getMemberCollectionShopList(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize,@RequestBody EsQueryCollectShopDTO dto);
 
 
     /**
@@ -23,7 +26,7 @@ public interface MemberCollectionShopService {
      *
      * @return
      */
-    DubboPageResult<EsQueryCollectionShopDO> getMemberCollectionShopListNew(int page, int pageSize, EsQueryCollectShopDTO dto);
+    DubboPageResult<EsQueryCollectionShopDO> getMemberCollectionShopListNew(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize,@RequestBody EsQueryCollectShopDTO dto);
 
 
 
@@ -34,7 +37,7 @@ public interface MemberCollectionShopService {
      * @param shopId
      * @return
      */
-    DubboResult<EsMemberCollectionShopDO> deleteMemberCollectionShop(Long memberId, Long shopId);
+    DubboResult<EsMemberCollectionShopDO> deleteMemberCollectionShop(@RequestParam("memberId") Long memberId, @RequestParam("shopId") Long shopId);
 
 
 
@@ -44,7 +47,7 @@ public interface MemberCollectionShopService {
      * @param esMemberCollectionShopDTO
      * @return
      */
-    DubboResult insertRemarks(EsMemberCollectionShopDTO esMemberCollectionShopDTO);
+    DubboResult insertRemarks(@RequestBody EsMemberCollectionShopDTO esMemberCollectionShopDTO);
 
 
     /**
@@ -53,7 +56,7 @@ public interface MemberCollectionShopService {
      * @param memberId
      * @return
      */
-    DubboResult updateShopTop(EsUpdateTopShopDTO esUpdateTopShopDTO, Long memberId);
+    DubboResult updateShopTop(@RequestBody EsUpdateTopShopDTO esUpdateTopShopDTO, @RequestParam("memberId") Long memberId);
 
 
 }

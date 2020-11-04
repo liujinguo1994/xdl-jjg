@@ -2,7 +2,9 @@ package com.xdl.jjg.web.service.feign.member;
 
 import com.jjg.member.model.domain.EsMemberPointHistoryDO;
 import com.xdl.jjg.response.service.DubboPageResult;
-
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestParam;
+@FeignClient(value = "jjg-member")
 public interface MemberPointHistoryService {
     /**
      * 根据id获取数据
@@ -11,7 +13,7 @@ public interface MemberPointHistoryService {
      * @param memberId    主键id
      * @return: com.shopx.common.model.result.DubboResult<EsMemberPointHistoryDO>
      */
-    DubboPageResult<EsMemberPointHistoryDO> pointStatistics(Long memberId);
+    DubboPageResult<EsMemberPointHistoryDO> pointStatistics(@RequestParam("memberId") Long memberId);
     /**
      * 根据id获取数据
      * @auther: lins 1220316142@qq.com
@@ -19,6 +21,6 @@ public interface MemberPointHistoryService {
      * @param memberId    主键id
      * @return: com.shopx.common.model.result.DubboResult<EsMemberPointHistoryDO>
      */
-    DubboPageResult<EsMemberPointHistoryDO> getMemberPointHistoryDetail(Long memberId, Integer gradePointType, int pageSize, int pageNum);
+    DubboPageResult<EsMemberPointHistoryDO> getMemberPointHistoryDetail(@RequestParam("memberId") Long memberId, @RequestParam("gradePointType") Integer gradePointType, @RequestParam("pageSize") int pageSize, @RequestParam("pageNum") int pageNum);
 
 }

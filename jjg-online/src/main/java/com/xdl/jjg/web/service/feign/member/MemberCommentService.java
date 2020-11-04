@@ -7,10 +7,13 @@ import com.jjg.member.model.dto.EsMemberCommentCopyDTO;
 import com.jjg.member.model.dto.EsQueryDetailCommentDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
-
+@FeignClient(value = "jjg-member")
 public interface MemberCommentService {
 
     /**
@@ -20,7 +23,7 @@ public interface MemberCommentService {
      * @param goodsId    评论DTO
      * @return: com.shopx.common.model.result.DubboResult<EsMemberCommentDO>
      */
-    DubboResult<Double> getGoodCommentRate(Long goodsId);
+    DubboResult<Double> getGoodCommentRate(@RequestParam("goodsId") Long goodsId);
 
 
     /**
@@ -29,7 +32,7 @@ public interface MemberCommentService {
      * @param goodsId    商品主键
      * @return: com.shopx.common.model.result.DubboResult<EsDiscountDO>
      */
-    DubboResult<List<Map<String, Object>>> getLabelsGroup(Long goodsId);
+    DubboResult<List<Map<String, Object>>> getLabelsGroup(@RequestParam("goodsId") Long goodsId);
 
     /**
      * 插入数据
@@ -38,7 +41,7 @@ public interface MemberCommentService {
      * @param memberCommentDTO    评论DTO
      * @return: com.shopx.common.model.result.DubboResult<EsMemberCommentDO>
      */
-    DubboResult insertMemberComment(EsMemberCommentCopyDTO memberCommentDTO);
+    DubboResult insertMemberComment(@RequestBody EsMemberCommentCopyDTO memberCommentDTO);
 
 
     /**
@@ -49,8 +52,8 @@ public interface MemberCommentService {
      * @param orderSn esOrderDO
      * @return: com.shopx.common.model.result.DubboResult<EsMemberCommentDO>
      */
-    DubboResult<EsCommentInfoDO> getPCCommentInfoByGoodsIdAndOrderSn(Long goodsId, String orderSn, Long skuId);
-    DubboResult<EsCommentInfoDO> getCommentInfoByGoodsIdAndOrderSn(Long goodsId, String orderSn, Long skuId);
+    DubboResult<EsCommentInfoDO> getPCCommentInfoByGoodsIdAndOrderSn(@RequestParam("goodsId") Long goodsId, @RequestParam("orderSn") String orderSn, @RequestParam("skuId") Long skuId);
+    DubboResult<EsCommentInfoDO> getCommentInfoByGoodsIdAndOrderSn(@RequestParam("goodsId") Long goodsId, @RequestParam("orderSn") String orderSn, @RequestParam("skuId") Long skuId);
 
 
 
@@ -62,7 +65,7 @@ public interface MemberCommentService {
      * @param pageNum
      * @return
      */
-    DubboPageResult<EsMemberCommentDetailDO> getMemberDetailCommentList(EsQueryDetailCommentDTO memberCommentDTO, Long memberId, int pageSize, int pageNum);
+    DubboPageResult<EsMemberCommentDetailDO> getMemberDetailCommentList(@RequestBody EsQueryDetailCommentDTO memberCommentDTO,@RequestParam("memberId")  Long memberId, @RequestParam("pageSize") int pageSize, @RequestParam("pageNum") int pageNum);
 
 
 
@@ -71,7 +74,7 @@ public interface MemberCommentService {
      * @auther: lins 1220316142@qq.com
      * @return
      */
-    DubboResult<GradeLevelDO> getCountComment(Long goodsId);
+    DubboResult<GradeLevelDO> getCountComment(@RequestParam("goodsId") Long goodsId);
 
 
 }

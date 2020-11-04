@@ -7,6 +7,8 @@ import com.jjg.shop.model.dto.EsGoodsSkuDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -20,7 +22,7 @@ public interface GoodsSkuService {
      * @param id    主键id
      * @return: com.shopx.common.model.result.DubboResult<EsGoodsSkuDO>
      */
-    DubboResult<EsGoodsSkuCO> getGoodsSku(Long id);
+    DubboResult<EsGoodsSkuCO> getGoodsSku(@RequestParam("id") Long id);
 
     /**
      * 根据id获取数据
@@ -29,7 +31,7 @@ public interface GoodsSkuService {
      * @param id    主键id
      * @return: com.shopx.common.model.result.DubboResult<EsGoodsSkuDO>
      */
-    DubboResult<EsGoodsSkuCO> getGoodsSkuEnable(Long id);
+    DubboResult<EsGoodsSkuCO> getGoodsSkuEnable(@RequestParam("id") Long id);
 
     /**
      * 卖家中心 更新商品SKU信息
@@ -38,14 +40,14 @@ public interface GoodsSkuService {
      * @param goodsSkuDTO    DTO
      * @return: com.shopx.common.model.result.DubboResult<EsGoodsSkuDO>
      */
-    DubboResult<EsGoodsSkuDO> sellerUpdateGoodsSkuGift(List<EsGoodsSkuDTO> goodsSkuDTO, Long shopId, Long goodsId);
+    DubboResult<EsGoodsSkuDO> sellerUpdateGoodsSkuGift(@RequestBody List<EsGoodsSkuDTO> goodsSkuDTO, @RequestParam("shopId") Long shopId, @RequestParam("goodsId") Long goodsId);
 
     /**
      * 根据DTO 获取商品SKU信息集合
      * @param goodsId
      * @return
      */
-    DubboPageResult<EsSellerGoodsSkuDO> getGoodsSkuList(Long goodsId);
+    DubboPageResult<EsSellerGoodsSkuDO> getGoodsSkuList(@RequestParam("goodsId") Long goodsId);
 
-    DubboPageResult<EsGoodsSkuDO> getSkuByIds(Long[] id);
+    DubboPageResult<EsGoodsSkuDO> getSkuByIds(@RequestParam("id") Long[] id);
 }

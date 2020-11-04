@@ -6,7 +6,10 @@ import com.jjg.shop.model.domain.EsGoodsIndexDO;
 import com.jjg.shop.model.dto.EsGoodsIndexDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
-
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+@FeignClient(value = "jjg-shop")
 public interface GoodsIndexService {
 
     /**
@@ -15,7 +18,7 @@ public interface GoodsIndexService {
 
      * @return
      */
-    DubboPageResult<EsGoodsIndexDO> getEsGoodsIndex(EsGoodsIndexDTO esGoodsIndexDTO, int pageSiz, int pageNum);
+    DubboPageResult<EsGoodsIndexDO> getEsGoodsIndex(@RequestBody EsGoodsIndexDTO esGoodsIndexDTO, @RequestParam("pageSiz") int pageSiz, @RequestParam("pageNum") int pageNum);
 
 
 
@@ -24,6 +27,6 @@ public interface GoodsIndexService {
      * @param goodsSearch
      * @return
      */
-    DubboResult<EsSelectSearchCO> getSelector(EsGoodsIndexDTO goodsSearch);
-    DubboPageResult<EsPcSelectSearchCO> getPcSelector(EsGoodsIndexDTO goodsSearch);
+    DubboResult<EsSelectSearchCO> getSelector(@RequestBody EsGoodsIndexDTO goodsSearch);
+    DubboPageResult<EsPcSelectSearchCO> getPcSelector(@RequestBody EsGoodsIndexDTO goodsSearch);
 }

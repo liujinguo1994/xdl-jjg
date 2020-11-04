@@ -3,7 +3,12 @@ package com.xdl.jjg.web.service.feign.member;
 import com.jjg.member.model.domain.EsMyFootprintDO;
 import com.jjg.member.model.dto.EsMyFootprintDTO;
 import com.xdl.jjg.response.service.DubboResult;
-
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+@FeignClient(value = "jjg-member")
 public interface MyFootprintService {
 
 
@@ -14,7 +19,8 @@ public interface MyFootprintService {
      * @date: 2019/06/03 13:42:53
      * @return: com.shopx.common.model.result.DubboPageResult<EsMyFootprintDO>
      */
-    DubboResult<EsMyFootprintDO> getMyFootprintList(EsMyFootprintDTO myFootprintDTO);
+    @GetMapping("/getMyFootprintList")
+    DubboResult<EsMyFootprintDO> getMyFootprintList(@RequestBody EsMyFootprintDTO myFootprintDTO);
 
     /**
      * 根据主键删除数据
@@ -24,7 +30,8 @@ public interface MyFootprintService {
      * @param viewTime
      * @return: com.shopx.common.model.result.DubboResult<EsMyFootprintDO>
      */
-    DubboResult deleteMyFoot(Long memberId, String viewTime);
+    @DeleteMapping("/deleteMyFoot")
+    DubboResult deleteMyFoot(@RequestParam("memberId") Long memberId, @RequestParam("viewTime") String viewTime);
 
     /**
      * 根据店铺id查询
@@ -34,7 +41,8 @@ public interface MyFootprintService {
      * @param shopId
      * @return: com.shopx.common.model.result.DubboResult<EsMyFootprintDO>
      */
-    DubboResult getTopMyFoot(Long memberId, Long shopId);
+    @GetMapping("/getTopMyFoot")
+    DubboResult getTopMyFoot(@RequestParam("memberId") Long memberId, @RequestParam("shopId") Long shopId);
 
     /**
      * 根据主键删除数据
@@ -43,7 +51,8 @@ public interface MyFootprintService {
      * @param id
      * @return: com.shopx.common.model.result.DubboResult<EsMyFootprintDO>
      */
-    DubboResult deleteMyFootById(Long id);
+    @DeleteMapping("/deleteMyFootById")
+    DubboResult deleteMyFootById(@RequestParam("id") Long id);
 
 
 }

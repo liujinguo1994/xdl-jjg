@@ -2,13 +2,14 @@ package com.xdl.jjg.web.service.feign.shop;
 
 import com.jjg.shop.model.domain.EsGoodsDO;
 import com.xdl.jjg.response.service.DubboPageResult;
-import com.xdl.jjg.response.service.DubboResult;
-
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestParam;
+@FeignClient(value = "jjg-shop")
 public interface TagGoodsService {
 
 
 
-    DubboPageResult<EsGoodsDO> queryTagGoods(Integer shopId, Integer num, String mark);
+    DubboPageResult<EsGoodsDO> queryTagGoods(@RequestParam("shopId") Integer shopId, @RequestParam("num") Integer num,@RequestParam("mark")  String mark);
 
 
 

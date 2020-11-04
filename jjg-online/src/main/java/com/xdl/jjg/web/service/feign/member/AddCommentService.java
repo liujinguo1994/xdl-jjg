@@ -2,7 +2,10 @@ package com.xdl.jjg.web.service.feign.member;
 
 import com.jjg.member.model.dto.EsAddCommentDTO;
 import com.xdl.jjg.response.service.DubboResult;
-
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+@FeignClient(value = "jjg-member")
 public interface AddCommentService {
 
 
@@ -13,5 +16,6 @@ public interface AddCommentService {
      * @param addCommentDTO    DTO
      * @return: com.shopx.common.model.result.DubboResult<EsAddCommentDO>
      */
-    DubboResult insertAddComment(EsAddCommentDTO addCommentDTO);
+    @PostMapping("/insertAddComment")
+    DubboResult insertAddComment(@RequestBody EsAddCommentDTO addCommentDTO);
 }

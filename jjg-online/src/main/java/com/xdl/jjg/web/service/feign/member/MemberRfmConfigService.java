@@ -2,7 +2,9 @@ package com.xdl.jjg.web.service.feign.member;
 
 import com.jjg.member.model.domain.EsMemberRfmConfigDO;
 import com.xdl.jjg.response.service.DubboPageResult;
+import org.springframework.cloud.netflix.feign.FeignClient;
 
+@FeignClient(value = "jjg-member")
 public interface MemberRfmConfigService {
 
     /**

@@ -3,7 +3,9 @@ package com.xdl.jjg.web.service.feign.shop;
 import com.jjg.member.model.domain.EsShopAndDetailDO;
 import com.jjg.member.model.domain.EsShopDO;
 import com.xdl.jjg.response.service.DubboResult;
-
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestParam;
+@FeignClient(value = "jjg-shop")
 public interface ShopService {
 
     /**
@@ -13,7 +15,7 @@ public interface ShopService {
      * @param id    主键id
      * @return: com.shopx.common.model.result.DubboResult<EsShopDO>
      */
-    DubboResult<EsShopDO> getShop(Long id);
+    DubboResult<EsShopDO> getShop(@RequestParam("id") Long id);
 
 
     /**
@@ -23,7 +25,7 @@ public interface ShopService {
      * @param id    主键id
      * @return: com.shopx.common.model.result.DubboResult<EsShopAndDetailDO>
      */
-    DubboResult<EsShopAndDetailDO> getShopDetail(Long id);
+    DubboResult<EsShopAndDetailDO> getShopDetail(@RequestParam("id") Long id);
 
     /**
      * 买家-商品详情页根据id获取店铺及店铺明细
@@ -32,7 +34,7 @@ public interface ShopService {
      * @param id    主键id
      * @return: com.shopx.common.model.result.DubboResult<EsShopAndDetailDO>
      */
-    DubboResult<EsShopDO> getBuyerShopDetail(Long id);
+    DubboResult<EsShopDO> getBuyerShopDetail(@RequestParam("id") Long id);
 
 
 }

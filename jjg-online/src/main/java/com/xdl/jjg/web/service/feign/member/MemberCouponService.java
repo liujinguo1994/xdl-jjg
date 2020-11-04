@@ -8,15 +8,18 @@ import com.jjg.member.model.dto.EsMemberCouponDTO;
 import com.jjg.member.model.dto.QuerySellerCouponDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
+import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Map;
-
+@FeignClient(value = "jjg-member")
 public interface MemberCouponService {
 
-    DubboResult updateMemberCouponIsNotCheck(EsMemberCouponDTO memberCouponDTO);
+    DubboResult updateMemberCouponIsNotCheck(@RequestBody EsMemberCouponDTO memberCouponDTO);
 
-    DubboResult updateMemberCouponIsCheck(EsMemberCouponDTO memberCouponDTO);
+    DubboResult updateMemberCouponIsCheck(@RequestBody EsMemberCouponDTO memberCouponDTO);
 
     /**
      * @Author xiaoLin
@@ -24,7 +27,7 @@ public interface MemberCouponService {
      * @Param [memberId, couponIdList]
      * @return java.util.List<java.lang.Long>
      */
-    DubboResult getMemberWhetherCouponIds(Long memberId, List<Long> couponIdList);
+    DubboResult getMemberWhetherCouponIds(@RequestParam("memberId") Long memberId, @RequestParam("couponIdList") List<Long> couponIdList);
 
     /**
      * @Description: 通过店铺以及店铺的价格活动符合条件的优惠券
@@ -35,7 +38,7 @@ public interface MemberCouponService {
      * @exception
      *
      */
-    DubboResult getMemberCouponInOrder(Long memberId, Map<Long, Double> shopIdPrice);
+    DubboResult getMemberCouponInOrder(@RequestParam("memberId") Long memberId, @RequestParam("shopIdPrice") Map<Long, Double> shopIdPrice);
 
     /**
      * 根据优惠券id和会员id查询优惠券列表
@@ -44,9 +47,9 @@ public interface MemberCouponService {
      * @param memberCouponDTO  会员优惠券DTO
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberCouponDO>
      */
-    DubboPageResult<EsMemberCouponDO> getByMemberIdAndCouponIdList(EsMemberCouponDTO memberCouponDTO);
+    DubboPageResult<EsMemberCouponDO> getByMemberIdAndCouponIdList(@RequestBody EsMemberCouponDTO memberCouponDTO);
 
-    DubboResult updateIsCheckByMemberIdAndShopId(Long memberId, List<Long> shopIdList);
+    DubboResult updateIsCheckByMemberIdAndShopId(@RequestParam("memberId") Long memberId, @RequestParam("shopIdList") List<Long> shopIdList);
 
     /**
      * 根据查询后台管理优惠券列表
@@ -55,7 +58,7 @@ public interface MemberCouponService {
      * @param memberCouponDTO  会员优惠券DTO
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberCouponDO>
      */
-    DubboResult<Integer> getCountByMemberIdAndCouponId(EsMemberCouponDTO memberCouponDTO);
+    DubboResult<Integer> getCountByMemberIdAndCouponId(@RequestBody EsMemberCouponDTO memberCouponDTO);
 
     /**
      * 插入数据
@@ -64,7 +67,7 @@ public interface MemberCouponService {
      * @param memberCouponDTO    会员优惠券DTO
      * @return: com.shopx.common.model.result.DubboResult<EsMemberCouponDO>
      */
-    DubboResult insertMemberCoupon(EsMemberCouponDTO memberCouponDTO);
+    DubboResult insertMemberCoupon(@RequestBody EsMemberCouponDTO memberCouponDTO);
 
     /**
      * 根据优惠券id和会员id删除
@@ -73,7 +76,7 @@ public interface MemberCouponService {
      * @param memberCouponDTO    会员优惠券DTO
      * @return: com.shopx.common.model.result.DubboResult<EsMemberCouponDO>
      */
-    DubboResult deleteMemberCouponByCouponIdAndMemId(EsMemberCouponDTO memberCouponDTO);
+    DubboResult deleteMemberCouponByCouponIdAndMemId(@RequestBody EsMemberCouponDTO memberCouponDTO);
 
 
     /**
@@ -83,12 +86,12 @@ public interface MemberCouponService {
      * @param memberCouponDTO  会员优惠券DTO
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberCouponDO>
      */
-    DubboResult updateStateByShopIdAndCouponId(EsMemberCouponDTO memberCouponDTO);
+    DubboResult updateStateByShopIdAndCouponId(@RequestBody EsMemberCouponDTO memberCouponDTO);
 
     /**
      * app端查询优惠券领取数量
      */
-    DubboResult<Integer> getCouponCount(Long memberId, Long couponId);
+    DubboResult<Integer> getCouponCount(@RequestParam("") Long memberId, @RequestParam("couponId") Long couponId);
 
 
     /**
@@ -97,7 +100,7 @@ public interface MemberCouponService {
      * @date: 2019/06/03 13:42:53
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberCouponDO>
      */
-    DubboResult<EsAdminMemberCouponDO> getBuyerMemberCouponList(Long memberId);
+    DubboResult<EsAdminMemberCouponDO> getBuyerMemberCouponList(@RequestParam("memberId") Long memberId);
 
     /**
      * 买家-根据查询条件查询后台会员列表
@@ -105,7 +108,7 @@ public interface MemberCouponService {
      * @date: 2019/06/03 13:42:53
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberCouponDO>
      */
-    DubboResult<EsAdminMemberCouponDO> getBuyerMemberCouponNumList(Long memberId);
+    DubboResult<EsAdminMemberCouponDO> getBuyerMemberCouponNumList(@RequestParam("memberId") Long memberId);
 
     /**
      * 根据查询条件查询卖家会员列表
@@ -116,7 +119,7 @@ public interface MemberCouponService {
      * @param pageNum   页码
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberCouponDO>
      */
-    DubboPageResult<EsSellerMemberCouponDO> getSellerMemberCouponList(QuerySellerCouponDTO querySellerCouponDTO, int pageSize, int pageNum);
+    DubboPageResult<EsSellerMemberCouponDO> getSellerMemberCouponList(@RequestBody QuerySellerCouponDTO querySellerCouponDTO, @RequestParam("pageSize") int pageSize,@RequestParam("pageNum") int pageNum);
 
     /**
      * 根据查询推荐优惠券列表
@@ -127,14 +130,14 @@ public interface MemberCouponService {
      * @param pageNum   页码
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberCouponDO>
      */
-    DubboPageResult<EsTradeCouponDO> getMemberCouponRecommendList(Long memberId, int pageSize, int pageNum);
+    DubboPageResult<EsTradeCouponDO> getMemberCouponRecommendList(@RequestParam("memberId") Long memberId, @RequestParam("pageSize") int pageSize, @RequestParam("pageNum") int pageNum);
 
 
     /**
      * 统计已领取优惠券数目
      * @return
      */
-    DubboResult<Integer> getCouponNum(Long memberId);
+    DubboResult<Integer> getCouponNum(@RequestParam("memberId") Long memberId);
 
 
     /**
@@ -143,7 +146,7 @@ public interface MemberCouponService {
      * @param couponId
      * @return
      */
-    DubboResult<Integer> getCouponNum(Long memberId, Long couponId);
+    DubboResult<Integer> getCouponNum(@RequestParam("memberId") Long memberId, @RequestParam("couponId") Long couponId);
 
 
 
