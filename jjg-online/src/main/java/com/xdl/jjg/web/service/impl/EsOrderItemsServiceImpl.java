@@ -35,7 +35,7 @@ import com.xdl.jjg.web.service.feign.shop.CategoryService;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
 import org.apache.dubbo.config.annotation.Reference;
-import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -60,7 +60,7 @@ import java.util.stream.Collectors;
  * @author LiuJG344009799@qq.com
  * @since 2019-05-29
  */
-@Service(version = "${dubbo.application.version}",interfaceClass = IEsOrderItemsService.class,timeout = 5000)
+@Service
 public class EsOrderItemsServiceImpl extends ServiceImpl<EsOrderItemsMapper, EsOrderItems> implements IEsOrderItemsService {
     private static Logger logger = LoggerFactory.getLogger(EsOrderItemsServiceImpl.class);
 

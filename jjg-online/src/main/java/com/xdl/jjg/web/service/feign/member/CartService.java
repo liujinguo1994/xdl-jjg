@@ -4,6 +4,8 @@ import com.jjg.member.model.domain.EsCartNumDO;
 import com.jjg.member.model.dto.EsCartDTO;
 import com.xdl.jjg.response.service.DubboResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -17,6 +19,7 @@ public interface CartService {
      * @param memberId    memberId
      * @return: com.shopx.common.model.result.DubboResult<EsCartDO>
      */
+    @GetMapping("/getByMemberId")
     DubboResult<EsCartNumDO> getByMemberId(@RequestParam("memberId") Long memberId);
 
     /**
@@ -26,5 +29,6 @@ public interface CartService {
      * @param cartDTO    购物车DTO
      * @return: com.shopx.common.model.result.DubboResult<EsCartDO>
      */
+    @PostMapping("/insertCart")
     DubboResult<Long> insertCart(@RequestBody EsCartDTO cartDTO);
 }

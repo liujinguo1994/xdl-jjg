@@ -14,7 +14,7 @@ import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.IEsHikExceptionService;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
-import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  * @author yuanj 595831329@qq.com
  * @since 2020-05-09
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsHikExceptionService.class, timeout = 5000)
+@Service
 public class EsHikExceptionServiceImpl extends ServiceImpl<EsHikExceptionMapper, EsHikExceptionOrder> implements IEsHikExceptionService {
 
     private static Logger logger = LoggerFactory.getLogger(EsHikExceptionServiceImpl.class);

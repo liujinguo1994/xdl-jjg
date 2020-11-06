@@ -7,6 +7,8 @@ import com.jjg.shop.model.dto.EsGoodsSkuDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -22,6 +24,7 @@ public interface GoodsSkuService {
      * @param id    主键id
      * @return: com.shopx.common.model.result.DubboResult<EsGoodsSkuDO>
      */
+    @GetMapping("/getGoodsSku")
     DubboResult<EsGoodsSkuCO> getGoodsSku(@RequestParam("id") Long id);
 
     /**
@@ -31,6 +34,7 @@ public interface GoodsSkuService {
      * @param id    主键id
      * @return: com.shopx.common.model.result.DubboResult<EsGoodsSkuDO>
      */
+    @GetMapping("/getGoodsSkuEnable")
     DubboResult<EsGoodsSkuCO> getGoodsSkuEnable(@RequestParam("id") Long id);
 
     /**
@@ -40,6 +44,7 @@ public interface GoodsSkuService {
      * @param goodsSkuDTO    DTO
      * @return: com.shopx.common.model.result.DubboResult<EsGoodsSkuDO>
      */
+    @PostMapping("/sellerUpdateGoodsSkuGift")
     DubboResult<EsGoodsSkuDO> sellerUpdateGoodsSkuGift(@RequestBody List<EsGoodsSkuDTO> goodsSkuDTO, @RequestParam("shopId") Long shopId, @RequestParam("goodsId") Long goodsId);
 
     /**
@@ -47,7 +52,9 @@ public interface GoodsSkuService {
      * @param goodsId
      * @return
      */
+    @GetMapping("/getGoodsSkuList")
     DubboPageResult<EsSellerGoodsSkuDO> getGoodsSkuList(@RequestParam("goodsId") Long goodsId);
 
+    @GetMapping("/getSkuByIds")
     DubboPageResult<EsGoodsSkuDO> getSkuByIds(@RequestParam("id") Long[] id);
 }

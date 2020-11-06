@@ -28,7 +28,7 @@ import com.xdl.jjg.web.service.IEsSeckillApplyService;
 import com.xdl.jjg.web.service.IEsSeckillService;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
-import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +53,7 @@ import java.util.stream.Collectors;
  * @author LiuJG 344009799@qq.com
  * @since 2019-06-03
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsSeckillService.class, timeout = 50000)
+@Service
 public class EsSeckillServiceImpl extends ServiceImpl<EsSeckillMapper, EsSeckill> implements IEsSeckillService {
 
     private static Logger logger = LoggerFactory.getLogger(EsSeckillServiceImpl.class);

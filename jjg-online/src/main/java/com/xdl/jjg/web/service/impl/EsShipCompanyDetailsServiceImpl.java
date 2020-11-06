@@ -20,7 +20,7 @@ import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.web.service.IEsShipCompanyDetailsService;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,7 +40,7 @@ import java.util.stream.Collectors;
  * @author LBW 981087977@qq.com
  * @since 2019-11-28 10:41:07
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsShipCompanyDetailsService.class, timeout = 50000)
+@Service
 public class EsShipCompanyDetailsServiceImpl extends ServiceImpl<EsShipCompanyDetailsMapper, EsShipCompanyDetails> implements IEsShipCompanyDetailsService {
 
     private static Logger logger = LoggerFactory.getLogger(EsShipCompanyDetailsServiceImpl.class);

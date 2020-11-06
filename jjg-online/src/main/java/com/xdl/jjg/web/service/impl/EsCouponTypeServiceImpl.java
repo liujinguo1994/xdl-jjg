@@ -13,7 +13,6 @@ import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.IEsCouponTypeService;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +20,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
 
+import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -33,7 +33,7 @@ import java.util.stream.Collectors;
  * @author LBW 981087977@qq.com
  * @since 2019-11-21 10:38:46
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsCouponTypeService.class, timeout = 50000)
+@Service
 public class EsCouponTypeServiceImpl extends ServiceImpl<EsCouponTypeMapper, EsCouponType> implements IEsCouponTypeService {
 
     private static Logger logger = LoggerFactory.getLogger(EsCouponTypeServiceImpl.class);

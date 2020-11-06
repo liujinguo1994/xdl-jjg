@@ -21,12 +21,11 @@ import com.xdl.jjg.web.service.IEsPromotionGoodsService;
 import com.xdl.jjg.web.service.IEsSeckillApplyService;
 import com.xdl.jjg.web.service.feign.shop.GoodsService;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
-import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -44,10 +43,10 @@ import java.util.stream.Collectors;
  * @author LiuJG 344009799@qq.com
  * @since 2019-06-03
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsPromotionGoodsService.class, timeout = 50000)
+@Service
 public class EsPromotionGoodsServiceImpl extends ServiceImpl<EsPromotionGoodsMapper, EsPromotionGoods> implements IEsPromotionGoodsService {
 
-    @Reference(version = "${dubbo.application.version}", timeout = 10000)
+    @Autowired
     private GoodsService esGoodsService;
     @Autowired
     private IEsSeckillApplyService iEsSeckillApplyService;

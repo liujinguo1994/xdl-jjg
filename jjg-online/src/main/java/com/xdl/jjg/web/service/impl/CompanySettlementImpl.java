@@ -29,6 +29,7 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -41,6 +42,7 @@ import java.util.List;
  * @Date: 2019/8/19 16:45
  * @Version: 1.0
  */
+@Service
 public class CompanySettlementImpl extends AbstractStatementSettlement {
 
     private static SnowflakeIdWorker snowflakeIdWorker = new SnowflakeIdWorker(0,0);

@@ -5,8 +5,8 @@ import com.jjg.member.model.dto.EsMemberAddressDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
 @FeignClient(value = "jjg-member")
 public interface MemberAddressService {
 
@@ -19,6 +19,7 @@ public interface MemberAddressService {
      * @date: 2019/06/03 13:42:53
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberAddressDO>
      */
+    @GetMapping("/getMemberAddressListByMemberId")
     DubboPageResult<EsMemberAddressDO> getMemberAddressListByMemberId(@RequestParam("memberId") Long memberId);
 
     /**
@@ -28,6 +29,7 @@ public interface MemberAddressService {
      * @date: 2019/05/31 16:37:16
      * @return: com.shopx.common.model.result.DubboResult<EsMemberAddressDO>
      */
+    @GetMapping("/getDefaultMemberAddress")
     DubboResult<EsMemberAddressDO> getDefaultMemberAddress(@RequestParam("memberId") Long memberId);
     /**
      * 根据条件更新更新数据
@@ -37,6 +39,7 @@ public interface MemberAddressService {
      * @date: 2019/05/31 16:40:10
      * @return: com.shopx.common.model.result.DubboResult<EsMemberAddressDO>
      */
+    @PostMapping("/updateMemberAddress")
     DubboResult<EsMemberAddressDO> updateMemberAddress(@RequestBody EsMemberAddressDTO memberAddressDTO);
 
     /**
@@ -47,6 +50,7 @@ public interface MemberAddressService {
      * @date: 2019/05/31 16:39:30
      * @return: com.shopx.common.model.result.DubboResult<EsMemberAddressDO>
      */
+    @PostMapping("/insertMemberAddress")
     DubboResult<EsMemberAddressDO> insertMemberAddress(@RequestBody EsMemberAddressDTO memberAddressDTO);
 
     /**
@@ -57,6 +61,7 @@ public interface MemberAddressService {
      * @date: 2019/05/31 16:40:44
      * @return: com.shopx.common.model.result.DubboResult<EsMemberAddressDO>
      */
+    @DeleteMapping("/deleteMemberAddress")
     DubboResult deleteMemberAddress(@RequestParam("id") Long id);
 
     /**
@@ -67,6 +72,7 @@ public interface MemberAddressService {
      * @date: 2019/05/31 16:37:16
      * @return: com.shopx.common.model.result.DubboResult<EsMemberAddressDO>
      */
+    @GetMapping("/getMemberAddress")
     DubboResult<EsMemberAddressDO> getMemberAddress(@RequestParam("id") Long id);
 
     /**
@@ -76,6 +82,7 @@ public interface MemberAddressService {
      * @date: 2019/12/11 16:37:16
      * @return: com.shopx.common.model.result.DubboResult<EsMemberAddressDO>
      */
+    @PostMapping("/setDefaultMemberAddress")
     DubboResult<EsMemberAddressDO> setDefaultMemberAddress(@RequestParam("id") Long id,@RequestParam("memberId")  Long memberId);
 
 
@@ -89,6 +96,7 @@ public interface MemberAddressService {
      * @date: 2019/06/03 13:42:53
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberAddressDO>
      */
+    @GetMapping("/getMemberAddressList")
     DubboPageResult<EsMemberAddressDO> getMemberAddressList(@RequestBody EsMemberAddressDTO memberAddressDTO,@RequestParam("pageSize")  int pageSize,@RequestParam("pageNum")  int pageNum);
 
 
@@ -100,5 +108,6 @@ public interface MemberAddressService {
      * @date: 2019/06/03 13:42:53
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberAddressDO>
      */
+    @GetMapping("/getMemberAddressLists")
     DubboPageResult<EsMemberAddressDO> getMemberAddressLists(@RequestBody EsMemberAddressDTO esMemberAddressDTO);
 }

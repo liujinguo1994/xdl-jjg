@@ -11,7 +11,7 @@ import com.xdl.jjg.response.exception.ArgumentException;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.web.service.IEsOrderMetaService;
-import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -27,7 +27,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
  * @author LiuJG344009799@qq.com
  * @since 2019-05-29
  */
-@Service(version = "${dubbo.application.version}",interfaceClass = IEsOrderMetaService.class,timeout = 5000)
+@Service
 public class EsOrderMetaServiceImpl extends ServiceImpl<EsOrderMetaMapper, EsOrderMeta> implements IEsOrderMetaService {
 
     private static Logger logger = LoggerFactory.getLogger(EsOrderMetaServiceImpl.class);

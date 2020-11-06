@@ -46,7 +46,6 @@ import com.xdl.jjg.web.service.feign.system.LogiCompanyService;
 import com.xdl.jjg.web.service.feign.system.SmsService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
-import org.apache.dubbo.config.annotation.Service;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -55,10 +54,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import redis.clients.jedis.JedisCluster;
 
 import java.io.ByteArrayInputStream;
 import java.text.SimpleDateFormat;
@@ -77,7 +77,7 @@ import java.util.stream.Collectors;
  * @author LiuJG 344009799@qq.com
  * @since 2019-05-29
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsOrderService.class, timeout = 5000)
+@Service
 public class EsOrderServiceImpl extends ServiceImpl<EsOrderMapper, EsOrder> implements IEsOrderService {
     private static Logger logger = LoggerFactory.getLogger(EsOrderServiceImpl.class);
 
@@ -97,7 +97,7 @@ public class EsOrderServiceImpl extends ServiceImpl<EsOrderMapper, EsOrder> impl
     private EsDeliveryInfoMapper esDeliveryInfoMapper;
 
     @Autowired
-    private JedisCluster jedisCluster;
+    private RedisTemplate redisTemplate;
 
     @Autowired
     private IEsOrderMetaService iEsOrderMetaService;
@@ -814,7 +814,7 @@ public class EsOrderServiceImpl extends ServiceImpl<EsOrderMapper, EsOrder> impl
 
             String tradeSn = orderStatusChangeMsg.getEsOrderDTO().getTradeSn();
             logger.error("订单编号："+tradeSn);
-            String tradeVOCache = jedisCluster.get(TradeCachePrefix.TRADE_SESSION_ID_KEY.getPrefix() + tradeSn);
+            String tradeVOCache = (String) redisTemplate.opsForValue().get(TradeCachePrefix.TRADE_SESSION_ID_KEY.getPrefix() + tradeSn);
             EsTradeVO tradeVO = null;
             if (!StringUtils.isBlank(tradeVOCache)) {
                 tradeVO = JsonUtil.jsonToObject(tradeVOCache, EsTradeVO.class);

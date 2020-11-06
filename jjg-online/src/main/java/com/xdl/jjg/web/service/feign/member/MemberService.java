@@ -6,6 +6,8 @@ import com.jjg.member.model.dto.EsMemberBalanceDTO;
 import com.jjg.member.model.dto.EsMemberDTO;
 import com.xdl.jjg.response.service.DubboResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,6 +25,7 @@ public interface MemberService {
      * @date: 2019/05/31 16:40:10
      * @return: com.shopx.common.model.result.DubboResult<EsMemberDO>
      */
+    @PostMapping("/updateMemberLastLoginTime")
     DubboResult<EsMemberDO> updateMemberLastLoginTime(@RequestBody EsMemberDTO memberDTO);
     /**
      * 会员注册
@@ -32,6 +35,7 @@ public interface MemberService {
      * @date: 2019/05/31 16:39:30
      * @return: com.shopx.common.model.result.DubboResult<EsMemberDO>
      */
+    @PostMapping("/insertMember")
     DubboResult<EsMemberDO> insertMember(@RequestBody EsMemberDTO memberDTO);
     /**
      * 依据会员手机号或者姓名查询会员信息
@@ -41,6 +45,7 @@ public interface MemberService {
      * @date: 2019/06/03 13:42:53
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberDO>
      */
+    @GetMapping("/getMemberInfoByName")
     DubboResult<EsMemberDO> getMemberInfoByName(@RequestParam("name") String name);
 
     /**
@@ -51,12 +56,14 @@ public interface MemberService {
      * @date: 2019/06/03 13:42:53
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberDO>
      */
+    @GetMapping("/getMemberInfoByMobile")
     DubboResult<EsMemberDO> getMemberInfoByMobile(@RequestParam("mobile") String mobile);
     /**
      * 统计会员资产
      * @param memberId
      * @return
      */
+    @GetMapping("/meansCensus")
     DubboResult<EsMyMeansDO> meansCensus(@RequestParam("memberId") Long memberId);
 
     /**
@@ -67,6 +74,7 @@ public interface MemberService {
      * @date: 2019/05/31 16:37:16
      * @return: com.shopx.common.model.result.DubboResult<EsMemberDO>
      */
+    @GetMapping("/getAdminMember")
     DubboResult<EsMemberDO> getAdminMember(@RequestParam("id") Long id);
     /**
      * 修改密码
@@ -76,6 +84,7 @@ public interface MemberService {
      * @date: 2019/05/31 16:40:10
      * @return: com.shopx.common.model.result.DubboResult<EsMemberDO>
      */
+    @PostMapping("/updateMemberPass")
     DubboResult updateMemberPass(@RequestBody EsMemberDTO memberDTO);
     /**
      * 判断输入的旧密码是否正确
@@ -86,6 +95,7 @@ public interface MemberService {
      * @date: 2019/05/31 16:37:16
      * @return: com.shopx.common.model.result.DubboResult<EsMemberDO>
      */
+    @GetMapping("/getMemberByPassWord")
     DubboResult<EsMemberDO> getMemberByPassWord(@RequestParam("passWord") String passWord,@RequestParam("userId")  Long userId);
 
     /**
@@ -96,6 +106,7 @@ public interface MemberService {
      * @date: 2019/06/03 13:42:53
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberDO>
      */
+    @GetMapping("/getMemberInfoByNameOrMobile")
     DubboResult<EsMemberDO> getMemberInfoByNameOrMobile(@RequestParam("nameAndMobile") String nameAndMobile);
     /**
      * 根据id获取数据
@@ -105,10 +116,12 @@ public interface MemberService {
      * @date: 2019/05/31 16:37:16
      * @return: com.shopx.common.model.result.DubboResult<EsMemberDO>
      */
+    @GetMapping("/getMember")
     DubboResult<EsMemberDO> getMember(@RequestParam("id") Long id);
 
 
     //根据登录态标识查询会员信息
+    @GetMapping("/getMemberBySkey")
     DubboResult<EsMemberDO> getMemberBySkey(@RequestParam("skey") String skey);
 
     /**
@@ -119,6 +132,7 @@ public interface MemberService {
      * @date: 2019/05/31 16:37:16
      * @return: com.shopx.common.model.result.DubboResult<EsMemberDO>
      */
+    @GetMapping("/getMemberById")
     DubboResult<EsMemberDO> getMemberById(@RequestParam("id") Long id);
 
 
@@ -130,6 +144,7 @@ public interface MemberService {
      * @date: 2019/05/31 16:40:10
      * @return: com.shopx.common.model.result.DubboResult<EsMemberDO>
      */
+    @PostMapping("/updateMemberInfo")
     DubboResult updateMemberInfo(@RequestBody EsMemberDTO memberDTO);
 
     /**
@@ -140,6 +155,7 @@ public interface MemberService {
      * @date: 2019/05/31 16:40:10
      * @return: com.shopx.common.model.result.DubboResult<EsMemberDO>
      */
+    @PostMapping("/updateMemberBalance")
     DubboResult updateMemberBalance(@RequestBody EsMemberBalanceDTO memberBalanceDTO);
 
 }

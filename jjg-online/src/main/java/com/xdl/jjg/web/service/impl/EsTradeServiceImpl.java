@@ -46,7 +46,6 @@ import com.xdl.jjg.web.service.feign.shop.GoodsSkuQuantityService;
 import com.xdl.jjg.web.service.support.OrderOperateChecker;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Service;
 import org.apache.rocketmq.client.producer.MessageQueueSelector;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageQueue;
@@ -55,10 +54,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import redis.clients.jedis.JedisCluster;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -72,7 +72,7 @@ import java.util.stream.Collectors;
  * @author LiuJG344009799@qq.com
  * @since 2019-05-29
  */
-@Service(version = "${dubbo.application.version}",interfaceClass = IEsTradeService.class/*,timeout = 5000*/)
+@Service
 public class EsTradeServiceImpl extends ServiceImpl<EsTradeMapper, EsTrade> implements IEsTradeService {
     private static Logger logger = LoggerFactory.getLogger(EsTradeServiceImpl.class);
 
@@ -89,7 +89,7 @@ public class EsTradeServiceImpl extends ServiceImpl<EsTradeMapper, EsTrade> impl
     private EsOrderLogMapper esOrderLogMapper;
 
     @Autowired
-    private JedisCluster jedisCluster;
+    private RedisTemplate redisTemplate;
 
     @Autowired
     private EsDeliveryInfoMapper esDeliveryInfoMapper;
@@ -363,7 +363,7 @@ public class EsTradeServiceImpl extends ServiceImpl<EsTradeMapper, EsTrade> impl
 
             //压入缓存
             String cacheKey = TradeCachePrefix.TRADE_SESSION_ID_KEY.getPrefix() + esTradeVO.getTradeSn();
-            this.jedisCluster.set(cacheKey, JsonUtil.objectToJson(esTradeVO));
+            this.redisTemplate.opsForValue().set(cacheKey, JsonUtil.objectToJson(esTradeVO));
             // 入库操作
             long start = System.currentTimeMillis();
             logger.info("入库操作开始时间[{}]",start);

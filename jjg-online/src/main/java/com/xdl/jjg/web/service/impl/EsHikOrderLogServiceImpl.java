@@ -8,7 +8,7 @@ import com.xdl.jjg.mapper.EsHikOrderLogMapper;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.IEsHikOrderLogService;
-import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ import org.springframework.transaction.interceptor.TransactionAspectSupport;
  * @author yuanj 595831329@qq.com
  * @since 2020-05-09
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsHikOrderLogService.class, timeout = 50000)
+@Service
 public class EsHikOrderLogServiceImpl extends ServiceImpl<EsHikOrderLogMapper, EsHikOrderLog> implements IEsHikOrderLogService {
 
     private static Logger logger = LoggerFactory.getLogger(EsHikOrderLogServiceImpl.class);

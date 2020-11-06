@@ -20,7 +20,7 @@ import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.util.StringUtil;
 import com.xdl.jjg.web.service.IEsPaymentMethodService;
-import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +41,7 @@ import java.util.Map;
  * @author LiuJG 344009799@qq.com
  * @since 2019-06-03
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsPaymentMethodService.class, timeout = 50000)
+@Service
 public class EsPaymentMethodServiceImpl extends ServiceImpl<EsPaymentMethodMapper, EsPaymentMethod> implements IEsPaymentMethodService {
 
     private static Logger logger = LoggerFactory.getLogger(EsPaymentMethodServiceImpl.class);

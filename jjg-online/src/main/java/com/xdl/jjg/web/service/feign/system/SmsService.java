@@ -2,6 +2,7 @@ package com.xdl.jjg.web.service.feign.system;
 
 import com.jjg.system.model.dto.EsSmsSendDTO;
 import com.xdl.jjg.response.service.DubboResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 public interface SmsService {
@@ -11,6 +12,7 @@ public interface SmsService {
      *
      * @param sendDTO
      */
+    @GetMapping("/sendLfc")
     DubboResult sendLfc(@RequestBody EsSmsSendDTO sendDTO);
 
     /**
@@ -18,5 +20,6 @@ public interface SmsService {
      *
      * @param sendDTO
      */
+    @GetMapping("/send")
     DubboResult send(@RequestBody EsSmsSendDTO sendDTO);
 }

@@ -5,8 +5,7 @@ import com.jjg.member.model.dto.EsCommercelItemsDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 @FeignClient(value = "jjg-member")
 public interface CommercelItemsService {
@@ -18,6 +17,7 @@ public interface CommercelItemsService {
      * @param memberId  会员id
      * @return: com.shopx.common.model.result.DubboPageResult<EsCommercelItemsDO>
      */
+    @GetMapping("/getCommercelItemsListByMemeberId")
     DubboPageResult<EsCommercelItemsDO> getCommercelItemsListByMemeberId(@RequestParam("memberId") Long memberId);
 
 
@@ -29,6 +29,7 @@ public interface CommercelItemsService {
      * @param cartId    cartId
      * @return: com.shopx.common.model.result.DubboResult<EsCommercelItemsDO>
      */
+    @GetMapping("/getItemsBySkuId")
     DubboResult<EsCommercelItemsDO> getItemsBySkuId(@RequestParam("skuId") Long skuId, @RequestParam("cartId") Long cartId);
 
 
@@ -39,6 +40,7 @@ public interface CommercelItemsService {
      * @param commercelItemsDTO    购物车项DTO
      * @return: com.shopx.common.model.result.DubboResult<EsCommercelItemsDO>
      */
+    @PostMapping("/insertCommercelItems")
     DubboResult insertCommercelItems(@RequestBody EsCommercelItemsDTO commercelItemsDTO);
 
     /**
@@ -48,6 +50,7 @@ public interface CommercelItemsService {
      * @param commercelItemsDTO    购物车项DTO
      * @return: com.shopx.common.model.result.DubboResult<EsCommercelItemsDO>
      */
+    @PostMapping("/updateCommercelItems")
     DubboResult updateCommercelItems(@RequestBody EsCommercelItemsDTO commercelItemsDTO);
 
     /**
@@ -57,6 +60,7 @@ public interface CommercelItemsService {
      * @param id    主键id
      * @return: com.shopx.common.model.result.DubboResult<EsCommercelItemsDO>
      */
+    @GetMapping("/getCommercelItems")
     DubboResult<EsCommercelItemsDO> getCommercelItems(@RequestParam("id") Long id);
 
     /**
@@ -68,16 +72,10 @@ public interface CommercelItemsService {
      * @param pageNum   页码
      * @return: com.shopx.common.model.result.DubboPageResult<EsCommercelItemsDO>
      */
+    @GetMapping("/getCommercelItemsList")
     DubboPageResult<EsCommercelItemsDO> getCommercelItemsList(@RequestBody EsCommercelItemsDTO commercelItemsDTO, @RequestParam("pageSize") int pageSize, @RequestParam("pageNum") int pageNum);
 
-    /**
-     * 根据主键删除数据
-     * @auther: yuanj 595831329@qq.com
-     * @date: 2019/07/04 10:40:44
-     * @param ids    主键id
-     * @return: com.shopx.common.model.result.DubboResult<EsCommercelItemsDO>
-     */
-    DubboResult deleteCommercelItems(@RequestParam("ids") Integer[] ids);
+
 
     /**
      * 根据skuId删除数据
@@ -86,5 +84,6 @@ public interface CommercelItemsService {
      * @param skuIds    购物车id
      * @return: com.shopx.common.model.result.DubboResult<EsCommercelItemsDO>
      */
+    @DeleteMapping("/deleteByskuId")
     DubboResult deleteByskuId(@RequestParam("memberId") Long memberId,@RequestParam("skuIds")  Integer[] skuIds);
 }

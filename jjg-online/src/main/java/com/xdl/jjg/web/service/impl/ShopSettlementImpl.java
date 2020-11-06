@@ -25,7 +25,6 @@ import com.xdl.jjg.util.SnowflakeIdWorker;
 import com.xdl.jjg.web.service.feign.member.ShopDetailService;
 import com.xdl.jjg.web.service.feign.shop.ShopService;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.dubbo.config.annotation.Reference;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;

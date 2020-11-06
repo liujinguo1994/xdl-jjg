@@ -32,7 +32,7 @@ import com.xdl.jjg.web.service.feign.member.MemberService;
 import com.xdl.jjg.web.service.feign.system.SettingsService;
 import com.xdl.jjg.web.service.support.OrderOperateChecker;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -51,7 +51,7 @@ import java.util.List;
  * @version v2.0
  * @since v7.0.0
  */
-@Service(version = "${dubbo.application.version}",interfaceClass = IEsOrderOperateService.class,timeout = 5000)
+@Service
 public class EsOrderOperateImpl implements IEsOrderOperateService {
     private static Logger logger = LoggerFactory.getLogger(EsOrderOperateImpl.class);
     @Autowired

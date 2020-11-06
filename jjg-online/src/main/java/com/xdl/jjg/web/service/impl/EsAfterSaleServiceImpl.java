@@ -25,12 +25,12 @@ import com.xdl.jjg.util.StringUtil;
 import com.xdl.jjg.web.service.*;
 import com.xdl.jjg.web.service.feign.shop.CategoryService;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -51,7 +51,7 @@ import java.util.stream.Collectors;
  * @author LBW 981087977@qq.com
  * @since 2019-06-05 09:20:40
  */
-@Service(version = "${dubbo.application.version}" , interfaceClass = IEsAfterSaleService.class, timeout = 50000)
+@Service
 public class EsAfterSaleServiceImpl extends ServiceImpl<EsAfterSaleMapper, EsAfterSale> implements IEsAfterSaleService {
 
     private static Logger logger = LoggerFactory.getLogger(EsAfterSaleServiceImpl.class);

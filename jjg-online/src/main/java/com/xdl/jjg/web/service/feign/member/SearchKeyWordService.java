@@ -4,8 +4,8 @@ import com.jjg.member.model.dto.EsSearchKeyWordDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
 @FeignClient(value = "jjg-member")
 public interface SearchKeyWordService {
     /**
@@ -14,6 +14,7 @@ public interface SearchKeyWordService {
      * @date: 2019/06/03 13:42:53
      * @return: com.shopx.common.model.result.DubboPageResult<EsSearchKeyWordDO>
      */
+    @GetMapping("/getSearchKeyWordList")
     DubboPageResult getSearchKeyWordList(@RequestParam("memberId") Long memberId);
 
     /**
@@ -23,6 +24,7 @@ public interface SearchKeyWordService {
      * @param searchKeyWordDTO    DTO
      * @return: com.shopx.common.model.result.DubboResult<EsSearchKeyWordDO>
      */
+    @PostMapping("/insertSearchKeyWord")
     DubboResult insertSearchKeyWord(@RequestBody EsSearchKeyWordDTO searchKeyWordDTO);
 
     /**
@@ -32,6 +34,7 @@ public interface SearchKeyWordService {
      * @param id    主键id
      * @return: com.shopx.common.model.result.DubboResult<EsSearchKeyWordDO>
      */
+    @DeleteMapping("/deleteSearchKeyWord")
     DubboResult deleteSearchKeyWord(@RequestParam("id") Long id);
 
     /**
@@ -41,6 +44,7 @@ public interface SearchKeyWordService {
      * @param memberId    memberId
      * @return: com.shopx.common.model.result.DubboResult<EsSearchKeyWordDO>
      */
+    @DeleteMapping("/deleteSearchKeyWordBatch")
     DubboResult deleteSearchKeyWordBatch(@RequestParam("memberId") Long memberId);
 
     /**
@@ -49,6 +53,7 @@ public interface SearchKeyWordService {
      * @date: 2019/06/03 13:42:53
      * @return: com.shopx.common.model.result.DubboPageResult<EsSearchKeyWordDO>
      */
+    @GetMapping("/getSearchKeyWord")
     DubboPageResult getSearchKeyWord(@RequestParam("memberId") Long memberId);
 
 }

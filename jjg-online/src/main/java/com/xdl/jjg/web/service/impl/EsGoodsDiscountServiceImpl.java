@@ -33,7 +33,7 @@ import com.xdl.jjg.web.service.job.ResponseEntityMsg;
 import com.xdl.jjg.web.service.job.execute.XXLHttpClient;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
-import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -57,7 +57,7 @@ import java.util.stream.Collectors;
  * @author LBW 981087977@qq.com
  * @since 2019-07-02 15:35:42
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsGoodsDiscountService.class, timeout = 50000)
+@Service
 public class EsGoodsDiscountServiceImpl extends ServiceImpl<EsGoodsDiscountMapper, EsGoodsDiscount> implements IEsGoodsDiscountService {
 
     private static Logger logger = LoggerFactory.getLogger(EsGoodsDiscountServiceImpl.class);

@@ -5,6 +5,7 @@ import com.jjg.shop.model.domain.EsCategoryDO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(value = "jjg-shop")
 public interface CategoryService {
@@ -13,6 +14,7 @@ public interface CategoryService {
      * 所有的一级分类
      * @return
      */
+    @GetMapping("/getFirstByName")
     DubboResult<EsCategoryDO> getFirstByName(@RequestParam("name") String name);
 
     /**
@@ -20,6 +22,7 @@ public interface CategoryService {
      * @param id
      * @return
      */
+    @GetMapping("/getCategoryChildren")
     DubboPageResult<EsCategoryDO> getCategoryChildren(@RequestParam("id") Long id);
 
     /**
@@ -29,6 +32,7 @@ public interface CategoryService {
      * @param id    主键id
      * @return: com.shopx.common.model.result.DubboResult<EsCategoryDO>
      */
+    @GetMapping("/getCategory")
     DubboResult<EsCategoryDO> getCategory(@RequestParam("id") Long id);
 
 
@@ -37,6 +41,7 @@ public interface CategoryService {
      * @param id 主键ID
      * @return
      */
+    @GetMapping("/getCategoryParentList")
     DubboPageResult<EsCategoryDO> getCategoryParentList(@RequestParam("id") Long id);
 
 
@@ -44,6 +49,7 @@ public interface CategoryService {
      * 所有的一级分类
      * @return
      */
+    @GetMapping("/getFirstBrandList")
     DubboPageResult<EsCategoryDO> getFirstBrandList();
 
     /**
@@ -51,6 +57,7 @@ public interface CategoryService {
      * @param id
      * @return
      */
+    @GetMapping("/getBuyCategoryChildren")
     DubboPageResult<EsBuyerCategoryDO> getBuyCategoryChildren(@RequestParam("id") Long id);
 
 }

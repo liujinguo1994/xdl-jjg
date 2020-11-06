@@ -36,16 +36,15 @@ import com.xdl.jjg.web.service.feign.shop.GoodsService;
 import com.xdl.jjg.web.service.job.execute.XXLHttpClient;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
-import org.apache.dubbo.config.annotation.Reference;
-import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import redis.clients.jedis.JedisCluster;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -62,7 +61,7 @@ import java.util.stream.Collectors;
  * @author LiuJG 344009799@qq.com
  * @since 2019-06-03
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsSeckillApplyService.class, timeout = 300000)
+@Service
 public class EsSeckillApplyServiceImpl extends ServiceImpl<EsSeckillApplyMapper, EsSeckillApply> implements IEsSeckillApplyService {
 
     private static Logger logger = LoggerFactory.getLogger(EsSeckillApplyServiceImpl.class);
@@ -82,7 +81,7 @@ public class EsSeckillApplyServiceImpl extends ServiceImpl<EsSeckillApplyMapper,
     private EsPromotionGoodsMapper esPromotionGoodsMapper;
 
     @Autowired
-    private JedisCluster jedisCluster;
+    private RedisTemplate redisTemplate;
     @Value("${xxl.job.admin.addresses}")
     private String addresses;
 
@@ -462,7 +461,7 @@ public class EsSeckillApplyServiceImpl extends ServiceImpl<EsSeckillApplyMapper,
         //得到活动缓存的key
         String redisKey = PromotionCacheKeys.getSeckillKey(nyr);
         //查询活动商品
-        String seckillGoodsCache = this.jedisCluster.hget(redisKey, timeLine.toString());
+        String seckillGoodsCache = (String) this.redisTemplate.opsForValue().getAndSet(redisKey, timeLine.toString());
         // 判断是否为空 如果为空 则保存
         if (StringUtil.isEmpty(seckillGoodsCache)){
             List<SeckillGoodsVO> list = new ArrayList<>();
@@ -477,7 +476,7 @@ public class EsSeckillApplyServiceImpl extends ServiceImpl<EsSeckillApplyMapper,
             seckillGoods.setGoodsImage(goodsVO.getGoodsImage());
             list.add(seckillGoods);
             String goods = JsonUtil.objectToJson(list);
-            this.jedisCluster.hset(redisKey,timeLine.toString(),goods);
+            this.redisTemplate.opsForHash().put(redisKey,timeLine.toString(),goods);
         }else {
             // 如果不为空则重新获取缓存中的秒杀活动商品 add进去再保存缓存
             List<SeckillGoodsVO> seckillGoodsVOS = JsonUtil.jsonToList(seckillGoodsCache, SeckillGoodsVO.class);
@@ -492,7 +491,7 @@ public class EsSeckillApplyServiceImpl extends ServiceImpl<EsSeckillApplyMapper,
             seckillGoods.setGoodsImage(goodsVO.getGoodsImage());
             seckillGoodsVOS.add(seckillGoods);
             String goods = JsonUtil.objectToJson(seckillGoodsVOS);
-            this.jedisCluster.hset(redisKey,timeLine.toString(),goods);
+            this.redisTemplate.opsForHash().put(redisKey,timeLine.toString(),goods);
         }
     }
 

@@ -33,16 +33,16 @@ import com.xdl.jjg.web.service.job.ResponseEntityMsg;
 import com.xdl.jjg.web.service.job.execute.XXLHttpClient;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
-import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
-import redis.clients.jedis.JedisCluster;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -57,7 +57,7 @@ import java.util.stream.Collectors;
  * @author LBW 981087977@qq.com
  * @since 2019-06-05 09:20:40
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsFullDiscountService.class, timeout = 50000)
+@Service
 public class EsFullDiscountServiceImpl extends ServiceImpl<EsFullDiscountMapper, EsFullDiscount> implements IEsFullDiscountService {
 
     private static Logger logger = LoggerFactory.getLogger(EsFullDiscountServiceImpl.class);
@@ -66,7 +66,7 @@ public class EsFullDiscountServiceImpl extends ServiceImpl<EsFullDiscountMapper,
     private EsFullDiscountMapper fullDiscountMapper;
 
     @Autowired
-    private JedisCluster jedisCluster;
+    private RedisTemplate redisTemplate;
 
     @Autowired
     private PromotionRuleManager promotionRuleManager;
@@ -137,7 +137,7 @@ public class EsFullDiscountServiceImpl extends ServiceImpl<EsFullDiscountMapper,
             }
             fullDiscountVO.setIsDel(0);
             // 将活动放入缓存中
-            jedisCluster.set(PromotionCacheKeys.getFullDiscountKey(id), JSON.toJSONString(fullDiscountVO));
+            redisTemplate.opsForValue().set(PromotionCacheKeys.getFullDiscountKey(id), JSON.toJSONString(fullDiscountVO));
             // 执行器名称
             String cartPromotionChangeJobHandler = "cartPromotionChangeJobHandler";
             // 第三方任务名称
@@ -207,7 +207,7 @@ public class EsFullDiscountServiceImpl extends ServiceImpl<EsFullDiscountMapper,
             // 将活动商品入库
             fullDiscountDTO.setIsDel(0);
             this.promotionGoodsService.updatePromotionGoods(fullDiscountDTO.getGoodsList(), detailDTO);
-            jedisCluster.set(PromotionCacheKeys.getFullDiscountKey(id), JSON.toJSONString(fullDiscountDTO));
+            redisTemplate.opsForValue().set(PromotionCacheKeys.getFullDiscountKey(id), JSON.toJSONString(fullDiscountDTO));
             /*
              * 修改定时任务信息
              */
@@ -321,7 +321,7 @@ public class EsFullDiscountServiceImpl extends ServiceImpl<EsFullDiscountMapper,
         try {
             EsFullDiscount esFullDiscount = fullDiscountMapper.selectById(id);
             this.fullDiscountMapper.deleteById(id);
-            this.jedisCluster.del(PromotionCacheKeys.getFullDiscountKey(id));
+            this.redisTemplate.delete(PromotionCacheKeys.getFullDiscountKey(id));
             // 处理该活动商品表对应的 下架状态
             promotionGoodsService.deletePromotionGoods(id,PromotionTypeEnum.FULL_DISCOUNT.name());
 
@@ -355,7 +355,7 @@ public class EsFullDiscountServiceImpl extends ServiceImpl<EsFullDiscountMapper,
      */
     @Override
     public DubboResult getFullDiscountForCache(Long id) {
-       String fullDiscountStr =  this.jedisCluster.get(PromotionCacheKeys.getFullDiscountKey(id));
+       String fullDiscountStr =  (String) this.redisTemplate.opsForValue().get(PromotionCacheKeys.getFullDiscountKey(id));
         EsFullDiscountDO fullDiscountDO = new EsFullDiscountDO();
        if(!StringUtils.isBlank(fullDiscountStr)){
            fullDiscountDO = JsonUtil.jsonToObject(fullDiscountStr, EsFullDiscountDO.class);

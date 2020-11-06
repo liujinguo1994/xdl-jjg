@@ -8,8 +8,8 @@ import com.jjg.member.model.dto.EsUpdateTopShopDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
 @FeignClient(value = "jjg-member")
 public interface MemberCollectionShopService {
 
@@ -18,6 +18,7 @@ public interface MemberCollectionShopService {
      *
      * @return
      */
+    @GetMapping("/getMemberCollectionShopList")
     DubboPageResult<EsQueryCollectionShopDO> getMemberCollectionShopList(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize,@RequestBody EsQueryCollectShopDTO dto);
 
 
@@ -26,6 +27,7 @@ public interface MemberCollectionShopService {
      *
      * @return
      */
+    @GetMapping("/getMemberCollectionShopListNew")
     DubboPageResult<EsQueryCollectionShopDO> getMemberCollectionShopListNew(@RequestParam("page") int page, @RequestParam("pageSize") int pageSize,@RequestBody EsQueryCollectShopDTO dto);
 
 
@@ -37,6 +39,7 @@ public interface MemberCollectionShopService {
      * @param shopId
      * @return
      */
+    @DeleteMapping("/deleteMemberCollectionShop")
     DubboResult<EsMemberCollectionShopDO> deleteMemberCollectionShop(@RequestParam("memberId") Long memberId, @RequestParam("shopId") Long shopId);
 
 
@@ -47,6 +50,7 @@ public interface MemberCollectionShopService {
      * @param esMemberCollectionShopDTO
      * @return
      */
+    @PostMapping("/insertRemarks")
     DubboResult insertRemarks(@RequestBody EsMemberCollectionShopDTO esMemberCollectionShopDTO);
 
 
@@ -56,6 +60,7 @@ public interface MemberCollectionShopService {
      * @param memberId
      * @return
      */
+    @PostMapping("/updateShopTop")
     DubboResult updateShopTop(@RequestBody EsUpdateTopShopDTO esUpdateTopShopDTO, @RequestParam("memberId") Long memberId);
 
 

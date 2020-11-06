@@ -23,7 +23,8 @@ import com.xdl.jjg.util.BeanUtil;
 import com.xdl.jjg.web.service.IEsCakeCardService;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.dubbo.config.annotation.Service;
+
+import org.springframework.stereotype.Service;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -46,7 +47,7 @@ import java.util.stream.Collectors;
  @Date 2020/3/31
  @Version V1.0
  **/
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsCakeCardService.class, timeout = 5000)
+@Service
 public class IEsCakeCardServiceImpl  extends ServiceImpl<EsCakeCardMapper, EsCakeCard> implements IEsCakeCardService {
     private static Logger logger = LoggerFactory.getLogger(IEsCakeCardServiceImpl.class);
     @Autowired

@@ -4,6 +4,8 @@ import com.jjg.member.model.domain.EsReceiptHistoryDO;
 import com.jjg.member.model.dto.EsReceiptHistoryDTO;
 import com.xdl.jjg.response.service.DubboResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 @FeignClient(value = "jjg-member")
@@ -18,7 +20,7 @@ public interface ReceiptHistoryService {
      * @date: 2019/05/31 16:39:30
      * @return: com.shopx.common.model.result.DubboResult<EsReceiptHistoryDO>
      */
-
+@PostMapping("/insertReceiptHistory")
     DubboResult insertReceiptHistory(@RequestBody EsReceiptHistoryDTO receiptHistoryDTO);
 
     /**
@@ -29,5 +31,6 @@ public interface ReceiptHistoryService {
      * @date: 2019/05/31 16:37:16
      * @return: com.shopx.common.model.result.DubboResult<EsReceiptHistoryDO>
      */
+    @GetMapping("/getReceiptHistoryByGoodsIdAndOrdersn")
     DubboResult<EsReceiptHistoryDO> getReceiptHistoryByGoodsIdAndOrdersn(@RequestParam("goodsId") Long goodsId, @RequestParam("orderSn") String orderSn);
 }

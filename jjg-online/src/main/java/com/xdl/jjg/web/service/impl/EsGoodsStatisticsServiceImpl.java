@@ -14,7 +14,7 @@ import com.xdl.jjg.mapper.EsGoodsStatisticsMapper;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.web.service.IEsGoodsStatisticsService;
-import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -27,7 +27,7 @@ import java.util.List;
  * @author KL 1137429161@qq.com
  * @since 2020-5-14 11:18:55
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsGoodsStatisticsService.class, timeout = 50000)
+@Service
 public class EsGoodsStatisticsServiceImpl implements IEsGoodsStatisticsService {
     @Autowired
     private EsGoodsStatisticsMapper esGoodsStatisticsMapper;

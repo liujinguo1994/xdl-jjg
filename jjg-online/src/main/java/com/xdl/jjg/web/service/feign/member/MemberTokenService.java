@@ -39,7 +39,7 @@ public interface MemberTokenService {
      * @param memberTokenDTO  DTO
      * @return: com.shopx.common.model.result.DubboPageResult<EsMemberTokenDO>
      */
-    @GetMapping("/")
+    @GetMapping("/getMemberTokenInfo")
     DubboResult<EsMemberTokenDO> getMemberTokenInfo(@RequestBody EsMemberTokenDTO memberTokenDTO);
 
     /**
@@ -49,6 +49,6 @@ public interface MemberTokenService {
      * @param id    主键id
      * @return: com.shopx.common.model.result.DubboResult<EsMemberTokenDO>
      */
-    @GetMapping("/")
+    @GetMapping("/getMemberToken")
     DubboResult<EsMemberTokenDO> getMemberToken(@RequestParam("id") Long id);
 }

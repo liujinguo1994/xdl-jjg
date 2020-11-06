@@ -23,8 +23,7 @@ import com.xdl.jjg.web.service.IEsSupplierBillDetailService;
 import com.xdl.jjg.web.service.feign.member.CompanyService;
 import com.xdl.jjg.web.service.feign.member.MemberService;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Reference;
-import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -45,7 +44,7 @@ import java.util.stream.Collectors;
  * @author LiuJG 344009799@qq.com
  * @since 2019-08-20
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsSupplierBillDetailService.class, timeout = 50000)
+@Service
 public class EsSupplierBillDetailServiceImpl extends ServiceImpl<EsSupplierBillDetailMapper, EsSupplierBillDetail> implements IEsSupplierBillDetailService {
 
     private static Logger logger = LoggerFactory.getLogger(EsSupplierBillDetailServiceImpl.class);

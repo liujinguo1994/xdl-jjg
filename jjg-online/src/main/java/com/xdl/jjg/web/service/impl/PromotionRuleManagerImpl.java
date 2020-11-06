@@ -12,7 +12,7 @@ import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.StringUtil;
 import com.xdl.jjg.web.service.feign.shop.GoodsService;
 import org.apache.commons.lang.StringUtils;
-import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.ArrayList;

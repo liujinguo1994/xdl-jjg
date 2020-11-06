@@ -23,7 +23,7 @@ import com.xdl.jjg.util.DateUtils;
 import com.xdl.jjg.util.SnowflakeIdWorker;
 import com.xdl.jjg.web.service.IEsSelfDateService;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
@@ -45,7 +45,7 @@ import java.util.stream.Collectors;
  * @author LiuJG 344009799@qq.com
  * @since 2019-06-03
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsSelfDateService.class, timeout = 50000)
+@Service
 public class EsSelfDateServiceImpl extends ServiceImpl<EsSelfDateMapper, EsSelfDate> implements IEsSelfDateService {
 
     private static Logger logger = LoggerFactory.getLogger(EsSelfDateServiceImpl.class);

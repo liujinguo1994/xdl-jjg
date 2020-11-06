@@ -17,13 +17,13 @@ import com.xdl.jjg.response.service.DubboResult;
 import com.xdl.jjg.util.JsonUtil;
 import com.xdl.jjg.web.service.IEsPaymentBillService;
 import com.xdl.jjg.web.service.IPayService;
-import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import redis.clients.jedis.JedisCluster;
 
+import org.springframework.stereotype.Service;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +36,7 @@ import java.util.Map;
  * @Date: 7/9/2019 20:04
  * @Version: 1.0
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IPayService.class, timeout = 5000)
+@Service
 public class PayServiceImpl implements IPayService {
 
     private Logger logger = LoggerFactory.getLogger(PayServiceImpl.class);

@@ -25,7 +25,7 @@ import com.xdl.jjg.web.service.feign.shop.GoodsSkuService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.dubbo.config.annotation.Reference;
-import org.apache.dubbo.config.annotation.Service;
+import org.springframework.stereotype.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 
@@ -39,7 +39,7 @@ import java.util.List;
  * @version v2.0
  * @since v7.0.0
  */
-@Service(version = "${dubbo.application.version}",interfaceClass = IEsTradeIntodbService.class,timeout = 5000)
+@Service
 public class EsTradeIntodbServiceImpl implements IEsTradeIntodbService {
 
     public static final SnowflakeIdWorker snowflakeIdWorker = new SnowflakeIdWorker(0,0);

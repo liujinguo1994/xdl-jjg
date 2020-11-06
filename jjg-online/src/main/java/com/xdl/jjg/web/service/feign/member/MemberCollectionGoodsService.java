@@ -7,8 +7,7 @@ import com.jjg.member.model.dto.EsQueryMemberCollectionGoodsDTO;
 import com.xdl.jjg.response.service.DubboPageResult;
 import com.xdl.jjg.response.service.DubboResult;
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 @FeignClient(value = "jjg-member")
@@ -19,6 +18,7 @@ public interface MemberCollectionGoodsService {
      * @param memberId
      * @return
      */
+    @GetMapping("/getMemberCollectionGoodListByMemberId")
     DubboPageResult getMemberCollectionGoodListByMemberId(@RequestParam("memberId") Long memberId);
 
     /**
@@ -30,6 +30,7 @@ public interface MemberCollectionGoodsService {
      * @exception
      *
      */
+    @GetMapping("/getIsMemberCollection")
     DubboResult<Boolean> getIsMemberCollection(@RequestParam("goodsId") Long goodsId,@RequestParam("memberId")  Long memberId);
 
     /**
@@ -38,6 +39,7 @@ public interface MemberCollectionGoodsService {
      * @param esQueryMemberCollectionGoodsDTO
      * @return
      */
+    @GetMapping("/getMemberCollectionGoodListBuyer")
     DubboPageResult<EsMemberCollectionGoodsDO> getMemberCollectionGoodListBuyer(@RequestBody EsQueryMemberCollectionGoodsDTO esQueryMemberCollectionGoodsDTO);
 
 
@@ -48,6 +50,7 @@ public interface MemberCollectionGoodsService {
      * @param ids
      * @return
      */
+    @DeleteMapping("/deleteMemberCollectionGoodBatch")
     DubboResult<EsMemberCollectionGoodsDO> deleteMemberCollectionGoodBatch(@RequestParam("memberId") Long memberId,@RequestParam("ids")  List<Long> ids);
 
     /**
@@ -57,6 +60,7 @@ public interface MemberCollectionGoodsService {
      * @param goodsId
      * @return
      */
+    @DeleteMapping("/deleteMemberCollectionGood")
     DubboResult<EsMemberCollectionGoodsDO> deleteMemberCollectionGood(@RequestParam("memberId") Long memberId, @RequestParam("goodsId") Long goodsId);
 
     /**
@@ -65,6 +69,7 @@ public interface MemberCollectionGoodsService {
      * @param esMemberCollectionGoodsDTO
      * @return
      */
+    @PostMapping("/insertMemberCollectionGood")
     DubboResult<EsMemberCollectionGoodsDO> insertMemberCollectionGood(@RequestBody EsMemberCollectionGoodsDTO esMemberCollectionGoodsDTO);
 
 
@@ -74,6 +79,7 @@ public interface MemberCollectionGoodsService {
      * @param goodsId
      * @return
      */
+    @PostMapping("/updateRemind")
     DubboResult updateRemind(@RequestParam("goodsId") Long goodsId, @RequestParam("userId") Long userId);
 
     /**
@@ -82,6 +88,7 @@ public interface MemberCollectionGoodsService {
      * @param memberId
      * @return
      */
+    @GetMapping("/getMemberCollectionGoodNumBuyer")
     DubboResult<EsMemberCollectionGoodsSortStatisticsDO> getMemberCollectionGoodNumBuyer(@RequestParam("memberId") Long memberId);
 
     /**
@@ -90,5 +97,6 @@ public interface MemberCollectionGoodsService {
      * @param goodsId
      * @return
      */
+    @DeleteMapping("/deleteRemind")
     DubboResult deleteRemind(@RequestParam("goodsId") Long goodsId, @RequestParam("userId") Long userId);
 }

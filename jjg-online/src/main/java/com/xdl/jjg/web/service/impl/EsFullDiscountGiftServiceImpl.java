@@ -28,10 +28,10 @@ import com.xdl.jjg.web.service.IEsFullDiscountGiftService;
 import com.xdl.jjg.web.service.feign.shop.*;
 import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.StringUtils;
-import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -40,7 +40,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
 /**
  * <p>
  * 满减赠品表 服务实现类
@@ -49,7 +48,7 @@ import java.util.stream.Collectors;
  * @author LBW 981087977@qq.com
  * @since 2019-06-05 09:20:40
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsFullDiscountGiftService.class, timeout = 50000)
+@Service
 public class EsFullDiscountGiftServiceImpl extends ServiceImpl<EsFullDiscountGiftMapper, EsFullDiscountGift> implements IEsFullDiscountGiftService {
 
     private static Logger logger = LoggerFactory.getLogger(EsFullDiscountGiftServiceImpl.class);

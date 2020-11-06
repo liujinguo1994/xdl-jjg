@@ -28,11 +28,11 @@ import com.xdl.jjg.web.service.feign.member.CompanyService;
 import com.xdl.jjg.web.service.feign.member.MemberService;
 import com.xdl.jjg.web.service.feign.shop.GoodsSkuService;
 import org.apache.dubbo.common.utils.CollectionUtils;
-import org.apache.dubbo.config.annotation.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.transaction.interceptor.TransactionAspectSupport;
@@ -49,7 +49,7 @@ import java.util.stream.Collectors;
  * @author LJG
  * @since 2019-06-05 09:20:40
  */
-@Service(version = "${dubbo.application.version}", interfaceClass = IEsDeliveryServiceService.class, timeout = 50000)
+@Service
 public class EsDeliveryServiceServiceImpl extends ServiceImpl<EsDeliveryServiceMapper, EsDeliveryService> implements IEsDeliveryServiceService {
 
     private static Logger logger = LoggerFactory.getLogger(EsDeliveryServiceServiceImpl.class);
